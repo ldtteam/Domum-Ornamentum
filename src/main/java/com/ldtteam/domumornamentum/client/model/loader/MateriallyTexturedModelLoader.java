@@ -2,21 +2,43 @@ package com.ldtteam.domumornamentum.client.model.loader;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
+import com.ldtteam.domumornamentum.DomumOrnamentum;
+import com.ldtteam.domumornamentum.client.model.geometry.MateriallyTexturedGeometry;
 import net.minecraft.resources.IResourceManager;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.IModelLoader;
-import net.minecraftforge.client.model.geometry.IModelGeometry;
+import net.minecraftforge.client.model.ModelLoaderRegistry;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import org.jetbrains.annotations.NotNull;
 
-public class MateriallyTexturedModelLoader implements IModelLoader
+@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+public class MateriallyTexturedModelLoader implements IModelLoader<MateriallyTexturedGeometry>
 {
-    @Override
-    public void onResourceManagerReload(final IResourceManager resourceManager)
-    {
 
+    private static final ResourceLocation ID = new ResourceLocation(DomumOrnamentum.DOMUM_ORNAMENTUM, "materially_textured");
+
+    @SubscribeEvent
+    public static void onModelRegistry(final ModelRegistryEvent event)
+    {
+        ModelLoaderRegistry.registerLoader(ID, new MateriallyTexturedModelLoader());
     }
 
     @Override
-    public IModelGeometry read(final JsonDeserializationContext deserializationContext, final JsonObject modelContents)
+    public void onResourceManagerReload(@NotNull final IResourceManager resourceManager)
     {
-        return null;
+        //The models clean up their own inner caches, since they are not static.
+    }
+
+    @NotNull
+    @Override
+    public MateriallyTexturedGeometry read(@NotNull final JsonDeserializationContext deserializationContext, final JsonObject modelContents)
+    {
+        final String parent = modelContents.get("parent").getAsString();
+        final ResourceLocation parentLocation = new ResourceLocation(parent);
+
+        return new MateriallyTexturedGeometry(parentLocation);
     }
 }
