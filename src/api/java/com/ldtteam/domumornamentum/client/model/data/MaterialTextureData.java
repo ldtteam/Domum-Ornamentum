@@ -18,7 +18,7 @@ public class MaterialTextureData implements INBTSerializable<CompoundNBT>
 
     private final Map<ResourceLocation, Block> texturedComponents;
 
-    private MaterialTextureData()
+    public MaterialTextureData()
     {
         this.texturedComponents = Maps.newHashMap();
     }

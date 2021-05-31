@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:logs",
+    "#minecraft:planks",
+    "#forge:stone",
+    "#forge:end_stones",
+    "#forge:netherrack",
+    "#forge:obsidian"
+  ]
+}

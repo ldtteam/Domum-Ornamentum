@@ -1,10 +1,12 @@
 package com.ldtteam.domumornamentum.block;
 
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-public interface IMateriallyTexturedBlock extends IForgeRegistryEntry<Block>
+import java.util.Collection;
+
+public interface IMateriallyTexturedBlock
 {
-
-
+    Collection<IMateriallyTexturedBlockComponent> getComponents();
 }

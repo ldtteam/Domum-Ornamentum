@@ -1,0 +1,21 @@
+{
+  "domum-ornamentum.shingle.name.format": "%s Shingles",
+  "domum-ornamentum.shingle.support.format": "Supported by: %s",
+  "domum-ornamentum.timber.frame.block.format": "  - Material: %s",
+  "domum-ornamentum.timber.frame.header": "Framing:",
+  "domum-ornamentum.timber.frame.name.format": "Framed %s",
+  "domum-ornamentum.timber.frame.type.double_crossed": "Double Crossed",
+  "domum-ornamentum.timber.frame.type.down_gated": "Down Gate",
+  "domum-ornamentum.timber.frame.type.format": "  - Type:     %s",
+  "domum-ornamentum.timber.frame.type.framed": "Framed",
+  "domum-ornamentum.timber.frame.type.horizontal_plain": "Plain Horizontal",
+  "domum-ornamentum.timber.frame.type.one_crossed_lr": "Left Right Crossed",
+  "domum-ornamentum.timber.frame.type.one_crossed_rl": "Right Left Crossed",
+  "domum-ornamentum.timber.frame.type.plain": "Plain",
+  "domum-ornamentum.timber.frame.type.side_framed": "Side",
+  "domum-ornamentum.timber.frame.type.side_framed_horizontal": "Side Horizontal",
+  "domum-ornamentum.timber.frame.type.up_gated": "Up Gate",
+  "itemGroup.domum-ornamentum.shingles": "Shingles",
+  "itemGroup.domum-ornamentum.timber_frames": "Framed Blocks",
+  "__comment": "Datagen-only lang entries above"
+}

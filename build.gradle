@@ -14,4 +14,9 @@ buildscript {
     }
 }
 
-apply from: 'https://raw.githubusercontent.com/ldtteam/A-Duce-Te-Aedificaverunt/master/gradle/mod.gradle'
+apply from: 'https://raw.githubusercontent.com/ldtteam/OperaPublicaCreator/main/gradle/mod.gradle'
+
+dependencies {
+    apiImplementation "com.ldtteam:datagenerators:${dataGeneratorsVersion}"
+    implementation "com.ldtteam:datagenerators:${dataGeneratorsVersion}"
+}

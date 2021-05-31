@@ -114,7 +114,7 @@ public class RetexturedBakedModelBuilder
         );
 
         this.target.getQuads(null, null, RANDOM, EmptyModelData.INSTANCE).forEach(quad -> {
-            if (!this.retexturingMaps.containsKey(quad.getSprite()))
+            if (!this.retexturingMaps.containsKey(quad.getSprite().getName()))
             {
                 builder.addGeneralQuad(quad);
             }
@@ -127,7 +127,7 @@ public class RetexturedBakedModelBuilder
         for (final Direction value : Direction.values())
         {
             this.target.getQuads(null, value, RANDOM, EmptyModelData.INSTANCE).forEach(quad -> {
-                if (this.retexturingMaps.containsKey(quad.getSprite()))
+                if (this.retexturingMaps.containsKey(quad.getSprite().getName()))
                 {
                     builder.addFaceQuad(value, retexture(quad, value));
                 }
@@ -137,6 +137,14 @@ public class RetexturedBakedModelBuilder
                 }
             });
         }
+
+        TextureAtlasSprite particleTexture = this.target.getParticleTexture(EmptyModelData.INSTANCE);
+        if (this.retexturingMaps.containsKey(particleTexture.getName()))
+        {
+            final IBakedModel particleOverrideTextureModel = this.retexturingMaps.get(particleTexture.getName());
+            particleTexture = particleOverrideTextureModel.getParticleTexture(EmptyModelData.INSTANCE);
+        }
+        builder.setTexture(particleTexture);
 
         return builder.build();
     }
@@ -158,12 +166,23 @@ public class RetexturedBakedModelBuilder
     private TextureAtlasSprite getTexture(@NotNull BakedQuad quad, @Nullable Direction direction)
     {
         final IBakedModel targetModel = this.retexturingMaps.get(quad.getSprite().getName());
-        final List<BakedQuad> targetQuads = targetModel.getQuads(
+        List<BakedQuad> targetQuads = targetModel.getQuads(
           null,
           direction,
           RANDOM,
           EmptyModelData.INSTANCE
         );
+
+        //If we did not find anything, that might be because the target model specifies culling while our source did not.
+        //Lets try with the targeting direction (the normal) of the quad itself.
+        if (targetQuads.isEmpty())
+            targetQuads = targetModel.getQuads(
+              null,
+              quad.getFace(),
+              RANDOM,
+              EmptyModelData.INSTANCE
+            );
+
         if(targetQuads.isEmpty())
             return quad.getSprite();
 

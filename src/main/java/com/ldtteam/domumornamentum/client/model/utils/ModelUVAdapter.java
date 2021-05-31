@@ -14,10 +14,10 @@ public class ModelUVAdapter extends BaseModelReader
 {
     private final BakedQuad source;
     private final float minU;
-    private final float maxUMinusMin;
+    private final float uDelta;
 
     private final float minV;
-    private final float maxVMinusMin;
+    private final float vDelta;
 
     private final TextureAtlasSprite target;
     private final BakedQuadBuilder bakedQuadBuilder;
@@ -57,10 +57,10 @@ public class ModelUVAdapter extends BaseModelReader
     {
         this.source = source;
         this.minU = source.getSprite().getMinU();
-        this.maxUMinusMin = source.getSprite().getMaxU() - minU;
+        this.uDelta = source.getSprite().getMaxU() - minU;
 
         this.minV = source.getSprite().getMinV();
-        this.maxVMinusMin = source.getSprite().getMaxV() - minV;
+        this.vDelta = source.getSprite().getMaxV() - minV;
 
         this.target = target;
         this.bakedQuadBuilder = new BakedQuadBuilder();
@@ -85,11 +85,11 @@ public class ModelUVAdapter extends BaseModelReader
         {
             final float[] uv = Arrays.copyOf( data, data.length );
 
-            final float u = ( uv[0] - minU ) / maxUMinusMin;
-            final float v = ( uv[1] - minV ) / maxVMinusMin;
+            final float u = ( uv[0] - minU ) / uDelta;
+            final float v = ( uv[1] - minV ) / vDelta;
 
-            final float newU = this.target.getInterpolatedU(u);
-            final float newV = this.target.getInterpolatedV(v);
+            final float newU = this.target.getInterpolatedU(u * 16);
+            final float newV = this.target.getInterpolatedV(v * 16);
 
             final float[] newUv = new float[4];
             newUv[0] = newU;

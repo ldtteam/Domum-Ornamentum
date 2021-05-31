@@ -2,8 +2,8 @@ package com.ldtteam.domumornamentum.client.model.loader;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
-import com.ldtteam.domumornamentum.DomumOrnamentum;
 import com.ldtteam.domumornamentum.client.model.geometry.MateriallyTexturedGeometry;
+import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -18,12 +18,10 @@ import org.jetbrains.annotations.NotNull;
 public class MateriallyTexturedModelLoader implements IModelLoader<MateriallyTexturedGeometry>
 {
 
-    private static final ResourceLocation ID = new ResourceLocation(DomumOrnamentum.DOMUM_ORNAMENTUM, "materially_textured");
-
     @SubscribeEvent
     public static void onModelRegistry(final ModelRegistryEvent event)
     {
-        ModelLoaderRegistry.registerLoader(ID, new MateriallyTexturedModelLoader());
+        ModelLoaderRegistry.registerLoader(Constants.MATERIALLY_TEXTURED_MODEL_LOADER, new MateriallyTexturedModelLoader());
     }
 
     @Override
