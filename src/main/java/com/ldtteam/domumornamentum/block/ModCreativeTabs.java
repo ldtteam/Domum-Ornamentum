@@ -9,6 +9,22 @@ import net.minecraft.item.ItemStack;
  */
 public final class ModCreativeTabs
 {
+    public static final ItemGroup GENERAL = new ItemGroup(Constants.MOD_ID + ".general")
+    {
+        @Override
+        public ItemStack createIcon()
+        {
+            return new ItemStack(ModBlocks.getArchitectsCutterBlock());
+        }
+
+        @Override
+        public boolean hasSearchBar()
+        {
+            return false;
+        }
+    };
+
+
     public static final ItemGroup TIMBER_FRAMES = new ItemGroup(Constants.MOD_ID + ".timber_frames")
     {
         @Override

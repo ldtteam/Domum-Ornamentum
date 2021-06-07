@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "domum-ornamentum:block/architectscutter",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "domum-ornamentum:block/architectscutter"
+    },
+    "facing=south": {
+      "model": "domum-ornamentum:block/architectscutter",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "domum-ornamentum:block/architectscutter",
+      "y": 270
+    }
+  }
+}

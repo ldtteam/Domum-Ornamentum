@@ -3,6 +3,7 @@ package com.ldtteam.domumornamentum.event.handlers;
 import com.ldtteam.datagenerators.lang.LangJson;
 import com.ldtteam.domumornamentum.datagen.frames.timber.*;
 import com.ldtteam.domumornamentum.datagen.global.GlobalLangEntryProvider;
+import com.ldtteam.domumornamentum.datagen.global.MateriallyTexturedBlockRecipeProvider;
 import com.ldtteam.domumornamentum.datagen.shingle.normal.*;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -34,5 +35,6 @@ public class ModBusEventHandler
 
         //Global
         event.getGenerator().addProvider(new GlobalLangEntryProvider(event.getGenerator(), langJson));
+        event.getGenerator().addProvider(new MateriallyTexturedBlockRecipeProvider(event.getGenerator()));
     }
 }

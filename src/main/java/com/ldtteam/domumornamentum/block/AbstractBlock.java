@@ -17,7 +17,6 @@ public abstract class AbstractBlock<B extends AbstractBlock<B>> extends Block im
         super(properties);
     }
 
-
     /**
      * Registery block at gameregistry.
      *

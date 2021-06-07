@@ -27,6 +27,12 @@ public class MateriallyTexturedBlockEntity extends TileEntity
         this.requestModelDataUpdate();
     }
 
+    @Override
+    public CompoundNBT getUpdateTag()
+    {
+        return write(new CompoundNBT());
+    }
+
     @NotNull
     @Override
     public CompoundNBT write(@NotNull final CompoundNBT compound)
@@ -48,6 +54,8 @@ public class MateriallyTexturedBlockEntity extends TileEntity
         {
             this.textureData.deserializeNBT(nbt.getCompound("textureData"));
         }
+
+        this.requestModelDataUpdate();
     }
 
     @NotNull
