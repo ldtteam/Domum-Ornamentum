@@ -8,6 +8,8 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public abstract class AbstractBlockPillar<B extends AbstractBlockPillar<B>> extends RotatedPillarBlock implements IDOBlock<B>
 {
     public AbstractBlockPillar(final Properties properties)

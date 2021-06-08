@@ -8,6 +8,8 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public abstract class AbstractBlockDirectional<B extends AbstractBlockDirectional<B>> extends HorizontalBlock implements IDOBlock<B>
 {
     public AbstractBlockDirectional(final Properties properties)

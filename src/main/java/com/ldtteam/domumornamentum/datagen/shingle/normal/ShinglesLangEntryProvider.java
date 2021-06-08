@@ -23,7 +23,7 @@ public class ShinglesLangEntryProvider implements IDataProvider
     }
 
     @Override
-    public void act(@NotNull DirectoryCache cache) throws IOException
+    public void run(@NotNull DirectoryCache cache) throws IOException
     {
         backingLangJson.put(Constants.MOD_ID + ".shingle.name.format", "%s Shingles");
         backingLangJson.put(Constants.MOD_ID + ".shingle.support.format", "Supported by: %s");

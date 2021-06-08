@@ -39,6 +39,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 /**
  * Decorative block
  */
@@ -72,7 +74,7 @@ public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements
      */
     public TimberFrameBlock(final TimberFrameType timberFrameType)
     {
-        super(Properties.create(Material.WOOD).hardnessAndResistance(BLOCK_HARDNESS, RESISTANCE).notSolid());
+        super(Properties.of(Material.WOOD).strength(BLOCK_HARDNESS, RESISTANCE).noOcclusion());
         setRegistryName(getName(timberFrameType));
 
         this.timberFrameType = timberFrameType;
@@ -90,9 +92,9 @@ public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements
     }
 
     @Override
-    protected void fillStateContainer(@NotNull final StateContainer.Builder<Block, BlockState> builder)
+    protected void createBlockStateDefinition(@NotNull final StateContainer.Builder<Block, BlockState> builder)
     {
-        super.fillStateContainer(builder);
+        super.createBlockStateDefinition(builder);
         builder.add(FACING);
     }
 
@@ -100,18 +102,18 @@ public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements
     @NotNull
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
-        return state.with(FACING, rot.rotate(state.get(FACING)));
+        return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
     }
 
     @SuppressWarnings("deprecation")
     @Override
     @NotNull
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
-        return state.rotate(mirrorIn.toRotation(state.get(FACING)));
+        return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
     }
 
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return this.getDefaultState().with(FACING, context.getNearestLookingDirection().getOpposite());
+        return this.defaultBlockState().setValue(FACING, context.getNearestLookingDirection().getOpposite());
     }
 
     @Override
@@ -121,7 +123,7 @@ public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements
     }
 
     @Override
-    public void fillItemGroup(final ItemGroup group, final NonNullList<ItemStack> items)
+    public void fillItemCategory(final ItemGroup group, final NonNullList<ItemStack> items)
     {
         IMateriallyTexturedBlockComponent outerComponent = getComponents().get(0);
         IMateriallyTexturedBlockComponent innerComponent = getComponents().get(1);
@@ -130,8 +132,8 @@ public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements
         final ITag<Block> innerCandidates = innerComponent.getValidSkins();
 
         try {
-            outerCandidates.getAllElements().forEach(outer -> {
-                innerCandidates.getAllElements().forEach(inner ->{
+            outerCandidates.getValues().forEach(outer -> {
+                innerCandidates.getValues().forEach(inner ->{
                     final Map<ResourceLocation, Block> textureData = Maps.newHashMap();
 
                     textureData.put(outerComponent.getId(), outer);
@@ -161,13 +163,13 @@ public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements
     }
 
     @Override
-    public void onBlockPlacedBy(
+    public void setPlacedBy(
       final World worldIn, final BlockPos pos, final BlockState state, @Nullable final LivingEntity placer, final ItemStack stack)
     {
-        super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
+        super.setPlacedBy(worldIn, pos, state, placer, stack);
 
-        final CompoundNBT textureData = stack.getOrCreateChildTag("textureData");
-        final TileEntity tileEntity = worldIn.getTileEntity(pos);
+        final CompoundNBT textureData = stack.getOrCreateTagElement("textureData");
+        final TileEntity tileEntity = worldIn.getBlockEntity(pos);
 
         if (tileEntity instanceof MateriallyTexturedBlockEntity)
             ((MateriallyTexturedBlockEntity) tileEntity).updateTextureDataWith(MaterialTextureData.deserializeFromNBT(textureData));

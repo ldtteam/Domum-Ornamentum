@@ -30,7 +30,7 @@ public class TimberFramesItemModelProvider implements IDataProvider
     }
 
     @Override
-    public void act(@NotNull DirectoryCache cache) throws IOException
+    public void run(@NotNull DirectoryCache cache) throws IOException
     {
         final ItemModelJson modelJson = new ItemModelJson();
         modelJson.setDisplay(getDisplay());

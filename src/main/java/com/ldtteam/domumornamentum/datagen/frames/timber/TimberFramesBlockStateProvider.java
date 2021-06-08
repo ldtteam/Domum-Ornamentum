@@ -30,7 +30,7 @@ public class TimberFramesBlockStateProvider implements IDataProvider
     }
 
     @Override
-    public void act(@NotNull final DirectoryCache cache) throws IOException
+    public void run(@NotNull final DirectoryCache cache) throws IOException
     {
         for (final TimberFrameBlock timberFrame : ModBlocks.getTimberFrames())
         {
@@ -45,7 +45,7 @@ public class TimberFramesBlockStateProvider implements IDataProvider
 
         final Map<String, BlockstateVariantJson> variants = new HashMap<>();
 
-        for (final Direction direction : TimberFrameBlock.FACING.getAllowedValues())
+        for (final Direction direction : TimberFrameBlock.FACING.getPossibleValues())
         {
             final String modelLocation = new ResourceLocation(Constants.MOD_ID, "block/timber_frames/" + Objects.requireNonNull(timberFrame.getRegistryName()).getPath()).toString();
 
@@ -62,7 +62,7 @@ public class TimberFramesBlockStateProvider implements IDataProvider
 
             final BlockstateVariantJson variant = new BlockstateVariantJson(model);
 
-            variants.put("facing=" + direction.getString(), variant);
+            variants.put("facing=" + direction.getSerializedName(), variant);
         }
 
         final BlockstateJson blockstate = new BlockstateJson(variants);

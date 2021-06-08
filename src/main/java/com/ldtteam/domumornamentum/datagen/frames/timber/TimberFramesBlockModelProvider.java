@@ -25,7 +25,7 @@ public class TimberFramesBlockModelProvider implements IDataProvider
     }
 
     @Override
-    public void act(@NotNull DirectoryCache cache) throws IOException
+    public void run(@NotNull DirectoryCache cache) throws IOException
     {
         for (final TimberFrameBlock timberFrame : ModBlocks.getTimberFrames())
         {

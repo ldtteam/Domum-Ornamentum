@@ -23,7 +23,7 @@ public class GlobalLangEntryProvider implements IDataProvider
     }
 
     @Override
-    public void act(@NotNull DirectoryCache cache) throws IOException
+    public void run(@NotNull DirectoryCache cache) throws IOException
     {
         backingLangJson.put("itemGroup." + Constants.MOD_ID + ".timber_frames", "Framed Blocks");
         backingLangJson.put("itemGroup." + Constants.MOD_ID + ".shingles", "Shingles");

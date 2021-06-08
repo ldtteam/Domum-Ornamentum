@@ -37,7 +37,7 @@ public final class ModBlockEntityTypes
     public static void registerBlocks(RegistryEvent.Register<TileEntityType<?>> event)
     {
         event.getRegistry().register(
-          TileEntityType.Builder.create(() -> new MateriallyTexturedBlockEntity(ModBlockEntityTypes.MATERIALLY_TEXTURED_BLOCK_ENTITY_TILE_ENTITY_TYPE),
+          TileEntityType.Builder.of(() -> new MateriallyTexturedBlockEntity(ModBlockEntityTypes.MATERIALLY_TEXTURED_BLOCK_ENTITY_TILE_ENTITY_TYPE),
             ModBlocks.getTimberFrames().toArray(new Block[0])
             ).build(null).setRegistryName(Constants.MOD_ID, Constants.BlockEntityTypes.TIMBER)
         );

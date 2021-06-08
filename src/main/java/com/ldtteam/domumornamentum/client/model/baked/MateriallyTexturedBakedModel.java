@@ -59,9 +59,9 @@ public class MateriallyTexturedBakedModel implements IBakedModel
     }
 
     @Override
-    public boolean isAmbientOcclusion()
+    public boolean useAmbientOcclusion()
     {
-        return innerModel.isAmbientOcclusion();
+        return innerModel.useAmbientOcclusion();
     }
 
     @Override
@@ -71,21 +71,21 @@ public class MateriallyTexturedBakedModel implements IBakedModel
     }
 
     @Override
-    public boolean isSideLit()
+    public boolean usesBlockLight()
     {
-        return innerModel.isSideLit();
+        return innerModel.usesBlockLight();
     }
 
     @Override
-    public boolean isBuiltInRenderer()
+    public boolean isCustomRenderer()
     {
-        return innerModel.isBuiltInRenderer();
+        return innerModel.isCustomRenderer();
     }
 
     @Override
-    public TextureAtlasSprite getParticleTexture()
+    public TextureAtlasSprite getParticleIcon()
     {
-        return innerModel.getParticleTexture();
+        return innerModel.getParticleIcon();
     }
 
     @Override
@@ -93,18 +93,18 @@ public class MateriallyTexturedBakedModel implements IBakedModel
     {
         if (!modelData.hasProperty(ModProperties.MATERIAL_TEXTURE_PROPERTY))
         {
-            return getParticleTexture();
+            return getParticleIcon();
         }
 
         final MaterialTextureData textureData = modelData.getData(ModProperties.MATERIAL_TEXTURE_PROPERTY);
         if (textureData == null)
-            return getParticleTexture();
+            return getParticleIcon();
 
-        final ResourceLocation particleTextureName = getParticleTexture().getName();
+        final ResourceLocation particleTextureName = getParticleIcon().getName();
         if (!textureData.getTexturedComponents().containsKey(particleTextureName))
-            return getParticleTexture();
+            return getParticleIcon();
 
-        return Minecraft.getInstance().getBlockRendererDispatcher().getModelForState(textureData.getTexturedComponents().get(particleTextureName).getDefaultState())
+        return Minecraft.getInstance().getBlockRenderer().getBlockModel(textureData.getTexturedComponents().get(particleTextureName).defaultBlockState())
           .getParticleTexture(modelData);
     }
 
@@ -153,10 +153,10 @@ public class MateriallyTexturedBakedModel implements IBakedModel
 
         @Nullable
         @Override
-        public IBakedModel getOverrideModel(
+        public IBakedModel resolve(
           final IBakedModel model, final ItemStack stack, @Nullable final ClientWorld world, @Nullable final LivingEntity livingEntity)
         {
-            final MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(stack.getOrCreateChildTag("textureData"));
+            final MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(stack.getOrCreateTagElement("textureData"));
             return this.model.getBakedInnerModelFor(textureData);
         }
     }

@@ -72,7 +72,8 @@ public class MaterialTextureData implements INBTSerializable<CompoundNBT>
     public void deserializeNBT(final CompoundNBT nbt)
     {
         this.texturedComponents.clear();
-        nbt.keySet().forEach(key -> {
+
+        nbt.getAllKeys().forEach(key -> {
             final ResourceLocation name = new ResourceLocation(nbt.getString(key));
 
             if (ForgeRegistries.BLOCKS.getValue(name) != Blocks.AIR)
@@ -83,7 +84,7 @@ public class MaterialTextureData implements INBTSerializable<CompoundNBT>
     }
 
     public static MaterialTextureData deserializeFromNBT(final CompoundNBT nbt) {
-        if (nbt.keySet().isEmpty())
+        if (nbt.getAllKeys().isEmpty())
             return EMPTY;
 
         final MaterialTextureData newData = new MaterialTextureData();

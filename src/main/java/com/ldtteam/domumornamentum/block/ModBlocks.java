@@ -62,7 +62,7 @@ public final class ModBlocks
     public static void registerBlocks(RegistryEvent.Register<Block> event)
     {
         final IForgeRegistry<Block> registry = event.getRegistry();
-        ARCHITECTS_CUTTER = new ArchitectsCutterBlock(AbstractBlock.Properties.create(Material.ROCK).setRequiresTool().hardnessAndResistance(3.5F)).registerBlock(registry);
+        ARCHITECTS_CUTTER = new ArchitectsCutterBlock(AbstractBlock.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.5F)).registerBlock(registry);
 
         for (final TimberFrameType blockType : TimberFrameType.values())
         {
@@ -76,15 +76,15 @@ public final class ModBlocks
     public static void registerItems(RegistryEvent.Register<Item> event)
     {
         final IForgeRegistry<Item> registry = event.getRegistry();
-        ARCHITECTS_CUTTER.registerItemBlock(registry, (new Item.Properties()).group(ModCreativeTabs.GENERAL));
+        ARCHITECTS_CUTTER.registerItemBlock(registry, (new Item.Properties()).tab(ModCreativeTabs.GENERAL));
 
-        final Item.Properties timberframeProperties = new Item.Properties().group(ModCreativeTabs.TIMBER_FRAMES);
+        final Item.Properties timberframeProperties = new Item.Properties().tab(ModCreativeTabs.TIMBER_FRAMES);
 
         for (final TimberFrameBlock frame : TIMBER_FRAMES)
         {
             frame.registerItemBlock(registry, timberframeProperties);
         }
 
-        SHINGLE.registerItemBlock(registry, new Item.Properties().group(ModCreativeTabs.SHINGLES));
+        SHINGLE.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.SHINGLES));
     }
 }

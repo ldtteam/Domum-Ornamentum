@@ -24,40 +24,40 @@ public class MateriallyTexturedBlockRecipeProvider extends RecipeProvider
     }
 
     @Override
-    protected void registerRecipes(final Consumer<IFinishedRecipe> consumer)
+    protected void buildShapelessRecipes(final Consumer<IFinishedRecipe> consumer)
     {
         ForgeRegistries.BLOCKS.forEach(
           block -> {
               if (Objects.requireNonNull(block.getRegistryName()).getNamespace().equals(Constants.MOD_ID) && block instanceof IMateriallyTexturedBlock) {
                   consumer.accept(new IFinishedRecipe() {
                       @Override
-                      public void serialize(final JsonObject json)
+                      public void serializeRecipeData(final JsonObject json)
                       {
 
                       }
 
                       @Override
-                      public ResourceLocation getID()
+                      public ResourceLocation getId()
                       {
                           return block.getRegistryName();
                       }
 
                       @Override
-                      public IRecipeSerializer<?> getSerializer()
+                      public IRecipeSerializer<?> getType()
                       {
                           return ModRecipeSerializers.ARCHITECTS_CUTTER;
                       }
 
                       @Nullable
                       @Override
-                      public JsonObject getAdvancementJson()
+                      public JsonObject serializeAdvancement()
                       {
                           return null;
                       }
 
                       @Nullable
                       @Override
-                      public ResourceLocation getAdvancementID()
+                      public ResourceLocation getAdvancementId()
                       {
                           return null;
                       }

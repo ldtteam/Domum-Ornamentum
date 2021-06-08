@@ -10,6 +10,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public abstract class AbstractBlock<B extends AbstractBlock<B>> extends Block implements IDOBlock<B>
 {
     public AbstractBlock(final Properties properties)

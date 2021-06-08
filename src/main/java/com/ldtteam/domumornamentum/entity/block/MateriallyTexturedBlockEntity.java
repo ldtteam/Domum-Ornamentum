@@ -30,14 +30,14 @@ public class MateriallyTexturedBlockEntity extends TileEntity
     @Override
     public CompoundNBT getUpdateTag()
     {
-        return write(new CompoundNBT());
+        return save(new CompoundNBT());
     }
 
     @NotNull
     @Override
-    public CompoundNBT write(@NotNull final CompoundNBT compound)
+    public CompoundNBT save(@NotNull final CompoundNBT compound)
     {
-        final CompoundNBT superData = super.write(compound);
+        final CompoundNBT superData = super.save(compound);
 
         superData.put("textureData", textureData.serializeNBT());
 
@@ -45,9 +45,9 @@ public class MateriallyTexturedBlockEntity extends TileEntity
     }
 
     @Override
-    public void read(@NotNull final BlockState state, @NotNull final CompoundNBT nbt)
+    public void load(@NotNull final BlockState state, @NotNull final CompoundNBT nbt)
     {
-        super.read(state, nbt);
+        super.load(state, nbt);
 
         this.textureData = new MaterialTextureData();
         if (nbt.contains("textureData", Constants.NBT.TAG_COMPOUND))

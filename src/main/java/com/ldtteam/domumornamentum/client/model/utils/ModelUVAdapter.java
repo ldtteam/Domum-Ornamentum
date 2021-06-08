@@ -56,19 +56,19 @@ public class ModelUVAdapter extends BaseModelReader
     )
     {
         this.source = source;
-        this.minU = source.getSprite().getMinU();
-        this.uDelta = source.getSprite().getMaxU() - minU;
+        this.minU = source.getSprite().getU0();
+        this.uDelta = source.getSprite().getU1() - minU;
 
-        this.minV = source.getSprite().getMinV();
-        this.vDelta = source.getSprite().getMaxV() - minV;
+        this.minV = source.getSprite().getV0();
+        this.vDelta = source.getSprite().getV1() - minV;
 
         this.target = target;
         this.bakedQuadBuilder = new BakedQuadBuilder();
 
         this.bakedQuadBuilder.setTexture(target);
         this.bakedQuadBuilder.setQuadTint(source.getTintIndex());
-        this.bakedQuadBuilder.setQuadOrientation(source.getFace());
-        this.bakedQuadBuilder.setApplyDiffuseLighting(source.applyDiffuseLighting());
+        this.bakedQuadBuilder.setQuadOrientation(source.getDirection());
+        this.bakedQuadBuilder.setApplyDiffuseLighting(source.isShade());
     }
 
 
@@ -88,8 +88,8 @@ public class ModelUVAdapter extends BaseModelReader
             final float u = ( uv[0] - minU ) / uDelta;
             final float v = ( uv[1] - minV ) / vDelta;
 
-            final float newU = this.target.getInterpolatedU(u * 16);
-            final float newV = this.target.getInterpolatedV(v * 16);
+            final float newU = this.target.getU(u * 16);
+            final float newV = this.target.getV(v * 16);
 
             final float[] newUv = new float[4];
             newUv[0] = newU;

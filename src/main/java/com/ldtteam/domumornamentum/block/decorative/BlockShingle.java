@@ -37,6 +37,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.jetbrains.annotations.Nullable;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 /**
  * Class defining the general shingle.
  */
@@ -59,7 +61,7 @@ public class BlockShingle extends AbstractBlockStairs<BlockShingle> implements I
 
     public BlockShingle()
     {
-        super(Blocks.OAK_PLANKS::getDefaultState, Properties.create(Material.WOOD).hardnessAndResistance(BLOCK_HARDNESS, RESISTANCE).notSolid());
+        super(Blocks.OAK_PLANKS::defaultBlockState, Properties.of(Material.WOOD).strength(BLOCK_HARDNESS, RESISTANCE).noOcclusion());
         setRegistryName(Constants.MOD_ID, "shingle");
     }
 
@@ -97,7 +99,7 @@ public class BlockShingle extends AbstractBlockStairs<BlockShingle> implements I
     }
 
     @Override
-    public void fillItemGroup(final ItemGroup group, final NonNullList<ItemStack> items)
+    public void fillItemCategory(final ItemGroup group, final NonNullList<ItemStack> items)
     {
         IMateriallyTexturedBlockComponent coverComponent = getComponents().get(0);
         IMateriallyTexturedBlockComponent supportComponent = getComponents().get(1);
@@ -106,8 +108,8 @@ public class BlockShingle extends AbstractBlockStairs<BlockShingle> implements I
         final ITag<Block> supportCandidates = supportComponent.getValidSkins();
 
         try {
-            coverCandidates.getAllElements().forEach(cover -> {
-                supportCandidates.getAllElements().forEach(support ->{
+            coverCandidates.getValues().forEach(cover -> {
+                supportCandidates.getValues().forEach(support ->{
                     final Map<ResourceLocation, Block> textureData = Maps.newHashMap();
 
                     textureData.put(coverComponent.getId(), cover);
@@ -130,13 +132,13 @@ public class BlockShingle extends AbstractBlockStairs<BlockShingle> implements I
     }
 
     @Override
-    public void onBlockPlacedBy(
+    public void setPlacedBy(
       final World worldIn, final BlockPos pos, final BlockState state, @Nullable final LivingEntity placer, final ItemStack stack)
     {
-        super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
+        super.setPlacedBy(worldIn, pos, state, placer, stack);
 
-        final CompoundNBT textureData = stack.getOrCreateChildTag("textureData");
-        final TileEntity tileEntity = worldIn.getTileEntity(pos);
+        final CompoundNBT textureData = stack.getOrCreateTagElement("textureData");
+        final TileEntity tileEntity = worldIn.getBlockEntity(pos);
 
         if (tileEntity instanceof MateriallyTexturedBlockEntity)
             ((MateriallyTexturedBlockEntity) tileEntity).updateTextureDataWith(MaterialTextureData.deserializeFromNBT(textureData));

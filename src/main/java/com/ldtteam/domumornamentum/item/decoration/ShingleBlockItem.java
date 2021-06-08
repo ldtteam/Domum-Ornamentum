@@ -19,6 +19,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+import net.minecraft.item.Item.Properties;
+
 public class ShingleBlockItem extends BlockItem
 {
     private final BlockShingle blockShingle;
@@ -30,30 +32,30 @@ public class ShingleBlockItem extends BlockItem
     }
 
     @Override
-    public ITextComponent getDisplayName(final ItemStack stack)
+    public ITextComponent getName(final ItemStack stack)
     {
-        final CompoundNBT dataNbt = stack.getOrCreateChildTag("textureData");
+        final CompoundNBT dataNbt = stack.getOrCreateTagElement("textureData");
         final MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
 
         final IMateriallyTexturedBlockComponent coverComponent = blockShingle.getComponents().get(0);
         final Block centerBlock = textureData.getTexturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
-        final TranslationTextComponent centerBlockName = new TranslationTextComponent(centerBlock.getTranslationKey());
+        final TranslationTextComponent centerBlockName = new TranslationTextComponent(centerBlock.getDescriptionId());
 
         return new TranslationTextComponent(Constants.MOD_ID + ".shingle.name.format", centerBlockName);
     }
 
     @Override
-    public void addInformation(
+    public void appendHoverText(
       final ItemStack stack, @Nullable final World worldIn, final List<ITextComponent> tooltip, final ITooltipFlag flagIn)
     {
-        super.addInformation(stack, worldIn, tooltip, flagIn);
+        super.appendHoverText(stack, worldIn, tooltip, flagIn);
 
-        final CompoundNBT dataNbt = stack.getOrCreateChildTag("textureData");
+        final CompoundNBT dataNbt = stack.getOrCreateTagElement("textureData");
         final MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
 
         final IMateriallyTexturedBlockComponent supportComponent = blockShingle.getComponents().get(1);
         final Block supportBlock = textureData.getTexturedComponents().getOrDefault(supportComponent.getId(), supportComponent.getDefault());
-        final TranslationTextComponent supportBlockName = new TranslationTextComponent(supportBlock.getTranslationKey());
+        final TranslationTextComponent supportBlockName = new TranslationTextComponent(supportBlock.getDescriptionId());
         tooltip.add(new TranslationTextComponent(Constants.MOD_ID + ".shingle.support.format", supportBlockName));
     }
 }

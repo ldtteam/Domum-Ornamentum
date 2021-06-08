@@ -19,6 +19,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.item.Item.Properties;
+
 public class TimberFrameBlockItem extends BlockItem
 {
     private final TimberFrameBlock timberFrameBlock;
@@ -30,25 +32,25 @@ public class TimberFrameBlockItem extends BlockItem
     }
 
     @Override
-    public ITextComponent getDisplayName(final ItemStack stack)
+    public ITextComponent getName(final ItemStack stack)
     {
-        final CompoundNBT dataNbt = stack.getOrCreateChildTag("textureData");
+        final CompoundNBT dataNbt = stack.getOrCreateTagElement("textureData");
         final MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
 
         final IMateriallyTexturedBlockComponent centerComponent = timberFrameBlock.getComponents().get(1);
         final Block centerBlock = textureData.getTexturedComponents().getOrDefault(centerComponent.getId(), centerComponent.getDefault());
-        final TranslationTextComponent centerBlockName = new TranslationTextComponent(centerBlock.getTranslationKey());
+        final TranslationTextComponent centerBlockName = new TranslationTextComponent(centerBlock.getDescriptionId());
 
         return new TranslationTextComponent(Constants.MOD_ID + ".timber.frame.name.format", centerBlockName);
     }
 
     @Override
-    public void addInformation(
+    public void appendHoverText(
       final ItemStack stack, @Nullable final World worldIn, final List<ITextComponent> tooltip, final ITooltipFlag flagIn)
     {
-        super.addInformation(stack, worldIn, tooltip, flagIn);
+        super.appendHoverText(stack, worldIn, tooltip, flagIn);
 
-        final CompoundNBT dataNbt = stack.getOrCreateChildTag("textureData");
+        final CompoundNBT dataNbt = stack.getOrCreateTagElement("textureData");
         final MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
 
         final TimberFrameType type = timberFrameBlock.getTimberFrameType();
@@ -58,7 +60,7 @@ public class TimberFrameBlockItem extends BlockItem
 
         final IMateriallyTexturedBlockComponent frameComponent = timberFrameBlock.getComponents().get(0);
         final Block frameBlock = textureData.getTexturedComponents().getOrDefault(frameComponent.getId(), frameComponent.getDefault());
-        final TranslationTextComponent frameBlockName = new TranslationTextComponent(frameBlock.getTranslationKey());
+        final TranslationTextComponent frameBlockName = new TranslationTextComponent(frameBlock.getDescriptionId());
         tooltip.add(new TranslationTextComponent(Constants.MOD_ID + ".timber.frame.block.format", frameBlockName));
     }
 }

@@ -26,36 +26,37 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
+
 @SuppressWarnings("deprecation")
 public final class ArchitectsCutterBlock extends AbstractBlock<ArchitectsCutterBlock>
 {
     private static final   ITextComponent    CONTAINER_NAME = new TranslationTextComponent("donum-ornamentum.architects-cutter");
-    public static final    DirectionProperty FACING         = HorizontalBlock.HORIZONTAL_FACING;
-    protected static final VoxelShape        SHAPE          = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 9.0D, 16.0D);
+    public static final    DirectionProperty FACING         = HorizontalBlock.FACING;
+    protected static final VoxelShape        SHAPE          = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 9.0D, 16.0D);
 
     public ArchitectsCutterBlock(AbstractBlock.Properties propertiesIn) {
         super(propertiesIn);
-        this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
         this.setRegistryName(new ResourceLocation(Constants.MOD_ID, "architectscutter"));
     }
 
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
     @NotNull
-    public ActionResultType onBlockActivated(@NotNull BlockState state, World worldIn, @NotNull BlockPos pos, @NotNull PlayerEntity player, @NotNull Hand handIn, @NotNull BlockRayTraceResult hit) {
-        if (worldIn.isRemote) {
+    public ActionResultType use(@NotNull BlockState state, World worldIn, @NotNull BlockPos pos, @NotNull PlayerEntity player, @NotNull Hand handIn, @NotNull BlockRayTraceResult hit) {
+        if (worldIn.isClientSide) {
             return ActionResultType.SUCCESS;
         } else {
-            player.openContainer(state.getContainer(worldIn, pos));
+            player.openMenu(state.getMenuProvider(worldIn, pos));
             return ActionResultType.CONSUME;
         }
     }
 
     @Nullable
-    public INamedContainerProvider getContainer(@NotNull BlockState state, @NotNull World worldIn, @NotNull BlockPos pos) {
-        return new SimpleNamedContainerProvider((id, inventory, player) -> new ArchitectsCutterContainer(id, inventory, IWorldPosCallable.of(worldIn, pos)), CONTAINER_NAME);
+    public INamedContainerProvider getMenuProvider(@NotNull BlockState state, @NotNull World worldIn, @NotNull BlockPos pos) {
+        return new SimpleNamedContainerProvider((id, inventory, player) -> new ArchitectsCutterContainer(id, inventory, IWorldPosCallable.create(worldIn, pos)), CONTAINER_NAME);
     }
 
     @NotNull
@@ -63,30 +64,30 @@ public final class ArchitectsCutterBlock extends AbstractBlock<ArchitectsCutterB
         return SHAPE;
     }
 
-    public boolean isTransparent(@NotNull BlockState state) {
+    public boolean useShapeForLightOcclusion(@NotNull BlockState state) {
         return true;
     }
 
     @NotNull
-    public BlockRenderType getRenderType(@NotNull BlockState state) {
+    public BlockRenderType getRenderShape(@NotNull BlockState state) {
         return BlockRenderType.MODEL;
     }
 
     @NotNull
     public BlockState rotate(BlockState state, Rotation rot) {
-        return state.with(FACING, rot.rotate(state.get(FACING)));
+        return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
     }
 
     @NotNull
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
-        return state.rotate(mirrorIn.toRotation(state.get(FACING)));
+        return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
     }
 
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(FACING);
     }
 
-    public boolean allowsMovement(@NotNull BlockState state, @NotNull IBlockReader worldIn, @NotNull BlockPos pos, @NotNull PathType type) {
+    public boolean isPathfindable(@NotNull BlockState state, @NotNull IBlockReader worldIn, @NotNull BlockPos pos, @NotNull PathType type) {
         return false;
     }
 }

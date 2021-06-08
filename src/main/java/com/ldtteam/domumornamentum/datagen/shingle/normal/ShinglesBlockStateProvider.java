@@ -35,7 +35,7 @@ public class ShinglesBlockStateProvider implements IDataProvider
     }
 
     @Override
-    public void act(@NotNull final DirectoryCache cache) throws IOException
+    public void run(@NotNull final DirectoryCache cache) throws IOException
     {
         createBlockstateFile(cache, ModBlocks.getShingleBlock());
     }
@@ -47,11 +47,11 @@ public class ShinglesBlockStateProvider implements IDataProvider
 
         final Map<String, BlockstateVariantJson> variants = new HashMap<>();
 
-        for (Direction facingValue : StairsBlock.FACING.getAllowedValues())
+        for (Direction facingValue : StairsBlock.FACING.getPossibleValues())
         {
-            for (StairsShape shapeValue : StairsBlock.SHAPE.getAllowedValues())
+            for (StairsShape shapeValue : StairsBlock.SHAPE.getPossibleValues())
             {
-                for (Half halfValue : StairsBlock.HALF.getAllowedValues())
+                for (Half halfValue : StairsBlock.HALF.getPossibleValues())
                 {
                     final String variantKey = "facing=" + facingValue + ",shape=" + shapeValue + ",half=" + halfValue;
 

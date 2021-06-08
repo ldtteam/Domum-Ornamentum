@@ -51,7 +51,7 @@ public class ArchitectsCutterRecipe implements IRecipe<IInventory>
         for (int componentsIndex = 0; componentsIndex < components.size(); componentsIndex++)
         {
             final IMateriallyTexturedBlockComponent component = components.get(componentsIndex);
-            final ItemStack itemStackInSlot = inv.getStackInSlot(componentsIndex);
+            final ItemStack itemStackInSlot = inv.getItem(componentsIndex);
 
             final Item item = itemStackInSlot.getItem();
             if (!(item instanceof BlockItem))
@@ -68,7 +68,7 @@ public class ArchitectsCutterRecipe implements IRecipe<IInventory>
     }
 
     @Override
-    public ItemStack getCraftingResult(final IInventory inv)
+    public ItemStack assemble(final IInventory inv)
     {
         if (!ForgeRegistries.BLOCKS.containsKey(getBlockName()))
             return ItemStack.EMPTY;
@@ -86,7 +86,7 @@ public class ArchitectsCutterRecipe implements IRecipe<IInventory>
         for (int componentsIndex = 0; componentsIndex < components.size(); componentsIndex++)
         {
             final IMateriallyTexturedBlockComponent component = components.get(componentsIndex);
-            final ItemStack itemStackInSlot = inv.getStackInSlot(componentsIndex);
+            final ItemStack itemStackInSlot = inv.getItem(componentsIndex);
 
             final Item item = itemStackInSlot.getItem();
             if (!(item instanceof BlockItem))
@@ -112,13 +112,13 @@ public class ArchitectsCutterRecipe implements IRecipe<IInventory>
     }
 
     @Override
-    public boolean canFit(final int width, final int height)
+    public boolean canCraftInDimensions(final int width, final int height)
     {
         return width * height <= MateriallyTexturedBlockManager.getInstance().getMaxTexturableComponentCount();
     }
 
     @Override
-    public ItemStack getRecipeOutput()
+    public ItemStack getResultItem()
     {
         if (!ForgeRegistries.BLOCKS.containsKey(getBlockName()))
             return ItemStack.EMPTY;

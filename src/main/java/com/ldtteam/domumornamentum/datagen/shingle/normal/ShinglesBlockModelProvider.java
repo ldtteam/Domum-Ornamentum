@@ -28,7 +28,7 @@ public class ShinglesBlockModelProvider implements IDataProvider
     }
 
     @Override
-    public void act(@NotNull DirectoryCache cache) throws IOException
+    public void run(@NotNull DirectoryCache cache) throws IOException
     {
         for (final ShingleShapeType shapeType : ShingleShapeType.values())
         {

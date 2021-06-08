@@ -8,9 +8,11 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import net.minecraft.block.AbstractBlock;
+
 public abstract class AbstractBlockFence<B extends AbstractBlockFence<B>> extends FenceBlock implements IDOBlock<B>
 {
-    public AbstractBlockFence(final Block.Properties properties)
+    public AbstractBlockFence(final AbstractBlock.Properties properties)
     {
         super(properties);
     }

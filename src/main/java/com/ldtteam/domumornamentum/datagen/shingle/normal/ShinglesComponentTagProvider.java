@@ -22,10 +22,10 @@ public class ShinglesComponentTagProvider extends BlockTagsProvider
 
     @SuppressWarnings("unchecked")
     @Override
-    protected void registerTags()
+    protected void addTags()
     {
 
-        this.getOrCreateBuilder(ModTags.SHINGLES_COVER)
+        this.tag(ModTags.SHINGLES_COVER)
           .add(
             Blocks.CLAY,
             Blocks.TERRACOTTA,
@@ -57,7 +57,7 @@ public class ShinglesComponentTagProvider extends BlockTagsProvider
             BlockTags.WART_BLOCKS
           );
 
-        this.getOrCreateBuilder(ModTags.SHINGLES_SUPPORT)
+        this.tag(ModTags.SHINGLES_SUPPORT)
           .addTags(
             BlockTags.LOGS,
             BlockTags.PLANKS,

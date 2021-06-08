@@ -20,12 +20,12 @@ public class ModBusEventHandler
     @SubscribeEvent
     public static void onFMLClientSetup(final FMLClientSetupEvent event)
     {
-        event.enqueueWork(() -> ScreenManager.registerFactory(
+        event.enqueueWork(() -> ScreenManager.register(
           ModContainerTypes.ARCHITECTS_CUTTER,
           ArchitectsCutterScreen::new
         ));
         event.enqueueWork(() -> {
-            RenderTypeLookup.setRenderLayer(ModBlocks.getArchitectsCutterBlock(), RenderType.getCutout());
+            RenderTypeLookup.setRenderLayer(ModBlocks.getArchitectsCutterBlock(), RenderType.cutout());
         });
     }
 }

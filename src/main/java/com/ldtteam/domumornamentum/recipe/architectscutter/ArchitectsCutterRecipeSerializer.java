@@ -10,20 +10,20 @@ import org.jetbrains.annotations.Nullable;
 public class ArchitectsCutterRecipeSerializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<ArchitectsCutterRecipe>
 {
     @Override
-    public ArchitectsCutterRecipe read(final ResourceLocation recipeId, final JsonObject json)
+    public ArchitectsCutterRecipe fromJson(final ResourceLocation recipeId, final JsonObject json)
     {
         return new ArchitectsCutterRecipe(recipeId);
     }
 
     @Nullable
     @Override
-    public ArchitectsCutterRecipe read(final ResourceLocation recipeId, final PacketBuffer buffer)
+    public ArchitectsCutterRecipe fromNetwork(final ResourceLocation recipeId, final PacketBuffer buffer)
     {
         return new ArchitectsCutterRecipe(recipeId);
     }
 
     @Override
-    public void write(final PacketBuffer buffer, final ArchitectsCutterRecipe recipe)
+    public void toNetwork(final PacketBuffer buffer, final ArchitectsCutterRecipe recipe)
     {
     }
 }

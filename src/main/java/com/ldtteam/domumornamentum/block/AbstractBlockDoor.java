@@ -7,6 +7,8 @@ import net.minecraft.block.DoorBlock;
 import net.minecraft.item.Item;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 /**
  * Creates an instance of the abstract door block.
  * @param <B> the type.

@@ -12,7 +12,7 @@ public final class ModCreativeTabs
     public static final ItemGroup GENERAL = new ItemGroup(Constants.MOD_ID + ".general")
     {
         @Override
-        public ItemStack createIcon()
+        public ItemStack makeIcon()
         {
             return new ItemStack(ModBlocks.getArchitectsCutterBlock());
         }
@@ -28,7 +28,7 @@ public final class ModCreativeTabs
     public static final ItemGroup TIMBER_FRAMES = new ItemGroup(Constants.MOD_ID + ".timber_frames")
     {
         @Override
-        public ItemStack createIcon()
+        public ItemStack makeIcon()
         {
             return new ItemStack(ModBlocks.getTimberFrames().stream().findFirst().orElse(null));
         }
@@ -43,7 +43,7 @@ public final class ModCreativeTabs
     public static final ItemGroup SHINGLES = new ItemGroup(Constants.MOD_ID + ".shingles")
     {
         @Override
-        public ItemStack createIcon()
+        public ItemStack makeIcon()
         {
             return new ItemStack(ModBlocks.getShingleBlock());
         }

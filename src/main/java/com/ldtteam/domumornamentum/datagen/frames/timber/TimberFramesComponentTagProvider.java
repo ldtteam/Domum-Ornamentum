@@ -21,17 +21,17 @@ public class TimberFramesComponentTagProvider extends BlockTagsProvider
 
     @SuppressWarnings("unchecked")
     @Override
-    protected void registerTags()
+    protected void addTags()
     {
 
-        this.getOrCreateBuilder(ModTags.TIMBERFRAMES_FRAME)
+        this.tag(ModTags.TIMBERFRAMES_FRAME)
           .addTags(
             BlockTags.LOGS,
             BlockTags.PLANKS,
             Tags.Blocks.OBSIDIAN
           );
 
-        this.getOrCreateBuilder(ModTags.TIMBERFRAMES_CENTER)
+        this.tag(ModTags.TIMBERFRAMES_CENTER)
           .addTags(
             BlockTags.LOGS,
             BlockTags.PLANKS,

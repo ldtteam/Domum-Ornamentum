@@ -46,8 +46,8 @@ public class RetexturedBakedModelBuilder
       final ResourceLocation source,
       final Block target
     ) {
-        final BlockState defaultState = target.getDefaultState();
-        final IBakedModel bakedModel = Minecraft.getInstance().getBlockRendererDispatcher().getModelForState(defaultState);
+        final BlockState defaultState = target.defaultBlockState();
+        final IBakedModel bakedModel = Minecraft.getInstance().getBlockRenderer().getBlockModel(defaultState);
 
         return this.with(source, bakedModel);
     }
@@ -89,19 +89,19 @@ public class RetexturedBakedModelBuilder
               @Override
               public boolean isSideLit()
               {
-                  return target.isSideLit();
+                  return target.usesBlockLight();
               }
 
               @Override
               public boolean useSmoothLighting()
               {
-                  return target.isAmbientOcclusion();
+                  return target.useAmbientOcclusion();
               }
 
               @Override
               public ItemCameraTransforms getCameraTransforms()
               {
-                  return target.getItemCameraTransforms();
+                  return target.getTransforms();
               }
 
               @Override
@@ -116,11 +116,11 @@ public class RetexturedBakedModelBuilder
         this.target.getQuads(null, null, RANDOM, EmptyModelData.INSTANCE).forEach(quad -> {
             if (!this.retexturingMaps.containsKey(quad.getSprite().getName()))
             {
-                builder.addGeneralQuad(quad);
+                builder.addUnculledFace(quad);
             }
             else
             {
-                builder.addGeneralQuad(retexture(quad, null));
+                builder.addUnculledFace(retexture(quad, null));
             }
         });
 
@@ -129,11 +129,11 @@ public class RetexturedBakedModelBuilder
             this.target.getQuads(null, value, RANDOM, EmptyModelData.INSTANCE).forEach(quad -> {
                 if (this.retexturingMaps.containsKey(quad.getSprite().getName()))
                 {
-                    builder.addFaceQuad(value, retexture(quad, value));
+                    builder.addCulledFace(value, retexture(quad, value));
                 }
                 else
                 {
-                    builder.addFaceQuad(value, quad);
+                    builder.addCulledFace(value, quad);
                 }
             });
         }
@@ -144,7 +144,7 @@ public class RetexturedBakedModelBuilder
             final IBakedModel particleOverrideTextureModel = this.retexturingMaps.get(particleTexture.getName());
             particleTexture = particleOverrideTextureModel.getParticleTexture(EmptyModelData.INSTANCE);
         }
-        builder.setTexture(particleTexture);
+        builder.particle(particleTexture);
 
         return builder.build();
     }
@@ -178,7 +178,7 @@ public class RetexturedBakedModelBuilder
         if (targetQuads.isEmpty())
             targetQuads = targetModel.getQuads(
               null,
-              quad.getFace(),
+              quad.getDirection(),
               RANDOM,
               EmptyModelData.INSTANCE
             );
