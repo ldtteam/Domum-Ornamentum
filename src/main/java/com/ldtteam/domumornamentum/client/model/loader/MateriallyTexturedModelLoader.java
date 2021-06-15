@@ -21,7 +21,7 @@ public class MateriallyTexturedModelLoader implements IModelLoader<MateriallyTex
     @SubscribeEvent
     public static void onModelRegistry(final ModelRegistryEvent event)
     {
-        ModelLoaderRegistry.registerLoader(Constants.MATERIALLY_TEXTURED_MODEL_LOADER, new MateriallyTexturedModelLoader());
+        ModelLoaderRegistry.registerLoader(new ResourceLocation(Constants.MATERIALLY_TEXTURED_MODEL_LOADER), new MateriallyTexturedModelLoader());
     }
 
     @Override

@@ -10,7 +10,7 @@ public class Constants
     }
 
     public static final String           MOD_ID                           = "domum-ornamentum";
-    public static final ResourceLocation MATERIALLY_TEXTURED_MODEL_LOADER = new ResourceLocation(MOD_ID, "materially_textured");
+    public static final String MATERIALLY_TEXTURED_MODEL_LOADER = MOD_ID + ":materially_textured";
 
     public static class BlockEntityTypes
     {
