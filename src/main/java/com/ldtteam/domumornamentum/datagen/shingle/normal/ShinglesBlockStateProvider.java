@@ -4,8 +4,7 @@ import com.ldtteam.datagenerators.blockstate.BlockstateJson;
 import com.ldtteam.datagenerators.blockstate.BlockstateModelJson;
 import com.ldtteam.datagenerators.blockstate.BlockstateVariantJson;
 import com.ldtteam.domumornamentum.block.ModBlocks;
-import com.ldtteam.domumornamentum.block.decorative.BlockShingle;
-import com.ldtteam.domumornamentum.block.decorative.TimberFrameBlock;
+import com.ldtteam.domumornamentum.block.decorative.ShingleBlock;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.block.StairsBlock;
@@ -15,7 +14,6 @@ import net.minecraft.data.IDataProvider;
 import net.minecraft.state.properties.Half;
 import net.minecraft.state.properties.StairsShape;
 import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -23,7 +21,6 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 
 public class ShinglesBlockStateProvider implements IDataProvider
 {
@@ -40,7 +37,7 @@ public class ShinglesBlockStateProvider implements IDataProvider
         createBlockstateFile(cache, ModBlocks.getShingleBlock());
     }
 
-    private void createBlockstateFile(final DirectoryCache cache, final BlockShingle shingle) throws IOException
+    private void createBlockstateFile(final DirectoryCache cache, final ShingleBlock shingle) throws IOException
     {
         if (shingle.getRegistryName() == null)
             return;
@@ -61,7 +58,7 @@ public class ShinglesBlockStateProvider implements IDataProvider
 
                     int x = halfValue == Half.TOP ? 180 : 0;
 
-                    final String modelLocation = Constants.MOD_ID + ":block/shingle/" + BlockShingle.getTypeFromShape(shapeValue).name().toLowerCase(Locale.ROOT);
+                    final String modelLocation = Constants.MOD_ID + ":block/shingle/" + ShingleBlock.getTypeFromShape(shapeValue).name().toLowerCase(Locale.ROOT);
 
                     final BlockstateModelJson model = new BlockstateModelJson(modelLocation, x, y);
                     final BlockstateVariantJson variant = new BlockstateVariantJson(model);

@@ -1,8 +1,10 @@
 package com.ldtteam.domumornamentum.block.decorative;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.ldtteam.domumornamentum.block.AbstractBlock;
+import com.ldtteam.domumornamentum.block.ICachedItemGroupBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.components.SimpleRetexturableComponent;
@@ -44,7 +46,7 @@ import net.minecraft.block.AbstractBlock.Properties;
 /**
  * Decorative block
  */
-public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements IMateriallyTexturedBlock
+public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock
 {
 
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
@@ -68,6 +70,8 @@ public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements
      * The type of this timber frame type.
      */
     private TimberFrameType timberFrameType;
+
+    private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
 
     /**
      * Constructor for the TimberFrame
@@ -125,6 +129,11 @@ public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements
     @Override
     public void fillItemCategory(final ItemGroup group, final NonNullList<ItemStack> items)
     {
+        if (!fillItemGroupCache.isEmpty()) {
+            items.addAll(fillItemGroupCache);
+            return;
+        }
+
         IMateriallyTexturedBlockComponent outerComponent = getComponents().get(0);
         IMateriallyTexturedBlockComponent innerComponent = getComponents().get(1);
 
@@ -146,7 +155,7 @@ public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements
                     final ItemStack result = new ItemStack(this);
                     result.getOrCreateTag().put("textureData", textureNbt);
 
-                    items.add(result);
+                    fillItemGroupCache.add(result);
                 });
             });
         } catch (IllegalStateException exception)
@@ -154,7 +163,7 @@ public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements
             //Ignored. Thrown during start up.
         }
 
-
+        items.addAll(fillItemGroupCache);
     }
 
     public TimberFrameType getTimberFrameType()
@@ -186,5 +195,11 @@ public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements
     public TileEntity createTileEntity(final BlockState state, final IBlockReader world)
     {
         return new MateriallyTexturedBlockEntity(ModBlockEntityTypes.MATERIALLY_TEXTURED_BLOCK_ENTITY_TILE_ENTITY_TYPE);
+    }
+
+    @Override
+    public void resetCache()
+    {
+        fillItemGroupCache.clear();
     }
 }

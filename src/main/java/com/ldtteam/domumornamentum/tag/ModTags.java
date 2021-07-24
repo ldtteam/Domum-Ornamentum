@@ -19,8 +19,12 @@ public class ModTags
     public static final Tags.IOptionalNamedTag<Block> TIMBERFRAMES_FRAME = tag("timber_frames_frame");
     public static final Tags.IOptionalNamedTag<Block> TIMBERFRAMES_CENTER = tag("timber_frames_center");
 
-    public static final Tags.IOptionalNamedTag<Block> SHINGLES_COVER = tag("shingles_cover");
+    public static final Tags.IOptionalNamedTag<Block> SHINGLES_ROOF    = tag("shingles_roof");
     public static final Tags.IOptionalNamedTag<Block> SHINGLES_SUPPORT = tag("shingles_support");
+    public static final Tags.IOptionalNamedTag<Block> SHINGLES_COVER = tag("shingles_cover");
+
+    public static final Tags.IOptionalNamedTag<Block> PAPERWALL_FRAME = tag("paper_wall_frame");
+    public static final Tags.IOptionalNamedTag<Block> PAPERWALL_CENTER = tag("paper_wall_center");
 
     private static Tags.IOptionalNamedTag<Block> tag(String name)
     {

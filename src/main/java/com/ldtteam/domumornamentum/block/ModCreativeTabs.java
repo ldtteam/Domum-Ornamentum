@@ -36,7 +36,7 @@ public final class ModCreativeTabs
         @Override
         public boolean hasSearchBar()
         {
-            return true;
+            return false;
         }
     };
 
@@ -51,7 +51,37 @@ public final class ModCreativeTabs
         @Override
         public boolean hasSearchBar()
         {
-            return true;
+            return false;
+        }
+    };
+
+    public static final ItemGroup SHINGLE_SLABS = new ItemGroup(Constants.MOD_ID + ".shingle_slabs")
+    {
+        @Override
+        public ItemStack makeIcon()
+        {
+            return new ItemStack(ModBlocks.getShingleSlabBlock());
+        }
+
+        @Override
+        public boolean hasSearchBar()
+        {
+            return false;
+        }
+    };
+
+    public static final ItemGroup PAPERWALLS = new ItemGroup(Constants.MOD_ID + ".paperwalls")
+    {
+        @Override
+        public ItemStack makeIcon()
+        {
+            return new ItemStack(ModBlocks.getPaperwallBlock());
+        }
+
+        @Override
+        public boolean hasSearchBar()
+        {
+            return false;
         }
     };
 }

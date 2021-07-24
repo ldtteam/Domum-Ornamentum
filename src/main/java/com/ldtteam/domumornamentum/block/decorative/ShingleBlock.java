@@ -5,8 +5,10 @@ import java.util.Map;
 import java.util.Objects;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.ldtteam.domumornamentum.block.AbstractBlockStairs;
+import com.ldtteam.domumornamentum.block.ICachedItemGroupBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.components.SimpleRetexturableComponent;
@@ -42,10 +44,10 @@ import net.minecraft.block.AbstractBlock.Properties;
 /**
  * Class defining the general shingle.
  */
-public class BlockShingle extends AbstractBlockStairs<BlockShingle> implements IMateriallyTexturedBlock
+public class ShingleBlock extends AbstractBlockStairs<ShingleBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock
 {
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
-                                                                               .add(new SimpleRetexturableComponent(new ResourceLocation("block/clay"), ModTags.SHINGLES_COVER, Blocks.CLAY))
+                                                                               .add(new SimpleRetexturableComponent(new ResourceLocation("block/clay"), ModTags.SHINGLES_ROOF, Blocks.CLAY))
                                                                                .add(new SimpleRetexturableComponent(new ResourceLocation("block/oak_planks"), ModTags.SHINGLES_SUPPORT, Blocks.OAK_PLANKS))
                                                                                .build();
 
@@ -59,7 +61,9 @@ public class BlockShingle extends AbstractBlockStairs<BlockShingle> implements I
      */
     private static final float RESISTANCE = 1F;
 
-    public BlockShingle()
+    private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
+
+    public ShingleBlock()
     {
         super(Blocks.OAK_PLANKS::defaultBlockState, Properties.of(Material.WOOD).strength(BLOCK_HARDNESS, RESISTANCE).noOcclusion());
         setRegistryName(Constants.MOD_ID, "shingle");
@@ -101,6 +105,11 @@ public class BlockShingle extends AbstractBlockStairs<BlockShingle> implements I
     @Override
     public void fillItemCategory(final ItemGroup group, final NonNullList<ItemStack> items)
     {
+        if (!fillItemGroupCache.isEmpty()) {
+            items.addAll(fillItemGroupCache);
+            return;
+        }
+
         IMateriallyTexturedBlockComponent coverComponent = getComponents().get(0);
         IMateriallyTexturedBlockComponent supportComponent = getComponents().get(1);
 
@@ -122,13 +131,15 @@ public class BlockShingle extends AbstractBlockStairs<BlockShingle> implements I
                     final ItemStack result = new ItemStack(this);
                     result.getOrCreateTag().put("textureData", textureNbt);
 
-                    items.add(result);
+                    fillItemGroupCache.add(result);
                 });
             });
         } catch (IllegalStateException exception)
         {
             //Ignored. Thrown during start up.
         }
+
+        items.addAll(fillItemGroupCache);
     }
 
     @Override
@@ -155,5 +166,11 @@ public class BlockShingle extends AbstractBlockStairs<BlockShingle> implements I
     public TileEntity createTileEntity(final BlockState state, final IBlockReader world)
     {
         return new MateriallyTexturedBlockEntity(ModBlockEntityTypes.MATERIALLY_TEXTURED_BLOCK_ENTITY_TILE_ENTITY_TYPE);
+    }
+
+    @Override
+    public void resetCache()
+    {
+        fillItemGroupCache.clear();
     }
 }

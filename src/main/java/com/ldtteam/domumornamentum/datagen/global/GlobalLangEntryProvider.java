@@ -25,8 +25,13 @@ public class GlobalLangEntryProvider implements IDataProvider
     @Override
     public void run(@NotNull DirectoryCache cache) throws IOException
     {
-        backingLangJson.put("itemGroup." + Constants.MOD_ID + ".timber_frames", "Framed Blocks");
-        backingLangJson.put("itemGroup." + Constants.MOD_ID + ".shingles", "Shingles");
+        backingLangJson.put("itemGroup." + Constants.MOD_ID + ".timber_frames", "DO - Framed Blocks");
+        backingLangJson.put("itemGroup." + Constants.MOD_ID + ".shingles", "DO - Shingles");
+        backingLangJson.put("itemGroup." + Constants.MOD_ID + ".general", "Domum Ornamentum (DO)");
+        backingLangJson.put("itemGroup." + Constants.MOD_ID + ".paperwalls", "DO - Thin framed walls");
+        backingLangJson.put("itemGroup." + Constants.MOD_ID + ".shingle_slabs", "DO - Shingle slabs");
+        backingLangJson.put("block." + Constants.MOD_ID + ".architectscutter", "Architects cutter");
+
 
         IDataProvider.save(DataGeneratorConstants.GSONLang, cache, backingLangJson.serialize(), dataGenerator.getOutputFolder().resolve(DataGeneratorConstants.EN_US_LANG));
     }

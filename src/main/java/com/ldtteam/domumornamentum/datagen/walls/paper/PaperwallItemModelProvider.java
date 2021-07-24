@@ -1,4 +1,4 @@
-package com.ldtteam.domumornamentum.datagen.shingle.normal;
+package com.ldtteam.domumornamentum.datagen.walls.paper;
 
 import com.ldtteam.datagenerators.models.ModelDisplayPositionJson;
 import com.ldtteam.datagenerators.models.ModelDisplayPositionsEnum;
@@ -6,7 +6,6 @@ import com.ldtteam.datagenerators.models.XYZDoubleListJson;
 import com.ldtteam.datagenerators.models.XYZIntListJson;
 import com.ldtteam.datagenerators.models.item.ItemModelJson;
 import com.ldtteam.domumornamentum.block.ModBlocks;
-import com.ldtteam.domumornamentum.block.types.ShingleShapeType;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.data.DataGenerator;
@@ -16,14 +15,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
-public class ShinglesItemModelProvider implements IDataProvider
+public class PaperwallItemModelProvider implements IDataProvider
 {
     private final DataGenerator generator;
 
-    public ShinglesItemModelProvider(final DataGenerator generator)
+    public PaperwallItemModelProvider(final DataGenerator generator)
     {
         this.generator = generator;
     }
@@ -34,14 +32,15 @@ public class ShinglesItemModelProvider implements IDataProvider
         final ItemModelJson modelJson = new ItemModelJson();
         modelJson.setDisplay(getDisplay());
 
-        final String modelLocation = Constants.MOD_ID + ":block/shingle/" + ShingleShapeType.STRAIGHT.name().toLowerCase(Locale.ROOT);
+        final String modelLocation = Constants.MOD_ID + ":item/paperwalls/blockpaperwall_spec";
 
         modelJson.setParent(modelLocation);
+        modelJson.setLoader(Constants.MATERIALLY_TEXTURED_MODEL_LOADER.toString());
 
-        if (ModBlocks.getShingleBlock().getRegistryName() == null)
+        if (ModBlocks.getPaperwallBlock().getRegistryName() == null)
             return;
 
-        final String name = ModBlocks.getShingleBlock().getRegistryName().getPath();
+        final String name = ModBlocks.getPaperwallBlock().getRegistryName().getPath();
         IDataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(modelJson), generator.getOutputFolder().resolve(DataGeneratorConstants.ITEM_MODEL_DIR).resolve(name + ".json"));
     }
 
@@ -106,6 +105,6 @@ public class ShinglesItemModelProvider implements IDataProvider
     @NotNull
     public String getName()
     {
-        return "Shingles Item Model Provider";
+        return "Paperwall Item Model Provider";
     }
 }

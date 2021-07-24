@@ -15,6 +15,6 @@ public class Constants
     public static class BlockEntityTypes
     {
 
-        public static final String TIMBER = "timber";
+        public static final String MATERIALLY_RETEXTURABLE = "materially_retexturable";
     }
 }

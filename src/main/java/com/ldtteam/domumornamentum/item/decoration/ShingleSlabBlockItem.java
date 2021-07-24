@@ -2,6 +2,7 @@ package com.ldtteam.domumornamentum.item.decoration;
 
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.decorative.ShingleBlock;
+import com.ldtteam.domumornamentum.block.decorative.ShingleSlabBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.block.Block;
@@ -16,13 +17,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-import net.minecraft.item.Item.Properties;
-
-public class ShingleBlockItem extends BlockItem
+public class ShingleSlabBlockItem extends BlockItem
 {
-    private final ShingleBlock shingleBlock;
+    private final ShingleSlabBlock shingleBlock;
 
-    public ShingleBlockItem(final ShingleBlock blockIn, final Properties builder)
+    public ShingleSlabBlockItem(final ShingleSlabBlock blockIn, final Properties builder)
     {
         super(blockIn, builder);
         this.shingleBlock = blockIn;
@@ -38,7 +37,7 @@ public class ShingleBlockItem extends BlockItem
         final Block centerBlock = textureData.getTexturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
         final TranslationTextComponent centerBlockName = new TranslationTextComponent(centerBlock.getDescriptionId());
 
-        return new TranslationTextComponent(Constants.MOD_ID + ".shingle.name.format", centerBlockName);
+        return new TranslationTextComponent(Constants.MOD_ID + ".shingle_slab.name.format", centerBlockName);
     }
 
     @Override
@@ -53,6 +52,11 @@ public class ShingleBlockItem extends BlockItem
         final IMateriallyTexturedBlockComponent supportComponent = shingleBlock.getComponents().get(1);
         final Block supportBlock = textureData.getTexturedComponents().getOrDefault(supportComponent.getId(), supportComponent.getDefault());
         final TranslationTextComponent supportBlockName = new TranslationTextComponent(supportBlock.getDescriptionId());
-        tooltip.add(new TranslationTextComponent(Constants.MOD_ID + ".shingle.support.format", supportBlockName));
+        tooltip.add(new TranslationTextComponent(Constants.MOD_ID + ".shingle_slab.support.format", supportBlockName));
+
+        final IMateriallyTexturedBlockComponent coverComponent = shingleBlock.getComponents().get(2);
+        final Block coverBlock = textureData.getTexturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
+        final TranslationTextComponent coverBlockName = new TranslationTextComponent(coverBlock.getDescriptionId());
+        tooltip.add(new TranslationTextComponent(Constants.MOD_ID + ".shingle_slab.cover.format", coverBlockName));
     }
 }

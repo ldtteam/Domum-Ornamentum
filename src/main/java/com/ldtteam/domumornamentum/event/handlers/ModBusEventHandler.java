@@ -5,6 +5,8 @@ import com.ldtteam.domumornamentum.datagen.frames.timber.*;
 import com.ldtteam.domumornamentum.datagen.global.GlobalLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.global.MateriallyTexturedBlockRecipeProvider;
 import com.ldtteam.domumornamentum.datagen.shingle.normal.*;
+import com.ldtteam.domumornamentum.datagen.shingle.slab.*;
+import com.ldtteam.domumornamentum.datagen.walls.paper.*;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -32,6 +34,20 @@ public class ModBusEventHandler
         event.getGenerator().addProvider(new ShinglesBlockModelProvider(event.getGenerator()));
         event.getGenerator().addProvider(new ShinglesComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(new ShinglesLangEntryProvider(event.getGenerator(), langJson));
+
+        //ShingleSlab
+        event.getGenerator().addProvider(new ShingleSlabBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new ShingleSlabItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new ShingleSlabBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new ShingleSlabComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(new ShingleSlabLangEntryProvider(event.getGenerator(), langJson));
+        
+        //Paperwall
+        event.getGenerator().addProvider(new PaperwallBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new PaperwallItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new PaperwallBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new PaperwallComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(new PaperwallLangEntryProvider(event.getGenerator(), langJson));
 
         //Global
         event.getGenerator().addProvider(new GlobalLangEntryProvider(event.getGenerator(), langJson));

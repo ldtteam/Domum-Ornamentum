@@ -6,6 +6,7 @@
     "#forge:stone",
     "#forge:end_stones",
     "#forge:netherrack",
-    "#forge:obsidian"
+    "#forge:obsidian",
+    "#forge:glass"
   ]
 }
