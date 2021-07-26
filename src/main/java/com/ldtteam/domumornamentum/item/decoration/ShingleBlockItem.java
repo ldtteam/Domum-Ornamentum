@@ -16,8 +16,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-import net.minecraft.item.Item.Properties;
-
 public class ShingleBlockItem extends BlockItem
 {
     private final ShingleBlock shingleBlock;

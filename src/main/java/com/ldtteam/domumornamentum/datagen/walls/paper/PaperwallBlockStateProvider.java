@@ -8,7 +8,6 @@ import com.ldtteam.datagenerators.blockstate.multipart.MultipartCaseJson;
 import com.ldtteam.datagenerators.blockstate.multipart.MultipartWhenJson;
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.decorative.PaperWallBlock;
-import com.ldtteam.domumornamentum.block.decorative.ShingleBlock;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.block.HorizontalBlock;
@@ -34,7 +33,7 @@ public class PaperwallBlockStateProvider implements IDataProvider
     @Override
     public void run(@NotNull final DirectoryCache cache) throws IOException
     {
-        createBlockstateFile(cache, ModBlocks.getPaperwallBlock());
+        createBlockstateFile(cache, ModBlocks.getPaperWall());
     }
 
     private void createBlockstateFile(final DirectoryCache cache, final PaperWallBlock paperWallBlock) throws IOException

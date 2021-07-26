@@ -25,7 +25,7 @@ public class ShinglesComponentTagProvider extends BlockTagsProvider
     protected void addTags()
     {
 
-        this.tag(ModTags.SHINGLES_COVER)
+        this.tag(ModTags.SHINGLES_ROOF)
           .add(
             Blocks.CLAY,
             Blocks.TERRACOTTA,

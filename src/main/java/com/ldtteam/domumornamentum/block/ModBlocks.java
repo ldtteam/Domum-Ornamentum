@@ -31,14 +31,16 @@ public final class ModBlocks
 
     private static       ArchitectsCutterBlock  ARCHITECTS_CUTTER;
     private static final List<TimberFrameBlock> TIMBER_FRAMES = Lists.newArrayList();
-    private static       BlockShingle           SHINGLE;
+    private static       ShingleBlock           SHINGLE;
+    private static       ShingleSlabBlock       SHINGLE_SLAB;
+    private static       PaperWallBlock         PAPER_WALL;
 
-    public static ArchitectsCutterBlock getArchitectsCutterBlock()
+    public static ArchitectsCutterBlock getArchitectsCutter()
     {
         return ARCHITECTS_CUTTER;
     }
 
-    public static BlockShingle getShingleBlock()
+    public static ShingleBlock getShingle()
     {
         return SHINGLE;
     }
@@ -46,6 +48,16 @@ public final class ModBlocks
     public static List<TimberFrameBlock> getTimberFrames()
     {
         return new ArrayList<>(TIMBER_FRAMES);
+    }
+
+    public static ShingleSlabBlock getShingleSlab()
+    {
+        return SHINGLE_SLAB;
+    }
+
+    public static PaperWallBlock getPaperWall()
+    {
+        return PAPER_WALL;
     }
 
     /**
@@ -69,7 +81,9 @@ public final class ModBlocks
             TIMBER_FRAMES.add(new TimberFrameBlock(blockType).registerBlock(registry));
         }
 
-        SHINGLE = new BlockShingle().registerBlock(registry);
+        SHINGLE = new ShingleBlock().registerBlock(registry);
+        SHINGLE_SLAB = new ShingleSlabBlock().registerBlock(registry);
+        PAPER_WALL = new PaperWallBlock().registerBlock(registry);
     }
 
     @SubscribeEvent
@@ -86,5 +100,7 @@ public final class ModBlocks
         }
 
         SHINGLE.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.SHINGLES));
+        SHINGLE_SLAB.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.SHINGLE_SLABS));
+        PAPER_WALL.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.PAPERWALLS));
     }
 }

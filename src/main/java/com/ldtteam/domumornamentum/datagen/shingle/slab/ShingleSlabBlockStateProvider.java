@@ -4,18 +4,14 @@ import com.ldtteam.datagenerators.blockstate.BlockstateJson;
 import com.ldtteam.datagenerators.blockstate.BlockstateModelJson;
 import com.ldtteam.datagenerators.blockstate.BlockstateVariantJson;
 import com.ldtteam.domumornamentum.block.ModBlocks;
-import com.ldtteam.domumornamentum.block.decorative.ShingleBlock;
 import com.ldtteam.domumornamentum.block.decorative.ShingleSlabBlock;
 import com.ldtteam.domumornamentum.block.types.ShingleSlabShapeType;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.block.HorizontalBlock;
-import net.minecraft.block.StairsBlock;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
 import net.minecraft.data.IDataProvider;
-import net.minecraft.state.properties.Half;
-import net.minecraft.state.properties.StairsShape;
 import net.minecraft.util.Direction;
 import org.jetbrains.annotations.NotNull;
 
@@ -37,7 +33,7 @@ public class ShingleSlabBlockStateProvider implements IDataProvider
     @Override
     public void run(@NotNull final DirectoryCache cache) throws IOException
     {
-        createBlockstateFile(cache, ModBlocks.getShingleSlabBlock());
+        createBlockstateFile(cache, ModBlocks.getShingleSlab());
     }
 
     private void createBlockstateFile(final DirectoryCache cache, final ShingleSlabBlock shingleSlab) throws IOException

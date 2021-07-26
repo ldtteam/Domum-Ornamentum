@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 public final class ModBlockEntityTypes
 {
 
-    @ObjectHolder(Constants.BlockEntityTypes.TIMBER)
+    @ObjectHolder(Constants.BlockEntityTypes.MATERIALLY_RETEXTURABLE)
     @NotNull
     public static final TileEntityType<MateriallyTexturedBlockEntity> MATERIALLY_TEXTURED_BLOCK_ENTITY_TILE_ENTITY_TYPE = null;
 
@@ -39,7 +39,7 @@ public final class ModBlockEntityTypes
         event.getRegistry().register(
           TileEntityType.Builder.of(() -> new MateriallyTexturedBlockEntity(ModBlockEntityTypes.MATERIALLY_TEXTURED_BLOCK_ENTITY_TILE_ENTITY_TYPE),
             ModBlocks.getTimberFrames().toArray(new Block[0])
-            ).build(null).setRegistryName(Constants.MOD_ID, Constants.BlockEntityTypes.TIMBER)
+            ).build(null).setRegistryName(Constants.MOD_ID, Constants.BlockEntityTypes.MATERIALLY_RETEXTURABLE)
         );
     }
 }

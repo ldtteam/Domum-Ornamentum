@@ -3,6 +3,7 @@ package com.ldtteam.domumornamentum.block;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Class used to handle the creativeTab of structurize.
@@ -12,9 +13,9 @@ public final class ModCreativeTabs
     public static final ItemGroup GENERAL = new ItemGroup(Constants.MOD_ID + ".general")
     {
         @Override
-        public ItemStack makeIcon()
+        public @NotNull ItemStack makeIcon()
         {
-            return new ItemStack(ModBlocks.getArchitectsCutterBlock());
+            return new ItemStack(ModBlocks.getArchitectsCutter());
         }
 
         @Override
@@ -28,7 +29,7 @@ public final class ModCreativeTabs
     public static final ItemGroup TIMBER_FRAMES = new ItemGroup(Constants.MOD_ID + ".timber_frames")
     {
         @Override
-        public ItemStack makeIcon()
+        public @NotNull ItemStack makeIcon()
         {
             return new ItemStack(ModBlocks.getTimberFrames().stream().findFirst().orElse(null));
         }
@@ -43,9 +44,9 @@ public final class ModCreativeTabs
     public static final ItemGroup SHINGLES = new ItemGroup(Constants.MOD_ID + ".shingles")
     {
         @Override
-        public ItemStack makeIcon()
+        public @NotNull ItemStack makeIcon()
         {
-            return new ItemStack(ModBlocks.getShingleBlock());
+            return new ItemStack(ModBlocks.getShingle());
         }
 
         @Override
@@ -58,9 +59,9 @@ public final class ModCreativeTabs
     public static final ItemGroup SHINGLE_SLABS = new ItemGroup(Constants.MOD_ID + ".shingle_slabs")
     {
         @Override
-        public ItemStack makeIcon()
+        public @NotNull ItemStack makeIcon()
         {
-            return new ItemStack(ModBlocks.getShingleSlabBlock());
+            return new ItemStack(ModBlocks.getShingleSlab());
         }
 
         @Override
@@ -73,9 +74,9 @@ public final class ModCreativeTabs
     public static final ItemGroup PAPERWALLS = new ItemGroup(Constants.MOD_ID + ".paperwalls")
     {
         @Override
-        public ItemStack makeIcon()
+        public @NotNull ItemStack makeIcon()
         {
-            return new ItemStack(ModBlocks.getPaperwallBlock());
+            return new ItemStack(ModBlocks.getPaperWall());
         }
 
         @Override

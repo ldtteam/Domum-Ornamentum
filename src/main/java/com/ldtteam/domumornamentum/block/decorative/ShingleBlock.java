@@ -39,8 +39,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.jetbrains.annotations.Nullable;
 
-import net.minecraft.block.AbstractBlock.Properties;
-
 /**
  * Class defining the general shingle.
  */

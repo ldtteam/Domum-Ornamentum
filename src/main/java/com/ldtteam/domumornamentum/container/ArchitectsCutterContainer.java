@@ -5,7 +5,6 @@ import com.ldtteam.domumornamentum.block.MateriallyTexturedBlockManager;
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.recipe.ModRecipeTypes;
 import com.ldtteam.domumornamentum.recipe.architectscutter.ArchitectsCutterRecipe;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.CraftResultInventory;
@@ -144,7 +143,7 @@ public class ArchitectsCutterContainer extends Container
      * Determines whether supplied player can use this container
      */
     public boolean stillValid(@NotNull PlayerEntity playerIn) {
-        return stillValid(this.worldPosCallable, playerIn, ModBlocks.getArchitectsCutterBlock());
+        return stillValid(this.worldPosCallable, playerIn, ModBlocks.getArchitectsCutter());
     }
 
     /**

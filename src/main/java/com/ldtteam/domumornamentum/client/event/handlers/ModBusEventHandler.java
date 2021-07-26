@@ -4,7 +4,6 @@ import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.client.screens.ArchitectsCutterScreen;
 import com.ldtteam.domumornamentum.container.ModContainerTypes;
 import com.ldtteam.domumornamentum.util.Constants;
-import net.minecraft.block.BlockRenderType;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
@@ -25,7 +24,7 @@ public class ModBusEventHandler
           ArchitectsCutterScreen::new
         ));
         event.enqueueWork(() -> {
-            RenderTypeLookup.setRenderLayer(ModBlocks.getArchitectsCutterBlock(), RenderType.cutout());
+            RenderTypeLookup.setRenderLayer(ModBlocks.getArchitectsCutter(), RenderType.cutout());
         });
     }
 }

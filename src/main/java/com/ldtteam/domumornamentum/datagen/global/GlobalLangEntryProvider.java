@@ -32,7 +32,6 @@ public class GlobalLangEntryProvider implements IDataProvider
         backingLangJson.put("itemGroup." + Constants.MOD_ID + ".shingle_slabs", "DO - Shingle slabs");
         backingLangJson.put("block." + Constants.MOD_ID + ".architectscutter", "Architects cutter");
 
-
         IDataProvider.save(DataGeneratorConstants.GSONLang, cache, backingLangJson.serialize(), dataGenerator.getOutputFolder().resolve(DataGeneratorConstants.EN_US_LANG));
     }
 
