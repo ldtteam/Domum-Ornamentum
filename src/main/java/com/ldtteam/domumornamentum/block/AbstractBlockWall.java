@@ -2,13 +2,13 @@ package com.ldtteam.domumornamentum.block;
 
 import com.ldtteam.domumornamentum.util.Suppression;
 import com.ldtteam.domumornamentum.block.interfaces.IDOBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.WallBlock;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.WallBlock;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import net.minecraft.block.AbstractBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 /**
  * The abstract class for structurize-added walls.
@@ -21,7 +21,7 @@ public abstract class AbstractBlockWall<B extends AbstractBlockWall<B>> extends 
      *
      * @param properties the properties of the wall block.
      */
-    public AbstractBlockWall(final AbstractBlock.Properties properties)
+    public AbstractBlockWall(final BlockBehaviour.Properties properties)
     {
         super(properties);
     }

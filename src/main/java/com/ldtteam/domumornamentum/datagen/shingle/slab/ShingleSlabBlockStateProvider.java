@@ -8,11 +8,11 @@ import com.ldtteam.domumornamentum.block.decorative.ShingleSlabBlock;
 import com.ldtteam.domumornamentum.block.types.ShingleSlabShapeType;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
-import net.minecraft.block.HorizontalBlock;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DirectoryCache;
-import net.minecraft.data.IDataProvider;
-import net.minecraft.util.Direction;
+import net.minecraft.data.HashCache;
+import net.minecraft.data.DataProvider;
+import net.minecraft.core.Direction;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public class ShingleSlabBlockStateProvider implements IDataProvider
+public class ShingleSlabBlockStateProvider implements DataProvider
 {
     private final DataGenerator generator;
 
@@ -31,19 +31,19 @@ public class ShingleSlabBlockStateProvider implements IDataProvider
     }
 
     @Override
-    public void run(@NotNull final DirectoryCache cache) throws IOException
+    public void run(@NotNull final HashCache cache) throws IOException
     {
         createBlockstateFile(cache, ModBlocks.getShingleSlab());
     }
 
-    private void createBlockstateFile(final DirectoryCache cache, final ShingleSlabBlock shingleSlab) throws IOException
+    private void createBlockstateFile(final HashCache cache, final ShingleSlabBlock shingleSlab) throws IOException
     {
         if (shingleSlab.getRegistryName() == null)
             return;
 
         final Map<String, BlockstateVariantJson> variants = new HashMap<>();
 
-        for (Direction facingValue : HorizontalBlock.FACING.getPossibleValues())
+        for (Direction facingValue : HorizontalDirectionalBlock.FACING.getPossibleValues())
         {
             for (ShingleSlabShapeType shapeValue : ShingleSlabShapeType.values())
             {
@@ -65,7 +65,7 @@ public class ShingleSlabBlockStateProvider implements IDataProvider
         final Path blockstateFolder = this.generator.getOutputFolder().resolve(DataGeneratorConstants.BLOCKSTATE_DIR);
         final Path blockstatePath = blockstateFolder.resolve(shingleSlab.getRegistryName().getPath() + ".json");
 
-        IDataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(blockstate), blockstatePath);
+        DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(blockstate), blockstatePath);
 
     }
 

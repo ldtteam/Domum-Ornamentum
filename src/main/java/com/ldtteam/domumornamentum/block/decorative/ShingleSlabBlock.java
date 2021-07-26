@@ -12,40 +12,40 @@ import com.ldtteam.domumornamentum.block.types.ShingleSlabShapeType;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
 import com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes;
-import com.ldtteam.domumornamentum.item.decoration.ShingleBlockItem;
 import com.ldtteam.domumornamentum.item.decoration.ShingleSlabBlockItem;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.Constants;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.IWaterLoggable;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.pathfinding.PathType;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.EnumProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.tags.ITag;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.jetbrains.annotations.NotNull;
 
@@ -55,12 +55,12 @@ import java.util.Map;
 import java.util.Objects;
 
 import static com.ldtteam.domumornamentum.block.types.ShingleSlabShapeType.*;
-import static net.minecraft.util.Direction.*;
+import static net.minecraft.core.Direction.*;
 
 /**
  * Decorative block
  */
-public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock> implements IWaterLoggable, IMateriallyTexturedBlock, ICachedItemGroupBlock
+public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock> implements SimpleWaterloggedBlock, IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock
 {
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
                                                                                .add(new SimpleRetexturableComponent(new ResourceLocation("block/oak_planks"), ModTags.SHINGLES_ROOF, Blocks.OAK_PLANKS))
@@ -117,7 +117,7 @@ public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock>
     // Deprecated here just means that you should not use this method when referencing a block, and instead it's blockstate <- Forge's Discord
     @NotNull
     @Override
-    public BlockState updateShape(final BlockState stateIn, @NotNull final Direction HORIZONTAL_FACING, @NotNull final BlockState HORIZONTAL_FACINGState, @NotNull final IWorld worldIn, @NotNull final BlockPos currentPos, @NotNull final BlockPos HORIZONTAL_FACINGPos)
+    public BlockState updateShape(final BlockState stateIn, @NotNull final Direction HORIZONTAL_FACING, @NotNull final BlockState HORIZONTAL_FACINGState, @NotNull final LevelAccessor worldIn, @NotNull final BlockPos currentPos, @NotNull final BlockPos HORIZONTAL_FACINGPos)
     {
         if (stateIn.getValue(WATERLOGGED))
         {
@@ -129,10 +129,10 @@ public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock>
 
     @Nullable
     @Override
-    public BlockState getStateForPlacement(final BlockItemUseContext context)
+    public BlockState getStateForPlacement(final BlockPlaceContext context)
     {
         @NotNull
-        final Direction facing = (context.getPlayer() == null) ? Direction.NORTH : Direction.fromYRot(context.getPlayer().yRot);
+        final Direction facing = (context.getPlayer() == null) ? Direction.NORTH : Direction.fromYRot(context.getPlayer().getYRot());
         return getSlabShape(
             this.defaultBlockState()
                 .setValue(FACING, facing)
@@ -165,7 +165,7 @@ public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock>
      */
     @NotNull
     @Override
-    public VoxelShape getShape(@NotNull final BlockState state, @NotNull final IBlockReader worldIn, @NotNull final BlockPos pos, @NotNull final ISelectionContext context)
+    public VoxelShape getShape(@NotNull final BlockState state, @NotNull final BlockGetter worldIn, @NotNull final BlockPos pos, @NotNull final CollisionContext context)
     {
         return Block.box(0.0D, 0.0D, 0.0D, 15.9D, 7.9D, 15.9D);
     }
@@ -178,7 +178,7 @@ public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock>
      * @param position the position.Re
      * @return the blockState to use.
      */
-    private static BlockState getSlabShape(@NotNull final BlockState state, @NotNull final IWorld world, @NotNull final BlockPos position)
+    private static BlockState getSlabShape(@NotNull final BlockState state, @NotNull final LevelAccessor world, @NotNull final BlockPos position)
     {
         final boolean north = world.getBlockState(position.north()).getBlock() instanceof ShingleSlabBlock;
         final boolean south = world.getBlockState(position.south()).getBlock() instanceof ShingleSlabBlock;
@@ -275,13 +275,13 @@ public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock>
     }
 
     @Override
-    public boolean isPathfindable(@NotNull final BlockState state, @NotNull final IBlockReader worldIn, @NotNull final BlockPos pos, @NotNull final PathType type)
+    public boolean isPathfindable(@NotNull final BlockState state, @NotNull final BlockGetter worldIn, @NotNull final BlockPos pos, @NotNull final PathComputationType type)
     {
-        return type == PathType.WATER && worldIn.getFluidState(pos).is(FluidTags.WATER);
+        return type == PathComputationType.WATER && worldIn.getFluidState(pos).is(FluidTags.WATER);
     }
 
     @Override
-    protected void createBlockStateDefinition(final StateContainer.Builder<Block, BlockState> builder)
+    protected void createBlockStateDefinition(final StateDefinition.Builder<Block, BlockState> builder)
     {
         builder.add(FACING, SHAPE, WATERLOGGED);
     }
@@ -293,7 +293,7 @@ public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock>
     }
 
     @Override
-    public void fillItemCategory(@NotNull final ItemGroup group, @NotNull final NonNullList<ItemStack> items)
+    public void fillItemCategory(@NotNull final CreativeModeTab group, @NotNull final NonNullList<ItemStack> items)
     {
         if (!fillItemGroupCache.isEmpty()) {
             items.addAll(fillItemGroupCache);
@@ -304,9 +304,9 @@ public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock>
         IMateriallyTexturedBlockComponent supportComponent = getComponents().get(1);
         IMateriallyTexturedBlockComponent coverComponent = getComponents().get(2);
 
-        final ITag<Block> roofCandidates = roofComponent.getValidSkins();
-        final ITag<Block> supportCandidates = supportComponent.getValidSkins();
-        final ITag<Block> coverCandidates = coverComponent.getValidSkins();
+        final Tag<Block> roofCandidates = roofComponent.getValidSkins();
+        final Tag<Block> supportCandidates = supportComponent.getValidSkins();
+        final Tag<Block> coverCandidates = coverComponent.getValidSkins();
 
         try {
             roofCandidates.getValues().forEach(roof -> {
@@ -320,7 +320,7 @@ public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock>
 
                         final MaterialTextureData materialTextureData = new MaterialTextureData(textureData);
 
-                        final CompoundNBT textureNbt = materialTextureData.serializeNBT();
+                        final CompoundTag textureNbt = materialTextureData.serializeNBT();
 
                         final ItemStack result = new ItemStack(this);
                         result.getOrCreateTag().put("textureData", textureNbt);
@@ -339,28 +339,23 @@ public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock>
 
     @Override
     public void setPlacedBy(
-      @NotNull final World worldIn, @NotNull final BlockPos pos, @NotNull final BlockState state, @org.jetbrains.annotations.Nullable final LivingEntity placer, @NotNull final ItemStack stack)
+      @NotNull final Level worldIn, @NotNull final BlockPos pos, @NotNull final BlockState state, @org.jetbrains.annotations.Nullable final LivingEntity placer, @NotNull final ItemStack stack)
     {
         super.setPlacedBy(worldIn, pos, state, placer, stack);
 
-        final CompoundNBT textureData = stack.getOrCreateTagElement("textureData");
-        final TileEntity tileEntity = worldIn.getBlockEntity(pos);
+        final CompoundTag textureData = stack.getOrCreateTagElement("textureData");
+        final BlockEntity tileEntity = worldIn.getBlockEntity(pos);
 
         if (tileEntity instanceof MateriallyTexturedBlockEntity)
             ((MateriallyTexturedBlockEntity) tileEntity).updateTextureDataWith(MaterialTextureData.deserializeFromNBT(textureData));
     }
 
-    @Override
-    public boolean hasTileEntity(final BlockState state)
-    {
-        return true;
-    }
 
-    @Nullable
+    @org.jetbrains.annotations.Nullable
     @Override
-    public TileEntity createTileEntity(final BlockState state, final IBlockReader world)
+    public BlockEntity newBlockEntity(final @NotNull BlockPos blockPos, final @NotNull BlockState blockState)
     {
-        return new MateriallyTexturedBlockEntity(ModBlockEntityTypes.MATERIALLY_TEXTURED_BLOCK_ENTITY_TILE_ENTITY_TYPE);
+        return new MateriallyTexturedBlockEntity(ModBlockEntityTypes.MATERIALLY_TEXTURED, blockPos, blockState);
     }
 
     @Override

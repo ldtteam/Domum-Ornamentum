@@ -1,13 +1,13 @@
 package com.ldtteam.domumornamentum.block.types;
 
 import com.ldtteam.domumornamentum.block.decorative.PaperWallBlock;
-import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.StringRepresentable;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Types that the {@link PaperWallBlock} supports
  */
-public enum PaperwallType implements IStringSerializable
+public enum PaperwallType implements StringRepresentable
 {
     OAK("oak"),
     SPRUCE("spruce"),

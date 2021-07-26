@@ -8,9 +8,9 @@ import com.ldtteam.domumornamentum.block.types.ShingleShapeType;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DirectoryCache;
-import net.minecraft.data.IDataProvider;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.data.HashCache;
+import net.minecraft.data.DataProvider;
+import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -18,7 +18,7 @@ import java.nio.file.Path;
 import java.util.Locale;
 import java.util.Objects;
 
-public class ShinglesBlockModelProvider implements IDataProvider
+public class ShinglesBlockModelProvider implements DataProvider
 {
     private final DataGenerator generator;
 
@@ -28,7 +28,7 @@ public class ShinglesBlockModelProvider implements IDataProvider
     }
 
     @Override
-    public void run(@NotNull DirectoryCache cache) throws IOException
+    public void run(@NotNull HashCache cache) throws IOException
     {
         for (final ShingleShapeType shapeType : ShingleShapeType.values())
         {
@@ -40,7 +40,7 @@ public class ShinglesBlockModelProvider implements IDataProvider
             final String name = shapeType.name().toLowerCase(Locale.ROOT) + ".json";
             final Path saveFile = this.generator.getOutputFolder().resolve(DataGeneratorConstants.SHINGLES_BLOCK_MODELS_DIR).resolve(name);
 
-            IDataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(modelJson), saveFile);
+            DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(modelJson), saveFile);
         }
     }
 

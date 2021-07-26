@@ -5,21 +5,21 @@ import com.ldtteam.domumornamentum.block.decorative.TimberFrameBlock;
 import com.ldtteam.domumornamentum.block.types.TimberFrameType;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.util.Constants;
-import net.minecraft.block.Block;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.item.Item.Properties;
+import net.minecraft.world.item.Item.Properties;
 
 public class TimberFrameBlockItem extends BlockItem
 {
@@ -32,35 +32,35 @@ public class TimberFrameBlockItem extends BlockItem
     }
 
     @Override
-    public ITextComponent getName(final ItemStack stack)
+    public Component getName(final ItemStack stack)
     {
-        final CompoundNBT dataNbt = stack.getOrCreateTagElement("textureData");
+        final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
         final MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
 
         final IMateriallyTexturedBlockComponent centerComponent = timberFrameBlock.getComponents().get(1);
         final Block centerBlock = textureData.getTexturedComponents().getOrDefault(centerComponent.getId(), centerComponent.getDefault());
-        final TranslationTextComponent centerBlockName = new TranslationTextComponent(centerBlock.getDescriptionId());
+        final TranslatableComponent centerBlockName = new TranslatableComponent(centerBlock.getDescriptionId());
 
-        return new TranslationTextComponent(Constants.MOD_ID + ".timber.frame.name.format", centerBlockName);
+        return new TranslatableComponent(Constants.MOD_ID + ".timber.frame.name.format", centerBlockName);
     }
 
     @Override
     public void appendHoverText(
-      final ItemStack stack, @Nullable final World worldIn, final List<ITextComponent> tooltip, final ITooltipFlag flagIn)
+      final ItemStack stack, @Nullable final Level worldIn, final List<Component> tooltip, final TooltipFlag flagIn)
     {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
 
-        final CompoundNBT dataNbt = stack.getOrCreateTagElement("textureData");
+        final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
         final MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
 
         final TimberFrameType type = timberFrameBlock.getTimberFrameType();
-        tooltip.add(new StringTextComponent(""));
-        tooltip.add(new TranslationTextComponent(Constants.MOD_ID + ".timber.frame.header"));
-        tooltip.add(new TranslationTextComponent(Constants.MOD_ID + ".timber.frame.type.format", new TranslationTextComponent(Constants.MOD_ID + ".timber.frame.type." + type.getName())));
+        tooltip.add(new TextComponent(""));
+        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".timber.frame.header"));
+        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".timber.frame.type.format", new TranslatableComponent(Constants.MOD_ID + ".timber.frame.type." + type.getName())));
 
         final IMateriallyTexturedBlockComponent frameComponent = timberFrameBlock.getComponents().get(0);
         final Block frameBlock = textureData.getTexturedComponents().getOrDefault(frameComponent.getId(), frameComponent.getDefault());
-        final TranslationTextComponent frameBlockName = new TranslationTextComponent(frameBlock.getDescriptionId());
-        tooltip.add(new TranslationTextComponent(Constants.MOD_ID + ".timber.frame.block.format", frameBlockName));
+        final TranslatableComponent frameBlockName = new TranslatableComponent(frameBlock.getDescriptionId());
+        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".timber.frame.block.format", frameBlockName));
     }
 }

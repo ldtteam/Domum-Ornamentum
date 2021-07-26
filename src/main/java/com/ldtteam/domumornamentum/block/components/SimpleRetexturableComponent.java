@@ -1,18 +1,18 @@
 package com.ldtteam.domumornamentum.block.components;
 
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
-import net.minecraft.block.Block;
-import net.minecraft.tags.ITag;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.tags.Tag;
+import net.minecraft.resources.ResourceLocation;
 
 public class SimpleRetexturableComponent implements IMateriallyTexturedBlockComponent
 {
 
     private final ResourceLocation id;
-    private final ITag<Block> validSkins;
+    private final Tag<Block> validSkins;
     private final Block defaultBlock;
 
-    public SimpleRetexturableComponent(final ResourceLocation id, final ITag<Block> validSkins, final Block defaultBlock) {
+    public SimpleRetexturableComponent(final ResourceLocation id, final Tag<Block> validSkins, final Block defaultBlock) {
         this.id = id;
         this.validSkins = validSkins;
         this.defaultBlock = defaultBlock;
@@ -25,7 +25,7 @@ public class SimpleRetexturableComponent implements IMateriallyTexturedBlockComp
     }
 
     @Override
-    public ITag<Block> getValidSkins()
+    public Tag<Block> getValidSkins()
     {
         return validSkins;
     }

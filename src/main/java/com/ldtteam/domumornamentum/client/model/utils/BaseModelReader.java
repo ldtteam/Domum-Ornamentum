@@ -1,9 +1,9 @@
 package com.ldtteam.domumornamentum.client.model.utils;
 
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.client.renderer.vertex.VertexFormat;
-import net.minecraft.util.Direction;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.VertexFormat;
+import net.minecraft.core.Direction;
 import net.minecraftforge.client.model.pipeline.IVertexConsumer;
 
 public abstract class BaseModelReader implements IVertexConsumer
@@ -12,7 +12,7 @@ public abstract class BaseModelReader implements IVertexConsumer
     @Override
     public VertexFormat getVertexFormat()
     {
-        return DefaultVertexFormats.BLOCK;
+        return DefaultVertexFormat.BLOCK;
     }
 
     @Override

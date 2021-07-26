@@ -7,13 +7,13 @@ import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.decorative.ShingleBlock;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
-import net.minecraft.block.StairsBlock;
+import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DirectoryCache;
-import net.minecraft.data.IDataProvider;
-import net.minecraft.state.properties.Half;
-import net.minecraft.state.properties.StairsShape;
-import net.minecraft.util.Direction;
+import net.minecraft.data.HashCache;
+import net.minecraft.data.DataProvider;
+import net.minecraft.world.level.block.state.properties.Half;
+import net.minecraft.world.level.block.state.properties.StairsShape;
+import net.minecraft.core.Direction;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public class ShinglesBlockStateProvider implements IDataProvider
+public class ShinglesBlockStateProvider implements DataProvider
 {
     private final DataGenerator generator;
 
@@ -32,23 +32,23 @@ public class ShinglesBlockStateProvider implements IDataProvider
     }
 
     @Override
-    public void run(@NotNull final DirectoryCache cache) throws IOException
+    public void run(@NotNull final HashCache cache) throws IOException
     {
         createBlockstateFile(cache, ModBlocks.getShingle());
     }
 
-    private void createBlockstateFile(final DirectoryCache cache, final ShingleBlock shingle) throws IOException
+    private void createBlockstateFile(final HashCache cache, final ShingleBlock shingle) throws IOException
     {
         if (shingle.getRegistryName() == null)
             return;
 
         final Map<String, BlockstateVariantJson> variants = new HashMap<>();
 
-        for (Direction facingValue : StairsBlock.FACING.getPossibleValues())
+        for (Direction facingValue : StairBlock.FACING.getPossibleValues())
         {
-            for (StairsShape shapeValue : StairsBlock.SHAPE.getPossibleValues())
+            for (StairsShape shapeValue : StairBlock.SHAPE.getPossibleValues())
             {
-                for (Half halfValue : StairsBlock.HALF.getPossibleValues())
+                for (Half halfValue : StairBlock.HALF.getPossibleValues())
                 {
                     final String variantKey = "facing=" + facingValue + ",shape=" + shapeValue + ",half=" + halfValue;
 
@@ -73,7 +73,7 @@ public class ShinglesBlockStateProvider implements IDataProvider
         final Path blockstateFolder = this.generator.getOutputFolder().resolve(DataGeneratorConstants.BLOCKSTATE_DIR);
         final Path blockstatePath = blockstateFolder.resolve(shingle.getRegistryName().getPath() + ".json");
 
-        IDataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(blockstate), blockstatePath);
+        DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(blockstate), blockstatePath);
 
     }
 

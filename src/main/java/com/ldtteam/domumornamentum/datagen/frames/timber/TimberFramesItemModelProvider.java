@@ -10,9 +10,9 @@ import com.ldtteam.domumornamentum.block.decorative.TimberFrameBlock;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DirectoryCache;
-import net.minecraft.data.IDataProvider;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.data.HashCache;
+import net.minecraft.data.DataProvider;
+import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class TimberFramesItemModelProvider implements IDataProvider
+public class TimberFramesItemModelProvider implements DataProvider
 {
     private final DataGenerator generator;
 
@@ -30,7 +30,7 @@ public class TimberFramesItemModelProvider implements IDataProvider
     }
 
     @Override
-    public void run(@NotNull DirectoryCache cache) throws IOException
+    public void run(@NotNull HashCache cache) throws IOException
     {
         final ItemModelJson modelJson = new ItemModelJson();
         modelJson.setDisplay(getDisplay());
@@ -45,7 +45,7 @@ public class TimberFramesItemModelProvider implements IDataProvider
                 continue;
 
             final String name = timberFrame.getRegistryName().getPath();
-            IDataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(modelJson), generator.getOutputFolder().resolve(DataGeneratorConstants.ITEM_MODEL_DIR).resolve(name + ".json"));
+            DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(modelJson), generator.getOutputFolder().resolve(DataGeneratorConstants.ITEM_MODEL_DIR).resolve(name + ".json"));
         }
     }
 

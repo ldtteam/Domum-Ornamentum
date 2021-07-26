@@ -4,20 +4,23 @@ import com.ldtteam.domumornamentum.block.MateriallyTexturedBlockManager;
 import com.ldtteam.domumornamentum.container.ArchitectsCutterContainer;
 import com.ldtteam.domumornamentum.recipe.architectscutter.ArchitectsCutterRecipe;
 import com.ldtteam.domumornamentum.util.Constants;
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.SimpleSound;
-import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.player.Inventory;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Objects;
 
-public class ArchitectsCutterScreen extends ContainerScreen<ArchitectsCutterContainer>
+public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCutterContainer>
 {
     private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(Constants.MOD_ID, "textures/gui/container/architectscutter.png");
     private              float            sliderProgress;
@@ -31,21 +34,22 @@ public class ArchitectsCutterScreen extends ContainerScreen<ArchitectsCutterCont
     private              int              recipeIndexOffset;
     private boolean hasItemsInInputSlot;
 
-    public ArchitectsCutterScreen(ArchitectsCutterContainer containerIn, PlayerInventory playerInv, ITextComponent titleIn) {
+    public ArchitectsCutterScreen(ArchitectsCutterContainer containerIn, Inventory playerInv, Component titleIn) {
         super(containerIn, playerInv, titleIn);
         containerIn.setInventoryUpdateListener(this::onInventoryUpdate);
         --this.titleLabelY;
     }
 
-    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(@NotNull PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         super.render(matrixStack, mouseX, mouseY, partialTicks);
         this.renderTooltip(matrixStack, mouseX, mouseY);
     }
 
-    protected void renderBg(MatrixStack matrixStack, float partialTicks, int x, int y) {
+    protected void renderBg(@NotNull PoseStack matrixStack, float partialTicks, int x, int y) {
         this.renderBackground(matrixStack);
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.minecraft.getTextureManager().bind(BACKGROUND_TEXTURE);
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.setShaderTexture(0, BACKGROUND_TEXTURE);
         int guiLeft = this.leftPos;
         int guiTop = this.topPos;
         this.blit(matrixStack, guiLeft, guiTop, 0, 0, this.imageWidth, this.imageHeight);
@@ -59,7 +63,7 @@ public class ArchitectsCutterScreen extends ContainerScreen<ArchitectsCutterCont
         this.drawRecipesItems(recipeAreaLeft, recipeAreaTop, recipeIndexDrawOffset);
     }
 
-    protected void renderTooltip(MatrixStack matrixStack, int x, int y) {
+    protected void renderTooltip(@NotNull PoseStack matrixStack, int x, int y) {
         super.renderTooltip(matrixStack, x, y);
         if (this.hasItemsInInputSlot) {
             int i = this.leftPos + 52;
@@ -79,7 +83,7 @@ public class ArchitectsCutterScreen extends ContainerScreen<ArchitectsCutterCont
 
     }
 
-    private void drawRecipeButtonBackgrounds(MatrixStack matrixStack, int x, int y, int recipeAreaLeft, int recipeAreaTop, int recipeIndexDrawOffset) {
+    private void drawRecipeButtonBackgrounds(PoseStack matrixStack, int x, int y, int recipeAreaLeft, int recipeAreaTop, int recipeIndexDrawOffset) {
         for(int i = this.recipeIndexOffset; i < recipeIndexDrawOffset && i < this.menu.getRecipeListSize(); ++i) {
             int drawIndex = i - this.recipeIndexOffset;
             int drawLeft = recipeAreaLeft + drawIndex % 4 * 16;
@@ -97,7 +101,7 @@ public class ArchitectsCutterScreen extends ContainerScreen<ArchitectsCutterCont
 
     }
 
-    private void drawSlotBackgrounds(MatrixStack matrixStack) {
+    private void drawSlotBackgrounds(PoseStack matrixStack) {
         final int sourceLeft = 16;
         final int sourceTop = 166;
 
@@ -121,7 +125,7 @@ public class ArchitectsCutterScreen extends ContainerScreen<ArchitectsCutterCont
             int k = left + j % 4 * 16;
             int l = j / 4;
             int i1 = top + l * 18 + 2;
-            this.minecraft.getItemRenderer().renderAndDecorateItem(list.get(i).assemble(this.menu.inputInventory), k, i1);
+            Objects.requireNonNull(this.minecraft).getItemRenderer().renderAndDecorateItem(list.get(i).assemble(this.menu.inputInventory), k, i1);
         }
 
     }
@@ -137,9 +141,9 @@ public class ArchitectsCutterScreen extends ContainerScreen<ArchitectsCutterCont
                 int i1 = l - this.recipeIndexOffset;
                 double d0 = mouseX - (double)(i + i1 % 4 * 16);
                 double d1 = mouseY - (double)(j + i1 / 4 * 18);
-                if (d0 >= 0.0D && d1 >= 0.0D && d0 < 16.0D && d1 < 18.0D && this.menu.clickMenuButton(this.minecraft.player, l)) {
-                    Minecraft.getInstance().getSoundManager().play(SimpleSound.forUI(SoundEvents.UI_STONECUTTER_SELECT_RECIPE, 1.0F));
-                    this.minecraft.gameMode.handleInventoryButtonClick((this.menu).containerId, l);
+                if (d0 >= 0.0D && d1 >= 0.0D && d0 < 16.0D && d1 < 18.0D && this.menu.clickMenuButton(Objects.requireNonNull(Objects.requireNonNull(this.minecraft).player), l)) {
+                    Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_STONECUTTER_SELECT_RECIPE, 1.0F));
+                    Objects.requireNonNull(this.minecraft.gameMode).handleInventoryButtonClick((this.menu).containerId, l);
                     return true;
                 }
             }
@@ -159,7 +163,7 @@ public class ArchitectsCutterScreen extends ContainerScreen<ArchitectsCutterCont
             int i = this.topPos + 14;
             int j = i + 54;
             this.sliderProgress = ((float)mouseY - (float)i - 7.5F) / ((float)(j - i) - 15.0F);
-            this.sliderProgress = MathHelper.clamp(this.sliderProgress, 0.0F, 1.0F);
+            this.sliderProgress = Mth.clamp(this.sliderProgress, 0.0F, 1.0F);
             this.recipeIndexOffset = (int)((double)(this.sliderProgress * (float)this.getHiddenRows()) + 0.5D) * 4;
             return true;
         } else {
@@ -171,7 +175,7 @@ public class ArchitectsCutterScreen extends ContainerScreen<ArchitectsCutterCont
         if (this.canScroll()) {
             int i = this.getHiddenRows();
             this.sliderProgress = (float)((double)this.sliderProgress - delta / (double)i);
-            this.sliderProgress = MathHelper.clamp(this.sliderProgress, 0.0F, 1.0F);
+            this.sliderProgress = Mth.clamp(this.sliderProgress, 0.0F, 1.0F);
             this.recipeIndexOffset = (int)((double)(this.sliderProgress * (float)i) + 0.5D) * 4;
         }
 

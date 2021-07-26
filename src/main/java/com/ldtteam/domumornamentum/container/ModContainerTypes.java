@@ -1,12 +1,8 @@
 package com.ldtteam.domumornamentum.container;
 
-import com.ldtteam.domumornamentum.recipe.architectscutter.ArchitectsCutterRecipe;
-import com.ldtteam.domumornamentum.recipe.architectscutter.ArchitectsCutterRecipeSerializer;
 import com.ldtteam.domumornamentum.util.Constants;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -16,7 +12,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class ModContainerTypes
 {
 
-    public static ContainerType<ArchitectsCutterContainer> ARCHITECTS_CUTTER;
+    public static MenuType<ArchitectsCutterContainer> ARCHITECTS_CUTTER;
 
     private ModContainerTypes()
     {
@@ -24,11 +20,11 @@ public class ModContainerTypes
     }
 
     @SubscribeEvent
-    public static void registerSerializers(RegistryEvent.Register<ContainerType<?>> event)
+    public static void registerSerializers(RegistryEvent.Register<MenuType<?>> event)
     {
-        final IForgeRegistry<ContainerType<?>> registry = event.getRegistry();
+        final IForgeRegistry<MenuType<?>> registry = event.getRegistry();
 
-        ARCHITECTS_CUTTER = new ContainerType<>(ArchitectsCutterContainer::new);
+        ARCHITECTS_CUTTER = new MenuType<>(ArchitectsCutterContainer::new);
         registry.register(ARCHITECTS_CUTTER.setRegistryName(new ResourceLocation(Constants.MOD_ID, "architects_cutter")));
     }
 }

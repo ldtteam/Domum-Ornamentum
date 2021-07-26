@@ -1,6 +1,6 @@
 package com.ldtteam.domumornamentum.block.types;
 
-import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.StringRepresentable;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
  *
  *  -> gradle runData <-
  */
-public enum ShingleWoodType implements IStringSerializable
+public enum ShingleWoodType implements StringRepresentable
 {
     OAK("oak", "Oak"),
     ACACIA("acacia", "Acacia"),

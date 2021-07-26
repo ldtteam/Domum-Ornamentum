@@ -5,11 +5,12 @@ import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.data.RecipeProvider;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
@@ -24,26 +25,26 @@ public class MateriallyTexturedBlockRecipeProvider extends RecipeProvider
     }
 
     @Override
-    protected void buildShapelessRecipes(final Consumer<IFinishedRecipe> consumer)
+    protected void buildCraftingRecipes(final @NotNull Consumer<FinishedRecipe> builder)
     {
         ForgeRegistries.BLOCKS.forEach(
           block -> {
               if (Objects.requireNonNull(block.getRegistryName()).getNamespace().equals(Constants.MOD_ID) && block instanceof IMateriallyTexturedBlock) {
-                  consumer.accept(new IFinishedRecipe() {
+                  builder.accept(new FinishedRecipe() {
                       @Override
-                      public void serializeRecipeData(final JsonObject json)
+                      public void serializeRecipeData(final @NotNull JsonObject json)
                       {
 
                       }
 
                       @Override
-                      public ResourceLocation getId()
+                      public @NotNull ResourceLocation getId()
                       {
                           return block.getRegistryName();
                       }
 
                       @Override
-                      public IRecipeSerializer<?> getType()
+                      public @NotNull RecipeSerializer<?> getType()
                       {
                           return ModRecipeSerializers.ARCHITECTS_CUTTER;
                       }
@@ -68,7 +69,7 @@ public class MateriallyTexturedBlockRecipeProvider extends RecipeProvider
     }
 
     @Override
-    public String getName()
+    public @NotNull String getName()
     {
         return "Materially textured block recipes";
     }

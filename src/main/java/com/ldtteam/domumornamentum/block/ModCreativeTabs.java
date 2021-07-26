@@ -1,8 +1,8 @@
 package com.ldtteam.domumornamentum.block;
 
 import com.ldtteam.domumornamentum.util.Constants;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public final class ModCreativeTabs
 {
-    public static final ItemGroup GENERAL = new ItemGroup(Constants.MOD_ID + ".general")
+    public static final CreativeModeTab GENERAL = new CreativeModeTab(Constants.MOD_ID + ".general")
     {
         @Override
         public @NotNull ItemStack makeIcon()
@@ -26,7 +26,7 @@ public final class ModCreativeTabs
     };
 
 
-    public static final ItemGroup TIMBER_FRAMES = new ItemGroup(Constants.MOD_ID + ".timber_frames")
+    public static final CreativeModeTab TIMBER_FRAMES = new CreativeModeTab(Constants.MOD_ID + ".timber_frames")
     {
         @Override
         public @NotNull ItemStack makeIcon()
@@ -41,7 +41,7 @@ public final class ModCreativeTabs
         }
     };
 
-    public static final ItemGroup SHINGLES = new ItemGroup(Constants.MOD_ID + ".shingles")
+    public static final CreativeModeTab SHINGLES = new CreativeModeTab(Constants.MOD_ID + ".shingles")
     {
         @Override
         public @NotNull ItemStack makeIcon()
@@ -56,7 +56,7 @@ public final class ModCreativeTabs
         }
     };
 
-    public static final ItemGroup SHINGLE_SLABS = new ItemGroup(Constants.MOD_ID + ".shingle_slabs")
+    public static final CreativeModeTab SHINGLE_SLABS = new CreativeModeTab(Constants.MOD_ID + ".shingle_slabs")
     {
         @Override
         public @NotNull ItemStack makeIcon()
@@ -71,7 +71,7 @@ public final class ModCreativeTabs
         }
     };
 
-    public static final ItemGroup PAPERWALLS = new ItemGroup(Constants.MOD_ID + ".paperwalls")
+    public static final CreativeModeTab PAPERWALLS = new CreativeModeTab(Constants.MOD_ID + ".paperwalls")
     {
         @Override
         public @NotNull ItemStack makeIcon()

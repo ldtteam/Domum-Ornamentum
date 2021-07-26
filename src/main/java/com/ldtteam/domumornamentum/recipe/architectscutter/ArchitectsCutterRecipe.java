@@ -8,23 +8,24 @@ import com.ldtteam.domumornamentum.block.MateriallyTexturedBlockManager;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
 import com.ldtteam.domumornamentum.recipe.ModRecipeTypes;
-import net.minecraft.block.Block;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Map;
 
-public class ArchitectsCutterRecipe implements IRecipe<IInventory>
+public class ArchitectsCutterRecipe implements Recipe<Container>
 {
     private final ResourceLocation blockName;
 
@@ -36,17 +37,16 @@ public class ArchitectsCutterRecipe implements IRecipe<IInventory>
     }
 
     @Override
-    public boolean matches(final IInventory inv, final World worldIn)
+    public boolean matches(final @NotNull Container inv, final @NotNull Level worldIn)
     {
         if (!ForgeRegistries.BLOCKS.containsKey(getBlockName()))
             return false;
 
         final Block generatedBlock = ForgeRegistries.BLOCKS.getValue(getBlockName());
 
-        if (!(generatedBlock instanceof IMateriallyTexturedBlock))
+        if (!(generatedBlock instanceof final IMateriallyTexturedBlock materiallyTexturedBlock))
             return false;
 
-        final IMateriallyTexturedBlock materiallyTexturedBlock = (IMateriallyTexturedBlock) generatedBlock;
         final List<IMateriallyTexturedBlockComponent> components = Lists.newArrayList(materiallyTexturedBlock.getComponents());
         for (int componentsIndex = 0; componentsIndex < components.size(); componentsIndex++)
         {
@@ -54,10 +54,9 @@ public class ArchitectsCutterRecipe implements IRecipe<IInventory>
             final ItemStack itemStackInSlot = inv.getItem(componentsIndex);
 
             final Item item = itemStackInSlot.getItem();
-            if (!(item instanceof BlockItem))
+            if (!(item instanceof final BlockItem blockItem))
                 return false;
 
-            final BlockItem blockItem = (BlockItem) item;
             final Block blockInSlot = blockItem.getBlock();
 
             if (!component.getValidSkins().contains(blockInSlot))
@@ -68,17 +67,16 @@ public class ArchitectsCutterRecipe implements IRecipe<IInventory>
     }
 
     @Override
-    public ItemStack assemble(final IInventory inv)
+    public @NotNull ItemStack assemble(final @NotNull Container inv)
     {
         if (!ForgeRegistries.BLOCKS.containsKey(getBlockName()))
             return ItemStack.EMPTY;
 
         final Block generatedBlock = ForgeRegistries.BLOCKS.getValue(getBlockName());
 
-        if (!(generatedBlock instanceof IMateriallyTexturedBlock))
+        if (!(generatedBlock instanceof final IMateriallyTexturedBlock materiallyTexturedBlock))
             return ItemStack.EMPTY;
 
-        final IMateriallyTexturedBlock materiallyTexturedBlock = (IMateriallyTexturedBlock) generatedBlock;
         final List<IMateriallyTexturedBlockComponent> components = Lists.newArrayList(materiallyTexturedBlock.getComponents());
 
         final Map<ResourceLocation, Block> textureData = Maps.newHashMap();
@@ -89,10 +87,9 @@ public class ArchitectsCutterRecipe implements IRecipe<IInventory>
             final ItemStack itemStackInSlot = inv.getItem(componentsIndex);
 
             final Item item = itemStackInSlot.getItem();
-            if (!(item instanceof BlockItem))
+            if (!(item instanceof final BlockItem blockItem))
                 return ItemStack.EMPTY;
 
-            final BlockItem blockItem = (BlockItem) item;
             final Block blockInSlot = blockItem.getBlock();
 
             if (!component.getValidSkins().contains(blockInSlot))
@@ -103,7 +100,7 @@ public class ArchitectsCutterRecipe implements IRecipe<IInventory>
 
         final MaterialTextureData materialTextureData = new MaterialTextureData(textureData);
 
-        final CompoundNBT textureNbt = materialTextureData.serializeNBT();
+        final CompoundTag textureNbt = materialTextureData.serializeNBT();
 
         final ItemStack result = new ItemStack(generatedBlock);
         result.getOrCreateTag().put("textureData", textureNbt);
@@ -118,7 +115,7 @@ public class ArchitectsCutterRecipe implements IRecipe<IInventory>
     }
 
     @Override
-    public ItemStack getResultItem()
+    public @NotNull ItemStack getResultItem()
     {
         if (!ForgeRegistries.BLOCKS.containsKey(getBlockName()))
             return ItemStack.EMPTY;
@@ -132,19 +129,19 @@ public class ArchitectsCutterRecipe implements IRecipe<IInventory>
     }
 
     @Override
-    public ResourceLocation getId()
+    public @NotNull ResourceLocation getId()
     {
         return getBlockName();
     }
 
     @Override
-    public IRecipeSerializer<?> getSerializer()
+    public @NotNull RecipeSerializer<?> getSerializer()
     {
         return ModRecipeSerializers.ARCHITECTS_CUTTER;
     }
 
     @Override
-    public IRecipeType<?> getType()
+    public @NotNull RecipeType<?> getType()
     {
         return ModRecipeTypes.ARCHITECTS_CUTTER;
     }

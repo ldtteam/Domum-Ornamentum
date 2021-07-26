@@ -9,9 +9,9 @@ import com.ldtteam.domumornamentum.block.types.ShingleSlabShapeType;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DirectoryCache;
-import net.minecraft.data.IDataProvider;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.data.HashCache;
+import net.minecraft.data.DataProvider;
+import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -19,7 +19,7 @@ import java.nio.file.Path;
 import java.util.Locale;
 import java.util.Objects;
 
-public class ShingleSlabBlockModelProvider implements IDataProvider
+public class ShingleSlabBlockModelProvider implements DataProvider
 {
     private final DataGenerator generator;
 
@@ -29,7 +29,7 @@ public class ShingleSlabBlockModelProvider implements IDataProvider
     }
 
     @Override
-    public void run(@NotNull DirectoryCache cache) throws IOException
+    public void run(@NotNull HashCache cache) throws IOException
     {
         for (final ShingleSlabShapeType shapeType : ShingleSlabShapeType.values())
         {
@@ -41,7 +41,7 @@ public class ShingleSlabBlockModelProvider implements IDataProvider
             final String name = shapeType.name().toLowerCase(Locale.ROOT) + ".json";
             final Path saveFile = this.generator.getOutputFolder().resolve(DataGeneratorConstants.SHINGLE_SLABS_BLOCK_MODELS_DIR).resolve(name);
 
-            IDataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(modelJson), saveFile);
+            DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(modelJson), saveFile);
         }
     }
 

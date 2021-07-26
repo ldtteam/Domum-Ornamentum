@@ -10,18 +10,18 @@ import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.decorative.PaperWallBlock;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
-import net.minecraft.block.HorizontalBlock;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DirectoryCache;
-import net.minecraft.data.IDataProvider;
-import net.minecraft.util.Direction;
+import net.minecraft.data.HashCache;
+import net.minecraft.data.DataProvider;
+import net.minecraft.core.Direction;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.*;
 
-public class PaperwallBlockStateProvider implements IDataProvider
+public class PaperwallBlockStateProvider implements DataProvider
 {
     private final DataGenerator generator;
 
@@ -31,12 +31,12 @@ public class PaperwallBlockStateProvider implements IDataProvider
     }
 
     @Override
-    public void run(@NotNull final DirectoryCache cache) throws IOException
+    public void run(@NotNull final HashCache cache) throws IOException
     {
         createBlockstateFile(cache, ModBlocks.getPaperWall());
     }
 
-    private void createBlockstateFile(final DirectoryCache cache, final PaperWallBlock paperWallBlock) throws IOException
+    private void createBlockstateFile(final HashCache cache, final PaperWallBlock paperWallBlock) throws IOException
     {
         if (paperWallBlock.getRegistryName() == null)
             return;
@@ -53,7 +53,7 @@ public class PaperwallBlockStateProvider implements IDataProvider
           )
         );
 
-        for (final Direction possibleValue : HorizontalBlock.FACING.getPossibleValues())
+        for (final Direction possibleValue : HorizontalDirectionalBlock.FACING.getPossibleValues())
         {
             cases.add(
               new MultipartCaseJson(
@@ -89,7 +89,7 @@ public class PaperwallBlockStateProvider implements IDataProvider
         final Path blockstateFolder = this.generator.getOutputFolder().resolve(DataGeneratorConstants.BLOCKSTATE_DIR);
         final Path blockstatePath = blockstateFolder.resolve(paperWallBlock.getRegistryName().getPath() + ".json");
 
-        IDataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(blockstate), blockstatePath);
+        DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(blockstate), blockstatePath);
 
     }
 

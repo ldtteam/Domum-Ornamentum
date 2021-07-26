@@ -19,30 +19,31 @@ import com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes;
 import com.ldtteam.domumornamentum.item.decoration.ShingleBlockItem;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.Constants;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.state.properties.StairsShape;
-import net.minecraft.tags.ITag;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.state.properties.StairsShape;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.NonNullList;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.IForgeRegistry;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Class defining the general shingle.
  */
-public class ShingleBlock extends AbstractBlockStairs<ShingleBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock
+public class ShingleBlock extends AbstractBlockStairs<ShingleBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock
 {
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
                                                                                .add(new SimpleRetexturableComponent(new ResourceLocation("block/clay"), ModTags.SHINGLES_ROOF, Blocks.CLAY))
@@ -101,7 +102,7 @@ public class ShingleBlock extends AbstractBlockStairs<ShingleBlock> implements I
     }
 
     @Override
-    public void fillItemCategory(final ItemGroup group, final NonNullList<ItemStack> items)
+    public void fillItemCategory(final CreativeModeTab group, final NonNullList<ItemStack> items)
     {
         if (!fillItemGroupCache.isEmpty()) {
             items.addAll(fillItemGroupCache);
@@ -111,8 +112,8 @@ public class ShingleBlock extends AbstractBlockStairs<ShingleBlock> implements I
         IMateriallyTexturedBlockComponent coverComponent = getComponents().get(0);
         IMateriallyTexturedBlockComponent supportComponent = getComponents().get(1);
 
-        final ITag<Block> coverCandidates = coverComponent.getValidSkins();
-        final ITag<Block> supportCandidates = supportComponent.getValidSkins();
+        final Tag<Block> coverCandidates = coverComponent.getValidSkins();
+        final Tag<Block> supportCandidates = supportComponent.getValidSkins();
 
         try {
             coverCandidates.getValues().forEach(cover -> {
@@ -124,7 +125,7 @@ public class ShingleBlock extends AbstractBlockStairs<ShingleBlock> implements I
 
                     final MaterialTextureData materialTextureData = new MaterialTextureData(textureData);
 
-                    final CompoundNBT textureNbt = materialTextureData.serializeNBT();
+                    final CompoundTag textureNbt = materialTextureData.serializeNBT();
 
                     final ItemStack result = new ItemStack(this);
                     result.getOrCreateTag().put("textureData", textureNbt);
@@ -142,28 +143,22 @@ public class ShingleBlock extends AbstractBlockStairs<ShingleBlock> implements I
 
     @Override
     public void setPlacedBy(
-      final World worldIn, final BlockPos pos, final BlockState state, @Nullable final LivingEntity placer, final ItemStack stack)
+      final Level worldIn, final BlockPos pos, final BlockState state, @Nullable final LivingEntity placer, final ItemStack stack)
     {
         super.setPlacedBy(worldIn, pos, state, placer, stack);
 
-        final CompoundNBT textureData = stack.getOrCreateTagElement("textureData");
-        final TileEntity tileEntity = worldIn.getBlockEntity(pos);
+        final CompoundTag textureData = stack.getOrCreateTagElement("textureData");
+        final BlockEntity tileEntity = worldIn.getBlockEntity(pos);
 
         if (tileEntity instanceof MateriallyTexturedBlockEntity)
             ((MateriallyTexturedBlockEntity) tileEntity).updateTextureDataWith(MaterialTextureData.deserializeFromNBT(textureData));
     }
 
-    @Override
-    public boolean hasTileEntity(final BlockState state)
-    {
-        return true;
-    }
-
     @Nullable
     @Override
-    public TileEntity createTileEntity(final BlockState state, final IBlockReader world)
+    public BlockEntity newBlockEntity(final @NotNull BlockPos blockPos, final @NotNull BlockState blockState)
     {
-        return new MateriallyTexturedBlockEntity(ModBlockEntityTypes.MATERIALLY_TEXTURED_BLOCK_ENTITY_TILE_ENTITY_TYPE);
+        return new MateriallyTexturedBlockEntity(ModBlockEntityTypes.MATERIALLY_TEXTURED, blockPos, blockState);
     }
 
     @Override

@@ -2,12 +2,12 @@ package com.ldtteam.domumornamentum.recipe;
 
 import com.ldtteam.domumornamentum.recipe.architectscutter.ArchitectsCutterRecipe;
 import com.ldtteam.domumornamentum.util.Constants;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeType;
 
 public class ModRecipeTypes
 {
-    public static IRecipeType<ArchitectsCutterRecipe> ARCHITECTS_CUTTER = register("architects_cutter");
+    public static RecipeType<ArchitectsCutterRecipe> ARCHITECTS_CUTTER = register("architects_cutter");
 
     /**
      * Registers a new recipe type, prefixing with the mod ID
@@ -16,7 +16,7 @@ public class ModRecipeTypes
      * @return  Registered recipe type
      */
     @SuppressWarnings("SameParameterValue")
-    static <T extends IRecipe<?>> IRecipeType<T> register(String name) {
-        return IRecipeType.register(Constants.MOD_ID + ":" + name);
+    static <T extends Recipe<?>> RecipeType<T> register(String name) {
+        return RecipeType.register(Constants.MOD_ID + ":" + name);
     }
 }

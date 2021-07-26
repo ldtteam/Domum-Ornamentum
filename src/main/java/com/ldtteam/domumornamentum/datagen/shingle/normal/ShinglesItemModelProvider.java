@@ -10,8 +10,8 @@ import com.ldtteam.domumornamentum.block.types.ShingleShapeType;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DirectoryCache;
-import net.minecraft.data.IDataProvider;
+import net.minecraft.data.HashCache;
+import net.minecraft.data.DataProvider;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public class ShinglesItemModelProvider implements IDataProvider
+public class ShinglesItemModelProvider implements DataProvider
 {
     private final DataGenerator generator;
 
@@ -29,7 +29,7 @@ public class ShinglesItemModelProvider implements IDataProvider
     }
 
     @Override
-    public void run(@NotNull DirectoryCache cache) throws IOException
+    public void run(@NotNull HashCache cache) throws IOException
     {
         final ItemModelJson modelJson = new ItemModelJson();
         modelJson.setDisplay(getDisplay());
@@ -42,7 +42,7 @@ public class ShinglesItemModelProvider implements IDataProvider
             return;
 
         final String name = ModBlocks.getShingle().getRegistryName().getPath();
-        IDataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(modelJson), generator.getOutputFolder().resolve(DataGeneratorConstants.ITEM_MODEL_DIR).resolve(name + ".json"));
+        DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(modelJson), generator.getOutputFolder().resolve(DataGeneratorConstants.ITEM_MODEL_DIR).resolve(name + ".json"));
     }
 
     private Map<ModelDisplayPositionsEnum, ModelDisplayPositionJson> getDisplay()

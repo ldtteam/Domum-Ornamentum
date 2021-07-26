@@ -1,13 +1,13 @@
 package com.ldtteam.domumornamentum.recipe.architectscutter;
 
 import com.google.gson.JsonObject;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import org.jetbrains.annotations.Nullable;
 
-public class ArchitectsCutterRecipeSerializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<ArchitectsCutterRecipe>
+public class ArchitectsCutterRecipeSerializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<ArchitectsCutterRecipe>
 {
     @Override
     public ArchitectsCutterRecipe fromJson(final ResourceLocation recipeId, final JsonObject json)
@@ -17,13 +17,13 @@ public class ArchitectsCutterRecipeSerializer extends ForgeRegistryEntry<IRecipe
 
     @Nullable
     @Override
-    public ArchitectsCutterRecipe fromNetwork(final ResourceLocation recipeId, final PacketBuffer buffer)
+    public ArchitectsCutterRecipe fromNetwork(final ResourceLocation recipeId, final FriendlyByteBuf buffer)
     {
         return new ArchitectsCutterRecipe(recipeId);
     }
 
     @Override
-    public void toNetwork(final PacketBuffer buffer, final ArchitectsCutterRecipe recipe)
+    public void toNetwork(final FriendlyByteBuf buffer, final ArchitectsCutterRecipe recipe)
     {
     }
 }

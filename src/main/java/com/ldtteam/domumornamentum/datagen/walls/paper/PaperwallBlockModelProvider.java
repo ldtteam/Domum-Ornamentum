@@ -7,12 +7,12 @@ import com.ldtteam.domumornamentum.block.types.ShingleFaceType;
 import com.ldtteam.domumornamentum.block.types.ShingleShapeType;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
-import net.minecraft.block.HorizontalBlock;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DirectoryCache;
-import net.minecraft.data.IDataProvider;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.data.HashCache;
+import net.minecraft.data.DataProvider;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -20,7 +20,7 @@ import java.nio.file.Path;
 import java.util.Locale;
 import java.util.Objects;
 
-public class PaperwallBlockModelProvider implements IDataProvider
+public class PaperwallBlockModelProvider implements DataProvider
 {
     private final DataGenerator generator;
 
@@ -30,7 +30,7 @@ public class PaperwallBlockModelProvider implements IDataProvider
     }
 
     @Override
-    public void run(@NotNull DirectoryCache cache) throws IOException
+    public void run(@NotNull HashCache cache) throws IOException
     {
         final BlockModelJson postJson = new BlockModelJson();
 
@@ -40,9 +40,9 @@ public class PaperwallBlockModelProvider implements IDataProvider
         final String postName = "blockpaperwall_post.json";
         final Path postSavePath = this.generator.getOutputFolder().resolve(DataGeneratorConstants.PAPERWALLS_BLOCK_MODELS_DIR).resolve(postName);
 
-        IDataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(postJson), postSavePath);
+        DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(postJson), postSavePath);
 
-        for (final Direction possibleValue : HorizontalBlock.FACING.getPossibleValues())
+        for (final Direction possibleValue : HorizontalDirectionalBlock.FACING.getPossibleValues())
         {
             final BlockModelJson onSideJson = new BlockModelJson();
 
@@ -52,7 +52,7 @@ public class PaperwallBlockModelProvider implements IDataProvider
             final String onSideName = "blockpaperwall_" + possibleValue.name().toLowerCase(Locale.ROOT) + "_side.json";
             final Path onSideSavePath = this.generator.getOutputFolder().resolve(DataGeneratorConstants.PAPERWALLS_BLOCK_MODELS_DIR).resolve(onSideName);
 
-            IDataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(onSideJson), onSideSavePath);
+            DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(onSideJson), onSideSavePath);
 
 
             final BlockModelJson offSideJson = new BlockModelJson();
@@ -63,7 +63,7 @@ public class PaperwallBlockModelProvider implements IDataProvider
             final String offSideName = "blockpaperwall_off_" + possibleValue.name().toLowerCase(Locale.ROOT) + "_side.json";
             final Path offSideSavePath = this.generator.getOutputFolder().resolve(DataGeneratorConstants.PAPERWALLS_BLOCK_MODELS_DIR).resolve(offSideName);
 
-            IDataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(offSideJson), offSideSavePath);
+            DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(offSideJson), offSideSavePath);
         }
         
         

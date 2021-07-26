@@ -6,16 +6,16 @@ import com.ldtteam.domumornamentum.block.decorative.TimberFrameBlock;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DirectoryCache;
-import net.minecraft.data.IDataProvider;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.data.HashCache;
+import net.minecraft.data.DataProvider;
+import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Objects;
 
-public class TimberFramesBlockModelProvider implements IDataProvider
+public class TimberFramesBlockModelProvider implements DataProvider
 {
     private final DataGenerator generator;
 
@@ -25,7 +25,7 @@ public class TimberFramesBlockModelProvider implements IDataProvider
     }
 
     @Override
-    public void run(@NotNull DirectoryCache cache) throws IOException
+    public void run(@NotNull HashCache cache) throws IOException
     {
         for (final TimberFrameBlock timberFrame : ModBlocks.getTimberFrames())
         {
@@ -37,7 +37,7 @@ public class TimberFramesBlockModelProvider implements IDataProvider
             final String name = Objects.requireNonNull(timberFrame.getRegistryName()).getPath() + ".json";
             final Path saveFile = this.generator.getOutputFolder().resolve(DataGeneratorConstants.TIMBER_FRAMES_BLOCK_MODELS_DIR).resolve(name);
 
-            IDataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(modelJson), saveFile);
+            DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(modelJson), saveFile);
         }
     }
 

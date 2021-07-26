@@ -4,18 +4,17 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.client.model.properties.ModProperties;
-import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.model.BakedQuad;
-import net.minecraft.client.renderer.model.IBakedModel;
-import net.minecraft.client.renderer.model.IUnbakedModel;
-import net.minecraft.client.renderer.model.ItemOverrideList;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.data.IModelData;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,24 +23,23 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
-public class MateriallyTexturedBakedModel implements IBakedModel
+public class MateriallyTexturedBakedModel implements BakedModel
 {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    private final Cache<MaterialTextureData, IBakedModel> cache = CacheBuilder.newBuilder()
+    private final Cache<MaterialTextureData, BakedModel> cache = CacheBuilder.newBuilder()
         .expireAfterAccess(2, TimeUnit.MINUTES)
         .concurrencyLevel(4)
         .maximumSize(100)
         .build();
-    private final IBakedModel innerModel;
+    private final BakedModel innerModel;
 
-    private final ItemOverrideList overrideList = new OverrideList(this);
+    private final ItemOverrides overrideList = new OverrideList(this);
 
-    public MateriallyTexturedBakedModel(final IBakedModel innerModel) {this.innerModel = innerModel;}
+    public MateriallyTexturedBakedModel(final BakedModel innerModel) {this.innerModel = innerModel;}
 
     @Override
     public List<BakedQuad> getQuads(
@@ -54,7 +52,7 @@ public class MateriallyTexturedBakedModel implements IBakedModel
     @Override
     public List<BakedQuad> getQuads(@Nullable final BlockState state, @Nullable final Direction side, @NotNull final Random rand, @NotNull final IModelData extraData)
     {
-        final IBakedModel remappedModel = getBakedInnerModelFor(extraData);
+        final BakedModel remappedModel = getBakedInnerModelFor(extraData);
         return remappedModel.getQuads(state, side, rand, extraData);
     }
 
@@ -89,7 +87,7 @@ public class MateriallyTexturedBakedModel implements IBakedModel
     }
 
     @Override
-    public TextureAtlasSprite getParticleTexture(@NotNull final IModelData modelData)
+    public TextureAtlasSprite getParticleIcon(@NotNull final IModelData modelData)
     {
         if (!modelData.hasProperty(ModProperties.MATERIAL_TEXTURE_PROPERTY))
         {
@@ -105,16 +103,16 @@ public class MateriallyTexturedBakedModel implements IBakedModel
             return getParticleIcon();
 
         return Minecraft.getInstance().getBlockRenderer().getBlockModel(textureData.getTexturedComponents().get(particleTextureName).defaultBlockState())
-          .getParticleTexture(modelData);
+          .getParticleIcon(modelData);
     }
 
     @Override
-    public ItemOverrideList getOverrides()
+    public ItemOverrides getOverrides()
     {
         return this.overrideList;
     }
 
-    private IBakedModel getBakedInnerModelFor(final IModelData modelData)
+    private BakedModel getBakedInnerModelFor(final IModelData modelData)
     {
         if (!modelData.hasProperty(ModProperties.MATERIAL_TEXTURE_PROPERTY))
         {
@@ -124,7 +122,7 @@ public class MateriallyTexturedBakedModel implements IBakedModel
         return getBakedInnerModelFor(modelData.getData(ModProperties.MATERIAL_TEXTURE_PROPERTY));
     }
 
-    private IBakedModel getBakedInnerModelFor(final MaterialTextureData modelData)
+    private BakedModel getBakedInnerModelFor(final MaterialTextureData modelData)
     {
         try
         {
@@ -145,7 +143,7 @@ public class MateriallyTexturedBakedModel implements IBakedModel
         }
     }
 
-    private static class OverrideList extends ItemOverrideList {
+    private static class OverrideList extends ItemOverrides {
 
         private final MateriallyTexturedBakedModel model;
 
@@ -153,8 +151,12 @@ public class MateriallyTexturedBakedModel implements IBakedModel
 
         @Nullable
         @Override
-        public IBakedModel resolve(
-          final IBakedModel model, final ItemStack stack, @Nullable final ClientWorld world, @Nullable final LivingEntity livingEntity)
+        public BakedModel resolve(
+          final BakedModel model,
+          final ItemStack stack,
+          @Nullable final ClientLevel level,
+          @Nullable final LivingEntity entity,
+          final int random)
         {
             final MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(stack.getOrCreateTagElement("textureData"));
             return this.model.getBakedInnerModelFor(textureData);

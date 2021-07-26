@@ -1,16 +1,12 @@
 package com.ldtteam.domumornamentum.block;
 
 import com.ldtteam.domumornamentum.block.interfaces.IDOBlock;
-import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.IForgeRegistry;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
-
-import net.minecraft.block.AbstractBlock.Properties;
 
 public abstract class AbstractBlock<B extends AbstractBlock<B>> extends Block implements IDOBlock<B>
 {

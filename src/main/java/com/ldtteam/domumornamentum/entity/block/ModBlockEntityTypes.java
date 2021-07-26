@@ -2,8 +2,9 @@ package com.ldtteam.domumornamentum.entity.block;
 
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.util.Constants;
-import net.minecraft.block.Block;
-import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -24,7 +25,7 @@ public final class ModBlockEntityTypes
 
     @ObjectHolder(Constants.BlockEntityTypes.MATERIALLY_RETEXTURABLE)
     @NotNull
-    public static final TileEntityType<MateriallyTexturedBlockEntity> MATERIALLY_TEXTURED_BLOCK_ENTITY_TILE_ENTITY_TYPE = null;
+    public static final BlockEntityType<MateriallyTexturedBlockEntity> MATERIALLY_TEXTURED = null;
 
     /**
      * Private constructor to hide the implicit public one.
@@ -34,12 +35,12 @@ public final class ModBlockEntityTypes
     }
 
     @SubscribeEvent
-    public static void registerBlocks(RegistryEvent.Register<TileEntityType<?>> event)
+    public static void registerBlocks(RegistryEvent.Register<BlockEntityType<?>> event)
     {
         event.getRegistry().register(
-          TileEntityType.Builder.of(() -> new MateriallyTexturedBlockEntity(ModBlockEntityTypes.MATERIALLY_TEXTURED_BLOCK_ENTITY_TILE_ENTITY_TYPE),
+          BlockEntityType.Builder.of((BlockEntityType.BlockEntitySupplier<BlockEntity>) (pos, state) -> new MateriallyTexturedBlockEntity(MATERIALLY_TEXTURED, pos, state),
             ModBlocks.getTimberFrames().toArray(new Block[0])
-            ).build(null).setRegistryName(Constants.MOD_ID, Constants.BlockEntityTypes.MATERIALLY_RETEXTURABLE)
+          ).build(null).setRegistryName(Constants.MOD_ID, Constants.BlockEntityTypes.MATERIALLY_RETEXTURABLE)
         );
     }
 }

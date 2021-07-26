@@ -4,10 +4,10 @@ import com.google.common.collect.Lists;
 import com.ldtteam.domumornamentum.block.decorative.*;
 import com.ldtteam.domumornamentum.block.types.TimberFrameType;
 import com.ldtteam.domumornamentum.util.Constants;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.item.Item;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -74,7 +74,7 @@ public final class ModBlocks
     public static void registerBlocks(RegistryEvent.Register<Block> event)
     {
         final IForgeRegistry<Block> registry = event.getRegistry();
-        ARCHITECTS_CUTTER = new ArchitectsCutterBlock(AbstractBlock.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.5F)).registerBlock(registry);
+        ARCHITECTS_CUTTER = new ArchitectsCutterBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.5F)).registerBlock(registry);
 
         for (final TimberFrameType blockType : TimberFrameType.values())
         {

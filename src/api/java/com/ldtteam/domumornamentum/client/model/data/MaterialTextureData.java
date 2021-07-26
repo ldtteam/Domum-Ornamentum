@@ -1,18 +1,17 @@
 package com.ldtteam.domumornamentum.client.model.data;
 
 import com.google.common.collect.Maps;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.util.INBTSerializable;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Map;
 import java.util.Objects;
 
-public class MaterialTextureData implements INBTSerializable<CompoundNBT>
+public class MaterialTextureData implements INBTSerializable<CompoundTag>
 {
     public static final MaterialTextureData EMPTY = new MaterialTextureData();
 
@@ -39,11 +38,10 @@ public class MaterialTextureData implements INBTSerializable<CompoundNBT>
         {
             return true;
         }
-        if (!(o instanceof MaterialTextureData))
+        if (!(o instanceof final MaterialTextureData that))
         {
             return false;
         }
-        final MaterialTextureData that = (MaterialTextureData) o;
         return Objects.equals(getTexturedComponents(), that.getTexturedComponents());
     }
 
@@ -54,22 +52,20 @@ public class MaterialTextureData implements INBTSerializable<CompoundNBT>
     }
 
     @Override
-    public CompoundNBT serializeNBT()
+    public CompoundTag serializeNBT()
     {
-        final CompoundNBT nbt = new CompoundNBT();
+        final CompoundTag nbt = new CompoundTag();
 
         if (this == EMPTY)
             return nbt;
 
-        this.getTexturedComponents().forEach((key, value) -> {
-            nbt.putString(key.toString(), Objects.requireNonNull(value.getRegistryName()).toString());
-        });
+        this.getTexturedComponents().forEach((key, value) -> nbt.putString(key.toString(), Objects.requireNonNull(value.getRegistryName()).toString()));
 
         return nbt;
     }
 
     @Override
-    public void deserializeNBT(final CompoundNBT nbt)
+    public void deserializeNBT(final CompoundTag nbt)
     {
         this.texturedComponents.clear();
 
@@ -83,7 +79,7 @@ public class MaterialTextureData implements INBTSerializable<CompoundNBT>
         });
     }
 
-    public static MaterialTextureData deserializeFromNBT(final CompoundNBT nbt) {
+    public static MaterialTextureData deserializeFromNBT(final CompoundTag nbt) {
         if (nbt.getAllKeys().isEmpty())
             return EMPTY;
 

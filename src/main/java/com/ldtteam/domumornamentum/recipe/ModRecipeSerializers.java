@@ -3,8 +3,8 @@ package com.ldtteam.domumornamentum.recipe;
 import com.ldtteam.domumornamentum.recipe.architectscutter.ArchitectsCutterRecipe;
 import com.ldtteam.domumornamentum.recipe.architectscutter.ArchitectsCutterRecipeSerializer;
 import com.ldtteam.domumornamentum.util.Constants;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -14,7 +14,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class ModRecipeSerializers
 {
 
-    public static IRecipeSerializer<ArchitectsCutterRecipe> ARCHITECTS_CUTTER;
+    public static RecipeSerializer<ArchitectsCutterRecipe> ARCHITECTS_CUTTER;
 
     private ModRecipeSerializers()
     {
@@ -22,9 +22,9 @@ public class ModRecipeSerializers
     }
 
     @SubscribeEvent
-    public static void registerSerializers(RegistryEvent.Register<IRecipeSerializer<?>> event)
+    public static void registerSerializers(RegistryEvent.Register<RecipeSerializer<?>> event)
     {
-        final IForgeRegistry<IRecipeSerializer<?>> registry = event.getRegistry();
+        final IForgeRegistry<RecipeSerializer<?>> registry = event.getRegistry();
 
         ARCHITECTS_CUTTER = new ArchitectsCutterRecipeSerializer();
         registry.register(ARCHITECTS_CUTTER.setRegistryName(new ResourceLocation(Constants.MOD_ID, "architects_cutter")));

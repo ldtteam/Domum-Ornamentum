@@ -14,25 +14,20 @@ import com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
 import com.ldtteam.domumornamentum.item.decoration.TimberFrameBlockItem;
 import com.ldtteam.domumornamentum.tag.ModTags;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.*;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.state.DirectionProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tags.ITag;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Rotation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.NonNullList;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -41,12 +36,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import net.minecraft.block.AbstractBlock.Properties;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
 
 /**
  * Decorative block
  */
-public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock
+public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock
 {
 
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
@@ -96,7 +94,7 @@ public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements
     }
 
     @Override
-    protected void createBlockStateDefinition(@NotNull final StateContainer.Builder<Block, BlockState> builder)
+    protected void createBlockStateDefinition(@NotNull final StateDefinition.Builder<Block, BlockState> builder)
     {
         super.createBlockStateDefinition(builder);
         builder.add(FACING);
@@ -116,7 +114,7 @@ public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements
         return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
     }
 
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
         return this.defaultBlockState().setValue(FACING, context.getNearestLookingDirection().getOpposite());
     }
 
@@ -127,7 +125,7 @@ public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements
     }
 
     @Override
-    public void fillItemCategory(final ItemGroup group, final NonNullList<ItemStack> items)
+    public void fillItemCategory(final CreativeModeTab group, final NonNullList<ItemStack> items)
     {
         if (!fillItemGroupCache.isEmpty()) {
             items.addAll(fillItemGroupCache);
@@ -137,8 +135,8 @@ public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements
         IMateriallyTexturedBlockComponent outerComponent = getComponents().get(0);
         IMateriallyTexturedBlockComponent innerComponent = getComponents().get(1);
 
-        final ITag<Block> outerCandidates = outerComponent.getValidSkins();
-        final ITag<Block> innerCandidates = innerComponent.getValidSkins();
+        final Tag<Block> outerCandidates = outerComponent.getValidSkins();
+        final Tag<Block> innerCandidates = innerComponent.getValidSkins();
 
         try {
             outerCandidates.getValues().forEach(outer -> {
@@ -150,7 +148,7 @@ public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements
 
                     final MaterialTextureData materialTextureData = new MaterialTextureData(textureData);
 
-                    final CompoundNBT textureNbt = materialTextureData.serializeNBT();
+                    final CompoundTag textureNbt = materialTextureData.serializeNBT();
 
                     final ItemStack result = new ItemStack(this);
                     result.getOrCreateTag().put("textureData", textureNbt);
@@ -173,28 +171,23 @@ public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements
 
     @Override
     public void setPlacedBy(
-      final World worldIn, final BlockPos pos, final BlockState state, @Nullable final LivingEntity placer, final ItemStack stack)
+      final Level worldIn, final BlockPos pos, final BlockState state, @Nullable final LivingEntity placer, final ItemStack stack)
     {
         super.setPlacedBy(worldIn, pos, state, placer, stack);
 
-        final CompoundNBT textureData = stack.getOrCreateTagElement("textureData");
-        final TileEntity tileEntity = worldIn.getBlockEntity(pos);
+        final CompoundTag textureData = stack.getOrCreateTagElement("textureData");
+        final BlockEntity tileEntity = worldIn.getBlockEntity(pos);
 
         if (tileEntity instanceof MateriallyTexturedBlockEntity)
             ((MateriallyTexturedBlockEntity) tileEntity).updateTextureDataWith(MaterialTextureData.deserializeFromNBT(textureData));
     }
 
-    @Override
-    public boolean hasTileEntity(final BlockState state)
-    {
-        return true;
-    }
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(final BlockState state, final IBlockReader world)
+    public BlockEntity newBlockEntity(final @NotNull BlockPos blockPos, final @NotNull BlockState blockState)
     {
-        return new MateriallyTexturedBlockEntity(ModBlockEntityTypes.MATERIALLY_TEXTURED_BLOCK_ENTITY_TILE_ENTITY_TYPE);
+        return new MateriallyTexturedBlockEntity(ModBlockEntityTypes.MATERIALLY_TEXTURED, blockPos, blockState);
     }
 
     @Override

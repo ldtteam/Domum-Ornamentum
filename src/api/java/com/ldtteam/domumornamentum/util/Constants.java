@@ -1,7 +1,5 @@
 package com.ldtteam.domumornamentum.util;
 
-import net.minecraft.util.ResourceLocation;
-
 public class Constants
 {
     private Constants()

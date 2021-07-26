@@ -1,14 +1,14 @@
 package com.ldtteam.domumornamentum.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.tags.ITag;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.tags.Tag;
+import net.minecraft.resources.ResourceLocation;
 
 public interface IMateriallyTexturedBlockComponent
 {
     ResourceLocation getId();
 
-    ITag<Block> getValidSkins();
+    Tag<Block> getValidSkins();
 
     Block getDefault();
 }

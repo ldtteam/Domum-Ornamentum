@@ -3,16 +3,16 @@ package com.ldtteam.domumornamentum.block;
 import java.util.function.Supplier;
 import com.ldtteam.domumornamentum.util.Suppression;
 import com.ldtteam.domumornamentum.block.interfaces.IDOBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.StairsBlock;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import net.minecraft.block.AbstractBlock.Properties;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
-public abstract class AbstractBlockStairs<B extends AbstractBlockStairs<B>> extends StairsBlock implements IDOBlock<B>
+public abstract class AbstractBlockStairs<B extends AbstractBlockStairs<B>> extends StairBlock implements IDOBlock<B>
 {
     public AbstractBlockStairs(final Supplier<BlockState> state, final Properties properties)
     {

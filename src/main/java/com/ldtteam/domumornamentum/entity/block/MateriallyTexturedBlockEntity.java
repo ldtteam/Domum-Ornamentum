@@ -2,23 +2,24 @@ package com.ldtteam.domumornamentum.entity.block;
 
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.client.model.properties.ModProperties;
-import net.minecraft.block.BlockState;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.client.model.data.IModelData;
 import net.minecraftforge.client.model.data.ModelDataMap;
 import net.minecraftforge.common.util.Constants;
 import org.jetbrains.annotations.NotNull;
 
-public class MateriallyTexturedBlockEntity extends TileEntity
+public class MateriallyTexturedBlockEntity extends BlockEntity
 {
 
     private MaterialTextureData textureData = MaterialTextureData.EMPTY;
 
-    public MateriallyTexturedBlockEntity(final TileEntityType<?> tileEntityTypeIn)
+    public MateriallyTexturedBlockEntity(final BlockEntityType<?> tileEntityTypeIn, BlockPos pos, BlockState state)
     {
-        super(tileEntityTypeIn);
+        super(tileEntityTypeIn, pos, state);
     }
 
     public void updateTextureDataWith(final MaterialTextureData materialTextureData)
@@ -28,16 +29,16 @@ public class MateriallyTexturedBlockEntity extends TileEntity
     }
 
     @Override
-    public CompoundNBT getUpdateTag()
+    public @NotNull CompoundTag getUpdateTag()
     {
-        return save(new CompoundNBT());
+        return save(new CompoundTag());
     }
 
     @NotNull
     @Override
-    public CompoundNBT save(@NotNull final CompoundNBT compound)
+    public CompoundTag save(@NotNull final CompoundTag compound)
     {
-        final CompoundNBT superData = super.save(compound);
+        final CompoundTag superData = super.save(compound);
 
         superData.put("textureData", textureData.serializeNBT());
 
@@ -45,9 +46,9 @@ public class MateriallyTexturedBlockEntity extends TileEntity
     }
 
     @Override
-    public void load(@NotNull final BlockState state, @NotNull final CompoundNBT nbt)
+    public void load(@NotNull final CompoundTag nbt)
     {
-        super.load(state, nbt);
+        super.load(nbt);
 
         this.textureData = new MaterialTextureData();
         if (nbt.contains("textureData", Constants.NBT.TAG_COMPOUND))

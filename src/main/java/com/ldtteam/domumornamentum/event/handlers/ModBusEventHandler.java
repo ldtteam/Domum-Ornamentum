@@ -10,7 +10,7 @@ import com.ldtteam.domumornamentum.datagen.walls.paper.*;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
+import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 
 @Mod.EventBusSubscriber(modid = Constants.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModBusEventHandler
@@ -42,7 +42,7 @@ public class ModBusEventHandler
         event.getGenerator().addProvider(new ShingleSlabComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(new ShingleSlabLangEntryProvider(event.getGenerator(), langJson));
         
-        //Paperwall
+        //Paper wall
         event.getGenerator().addProvider(new PaperwallBlockStateProvider(event.getGenerator()));
         event.getGenerator().addProvider(new PaperwallItemModelProvider(event.getGenerator()));
         event.getGenerator().addProvider(new PaperwallBlockModelProvider(event.getGenerator()));

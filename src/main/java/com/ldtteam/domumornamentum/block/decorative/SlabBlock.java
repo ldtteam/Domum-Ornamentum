@@ -2,14 +2,14 @@ package com.ldtteam.domumornamentum.block.decorative;
 
 import com.ldtteam.domumornamentum.util.Suppression;
 import com.ldtteam.domumornamentum.block.interfaces.IDOBlock;
-import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import net.minecraft.block.AbstractBlock.Properties;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
-public class SlabBlock<B extends SlabBlock<B>> extends net.minecraft.block.SlabBlock implements IDOBlock<B>
+public class SlabBlock<B extends SlabBlock<B>> extends net.minecraft.world.level.block.SlabBlock implements IDOBlock<B>
 {
     /**
      * Constructor of abstract class.

@@ -1,6 +1,6 @@
 package com.ldtteam.domumornamentum.block.types;
 
-import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.StringRepresentable;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
  *
  *  -> gradle runData <-
  */
-public enum ShingleFaceType implements IStringSerializable
+public enum ShingleFaceType implements StringRepresentable
 {
     // Clay
     CLAY("clay", "clay", "Clay", "minecraft:brick", false),

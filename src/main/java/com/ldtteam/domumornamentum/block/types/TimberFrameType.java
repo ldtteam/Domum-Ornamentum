@@ -1,11 +1,11 @@
 package com.ldtteam.domumornamentum.block.types;
 
-import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.StringRepresentable;
 import org.jetbrains.annotations.NotNull;
 
 // Creates types for TimberFrame with different variants of wood and texture
 
-public enum TimberFrameType implements IStringSerializable
+public enum TimberFrameType implements StringRepresentable
 {
     PLAIN("plain", "Plain", false),
     DOUBLE_CROSSED("double_crossed", "Double Crossed", false),

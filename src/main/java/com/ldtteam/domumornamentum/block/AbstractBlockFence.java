@@ -2,17 +2,17 @@ package com.ldtteam.domumornamentum.block;
 
 import com.ldtteam.domumornamentum.util.Suppression;
 import com.ldtteam.domumornamentum.block.interfaces.IDOBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.FenceBlock;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.FenceBlock;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import net.minecraft.block.AbstractBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public abstract class AbstractBlockFence<B extends AbstractBlockFence<B>> extends FenceBlock implements IDOBlock<B>
 {
-    public AbstractBlockFence(final AbstractBlock.Properties properties)
+    public AbstractBlockFence(final BlockBehaviour.Properties properties)
     {
         super(properties);
     }

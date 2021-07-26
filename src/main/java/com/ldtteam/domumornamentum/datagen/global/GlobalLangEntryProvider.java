@@ -5,13 +5,13 @@ import com.ldtteam.domumornamentum.block.types.TimberFrameType;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DirectoryCache;
-import net.minecraft.data.IDataProvider;
+import net.minecraft.data.HashCache;
+import net.minecraft.data.DataProvider;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
-public class GlobalLangEntryProvider implements IDataProvider
+public class GlobalLangEntryProvider implements DataProvider
 {
     private final DataGenerator dataGenerator;
     private final LangJson backingLangJson;
@@ -23,7 +23,7 @@ public class GlobalLangEntryProvider implements IDataProvider
     }
 
     @Override
-    public void run(@NotNull DirectoryCache cache) throws IOException
+    public void run(@NotNull HashCache cache) throws IOException
     {
         backingLangJson.put("itemGroup." + Constants.MOD_ID + ".timber_frames", "DO - Framed Blocks");
         backingLangJson.put("itemGroup." + Constants.MOD_ID + ".shingles", "DO - Shingles");
@@ -32,7 +32,7 @@ public class GlobalLangEntryProvider implements IDataProvider
         backingLangJson.put("itemGroup." + Constants.MOD_ID + ".shingle_slabs", "DO - Shingle slabs");
         backingLangJson.put("block." + Constants.MOD_ID + ".architectscutter", "Architects cutter");
 
-        IDataProvider.save(DataGeneratorConstants.GSONLang, cache, backingLangJson.serialize(), dataGenerator.getOutputFolder().resolve(DataGeneratorConstants.EN_US_LANG));
+        DataProvider.save(DataGeneratorConstants.GSONLang, cache, backingLangJson.serialize(), dataGenerator.getOutputFolder().resolve(DataGeneratorConstants.EN_US_LANG));
     }
 
     @Override

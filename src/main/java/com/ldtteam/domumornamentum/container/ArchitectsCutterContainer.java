@@ -5,20 +5,19 @@ import com.ldtteam.domumornamentum.block.MateriallyTexturedBlockManager;
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.recipe.ModRecipeTypes;
 import com.ldtteam.domumornamentum.recipe.architectscutter.ArchitectsCutterRecipe;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.CraftResultInventory;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.util.*;
-import net.minecraft.world.World;
+import net.minecraft.core.NonNullList;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
@@ -26,11 +25,11 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArchitectsCutterContainer extends Container
+public class ArchitectsCutterContainer extends AbstractContainerMenu
 {
-    private final IWorldPosCallable        worldPosCallable;
-    private final IntReferenceHolder       selectedRecipe          = IntReferenceHolder.standalone();
-    private final World                        world;
+    private final ContainerLevelAccess        worldPosCallable;
+    private final DataSlot       selectedRecipe          = DataSlot.standalone();
+    private final Level                        world;
     private       List<ArchitectsCutterRecipe> recipes = Lists.newArrayList();
 
     private final NonNullList<ItemStack> inputItemStacks = NonNullList.withSize(MateriallyTexturedBlockManager.getInstance().getMaxTexturableComponentCount(), ItemStack.EMPTY);
@@ -38,20 +37,20 @@ public class ArchitectsCutterContainer extends Container
     final List<Slot>                        inputInventorySlots = Lists.newArrayList();
     final         Slot                     outputInventorySlot;
     private       Runnable                 inventoryUpdateListener = () -> {};
-    public final  IInventory               inputInventory          = new Inventory(MateriallyTexturedBlockManager.getInstance().getMaxTexturableComponentCount()) {
+    public final  Container               inputInventory          = new SimpleContainer(MateriallyTexturedBlockManager.getInstance().getMaxTexturableComponentCount()) {
         public void setChanged() {
             super.setChanged();
             ArchitectsCutterContainer.this.slotsChanged(this);
             ArchitectsCutterContainer.this.inventoryUpdateListener.run();
         }
     };
-    private final CraftResultInventory     inventory               = new CraftResultInventory();
+    private final ResultContainer     inventory               = new ResultContainer();
 
-    public ArchitectsCutterContainer(int windowIdIn, PlayerInventory playerInventoryIn) {
-        this(windowIdIn, playerInventoryIn, IWorldPosCallable.NULL);
+    public ArchitectsCutterContainer(int windowIdIn, Inventory playerInventoryIn) {
+        this(windowIdIn, playerInventoryIn, ContainerLevelAccess.NULL);
     }
 
-    public ArchitectsCutterContainer(int windowIdIn, PlayerInventory playerInventoryIn, final IWorldPosCallable worldPosCallableIn) {
+    public ArchitectsCutterContainer(int windowIdIn, Inventory playerInventoryIn, final ContainerLevelAccess worldPosCallableIn) {
         super(ModContainerTypes.ARCHITECTS_CUTTER, windowIdIn);
         this.worldPosCallable = worldPosCallableIn;
         this.world = playerInventoryIn.player.level;
@@ -77,8 +76,7 @@ public class ArchitectsCutterContainer extends Container
                 return false;
             }
 
-            @NotNull
-            public ItemStack onTake(@NotNull PlayerEntity thePlayer, @NotNull ItemStack stack) {
+            public void onTake(@NotNull Player thePlayer, @NotNull ItemStack stack) {
                 stack.onCraftedBy(thePlayer.level, thePlayer, stack.getCount());
                 ArchitectsCutterContainer.this.inventory.awardUsedRecipes(thePlayer);
                 boolean anyEmpty = false;
@@ -94,12 +92,11 @@ public class ArchitectsCutterContainer extends Container
                 worldPosCallableIn.execute((world, pos) -> {
                     long gameTime = world.getGameTime();
                     if (ArchitectsCutterContainer.this.lastOnTake != gameTime) {
-                        world.playSound(null, pos, SoundEvents.UI_STONECUTTER_TAKE_RESULT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                        world.playSound(null, pos, SoundEvents.UI_STONECUTTER_TAKE_RESULT, SoundSource.BLOCKS, 1.0F, 1.0F);
                         ArchitectsCutterContainer.this.lastOnTake = gameTime;
                     }
 
                 });
-                return super.onTake(thePlayer, stack);
             }
         });
 
@@ -142,14 +139,14 @@ public class ArchitectsCutterContainer extends Container
     /**
      * Determines whether supplied player can use this container
      */
-    public boolean stillValid(@NotNull PlayerEntity playerIn) {
+    public boolean stillValid(@NotNull Player playerIn) {
         return stillValid(this.worldPosCallable, playerIn, ModBlocks.getArchitectsCutter());
     }
 
     /**
      * Handles the given Button-click on the server, currently only used by enchanting. Name is for legacy.
      */
-    public boolean clickMenuButton(@NotNull PlayerEntity playerIn, int id) {
+    public boolean clickMenuButton(@NotNull Player playerIn, int id) {
         if (this.isValidRecipeIndex(id)) {
             this.selectedRecipe.set(id);
             this.updateRecipeResultSlot();
@@ -165,7 +162,7 @@ public class ArchitectsCutterContainer extends Container
     /**
      * Callback for when the crafting matrix is changed.
      */
-    public void slotsChanged(@NotNull IInventory inventoryIn) {
+    public void slotsChanged(@NotNull Container inventoryIn) {
         boolean anyChanged = false;
         List<Slot> slots = this.inputInventorySlots;
         for (int i = 0; i < slots.size(); i++)
@@ -190,7 +187,7 @@ public class ArchitectsCutterContainer extends Container
 
     }
 
-    private void updateAvailableRecipes(IInventory inventoryIn, List<ItemStack> stacks) {
+    private void updateAvailableRecipes(Container inventoryIn, List<ItemStack> stacks) {
         this.recipes.clear();
         this.selectedRecipe.set(-1);
         this.outputInventorySlot.set(ItemStack.EMPTY);
@@ -202,7 +199,7 @@ public class ArchitectsCutterContainer extends Container
 
     private void updateRecipeResultSlot() {
         if (!this.recipes.isEmpty() && this.isValidRecipeIndex(this.selectedRecipe.get())) {
-            IRecipe<IInventory> recipe = this.recipes.get(this.selectedRecipe.get());
+            Recipe<Container> recipe = this.recipes.get(this.selectedRecipe.get());
             this.inventory.setRecipeUsed(recipe);
             this.outputInventorySlot.set(recipe.assemble(this.inputInventory));
         } else {
@@ -213,7 +210,7 @@ public class ArchitectsCutterContainer extends Container
     }
 
     @NotNull
-    public ContainerType<?> getType() {
+    public MenuType<?> getType() {
         return ModContainerTypes.ARCHITECTS_CUTTER;
     }
 
@@ -235,10 +232,10 @@ public class ArchitectsCutterContainer extends Container
      * inventory and the other inventory(s).
      */
     @NotNull
-    public ItemStack quickMoveStack(@NotNull PlayerEntity playerIn, int index) {
+    public ItemStack quickMoveStack(@NotNull Player playerIn, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
-        if (slot != null && slot.hasItem()) {
+        if (slot.hasItem()) {
             ItemStack itemstack1 = slot.getItem();
             Item item = itemstack1.getItem();
             itemstack = itemstack1.copy();
@@ -253,7 +250,7 @@ public class ArchitectsCutterContainer extends Container
                 if (!this.moveItemStackTo(itemstack1, 2, 38, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (this.world.getRecipeManager().getRecipeFor(IRecipeType.STONECUTTING, new Inventory(itemstack1), this.world).isPresent()) {
+            } else if (this.world.getRecipeManager().getRecipeFor(RecipeType.STONECUTTING, new SimpleContainer(itemstack1), this.world).isPresent()) {
                 if (!this.moveItemStackTo(itemstack1, 0, 1, false)) {
                     return ItemStack.EMPTY;
                 }
@@ -284,9 +281,9 @@ public class ArchitectsCutterContainer extends Container
     /**
      * Called when the container is closed.
      */
-    public void removed(@NotNull PlayerEntity playerIn) {
+    public void removed(@NotNull Player playerIn) {
         super.removed(playerIn);
         this.inventory.removeItemNoUpdate(1);
-        this.worldPosCallable.execute((p_217079_2_, p_217079_3_) -> this.clearContainer(playerIn, playerIn.level, this.inputInventory));
+        this.worldPosCallable.execute((p_217079_2_, p_217079_3_) -> this.clearContainer(playerIn, this.inputInventory));
     }
 }

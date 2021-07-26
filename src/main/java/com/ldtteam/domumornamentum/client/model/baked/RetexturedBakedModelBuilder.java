@@ -2,16 +2,17 @@ package com.ldtteam.domumornamentum.client.model.baked;
 
 import com.google.common.collect.Maps;
 import com.ldtteam.domumornamentum.client.model.utils.ModelUVAdapter;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.model.*;
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.resources.model.*;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.IModelConfiguration;
 import net.minecraftforge.client.model.data.EmptyModelData;
-import net.minecraftforge.client.model.pipeline.LightUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -24,19 +25,19 @@ public class RetexturedBakedModelBuilder
 
     private static final Random RANDOM = new Random();
 
-    public static RetexturedBakedModelBuilder createFor(final IBakedModel target)
+    public static RetexturedBakedModelBuilder createFor(final BakedModel target)
     {
         return new RetexturedBakedModelBuilder(target);
     }
 
-    private final IBakedModel target;
-    private final Map<ResourceLocation, IBakedModel> retexturingMaps = Maps.newHashMap();
+    private final BakedModel target;
+    private final Map<ResourceLocation, BakedModel> retexturingMaps = Maps.newHashMap();
 
-    private RetexturedBakedModelBuilder(final IBakedModel target) {this.target = target;}
+    private RetexturedBakedModelBuilder(final BakedModel target) {this.target = target;}
 
     public RetexturedBakedModelBuilder with(
       final ResourceLocation source,
-      final IBakedModel target
+      final BakedModel target
     ) {
         this.retexturingMaps.putIfAbsent(source, target);
         return this;
@@ -47,17 +48,17 @@ public class RetexturedBakedModelBuilder
       final Block target
     ) {
         final BlockState defaultState = target.defaultBlockState();
-        final IBakedModel bakedModel = Minecraft.getInstance().getBlockRenderer().getBlockModel(defaultState);
+        final BakedModel bakedModel = Minecraft.getInstance().getBlockRenderer().getBlockModel(defaultState);
 
         return this.with(source, bakedModel);
     }
 
-    public IBakedModel build() {
+    public BakedModel build() {
         final SimpleBakedModel.Builder builder = new SimpleBakedModel.Builder(
           new IModelConfiguration() {
               @Nullable
               @Override
-              public IUnbakedModel getOwnerModel()
+              public UnbakedModel getOwnerModel()
               {
                   return null;
               }
@@ -75,7 +76,7 @@ public class RetexturedBakedModelBuilder
               }
 
               @Override
-              public RenderMaterial resolveTexture(final String name)
+              public Material resolveTexture(final String name)
               {
                   return null;
               }
@@ -99,13 +100,13 @@ public class RetexturedBakedModelBuilder
               }
 
               @Override
-              public ItemCameraTransforms getCameraTransforms()
+              public ItemTransforms getCameraTransforms()
               {
                   return target.getTransforms();
               }
 
               @Override
-              public IModelTransform getCombinedTransform()
+              public ModelState getCombinedTransform()
               {
                   return null;
               }
@@ -138,11 +139,11 @@ public class RetexturedBakedModelBuilder
             });
         }
 
-        TextureAtlasSprite particleTexture = this.target.getParticleTexture(EmptyModelData.INSTANCE);
+        TextureAtlasSprite particleTexture = this.target.getParticleIcon(EmptyModelData.INSTANCE);
         if (this.retexturingMaps.containsKey(particleTexture.getName()))
         {
-            final IBakedModel particleOverrideTextureModel = this.retexturingMaps.get(particleTexture.getName());
-            particleTexture = particleOverrideTextureModel.getParticleTexture(EmptyModelData.INSTANCE);
+            final BakedModel particleOverrideTextureModel = this.retexturingMaps.get(particleTexture.getName());
+            particleTexture = particleOverrideTextureModel.getParticleIcon(EmptyModelData.INSTANCE);
         }
         builder.particle(particleTexture);
 
@@ -165,7 +166,7 @@ public class RetexturedBakedModelBuilder
 
     private TextureAtlasSprite getTexture(@NotNull BakedQuad quad, @Nullable Direction direction)
     {
-        final IBakedModel targetModel = this.retexturingMaps.get(quad.getSprite().getName());
+        final BakedModel targetModel = this.retexturingMaps.get(quad.getSprite().getName());
         List<BakedQuad> targetQuads = targetModel.getQuads(
           null,
           direction,
