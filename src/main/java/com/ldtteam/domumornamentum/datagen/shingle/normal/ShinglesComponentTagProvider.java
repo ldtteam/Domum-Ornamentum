@@ -1,7 +1,9 @@
 package com.ldtteam.domumornamentum.datagen.shingle.normal;
 
+import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.Constants;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
@@ -67,6 +69,10 @@ public class ShinglesComponentTagProvider extends BlockTagsProvider
             Tags.Blocks.OBSIDIAN
           );
 
+        for (final Block block : ModBlocks.getExtraTopBlocks())
+        {
+            this.tag(ModTags.SHINGLES_ROOF).add(block);
+        }
     }
 
     @Override

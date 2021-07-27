@@ -1,10 +1,12 @@
 package com.ldtteam.domumornamentum.datagen.shingle.slab;
 
+import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
@@ -32,6 +34,10 @@ public class ShingleSlabComponentTagProvider extends BlockTagsProvider
             Tags.Blocks.NETHERRACK,
             Tags.Blocks.OBSIDIAN
           );
+        for (final Block block : ModBlocks.getExtraTopBlocks())
+        {
+            this.tag(ModTags.SHINGLES_COVER).add(block);
+        }
     }
 
     @Override

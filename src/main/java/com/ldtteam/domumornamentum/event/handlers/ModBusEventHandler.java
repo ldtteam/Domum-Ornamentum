@@ -1,6 +1,7 @@
 package com.ldtteam.domumornamentum.event.handlers;
 
 import com.ldtteam.datagenerators.lang.LangJson;
+import com.ldtteam.domumornamentum.datagen.extra.*;
 import com.ldtteam.domumornamentum.datagen.frames.timber.*;
 import com.ldtteam.domumornamentum.datagen.global.GlobalLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.global.MateriallyTexturedBlockRecipeProvider;
@@ -52,5 +53,12 @@ public class ModBusEventHandler
         //Global
         event.getGenerator().addProvider(new GlobalLangEntryProvider(event.getGenerator(), langJson));
         event.getGenerator().addProvider(new MateriallyTexturedBlockRecipeProvider(event.getGenerator()));
+
+        //Shingles
+        event.getGenerator().addProvider(new ExtraBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new ExtraItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new ExtraBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new ExtraRecipeProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new ExtraLangEntryProvider(event.getGenerator(), langJson));
     }
 }
