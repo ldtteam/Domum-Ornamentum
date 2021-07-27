@@ -7,7 +7,7 @@ import com.ldtteam.datagenerators.recipes.shaped.ShapedPatternJson;
 import com.ldtteam.datagenerators.recipes.shaped.ShapedRecipeJson;
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.decorative.ExtraBlock;
-import com.ldtteam.domumornamentum.block.types.ExtraShingleTopType;
+import com.ldtteam.domumornamentum.block.types.ExtraBlockType;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
@@ -34,7 +34,7 @@ public class ExtraRecipeProvider implements DataProvider
     {
         for (final ExtraBlock block : ModBlocks.getExtraTopBlocks())
         {
-            final ExtraShingleTopType type = block.getType();
+            final ExtraBlockType type = block.getType();
             final ShapedPatternJson pattern =  new ShapedPatternJson("X X"," Z ","X X");
             final Map<String, RecipeIngredientKeyJson> keys = new HashMap<>();
             keys.put("X", new RecipeIngredientKeyJson(new RecipeIngredientJson(type.getMaterial().getRegistryName().toString(), false)));

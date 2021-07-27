@@ -8,9 +8,10 @@ import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-// Creates types for TimberFrame with different variants of wood and texture
-
-public enum ExtraShingleTopType implements StringRepresentable
+/**
+ * Creates special blocks for shingles and timberframes.
+ */
+public enum ExtraBlockType implements StringRepresentable
 {
     BLACK_CLAY(DyeColor.BLACK, Items.BRICK),
     BLUE_CLAY(DyeColor.BLUE, Items.BRICK),
@@ -34,12 +35,13 @@ public enum ExtraShingleTopType implements StringRepresentable
     BASE_SLATE(null, Items.COBBLESTONE),
     BASE_THATCHED(null, Items.WHEAT),
     WHITE_CLAY(DyeColor.WHITE, Items.BRICK),
-    YELLOW_CLAY(DyeColor.YELLOW, Items.BRICK);
+    YELLOW_CLAY(DyeColor.YELLOW, Items.BRICK),
+    BASE_PAPER(null, Items.PAPER);
 
     private final DyeColor color;
     private final Item material;
 
-    ExtraShingleTopType(final DyeColor color, final Item material)
+    ExtraBlockType(final DyeColor color, final Item material)
     {
         this.color = color;
         this.material = material;

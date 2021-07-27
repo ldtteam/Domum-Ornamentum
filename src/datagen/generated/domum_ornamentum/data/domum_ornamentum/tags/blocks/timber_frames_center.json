@@ -9,6 +9,7 @@
     "#forge:end_stones",
     "#forge:netherrack",
     "#forge:obsidian",
-    "#forge:storage_blocks"
+    "#forge:storage_blocks",
+    "#domum_ornamentum:extra_block"
   ]
 }

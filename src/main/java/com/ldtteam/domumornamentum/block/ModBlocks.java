@@ -2,7 +2,7 @@ package com.ldtteam.domumornamentum.block;
 
 import com.google.common.collect.Lists;
 import com.ldtteam.domumornamentum.block.decorative.*;
-import com.ldtteam.domumornamentum.block.types.ExtraShingleTopType;
+import com.ldtteam.domumornamentum.block.types.ExtraBlockType;
 import com.ldtteam.domumornamentum.block.types.TimberFrameType;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.world.item.DyeColor;
@@ -99,7 +99,7 @@ public final class ModBlocks
         SHINGLE_SLAB = new ShingleSlabBlock().registerBlock(registry);
         PAPER_WALL = new PaperWallBlock().registerBlock(registry);
 
-        for (final ExtraShingleTopType blockType : ExtraShingleTopType.values())
+        for (final ExtraBlockType blockType : ExtraBlockType.values())
         {
             EXTRA_TOP_BLOCKS.add(new ExtraBlock(blockType).registerBlock(registry));
         }

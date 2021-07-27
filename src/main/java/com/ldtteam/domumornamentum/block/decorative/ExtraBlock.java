@@ -1,7 +1,7 @@
 package com.ldtteam.domumornamentum.block.decorative;
 
 import com.ldtteam.domumornamentum.block.AbstractBlock;
-import com.ldtteam.domumornamentum.block.types.ExtraShingleTopType;
+import com.ldtteam.domumornamentum.block.types.ExtraBlockType;
 import com.ldtteam.domumornamentum.item.decoration.ExtraBlockItem;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.resources.ResourceLocation;
@@ -26,19 +26,19 @@ public class ExtraBlock extends AbstractBlock<ExtraBlock>
     /**
      * The top type.
      */
-    private final ExtraShingleTopType type;
+    private final ExtraBlockType type;
 
     /**
      * Constructor of the FullBlock.
      */
-    public ExtraBlock(final ExtraShingleTopType type)
+    public ExtraBlock(final ExtraBlockType type)
     {
         super(Properties.of(Material.WOOD).strength(BLOCK_HARDNESS, RESISTANCE));
         setRegistryName(new ResourceLocation(Constants.MOD_ID, type.getSerializedName()));
         this.type = type;
     }
 
-    public ExtraShingleTopType getType()
+    public ExtraBlockType getType()
     {
         return type;
     }
