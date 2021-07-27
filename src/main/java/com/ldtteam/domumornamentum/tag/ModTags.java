@@ -25,6 +25,7 @@ public class ModTags
     public static final Tags.IOptionalNamedTag<Block> PAPERWALL_CENTER = tag("paper_wall_center");
 
     public static final Tags.IOptionalNamedTag<Block> EXTRA_BLOCKS    = tag("extra_block");
+    public static final Tags.IOptionalNamedTag<Block> FLOATING_CARPETS = tag("floating_carpet");
 
 
     private static Tags.IOptionalNamedTag<Block> tag(String name)

@@ -4,6 +4,7 @@ import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.decorative.TimberFrameBlock;
 import com.ldtteam.domumornamentum.block.types.TimberFrameType;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
+import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.TooltipFlag;
@@ -39,7 +40,7 @@ public class TimberFrameBlockItem extends BlockItem
 
         final IMateriallyTexturedBlockComponent centerComponent = timberFrameBlock.getComponents().get(1);
         final Block centerBlock = textureData.getTexturedComponents().getOrDefault(centerComponent.getId(), centerComponent.getDefault());
-        final TranslatableComponent centerBlockName = new TranslatableComponent(centerBlock.getDescriptionId());
+        final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
 
         return new TranslatableComponent(Constants.MOD_ID + ".timber.frame.name.format", centerBlockName);
     }
@@ -60,7 +61,7 @@ public class TimberFrameBlockItem extends BlockItem
 
         final IMateriallyTexturedBlockComponent frameComponent = timberFrameBlock.getComponents().get(0);
         final Block frameBlock = textureData.getTexturedComponents().getOrDefault(frameComponent.getId(), frameComponent.getDefault());
-        final TranslatableComponent frameBlockName = new TranslatableComponent(frameBlock.getDescriptionId());
+        final Component frameBlockName = BlockUtils.getHoverName(frameBlock);
         tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".timber.frame.block.format", frameBlockName));
     }
 }

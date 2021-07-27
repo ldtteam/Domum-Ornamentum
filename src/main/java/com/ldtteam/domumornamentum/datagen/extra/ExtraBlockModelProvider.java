@@ -47,6 +47,6 @@ public class ExtraBlockModelProvider implements DataProvider
     @NotNull
     public String getName()
     {
-        return "Shingles Block Model Provider";
+        return "Extra Block Model Provider";
     }
 }

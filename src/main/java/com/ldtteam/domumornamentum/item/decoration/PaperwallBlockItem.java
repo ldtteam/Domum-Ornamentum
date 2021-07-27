@@ -4,6 +4,7 @@ import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.decorative.PaperWallBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.block.ICachedItemGroupBlock;
+import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.TooltipFlag;
@@ -40,7 +41,7 @@ public class PaperwallBlockItem extends BlockItem
 
         final IMateriallyTexturedBlockComponent centerComponent = paperWallBlock.getComponents().get(1);
         final Block centerBlock = textureData.getTexturedComponents().getOrDefault(centerComponent.getId(), centerComponent.getDefault());
-        final TranslatableComponent centerBlockName = new TranslatableComponent(centerBlock.getDescriptionId());
+        final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
 
         return new TranslatableComponent(Constants.MOD_ID + ".paperwall.name.format", centerBlockName);
     }
@@ -56,13 +57,15 @@ public class PaperwallBlockItem extends BlockItem
 
         tooltip.add(new TextComponent(""));
         tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".paperwall.header"));
+
         final IMateriallyTexturedBlockComponent frameComponent = paperWallBlock.getComponents().get(0);
         final Block frameBlock = textureData.getTexturedComponents().getOrDefault(frameComponent.getId(), frameComponent.getDefault());
-        final TranslatableComponent frameBlockName = new TranslatableComponent(frameBlock.getDescriptionId());
+        final Component frameBlockName = BlockUtils.getHoverName(frameBlock);
         tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".paperwall.frame.format", frameBlockName));
+
         final IMateriallyTexturedBlockComponent centerComponent = paperWallBlock.getComponents().get(1);
         final Block centerBlock = textureData.getTexturedComponents().getOrDefault(centerComponent.getId(), centerComponent.getDefault());
-        final TranslatableComponent centerBlockName = new TranslatableComponent(centerBlock.getDescriptionId());
+        final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
         tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".paperwall.center.format", centerBlockName));
 
     }

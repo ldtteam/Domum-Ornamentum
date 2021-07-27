@@ -3,7 +3,9 @@ package com.ldtteam.domumornamentum.item.decoration;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.decorative.ShingleBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
+import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.Constants;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.BlockItem;
@@ -36,7 +38,7 @@ public class ShingleBlockItem extends BlockItem
 
         final IMateriallyTexturedBlockComponent coverComponent = shingleBlock.getComponents().get(0);
         final Block centerBlock = textureData.getTexturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
-        final TranslatableComponent centerBlockName = new TranslatableComponent(centerBlock.getDescriptionId());
+        final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
 
         return new TranslatableComponent(Constants.MOD_ID + ".shingle.name.format", centerBlockName);
     }
@@ -52,7 +54,7 @@ public class ShingleBlockItem extends BlockItem
 
         final IMateriallyTexturedBlockComponent supportComponent = shingleBlock.getComponents().get(1);
         final Block supportBlock = textureData.getTexturedComponents().getOrDefault(supportComponent.getId(), supportComponent.getDefault());
-        final TranslatableComponent supportBlockName = new TranslatableComponent(supportBlock.getDescriptionId());
+        final Component supportBlockName = BlockUtils.getHoverName(supportBlock);
         tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".shingle.support.format", supportBlockName));
     }
 }

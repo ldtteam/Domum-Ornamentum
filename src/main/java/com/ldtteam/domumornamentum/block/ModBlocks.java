@@ -5,6 +5,7 @@ import com.ldtteam.domumornamentum.block.decorative.*;
 import com.ldtteam.domumornamentum.block.types.ExtraShingleTopType;
 import com.ldtteam.domumornamentum.block.types.TimberFrameType;
 import com.ldtteam.domumornamentum.util.Constants;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Material;
@@ -35,8 +36,8 @@ public final class ModBlocks
     private static       ShingleBlock           SHINGLE;
     private static       ShingleSlabBlock       SHINGLE_SLAB;
     private static       PaperWallBlock         PAPER_WALL;
-
     private static final List<ExtraBlock> EXTRA_TOP_BLOCKS = Lists.newArrayList();
+    private static final List<FloatingCarpetBlock> FLOATING_CARPETS = Lists.newArrayList();
 
     public static ArchitectsCutterBlock getArchitectsCutter()
     {
@@ -68,6 +69,11 @@ public final class ModBlocks
         return EXTRA_TOP_BLOCKS;
     }
 
+    public static List<FloatingCarpetBlock> getFloatingCarpets()
+    {
+        return FLOATING_CARPETS;
+    }
+
     /**
      * Private constructor to hide the implicit public one.
      */
@@ -97,6 +103,11 @@ public final class ModBlocks
         {
             EXTRA_TOP_BLOCKS.add(new ExtraBlock(blockType).registerBlock(registry));
         }
+
+        for (final DyeColor value : DyeColor.values())
+        {
+            FLOATING_CARPETS.add(new FloatingCarpetBlock(value).registerBlock(registry));
+        }
     }
 
     @SubscribeEvent
@@ -118,7 +129,12 @@ public final class ModBlocks
 
         for (final ExtraBlock block : EXTRA_TOP_BLOCKS)
         {
-            block.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.GENERAL));
+            block.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.EXTRA_BLOCKS));
+        }
+
+        for (final FloatingCarpetBlock floatingCarpet : FLOATING_CARPETS)
+        {
+            floatingCarpet.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.FLOATING_CARPETS));
         }
     }
 }

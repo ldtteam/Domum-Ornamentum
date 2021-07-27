@@ -1,4 +1,4 @@
-package com.ldtteam.domumornamentum.datagen.extra;
+package com.ldtteam.domumornamentum.datagen.floatingcarpet;
 
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.tag.ModTags;
@@ -10,9 +10,9 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ExtraBlockTagProvider extends BlockTagsProvider
+public class FloatingCarpetBlockTagProvider extends BlockTagsProvider
 {
-    public ExtraBlockTagProvider(
+    public FloatingCarpetBlockTagProvider(
       final DataGenerator generatorIn,
       @Nullable final ExistingFileHelper existingFileHelper)
     {
@@ -23,9 +23,9 @@ public class ExtraBlockTagProvider extends BlockTagsProvider
     @Override
     protected void addTags()
     {
-        for (final Block block : ModBlocks.getExtraTopBlocks())
+        for (final Block block : ModBlocks.getFloatingCarpets())
         {
-            this.tag(ModTags.EXTRA_BLOCKS).add(block);
+            this.tag(ModTags.FLOATING_CARPETS).add(block);
         }
     }
 
@@ -33,6 +33,6 @@ public class ExtraBlockTagProvider extends BlockTagsProvider
     @NotNull
     public String getName()
     {
-        return "Extra Blocks Tag Provider";
+        return "Floating Carpets Tag Provider";
     }
 }

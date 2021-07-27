@@ -38,7 +38,7 @@ import net.minecraft.world.level.block.Rotation;
 @SuppressWarnings("deprecation")
 public final class ArchitectsCutterBlock extends AbstractBlock<ArchitectsCutterBlock>
 {
-    private static final   Component    CONTAINER_NAME = new TranslatableComponent("donum-ornamentum.architects-cutter");
+    private static final   Component    CONTAINER_NAME = new TranslatableComponent(Constants.MOD_ID + ".architectscutter");
     public static final    DirectionProperty FACING         = HorizontalDirectionalBlock.FACING;
     protected static final VoxelShape        SHAPE          = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 9.0D, 16.0D);
 
