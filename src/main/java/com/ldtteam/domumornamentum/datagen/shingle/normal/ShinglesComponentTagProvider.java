@@ -1,7 +1,9 @@
 package com.ldtteam.domumornamentum.datagen.shingle.normal;
 
+import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.Constants;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
@@ -54,7 +56,8 @@ public class ShinglesComponentTagProvider extends BlockTagsProvider
             BlockTags.LOGS,
             BlockTags.PLANKS,
             BlockTags.CORAL_BLOCKS,
-            BlockTags.WART_BLOCKS
+            BlockTags.WART_BLOCKS,
+            ModTags.EXTRA_BLOCKS
           );
 
         this.tag(ModTags.SHINGLES_SUPPORT)
@@ -66,7 +69,6 @@ public class ShinglesComponentTagProvider extends BlockTagsProvider
             Tags.Blocks.NETHERRACK,
             Tags.Blocks.OBSIDIAN
           );
-
     }
 
     @Override

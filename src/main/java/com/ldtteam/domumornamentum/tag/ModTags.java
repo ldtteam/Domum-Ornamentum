@@ -24,6 +24,9 @@ public class ModTags
     public static final Tags.IOptionalNamedTag<Block> PAPERWALL_FRAME = tag("paper_wall_frame");
     public static final Tags.IOptionalNamedTag<Block> PAPERWALL_CENTER = tag("paper_wall_center");
 
+    public static final Tags.IOptionalNamedTag<Block> EXTRA_BLOCKS    = tag("extra_block");
+
+
     private static Tags.IOptionalNamedTag<Block> tag(String name)
     {
         return BlockTags.createOptional(new ResourceLocation(Constants.MOD_ID, name));

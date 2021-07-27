@@ -1,6 +1,7 @@
 package com.ldtteam.domumornamentum.event.handlers;
 
 import com.ldtteam.datagenerators.lang.LangJson;
+import com.ldtteam.domumornamentum.datagen.extra.*;
 import com.ldtteam.domumornamentum.datagen.frames.timber.*;
 import com.ldtteam.domumornamentum.datagen.global.GlobalLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.global.MateriallyTexturedBlockRecipeProvider;
@@ -20,6 +21,14 @@ public class ModBusEventHandler
     public static void dataGeneratorSetup(final GatherDataEvent event)
     {
         final LangJson langJson = new LangJson();
+
+        //Extra blocks
+        event.getGenerator().addProvider(new ExtraBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new ExtraItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new ExtraBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new ExtraRecipeProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new ExtraBlockTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(new ExtraLangEntryProvider(event.getGenerator(), langJson));
 
         // Timber Frames
         event.getGenerator().addProvider(new TimberFramesBlockStateProvider(event.getGenerator()));
@@ -50,6 +59,7 @@ public class ModBusEventHandler
         event.getGenerator().addProvider(new PaperwallLangEntryProvider(event.getGenerator(), langJson));
 
         //Global
+        //IMPORTANT: Needs to be last since this writes the lang data actually to disk!!!!!
         event.getGenerator().addProvider(new GlobalLangEntryProvider(event.getGenerator(), langJson));
         event.getGenerator().addProvider(new MateriallyTexturedBlockRecipeProvider(event.getGenerator()));
     }
