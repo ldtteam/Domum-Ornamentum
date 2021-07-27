@@ -1,20 +1,18 @@
-package com.ldtteam.domumornamentum.datagen.shingle.slab;
+package com.ldtteam.domumornamentum.datagen.extra;
 
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ShingleSlabComponentTagProvider extends BlockTagsProvider
+public class ExtraBlockTagProvider extends BlockTagsProvider
 {
-    public ShingleSlabComponentTagProvider(
+    public ExtraBlockTagProvider(
       final DataGenerator generatorIn,
       @Nullable final ExistingFileHelper existingFileHelper)
     {
@@ -25,22 +23,16 @@ public class ShingleSlabComponentTagProvider extends BlockTagsProvider
     @Override
     protected void addTags()
     {
-        this.tag(ModTags.SHINGLES_COVER)
-          .addTags(
-            BlockTags.LOGS,
-            BlockTags.PLANKS,
-            Tags.Blocks.STONE,
-            Tags.Blocks.END_STONES,
-            Tags.Blocks.NETHERRACK,
-            Tags.Blocks.OBSIDIAN,
-            ModTags.EXTRA_BLOCKS
-          );
+        for (final Block block : ModBlocks.getExtraTopBlocks())
+        {
+            this.tag(ModTags.EXTRA_BLOCKS).add(block);
+        }
     }
 
     @Override
     @NotNull
     public String getName()
     {
-        return "Shingle Slabs Tag Provider";
+        return "Timber Frames Tag Provider";
     }
 }

@@ -22,6 +22,14 @@ public class ModBusEventHandler
     {
         final LangJson langJson = new LangJson();
 
+        //Extra blocks
+        event.getGenerator().addProvider(new ExtraBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new ExtraItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new ExtraBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new ExtraRecipeProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new ExtraBlockTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(new ExtraLangEntryProvider(event.getGenerator(), langJson));
+
         // Timber Frames
         event.getGenerator().addProvider(new TimberFramesBlockStateProvider(event.getGenerator()));
         event.getGenerator().addProvider(new TimberFramesItemModelProvider(event.getGenerator()));
@@ -49,13 +57,6 @@ public class ModBusEventHandler
         event.getGenerator().addProvider(new PaperwallBlockModelProvider(event.getGenerator()));
         event.getGenerator().addProvider(new PaperwallComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(new PaperwallLangEntryProvider(event.getGenerator(), langJson));
-
-        //Shingles
-        event.getGenerator().addProvider(new ExtraBlockStateProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new ExtraItemModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new ExtraBlockModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new ExtraRecipeProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new ExtraLangEntryProvider(event.getGenerator(), langJson));
 
         //Global
         //IMPORTANT: Needs to be last since this writes the lang data actually to disk!!!!!

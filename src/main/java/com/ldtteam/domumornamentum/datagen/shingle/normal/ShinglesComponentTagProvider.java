@@ -56,7 +56,8 @@ public class ShinglesComponentTagProvider extends BlockTagsProvider
             BlockTags.LOGS,
             BlockTags.PLANKS,
             BlockTags.CORAL_BLOCKS,
-            BlockTags.WART_BLOCKS
+            BlockTags.WART_BLOCKS,
+            ModTags.EXTRA_BLOCKS
           );
 
         this.tag(ModTags.SHINGLES_SUPPORT)
@@ -68,11 +69,6 @@ public class ShinglesComponentTagProvider extends BlockTagsProvider
             Tags.Blocks.NETHERRACK,
             Tags.Blocks.OBSIDIAN
           );
-
-        for (final Block block : ModBlocks.getExtraTopBlocks())
-        {
-            this.tag(ModTags.SHINGLES_ROOF).add(block);
-        }
     }
 
     @Override

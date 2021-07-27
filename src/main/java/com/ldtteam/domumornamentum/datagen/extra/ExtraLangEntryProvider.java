@@ -23,7 +23,7 @@ public class ExtraLangEntryProvider implements DataProvider
     @Override
     public void run(@NotNull HashCache cache) throws IOException
     {
-        backingLangJson.put(Constants.MOD_ID + ".extra.name.format", "%s %s Brick");
+        backingLangJson.put(Constants.MOD_ID + ".extra.name.format", "%s %s Extra");
     }
 
     @Override

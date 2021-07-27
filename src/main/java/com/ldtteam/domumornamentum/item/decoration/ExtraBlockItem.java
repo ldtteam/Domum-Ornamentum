@@ -21,6 +21,11 @@ public class ExtraBlockItem extends BlockItem
     @Override
     public @NotNull Component getName(final @NotNull ItemStack stack)
     {
-        return new TranslatableComponent(Constants.MOD_ID + ".extra.name.format", new TranslatableComponent(extraBlock.getType().getColor() == null ? "" : extraBlock.getType().getColor().getSerializedName()), new TranslatableComponent(extraBlock.getType().getMaterial().getDescriptionId()));
+        String color = new TranslatableComponent(extraBlock.getType().getColor() == null ? "" : extraBlock.getType().getColor().getSerializedName()).getString();
+        if (!color.isEmpty())
+        {
+            color = color.substring(0, 1).toUpperCase() + color.substring(1);
+        }
+        return new TranslatableComponent(Constants.MOD_ID + ".extra.name.format", color, new TranslatableComponent(extraBlock.getType().getMaterial().getDescriptionId()));
     }
 }
