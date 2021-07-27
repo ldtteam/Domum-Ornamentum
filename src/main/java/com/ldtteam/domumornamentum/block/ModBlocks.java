@@ -2,6 +2,7 @@ package com.ldtteam.domumornamentum.block;
 
 import com.google.common.collect.Lists;
 import com.ldtteam.domumornamentum.block.decorative.*;
+import com.ldtteam.domumornamentum.block.types.ExtraShingleTopType;
 import com.ldtteam.domumornamentum.block.types.TimberFrameType;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -35,6 +36,8 @@ public final class ModBlocks
     private static       ShingleSlabBlock       SHINGLE_SLAB;
     private static       PaperWallBlock         PAPER_WALL;
 
+    private static final List<ExtraBlock> EXTRA_TOP_BLOCKS = Lists.newArrayList();
+
     public static ArchitectsCutterBlock getArchitectsCutter()
     {
         return ARCHITECTS_CUTTER;
@@ -58,6 +61,11 @@ public final class ModBlocks
     public static PaperWallBlock getPaperWall()
     {
         return PAPER_WALL;
+    }
+
+    public static List<ExtraBlock> getExtraTopBlocks()
+    {
+        return EXTRA_TOP_BLOCKS;
     }
 
     /**
@@ -84,6 +92,11 @@ public final class ModBlocks
         SHINGLE = new ShingleBlock().registerBlock(registry);
         SHINGLE_SLAB = new ShingleSlabBlock().registerBlock(registry);
         PAPER_WALL = new PaperWallBlock().registerBlock(registry);
+
+        for (final ExtraShingleTopType blockType : ExtraShingleTopType.values())
+        {
+            EXTRA_TOP_BLOCKS.add(new ExtraBlock(blockType).registerBlock(registry));
+        }
     }
 
     @SubscribeEvent
@@ -102,5 +115,10 @@ public final class ModBlocks
         SHINGLE.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.SHINGLES));
         SHINGLE_SLAB.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.SHINGLE_SLABS));
         PAPER_WALL.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.PAPERWALLS));
+
+        for (final ExtraBlock block : EXTRA_TOP_BLOCKS)
+        {
+            block.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.GENERAL));
+        }
     }
 }
