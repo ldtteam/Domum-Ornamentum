@@ -1,5 +1,6 @@
 {
   "block.domum_ornamentum.architectscutter": "Architects cutter",
+  "domum_ornamentum.extra.name.format": "%s %s Brick",
   "domum_ornamentum.paperwall.center.format": "  - Center:    %s",
   "domum_ornamentum.paperwall.frame.format": "  - Frame:     %s",
   "domum_ornamentum.paperwall.header": "Materials:",
