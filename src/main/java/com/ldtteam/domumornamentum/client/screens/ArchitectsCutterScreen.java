@@ -15,6 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.StonecutterMenu;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -133,24 +134,24 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         this.clickedOnSroll = false;
         if (this.hasItemsInInputSlot) {
-            int i = this.leftPos + 52;
-            int j = this.topPos + 14;
-            int k = this.recipeIndexOffset + 12;
+            int var6 = this.leftPos + 52;
+            int var7 = this.topPos + 14;
+            int var8 = this.recipeIndexOffset + 12;
 
-            for(int l = this.recipeIndexOffset; l < k; ++l) {
-                int i1 = l - this.recipeIndexOffset;
-                double d0 = mouseX - (double)(i + i1 % 4 * 16);
-                double d1 = mouseY - (double)(j + i1 / 4 * 18);
-                if (d0 >= 0.0D && d1 >= 0.0D && d0 < 16.0D && d1 < 18.0D && this.menu.clickMenuButton(Objects.requireNonNull(Objects.requireNonNull(this.minecraft).player), l)) {
+            for(int var9 = this.recipeIndexOffset; var9 < var8; ++var9) {
+                int var10 = var9 - this.recipeIndexOffset;
+                double var11 = mouseX - (double)(var6 + var10 % 4 * 16);
+                double var13 = mouseY - (double)(var7 + var10 / 4 * 18);
+                if (var11 >= 0.0D && var13 >= 0.0D && var11 < 16.0D && var13 < 18.0D && (this.menu).clickMenuButton(Objects.requireNonNull(Objects.requireNonNull(this.minecraft).player), var9)) {
                     Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_STONECUTTER_SELECT_RECIPE, 1.0F));
-                    Objects.requireNonNull(this.minecraft.gameMode).handleInventoryButtonClick((this.menu).containerId, l);
+                    Objects.requireNonNull(this.minecraft.gameMode).handleInventoryButtonClick(this.menu.containerId, var9);
                     return true;
                 }
             }
 
-            i = this.leftPos + 119;
-            j = this.topPos + 9;
-            if (mouseX >= (double)i && mouseX < (double)(i + 12) && mouseY >= (double)j && mouseY < (double)(j + 54)) {
+            var6 = this.leftPos + 119;
+            var7 = this.topPos + 9;
+            if (mouseX >= (double)var6 && mouseX < (double)(var6 + 12) && mouseY >= (double)var7 && mouseY < (double)(var7 + 54)) {
                 this.clickedOnSroll = true;
             }
         }

@@ -104,6 +104,7 @@ public class ArchitectsCutterRecipe implements Recipe<Container>
 
         final ItemStack result = new ItemStack(generatedBlock);
         result.getOrCreateTag().put("textureData", textureNbt);
+        result.setCount(components.size());
 
         return result;
     }

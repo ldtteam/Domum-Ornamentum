@@ -82,8 +82,9 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
                 boolean anyEmpty = false;
                 for (final Slot inputInventorySlot : ArchitectsCutterContainer.this.inputInventorySlots)
                 {
-                    if (inputInventorySlot.remove(1).isEmpty())
-                        anyEmpty = true;
+                    if (!inputInventorySlot.getItem().isEmpty())
+                        if (!thePlayer.isCreative() && inputInventorySlot.remove(1).isEmpty())
+                            anyEmpty = true;
                 }
                 if (!anyEmpty) {
                     ArchitectsCutterContainer.this.updateRecipeResultSlot();
@@ -133,7 +134,7 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
 
     @OnlyIn(Dist.CLIENT)
     public boolean hasItemsInInputSlots() {
-        return this.inputInventorySlots.stream().allMatch(Slot::hasItem) && !this.recipes.isEmpty();
+        return this.inputInventorySlots.stream().anyMatch(Slot::hasItem) && !this.recipes.isEmpty();
     }
 
     /**

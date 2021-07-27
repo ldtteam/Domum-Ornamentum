@@ -50,15 +50,16 @@ public class ModBusEventHandler
         event.getGenerator().addProvider(new PaperwallComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(new PaperwallLangEntryProvider(event.getGenerator(), langJson));
 
-        //Global
-        event.getGenerator().addProvider(new GlobalLangEntryProvider(event.getGenerator(), langJson));
-        event.getGenerator().addProvider(new MateriallyTexturedBlockRecipeProvider(event.getGenerator()));
-
         //Shingles
         event.getGenerator().addProvider(new ExtraBlockStateProvider(event.getGenerator()));
         event.getGenerator().addProvider(new ExtraItemModelProvider(event.getGenerator()));
         event.getGenerator().addProvider(new ExtraBlockModelProvider(event.getGenerator()));
         event.getGenerator().addProvider(new ExtraRecipeProvider(event.getGenerator()));
         event.getGenerator().addProvider(new ExtraLangEntryProvider(event.getGenerator(), langJson));
+
+        //Global
+        //IMPORTANT: Needs to be last since this writes the lang data actually to disk!!!!!
+        event.getGenerator().addProvider(new GlobalLangEntryProvider(event.getGenerator(), langJson));
+        event.getGenerator().addProvider(new MateriallyTexturedBlockRecipeProvider(event.getGenerator()));
     }
 }
