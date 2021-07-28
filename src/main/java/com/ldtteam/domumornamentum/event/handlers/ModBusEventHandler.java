@@ -2,6 +2,7 @@ package com.ldtteam.domumornamentum.event.handlers;
 
 import com.ldtteam.datagenerators.lang.LangJson;
 import com.ldtteam.domumornamentum.datagen.extra.*;
+import com.ldtteam.domumornamentum.datagen.fence.*;
 import com.ldtteam.domumornamentum.datagen.floatingcarpet.*;
 import com.ldtteam.domumornamentum.datagen.frames.timber.*;
 import com.ldtteam.domumornamentum.datagen.global.GlobalLangEntryProvider;
@@ -58,6 +59,14 @@ public class ModBusEventHandler
         event.getGenerator().addProvider(new PaperwallBlockModelProvider(event.getGenerator()));
         event.getGenerator().addProvider(new PaperwallComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(new PaperwallLangEntryProvider(event.getGenerator(), langJson));
+
+        //Fence
+        event.getGenerator().addProvider(new FenceBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new FenceItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new FenceBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new FenceComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(new FenceCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(new FenceLangEntryProvider(event.getGenerator(), langJson));
 
         //Floating carpets
         event.getGenerator().addProvider(new FloatingCarpetBlockStateProvider(event.getGenerator()));

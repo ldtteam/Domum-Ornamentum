@@ -6,15 +6,12 @@ import com.ldtteam.datagenerators.recipes.RecipeResultJson;
 import com.ldtteam.datagenerators.recipes.shaped.ShapedPatternJson;
 import com.ldtteam.datagenerators.recipes.shaped.ShapedRecipeJson;
 import com.ldtteam.domumornamentum.block.ModBlocks;
-import com.ldtteam.domumornamentum.block.decorative.ExtraBlock;
 import com.ldtteam.domumornamentum.block.decorative.FloatingCarpetBlock;
-import com.ldtteam.domumornamentum.block.types.ExtraShingleTopType;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
 import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.DyeItem;
 import net.minecraftforge.common.Tags;
 import org.jetbrains.annotations.NotNull;
 

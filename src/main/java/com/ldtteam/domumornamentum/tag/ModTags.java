@@ -27,6 +27,8 @@ public class ModTags
     public static final Tags.IOptionalNamedTag<Block> EXTRA_BLOCKS    = tag("extra_block");
     public static final Tags.IOptionalNamedTag<Block> FLOATING_CARPETS = tag("floating_carpet");
 
+    public static final Tags.IOptionalNamedTag<Block> FENCE_MATERIALS = tag("fence_materials");
+
 
     private static Tags.IOptionalNamedTag<Block> tag(String name)
     {

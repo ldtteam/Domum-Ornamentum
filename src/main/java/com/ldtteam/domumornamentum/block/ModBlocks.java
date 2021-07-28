@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.ldtteam.domumornamentum.block.decorative.*;
 import com.ldtteam.domumornamentum.block.types.ExtraBlockType;
 import com.ldtteam.domumornamentum.block.types.TimberFrameType;
+import com.ldtteam.domumornamentum.block.vanilla.FenceBlock;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -40,6 +41,8 @@ public final class ModBlocks
     private static final List<FloatingCarpetBlock> FLOATING_CARPETS = Lists.newArrayList();
     private static       BarrelBlock STANDING_BARREL;
     private static       BarrelBlock LAYING_BARREL;
+
+    private static FenceBlock FENCE;
 
     public static ArchitectsCutterBlock getArchitectsCutter()
     {
@@ -86,14 +89,16 @@ public final class ModBlocks
         return LAYING_BARREL;
     }
 
+    public static FenceBlock getFence()
+    {
+        return FENCE;
+    }
+
     /**
      * Private constructor to hide the implicit public one.
      */
     private ModBlocks()
     {
-        /**
-         * Intentionally left empty.
-         */
     }
 
     @SubscribeEvent
@@ -123,6 +128,8 @@ public final class ModBlocks
 
         STANDING_BARREL = new BarrelBlock(true).registerBlock(registry);
         LAYING_BARREL = new BarrelBlock(false).registerBlock(registry);
+
+        FENCE = new FenceBlock().registerBlock(registry);
     }
 
     @SubscribeEvent
@@ -154,5 +161,7 @@ public final class ModBlocks
 
         STANDING_BARREL.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.EXTRA_BLOCKS));
         LAYING_BARREL.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.EXTRA_BLOCKS));
+
+        FENCE.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.FENCES));
     }
 }
