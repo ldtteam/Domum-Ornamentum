@@ -3,6 +3,7 @@
   "values": [
     "#minecraft:logs",
     "#minecraft:planks",
-    "#forge:obsidian"
+    "#forge:obsidian",
+    "#domum_ornamentum:extra_block"
   ]
 }

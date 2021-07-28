@@ -1,13 +1,12 @@
 package com.ldtteam.domumornamentum.datagen.extra;
 
 import com.ldtteam.datagenerators.models.block.BlockModelJson;
-import com.ldtteam.domumornamentum.block.types.ExtraShingleTopType;
+import com.ldtteam.domumornamentum.block.types.ExtraBlockType;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
-import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -27,13 +26,13 @@ public class ExtraBlockModelProvider implements DataProvider
     @Override
     public void run(@NotNull HashCache cache) throws IOException
     {
-        for (final ExtraShingleTopType type : ExtraShingleTopType.values())
+        for (final ExtraBlockType type : ExtraBlockType.values())
         {
             final BlockModelJson modelJson = new BlockModelJson();
 
             modelJson.setParent("minecraft:block/cube_all");
             final HashMap<String, String> textureMap = new HashMap<>();
-            textureMap.put("all", Constants.MOD_ID + ":block/shingle/" + type.getSerializedName());
+            textureMap.put("all", Constants.MOD_ID + ":block/extra/" + type.getSerializedName());
             modelJson.setTextures(textureMap);
 
             final String name = type.getSerializedName().toLowerCase(Locale.ROOT) + ".json";
