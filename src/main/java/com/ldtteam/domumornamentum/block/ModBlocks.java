@@ -38,6 +38,8 @@ public final class ModBlocks
     private static       PaperWallBlock         PAPER_WALL;
     private static final List<ExtraBlock> EXTRA_TOP_BLOCKS = Lists.newArrayList();
     private static final List<FloatingCarpetBlock> FLOATING_CARPETS = Lists.newArrayList();
+    private static       BarrelBlock STANDING_BARREL;
+    private static       BarrelBlock LAYING_BARREL;
 
     public static ArchitectsCutterBlock getArchitectsCutter()
     {
@@ -74,6 +76,16 @@ public final class ModBlocks
         return FLOATING_CARPETS;
     }
 
+    public static BarrelBlock getStandingBarrel()
+    {
+        return STANDING_BARREL;
+    }
+
+    public static BarrelBlock getLayingBarrel()
+    {
+        return LAYING_BARREL;
+    }
+
     /**
      * Private constructor to hide the implicit public one.
      */
@@ -108,6 +120,9 @@ public final class ModBlocks
         {
             FLOATING_CARPETS.add(new FloatingCarpetBlock(value).registerBlock(registry));
         }
+
+        STANDING_BARREL = new BarrelBlock(true).registerBlock(registry);
+        LAYING_BARREL = new BarrelBlock(false).registerBlock(registry);
     }
 
     @SubscribeEvent
@@ -136,5 +151,8 @@ public final class ModBlocks
         {
             floatingCarpet.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.FLOATING_CARPETS));
         }
+
+        STANDING_BARREL.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.EXTRA_BLOCKS));
+        LAYING_BARREL.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.EXTRA_BLOCKS));
     }
 }

@@ -25,6 +25,16 @@ public class ModBusEventHandler
         ));
         event.enqueueWork(() -> {
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.getArchitectsCutter(), RenderType.cutout());
+
+            ModBlocks.getFloatingCarpets().forEach(block -> ItemBlockRenderTypes.setRenderLayer(block, RenderType.cutout()));
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.getStandingBarrel(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.getLayingBarrel(), RenderType.cutout());
+
+            ModBlocks.getTimberFrames().forEach(block -> ItemBlockRenderTypes.setRenderLayer(block, RenderType.translucent()));
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.getShingle(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.getShingleSlab(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.getPaperWall(), RenderType.translucent());
         });
+
     }
 }

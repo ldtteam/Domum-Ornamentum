@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=south": {
+      "model": "domum_ornamentum:block/barrel_dec/barreldeco_standing"
+    },
+    "facing=west": {
+      "model": "domum_ornamentum:block/barrel_dec/barreldeco_standing",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "domum_ornamentum:block/barrel_dec/barreldeco_standing",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "domum_ornamentum:block/barrel_dec/barreldeco_standing",
+      "y": 270
+    }
+  }
+}

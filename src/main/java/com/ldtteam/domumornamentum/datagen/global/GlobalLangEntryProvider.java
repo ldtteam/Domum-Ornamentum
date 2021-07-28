@@ -1,6 +1,7 @@
 package com.ldtteam.domumornamentum.datagen.global;
 
 import com.ldtteam.datagenerators.lang.LangJson;
+import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.types.TimberFrameType;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
@@ -34,6 +35,9 @@ public class GlobalLangEntryProvider implements DataProvider
         backingLangJson.put("itemGroup." + Constants.MOD_ID + ".floating-carpet", "DO - Floating Carpets");
         backingLangJson.put("block." + Constants.MOD_ID + ".architectscutter", "Architects cutter");
         backingLangJson.put(Constants.MOD_ID + ".architectscutter", "Architects cutter");
+
+        backingLangJson.put(ModBlocks.getStandingBarrel().getDescriptionId(), "Standing Barrel");
+        backingLangJson.put(ModBlocks.getLayingBarrel().getDescriptionId(), "Laying Barrel");
 
         DataProvider.save(DataGeneratorConstants.GSONLang, cache, backingLangJson.serialize(), dataGenerator.getOutputFolder().resolve(DataGeneratorConstants.EN_US_LANG));
     }

@@ -1,6 +1,8 @@
 {
   "block.domum_ornamentum.architectscutter": "Architects cutter",
   "block.domum_ornamentum.black_floating_carpet": "Black Floating carpet",
+  "block.domum_ornamentum.blockbarreldeco_onside": "Laying Barrel",
+  "block.domum_ornamentum.blockbarreldeco_standing": "Standing Barrel",
   "block.domum_ornamentum.blue_floating_carpet": "Blue Floating carpet",
   "block.domum_ornamentum.brown_floating_carpet": "Brown Floating carpet",
   "block.domum_ornamentum.cyan_floating_carpet": "Cyan Floating carpet",
@@ -41,6 +43,8 @@
   "domum_ornamentum.timber.frame.type.side_framed": "Side",
   "domum_ornamentum.timber.frame.type.side_framed_horizontal": "Side Horizontal",
   "domum_ornamentum.timber.frame.type.up_gated": "Up Gate",
+  "itemGroup.domum_ornamentum.extra-blocks": "DO - Decorative blocks",
+  "itemGroup.domum_ornamentum.floating-carpet": "DO - Floating Carpets",
   "itemGroup.domum_ornamentum.general": "Domum Ornamentum (DO)",
   "itemGroup.domum_ornamentum.paperwalls": "DO - Thin framed walls",
   "itemGroup.domum_ornamentum.shingle_slabs": "DO - Shingle slabs",
