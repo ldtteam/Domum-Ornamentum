@@ -1,6 +1,7 @@
 package com.ldtteam.domumornamentum.event.handlers;
 
 import com.ldtteam.datagenerators.lang.LangJson;
+import com.ldtteam.domumornamentum.datagen.bricks.*;
 import com.ldtteam.domumornamentum.datagen.extra.*;
 import com.ldtteam.domumornamentum.datagen.fence.*;
 import com.ldtteam.domumornamentum.datagen.floatingcarpet.*;
@@ -74,6 +75,14 @@ public class ModBusEventHandler
         event.getGenerator().addProvider(new FloatingCarpetItemModelProvider(event.getGenerator()));
         event.getGenerator().addProvider(new FloatingCarpetLangEntryProvider(event.getGenerator(), langJson));
         event.getGenerator().addProvider(new FloatingCarpetRecipeProvider(event.getGenerator()));
+
+        //Brick blocks
+        event.getGenerator().addProvider(new BrickBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new BrickItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new BrickBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new BrickRecipeProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new BrickBlockTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(new BrickLangEntryProvider(event.getGenerator(), langJson));
 
         //Global
         //IMPORTANT: Needs to be last since this writes the lang data actually to disk!!!!!

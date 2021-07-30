@@ -64,9 +64,4 @@ public enum ExtraBlockType implements StringRepresentable
     {
         return this.material;
     }
-
-    private TranslatableComponent getLangKey()
-    {
-        return null;
-    }
 }
