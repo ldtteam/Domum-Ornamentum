@@ -32,7 +32,9 @@ public class GlobalLangEntryProvider implements DataProvider
         backingLangJson.put("itemGroup." + Constants.MOD_ID + ".paperwalls", "DO - Thin framed walls");
         backingLangJson.put("itemGroup." + Constants.MOD_ID + ".shingle_slabs", "DO - Shingle slabs");
         backingLangJson.put("itemGroup." + Constants.MOD_ID + ".extra-blocks", "DO - Decorative blocks");
-        backingLangJson.put("itemGroup." + Constants.MOD_ID + ".floating-carpet", "DO - Floating Carpets");
+        backingLangJson.put("itemGroup." + Constants.MOD_ID + ".floating-carpets", "DO - Floating Carpets");
+        backingLangJson.put("itemGroup." + Constants.MOD_ID + ".fences", "DO - Fences");
+        backingLangJson.put("itemGroup." + Constants.MOD_ID + ".slabs", "DO - Slabs");
         backingLangJson.put("block." + Constants.MOD_ID + ".architectscutter", "Architects cutter");
         backingLangJson.put(Constants.MOD_ID + ".architectscutter", "Architects cutter");
 

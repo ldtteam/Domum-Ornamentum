@@ -1,5 +1,6 @@
 package com.ldtteam.domumornamentum.entity.block;
 
+import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.world.level.block.Block;
@@ -8,6 +9,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ObjectHolder;
 import org.jetbrains.annotations.NotNull;
 
@@ -39,7 +41,7 @@ public final class ModBlockEntityTypes
     {
         event.getRegistry().register(
           BlockEntityType.Builder.of((BlockEntityType.BlockEntitySupplier<BlockEntity>) (pos, state) -> new MateriallyTexturedBlockEntity(MATERIALLY_TEXTURED, pos, state),
-            ModBlocks.getTimberFrames().toArray(new Block[0])
+            ForgeRegistries.BLOCKS.getValues().stream().filter(IMateriallyTexturedBlock.class::isInstance).toArray(Block[]::new)
           ).build(null).setRegistryName(Constants.MOD_ID, Constants.BlockEntityTypes.MATERIALLY_RETEXTURABLE)
         );
     }

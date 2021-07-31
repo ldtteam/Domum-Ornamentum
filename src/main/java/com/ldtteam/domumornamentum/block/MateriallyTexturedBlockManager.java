@@ -52,10 +52,9 @@ public final class MateriallyTexturedBlockManager
         if (stack.isEmpty())
             return true;
 
-        if (!(stack.getItem() instanceof BlockItem))
+        if (!(stack.getItem() instanceof final BlockItem blockItem))
             return false;
 
-        final BlockItem blockItem = (BlockItem) stack.getItem();
         final Block block = blockItem.getBlock();
 
         if (slotIndex >= getMaxTexturableComponentCount())

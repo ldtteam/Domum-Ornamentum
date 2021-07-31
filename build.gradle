@@ -15,6 +15,10 @@ buildscript {
 
 apply from: 'https://raw.githubusercontent.com/ldtteam/OperaPublicaCreator/main/gradle/mod.gradle'
 
+repositories {
+    mavenLocal()
+}
+
 dependencies {
     apiImplementation "com.ldtteam:datagenerators:${dataGeneratorsVersion}"
     implementation "com.ldtteam:datagenerators:${dataGeneratorsVersion}"

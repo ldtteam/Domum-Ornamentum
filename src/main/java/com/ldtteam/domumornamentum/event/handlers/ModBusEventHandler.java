@@ -4,12 +4,14 @@ import com.ldtteam.datagenerators.lang.LangJson;
 import com.ldtteam.domumornamentum.datagen.bricks.*;
 import com.ldtteam.domumornamentum.datagen.extra.*;
 import com.ldtteam.domumornamentum.datagen.fence.*;
+import com.ldtteam.domumornamentum.datagen.fencegate.*;
 import com.ldtteam.domumornamentum.datagen.floatingcarpet.*;
 import com.ldtteam.domumornamentum.datagen.frames.timber.*;
 import com.ldtteam.domumornamentum.datagen.global.GlobalLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.global.MateriallyTexturedBlockRecipeProvider;
 import com.ldtteam.domumornamentum.datagen.shingle.normal.*;
 import com.ldtteam.domumornamentum.datagen.shingle.slab.*;
+import com.ldtteam.domumornamentum.datagen.slab.*;
 import com.ldtteam.domumornamentum.datagen.walls.paper.*;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -68,6 +70,22 @@ public class ModBusEventHandler
         event.getGenerator().addProvider(new FenceComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(new FenceCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(new FenceLangEntryProvider(event.getGenerator(), langJson));
+
+        //FenceGate
+        event.getGenerator().addProvider(new FenceGateBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new FenceGateItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new FenceGateBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new FenceGateComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(new FenceGateCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(new FenceGateLangEntryProvider(event.getGenerator(), langJson));
+        
+        //Slab
+        event.getGenerator().addProvider(new SlabBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new SlabItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new SlabBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new SlabComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(new SlabCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(new SlabLangEntryProvider(event.getGenerator(), langJson));
 
         //Floating carpets
         event.getGenerator().addProvider(new FloatingCarpetBlockStateProvider(event.getGenerator()));

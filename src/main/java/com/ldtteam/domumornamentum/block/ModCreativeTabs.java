@@ -130,4 +130,19 @@ public final class ModCreativeTabs
             return false;
         }
     };
+
+    public static final CreativeModeTab SLABS = new CreativeModeTab(Constants.MOD_ID + ".slabs")
+    {
+        @Override
+        public @NotNull ItemStack makeIcon()
+        {
+            return new ItemStack(ModBlocks.getSlab());
+        }
+
+        @Override
+        public boolean hasSearchBar()
+        {
+            return false;
+        }
+    };
 }
