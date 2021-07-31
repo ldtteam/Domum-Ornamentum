@@ -5,6 +5,7 @@ import com.ldtteam.domumornamentum.block.decorative.*;
 import com.ldtteam.domumornamentum.block.types.ExtraBlockType;
 import com.ldtteam.domumornamentum.block.types.TimberFrameType;
 import com.ldtteam.domumornamentum.block.vanilla.FenceBlock;
+import com.ldtteam.domumornamentum.block.vanilla.FenceGateBlock;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -42,7 +43,8 @@ public final class ModBlocks
     private static       BarrelBlock STANDING_BARREL;
     private static       BarrelBlock LAYING_BARREL;
 
-    private static FenceBlock FENCE;
+    private static FenceBlock     FENCE;
+    private static FenceGateBlock FENCE_GATE;
 
     public static ArchitectsCutterBlock getArchitectsCutter()
     {
@@ -94,6 +96,8 @@ public final class ModBlocks
         return FENCE;
     }
 
+    public static FenceGateBlock getFenceGate() { return FENCE_GATE; }
+
     /**
      * Private constructor to hide the implicit public one.
      */
@@ -130,6 +134,7 @@ public final class ModBlocks
         LAYING_BARREL = new BarrelBlock(false).registerBlock(registry);
 
         FENCE = new FenceBlock().registerBlock(registry);
+        FENCE_GATE = new FenceGateBlock().registerBlock(registry);
     }
 
     @SubscribeEvent
@@ -163,5 +168,6 @@ public final class ModBlocks
         LAYING_BARREL.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.EXTRA_BLOCKS));
 
         FENCE.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.FENCES));
+        FENCE_GATE.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.FENCES));
     }
 }

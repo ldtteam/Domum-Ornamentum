@@ -20,6 +20,7 @@
   "block.domum_ornamentum.yellow_floating_carpet": "Yellow Floating carpet",
   "domum_ornamentum.architectscutter": "Architects cutter",
   "domum_ornamentum.extra.name.format": "%s %s Extra",
+  "domum_ornamentum.fence-gate.name.format": "%s FenceGate",
   "domum_ornamentum.fence.name.format": "%s Fence",
   "domum_ornamentum.paperwall.center.format": "  - Center:    %s",
   "domum_ornamentum.paperwall.frame.format": "  - Frame:     %s",
