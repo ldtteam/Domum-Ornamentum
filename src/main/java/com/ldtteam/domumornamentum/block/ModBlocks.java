@@ -2,6 +2,7 @@ package com.ldtteam.domumornamentum.block;
 
 import com.google.common.collect.Lists;
 import com.ldtteam.domumornamentum.block.decorative.*;
+import com.ldtteam.domumornamentum.block.types.BrickType;
 import com.ldtteam.domumornamentum.block.types.ExtraBlockType;
 import com.ldtteam.domumornamentum.block.types.TimberFrameType;
 import com.ldtteam.domumornamentum.block.vanilla.FenceBlock;
@@ -42,7 +43,8 @@ public final class ModBlocks
     private static final List<ExtraBlock> EXTRA_TOP_BLOCKS = Lists.newArrayList();
     private static final List<FloatingCarpetBlock> FLOATING_CARPETS = Lists.newArrayList();
     private static       BarrelBlock STANDING_BARREL;
-    private static       BarrelBlock LAYING_BARREL;
+    private static       BarrelBlock      LAYING_BARREL;
+    private static final List<BrickBlock> BRICK = new ArrayList<>();
 
     private static FenceBlock     FENCE;
     private static FenceGateBlock FENCE_GATE;
@@ -105,6 +107,11 @@ public final class ModBlocks
         return SLAB;
     }
 
+    public static List<BrickBlock> getBricks()
+    {
+        return BRICK;
+    }
+
     /**
      * Private constructor to hide the implicit public one.
      */
@@ -135,6 +142,11 @@ public final class ModBlocks
         for (final DyeColor value : DyeColor.values())
         {
             FLOATING_CARPETS.add(new FloatingCarpetBlock(value).registerBlock(registry));
+        }
+
+        for (final BrickType type : BrickType.values())
+        {
+            BRICK.add(new BrickBlock(type).registerBlock(registry));
         }
 
         STANDING_BARREL = new BarrelBlock(true).registerBlock(registry);
@@ -170,6 +182,11 @@ public final class ModBlocks
         for (final FloatingCarpetBlock floatingCarpet : FLOATING_CARPETS)
         {
             floatingCarpet.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.FLOATING_CARPETS));
+        }
+
+        for (final BrickBlock brickBlock : BRICK)
+        {
+            brickBlock.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.EXTRA_BLOCKS));
         }
 
         STANDING_BARREL.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.EXTRA_BLOCKS));
