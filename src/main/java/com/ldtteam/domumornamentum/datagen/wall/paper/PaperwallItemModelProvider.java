@@ -1,4 +1,4 @@
-package com.ldtteam.domumornamentum.datagen.walls.paper;
+package com.ldtteam.domumornamentum.datagen.wall.paper;
 
 import com.ldtteam.datagenerators.models.ModelDisplayPositionJson;
 import com.ldtteam.datagenerators.models.ModelDisplayPositionsEnum;

@@ -4,6 +4,7 @@
     "#minecraft:logs",
     "#minecraft:planks",
     "#forge:obsidian",
-    "#domum_ornamentum:extra_block"
+    "#domum_ornamentum:extra_block",
+    "#domum_ornamentum:bricks"
   ]
 }

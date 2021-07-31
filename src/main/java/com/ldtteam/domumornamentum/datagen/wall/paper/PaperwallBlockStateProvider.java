@@ -1,4 +1,4 @@
-package com.ldtteam.domumornamentum.datagen.walls.paper;
+package com.ldtteam.domumornamentum.datagen.wall.paper;
 
 import com.google.common.collect.Lists;
 import com.ldtteam.datagenerators.blockstate.BlockstateJson;

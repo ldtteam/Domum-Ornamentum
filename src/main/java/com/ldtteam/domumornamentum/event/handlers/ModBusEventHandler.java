@@ -12,7 +12,8 @@ import com.ldtteam.domumornamentum.datagen.global.MateriallyTexturedBlockRecipeP
 import com.ldtteam.domumornamentum.datagen.shingle.normal.*;
 import com.ldtteam.domumornamentum.datagen.shingle.slab.*;
 import com.ldtteam.domumornamentum.datagen.slab.*;
-import com.ldtteam.domumornamentum.datagen.walls.paper.*;
+import com.ldtteam.domumornamentum.datagen.wall.paper.*;
+import com.ldtteam.domumornamentum.datagen.wall.vanilla.*;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -34,6 +35,14 @@ public class ModBusEventHandler
         event.getGenerator().addProvider(new ExtraRecipeProvider(event.getGenerator()));
         event.getGenerator().addProvider(new ExtraBlockTagProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(new ExtraLangEntryProvider(event.getGenerator(), langJson));
+
+        //Brick blocks
+        event.getGenerator().addProvider(new BrickBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new BrickItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new BrickBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new BrickRecipeProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new BrickBlockTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(new BrickLangEntryProvider(event.getGenerator(), langJson));
 
         // Timber Frames
         event.getGenerator().addProvider(new TimberFramesBlockStateProvider(event.getGenerator()));
@@ -78,7 +87,7 @@ public class ModBusEventHandler
         event.getGenerator().addProvider(new FenceGateComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(new FenceGateCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(new FenceGateLangEntryProvider(event.getGenerator(), langJson));
-        
+
         //Slab
         event.getGenerator().addProvider(new SlabBlockStateProvider(event.getGenerator()));
         event.getGenerator().addProvider(new SlabItemModelProvider(event.getGenerator()));
@@ -86,6 +95,14 @@ public class ModBusEventHandler
         event.getGenerator().addProvider(new SlabComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(new SlabCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(new SlabLangEntryProvider(event.getGenerator(), langJson));
+        
+        //Wall
+        event.getGenerator().addProvider(new WallBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new WallItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new WallBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new WallComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(new WallCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(new WallLangEntryProvider(event.getGenerator(), langJson));
 
         //Floating carpets
         event.getGenerator().addProvider(new FloatingCarpetBlockStateProvider(event.getGenerator()));
@@ -93,14 +110,6 @@ public class ModBusEventHandler
         event.getGenerator().addProvider(new FloatingCarpetItemModelProvider(event.getGenerator()));
         event.getGenerator().addProvider(new FloatingCarpetLangEntryProvider(event.getGenerator(), langJson));
         event.getGenerator().addProvider(new FloatingCarpetRecipeProvider(event.getGenerator()));
-
-        //Brick blocks
-        event.getGenerator().addProvider(new BrickBlockStateProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new BrickItemModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new BrickBlockModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new BrickRecipeProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new BrickBlockTagProvider(event.getGenerator(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(new BrickLangEntryProvider(event.getGenerator(), langJson));
 
         //Global
         //IMPORTANT: Needs to be last since this writes the lang data actually to disk!!!!!

@@ -8,6 +8,7 @@ import com.ldtteam.domumornamentum.block.types.TimberFrameType;
 import com.ldtteam.domumornamentum.block.vanilla.FenceBlock;
 import com.ldtteam.domumornamentum.block.vanilla.FenceGateBlock;
 import com.ldtteam.domumornamentum.block.vanilla.SlabBlock;
+import com.ldtteam.domumornamentum.block.vanilla.WallBlock;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -49,6 +50,7 @@ public final class ModBlocks
     private static FenceBlock     FENCE;
     private static FenceGateBlock FENCE_GATE;
     private static SlabBlock SLAB;
+    private static WallBlock WALL;
 
     public static ArchitectsCutterBlock getArchitectsCutter()
     {
@@ -112,6 +114,11 @@ public final class ModBlocks
         return BRICK;
     }
 
+    public static WallBlock getWall()
+    {
+        return WALL;
+    }
+
     /**
      * Private constructor to hide the implicit public one.
      */
@@ -155,6 +162,7 @@ public final class ModBlocks
         FENCE = new FenceBlock().registerBlock(registry);
         FENCE_GATE = new FenceGateBlock().registerBlock(registry);
         SLAB = new SlabBlock().registerBlock(registry);
+        WALL = new WallBlock().registerBlock(registry);
     }
 
     @SubscribeEvent
@@ -195,5 +203,6 @@ public final class ModBlocks
         FENCE.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.FENCES));
         FENCE_GATE.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.FENCES));
         SLAB.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.SLABS));
+        WALL.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.WALLS));
     }
 }

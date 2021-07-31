@@ -1,4 +1,4 @@
-package com.ldtteam.domumornamentum.datagen.walls.paper;
+package com.ldtteam.domumornamentum.datagen.wall.paper;
 
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.Constants;
@@ -55,7 +55,8 @@ public class PaperwallComponentTagProvider extends BlockTagsProvider
             BlockTags.PLANKS,
             BlockTags.CORAL_BLOCKS,
             BlockTags.WART_BLOCKS,
-            ModTags.EXTRA_BLOCKS
+            ModTags.EXTRA_BLOCKS,
+            ModTags.BRICKS
           );
 
         this.tag(ModTags.PAPERWALL_CENTER)
@@ -67,7 +68,8 @@ public class PaperwallComponentTagProvider extends BlockTagsProvider
             Tags.Blocks.NETHERRACK,
             Tags.Blocks.OBSIDIAN,
             Tags.Blocks.GLASS,
-            ModTags.EXTRA_BLOCKS
+            ModTags.EXTRA_BLOCKS,
+            ModTags.BRICKS
           );
 
     }

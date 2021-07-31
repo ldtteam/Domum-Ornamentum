@@ -1,9 +1,7 @@
-package com.ldtteam.domumornamentum.datagen.walls.paper;
+package com.ldtteam.domumornamentum.datagen.wall.paper;
 
 import com.ldtteam.datagenerators.lang.LangJson;
-import com.ldtteam.domumornamentum.block.types.TimberFrameType;
 import com.ldtteam.domumornamentum.util.Constants;
-import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.HashCache;
 import net.minecraft.data.DataProvider;

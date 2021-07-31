@@ -29,7 +29,8 @@ public class TimberFramesComponentTagProvider extends BlockTagsProvider
             BlockTags.LOGS,
             BlockTags.PLANKS,
             Tags.Blocks.OBSIDIAN,
-            ModTags.EXTRA_BLOCKS
+            ModTags.EXTRA_BLOCKS,
+            ModTags.BRICKS
           );
 
         this.tag(ModTags.TIMBERFRAMES_CENTER)
@@ -43,7 +44,8 @@ public class TimberFramesComponentTagProvider extends BlockTagsProvider
             Tags.Blocks.NETHERRACK,
             Tags.Blocks.OBSIDIAN,
             Tags.Blocks.STORAGE_BLOCKS,
-            ModTags.EXTRA_BLOCKS
+            ModTags.EXTRA_BLOCKS,
+            ModTags.BRICKS
           );
 
     }

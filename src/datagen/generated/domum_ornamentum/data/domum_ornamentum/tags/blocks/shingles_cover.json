@@ -7,6 +7,7 @@
     "#forge:end_stones",
     "#forge:netherrack",
     "#forge:obsidian",
-    "#domum_ornamentum:extra_block"
+    "#domum_ornamentum:extra_block",
+    "#domum_ornamentum:bricks"
   ]
 }

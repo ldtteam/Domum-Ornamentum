@@ -27,6 +27,7 @@
     "#minecraft:planks",
     "#minecraft:coral_blocks",
     "#minecraft:wart_blocks",
-    "#domum_ornamentum:extra_block"
+    "#domum_ornamentum:extra_block",
+    "#domum_ornamentum:bricks"
   ]
 }

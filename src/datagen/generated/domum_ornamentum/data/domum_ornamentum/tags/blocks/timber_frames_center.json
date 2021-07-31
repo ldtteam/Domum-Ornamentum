@@ -10,6 +10,7 @@
     "#forge:netherrack",
     "#forge:obsidian",
     "#forge:storage_blocks",
-    "#domum_ornamentum:extra_block"
+    "#domum_ornamentum:extra_block",
+    "#domum_ornamentum:bricks"
   ]
 }

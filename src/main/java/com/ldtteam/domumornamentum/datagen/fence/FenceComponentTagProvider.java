@@ -54,7 +54,8 @@ public class FenceComponentTagProvider extends BlockTagsProvider
             BlockTags.LOGS,
             BlockTags.CORAL_BLOCKS,
             BlockTags.WART_BLOCKS,
-            ModTags.EXTRA_BLOCKS
+            ModTags.EXTRA_BLOCKS,
+            ModTags.BRICKS
           );
 
     }

@@ -8,6 +8,7 @@
     "#forge:netherrack",
     "#forge:obsidian",
     "#forge:glass",
-    "#domum_ornamentum:extra_block"
+    "#domum_ornamentum:extra_block",
+    "#domum_ornamentum:bricks"
   ]
 }

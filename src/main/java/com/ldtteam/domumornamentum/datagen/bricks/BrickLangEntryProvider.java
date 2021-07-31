@@ -26,13 +26,13 @@ public class BrickLangEntryProvider implements DataProvider
     @Override
     public void run(@NotNull HashCache cache) throws IOException
     {
-        backingLangJson.put(Constants.MOD_ID + ".brick.name." + BrickType.BEIGE + BrickType.SUFFIX, "Beige Brick");
-        backingLangJson.put(Constants.MOD_ID + ".brick.name." + BrickType.BROWN + BrickType.SUFFIX, "Brown Brick");
-        backingLangJson.put(Constants.MOD_ID + ".brick.name." + BrickType.CREAM + BrickType.SUFFIX, "Cream Brick");
+        backingLangJson.put("block." + Constants.MOD_ID + "." + BrickType.BEIGE.getSerializedName(), "Beige Brick");
+        backingLangJson.put("block." + Constants.MOD_ID + "." + BrickType.BROWN.getSerializedName(), "Brown Brick");
+        backingLangJson.put("block." + Constants.MOD_ID + "." + BrickType.CREAM.getSerializedName(), "Cream Brick");
 
-        backingLangJson.put(Constants.MOD_ID + ".brick.name." + BrickType.BEIGE_STONE + BrickType.SUFFIX, "Beige Stone Brick");
-        backingLangJson.put(Constants.MOD_ID + ".brick.name." + BrickType.BROWN_STONE + BrickType.SUFFIX, "Brown Stone Brick");
-        backingLangJson.put(Constants.MOD_ID + ".brick.name." + BrickType.CREAM_STONE + BrickType.SUFFIX, "Cream Stone Brick");
+        backingLangJson.put("block." + Constants.MOD_ID + "." + BrickType.BEIGE_STONE.getSerializedName(), "Beige Stone Brick");
+        backingLangJson.put("block." + Constants.MOD_ID + "." + BrickType.BROWN_STONE.getSerializedName(), "Brown Stone Brick");
+        backingLangJson.put("block." + Constants.MOD_ID + "." + BrickType.CREAM_STONE.getSerializedName(), "Cream Stone Brick");
     }
 
     @Override

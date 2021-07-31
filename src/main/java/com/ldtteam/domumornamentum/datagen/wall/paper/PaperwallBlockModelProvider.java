@@ -1,10 +1,6 @@
-package com.ldtteam.domumornamentum.datagen.walls.paper;
+package com.ldtteam.domumornamentum.datagen.wall.paper;
 
 import com.ldtteam.datagenerators.models.block.BlockModelJson;
-import com.ldtteam.domumornamentum.block.ModBlocks;
-import com.ldtteam.domumornamentum.block.decorative.TimberFrameBlock;
-import com.ldtteam.domumornamentum.block.types.ShingleFaceType;
-import com.ldtteam.domumornamentum.block.types.ShingleShapeType;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
@@ -18,7 +14,6 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Locale;
-import java.util.Objects;
 
 public class PaperwallBlockModelProvider implements DataProvider
 {
