@@ -27,6 +27,7 @@ public class DataGeneratorConstants
     public static final String SHINGLES_BLOCK_MODELS_DIR = RESOURCEPACK_DIR + "models/block/shingle/";
     public static final String PAPERWALLS_BLOCK_MODELS_DIR = RESOURCEPACK_DIR + "models/block/paperwalls/";
     public static final String FENCES_BLOCK_MODELS_DIR = RESOURCEPACK_DIR + "models/block/fences/";
+    public static final String SLABS_BLOCK_MODELS_DIR = RESOURCEPACK_DIR + "models/block/slabs/";
     public static final String FENCE_GATES_BLOCK_MODELS_DIR =  RESOURCEPACK_DIR + "models/block/fence_gates/";
     public static final String SHINGLE_SLABS_BLOCK_MODELS_DIR = RESOURCEPACK_DIR + "models/block/shingle_slab/";
     public static final String FLOATING_CARPETS_BLOCK_MODELS_DIR = RESOURCEPACK_DIR + "models/block/floating_carpet/";

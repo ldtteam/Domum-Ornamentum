@@ -29,6 +29,7 @@ public class ModTags
 
     public static final Tags.IOptionalNamedTag<Block> FENCE_MATERIALS = tag("fence_materials");
     public static final Tags.IOptionalNamedTag<Block> FENCE_GATE_MATERIALS = tag("fence_gate_materials");
+    public static final Tags.IOptionalNamedTag<Block> SLAB_MATERIALS = tag("slab_materials");
 
 
     private static Tags.IOptionalNamedTag<Block> tag(String name)

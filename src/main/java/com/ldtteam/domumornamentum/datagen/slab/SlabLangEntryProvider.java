@@ -1,4 +1,4 @@
-package com.ldtteam.domumornamentum.datagen.fencegate;
+package com.ldtteam.domumornamentum.datagen.slab;
 
 import com.ldtteam.datagenerators.lang.LangJson;
 import com.ldtteam.domumornamentum.util.Constants;
@@ -9,12 +9,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
-public class FenceGateLangEntryProvider implements DataProvider
+public class SlabLangEntryProvider implements DataProvider
 {
     private final DataGenerator dataGenerator;
     private final LangJson backingLangJson;
 
-    public FenceGateLangEntryProvider(final DataGenerator dataGenerator, LangJson backingLangJson)
+    public SlabLangEntryProvider(final DataGenerator dataGenerator, LangJson backingLangJson)
     {
         this.dataGenerator = dataGenerator;
         this.backingLangJson = backingLangJson;
@@ -23,13 +23,13 @@ public class FenceGateLangEntryProvider implements DataProvider
     @Override
     public void run(@NotNull HashCache cache) throws IOException
     {
-        backingLangJson.put(Constants.MOD_ID + ".fence-gate.name.format", "%s Fence gate");
+        backingLangJson.put(Constants.MOD_ID + ".slab.name.format", "%s Slab");
     }
 
     @Override
     @NotNull
     public String getName()
     {
-        return "FenceGates Lang Provider";
+        return "Slabs Lang Provider";
     }
 }

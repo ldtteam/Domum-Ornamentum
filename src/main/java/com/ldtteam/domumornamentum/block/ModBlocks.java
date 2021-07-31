@@ -6,6 +6,7 @@ import com.ldtteam.domumornamentum.block.types.ExtraBlockType;
 import com.ldtteam.domumornamentum.block.types.TimberFrameType;
 import com.ldtteam.domumornamentum.block.vanilla.FenceBlock;
 import com.ldtteam.domumornamentum.block.vanilla.FenceGateBlock;
+import com.ldtteam.domumornamentum.block.vanilla.SlabBlock;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -45,6 +46,7 @@ public final class ModBlocks
 
     private static FenceBlock     FENCE;
     private static FenceGateBlock FENCE_GATE;
+    private static SlabBlock SLAB;
 
     public static ArchitectsCutterBlock getArchitectsCutter()
     {
@@ -98,6 +100,11 @@ public final class ModBlocks
 
     public static FenceGateBlock getFenceGate() { return FENCE_GATE; }
 
+    public static SlabBlock getSlab()
+    {
+        return SLAB;
+    }
+
     /**
      * Private constructor to hide the implicit public one.
      */
@@ -135,6 +142,7 @@ public final class ModBlocks
 
         FENCE = new FenceBlock().registerBlock(registry);
         FENCE_GATE = new FenceGateBlock().registerBlock(registry);
+        SLAB = new SlabBlock().registerBlock(registry);
     }
 
     @SubscribeEvent
@@ -169,5 +177,6 @@ public final class ModBlocks
 
         FENCE.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.FENCES));
         FENCE_GATE.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.FENCES));
+        SLAB.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.SLABS));
     }
 }
