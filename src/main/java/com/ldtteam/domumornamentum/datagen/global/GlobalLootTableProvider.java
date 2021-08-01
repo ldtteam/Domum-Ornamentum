@@ -46,6 +46,11 @@ public class GlobalLootTableProvider implements DataProvider
         {
             saveBlock(block, cache);
         }
+
+        for (final ExtraBlock block : ModBlocks.getFloatingCarpets())
+        {
+            saveBlock(block, cache);
+        }
     }
 
     private void saveBlock(final Block block, final HashCache cache) throws IOException
