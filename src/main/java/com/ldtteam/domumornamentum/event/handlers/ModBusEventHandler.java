@@ -8,6 +8,7 @@ import com.ldtteam.domumornamentum.datagen.fencegate.*;
 import com.ldtteam.domumornamentum.datagen.floatingcarpet.*;
 import com.ldtteam.domumornamentum.datagen.frames.timber.*;
 import com.ldtteam.domumornamentum.datagen.global.GlobalLangEntryProvider;
+import com.ldtteam.domumornamentum.datagen.global.GlobalLootTableProvider;
 import com.ldtteam.domumornamentum.datagen.global.MateriallyTexturedBlockRecipeProvider;
 import com.ldtteam.domumornamentum.datagen.shingle.normal.*;
 import com.ldtteam.domumornamentum.datagen.shingle.slab.*;
@@ -123,6 +124,7 @@ public class ModBusEventHandler
         //Global
         //IMPORTANT: Needs to be last since this writes the lang data actually to disk!!!!!
         event.getGenerator().addProvider(new GlobalLangEntryProvider(event.getGenerator(), langJson));
+        event.getGenerator().addProvider(new GlobalLootTableProvider(event.getGenerator()));
         event.getGenerator().addProvider(new MateriallyTexturedBlockRecipeProvider(event.getGenerator()));
     }
 }
