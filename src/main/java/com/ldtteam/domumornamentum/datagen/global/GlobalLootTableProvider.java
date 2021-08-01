@@ -9,6 +9,7 @@ import com.ldtteam.datagenerators.loot_table.pool.entry.EntryTypeEnum;
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.decorative.BrickBlock;
 import com.ldtteam.domumornamentum.block.decorative.ExtraBlock;
+import com.ldtteam.domumornamentum.block.decorative.FloatingCarpetBlock;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
@@ -47,10 +48,14 @@ public class GlobalLootTableProvider implements DataProvider
             saveBlock(block, cache);
         }
 
-        for (final ExtraBlock block : ModBlocks.getFloatingCarpets())
+        for (final FloatingCarpetBlock block : ModBlocks.getFloatingCarpets())
         {
             saveBlock(block, cache);
         }
+
+        saveBlock(ModBlocks.getStandingBarrel(), cache);
+        saveBlock(ModBlocks.getLayingBarrel(), cache);
+        saveBlock(ModBlocks.getArchitectsCutter(), cache);
     }
 
     private void saveBlock(final Block block, final HashCache cache) throws IOException
