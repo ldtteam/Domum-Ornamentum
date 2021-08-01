@@ -39,6 +39,8 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.jetbrains.annotations.NotNull;
@@ -208,6 +210,23 @@ public class StairBlock extends AbstractBlockStairs<StairBlock> implements IMate
     {
         final BlockState state = getBlockState(p_56878_, p_56879_);
         state.getBlock().wasExploded(p_56878_, p_56879_, p_56880_);
+    }
+
+    @Override
+    public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootContext.Builder builder)
+    {
+        final BlockEntity blockEntity = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
+        if (!(blockEntity instanceof final MateriallyTexturedBlockEntity texturedBlockEntity))
+            return Lists.newArrayList();
+
+        final MaterialTextureData materialTextureData = texturedBlockEntity.getTextureData();
+
+        final CompoundTag textureNbt = materialTextureData.serializeNBT();
+
+        final ItemStack result = new ItemStack(this);
+        result.getOrCreateTag().put("textureData", textureNbt);
+
+        return Lists.newArrayList(result);
     }
 
     private BlockState getBlockState(final BlockGetter blockGetter, final BlockPos blockPos) {

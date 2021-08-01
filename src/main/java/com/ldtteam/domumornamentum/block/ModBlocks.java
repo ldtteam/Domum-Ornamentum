@@ -50,6 +50,7 @@ public final class ModBlocks
     private static SlabBlock SLAB;
     private static WallBlock WALL;
     private static StairBlock STAIR;
+    private static TrapdoorBlock TRAPDOOR;
 
     public static ArchitectsCutterBlock getArchitectsCutter()
     {
@@ -123,6 +124,10 @@ public final class ModBlocks
         return STAIR;
     }
 
+    public static TrapdoorBlock getTrapdoor() {
+        return TRAPDOOR;
+    }
+
     /**
      * Private constructor to hide the implicit public one.
      */
@@ -168,6 +173,7 @@ public final class ModBlocks
         SLAB = new SlabBlock().registerBlock(registry);
         WALL = new WallBlock().registerBlock(registry);
         STAIR = new StairBlock().registerBlock(registry);
+        TRAPDOOR = new TrapdoorBlock().registerBlock(registry);
     }
 
     @SubscribeEvent
@@ -210,5 +216,6 @@ public final class ModBlocks
         SLAB.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.SLABS));
         WALL.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.WALLS));
         STAIR.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.STAIRS));
+        TRAPDOOR.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.DOORS));
     }
 }

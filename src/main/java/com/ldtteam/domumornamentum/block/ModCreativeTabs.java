@@ -175,4 +175,19 @@ public final class ModCreativeTabs
             return false;
         }
     };
+
+    public static final CreativeModeTab DOORS = new CreativeModeTab(Constants.MOD_ID + ".doors")
+    {
+        @Override
+        public @NotNull ItemStack makeIcon()
+        {
+            return new ItemStack(ModBlocks.getTrapdoor());
+        }
+
+        @Override
+        public boolean hasSearchBar()
+        {
+            return false;
+        }
+    };
 }

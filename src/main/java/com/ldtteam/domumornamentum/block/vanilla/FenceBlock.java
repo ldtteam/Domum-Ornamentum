@@ -31,6 +31,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -126,5 +128,22 @@ public class FenceBlock extends AbstractBlockFence<FenceBlock> implements IMater
     public void resetCache()
     {
         fillItemGroupCache.clear();
+    }
+
+    @Override
+    public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootContext.Builder builder)
+    {
+        final BlockEntity blockEntity = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
+        if (!(blockEntity instanceof final MateriallyTexturedBlockEntity texturedBlockEntity))
+            return Lists.newArrayList();
+
+        final MaterialTextureData materialTextureData = texturedBlockEntity.getTextureData();
+
+        final CompoundTag textureNbt = materialTextureData.serializeNBT();
+
+        final ItemStack result = new ItemStack(this);
+        result.getOrCreateTag().put("textureData", textureNbt);
+
+        return Lists.newArrayList(result);
     }
 }

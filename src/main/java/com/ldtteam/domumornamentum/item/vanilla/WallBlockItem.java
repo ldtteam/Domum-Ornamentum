@@ -1,9 +1,11 @@
 package com.ldtteam.domumornamentum.item.vanilla;
 
+import com.google.common.collect.Lists;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.vanilla.FenceBlock;
 import com.ldtteam.domumornamentum.block.vanilla.WallBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
+import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.nbt.CompoundTag;
@@ -12,6 +14,13 @@ import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 public class WallBlockItem extends BlockItem
 {

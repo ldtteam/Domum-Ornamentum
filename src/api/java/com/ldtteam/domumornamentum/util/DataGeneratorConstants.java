@@ -34,7 +34,8 @@ public class DataGeneratorConstants
     public static final String STAIRS_BLOCK_MODELS_DIR = RESOURCEPACK_DIR + "models/block/stairs/";
     public static final String FLOATING_CARPETS_BLOCK_MODELS_DIR = RESOURCEPACK_DIR + "models/block/floating_carpet/";
     public static final String EXTRA_BLOCK_MODELS_DIR = RESOURCEPACK_DIR + "models/block/extra/";
-    public static final String BRICK_BLOCK_MODELS_DIR = RESOURCEPACK_DIR + "models/block/brick/";
+    public static final String BRICK_BLOCK_MODELS_DIR     = RESOURCEPACK_DIR + "models/block/brick/";
+    public static final String TRAPDOORS_BLOCK_MODELS_DIR = RESOURCEPACK_DIR + "models/block/trapdoors/";
 
     public static final String TIMBER_FRAMES_BLOCK_MODELS_DIR = RESOURCEPACK_DIR + "models/block/timber_frames/";
 

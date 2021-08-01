@@ -1,17 +1,18 @@
-package com.ldtteam.domumornamentum.block.decorative;
+package com.ldtteam.domumornamentum.block.vanilla;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.ldtteam.domumornamentum.block.AbstractBlockPane;
+import com.ldtteam.domumornamentum.block.AbstractBlockTrapdoor;
 import com.ldtteam.domumornamentum.block.ICachedItemGroupBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.components.SimpleRetexturableComponent;
+import com.ldtteam.domumornamentum.block.types.TrapdoorType;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
 import com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes;
-import com.ldtteam.domumornamentum.item.decoration.PaperwallBlockItem;
+import com.ldtteam.domumornamentum.item.vanilla.TrapdoorBlockItem;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
@@ -23,17 +24,17 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -42,71 +43,36 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/**
- * The paperwall block class defining the paperwall.
- */
-public class PaperWallBlock extends AbstractBlockPane<PaperWallBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock
+import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
+
+@SuppressWarnings("deprecation")
+public class TrapdoorBlock extends AbstractBlockTrapdoor<TrapdoorBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock
 {
+    public static final EnumProperty<TrapdoorType> TYPE = EnumProperty.create("type", TrapdoorType.class);
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
-                                                                               .add(new SimpleRetexturableComponent(new ResourceLocation("block/oak_planks"), ModTags.PAPERWALL_FRAME, Blocks.OAK_PLANKS))
-                                                                               .add(new SimpleRetexturableComponent(new ResourceLocation("block/dark_oak_planks"), ModTags.PAPERWALL_CENTER, Blocks.DARK_OAK_PLANKS))
+                                                                               .add(new SimpleRetexturableComponent(new ResourceLocation("minecraft:block/oak_planks"), ModTags.SLAB_MATERIALS, OAK_PLANKS))
                                                                                .build();
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
 
-    /**
-     * This block's name.
-     */
-    public static final String                      BLOCK_NAME     = "blockpaperwall";
-
-    /**
-     * The hardness this block has.
-     */
-    private static final float                      BLOCK_HARDNESS = 3F;
-
-    /**
-     * The resistance this block has.
-     */
-    private static final float                      RESISTANCE     = 1F;
-
-    public PaperWallBlock()
+    public TrapdoorBlock()
     {
-        super(Properties.of(Material.GLASS).strength(BLOCK_HARDNESS, RESISTANCE));
-        setRegistryName(BLOCK_NAME);
+        super(Properties.of(Material.WOOD, OAK_PLANKS.defaultMaterialColor()).strength(2.0F, 3.0F).sound(SoundType.WOOD));
+        this.registerDefaultState(this.defaultBlockState().setValue(TYPE, TrapdoorType.FULL));
+        setRegistryName(com.ldtteam.domumornamentum.util.Constants.MOD_ID, "vanilla_trapdoors_compat");
     }
 
-    /**
-     * Registry block at game registry.
-     *
-     * @param registry the registry to use.
-     */
+    @Override
+    protected void createBlockStateDefinition(final StateDefinition.Builder<Block, BlockState> builder)
+    {
+        super.createBlockStateDefinition(builder);
+        builder.add(TYPE);
+    }
+
     @Override
     public void registerItemBlock(final IForgeRegistry<Item> registry, final Item.Properties properties)
     {
-        registry.register((new PaperwallBlockItem(this, properties)).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
-    }
-
-    @Override
-    public BlockState rotate(final BlockState state, final LevelAccessor world, final BlockPos pos, final Rotation direction)
-    {
-        return switch (direction)
-                 {
-                     case CLOCKWISE_180 -> state.setValue(NORTH, state.getValue(SOUTH))
-                                             .setValue(EAST, state.getValue(WEST)).setValue(SOUTH, state.getValue(NORTH))
-                                             .setValue(WEST, state.getValue(EAST));
-                     case COUNTERCLOCKWISE_90 -> state.setValue(NORTH, state.getValue(EAST))
-                                                   .setValue(EAST, state.getValue(SOUTH)).setValue(SOUTH, state.getValue(WEST))
-                                                   .setValue(WEST, state.getValue(NORTH));
-                     case CLOCKWISE_90 -> state.setValue(NORTH, state.getValue(WEST))
-                                            .setValue(EAST, state.getValue(NORTH)).setValue(SOUTH, state.getValue(EAST))
-                                            .setValue(WEST, state.getValue(SOUTH));
-                     default -> state;
-                 };
-    }
-
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(NORTH, EAST, WEST, SOUTH, WATERLOGGED);
+        registry.register((new TrapdoorBlockItem(this, properties)).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
     }
 
     @Override
@@ -114,7 +80,6 @@ public class PaperWallBlock extends AbstractBlockPane<PaperWallBlock> implements
     {
         return COMPONENTS;
     }
-
 
     @Override
     public void fillItemCategory(final @NotNull CreativeModeTab group, final @NotNull NonNullList<ItemStack> items)
@@ -124,19 +89,17 @@ public class PaperWallBlock extends AbstractBlockPane<PaperWallBlock> implements
             return;
         }
 
-        IMateriallyTexturedBlockComponent frameComponent = getComponents().get(0);
-        IMateriallyTexturedBlockComponent centerComponent = getComponents().get(1);
+        IMateriallyTexturedBlockComponent materialComponent = getComponents().get(0);
 
-        final Tag<Block> frameCandidates = frameComponent.getValidSkins();
-        final Tag<Block> centerCandidates = centerComponent.getValidSkins();
+        final Tag<Block> materialCandidate = materialComponent.getValidSkins();
 
         try {
-            frameCandidates.getValues().forEach(cover -> {
-                centerCandidates.getValues().forEach(support ->{
+            for (final TrapdoorType trapdoorType : TrapdoorType.values())
+            {
+                materialCandidate.getValues().forEach(cover -> {
                     final Map<ResourceLocation, Block> textureData = Maps.newHashMap();
 
-                    textureData.put(frameComponent.getId(), cover);
-                    textureData.put(centerComponent.getId(), support);
+                    textureData.put(materialComponent.getId(), cover);
 
                     final MaterialTextureData materialTextureData = new MaterialTextureData(textureData);
 
@@ -144,10 +107,13 @@ public class PaperWallBlock extends AbstractBlockPane<PaperWallBlock> implements
 
                     final ItemStack result = new ItemStack(this);
                     result.getOrCreateTag().put("textureData", textureNbt);
+                    result.getOrCreateTag().putString("type", trapdoorType.toString().toUpperCase());
 
                     fillItemGroupCache.add(result);
                 });
-            });
+            }
+
+
         } catch (IllegalStateException exception)
         {
             //Ignored. Thrown during start up.
@@ -161,6 +127,13 @@ public class PaperWallBlock extends AbstractBlockPane<PaperWallBlock> implements
       final @NotNull Level worldIn, final @NotNull BlockPos pos, final @NotNull BlockState state, @Nullable final LivingEntity placer, final @NotNull ItemStack stack)
     {
         super.setPlacedBy(worldIn, pos, state, placer, stack);
+
+        final String type = stack.getOrCreateTag().getString("type");
+        worldIn.setBlock(
+          pos,
+          state.setValue(TYPE, TrapdoorType.valueOf(type.toUpperCase())),
+          Constants.BlockFlags.DEFAULT_AND_RERENDER
+        );
 
         final CompoundTag textureData = stack.getOrCreateTagElement("textureData");
         final BlockEntity tileEntity = worldIn.getBlockEntity(pos);
@@ -177,13 +150,6 @@ public class PaperWallBlock extends AbstractBlockPane<PaperWallBlock> implements
     }
 
     @Override
-    public void resetCache()
-    {
-        fillItemGroupCache.clear();
-    }
-
-
-    @Override
     public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootContext.Builder builder)
     {
         final BlockEntity blockEntity = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
@@ -196,7 +162,14 @@ public class PaperWallBlock extends AbstractBlockPane<PaperWallBlock> implements
 
         final ItemStack result = new ItemStack(this);
         result.getOrCreateTag().put("textureData", textureNbt);
+        result.getOrCreateTag().putString("type", state.getValue(TYPE).toString().toUpperCase());
 
         return Lists.newArrayList(result);
+    }
+
+    @Override
+    public void resetCache()
+    {
+        fillItemGroupCache.clear();
     }
 }
