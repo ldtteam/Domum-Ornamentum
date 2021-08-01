@@ -1,19 +1,19 @@
-package com.ldtteam.domumornamentum.datagen.shingle.normal;
+package com.ldtteam.domumornamentum.datagen.stair;
 
 import com.ldtteam.datagenerators.blockstate.BlockstateJson;
 import com.ldtteam.datagenerators.blockstate.BlockstateModelJson;
 import com.ldtteam.datagenerators.blockstate.BlockstateVariantJson;
 import com.ldtteam.domumornamentum.block.ModBlocks;
-import com.ldtteam.domumornamentum.block.decorative.ShingleBlock;
+import com.ldtteam.domumornamentum.block.types.ShingleShapeType;
+import com.ldtteam.domumornamentum.block.vanilla.StairBlock;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
-import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
-import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.data.DataProvider;
 import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.block.state.properties.StairsShape;
+import net.minecraft.core.Direction;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -22,11 +22,13 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public class ShinglesBlockStateProvider implements DataProvider
+import static net.minecraft.world.level.block.StairBlock.*;
+
+public class StairsBlockStateProvider implements DataProvider
 {
     private final DataGenerator generator;
 
-    public ShinglesBlockStateProvider(DataGenerator generator)
+    public StairsBlockStateProvider(DataGenerator generator)
     {
         this.generator = generator;
     }
@@ -34,21 +36,21 @@ public class ShinglesBlockStateProvider implements DataProvider
     @Override
     public void run(@NotNull final HashCache cache) throws IOException
     {
-        createBlockstateFile(cache, ModBlocks.getShingle());
+        createBlockstateFile(cache, ModBlocks.getStair());
     }
 
-    private void createBlockstateFile(final HashCache cache, final ShingleBlock shingle) throws IOException
+    private void createBlockstateFile(final HashCache cache, final StairBlock shingle) throws IOException
     {
         if (shingle.getRegistryName() == null)
             return;
 
         final Map<String, BlockstateVariantJson> variants = new HashMap<>();
 
-        for (Direction facingValue : StairBlock.FACING.getPossibleValues())
+        for (Direction facingValue : FACING.getPossibleValues())
         {
-            for (StairsShape shapeValue : StairBlock.SHAPE.getPossibleValues())
+            for (StairsShape shapeValue : SHAPE.getPossibleValues())
             {
-                for (Half halfValue : StairBlock.HALF.getPossibleValues())
+                for (Half halfValue : HALF.getPossibleValues())
                 {
                     final String variantKey = "facing=" + facingValue + ",shape=" + shapeValue + ",half=" + halfValue;
 
@@ -58,7 +60,7 @@ public class ShinglesBlockStateProvider implements DataProvider
 
                     int x = halfValue == Half.TOP ? 180 : 0;
 
-                    final String modelLocation = Constants.MOD_ID + ":block/shingle/" + ShingleBlock.getTypeFromShape(shapeValue).name().toLowerCase(Locale.ROOT);
+                    final String modelLocation = Constants.MOD_ID + ":block/stairs/" + getTypeFromShape(shapeValue);
 
                     final BlockstateModelJson model = new BlockstateModelJson(modelLocation, x, y);
                     final BlockstateVariantJson variant = new BlockstateVariantJson(model);
@@ -81,7 +83,7 @@ public class ShinglesBlockStateProvider implements DataProvider
     @Override
     public String getName()
     {
-        return "Shingles BlockStates Provider";
+        return "Stairs BlockStates Provider";
     }
 
     private int getYFromHalf(final Half half, final StairsShape shape)
@@ -90,7 +92,7 @@ public class ShinglesBlockStateProvider implements DataProvider
         {
             if (shape == StairsShape.STRAIGHT)
             {
-                return 180;
+                return 0;
             }
             return 90;
         }
@@ -99,28 +101,38 @@ public class ShinglesBlockStateProvider implements DataProvider
 
     private int getYFromShape(final StairsShape shape)
     {
-        switch (shape)
-        {
-            default:
-                return 0;
-            case OUTER_RIGHT:
-            case INNER_RIGHT:
-                return 90;
-        }
+        return switch (shape)
+                 {
+                     default -> 0;
+                     case OUTER_LEFT, INNER_LEFT -> -90;
+                 };
     }
 
     private int getYFromFacing(final Direction facing)
     {
-        switch (facing)
-        {
-            default:
-                return 0;
-            case WEST:
-                return 90;
-            case NORTH:
-                return 180;
-            case EAST:
-                return 270;
-        }
+        return switch (facing)
+                 {
+                     default -> 90;
+                     case WEST -> 180;
+                     case NORTH -> 270;
+                     case EAST -> 0;
+                 };
+    }
+
+
+    /**
+     * Get the model type from a StairsShape object
+     *
+     * @param shape the StairsShape object
+     * @return the model type for provided StairsShape
+     */
+    private static String getTypeFromShape(final StairsShape shape)
+    {
+        return switch (shape)
+                 {
+                     case INNER_LEFT, INNER_RIGHT -> "stairs_inner";
+                     case OUTER_LEFT, OUTER_RIGHT -> "stairs_outer";
+                     default -> "stairs";
+                 };
     }
 }

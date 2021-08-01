@@ -68,5 +68,9 @@ public class MateriallyTexturedBlockEntity extends BlockEntity
           .build();
     }
 
-
+    @NotNull
+    public MaterialTextureData getTextureData()
+    {
+        return textureData;
+    }
 }

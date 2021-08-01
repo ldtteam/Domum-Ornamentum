@@ -1,4 +1,4 @@
-package com.ldtteam.domumornamentum.datagen.shingle.normal;
+package com.ldtteam.domumornamentum.datagen.stair;
 
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.Constants;
@@ -6,14 +6,13 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ShinglesComponentTagProvider extends BlockTagsProvider
+public class StairsComponentTagProvider extends BlockTagsProvider
 {
-    public ShinglesComponentTagProvider(
+    public StairsComponentTagProvider(
       final DataGenerator generatorIn,
       @Nullable final ExistingFileHelper existingFileHelper)
     {
@@ -25,7 +24,7 @@ public class ShinglesComponentTagProvider extends BlockTagsProvider
     protected void addTags()
     {
 
-        this.tag(ModTags.SHINGLES_ROOF)
+        this.tag(ModTags.STAIRS_MATERIALS)
           .add(
             Blocks.CLAY,
             Blocks.TERRACOTTA,
@@ -58,23 +57,12 @@ public class ShinglesComponentTagProvider extends BlockTagsProvider
             ModTags.EXTRA_BLOCKS,
             ModTags.BRICKS
           );
-
-        this.tag(ModTags.SHINGLES_SUPPORT)
-          .addTags(
-            BlockTags.LOGS,
-            BlockTags.PLANKS,
-            Tags.Blocks.STONE,
-            Tags.Blocks.END_STONES,
-            Tags.Blocks.NETHERRACK,
-            Tags.Blocks.OBSIDIAN,
-            ModTags.BRICKS
-          );
     }
 
     @Override
     @NotNull
     public String getName()
     {
-        return "Shingles Tag Provider";
+        return "Stairs Tag Provider";
     }
 }

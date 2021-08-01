@@ -12,6 +12,7 @@ import com.ldtteam.domumornamentum.datagen.global.MateriallyTexturedBlockRecipeP
 import com.ldtteam.domumornamentum.datagen.shingle.normal.*;
 import com.ldtteam.domumornamentum.datagen.shingle.slab.*;
 import com.ldtteam.domumornamentum.datagen.slab.*;
+import com.ldtteam.domumornamentum.datagen.stair.*;
 import com.ldtteam.domumornamentum.datagen.wall.paper.*;
 import com.ldtteam.domumornamentum.datagen.wall.vanilla.*;
 import com.ldtteam.domumornamentum.util.Constants;
@@ -95,7 +96,7 @@ public class ModBusEventHandler
         event.getGenerator().addProvider(new SlabComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(new SlabCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(new SlabLangEntryProvider(event.getGenerator(), langJson));
-        
+
         //Wall
         event.getGenerator().addProvider(new WallBlockStateProvider(event.getGenerator()));
         event.getGenerator().addProvider(new WallItemModelProvider(event.getGenerator()));
@@ -103,6 +104,14 @@ public class ModBusEventHandler
         event.getGenerator().addProvider(new WallComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(new WallCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(new WallLangEntryProvider(event.getGenerator(), langJson));
+
+        //Stair
+        event.getGenerator().addProvider(new StairsBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new StairsItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new StairsBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new StairsComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(new StairsCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(new StairsLangEntryProvider(event.getGenerator(), langJson));
 
         //Floating carpets
         event.getGenerator().addProvider(new FloatingCarpetBlockStateProvider(event.getGenerator()));

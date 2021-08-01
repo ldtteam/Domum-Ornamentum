@@ -160,4 +160,19 @@ public final class ModCreativeTabs
             return false;
         }
     };
+
+    public static final CreativeModeTab STAIRS = new CreativeModeTab(Constants.MOD_ID + ".stairs")
+    {
+        @Override
+        public @NotNull ItemStack makeIcon()
+        {
+            return new ItemStack(ModBlocks.getStair());
+        }
+
+        @Override
+        public boolean hasSearchBar()
+        {
+            return false;
+        }
+    };
 }

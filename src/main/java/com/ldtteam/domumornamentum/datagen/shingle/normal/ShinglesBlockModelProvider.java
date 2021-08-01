@@ -1,22 +1,18 @@
 package com.ldtteam.domumornamentum.datagen.shingle.normal;
 
 import com.ldtteam.datagenerators.models.block.BlockModelJson;
-import com.ldtteam.domumornamentum.block.ModBlocks;
-import com.ldtteam.domumornamentum.block.decorative.TimberFrameBlock;
-import com.ldtteam.domumornamentum.block.types.ShingleFaceType;
 import com.ldtteam.domumornamentum.block.types.ShingleShapeType;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.HashCache;
 import net.minecraft.data.DataProvider;
+import net.minecraft.data.HashCache;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Locale;
-import java.util.Objects;
 
 public class ShinglesBlockModelProvider implements DataProvider
 {

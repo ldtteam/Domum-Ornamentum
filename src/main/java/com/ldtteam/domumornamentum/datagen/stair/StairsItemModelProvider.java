@@ -1,4 +1,4 @@
-package com.ldtteam.domumornamentum.datagen.shingle.normal;
+package com.ldtteam.domumornamentum.datagen.stair;
 
 import com.ldtteam.datagenerators.models.ModelDisplayPositionJson;
 import com.ldtteam.datagenerators.models.ModelDisplayPositionsEnum;
@@ -10,8 +10,8 @@ import com.ldtteam.domumornamentum.block.types.ShingleShapeType;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
+import net.minecraft.data.DataProvider;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -19,11 +19,11 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public class ShinglesItemModelProvider implements DataProvider
+public class StairsItemModelProvider implements DataProvider
 {
     private final DataGenerator generator;
 
-    public ShinglesItemModelProvider(final DataGenerator generator)
+    public StairsItemModelProvider(final DataGenerator generator)
     {
         this.generator = generator;
     }
@@ -34,14 +34,14 @@ public class ShinglesItemModelProvider implements DataProvider
         final ItemModelJson modelJson = new ItemModelJson();
         modelJson.setDisplay(getDisplay());
 
-        final String modelLocation = Constants.MOD_ID + ":block/shingle/" + ShingleShapeType.STRAIGHT.name().toLowerCase(Locale.ROOT);
+        final String modelLocation = Constants.MOD_ID + ":block/stairs/stairs";
 
         modelJson.setParent(modelLocation);
 
-        if (ModBlocks.getShingle().getRegistryName() == null)
+        if (ModBlocks.getStair().getRegistryName() == null)
             return;
 
-        final String name = ModBlocks.getShingle().getRegistryName().getPath();
+        final String name = ModBlocks.getStair().getRegistryName().getPath();
         DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(modelJson), generator.getOutputFolder().resolve(DataGeneratorConstants.ITEM_MODEL_DIR).resolve(name + ".json"));
     }
 
@@ -106,6 +106,6 @@ public class ShinglesItemModelProvider implements DataProvider
     @NotNull
     public String getName()
     {
-        return "Shingles Item Model Provider";
+        return "Stairs Item Model Provider";
     }
 }
