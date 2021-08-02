@@ -25,7 +25,7 @@ public class StairsLangEntryProvider implements DataProvider
     @Override
     public void run(@NotNull HashCache cache) throws IOException
     {
-        backingLangJson.put(Constants.MOD_ID + ".stair.name.format", "%s Shingles");
+        backingLangJson.put(Constants.MOD_ID + ".stair.name.format", "%s Stairs");
     }
 
     @Override

@@ -51,7 +51,6 @@ public class StairsComponentTagProvider extends BlockTagsProvider
           )
           .addTags(
             BlockTags.LOGS,
-            BlockTags.PLANKS,
             BlockTags.CORAL_BLOCKS,
             BlockTags.WART_BLOCKS,
             ModTags.EXTRA_BLOCKS,
