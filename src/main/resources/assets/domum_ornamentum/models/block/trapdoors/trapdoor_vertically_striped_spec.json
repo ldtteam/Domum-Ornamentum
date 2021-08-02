@@ -1,7 +1,8 @@
 {
-	"credit": "Made with Blockbench",
+  "parent": "block/thin_block",
 	"textures": {
-		"1": "block/acacia_door_top"
+		"1": "block/oak_planks",
+      "particle": "block/oak_planks"
 	},
 	"elements": [
 		{

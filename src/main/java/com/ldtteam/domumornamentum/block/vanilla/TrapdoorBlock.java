@@ -14,15 +14,18 @@ import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
 import com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes;
 import com.ldtteam.domumornamentum.item.vanilla.TrapdoorBlockItem;
 import com.ldtteam.domumornamentum.tag.ModTags;
+import com.ldtteam.domumornamentum.util.BlockUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.Tag;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -32,8 +35,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.jetbrains.annotations.NotNull;
@@ -57,13 +62,13 @@ public class TrapdoorBlock extends AbstractBlockTrapdoor<TrapdoorBlock> implemen
 
     public TrapdoorBlock()
     {
-        super(Properties.of(Material.WOOD, OAK_PLANKS.defaultMaterialColor()).strength(2.0F, 3.0F).sound(SoundType.WOOD));
+        super(Properties.of(Material.WOOD, MaterialColor.WOOD).strength(3.0F).sound(SoundType.WOOD).noOcclusion().isValidSpawn((state, blockGetter, pos, type) -> false));
         this.registerDefaultState(this.defaultBlockState().setValue(TYPE, TrapdoorType.FULL));
         setRegistryName(com.ldtteam.domumornamentum.util.Constants.MOD_ID, "vanilla_trapdoors_compat");
     }
 
     @Override
-    protected void createBlockStateDefinition(final StateDefinition.Builder<Block, BlockState> builder)
+    protected void createBlockStateDefinition(final StateDefinition.@NotNull Builder<Block, BlockState> builder)
     {
         super.createBlockStateDefinition(builder);
         builder.add(TYPE);
@@ -152,19 +157,20 @@ public class TrapdoorBlock extends AbstractBlockTrapdoor<TrapdoorBlock> implemen
     @Override
     public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootContext.Builder builder)
     {
-        final BlockEntity blockEntity = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
-        if (!(blockEntity instanceof final MateriallyTexturedBlockEntity texturedBlockEntity))
-            return Lists.newArrayList();
+        return BlockUtils.getMaterializedItemStack(builder, (s, e) -> {
+            s.getOrCreateTag().putString("type", e.getBlockState().getValue(TYPE).toString().toUpperCase());
+            return s;
+        });
+    }
 
-        final MaterialTextureData materialTextureData = texturedBlockEntity.getTextureData();
-
-        final CompoundTag textureNbt = materialTextureData.serializeNBT();
-
-        final ItemStack result = new ItemStack(this);
-        result.getOrCreateTag().put("textureData", textureNbt);
-        result.getOrCreateTag().putString("type", state.getValue(TYPE).toString().toUpperCase());
-
-        return Lists.newArrayList(result);
+    @Override
+    public ItemStack getPickBlock(
+      final BlockState state, final HitResult target, final BlockGetter world, final BlockPos pos, final Player player)
+    {
+        return BlockUtils.getMaterializedItemStack(world, pos, (s, e) -> {
+            s.getOrCreateTag().putString("type", e.getBlockState().getValue(TYPE).toString().toUpperCase());
+            return s;
+        });
     }
 
     @Override

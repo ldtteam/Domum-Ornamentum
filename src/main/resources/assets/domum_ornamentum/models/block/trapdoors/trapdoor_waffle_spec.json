@@ -1,8 +1,8 @@
 {
-	"credit": "Made with Blockbench",
+  "parent": "block/thin_block",
 	"textures": {
-		"0": "block/oak_trapdoor",
-		"particle": "block/oak_trapdoor"
+		"0": "block/oak_planks",
+		"particle": "block/oak_planks"
 	},
 	"elements": [
 		{

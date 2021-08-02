@@ -4,13 +4,16 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.client.model.properties.ModProperties;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -33,8 +36,15 @@ public class MateriallyTexturedBakedModel implements BakedModel
     private final Cache<MaterialTextureData, BakedModel> cache = CacheBuilder.newBuilder()
         .expireAfterAccess(2, TimeUnit.MINUTES)
         .concurrencyLevel(4)
-        .maximumSize(100)
+        .maximumSize(10000)
         .build();
+
+    private final Cache<Pair<MaterialTextureData, CompoundTag>, BakedModel> itemCache = CacheBuilder.newBuilder()
+                                                                   .expireAfterAccess(2, TimeUnit.MINUTES)
+                                                                   .concurrencyLevel(4)
+                                                                   .maximumSize(10000)
+                                                                   .build();
+
     private final BakedModel innerModel;
 
     private final ItemOverrides overrideList = new OverrideList(this);
@@ -112,6 +122,12 @@ public class MateriallyTexturedBakedModel implements BakedModel
         return this.overrideList;
     }
 
+    @Override
+    public ItemTransforms getTransforms()
+    {
+        return this.innerModel.getTransforms();
+    }
+
     private BakedModel getBakedInnerModelFor(final IModelData modelData)
     {
         if (!modelData.hasProperty(ModProperties.MATERIAL_TEXTURE_PROPERTY))
@@ -143,6 +159,32 @@ public class MateriallyTexturedBakedModel implements BakedModel
         }
     }
 
+    private BakedModel getBakedInnerModelFor(final ItemStack stack, final MaterialTextureData textureData,
+      @Nullable final ClientLevel level,
+      @Nullable final LivingEntity entity,
+      final int random)
+    {
+        try
+        {
+            return itemCache.get(
+              Pair.of(textureData, stack.serializeNBT())
+              , () -> {
+                final RetexturedBakedModelBuilder builder = RetexturedBakedModelBuilder.createFor(
+                  this.innerModel.getOverrides().resolve(this.innerModel, stack, level, entity, random)
+                );
+
+                textureData.getTexturedComponents().forEach(builder::with);
+
+                return builder.build();
+            });
+        }
+        catch (Exception exception)
+        {
+            LOGGER.error(String.format("Failed to build baked materially textured model for: %s for item: %s", textureData, stack), exception);
+            return Minecraft.getInstance().getModelManager().getMissingModel();
+        }
+    }
+
     private static class OverrideList extends ItemOverrides {
 
         private final MateriallyTexturedBakedModel model;
@@ -152,14 +194,14 @@ public class MateriallyTexturedBakedModel implements BakedModel
         @Nullable
         @Override
         public BakedModel resolve(
-          final BakedModel model,
+          final @NotNull BakedModel model,
           final ItemStack stack,
           @Nullable final ClientLevel level,
           @Nullable final LivingEntity entity,
           final int random)
         {
             final MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(stack.getOrCreateTagElement("textureData"));
-            return this.model.getBakedInnerModelFor(textureData);
+            return this.model.getBakedInnerModelFor(stack, textureData, level, entity, random);
         }
     }
 }

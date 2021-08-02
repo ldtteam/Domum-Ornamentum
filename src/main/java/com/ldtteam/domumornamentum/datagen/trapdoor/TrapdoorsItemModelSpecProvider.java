@@ -1,6 +1,7 @@
 package com.ldtteam.domumornamentum.datagen.trapdoor;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 import com.ldtteam.datagenerators.models.ModelDisplayPositionJson;
 import com.ldtteam.datagenerators.models.ModelDisplayPositionsEnum;
 import com.ldtteam.datagenerators.models.XYZDoubleListJson;
@@ -23,11 +24,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class TrapdoorsItemModelProvider implements DataProvider
+public class TrapdoorsItemModelSpecProvider implements DataProvider
 {
     private final DataGenerator generator;
 
-    public TrapdoorsItemModelProvider(final DataGenerator generator)
+    public TrapdoorsItemModelSpecProvider(final DataGenerator generator)
     {
         this.generator = generator;
     }
@@ -38,16 +39,30 @@ public class TrapdoorsItemModelProvider implements DataProvider
         final ItemModelJson modelJson = new ItemModelJson();
         modelJson.setDisplay(getDisplay());
 
-
         if (ModBlocks.getTrapdoor().getRegistryName() == null)
             return;
 
-        final String name = ModBlocks.getTrapdoor().getRegistryName().getPath();
-        final String modelLocation = Constants.MOD_ID + ":item/" + name + "_spec";
+        modelJson.setOverrides(new ArrayList<>());
+        TrapdoorType[] values = TrapdoorType.values();
+        for (int i = 0; i < values.length; i++)
+        {
+            final TrapdoorType value = values[i];
+            Objects.requireNonNull(modelJson.getOverrides()).add(
+              new OverrideCaseJson(
+                new OverridePredicateJson(
+                  ImmutableMap.<String, Float>builder()
+                  .put(Constants.TRAPDOOR_MODEL_OVERRIDE, (float) i)
+                  .build()
+                ),
+                Constants.MOD_ID + ":block/trapdoors/trapdoor_" + value.getSerializedName()
+              )
+            );
+        }
 
-        modelJson.setParent(modelLocation);
-        modelJson.setLoader(Constants.MATERIALLY_TEXTURED_MODEL_LOADER);
-        DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(modelJson), generator.getOutputFolder().resolve(DataGeneratorConstants.ITEM_MODEL_DIR).resolve(name + ".json"));
+        modelJson.setParent("block/thin_block");
+
+        final String name = ModBlocks.getTrapdoor().getRegistryName().getPath();
+        DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(modelJson), generator.getOutputFolder().resolve(DataGeneratorConstants.ITEM_MODEL_DIR).resolve(name + "_spec.json"));
     }
 
     private Map<ModelDisplayPositionsEnum, ModelDisplayPositionJson> getDisplay()

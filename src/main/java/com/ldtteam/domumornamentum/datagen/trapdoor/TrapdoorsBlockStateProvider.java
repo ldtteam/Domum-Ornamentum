@@ -21,7 +21,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static net.minecraft.world.level.block.TrapDoorBlock.HALF;
-import static net.minecraft.world.level.block.state.properties.BlockStateProperties.*;
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.OPEN;
 
 public class TrapdoorsBlockStateProvider implements DataProvider
 {
@@ -41,7 +42,9 @@ public class TrapdoorsBlockStateProvider implements DataProvider
     private void createBlockstateFile(final HashCache cache, final TrapdoorBlock shingle) throws IOException
     {
         if (shingle.getRegistryName() == null)
+        {
             return;
+        }
 
         final Map<String, BlockstateVariantJson> variants = new HashMap<>();
 
@@ -51,7 +54,8 @@ public class TrapdoorsBlockStateProvider implements DataProvider
             {
                 for (Half halfValue : HALF.getPossibleValues())
                 {
-                    for(boolean openValue : OPEN.getPossibleValues()) {
+                    for (boolean openValue : OPEN.getPossibleValues())
+                    {
                         final String variantKey = "facing=" + facingValue + ",type=" + typeValue.getSerializedName() + ",half=" + halfValue + ",open=" + openValue;
 
                         int y = getYFromFacing(facingValue);
@@ -76,24 +80,6 @@ public class TrapdoorsBlockStateProvider implements DataProvider
         final Path blockstatePath = blockstateFolder.resolve(shingle.getRegistryName().getPath() + ".json");
 
         DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(blockstate), blockstatePath);
-
-    }
-
-    @NotNull
-    @Override
-    public String getName()
-    {
-        return "Trapdoors BlockStates Provider";
-    }
-
-    private int getXFromOpenAndHalf(final boolean open, final Half half)
-    {
-        return half == Half.TOP && open ? 180 : 0;
-    }
-
-    private int getYFromOpenAndHalf(final boolean open, final Half half)
-    {
-        return half == Half.TOP && open ? 180 : 0;
     }
 
     private int getYFromFacing(final Direction facing)
@@ -105,5 +91,27 @@ public class TrapdoorsBlockStateProvider implements DataProvider
                      case WEST -> 270;
                      case EAST -> 90;
                  };
+    }
+
+    private int getYFromOpenAndHalf(final boolean open, final Half half)
+    {
+        return half == Half.TOP && open ? 180 : 0;
+    }
+
+    private int getXFromOpenAndHalf(final boolean open, final Half half)
+    {
+        if (!open)
+        {
+            return half == Half.TOP ? 180 : 0;
+        }
+
+        return half == Half.TOP ? -90 : 90;
+    }
+
+    @NotNull
+    @Override
+    public String getName()
+    {
+        return "Trapdoors BlockStates Provider";
     }
 }

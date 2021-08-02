@@ -14,6 +14,9 @@ import com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
 import com.ldtteam.domumornamentum.item.decoration.TimberFrameBlockItem;
 import com.ldtteam.domumornamentum.tag.ModTags;
+import com.ldtteam.domumornamentum.util.BlockUtils;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
@@ -30,6 +33,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -198,21 +202,16 @@ public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements
         fillItemGroupCache.clear();
     }
 
-
     @Override
     public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootContext.Builder builder)
     {
-        final BlockEntity blockEntity = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
-        if (!(blockEntity instanceof final MateriallyTexturedBlockEntity texturedBlockEntity))
-            return Lists.newArrayList();
+        return BlockUtils.getMaterializedItemStack(builder);
+    }
 
-        final MaterialTextureData materialTextureData = texturedBlockEntity.getTextureData();
-
-        final CompoundTag textureNbt = materialTextureData.serializeNBT();
-
-        final ItemStack result = new ItemStack(this);
-        result.getOrCreateTag().put("textureData", textureNbt);
-
-        return Lists.newArrayList(result);
+    @Override
+    public ItemStack getPickBlock(
+      final BlockState state, final HitResult target, final BlockGetter world, final BlockPos pos, final Player player)
+    {
+        return BlockUtils.getMaterializedItemStack(world, pos);
     }
 }

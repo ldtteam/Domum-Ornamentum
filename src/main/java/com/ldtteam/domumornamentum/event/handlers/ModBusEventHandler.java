@@ -19,6 +19,7 @@ import com.ldtteam.domumornamentum.datagen.wall.vanilla.*;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fmlserverevents.FMLServerStartedEvent;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 
 @Mod.EventBusSubscriber(modid = Constants.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -117,6 +118,7 @@ public class ModBusEventHandler
         //Trapdoor
         event.getGenerator().addProvider(new TrapdoorsBlockStateProvider(event.getGenerator()));
         event.getGenerator().addProvider(new TrapdoorsItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new TrapdoorsItemModelSpecProvider(event.getGenerator()));
         event.getGenerator().addProvider(new TrapdoorsBlockModelProvider(event.getGenerator()));
         event.getGenerator().addProvider(new TrapdoorsComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(new TrapdoorsCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
