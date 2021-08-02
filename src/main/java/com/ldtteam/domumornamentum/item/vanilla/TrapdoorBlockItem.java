@@ -48,7 +48,15 @@ public class TrapdoorBlockItem extends BlockItem
     {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
 
-        final TrapdoorType trapdoorType = TrapdoorType.valueOf(stack.getOrCreateTag().getString("type").toUpperCase());
+        TrapdoorType trapdoorType;
+        try {
+            if (stack.getOrCreateTag().contains("type"))
+                trapdoorType = TrapdoorType.valueOf(stack.getOrCreateTag().getString("type").toUpperCase());
+            else
+                trapdoorType = TrapdoorType.FULL;
+        } catch (Exception ex) {
+            trapdoorType = TrapdoorType.FULL;
+        }
 
         tooltip.add(new TextComponent(""));
         tooltip.add(new TranslatableComponent(

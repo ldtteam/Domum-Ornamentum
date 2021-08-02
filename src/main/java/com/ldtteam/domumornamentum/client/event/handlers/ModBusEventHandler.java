@@ -32,7 +32,14 @@ public class ModBusEventHandler
             if (!itemStack.getOrCreateTag().contains("type"))
                 return 0f;
 
-            return TrapdoorType.valueOf(itemStack.getOrCreateTag().getString("type").toUpperCase()).ordinal();
+              TrapdoorType trapdoorType;
+              try {
+                  trapdoorType = TrapdoorType.valueOf(itemStack.getOrCreateTag().getString("type").toUpperCase());
+              } catch (Exception ex) {
+                  trapdoorType = TrapdoorType.FULL;
+              }
+
+              return trapdoorType.ordinal();
           }));
         event.enqueueWork(() -> MenuScreens.register(
           ModContainerTypes.ARCHITECTS_CUTTER,
