@@ -39,6 +39,7 @@ public class TimberFramesComponentTagProvider extends BlockTagsProvider
             BlockTags.PLANKS,
             BlockTags.CORAL_BLOCKS,
             BlockTags.WART_BLOCKS,
+            Tags.Blocks.COBBLESTONE,
             Tags.Blocks.STONE,
             Tags.Blocks.END_STONES,
             Tags.Blocks.NETHERRACK,
