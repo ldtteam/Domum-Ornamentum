@@ -2,6 +2,7 @@ package com.ldtteam.domumornamentum.event.handlers;
 
 import com.ldtteam.datagenerators.lang.LangJson;
 import com.ldtteam.domumornamentum.datagen.bricks.*;
+import com.ldtteam.domumornamentum.datagen.door.*;
 import com.ldtteam.domumornamentum.datagen.extra.*;
 import com.ldtteam.domumornamentum.datagen.fence.*;
 import com.ldtteam.domumornamentum.datagen.fencegate.*;
@@ -19,7 +20,6 @@ import com.ldtteam.domumornamentum.datagen.wall.vanilla.*;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fmlserverevents.FMLServerStartedEvent;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 
 @Mod.EventBusSubscriber(modid = Constants.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -124,6 +124,15 @@ public class ModBusEventHandler
         event.getGenerator().addProvider(new TrapdoorsCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(new TrapdoorsLangEntryProvider(event.getGenerator(), langJson));
 
+        //Door
+        event.getGenerator().addProvider(new DoorsBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new DoorsItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new DoorsItemModelSpecProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new DoorsBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new DoorsComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(new DoorsCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(new DoorsLangEntryProvider(event.getGenerator(), langJson));
+        
         //Floating carpets
         event.getGenerator().addProvider(new FloatingCarpetBlockStateProvider(event.getGenerator()));
         event.getGenerator().addProvider(new FloatingCarpetBlockTagProvider(event.getGenerator(), event.getExistingFileHelper()));

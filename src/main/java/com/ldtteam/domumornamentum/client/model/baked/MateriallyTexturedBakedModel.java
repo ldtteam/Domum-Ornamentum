@@ -170,6 +170,7 @@ public class MateriallyTexturedBakedModel implements BakedModel
               Pair.of(textureData, stack.serializeNBT())
               , () -> {
                 final RetexturedBakedModelBuilder builder = RetexturedBakedModelBuilder.createFor(
+                  this.innerModel,
                   this.innerModel.getOverrides().resolve(this.innerModel, stack, level, entity, random)
                 );
 

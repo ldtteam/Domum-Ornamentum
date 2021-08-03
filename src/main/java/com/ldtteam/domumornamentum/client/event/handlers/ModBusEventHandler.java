@@ -1,6 +1,7 @@
 package com.ldtteam.domumornamentum.client.event.handlers;
 
 import com.ldtteam.domumornamentum.block.ModBlocks;
+import com.ldtteam.domumornamentum.block.types.DoorType;
 import com.ldtteam.domumornamentum.block.types.TrapdoorType;
 import com.ldtteam.domumornamentum.client.screens.ArchitectsCutterScreen;
 import com.ldtteam.domumornamentum.container.ModContainerTypes;
@@ -40,6 +41,20 @@ public class ModBusEventHandler
               }
 
               return trapdoorType.ordinal();
+          }));
+        event.enqueueWork(() -> ItemProperties.register(ModBlocks.getDoor().asItem(), new ResourceLocation(Constants.DOOR_MODEL_OVERRIDE),
+          (itemStack, clientLevel, livingEntity, i) -> {
+              if (!itemStack.getOrCreateTag().contains("type"))
+                  return 0f;
+
+              DoorType doorType;
+              try {
+                  doorType = DoorType.valueOf(itemStack.getOrCreateTag().getString("type").toUpperCase());
+              } catch (Exception ex) {
+                  doorType = DoorType.FULL;
+              }
+
+              return doorType.ordinal();
           }));
         event.enqueueWork(() -> MenuScreens.register(
           ModContainerTypes.ARCHITECTS_CUTTER,

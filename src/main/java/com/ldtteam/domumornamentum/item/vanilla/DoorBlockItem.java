@@ -2,6 +2,7 @@ package com.ldtteam.domumornamentum.item.vanilla;
 
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.types.DoorType;
+import com.ldtteam.domumornamentum.block.types.TrapdoorType;
 import com.ldtteam.domumornamentum.block.vanilla.DoorBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.util.BlockUtils;
@@ -49,7 +50,15 @@ public class DoorBlockItem extends DoubleHighBlockItem
     {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
 
-        final DoorType doorType = DoorType.valueOf(stack.getOrCreateTag().getString("type").toUpperCase());
+        DoorType doorType;
+        try {
+            if (stack.getOrCreateTag().contains("type"))
+                doorType = DoorType.valueOf(stack.getOrCreateTag().getString("type").toUpperCase());
+            else
+                doorType = DoorType.FULL;
+        } catch (Exception ex) {
+            doorType = DoorType.FULL;
+        }
 
         tooltip.add(new TextComponent(""));
         tooltip.add(new TranslatableComponent(

@@ -196,6 +196,6 @@ public class PaperWallBlock extends AbstractBlockPane<PaperWallBlock> implements
     public ItemStack getPickBlock(
       final BlockState state, final HitResult target, final BlockGetter world, final BlockPos pos, final Player player)
     {
-        return BlockUtils.getMaterializedItemStack(world, pos);
+        return BlockUtils.getMaterializedItemStack(player, world, pos);
     }
 }

@@ -63,7 +63,7 @@ public class DoorBlock extends AbstractBlockDoor<DoorBlock> implements IMaterial
     {
         super(Properties.of(Material.WOOD, MaterialColor.WOOD).strength(3.0F).sound(SoundType.WOOD).noOcclusion().isValidSpawn((state, blockGetter, pos, type) -> false));
         this.registerDefaultState(this.defaultBlockState().setValue(TYPE, DoorType.FULL));
-        setRegistryName(com.ldtteam.domumornamentum.util.Constants.MOD_ID, "vanilla_Doors_compat");
+        setRegistryName(com.ldtteam.domumornamentum.util.Constants.MOD_ID, "vanilla_doors_compat");
     }
 
     @Override
@@ -135,12 +135,12 @@ public class DoorBlock extends AbstractBlockDoor<DoorBlock> implements IMaterial
         final String type = stack.getOrCreateTag().getString("type");
         worldIn.setBlock(
           pos,
-          state.setValue(TYPE, DoorType.valueOf(type.toUpperCase())),
+          worldIn.getBlockState(pos).setValue(TYPE, DoorType.valueOf(type.toUpperCase())),
           Constants.BlockFlags.DEFAULT_AND_RERENDER
         );
         worldIn.setBlock(
           pos.above(),
-          state.setValue(TYPE, DoorType.valueOf(type.toUpperCase())),
+          worldIn.getBlockState(pos.above()).setValue(TYPE, DoorType.valueOf(type.toUpperCase())),
           Constants.BlockFlags.DEFAULT_AND_RERENDER
         );
 
@@ -176,7 +176,7 @@ public class DoorBlock extends AbstractBlockDoor<DoorBlock> implements IMaterial
     public ItemStack getPickBlock(
       final BlockState state, final HitResult target, final BlockGetter world, final BlockPos pos, final Player player)
     {
-        return BlockUtils.getMaterializedItemStack(world, pos, (s, e) -> {
+        return BlockUtils.getMaterializedItemStack(player, world, pos, (s, e) -> {
             s.getOrCreateTag().putString("type", e.getBlockState().getValue(TYPE).toString().toUpperCase());
             return s;
         });

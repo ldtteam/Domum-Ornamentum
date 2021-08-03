@@ -3,8 +3,8 @@
 	"parent": "minecraft:block/door_bottom",
 	"ambientocclusion": false,
 	"textures": {
-		"0": "block/acacia_door_bottom",
-		"particle": "block/acacia_door_bottom"
+		"0": "block/oak_planks",
+		"particle": "block/oak_planks"
 	},
 	"elements": [
 		{

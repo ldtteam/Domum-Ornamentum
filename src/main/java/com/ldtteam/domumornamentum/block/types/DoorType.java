@@ -8,7 +8,10 @@ import java.util.stream.Collectors;
 
 public enum DoorType implements StringRepresentable
 {
-    FULL("full");
+    FULL("full"),
+    PORT_MANTEAU("port_manteau"),
+    VERTICALLY_STRIPED("vertically_striped"),
+    WAFFLE("waffle");
 
     private final String serializationName;
 
