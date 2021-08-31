@@ -20,6 +20,6 @@ repositories {
 }
 
 dependencies {
-    apiImplementation "com.ldtteam:datagenerators:${dataGeneratorsVersion}"
-    implementation "com.ldtteam:datagenerators:${dataGeneratorsVersion}"
+    apiImplementation "com.ldtteam:datagenerators:${project.dataGeneratorsVersion}"
+    implementation "com.ldtteam:datagenerators:${project.dataGeneratorsVersion}"
 }
