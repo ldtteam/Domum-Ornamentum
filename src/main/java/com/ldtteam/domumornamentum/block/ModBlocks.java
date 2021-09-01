@@ -187,18 +187,18 @@ public final class ModBlocks
     public static void registerItems(RegistryEvent.Register<Item> event)
     {
         final IForgeRegistry<Item> registry = event.getRegistry();
-        ARCHITECTS_CUTTER.registerItemBlock(registry, (new Item.Properties()).tab(ModCreativeTabs.GENERAL));
+        ARCHITECTS_CUTTER.registerItemBlock(registry, (new Item.Properties().tab(ModCreativeTabs.GENERAL)));
 
-        final Item.Properties timberframeProperties = new Item.Properties().tab(ModCreativeTabs.TIMBER_FRAMES);
+        final Item.Properties timberframeProperties = new Item.Properties();
 
         for (final TimberFrameBlock frame : TIMBER_FRAMES)
         {
             frame.registerItemBlock(registry, timberframeProperties);
         }
 
-        SHINGLE.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.SHINGLES));
-        SHINGLE_SLAB.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.SHINGLE_SLABS));
-        PAPER_WALL.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.PAPERWALLS));
+        SHINGLE.registerItemBlock(registry, new Item.Properties());
+        SHINGLE_SLAB.registerItemBlock(registry, new Item.Properties());
+        PAPER_WALL.registerItemBlock(registry, new Item.Properties());
 
         for (final ExtraBlock block : EXTRA_TOP_BLOCKS)
         {
@@ -207,7 +207,7 @@ public final class ModBlocks
 
         for (final FloatingCarpetBlock floatingCarpet : FLOATING_CARPETS)
         {
-            floatingCarpet.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.FLOATING_CARPETS));
+            floatingCarpet.registerItemBlock(registry, new Item.Properties());
         }
 
         for (final BrickBlock brickBlock : BRICK)
@@ -218,12 +218,12 @@ public final class ModBlocks
         STANDING_BARREL.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.EXTRA_BLOCKS));
         LAYING_BARREL.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.EXTRA_BLOCKS));
 
-        FENCE.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.FENCES));
-        FENCE_GATE.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.FENCES));
-        SLAB.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.SLABS));
-        WALL.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.WALLS));
-        STAIR.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.STAIRS));
-        TRAPDOOR.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.DOORS));
-        DOOR.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.DOORS));
+        FENCE.registerItemBlock(registry, new Item.Properties());
+        FENCE_GATE.registerItemBlock(registry, new Item.Properties());
+        SLAB.registerItemBlock(registry, new Item.Properties());
+        WALL.registerItemBlock(registry, new Item.Properties());
+        STAIR.registerItemBlock(registry, new Item.Properties());
+        TRAPDOOR.registerItemBlock(registry, new Item.Properties());
+        DOOR.registerItemBlock(registry, new Item.Properties());
     }
 }

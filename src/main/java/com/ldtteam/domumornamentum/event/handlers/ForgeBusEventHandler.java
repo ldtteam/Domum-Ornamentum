@@ -35,8 +35,10 @@ public class ForgeBusEventHandler
         {
             if (Objects.requireNonNull(value.getRegistryName()).getNamespace().equals(Constants.MOD_ID)) {
                 final NonNullList<ItemStack> stacks = NonNullList.create();
-                value.fillItemCategory(Objects.requireNonNull(value.getItemCategory()), stacks);
-
+                if (value.getItemCategory() != null)
+                {
+                    value.fillItemCategory(Objects.requireNonNull(value.getItemCategory()), stacks);
+                }
                 dataCount.put(value.getRegistryName(), dataCount.getOrDefault(value.getRegistryName(), 0) + stacks.size());
             }
         }
