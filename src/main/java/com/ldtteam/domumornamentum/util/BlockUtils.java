@@ -61,9 +61,6 @@ public class BlockUtils
     }
 
     public static ItemStack getMaterializedItemStack(final Entity entity, final BlockEntity blockEntity, final BiFunction<ItemStack, MateriallyTexturedBlockEntity, ItemStack> adapter) {
-        if (entity instanceof Player player && player.isCreative())
-            return ItemStack.EMPTY;
-
         if (!(blockEntity instanceof final MateriallyTexturedBlockEntity texturedBlockEntity))
             return ItemStack.EMPTY;
 

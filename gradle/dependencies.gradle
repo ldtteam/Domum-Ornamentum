@@ -1,0 +1,19 @@
+configurations {
+    library
+    implementation.extendsFrom library
+}
+
+minecraft.runs.all {
+    lazyToken('minecraft_classpath') {
+        configurations.library.copyRecursive().resolve().collect { it.absolutePath }.join(File.pathSeparator)
+    }
+}
+
+repositories {
+    mavenLocal()
+}
+
+dependencies {
+    apiImplementation "com.ldtteam:datagenerators:${project.dataGeneratorsVersion}"
+    library "com.ldtteam:datagenerators:${project.dataGeneratorsVersion}"
+}
