@@ -39,4 +39,19 @@ public final class ModCreativeTabs
             return false;
         }
     };
+
+    public static final CreativeModeTab FLOATING_CARPETS = new CreativeModeTab(Constants.MOD_ID + ".floating-carpets")
+    {
+        @Override
+        public @NotNull ItemStack makeIcon()
+        {
+            return new ItemStack(ModBlocks.getFloatingCarpets().get(0));
+        }
+
+        @Override
+        public boolean hasSearchBar()
+        {
+            return false;
+        }
+    };
 }

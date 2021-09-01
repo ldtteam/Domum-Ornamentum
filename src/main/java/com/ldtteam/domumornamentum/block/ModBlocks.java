@@ -207,7 +207,7 @@ public final class ModBlocks
 
         for (final FloatingCarpetBlock floatingCarpet : FLOATING_CARPETS)
         {
-            floatingCarpet.registerItemBlock(registry, new Item.Properties());
+            floatingCarpet.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.FLOATING_CARPETS));
         }
 
         for (final BrickBlock brickBlock : BRICK)
