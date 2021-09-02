@@ -34,7 +34,8 @@ public class ShingleSlabComponentTagProvider extends BlockTagsProvider
             Tags.Blocks.NETHERRACK,
             Tags.Blocks.OBSIDIAN,
             ModTags.EXTRA_BLOCKS,
-            ModTags.BRICKS
+            ModTags.BRICKS,
+            ModTags.SHINGLES_ROOF
           );
     }
 
