@@ -5,6 +5,7 @@ import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
@@ -25,6 +26,20 @@ public class TimberFramesComponentTagProvider extends BlockTagsProvider
     {
 
         this.tag(ModTags.TIMBERFRAMES_FRAME)
+          .add(
+            Blocks.COPPER_BLOCK,
+            Blocks.CUT_COPPER,
+            Blocks.EXPOSED_COPPER,
+            Blocks.OXIDIZED_COPPER,
+            Blocks.WEATHERED_COPPER,
+            Blocks.WEATHERED_CUT_COPPER,
+            Blocks.WAXED_COPPER_BLOCK,
+            Blocks.WAXED_CUT_COPPER,
+            Blocks.WAXED_EXPOSED_COPPER,
+            Blocks.WAXED_OXIDIZED_COPPER,
+            Blocks.WAXED_WEATHERED_COPPER,
+            Blocks.WAXED_WEATHERED_CUT_COPPER
+          )
           .addTags(
             BlockTags.LOGS,
             BlockTags.PLANKS,
@@ -34,6 +49,20 @@ public class TimberFramesComponentTagProvider extends BlockTagsProvider
           );
 
         this.tag(ModTags.TIMBERFRAMES_CENTER)
+          .add(
+            Blocks.COPPER_BLOCK,
+            Blocks.CUT_COPPER,
+            Blocks.EXPOSED_COPPER,
+            Blocks.OXIDIZED_COPPER,
+            Blocks.WEATHERED_COPPER,
+            Blocks.WEATHERED_CUT_COPPER,
+            Blocks.WAXED_COPPER_BLOCK,
+            Blocks.WAXED_CUT_COPPER,
+            Blocks.WAXED_EXPOSED_COPPER,
+            Blocks.WAXED_OXIDIZED_COPPER,
+            Blocks.WAXED_WEATHERED_COPPER,
+            Blocks.WAXED_WEATHERED_CUT_COPPER
+          )
           .addTags(
             BlockTags.LOGS,
             BlockTags.PLANKS,

@@ -24,7 +24,6 @@ public class FenceComponentTagProvider extends BlockTagsProvider
     @Override
     protected void addTags()
     {
-
         this.tag(ModTags.FENCE_MATERIALS)
           .add(
             Blocks.CLAY,
@@ -48,7 +47,19 @@ public class FenceComponentTagProvider extends BlockTagsProvider
             Blocks.BLACK_TERRACOTTA,
             Blocks.BLACKSTONE,
             Blocks.GILDED_BLACKSTONE,
-            Blocks.HAY_BLOCK
+            Blocks.HAY_BLOCK,
+            Blocks.COPPER_BLOCK,
+            Blocks.CUT_COPPER,
+            Blocks.EXPOSED_COPPER,
+            Blocks.OXIDIZED_COPPER,
+            Blocks.WEATHERED_COPPER,
+            Blocks.WEATHERED_CUT_COPPER,
+            Blocks.WAXED_COPPER_BLOCK,
+            Blocks.WAXED_CUT_COPPER,
+            Blocks.WAXED_EXPOSED_COPPER,
+            Blocks.WAXED_OXIDIZED_COPPER,
+            Blocks.WAXED_WEATHERED_COPPER,
+            Blocks.WAXED_WEATHERED_CUT_COPPER
           )
           .addTags(
             BlockTags.LOGS,
