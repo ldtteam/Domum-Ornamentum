@@ -27,7 +27,7 @@ public class TimberFramesBlockModelProvider implements DataProvider
     @Override
     public void run(@NotNull HashCache cache) throws IOException
     {
-        for (final TimberFrameBlock timberFrame : ModBlocks.getTimberFrames())
+        for (final TimberFrameBlock timberFrame : ModBlocks.getInstance().getTimberFrames())
         {
             final BlockModelJson modelJson = new BlockModelJson();
 

@@ -24,12 +24,12 @@ public class TrapdoorsCompatibilityTagProvider extends BlockTagsProvider
     {
         this.tag(BlockTags.TRAPDOORS)
           .add(
-            ModBlocks.getTrapdoor()
+            ModBlocks.getInstance().getTrapdoor()
           );
 
         this.tag(BlockTags.WOODEN_TRAPDOORS)
           .add(
-            ModBlocks.getTrapdoor()
+            ModBlocks.getInstance().getTrapdoor()
           );
     }
 

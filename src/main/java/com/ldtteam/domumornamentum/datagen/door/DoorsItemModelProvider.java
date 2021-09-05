@@ -33,10 +33,10 @@ public class DoorsItemModelProvider implements DataProvider
         modelJson.setDisplay(getDisplay());
 
 
-        if (ModBlocks.getDoor().getRegistryName() == null)
+        if (ModBlocks.getInstance().getDoor().getRegistryName() == null)
             return;
 
-        final String name = ModBlocks.getDoor().getRegistryName().getPath();
+        final String name = ModBlocks.getInstance().getDoor().getRegistryName().getPath();
         final String modelLocation = Constants.MOD_ID + ":item/" + name + "_spec";
 
         modelJson.setParent(modelLocation);

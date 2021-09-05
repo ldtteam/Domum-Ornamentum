@@ -32,7 +32,7 @@ public class TimberFramesBlockStateProvider implements DataProvider
     @Override
     public void run(@NotNull final HashCache cache) throws IOException
     {
-        for (final TimberFrameBlock timberFrame : ModBlocks.getTimberFrames())
+        for (final TimberFrameBlock timberFrame : ModBlocks.getInstance().getTimberFrames())
         {
             createBlockstateFile(cache, timberFrame);
         }

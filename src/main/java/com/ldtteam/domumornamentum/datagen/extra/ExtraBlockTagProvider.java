@@ -23,7 +23,7 @@ public class ExtraBlockTagProvider extends BlockTagsProvider
     @Override
     protected void addTags()
     {
-        for (final Block block : ModBlocks.getExtraTopBlocks())
+        for (final Block block : ModBlocks.getInstance().getExtraTopBlocks())
         {
             this.tag(ModTags.EXTRA_BLOCKS).add(block);
         }

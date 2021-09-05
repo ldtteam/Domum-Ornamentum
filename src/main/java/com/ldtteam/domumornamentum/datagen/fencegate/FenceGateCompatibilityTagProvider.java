@@ -25,7 +25,7 @@ public class FenceGateCompatibilityTagProvider extends BlockTagsProvider
 
         this.tag(BlockTags.FENCE_GATES)
           .add(
-            ModBlocks.getFenceGate()
+            ModBlocks.getInstance().getFenceGate()
           );
     }
 

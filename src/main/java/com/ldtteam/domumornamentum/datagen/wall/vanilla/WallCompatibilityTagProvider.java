@@ -25,7 +25,7 @@ public class WallCompatibilityTagProvider extends BlockTagsProvider
 
         this.tag(BlockTags.WALLS)
           .add(
-            ModBlocks.getWall()
+            ModBlocks.getInstance().getWall()
           );
     }
 

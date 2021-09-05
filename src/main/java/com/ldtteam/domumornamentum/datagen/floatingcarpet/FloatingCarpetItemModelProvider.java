@@ -26,7 +26,7 @@ public class FloatingCarpetItemModelProvider implements DataProvider
     {
         final ItemModelJson modelJson = new ItemModelJson();
 
-        for (final FloatingCarpetBlock state : ModBlocks.getFloatingCarpets())
+        for (final FloatingCarpetBlock state : ModBlocks.getInstance().getFloatingCarpets())
         {
             final String modelLocation = "minecraft:block/" + state.getColor().getName() + "_carpet";
 

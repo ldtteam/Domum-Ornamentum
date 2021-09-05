@@ -31,7 +31,7 @@ public class FloatingCarpetBlockStateProvider implements DataProvider
     @Override
     public void run(@NotNull final HashCache cache) throws IOException
     {
-        for (final FloatingCarpetBlock state : ModBlocks.getFloatingCarpets())
+        for (final FloatingCarpetBlock state : ModBlocks.getInstance().getFloatingCarpets())
         {
             final Map<String, BlockstateVariantJson> variants = new HashMap<>();
             variants.put("", new BlockstateVariantJson(new BlockstateModelJson("minecraft:block/" + state.getColor().getName() + "_carpet")));

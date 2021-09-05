@@ -15,7 +15,7 @@ public final class ModCreativeTabs
         @Override
         public @NotNull ItemStack makeIcon()
         {
-            return new ItemStack(ModBlocks.getArchitectsCutter());
+            return new ItemStack(IModBlocks.getInstance().getArchitectsCutter());
         }
 
         @Override
@@ -30,7 +30,7 @@ public final class ModCreativeTabs
         @Override
         public @NotNull ItemStack makeIcon()
         {
-            return new ItemStack(ModBlocks.getExtraTopBlocks().get(0));
+            return new ItemStack(IModBlocks.getInstance().getExtraTopBlocks().get(0));
         }
 
         @Override
@@ -45,7 +45,7 @@ public final class ModCreativeTabs
         @Override
         public @NotNull ItemStack makeIcon()
         {
-            return new ItemStack(ModBlocks.getFloatingCarpets().get(0));
+            return new ItemStack(IModBlocks.getInstance().getFloatingCarpets().get(0));
         }
 
         @Override

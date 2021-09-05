@@ -26,7 +26,7 @@ public class ExtraItemModelProvider implements DataProvider
     {
         final ItemModelJson modelJson = new ItemModelJson();
 
-        for (final ExtraBlock state : ModBlocks.getExtraTopBlocks())
+        for (final ExtraBlock state : ModBlocks.getInstance().getExtraTopBlocks())
         {
             final String modelLocation = Constants.MOD_ID + ":block/extra/" + state.getRegistryName().getPath();
 

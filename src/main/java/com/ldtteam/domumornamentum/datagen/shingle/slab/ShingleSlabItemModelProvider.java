@@ -38,10 +38,10 @@ public class ShingleSlabItemModelProvider implements DataProvider
 
         modelJson.setParent(modelLocation);
 
-        if (ModBlocks.getShingleSlab().getRegistryName() == null)
+        if (ModBlocks.getInstance().getShingleSlab().getRegistryName() == null)
             return;
 
-        final String name = ModBlocks.getShingleSlab().getRegistryName().getPath();
+        final String name = ModBlocks.getInstance().getShingleSlab().getRegistryName().getPath();
         DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(modelJson), generator.getOutputFolder().resolve(DataGeneratorConstants.ITEM_MODEL_DIR).resolve(name + ".json"));
     }
 

@@ -37,10 +37,10 @@ public class FenceGateItemModelProvider implements DataProvider
         modelJson.setParent(modelLocation);
         modelJson.setLoader(Constants.MATERIALLY_TEXTURED_MODEL_LOADER.toString());
 
-        if (ModBlocks.getFenceGate().getRegistryName() == null)
+        if (ModBlocks.getInstance().getFenceGate().getRegistryName() == null)
             return;
 
-        final String name = ModBlocks.getFenceGate().getRegistryName().getPath();
+        final String name = ModBlocks.getInstance().getFenceGate().getRegistryName().getPath();
         DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(modelJson), generator.getOutputFolder().resolve(DataGeneratorConstants.ITEM_MODEL_DIR).resolve(name + ".json"));
     }
 

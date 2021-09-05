@@ -39,7 +39,7 @@ public class TrapdoorsItemModelSpecProvider implements DataProvider
         final ItemModelJson modelJson = new ItemModelJson();
         modelJson.setDisplay(getDisplay());
 
-        if (ModBlocks.getTrapdoor().getRegistryName() == null)
+        if (ModBlocks.getInstance().getTrapdoor().getRegistryName() == null)
             return;
 
         modelJson.setOverrides(new ArrayList<>());
@@ -61,7 +61,7 @@ public class TrapdoorsItemModelSpecProvider implements DataProvider
 
         modelJson.setParent("block/thin_block");
 
-        final String name = ModBlocks.getTrapdoor().getRegistryName().getPath();
+        final String name = ModBlocks.getInstance().getTrapdoor().getRegistryName().getPath();
         DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(modelJson), generator.getOutputFolder().resolve(DataGeneratorConstants.ITEM_MODEL_DIR).resolve(name + "_spec.json"));
     }
 

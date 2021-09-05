@@ -40,7 +40,7 @@ public class SlabBlockStateProvider implements DataProvider
     @Override
     public void run(@NotNull final HashCache cache) throws IOException
     {
-        createBlockstateFile(cache, ModBlocks.getSlab());
+        createBlockstateFile(cache, ModBlocks.getInstance().getSlab());
     }
 
     private void createBlockstateFile(final HashCache cache, final SlabBlock slabBlock) throws IOException

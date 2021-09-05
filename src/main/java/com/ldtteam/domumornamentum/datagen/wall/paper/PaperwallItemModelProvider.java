@@ -37,10 +37,10 @@ public class PaperwallItemModelProvider implements DataProvider
         modelJson.setParent(modelLocation);
         modelJson.setLoader(Constants.MATERIALLY_TEXTURED_MODEL_LOADER.toString());
 
-        if (ModBlocks.getPaperWall().getRegistryName() == null)
+        if (ModBlocks.getInstance().getPaperWall().getRegistryName() == null)
             return;
 
-        final String name = ModBlocks.getPaperWall().getRegistryName().getPath();
+        final String name = ModBlocks.getInstance().getPaperWall().getRegistryName().getPath();
         DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(modelJson), generator.getOutputFolder().resolve(DataGeneratorConstants.ITEM_MODEL_DIR).resolve(name + ".json"));
     }
 

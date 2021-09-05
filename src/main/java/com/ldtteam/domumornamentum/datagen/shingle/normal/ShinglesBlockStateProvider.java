@@ -34,7 +34,7 @@ public class ShinglesBlockStateProvider implements DataProvider
     @Override
     public void run(@NotNull final HashCache cache) throws IOException
     {
-        createBlockstateFile(cache, ModBlocks.getShingle());
+        createBlockstateFile(cache, ModBlocks.getInstance().getShingle());
     }
 
     private void createBlockstateFile(final HashCache cache, final ShingleBlock shingle) throws IOException

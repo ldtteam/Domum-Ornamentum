@@ -33,7 +33,7 @@ public class PaperwallBlockStateProvider implements DataProvider
     @Override
     public void run(@NotNull final HashCache cache) throws IOException
     {
-        createBlockstateFile(cache, ModBlocks.getPaperWall());
+        createBlockstateFile(cache, ModBlocks.getInstance().getPaperWall());
     }
 
     private void createBlockstateFile(final HashCache cache, final PaperWallBlock paperWallBlock) throws IOException

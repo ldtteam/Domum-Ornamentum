@@ -24,12 +24,12 @@ public class DoorsCompatibilityTagProvider extends BlockTagsProvider
     {
         this.tag(BlockTags.DOORS)
           .add(
-            ModBlocks.getDoor()
+            ModBlocks.getInstance().getDoor()
           );
 
         this.tag(BlockTags.WOODEN_DOORS)
           .add(
-            ModBlocks.getDoor()
+            ModBlocks.getInstance().getDoor()
           );
     }
 

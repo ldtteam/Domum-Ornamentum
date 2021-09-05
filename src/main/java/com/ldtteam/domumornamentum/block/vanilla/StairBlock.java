@@ -232,7 +232,10 @@ public class StairBlock extends AbstractBlockStairs<StairBlock> implements IMate
 
         if (blockEntity instanceof MateriallyTexturedBlockEntity) {
             final MaterialTextureData data = ((MateriallyTexturedBlockEntity) blockEntity).getTextureData();
-            return data.getTexturedComponents().get(MATERIAL_COMPONENT.getId()).defaultBlockState();
+            final Block block = data.getTexturedComponents().get(MATERIAL_COMPONENT.getId());
+            if (block != null) {
+                return block.defaultBlockState();
+            }
         }
 
         return Blocks.AIR.defaultBlockState();

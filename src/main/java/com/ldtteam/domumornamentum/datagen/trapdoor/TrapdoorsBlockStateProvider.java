@@ -36,7 +36,7 @@ public class TrapdoorsBlockStateProvider implements DataProvider
     @Override
     public void run(@NotNull final HashCache cache) throws IOException
     {
-        createBlockstateFile(cache, ModBlocks.getTrapdoor());
+        createBlockstateFile(cache, ModBlocks.getInstance().getTrapdoor());
     }
 
     private void createBlockstateFile(final HashCache cache, final TrapdoorBlock shingle) throws IOException

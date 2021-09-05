@@ -32,7 +32,7 @@ public class ExtraRecipeProvider implements DataProvider
     @Override
     public void run(@NotNull final HashCache cache) throws IOException
     {
-        for (final ExtraBlock block : ModBlocks.getExtraTopBlocks())
+        for (final ExtraBlock block : ModBlocks.getInstance().getExtraTopBlocks())
         {
             final ExtraBlockType type = block.getType();
             final ShapedPatternJson pattern =  new ShapedPatternJson("X X"," Z ","X X");

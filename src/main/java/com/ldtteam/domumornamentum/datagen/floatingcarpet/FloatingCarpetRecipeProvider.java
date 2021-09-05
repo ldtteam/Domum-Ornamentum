@@ -32,7 +32,7 @@ public class FloatingCarpetRecipeProvider implements DataProvider
     @Override
     public void run(@NotNull final HashCache cache) throws IOException
     {
-        for (final FloatingCarpetBlock block : ModBlocks.getFloatingCarpets())
+        for (final FloatingCarpetBlock block : ModBlocks.getInstance().getFloatingCarpets())
         {
             final DyeColor color = block.getColor();
             final ShapedPatternJson pattern =  new ShapedPatternJson("C  ","S  ","   ");

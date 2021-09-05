@@ -38,7 +38,7 @@ public class DoorsItemModelSpecProvider implements DataProvider
         final ItemModelJson modelJson = new ItemModelJson();
         modelJson.setDisplay(getDisplay());
 
-        if (ModBlocks.getDoor().getRegistryName() == null)
+        if (ModBlocks.getInstance().getDoor().getRegistryName() == null)
             return;
 
         modelJson.setOverrides(new ArrayList<>());
@@ -58,7 +58,7 @@ public class DoorsItemModelSpecProvider implements DataProvider
             );
         }
 
-        final String name = ModBlocks.getDoor().getRegistryName().getPath();
+        final String name = ModBlocks.getInstance().getDoor().getRegistryName().getPath();
         DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(modelJson), generator.getOutputFolder().resolve(DataGeneratorConstants.ITEM_MODEL_DIR).resolve(name + "_spec.json"));
     }
 

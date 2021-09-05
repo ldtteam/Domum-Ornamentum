@@ -12,7 +12,7 @@ import net.minecraftforge.client.model.data.ModelDataMap;
 import net.minecraftforge.common.util.Constants;
 import org.jetbrains.annotations.NotNull;
 
-public class MateriallyTexturedBlockEntity extends BlockEntity
+public class MateriallyTexturedBlockEntity extends BlockEntity implements IMateriallyTexturedBlockEntity
 {
 
     private MaterialTextureData textureData = MaterialTextureData.EMPTY;
@@ -22,6 +22,7 @@ public class MateriallyTexturedBlockEntity extends BlockEntity
         super(tileEntityTypeIn, pos, state);
     }
 
+    @Override
     public void updateTextureDataWith(final MaterialTextureData materialTextureData)
     {
         this.textureData = materialTextureData;
@@ -68,6 +69,7 @@ public class MateriallyTexturedBlockEntity extends BlockEntity
           .build();
     }
 
+    @Override
     @NotNull
     public MaterialTextureData getTextureData()
     {

@@ -38,7 +38,7 @@ public class DoorsBlockStateProvider implements DataProvider
     @Override
     public void run(@NotNull final HashCache cache) throws IOException
     {
-        createBlockstateFile(cache, ModBlocks.getDoor());
+        createBlockstateFile(cache, ModBlocks.getInstance().getDoor());
     }
 
     private void createBlockstateFile(final HashCache cache, final DoorBlock shingle) throws IOException

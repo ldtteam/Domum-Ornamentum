@@ -39,10 +39,10 @@ public class TrapdoorsItemModelProvider implements DataProvider
         modelJson.setDisplay(getDisplay());
 
 
-        if (ModBlocks.getTrapdoor().getRegistryName() == null)
+        if (ModBlocks.getInstance().getTrapdoor().getRegistryName() == null)
             return;
 
-        final String name = ModBlocks.getTrapdoor().getRegistryName().getPath();
+        final String name = ModBlocks.getInstance().getTrapdoor().getRegistryName().getPath();
         final String modelLocation = Constants.MOD_ID + ":item/" + name + "_spec";
 
         modelJson.setParent(modelLocation);

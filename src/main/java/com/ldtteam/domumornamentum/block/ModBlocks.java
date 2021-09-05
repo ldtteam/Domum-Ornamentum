@@ -31,9 +31,8 @@ import java.util.List;
 @SuppressWarnings({"squid:ClassVariableVisibilityCheck", "squid:S2444", "squid:S1444", "squid:S1820",})
 @ObjectHolder(Constants.MOD_ID)
 @Mod.EventBusSubscriber(modid = Constants.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public final class ModBlocks
+public final class ModBlocks implements IModBlocks
 {
-
     private static       ArchitectsCutterBlock  ARCHITECTS_CUTTER;
     private static final List<TimberFrameBlock> TIMBER_FRAMES = Lists.newArrayList();
     private static       ShingleBlock           SHINGLE;
@@ -53,85 +52,10 @@ public final class ModBlocks
     private static TrapdoorBlock TRAPDOOR;
     private static DoorBlock DOOR;
 
-    public static ArchitectsCutterBlock getArchitectsCutter()
-    {
-        return ARCHITECTS_CUTTER;
-    }
+    private static final ModBlocks INSTANCE = new ModBlocks();
 
-    public static ShingleBlock getShingle()
-    {
-        return SHINGLE;
-    }
-
-    public static List<TimberFrameBlock> getTimberFrames()
-    {
-        return new ArrayList<>(TIMBER_FRAMES);
-    }
-
-    public static ShingleSlabBlock getShingleSlab()
-    {
-        return SHINGLE_SLAB;
-    }
-
-    public static PaperWallBlock getPaperWall()
-    {
-        return PAPER_WALL;
-    }
-
-    public static List<ExtraBlock> getExtraTopBlocks()
-    {
-        return EXTRA_TOP_BLOCKS;
-    }
-
-    public static List<FloatingCarpetBlock> getFloatingCarpets()
-    {
-        return FLOATING_CARPETS;
-    }
-
-    public static BarrelBlock getStandingBarrel()
-    {
-        return STANDING_BARREL;
-    }
-
-    public static BarrelBlock getLayingBarrel()
-    {
-        return LAYING_BARREL;
-    }
-
-    public static FenceBlock getFence()
-    {
-        return FENCE;
-    }
-
-    public static FenceGateBlock getFenceGate() { return FENCE_GATE; }
-
-    public static SlabBlock getSlab()
-    {
-        return SLAB;
-    }
-
-    public static List<BrickBlock> getBricks()
-    {
-        return BRICK;
-    }
-
-    public static WallBlock getWall()
-    {
-        return WALL;
-    }
-
-    public static StairBlock getStair()
-    {
-        return STAIR;
-    }
-
-    public static TrapdoorBlock getTrapdoor() {
-        return TRAPDOOR;
-    }
-
-    public static DoorBlock getDoor()
-    {
-        return DOOR;
+    public static ModBlocks getInstance() {
+        return INSTANCE;
     }
 
     /**
@@ -141,6 +65,105 @@ public final class ModBlocks
     {
     }
 
+    @Override
+    public ArchitectsCutterBlock getArchitectsCutter()
+    {
+        return ModBlocks.ARCHITECTS_CUTTER;
+    }
+
+    @Override
+    public ShingleBlock getShingle()
+    {
+        return ModBlocks.SHINGLE;
+    }
+
+    @Override
+    public List<TimberFrameBlock> getTimberFrames()
+    {
+        return new ArrayList<>(ModBlocks.TIMBER_FRAMES);
+    }
+
+    @Override
+    public ShingleSlabBlock getShingleSlab()
+    {
+        return ModBlocks.SHINGLE_SLAB;
+    }
+
+    @Override
+    public PaperWallBlock getPaperWall()
+    {
+        return ModBlocks.PAPER_WALL;
+    }
+
+    @Override
+    public List<ExtraBlock> getExtraTopBlocks()
+    {
+        return ModBlocks.EXTRA_TOP_BLOCKS;
+    }
+
+    @Override
+    public List<FloatingCarpetBlock> getFloatingCarpets()
+    {
+        return ModBlocks.FLOATING_CARPETS;
+    }
+
+    @Override
+    public BarrelBlock getStandingBarrel()
+    {
+        return ModBlocks.STANDING_BARREL;
+    }
+
+    @Override
+    public BarrelBlock getLayingBarrel()
+    {
+        return ModBlocks.LAYING_BARREL;
+    }
+
+    @Override
+    public FenceBlock getFence()
+    {
+        return ModBlocks.FENCE;
+    }
+
+    @Override
+    public FenceGateBlock getFenceGate() { return ModBlocks.FENCE_GATE; }
+
+    @Override
+    public SlabBlock getSlab()
+    {
+        return ModBlocks.SLAB;
+    }
+
+    @Override
+    public List<BrickBlock> getBricks()
+    {
+        return ModBlocks.BRICK;
+    }
+
+    @Override
+    public WallBlock getWall()
+    {
+        return ModBlocks.WALL;
+    }
+
+    @Override
+    public StairBlock getStair()
+    {
+        return ModBlocks.STAIR;
+    }
+
+    @Override
+    public TrapdoorBlock getTrapdoor()
+    {
+        return ModBlocks.TRAPDOOR;
+    }
+
+    @Override
+    public DoorBlock getDoor()
+    {
+        return ModBlocks.DOOR;
+    }
+    
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event)
     {

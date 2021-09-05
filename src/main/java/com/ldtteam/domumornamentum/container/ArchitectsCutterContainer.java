@@ -1,6 +1,7 @@
 package com.ldtteam.domumornamentum.container;
 
 import com.google.common.collect.Lists;
+import com.ldtteam.domumornamentum.block.IModBlocks;
 import com.ldtteam.domumornamentum.block.MateriallyTexturedBlockManager;
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.recipe.ModRecipeTypes;
@@ -141,7 +142,7 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
      * Determines whether supplied player can use this container
      */
     public boolean stillValid(@NotNull Player playerIn) {
-        return stillValid(this.worldPosCallable, playerIn, ModBlocks.getArchitectsCutter());
+        return stillValid(this.worldPosCallable, playerIn, IModBlocks.getInstance().getArchitectsCutter());
     }
 
     /**
