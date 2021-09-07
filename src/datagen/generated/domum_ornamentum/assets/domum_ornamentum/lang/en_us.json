@@ -34,6 +34,7 @@
   "domum_ornamentum.extra.name.format": "%s %s Extra",
   "domum_ornamentum.fence-gate.name.format": "%s Fence gate",
   "domum_ornamentum.fence.name.format": "%s Fence",
+  "domum_ornamentum.origin.tooltip": "Crafted in the Architects cutter",
   "domum_ornamentum.paperwall.center.format": "  - Center:    %s",
   "domum_ornamentum.paperwall.frame.format": "  - Frame:     %s",
   "domum_ornamentum.paperwall.header": "Materials:",

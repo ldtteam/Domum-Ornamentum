@@ -55,6 +55,7 @@ public class TimberFrameBlockItem extends BlockItem
         final MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
 
         final TimberFrameType type = timberFrameBlock.getTimberFrameType();
+        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".origin.tooltip"));
         tooltip.add(new TextComponent(""));
         tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".timber.frame.header"));
         tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".timber.frame.type.format", new TranslatableComponent(Constants.MOD_ID + ".timber.frame.type." + type.getName())));

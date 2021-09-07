@@ -10,7 +10,13 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class StairsBlockItem extends BlockItem
 {
@@ -33,6 +39,13 @@ public class StairsBlockItem extends BlockItem
         final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
 
         return new TranslatableComponent(Constants.MOD_ID + ".stair.name.format", centerBlockName);
+    }
+
+    @Override
+    public void appendHoverText(@NotNull final ItemStack stack, @Nullable final Level worldIn, @NotNull final List<Component> tooltip, @NotNull final TooltipFlag flagIn)
+    {
+        super.appendHoverText(stack, worldIn, tooltip, flagIn);
+        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".origin.tooltip"));
     }
 }
 

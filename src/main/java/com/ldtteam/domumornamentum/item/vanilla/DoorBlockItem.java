@@ -60,6 +60,7 @@ public class DoorBlockItem extends DoubleHighBlockItem
             doorType = DoorType.FULL;
         }
 
+        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".origin.tooltip"));
         tooltip.add(new TextComponent(""));
         tooltip.add(new TranslatableComponent(
           Constants.MOD_ID + ".door.type.format",

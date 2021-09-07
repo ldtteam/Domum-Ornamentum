@@ -43,8 +43,7 @@ public class TrapdoorBlockItem extends BlockItem
     }
 
     @Override
-    public void appendHoverText(
-      final ItemStack stack, @Nullable final Level worldIn, final List<Component> tooltip, final TooltipFlag flagIn)
+    public void appendHoverText(final ItemStack stack, @Nullable final Level worldIn, final List<Component> tooltip, final TooltipFlag flagIn)
     {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
 
@@ -58,6 +57,7 @@ public class TrapdoorBlockItem extends BlockItem
             trapdoorType = TrapdoorType.FULL;
         }
 
+        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".origin.tooltip"));
         tooltip.add(new TextComponent(""));
         tooltip.add(new TranslatableComponent(
           Constants.MOD_ID + ".trapdoor.type.format",
