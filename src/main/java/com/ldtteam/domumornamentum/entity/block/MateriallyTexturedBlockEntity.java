@@ -3,6 +3,8 @@ package com.ldtteam.domumornamentum.entity.block;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.client.model.properties.ModProperties;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -33,6 +35,25 @@ public class MateriallyTexturedBlockEntity extends BlockEntity implements IMater
     public @NotNull CompoundTag getUpdateTag()
     {
         return save(new CompoundTag());
+    }
+
+    @Override
+    public void onDataPacket(final Connection net, final ClientboundBlockEntityDataPacket packet)
+    {
+        this.load(packet.getTag());
+    }
+
+    @Override
+    public void handleUpdateTag(final CompoundTag tag)
+    {
+        this.load(tag);
+    }
+
+    @Override
+    public ClientboundBlockEntityDataPacket getUpdatePacket()
+    {
+        final CompoundTag compound = new CompoundTag();
+        return new ClientboundBlockEntityDataPacket(this.worldPosition, 0, this.save(compound));
     }
 
     @NotNull
