@@ -19,6 +19,7 @@
     "#forge:end_stones",
     "#forge:netherrack",
     "#forge:obsidian",
-    "#domum_ornamentum:bricks"
+    "#domum_ornamentum:bricks",
+    "#forge:storage_blocks"
   ]
 }

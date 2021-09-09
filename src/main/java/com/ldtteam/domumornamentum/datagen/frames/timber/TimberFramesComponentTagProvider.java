@@ -61,7 +61,8 @@ public class TimberFramesComponentTagProvider extends BlockTagsProvider
             Blocks.WAXED_EXPOSED_COPPER,
             Blocks.WAXED_OXIDIZED_COPPER,
             Blocks.WAXED_WEATHERED_COPPER,
-            Blocks.WAXED_WEATHERED_CUT_COPPER
+            Blocks.WAXED_WEATHERED_CUT_COPPER,
+            Blocks.BRICKS
           )
           .addTags(
             BlockTags.LOGS,
@@ -74,6 +75,7 @@ public class TimberFramesComponentTagProvider extends BlockTagsProvider
             Tags.Blocks.NETHERRACK,
             Tags.Blocks.OBSIDIAN,
             Tags.Blocks.STORAGE_BLOCKS,
+            Tags.Blocks.SANDSTONE,
             ModTags.EXTRA_BLOCKS,
             ModTags.BRICKS
           );

@@ -60,7 +60,8 @@ public class ShinglesComponentTagProvider extends BlockTagsProvider
             Blocks.WAXED_EXPOSED_COPPER,
             Blocks.WAXED_OXIDIZED_COPPER,
             Blocks.WAXED_WEATHERED_COPPER,
-            Blocks.WAXED_WEATHERED_CUT_COPPER
+            Blocks.WAXED_WEATHERED_CUT_COPPER,
+            Blocks.BRICKS
           )
           .addTags(
             BlockTags.LOGS,
@@ -68,7 +69,8 @@ public class ShinglesComponentTagProvider extends BlockTagsProvider
             BlockTags.CORAL_BLOCKS,
             BlockTags.WART_BLOCKS,
             ModTags.EXTRA_BLOCKS,
-            ModTags.BRICKS
+            ModTags.BRICKS,
+            Tags.Blocks.SANDSTONE
           );
 
         this.tag(ModTags.SHINGLES_SUPPORT)
@@ -93,7 +95,8 @@ public class ShinglesComponentTagProvider extends BlockTagsProvider
             Tags.Blocks.END_STONES,
             Tags.Blocks.NETHERRACK,
             Tags.Blocks.OBSIDIAN,
-            ModTags.BRICKS
+            ModTags.BRICKS,
+            Tags.Blocks.STORAGE_BLOCKS
           );
     }
 

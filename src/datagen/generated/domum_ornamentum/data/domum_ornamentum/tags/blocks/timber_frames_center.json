@@ -13,6 +13,7 @@
     "minecraft:waxed_oxidized_copper",
     "minecraft:waxed_weathered_copper",
     "minecraft:waxed_weathered_cut_copper",
+    "minecraft:bricks",
     "#minecraft:logs",
     "#minecraft:planks",
     "#minecraft:coral_blocks",
@@ -23,6 +24,7 @@
     "#forge:netherrack",
     "#forge:obsidian",
     "#forge:storage_blocks",
+    "#forge:sandstone",
     "#domum_ornamentum:extra_block",
     "#domum_ornamentum:bricks"
   ]
