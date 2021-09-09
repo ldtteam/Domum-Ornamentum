@@ -37,6 +37,7 @@ public enum ExtraBlockType implements StringRepresentable
     YELLOW_CLAY(DyeColor.YELLOW, Items.BRICK),
     BASE_PAPER(null, Items.PAPER),
     BASE_CACTUS(null, Items.CACTUS),
+    GREEN_CACTUS(DyeColor.GREEN, Items.CACTUS),
     LIGHT_PAPER(DyeColor.WHITE, Items.PAPER);
 
     private final DyeColor color;
