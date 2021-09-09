@@ -17,6 +17,7 @@
     "#minecraft:planks",
     "#forge:obsidian",
     "#domum_ornamentum:extra_block",
+    "#forge:storage_blocks",
     "#domum_ornamentum:bricks"
   ]
 }

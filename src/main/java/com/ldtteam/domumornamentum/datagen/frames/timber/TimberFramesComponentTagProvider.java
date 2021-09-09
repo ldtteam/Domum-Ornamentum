@@ -45,6 +45,7 @@ public class TimberFramesComponentTagProvider extends BlockTagsProvider
             BlockTags.PLANKS,
             Tags.Blocks.OBSIDIAN,
             ModTags.EXTRA_BLOCKS,
+            Tags.Blocks.STORAGE_BLOCKS,
             ModTags.BRICKS
           );
 
