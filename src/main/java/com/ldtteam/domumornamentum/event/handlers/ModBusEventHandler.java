@@ -10,6 +10,7 @@ import com.ldtteam.domumornamentum.datagen.fencegate.*;
 import com.ldtteam.domumornamentum.datagen.floatingcarpet.*;
 import com.ldtteam.domumornamentum.datagen.frames.timber.*;
 import com.ldtteam.domumornamentum.datagen.global.GlobalLangEntryProvider;
+import com.ldtteam.domumornamentum.datagen.global.GlobalRecipeProvider;
 import com.ldtteam.domumornamentum.datagen.global.MateriallyTexturedBlockRecipeProvider;
 import com.ldtteam.domumornamentum.datagen.shingle.normal.*;
 import com.ldtteam.domumornamentum.datagen.shingle.slab.*;
@@ -149,6 +150,8 @@ public class ModBusEventHandler
         event.getGenerator().addProvider(new FloatingCarpetItemModelProvider(event.getGenerator()));
         event.getGenerator().addProvider(new FloatingCarpetLangEntryProvider(event.getGenerator(), langJson));
         event.getGenerator().addProvider(new FloatingCarpetRecipeProvider(event.getGenerator()));
+
+        event.getGenerator().addProvider(new GlobalRecipeProvider(event.getGenerator()));
 
         //Global
         //IMPORTANT: Needs to be last since this writes the lang data actually to disk!!!!!
