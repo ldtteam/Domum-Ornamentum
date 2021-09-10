@@ -1,0 +1,5 @@
+{
+  "type": "domum_ornamentum:architects_cutter",
+  "block": "domum_ornamentum:vanilla_trapdoors_compat",
+  "nbt": "{type:\"FULL\"}"
+}

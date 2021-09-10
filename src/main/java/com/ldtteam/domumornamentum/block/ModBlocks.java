@@ -52,6 +52,8 @@ public final class ModBlocks implements IModBlocks
     private static TrapdoorBlock TRAPDOOR;
     private static DoorBlock DOOR;
 
+    private static FancyDoorBlock FANCY_DOOR;
+
     private static final ModBlocks INSTANCE = new ModBlocks();
 
     public static ModBlocks getInstance() {
@@ -163,6 +165,9 @@ public final class ModBlocks implements IModBlocks
     {
         return ModBlocks.DOOR;
     }
+
+    @Override
+    public FancyDoorBlock getFancyDoor() { return ModBlocks.FANCY_DOOR; };
     
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event)
@@ -204,6 +209,8 @@ public final class ModBlocks implements IModBlocks
         STAIR = new StairBlock().registerBlock(registry);
         TRAPDOOR = new TrapdoorBlock().registerBlock(registry);
         DOOR = new DoorBlock().registerBlock(registry);
+
+        FANCY_DOOR = new FancyDoorBlock().registerBlock(registry);
     }
 
     @SubscribeEvent
@@ -248,5 +255,7 @@ public final class ModBlocks implements IModBlocks
         STAIR.registerItemBlock(registry, new Item.Properties());
         TRAPDOOR.registerItemBlock(registry, new Item.Properties());
         DOOR.registerItemBlock(registry, new Item.Properties());
+
+        FANCY_DOOR.registerItemBlock(registry, new Item.Properties());
     }
 }

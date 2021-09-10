@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
-import com.ldtteam.domumornamentum.block.MateriallyTexturedBlockManager;
+import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockManager;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
 import com.ldtteam.domumornamentum.recipe.ModRecipeTypes;
@@ -24,12 +24,30 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class ArchitectsCutterRecipe implements Recipe<Container>
 {
+    private final ResourceLocation recipeId;
     private final ResourceLocation blockName;
+    private final int count;
+    private final CompoundTag additionalTag;
 
-    public ArchitectsCutterRecipe(final ResourceLocation blockName) {this.blockName = blockName;}
+    public ArchitectsCutterRecipe(final ResourceLocation blockName, final int count)
+    {
+        this.recipeId = blockName;
+        this.blockName = blockName;
+        this.count = count;
+        this.additionalTag = new CompoundTag();
+    }
+
+    public ArchitectsCutterRecipe(final ResourceLocation recipeId, final ResourceLocation blockName, final int count, final CompoundTag additionalTag)
+    {
+        this.recipeId = recipeId;
+        this.blockName = blockName;
+        this.count = count;
+        this.additionalTag = additionalTag;
+    }
 
     public ResourceLocation getBlockName()
     {
@@ -86,6 +104,9 @@ public class ArchitectsCutterRecipe implements Recipe<Container>
             final IMateriallyTexturedBlockComponent component = components.get(componentsIndex);
             final ItemStack itemStackInSlot = inv.getItem(componentsIndex);
 
+            if (itemStackInSlot.isEmpty() && component.isOptional())
+                continue;
+
             final Item item = itemStackInSlot.getItem();
             if (!(item instanceof final BlockItem blockItem))
                 return ItemStack.EMPTY;
@@ -104,7 +125,9 @@ public class ArchitectsCutterRecipe implements Recipe<Container>
 
         final ItemStack result = new ItemStack(generatedBlock);
         result.getOrCreateTag().put("textureData", textureNbt);
-        result.setCount(components.size());
+        result.setCount(Math.max(components.size(), count));
+
+        additionalTag.getAllKeys().forEach(key -> result.getOrCreateTag().put(key, Objects.requireNonNull(additionalTag.get(key)).copy()));
 
         return result;
     }
@@ -112,7 +135,7 @@ public class ArchitectsCutterRecipe implements Recipe<Container>
     @Override
     public boolean canCraftInDimensions(final int width, final int height)
     {
-        return width * height <= MateriallyTexturedBlockManager.getInstance().getMaxTexturableComponentCount();
+        return width * height <= IMateriallyTexturedBlockManager.getInstance().getMaxTexturableComponentCount();
     }
 
     @Override
@@ -126,13 +149,16 @@ public class ArchitectsCutterRecipe implements Recipe<Container>
         if (!(generatedBlock instanceof IMateriallyTexturedBlock))
             return ItemStack.EMPTY;
 
-        return new ItemStack(generatedBlock);
+        final ItemStack result = new ItemStack(generatedBlock);
+        additionalTag.getAllKeys().forEach(key -> result.getOrCreateTag().put(key, Objects.requireNonNull(additionalTag.get(key)).copy()));
+
+        return result;
     }
 
     @Override
     public @NotNull ResourceLocation getId()
     {
-        return getBlockName();
+        return recipeId;
     }
 
     @Override
@@ -145,5 +171,15 @@ public class ArchitectsCutterRecipe implements Recipe<Container>
     public @NotNull RecipeType<?> getType()
     {
         return ModRecipeTypes.ARCHITECTS_CUTTER;
+    }
+
+    public @NotNull CompoundTag getAdditionalTag()
+    {
+        return additionalTag;
+    }
+
+    public int getCount()
+    {
+        return count;
     }
 }

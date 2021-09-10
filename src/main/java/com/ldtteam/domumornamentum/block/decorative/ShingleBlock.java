@@ -1,5 +1,6 @@
 package com.ldtteam.domumornamentum.block.decorative;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -7,6 +8,7 @@ import java.util.Objects;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.gson.JsonObject;
 import com.ldtteam.domumornamentum.block.AbstractBlockStairs;
 import com.ldtteam.domumornamentum.block.ICachedItemGroupBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
@@ -17,10 +19,13 @@ import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
 import com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes;
 import com.ldtteam.domumornamentum.item.decoration.ShingleBlockItem;
+import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.Constants;
+import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -184,5 +189,51 @@ public class ShingleBlock extends AbstractBlockStairs<ShingleBlock> implements I
       final BlockState state, final HitResult target, final BlockGetter world, final BlockPos pos, final Player player)
     {
         return BlockUtils.getMaterializedItemStack(player, world, pos);
+    }
+
+    @Override
+    public @NotNull Block getBlock()
+    {
+        return this;
+    }
+
+
+    @NotNull
+    public Collection<FinishedRecipe> getValidCutterRecipes() {
+        return Lists.newArrayList(
+          new FinishedRecipe() {
+              @Override
+              public void serializeRecipeData(final @NotNull JsonObject json)
+              {
+                  json.addProperty("count", COMPONENTS.size() * 2);
+              }
+
+              @Override
+              public @NotNull ResourceLocation getId()
+              {
+                  return Objects.requireNonNull(getBlock().getRegistryName());
+              }
+
+              @Override
+              public @NotNull RecipeSerializer<?> getType()
+              {
+                  return ModRecipeSerializers.ARCHITECTS_CUTTER;
+              }
+
+              @Nullable
+              @Override
+              public JsonObject serializeAdvancement()
+              {
+                  return null;
+              }
+
+              @Nullable
+              @Override
+              public ResourceLocation getAdvancementId()
+              {
+                  return null;
+              }
+          }
+        );
     }
 }

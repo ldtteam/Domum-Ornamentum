@@ -35,6 +35,8 @@ public class ModTags
     public static final Tags.IOptionalNamedTag<Block> TRAPDOORS_MATERIALS = tag("trapdoors_materials");
     public static final Tags.IOptionalNamedTag<Block> DOORS_MATERIALS = tag("doors_materials");
 
+    public static final Tags.IOptionalNamedTag<Block> FANCY_DOORS_MATERIALS = tag("fancy_doors_materials");
+
     public static final Tags.IOptionalNamedTag<Block> BRICKS = tag("bricks");
 
     private static Tags.IOptionalNamedTag<Block> tag(String name)

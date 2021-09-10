@@ -3,6 +3,7 @@ package com.ldtteam.domumornamentum.event.handlers;
 import com.ldtteam.datagenerators.lang.LangJson;
 import com.ldtteam.domumornamentum.datagen.bricks.*;
 import com.ldtteam.domumornamentum.datagen.door.*;
+import com.ldtteam.domumornamentum.datagen.door.fancy.*;
 import com.ldtteam.domumornamentum.datagen.extra.*;
 import com.ldtteam.domumornamentum.datagen.fence.*;
 import com.ldtteam.domumornamentum.datagen.fencegate.*;
@@ -132,7 +133,16 @@ public class ModBusEventHandler
         event.getGenerator().addProvider(new DoorsComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(new DoorsCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(new DoorsLangEntryProvider(event.getGenerator(), langJson));
-        
+
+        //FancyDoor
+        event.getGenerator().addProvider(new FancyDoorsBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new FancyDoorsItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new FancyDoorsItemModelSpecProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new FancyDoorsBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new FancyDoorsComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(new FancyDoorsCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(new FancyDoorsLangEntryProvider(event.getGenerator(), langJson));
+
         //Floating carpets
         event.getGenerator().addProvider(new FloatingCarpetBlockStateProvider(event.getGenerator()));
         event.getGenerator().addProvider(new FloatingCarpetBlockTagProvider(event.getGenerator(), event.getExistingFileHelper()));

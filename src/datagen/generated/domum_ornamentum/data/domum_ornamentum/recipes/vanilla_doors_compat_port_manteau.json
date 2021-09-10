@@ -1,0 +1,5 @@
+{
+  "type": "domum_ornamentum:architects_cutter",
+  "block": "domum_ornamentum:vanilla_doors_compat",
+  "nbt": "{type:\"PORT_MANTEAU\"}"
+}

@@ -2,6 +2,7 @@ package com.ldtteam.domumornamentum.client.event.handlers;
 
 import com.ldtteam.domumornamentum.block.IModBlocks;
 import com.ldtteam.domumornamentum.block.types.DoorType;
+import com.ldtteam.domumornamentum.block.types.FancyDoorType;
 import com.ldtteam.domumornamentum.block.types.TrapdoorType;
 import com.ldtteam.domumornamentum.client.screens.ArchitectsCutterScreen;
 import com.ldtteam.domumornamentum.container.ModContainerTypes;
@@ -11,6 +12,7 @@ import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -38,19 +40,9 @@ public class ModBusEventHandler
               return trapdoorType.ordinal();
           }));
         event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getDoor().asItem(), new ResourceLocation(Constants.DOOR_MODEL_OVERRIDE),
-          (itemStack, clientLevel, livingEntity, i) -> {
-              if (!itemStack.getOrCreateTag().contains("type"))
-                  return 0f;
-
-              DoorType doorType;
-              try {
-                  doorType = DoorType.valueOf(itemStack.getOrCreateTag().getString("type").toUpperCase());
-              } catch (Exception ex) {
-                  doorType = DoorType.FULL;
-              }
-
-              return doorType.ordinal();
-          }));
+          (itemStack, clientLevel, livingEntity, i) -> handleDoorTypeOverride(itemStack)));
+        event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getFancyDoor().asItem(), new ResourceLocation(Constants.DOOR_MODEL_OVERRIDE),
+          (itemStack, clientLevel, livingEntity, i) -> handleFancyDoorTypeOverride(itemStack)));
         event.enqueueWork(() -> MenuScreens.register(
           ModContainerTypes.ARCHITECTS_CUTTER,
           ArchitectsCutterScreen::new
@@ -74,5 +66,45 @@ public class ModBusEventHandler
             ItemBlockRenderTypes.setRenderLayer(IModBlocks.getInstance().getPaperWall(), RenderType.translucent());
         });
 
+    }
+
+    private static float handleDoorTypeOverride(ItemStack itemStack)
+    {
+        if (!itemStack.getOrCreateTag().contains("type"))
+        {
+            return 0f;
+        }
+
+        DoorType doorType;
+        try
+        {
+            doorType = DoorType.valueOf(itemStack.getOrCreateTag().getString("type").toUpperCase());
+        }
+        catch (Exception ex)
+        {
+            doorType = DoorType.FULL;
+        }
+
+        return doorType.ordinal();
+    }
+
+    private static float handleFancyDoorTypeOverride(ItemStack itemStack)
+    {
+        if (!itemStack.getOrCreateTag().contains("type"))
+        {
+            return 0f;
+        }
+
+        FancyDoorType doorType;
+        try
+        {
+            doorType = FancyDoorType.valueOf(itemStack.getOrCreateTag().getString("type").toUpperCase());
+        }
+        catch (Exception ex)
+        {
+            doorType = FancyDoorType.FULL;
+        }
+
+        return doorType.ordinal();
     }
 }

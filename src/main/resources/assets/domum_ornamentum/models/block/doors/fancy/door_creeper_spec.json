@@ -1,0 +1,85 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/door_bottom",
+	"ambientocclusion": false,
+	"textures": {
+      "4": "block/oak_planks",
+      "5": "block/acacia_planks",
+      "particle": "block/oak_planks"
+	},
+	"elements": [
+		{
+			"name": "door_lower_inner_0",
+			"from": [0, 3, 2],
+			"to": [3, 16, 14],
+			"faces": {
+				"north": {"uv": [2, 0, 3, 13], "texture": "#4"},
+				"east": {"uv": [2, 13, 14, 0], "rotation": 180, "texture": "#4"},
+				"south": {"uv": [13, 0, 14, 13], "texture": "#4"},
+				"west": {"uv": [2, 0, 14, 13], "texture": "#4"},
+				"up": {"uv": [14, 0, 2, 1], "rotation": 270, "texture": "#4"},
+				"down": {"uv": [2, 12, 14, 13], "rotation": 270, "texture": "#4"}
+			}
+		},
+		{
+			"name": "door_lower_outer_0",
+			"from": [0, 0, 0],
+			"to": [3, 16, 2],
+			"faces": {
+				"north": {"uv": [0, 0, 1, 16], "texture": "#5"},
+				"east": {"uv": [0, 16, 2, 0], "rotation": 180, "texture": "#5"},
+				"south": {"uv": [1, 0, 2, 16], "texture": "#5"},
+				"west": {"uv": [0, 0, 2, 16], "texture": "#5"},
+				"up": {"uv": [2, 0, 0, 1], "rotation": 270, "texture": "#5"},
+				"down": {"uv": [0, 15, 2, 16], "rotation": 270, "texture": "#5"}
+			}
+		},
+		{
+			"name": "door_lower_outer_1",
+			"from": [0, 0, 14],
+			"to": [3, 16, 16],
+			"faces": {
+				"north": {"uv": [14, 0, 15, 16], "texture": "#5"},
+				"east": {"uv": [14, 16, 16, 0], "rotation": 180, "texture": "#5"},
+				"south": {"uv": [15, 0, 16, 16], "texture": "#5"},
+				"west": {"uv": [14, 0, 16, 16], "texture": "#5"},
+				"up": {"uv": [16, 0, 14, 1], "rotation": 270, "texture": "#5"},
+				"down": {"uv": [14, 15, 16, 16], "rotation": 270, "texture": "#5"}
+			}
+		},
+		{
+			"name": "door_lower_outer_2",
+			"from": [0, 0, 2],
+			"to": [3, 3, 14],
+			"faces": {
+				"north": {"uv": [2, 13, 3, 16], "texture": "#5"},
+				"east": {"uv": [2, 16, 14, 13], "rotation": 180, "texture": "#5"},
+				"south": {"uv": [13, 13, 14, 16], "texture": "#5"},
+				"west": {"uv": [2, 13, 14, 16], "texture": "#5"},
+				"up": {"uv": [14, 13, 2, 14], "rotation": 270, "texture": "#5"},
+				"down": {"uv": [2, 15, 14, 16], "rotation": 270, "texture": "#5"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "door_lower",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [
+				{
+					"name": "door_lower_inner",
+					"origin": [8, 8, 8],
+					"color": 0,
+					"children": [0]
+				},
+				{
+					"name": "door_lower_outer",
+					"origin": [8, 8, 8],
+					"color": 0,
+					"children": [1, 2, 3]
+				}
+			]
+		}
+	]
+}

@@ -3,20 +3,24 @@ package com.ldtteam.domumornamentum.block.vanilla;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.gson.JsonObject;
 import com.ldtteam.domumornamentum.block.AbstractBlockDoor;
 import com.ldtteam.domumornamentum.block.ICachedItemGroupBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.components.SimpleRetexturableComponent;
 import com.ldtteam.domumornamentum.block.types.DoorType;
+import com.ldtteam.domumornamentum.block.types.FancyDoorType;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
 import com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes;
 import com.ldtteam.domumornamentum.item.vanilla.DoorBlockItem;
+import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
+import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.Tag;
@@ -25,6 +29,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -43,9 +48,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
 
@@ -54,7 +57,7 @@ public class DoorBlock extends AbstractBlockDoor<DoorBlock> implements IMaterial
 {
     public static final EnumProperty<DoorType> TYPE = EnumProperty.create("type", DoorType.class);
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
-                                                                               .add(new SimpleRetexturableComponent(new ResourceLocation("minecraft:block/oak_planks"), ModTags.SLAB_MATERIALS, OAK_PLANKS))
+                                                                               .add(new SimpleRetexturableComponent(new ResourceLocation("minecraft:block/oak_planks"), ModTags.DOORS_MATERIALS, OAK_PLANKS))
                                                                                .build();
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
@@ -186,5 +189,62 @@ public class DoorBlock extends AbstractBlockDoor<DoorBlock> implements IMaterial
     public void resetCache()
     {
         fillItemGroupCache.clear();
+    }
+
+    @Override
+    public @NotNull Block getBlock()
+    {
+        return this;
+    }
+
+    @Override
+    public @NotNull Collection<FinishedRecipe> getValidCutterRecipes()
+    {
+        final List<FinishedRecipe> recipes = new ArrayList<>();
+
+        for (final DoorType value : DoorType.values())
+        {
+            recipes.add(
+              new FinishedRecipe() {
+                  @Override
+                  public void serializeRecipeData(final @NotNull JsonObject jsonObject)
+                  {
+                      final CompoundTag tag = new CompoundTag();
+                      tag.putString("type", value.toString().toUpperCase());
+
+                      jsonObject.addProperty("block", Objects.requireNonNull(getBlock().getRegistryName()).toString());
+                      jsonObject.addProperty("nbt", tag.toString());
+                  }
+
+                  @Override
+                  public @NotNull ResourceLocation getId()
+                  {
+                      return new ResourceLocation(Objects.requireNonNull(getBlock().getRegistryName()).toString() + "_" + value.getSerializedName());
+                  }
+
+                  @Override
+                  public @NotNull RecipeSerializer<?> getType()
+                  {
+                      return ModRecipeSerializers.ARCHITECTS_CUTTER;
+                  }
+
+                  @Nullable
+                  @Override
+                  public JsonObject serializeAdvancement()
+                  {
+                      return null;
+                  }
+
+                  @Nullable
+                  @Override
+                  public ResourceLocation getAdvancementId()
+                  {
+                      return null;
+                  }
+              }
+            );
+        }
+
+        return recipes;
     }
 }

@@ -146,4 +146,10 @@ public class FenceBlock extends AbstractBlockFence<FenceBlock> implements IMater
     {
         return BlockUtils.getMaterializedItemStack(player, world, pos);
     }
+
+    @Override
+    public @NotNull Block getBlock()
+    {
+        return this;
+    }
 }

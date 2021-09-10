@@ -144,4 +144,10 @@ public class FenceGateBlock extends AbstractBlockFenceGate<FenceGateBlock> imple
     {
         return BlockUtils.getMaterializedItemStack(player, world, pos);
     }
+
+    @Override
+    public @NotNull Block getBlock()
+    {
+        return this;
+    }
 }

@@ -9,6 +9,11 @@ public class ModRecipeTypes
 {
     public static RecipeType<ArchitectsCutterRecipe> ARCHITECTS_CUTTER = register("architects_cutter");
 
+    private ModRecipeTypes()
+    {
+        throw new IllegalStateException("Can not instantiate an instance of: ModRecipeTypes. This is a utility class");
+    }
+
     /**
      * Registers a new recipe type, prefixing with the mod ID
      * @param name  Recipe type name

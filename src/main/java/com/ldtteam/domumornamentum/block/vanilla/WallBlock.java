@@ -143,4 +143,10 @@ public class WallBlock extends AbstractBlockWall<WallBlock> implements IMaterial
     {
         return BlockUtils.getMaterializedItemStack(player, world, pos);
     }
+
+    @Override
+    public @NotNull Block getBlock()
+    {
+        return this;
+    }
 }

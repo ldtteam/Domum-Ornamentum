@@ -18,7 +18,7 @@ public class ModRecipeSerializers
 
     private ModRecipeSerializers()
     {
-        throw new IllegalStateException("Can not instantiate an instance of: ModTags. This is a utility class");
+        throw new IllegalStateException("Can not instantiate an instance of: ModRecipeSerializers. This is a utility class");
     }
 
     @SubscribeEvent

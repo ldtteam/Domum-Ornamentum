@@ -1,5 +1,6 @@
 package com.ldtteam.domumornamentum;
 
+import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockManager;
 import com.ldtteam.domumornamentum.block.IModBlocks;
 
 /**
@@ -20,6 +21,12 @@ public interface IDomumOrnamentumApi
      * @return The blocks of this mod.
      */
     IModBlocks getBlocks();
+
+    /**
+     * The materially texturable block manager.
+     * @return The manager
+     */
+    IMateriallyTexturedBlockManager getMateriallyTexturedBlockManager();
 
     class Holder {
         private static IDomumOrnamentumApi apiInstance;

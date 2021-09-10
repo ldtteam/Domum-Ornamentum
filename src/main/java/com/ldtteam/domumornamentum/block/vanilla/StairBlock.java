@@ -240,4 +240,10 @@ public class StairBlock extends AbstractBlockStairs<StairBlock> implements IMate
 
         return Blocks.AIR.defaultBlockState();
     }
+
+    @Override
+    public @NotNull Block getBlock()
+    {
+        return this;
+    }
 }

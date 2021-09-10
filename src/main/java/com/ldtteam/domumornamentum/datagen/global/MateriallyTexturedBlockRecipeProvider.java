@@ -29,40 +29,8 @@ public class MateriallyTexturedBlockRecipeProvider extends RecipeProvider
     {
         ForgeRegistries.BLOCKS.forEach(
           block -> {
-              if (Objects.requireNonNull(block.getRegistryName()).getNamespace().equals(Constants.MOD_ID) && block instanceof IMateriallyTexturedBlock) {
-                  builder.accept(new FinishedRecipe() {
-                      @Override
-                      public void serializeRecipeData(final @NotNull JsonObject json)
-                      {
-
-                      }
-
-                      @Override
-                      public @NotNull ResourceLocation getId()
-                      {
-                          return block.getRegistryName();
-                      }
-
-                      @Override
-                      public @NotNull RecipeSerializer<?> getType()
-                      {
-                          return ModRecipeSerializers.ARCHITECTS_CUTTER;
-                      }
-
-                      @Nullable
-                      @Override
-                      public JsonObject serializeAdvancement()
-                      {
-                          return null;
-                      }
-
-                      @Nullable
-                      @Override
-                      public ResourceLocation getAdvancementId()
-                      {
-                          return null;
-                      }
-                  });
+              if (Objects.requireNonNull(block.getRegistryName()).getNamespace().equals(Constants.MOD_ID) && block instanceof IMateriallyTexturedBlock materiallyTexturedBlock) {
+                  materiallyTexturedBlock.getValidCutterRecipes().forEach(builder);
               }
           }
         );
