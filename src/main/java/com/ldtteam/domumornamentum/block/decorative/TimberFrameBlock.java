@@ -35,6 +35,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.HitResult;
@@ -116,6 +117,12 @@ public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
         return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
+    }
+
+    @Override
+    public @NotNull PushReaction getPistonPushReaction(final BlockState state)
+    {
+        return PushReaction.PUSH_ONLY;
     }
 
     @SuppressWarnings("deprecation")

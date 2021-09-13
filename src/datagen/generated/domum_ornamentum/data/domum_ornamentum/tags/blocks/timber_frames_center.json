@@ -14,6 +14,12 @@
     "minecraft:waxed_weathered_copper",
     "minecraft:waxed_weathered_cut_copper",
     "minecraft:bricks",
+    "minecraft:deepslate",
+    "minecraft:deepslate_bricks",
+    "minecraft:cobbled_deepslate",
+    "minecraft:polished_deepslate",
+    "minecraft:polished_blackstone",
+    "minecraft:polished_blackstone_bricks",
     "#minecraft:logs",
     "#minecraft:planks",
     "#minecraft:coral_blocks",
@@ -26,6 +32,10 @@
     "#forge:storage_blocks",
     "#forge:sandstone",
     "#domum_ornamentum:extra_block",
-    "#domum_ornamentum:bricks"
+    "#domum_ornamentum:bricks",
+    "#minecraft:dirt",
+    "#minecraft:wool",
+    "#forge:glass",
+    "#domum_ornamentum:concrete"
   ]
 }

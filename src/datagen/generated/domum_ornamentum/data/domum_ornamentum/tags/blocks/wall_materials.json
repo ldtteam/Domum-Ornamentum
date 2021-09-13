@@ -35,12 +35,17 @@
     "minecraft:waxed_oxidized_copper",
     "minecraft:waxed_weathered_copper",
     "minecraft:waxed_weathered_cut_copper",
+    "minecraft:polished_andesite",
+    "minecraft:polished_diorite",
+    "minecraft:polished_granite",
     "#minecraft:logs",
     "#minecraft:coral_blocks",
     "#minecraft:wart_blocks",
     "#minecraft:logs",
     "#minecraft:planks",
     "#domum_ornamentum:extra_block",
-    "#domum_ornamentum:bricks"
+    "#domum_ornamentum:bricks",
+    "#forge:glass",
+    "#domum_ornamentum:concrete"
   ]
 }

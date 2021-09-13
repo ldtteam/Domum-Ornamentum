@@ -39,6 +39,9 @@
     "#minecraft:coral_blocks",
     "#minecraft:wart_blocks",
     "#domum_ornamentum:extra_block",
-    "#domum_ornamentum:bricks"
+    "#domum_ornamentum:bricks",
+    "#minecraft:dirt",
+    "#minecraft:wool",
+    "#domum_ornamentum:concrete"
   ]
 }

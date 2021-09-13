@@ -13,6 +13,12 @@
     "minecraft:waxed_oxidized_copper",
     "minecraft:waxed_weathered_copper",
     "minecraft:waxed_weathered_cut_copper",
+    "minecraft:deepslate",
+    "minecraft:deepslate_bricks",
+    "minecraft:cobbled_deepslate",
+    "minecraft:polished_deepslate",
+    "minecraft:polished_blackstone",
+    "minecraft:polished_blackstone_bricks",
     "#minecraft:logs",
     "#minecraft:planks",
     "#forge:stone",
@@ -20,6 +26,7 @@
     "#forge:netherrack",
     "#forge:obsidian",
     "#domum_ornamentum:bricks",
-    "#forge:storage_blocks"
+    "#forge:storage_blocks",
+    "#domum_ornamentum:concrete"
   ]
 }

@@ -38,7 +38,13 @@ public class TimberFramesComponentTagProvider extends BlockTagsProvider
             Blocks.WAXED_EXPOSED_COPPER,
             Blocks.WAXED_OXIDIZED_COPPER,
             Blocks.WAXED_WEATHERED_COPPER,
-            Blocks.WAXED_WEATHERED_CUT_COPPER
+            Blocks.WAXED_WEATHERED_CUT_COPPER,
+            Blocks.DEEPSLATE,
+            Blocks.DEEPSLATE_BRICKS,
+            Blocks.COBBLED_DEEPSLATE,
+            Blocks.POLISHED_DEEPSLATE,
+            Blocks.POLISHED_BLACKSTONE,
+            Blocks.POLISHED_BLACKSTONE_BRICKS
           )
           .addTags(
             BlockTags.LOGS,
@@ -46,7 +52,11 @@ public class TimberFramesComponentTagProvider extends BlockTagsProvider
             Tags.Blocks.OBSIDIAN,
             ModTags.EXTRA_BLOCKS,
             Tags.Blocks.STORAGE_BLOCKS,
-            ModTags.BRICKS
+            ModTags.BRICKS,
+            BlockTags.DIRT,
+            Tags.Blocks.STONE,
+            Tags.Blocks.GLASS,
+            ModTags.CONCRETE
           );
 
         this.tag(ModTags.TIMBERFRAMES_CENTER)
@@ -63,7 +73,13 @@ public class TimberFramesComponentTagProvider extends BlockTagsProvider
             Blocks.WAXED_OXIDIZED_COPPER,
             Blocks.WAXED_WEATHERED_COPPER,
             Blocks.WAXED_WEATHERED_CUT_COPPER,
-            Blocks.BRICKS
+            Blocks.BRICKS,
+            Blocks.DEEPSLATE,
+            Blocks.DEEPSLATE_BRICKS,
+            Blocks.COBBLED_DEEPSLATE,
+            Blocks.POLISHED_DEEPSLATE,
+            Blocks.POLISHED_BLACKSTONE,
+            Blocks.POLISHED_BLACKSTONE_BRICKS
           )
           .addTags(
             BlockTags.LOGS,
@@ -78,7 +94,11 @@ public class TimberFramesComponentTagProvider extends BlockTagsProvider
             Tags.Blocks.STORAGE_BLOCKS,
             Tags.Blocks.SANDSTONE,
             ModTags.EXTRA_BLOCKS,
-            ModTags.BRICKS
+            ModTags.BRICKS,
+            BlockTags.DIRT,
+            BlockTags.WOOL,
+            Tags.Blocks.GLASS,
+            ModTags.CONCRETE
           );
 
     }

@@ -61,7 +61,13 @@ public class ShinglesComponentTagProvider extends BlockTagsProvider
             Blocks.WAXED_OXIDIZED_COPPER,
             Blocks.WAXED_WEATHERED_COPPER,
             Blocks.WAXED_WEATHERED_CUT_COPPER,
-            Blocks.BRICKS
+            Blocks.BRICKS,
+            Blocks.DEEPSLATE,
+            Blocks.DEEPSLATE_BRICKS,
+            Blocks.COBBLED_DEEPSLATE,
+            Blocks.POLISHED_DEEPSLATE,
+            Blocks.POLISHED_BLACKSTONE,
+            Blocks.POLISHED_BLACKSTONE_BRICKS
           )
           .addTags(
             BlockTags.LOGS,
@@ -70,7 +76,9 @@ public class ShinglesComponentTagProvider extends BlockTagsProvider
             BlockTags.WART_BLOCKS,
             ModTags.EXTRA_BLOCKS,
             ModTags.BRICKS,
-            Tags.Blocks.SANDSTONE
+            Tags.Blocks.SANDSTONE,
+            BlockTags.WOOL,
+            ModTags.CONCRETE
           );
 
         this.tag(ModTags.SHINGLES_SUPPORT)
@@ -86,7 +94,13 @@ public class ShinglesComponentTagProvider extends BlockTagsProvider
             Blocks.WAXED_EXPOSED_COPPER,
             Blocks.WAXED_OXIDIZED_COPPER,
             Blocks.WAXED_WEATHERED_COPPER,
-            Blocks.WAXED_WEATHERED_CUT_COPPER
+            Blocks.WAXED_WEATHERED_CUT_COPPER,
+            Blocks.DEEPSLATE,
+            Blocks.DEEPSLATE_BRICKS,
+            Blocks.COBBLED_DEEPSLATE,
+            Blocks.POLISHED_DEEPSLATE,
+            Blocks.POLISHED_BLACKSTONE,
+            Blocks.POLISHED_BLACKSTONE_BRICKS
           )
           .addTags(
             BlockTags.LOGS,
@@ -96,7 +110,8 @@ public class ShinglesComponentTagProvider extends BlockTagsProvider
             Tags.Blocks.NETHERRACK,
             Tags.Blocks.OBSIDIAN,
             ModTags.BRICKS,
-            Tags.Blocks.STORAGE_BLOCKS
+            Tags.Blocks.STORAGE_BLOCKS,
+            ModTags.CONCRETE
           );
     }
 

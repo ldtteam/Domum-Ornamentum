@@ -68,7 +68,8 @@ public class PaperwallComponentTagProvider extends BlockTagsProvider
             BlockTags.CORAL_BLOCKS,
             BlockTags.WART_BLOCKS,
             ModTags.EXTRA_BLOCKS,
-            ModTags.BRICKS
+            ModTags.BRICKS,
+            BlockTags.WOOL
           );
 
         this.tag(ModTags.PAPERWALL_CENTER)
@@ -81,7 +82,8 @@ public class PaperwallComponentTagProvider extends BlockTagsProvider
             Tags.Blocks.OBSIDIAN,
             Tags.Blocks.GLASS,
             ModTags.EXTRA_BLOCKS,
-            ModTags.BRICKS
+            ModTags.BRICKS,
+            BlockTags.WOOL
           );
 
     }

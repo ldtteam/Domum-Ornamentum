@@ -39,6 +39,8 @@ public class ModTags
 
     public static final Tags.IOptionalNamedTag<Block> BRICKS = tag("bricks");
 
+    public static final Tags.IOptionalNamedTag<Block> CONCRETE = tag("concrete");
+
     private static Tags.IOptionalNamedTag<Block> tag(String name)
     {
         return BlockTags.createOptional(new ResourceLocation(Constants.MOD_ID, name));

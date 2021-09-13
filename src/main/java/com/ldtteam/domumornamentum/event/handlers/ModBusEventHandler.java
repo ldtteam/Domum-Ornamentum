@@ -9,6 +9,7 @@ import com.ldtteam.domumornamentum.datagen.fence.*;
 import com.ldtteam.domumornamentum.datagen.fencegate.*;
 import com.ldtteam.domumornamentum.datagen.floatingcarpet.*;
 import com.ldtteam.domumornamentum.datagen.frames.timber.*;
+import com.ldtteam.domumornamentum.datagen.global.ConcreteTagProvider;
 import com.ldtteam.domumornamentum.datagen.global.GlobalLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.global.GlobalRecipeProvider;
 import com.ldtteam.domumornamentum.datagen.global.MateriallyTexturedBlockRecipeProvider;
@@ -32,6 +33,8 @@ public class ModBusEventHandler
     public static void dataGeneratorSetup(final GatherDataEvent event)
     {
         final LangJson langJson = new LangJson();
+
+        event.getGenerator().addProvider(new ConcreteTagProvider(event.getGenerator(), event.getExistingFileHelper()));
 
         //Extra blocks
         event.getGenerator().addProvider(new ExtraBlockStateProvider(event.getGenerator()));

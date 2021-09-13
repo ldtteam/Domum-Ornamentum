@@ -6,6 +6,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -59,7 +60,10 @@ public class WallComponentTagProvider extends BlockTagsProvider
             Blocks.WAXED_EXPOSED_COPPER,
             Blocks.WAXED_OXIDIZED_COPPER,
             Blocks.WAXED_WEATHERED_COPPER,
-            Blocks.WAXED_WEATHERED_CUT_COPPER
+            Blocks.WAXED_WEATHERED_CUT_COPPER,
+            Blocks.POLISHED_ANDESITE,
+            Blocks.POLISHED_DIORITE,
+            Blocks.POLISHED_GRANITE
           )
           .addTags(
             BlockTags.LOGS,
@@ -68,7 +72,9 @@ public class WallComponentTagProvider extends BlockTagsProvider
             BlockTags.LOGS,
             BlockTags.PLANKS,
             ModTags.EXTRA_BLOCKS,
-            ModTags.BRICKS
+            ModTags.BRICKS,
+            Tags.Blocks.GLASS,
+            ModTags.CONCRETE
           );
 
     }
