@@ -81,7 +81,7 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
                 boolean anyEmpty = false;
                 List<Slot> inventorySlots = ArchitectsCutterContainer.this.inputInventorySlots;
 
-                final boolean craftingMateriallyTexturedBlock = stack.getItem() instanceof BlockItem blockItem && blockItem.getBlock() instanceof IMateriallyTexturedBlockManager;
+                final boolean craftingMateriallyTexturedBlock = stack.getItem() instanceof BlockItem blockItem && blockItem.getBlock() instanceof IMateriallyTexturedBlock;
                 final List<IMateriallyTexturedBlockComponent>
                   components = craftingMateriallyTexturedBlock ? Lists.newArrayList(((IMateriallyTexturedBlock) ((BlockItem) stack.getItem()).getBlock()).getComponents()) : Collections.emptyList();
 
@@ -90,8 +90,7 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
                     final Slot inputInventorySlot = inventorySlots.get(i);
 
                     final boolean isRequiredBlock = !craftingMateriallyTexturedBlock ||
-                                                      (i < components.size() &&
-                                                        !components.get(i).isOptional());
+                                                      (i < components.size());
 
                     if (!inputInventorySlot.getItem().isEmpty() && isRequiredBlock)
                     {
