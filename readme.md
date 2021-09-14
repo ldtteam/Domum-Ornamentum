@@ -69,54 +69,35 @@
 <hr />
 
 ### <a name="BaseImplementation"></a>Base implementation:
-This is a minecraft mod that provides skinnable blocks to be used in the
+This is a minecraft mod that provides skinnable blocks to be used in buildings inside the game minecraft.
+The core of this mod is a reskinning supporting model loader that gets the skin information passed from a none ticking block entity.
 
+### <a name="Gameplay"></a>Gameplay:
+Craft an architects cutter and place the materials in as requested.
+Then select the type of skinned block in the middle, and pick up the result on the right.
+
+In general terms the architects cutter is just a fancy stone cutter, nothing more, nothing less.
 ### <a name="VanillaCompatibility"></a>Vanilla compatibility:
-By default, the mod replaces any vanilla mobs GroundPathNavigator.
-In other words all entities that travel over or on the ground are currently supported.
-However, as of now no flying or climbing mobs are supported.
-
-Notable supported entities:
-- Creeper
-- Drowned
-- Enderman
-- Evoker
-- Illusioner
-- Iron Golem
-- Mooshroom
-- Skeleton
-- Stray
-- Vex
-- Villager
-- Vindicator
-- Wandering Trader
-- Witch
-- Wither Skeleton
-- Zombie
-- Zombie Villager
-
-See the following file for more details: [Compatible Vanilla Entity List](https://github.com/ldtteam/DomumOrnamentum/blob/version/latest/src/datagen/generated/per-viam-invenire/wiki/per-viam-invenire/tags/entity_types/replace_vanilla_navigator.md).
+By default, the mod creates a wide array of different compatibility tags that can be used to allow DO to skin its blocks with others.
+The tags listed (here)[https://github.com/ldtteam/Domum-Ornamentum/tree/version/latest/src/datagen/generated/domum_ornamentum/data/domum_ornamentum/tags/blocks] provide an overview of the tags DO uses to 
+enable the compatibility, any modder can add his or her blocks to these to enable compatibility.
 
 ##### <a name="VanillaCompatibilityState"></a>Vanilla compatibility (State):
 State of the application:
-The current state of this mod is **ALPHA**.
-This is important, since even though we do our best to maintain the best compatibility and prevent bugs from appearing,
-we do not have the time or stamina to test every single feature/bugged-feature that minecraft holds when it comes to pathfinding.
-If you do find a bug or something that behaves differently from the vanilla minecraft please create an issue on the bug tracker [Here](https://github.com/ldtteam/DomumOrnamentum/issues).
+The current state of this mod is **RELEASE**.
+We have done thorough testing, however as with all mods, bugs can not be prevented so please report any of them. 
 
 #### <a name="ModCompatibility"></a>Mod compatibility:
-By default, any mob that uses a default GroundPathNavigator can be easily added, by adding it to the data pack tag: `per-viam-invenire:replace_vanilla_navigator`.
-This will cause DomumOrnamentum to replace the navigator that is used by the mobs in that list and use best guess values when needed.
-
-If a modder wants to support DomumOrnamentum directly then they can depend directly on the DomumOrnamentum API to make this a reality.
+By default, a modder will need to add his blocks to the required material tags (see above), however most of these already extend from other tags, as such, it generally suffices to add
+the planks or logs to the vanilla tag for DO to pick them up.
 
 #### <a name="Installation"></a>Installation:
-The way to install DomumOrnamentum differs if you are a player or a modder:
+The way to install Domum Ornamentum differs if you are a player or a modder:
 #### <a name="InstallationPlayer"></a>Installation of DomumOrnamentum as a player:
-To install DomumOrnamentum as a player you need to perform the following steps:
+To install Domum Ornamentum as a player you need to perform the following steps:
 1) Download the correct version from [CurseForge](https://www.curseforge.com/minecraft/mc-mods/DomumOrnamentum).
 2) Create a Forge based profile in your launcher of choice.
-3) Drop the DomumOrnamentum jar into the mods folder of your profile.
+3) Drop the Domum Ornamentum jar into the mods folder of your profile.
 4) Enjoy!
 5) Report any bugs you found.
 
@@ -131,12 +112,12 @@ repositories {
     }
 }
 ```
-2) Determine which version of DomumOrnamentum you want to depend on using [CurseForge](https://www.curseforge.com/minecraft/mc-mods/DomumOrnamentum).
-3) Add the DomumOrnamentum API-jar as a Compile-time and the DomumOrnamentum Main-jar as a Run-time dependency:
+2) Determine which version of Domum Ornamentum you want to depend on using [CurseForge](https://www.curseforge.com/minecraft/mc-mods/DomumOrnamentum).
+3) Add the Domum Ornamentum API-jar as a Compile-time and the Domum Ornamentum Main-jar as a Run-time dependency:
 ```groovy
 dependencies {
-    compileOnly fg.deobf("com.ldtteam:DomumOrnamentum:${project.exactMinecraftVersion}-${project.DomumOrnamentumVersion}:api")
-    runtimeOnly fg.deobf("com.ldtteam:DomumOrnamentum:${project.exactMinecraftVersion}-${project.DomumOrnamentumVersion}:universal")
+    compileOnly fg.deobf("com.ldtteam:domom-ornamentum:${project.exactMinecraftVersion}-${project.DomumOrnamentumVersion}:api")
+    runtimeOnly fg.deobf("com.ldtteam:domom-ornamentum:${project.exactMinecraftVersion}-${project.DomumOrnamentumVersion}:universal")
 }
 ```
 
