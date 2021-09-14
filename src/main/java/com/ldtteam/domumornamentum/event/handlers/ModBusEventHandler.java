@@ -18,6 +18,7 @@ import com.ldtteam.domumornamentum.datagen.shingle.slab.*;
 import com.ldtteam.domumornamentum.datagen.slab.*;
 import com.ldtteam.domumornamentum.datagen.stair.*;
 import com.ldtteam.domumornamentum.datagen.trapdoor.*;
+import com.ldtteam.domumornamentum.datagen.trapdoor.fancy.*;
 import com.ldtteam.domumornamentum.datagen.wall.paper.*;
 import com.ldtteam.domumornamentum.datagen.wall.vanilla.*;
 import com.ldtteam.domumornamentum.util.Constants;
@@ -128,6 +129,15 @@ public class ModBusEventHandler
         event.getGenerator().addProvider(new TrapdoorsComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(new TrapdoorsCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(new TrapdoorsLangEntryProvider(event.getGenerator(), langJson));
+
+        //Fancy Trapdoor
+        event.getGenerator().addProvider(new FancyTrapdoorsBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new FancyTrapdoorsItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new FancyTrapdoorsItemModelSpecProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new FancyTrapdoorsBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new FancyTrapdoorsComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(new FancyTrapdoorsCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(new FancyTrapdoorsLangEntryProvider(event.getGenerator(), langJson));
 
         //Door
         event.getGenerator().addProvider(new DoorsBlockStateProvider(event.getGenerator()));

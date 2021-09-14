@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.ldtteam.domumornamentum.block.decorative.*;
 import com.ldtteam.domumornamentum.block.types.BrickType;
 import com.ldtteam.domumornamentum.block.types.ExtraBlockType;
+import com.ldtteam.domumornamentum.block.types.FancyTrapdoorType;
 import com.ldtteam.domumornamentum.block.types.TimberFrameType;
 import com.ldtteam.domumornamentum.block.vanilla.*;
 import com.ldtteam.domumornamentum.block.vanilla.SlabBlock;
@@ -53,6 +54,7 @@ public final class ModBlocks implements IModBlocks
     private static DoorBlock DOOR;
 
     private static FancyDoorBlock FANCY_DOOR;
+    private static FancyTrapdoorBlock FANCY_TRAPDOOR;
 
     private static final ModBlocks INSTANCE = new ModBlocks();
 
@@ -167,8 +169,11 @@ public final class ModBlocks implements IModBlocks
     }
 
     @Override
-    public FancyDoorBlock getFancyDoor() { return ModBlocks.FANCY_DOOR; };
-    
+    public FancyDoorBlock getFancyDoor() { return ModBlocks.FANCY_DOOR; }
+
+    @Override
+    public FancyTrapdoorBlock getFancyTrapdoor() { return ModBlocks.FANCY_TRAPDOOR; }
+
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event)
     {
@@ -211,6 +216,7 @@ public final class ModBlocks implements IModBlocks
         DOOR = new DoorBlock().registerBlock(registry);
 
         FANCY_DOOR = new FancyDoorBlock().registerBlock(registry);
+        FANCY_TRAPDOOR = new FancyTrapdoorBlock().registerBlock(registry);
     }
 
     @SubscribeEvent
@@ -257,5 +263,6 @@ public final class ModBlocks implements IModBlocks
         DOOR.registerItemBlock(registry, new Item.Properties());
 
         FANCY_DOOR.registerItemBlock(registry, new Item.Properties());
+        FANCY_TRAPDOOR.registerItemBlock(registry, new Item.Properties());
     }
 }

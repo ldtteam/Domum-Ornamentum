@@ -3,6 +3,7 @@ package com.ldtteam.domumornamentum.client.event.handlers;
 import com.ldtteam.domumornamentum.block.IModBlocks;
 import com.ldtteam.domumornamentum.block.types.DoorType;
 import com.ldtteam.domumornamentum.block.types.FancyDoorType;
+import com.ldtteam.domumornamentum.block.types.FancyTrapdoorType;
 import com.ldtteam.domumornamentum.block.types.TrapdoorType;
 import com.ldtteam.domumornamentum.client.screens.ArchitectsCutterScreen;
 import com.ldtteam.domumornamentum.container.ModContainerTypes;
@@ -43,6 +44,8 @@ public class ModBusEventHandler
           (itemStack, clientLevel, livingEntity, i) -> handleDoorTypeOverride(itemStack)));
         event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getFancyDoor().asItem(), new ResourceLocation(Constants.DOOR_MODEL_OVERRIDE),
           (itemStack, clientLevel, livingEntity, i) -> handleFancyDoorTypeOverride(itemStack)));
+        event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getFancyTrapdoor().asItem(), new ResourceLocation(Constants.TRAPDOOR_MODEL_OVERRIDE),
+          (itemStack, clientLevel, livingEntity, i) -> handleFancyTrapdoorTypeOverride(itemStack)));
         event.enqueueWork(() -> MenuScreens.register(
           ModContainerTypes.ARCHITECTS_CUTTER,
           ArchitectsCutterScreen::new
@@ -103,6 +106,26 @@ public class ModBusEventHandler
         catch (Exception ex)
         {
             doorType = FancyDoorType.FULL;
+        }
+
+        return doorType.ordinal();
+    }
+
+    private static float handleFancyTrapdoorTypeOverride(ItemStack itemStack)
+    {
+        if (!itemStack.getOrCreateTag().contains("type"))
+        {
+            return 0f;
+        }
+
+        FancyTrapdoorType doorType;
+        try
+        {
+            doorType = FancyTrapdoorType.valueOf(itemStack.getOrCreateTag().getString("type").toUpperCase());
+        }
+        catch (Exception ex)
+        {
+            doorType = FancyTrapdoorType.FULL;
         }
 
         return doorType.ordinal();
