@@ -79,7 +79,7 @@ Then select the type of skinned block in the middle, and pick up the result on t
 In general terms the architects cutter is just a fancy stone cutter, nothing more, nothing less.
 ### <a name="VanillaCompatibility"></a>Vanilla compatibility:
 By default, the mod creates a wide array of different compatibility tags that can be used to allow DO to skin its blocks with others.
-The tags listed (here)[https://github.com/ldtteam/Domum-Ornamentum/tree/version/latest/src/datagen/generated/domum_ornamentum/data/domum_ornamentum/tags/blocks] provide an overview of the tags DO uses to 
+The tags listed [here](https://github.com/ldtteam/Domum-Ornamentum/tree/version/latest/src/datagen/generated/domum_ornamentum/data/domum_ornamentum/tags/blocks) provide an overview of the tags DO uses to 
 enable the compatibility, any modder can add his or her blocks to these to enable compatibility.
 
 ##### <a name="VanillaCompatibilityState"></a>Vanilla compatibility (State):
