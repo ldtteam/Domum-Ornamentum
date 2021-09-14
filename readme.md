@@ -1,28 +1,28 @@
 <h1 align="center">
-  <a name="logo" href="https://github.com/ldtteam/DomumOrnamentum"><img src="https://github.com/ldtteam/DomumOrnamentum/raw/version/latest/logo.png" alt="DomumOrnamentum" width="200"></a>
+  <a name="logo" href="https://github.com/ldtteam/Domum-Ornamentum"><img src="https://github.com/ldtteam/Domum-Ornamentum/raw/version/latest/logo.png" alt="Domum Ornamentum" width="200"></a>
   <br>
   Domum Ornamentum Source Code
 </h1>
 <h4 align="center">Be sure to :star: this repo so you can keep up to date on any progress!</h4>
 <div align="center">
   <h4>
-    <a href="https://buildsystem.ldtteam.com/buildConfiguration/LetSDevTogether_DomumOrnamentum_Alpha_Release?branch=&mode=builds">
-        <img alt="TeamCity Alpha Build Status" src="https://img.shields.io/teamcity/build/e/LetSDevTogether_DomumOrnamentum_Alpha_Release?label=Alpha&logo=Alpha%20build&server=https%3A%2F%2Fbuildsystem.ldtteam.com&style=plasticr">
+    <a href="https://buildsystem.ldtteam.com/buildConfiguration/LetSDevTogether_Domum-Ornamentum_Alpha_Release?branch=&mode=builds">
+        <img alt="TeamCity Alpha Build Status" src="https://img.shields.io/teamcity/build/e/LetSDevTogether_Domum-Ornamentum_Alpha_Release?label=Alpha&logo=Alpha%20build&server=https%3A%2F%2Fbuildsystem.ldtteam.com&style=plasticr">
     </a>
-    <a href="https://buildsystem.ldtteam.com/buildConfiguration/LetSDevTogether_DomumOrnamentum_Beta_Release?branch=&mode=builds">
-        <img alt="TeamCity Beta Build Status" src="https://img.shields.io/teamcity/build/e/LetSDevTogether_DomumOrnamentum_Beta_Release?label=Beta&logo=Beta%20build&server=https%3A%2F%2Fbuildsystem.ldtteam.com&style=plasticr">
+    <a href="https://buildsystem.ldtteam.com/buildConfiguration/LetSDevTogether_Domum-Ornamentum_Beta_Release?branch=&mode=builds">
+        <img alt="TeamCity Beta Build Status" src="https://img.shields.io/teamcity/build/e/LetSDevTogether_Domum-Ornamentum_Beta_Release?label=Beta&logo=Beta%20build&server=https%3A%2F%2Fbuildsystem.ldtteam.com&style=plasticr">
     </a>
-    <a href="https://buildsystem.ldtteam.com/buildConfiguration/LetSDevTogether_DomumOrnamentum_Release_Release?branch=&mode=builds">
-        <img alt="TeamCity Release Build Status" src="https://img.shields.io/teamcity/build/e/LetSDevTogether_DomumOrnamentum_Release_Release?label=Release&logo=Release%20build&server=https%3A%2F%2Fbuildsystem.ldtteam.com&style=plasticr">
+    <a href="https://buildsystem.ldtteam.com/buildConfiguration/LetSDevTogether_Domum-Ornamentum_Release_Release?branch=&mode=builds">
+        <img alt="TeamCity Release Build Status" src="https://img.shields.io/teamcity/build/e/LetSDevTogether_Domum-Ornamentum_Release_Release?label=Release&logo=Release%20build&server=https%3A%2F%2Fbuildsystem.ldtteam.com&style=plasticr">
     </a>
-    <a href="https://github.com/ldtteam/DomumOrnamentum/stargazers">
-        <img src="https://img.shields.io/github/stars/ldtteam/DomumOrnamentum.svg?style=plasticr"/>
+    <a href="https://github.com/ldtteam/Domum-Ornamentum/stargazers">
+        <img src="https://img.shields.io/github/stars/ldtteam/Domum-Ornamentum.svg?style=plasticr"/>
     </a>
-    <a href="https://github.com/ldtteam/DomumOrnamentum/commits/master">
-        <img src="https://img.shields.io/github/last-commit/ldtteam/DomumOrnamentum.svg?style=plasticr"/>
+    <a href="https://github.com/ldtteam/Domum-Ornamentum/commits/master">
+        <img src="https://img.shields.io/github/last-commit/ldtteam/Domum-Ornamentum.svg?style=plasticr"/>
     </a>
-    <a href="https://github.com/ldtteam/DomumOrnamentum/commits/master">
-        <img src="https://img.shields.io/github/commit-activity/m/ldtteam/DomumOrnamentum.svg?style=plasticr"/>
+    <a href="https://github.com/ldtteam/Domum-Ornamentum/commits/master">
+        <img src="https://img.shields.io/github/commit-activity/m/ldtteam/Domum-Ornamentum.svg?style=plasticr"/>
     </a>
   </h4>
 </div>
@@ -33,27 +33,27 @@
       Discord
     </a>
     <span> | </span>
-    <a href="https://www.curseforge.com/minecraft/mc-mods/DomumOrnamentum">
+    <a href="https://www.curseforge.com/minecraft/mc-mods/Domum-Ornamentum">
       CurseForge
     </a>
     <span> | </span>
-    <a href="https://www.curseforge.com/minecraft/mc-mods/DomumOrnamentum/files">
+    <a href="https://www.curseforge.com/minecraft/mc-mods/Domum-Ornamentum/files">
       Releases
     </a>
     <span> | </span>
-    <a href="https://buildsystem.ldtteam.com/project/LetSDevTogether_DomumOrnamentum?branch=&mode=builds">
+    <a href="https://buildsystem.ldtteam.com/project/LetSDevTogether_Domum-Ornamentum?branch=&mode=builds">
       BuildSystem
     </a>
     <span> | </span>
-    <a href="https://github.com/ldtteam/DomumOrnamentum/">
+    <a href="https://github.com/ldtteam/Domum-Ornamentum/">
       Code
     </a>
     <span> | </span>
-    <a href="https://github.com/ldtteam/DomumOrnamentum/issues">
+    <a href="https://github.com/ldtteam/Domum-Ornamentum/issues">
       Issues
     </a>
     <span> | </span>
-    <a href="https://github.com/ldtteam/DomumOrnamentum/pulls">
+    <a href="https://github.com/ldtteam/Domum-Ornamentum/pulls">
       Pull Requests
     </a>
     <span> | </span>
@@ -61,7 +61,7 @@
       Patreon
     </a>
     <span> | </span>
-    <a href="https://www.paypal.com/cgi-bin/webscr?return=https://www.curseforge.com/projects/449945&cn=Add+special+instructions+to+the+addon+author()&business=paypal%40ldtteam.com&bn=PP-DonationsBF:btn_donateCC_LG.gif:NonHosted&cancel_return=https://www.curseforge.com/projects/449945&lc=US&item_name=DomumOrnamentum+(from+GitHub.com)&cmd=_donations&rm=1&no_shipping=1&currency_code=USD">
+    <a href="https://www.paypal.com/cgi-bin/webscr?return=https://www.curseforge.com/projects/449945&cn=Add+special+instructions+to+the+addon+author()&business=paypal%40ldtteam.com&bn=PP-DonationsBF:btn_donateCC_LG.gif:NonHosted&cancel_return=https://www.curseforge.com/projects/449945&lc=US&item_name=Domum-Ornamentum+(from+GitHub.com)&cmd=_donations&rm=1&no_shipping=1&currency_code=USD">
       Paypal
     </a>
   </h4>
@@ -93,16 +93,16 @@ the planks or logs to the vanilla tag for DO to pick them up.
 
 #### <a name="Installation"></a>Installation:
 The way to install Domum Ornamentum differs if you are a player or a modder:
-#### <a name="InstallationPlayer"></a>Installation of DomumOrnamentum as a player:
+#### <a name="InstallationPlayer"></a>Installation of Domum Ornamentum as a player:
 To install Domum Ornamentum as a player you need to perform the following steps:
-1) Download the correct version from [CurseForge](https://www.curseforge.com/minecraft/mc-mods/DomumOrnamentum).
+1) Download the correct version from [CurseForge](https://www.curseforge.com/minecraft/mc-mods/Domum-Ornamentum).
 2) Create a Forge based profile in your launcher of choice.
 3) Drop the Domum Ornamentum jar into the mods folder of your profile.
 4) Enjoy!
 5) Report any bugs you found.
 
-#### <a name="InstallationModder"></a>Installation of DomumOrnamentum as a Modder:
-To install DomumOrnamentum as a modder you need to perform the following steps:
+#### <a name="InstallationModder"></a>Installation of Domum Ornamentum as a Modder:
+To install Domum Ornamentum as a modder you need to perform the following steps:
 1) Add the LDTTeam Maven repository to your project:
 ```groovy
 repositories {
@@ -112,7 +112,7 @@ repositories {
     }
 }
 ```
-2) Determine which version of Domum Ornamentum you want to depend on using [CurseForge](https://www.curseforge.com/minecraft/mc-mods/DomumOrnamentum).
+2) Determine which version of Domum Ornamentum you want to depend on using [CurseForge](https://www.curseforge.com/minecraft/mc-mods/Domum Ornamentum).
 3) Add the Domum Ornamentum API-jar as a Compile-time and the Domum Ornamentum Main-jar as a Run-time dependency:
 ```groovy
 dependencies {
