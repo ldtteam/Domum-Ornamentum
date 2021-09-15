@@ -70,7 +70,8 @@ public class SlabComponentTagProvider extends BlockTagsProvider
             ModTags.BRICKS,
             BlockTags.DIRT,
             BlockTags.WOOL,
-            ModTags.CONCRETE
+            ModTags.CONCRETE,
+            Tags.Blocks.GLASS
           );
     }
 

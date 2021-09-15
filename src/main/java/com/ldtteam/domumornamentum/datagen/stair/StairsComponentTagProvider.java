@@ -45,7 +45,6 @@ public class StairsComponentTagProvider extends BlockTagsProvider
             Blocks.GREEN_TERRACOTTA,
             Blocks.RED_TERRACOTTA,
             Blocks.BLACK_TERRACOTTA,
-            Blocks.BLACK_TERRACOTTA,
             Blocks.BLACKSTONE,
             Blocks.GILDED_BLACKSTONE,
             Blocks.HAY_BLOCK,
@@ -70,7 +69,8 @@ public class StairsComponentTagProvider extends BlockTagsProvider
             ModTags.BRICKS,
             BlockTags.DIRT,
             BlockTags.WOOL,
-            ModTags.CONCRETE
+            ModTags.CONCRETE,
+            Tags.Blocks.GLASS
           );
     }
 

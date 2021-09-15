@@ -41,6 +41,7 @@
     "#minecraft:wart_blocks",
     "#domum_ornamentum:extra_block",
     "#domum_ornamentum:bricks",
-    "#minecraft:wool"
+    "#minecraft:wool",
+    "#forge:glass"
   ]
 }

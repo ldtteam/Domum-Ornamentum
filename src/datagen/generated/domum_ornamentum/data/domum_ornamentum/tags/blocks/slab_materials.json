@@ -42,6 +42,7 @@
     "#domum_ornamentum:bricks",
     "#minecraft:dirt",
     "#minecraft:wool",
-    "#domum_ornamentum:concrete"
+    "#domum_ornamentum:concrete",
+    "#forge:glass"
   ]
 }

@@ -69,7 +69,8 @@ public class DoorsComponentTagProvider extends BlockTagsProvider
             BlockTags.WART_BLOCKS,
             ModTags.EXTRA_BLOCKS,
             ModTags.BRICKS,
-            BlockTags.WOOL
+            BlockTags.WOOL,
+            Tags.Blocks.GLASS
           );
     }
 

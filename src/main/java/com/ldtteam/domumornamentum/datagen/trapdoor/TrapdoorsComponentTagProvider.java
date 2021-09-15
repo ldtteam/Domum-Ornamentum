@@ -6,6 +6,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -67,7 +68,8 @@ public class TrapdoorsComponentTagProvider extends BlockTagsProvider
             BlockTags.CORAL_BLOCKS,
             BlockTags.WART_BLOCKS,
             ModTags.EXTRA_BLOCKS,
-            ModTags.BRICKS
+            ModTags.BRICKS,
+            Tags.Blocks.GLASS
           );
     }
 
