@@ -43,7 +43,7 @@ public class GlobalRecipeProvider implements DataProvider
         keys.put("S", new RecipeIngredientKeyJson(new RecipeIngredientJson(Items.STONE_SLAB.getRegistryName().toString(), false)));
         keys.put("L", new RecipeIngredientKeyJson(new RecipeIngredientJson(BlockTags.LOGS.getName().toString(), true)));
 
-        final ShapedRecipeJson json = new ShapedRecipeJson("global", pattern, keys, new RecipeResultJson(4, block.asItem().getRegistryName().toString()));
+        final ShapedRecipeJson json = new ShapedRecipeJson("global", pattern, keys, new RecipeResultJson(1, block.asItem().getRegistryName().toString()));
         final Path recipeFolder = this.generator.getOutputFolder().resolve(DataGeneratorConstants.RECIPES_DIR);
         final Path blockstatePath = recipeFolder.resolve(block.getRegistryName().getPath() + ".json");
 
