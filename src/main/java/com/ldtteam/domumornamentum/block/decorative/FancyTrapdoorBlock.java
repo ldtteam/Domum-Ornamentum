@@ -59,8 +59,8 @@ public class FancyTrapdoorBlock extends AbstractBlockTrapdoor<FancyTrapdoorBlock
 {
     public static final EnumProperty<FancyTrapdoorType> TYPE = EnumProperty.create("type", FancyTrapdoorType.class);
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
-                                                                               .add(new SimpleRetexturableComponent(new ResourceLocation("minecraft:block/oak_planks"), ModTags.SLAB_MATERIALS, OAK_PLANKS))
-                                                                               .add(new SimpleRetexturableComponent(new ResourceLocation("minecraft:block/acacia_planks"), ModTags.SLAB_MATERIALS, ACACIA_PLANKS))
+                                                                               .add(new SimpleRetexturableComponent(new ResourceLocation("minecraft:block/oak_planks"), ModTags.FANCY_TRAPDOORS_MATERIALS, OAK_PLANKS))
+                                                                               .add(new SimpleRetexturableComponent(new ResourceLocation("minecraft:block/acacia_planks"), ModTags.FANCY_TRAPDOORS_MATERIALS, ACACIA_PLANKS))
                                                                                .build();
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();

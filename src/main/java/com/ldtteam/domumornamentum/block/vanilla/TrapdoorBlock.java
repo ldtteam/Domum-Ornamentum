@@ -58,7 +58,7 @@ public class TrapdoorBlock extends AbstractBlockTrapdoor<TrapdoorBlock> implemen
 {
     public static final EnumProperty<TrapdoorType> TYPE = EnumProperty.create("type", TrapdoorType.class);
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
-                                                                               .add(new SimpleRetexturableComponent(new ResourceLocation("minecraft:block/oak_planks"), ModTags.SLAB_MATERIALS, OAK_PLANKS))
+                                                                               .add(new SimpleRetexturableComponent(new ResourceLocation("minecraft:block/oak_planks"), ModTags.TRAPDOORS_MATERIALS, OAK_PLANKS))
                                                                                .build();
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();

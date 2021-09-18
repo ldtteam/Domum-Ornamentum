@@ -27,31 +27,7 @@ public class ShingleSlabComponentTagProvider extends BlockTagsProvider
     protected void addTags()
     {
         this.tag(ModTags.SHINGLES_COVER)
-          .add(
-            Blocks.COPPER_BLOCK,
-            Blocks.CUT_COPPER,
-            Blocks.EXPOSED_COPPER,
-            Blocks.OXIDIZED_COPPER,
-            Blocks.WEATHERED_COPPER,
-            Blocks.WEATHERED_CUT_COPPER,
-            Blocks.WAXED_COPPER_BLOCK,
-            Blocks.WAXED_CUT_COPPER,
-            Blocks.WAXED_EXPOSED_COPPER,
-            Blocks.WAXED_OXIDIZED_COPPER,
-            Blocks.WAXED_WEATHERED_COPPER,
-            Blocks.WAXED_WEATHERED_CUT_COPPER
-          )
-          .addTags(
-            BlockTags.LOGS,
-            BlockTags.PLANKS,
-            Tags.Blocks.STONE,
-            Tags.Blocks.END_STONES,
-            Tags.Blocks.NETHERRACK,
-            Tags.Blocks.OBSIDIAN,
-            ModTags.EXTRA_BLOCKS,
-            ModTags.BRICKS,
-            ModTags.SHINGLES_ROOF
-          );
+          .addTags(ModTags.SHINGLES_ROOF);
     }
 
     @Override

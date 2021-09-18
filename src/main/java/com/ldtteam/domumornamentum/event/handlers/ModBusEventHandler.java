@@ -9,7 +9,7 @@ import com.ldtteam.domumornamentum.datagen.fence.*;
 import com.ldtteam.domumornamentum.datagen.fencegate.*;
 import com.ldtteam.domumornamentum.datagen.floatingcarpet.*;
 import com.ldtteam.domumornamentum.datagen.frames.timber.*;
-import com.ldtteam.domumornamentum.datagen.global.ConcreteTagProvider;
+import com.ldtteam.domumornamentum.datagen.global.GlobalTagProvider;
 import com.ldtteam.domumornamentum.datagen.global.GlobalLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.global.GlobalRecipeProvider;
 import com.ldtteam.domumornamentum.datagen.global.MateriallyTexturedBlockRecipeProvider;
@@ -35,8 +35,6 @@ public class ModBusEventHandler
     {
         final LangJson langJson = new LangJson();
 
-        event.getGenerator().addProvider(new ConcreteTagProvider(event.getGenerator(), event.getExistingFileHelper()));
-
         //Extra blocks
         event.getGenerator().addProvider(new ExtraBlockStateProvider(event.getGenerator()));
         event.getGenerator().addProvider(new ExtraItemModelProvider(event.getGenerator()));
@@ -52,6 +50,8 @@ public class ModBusEventHandler
         event.getGenerator().addProvider(new BrickRecipeProvider(event.getGenerator()));
         event.getGenerator().addProvider(new BrickBlockTagProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(new BrickLangEntryProvider(event.getGenerator(), langJson));
+
+        event.getGenerator().addProvider(new GlobalTagProvider(event.getGenerator(), event.getExistingFileHelper()));
 
         // Timber Frames
         event.getGenerator().addProvider(new TimberFramesBlockStateProvider(event.getGenerator()));

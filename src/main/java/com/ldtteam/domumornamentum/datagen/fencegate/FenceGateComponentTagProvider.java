@@ -23,52 +23,10 @@ public class FenceGateComponentTagProvider extends BlockTagsProvider
     @Override
     protected void addTags()
     {
-
         this.tag(ModTags.FENCE_GATE_MATERIALS)
-          .add(
-            Blocks.CLAY,
-            Blocks.TERRACOTTA,
-            Blocks.WHITE_TERRACOTTA,
-            Blocks.ORANGE_TERRACOTTA,
-            Blocks.MAGENTA_TERRACOTTA,
-            Blocks.LIGHT_BLUE_TERRACOTTA,
-            Blocks.YELLOW_TERRACOTTA,
-            Blocks.LIME_TERRACOTTA,
-            Blocks.PINK_TERRACOTTA,
-            Blocks.GRAY_TERRACOTTA,
-            Blocks.LIGHT_GRAY_TERRACOTTA,
-            Blocks.CYAN_TERRACOTTA,
-            Blocks.PURPLE_TERRACOTTA,
-            Blocks.BLUE_TERRACOTTA,
-            Blocks.BROWN_TERRACOTTA,
-            Blocks.GREEN_TERRACOTTA,
-            Blocks.RED_TERRACOTTA,
-            Blocks.BLACK_TERRACOTTA,
-            Blocks.BLACK_TERRACOTTA,
-            Blocks.BLACKSTONE,
-            Blocks.GILDED_BLACKSTONE,
-            Blocks.HAY_BLOCK,
-            Blocks.COPPER_BLOCK,
-            Blocks.CUT_COPPER,
-            Blocks.EXPOSED_COPPER,
-            Blocks.OXIDIZED_COPPER,
-            Blocks.WEATHERED_COPPER,
-            Blocks.WEATHERED_CUT_COPPER,
-            Blocks.WAXED_COPPER_BLOCK,
-            Blocks.WAXED_CUT_COPPER,
-            Blocks.WAXED_EXPOSED_COPPER,
-            Blocks.WAXED_OXIDIZED_COPPER,
-            Blocks.WAXED_WEATHERED_COPPER,
-            Blocks.WAXED_WEATHERED_CUT_COPPER
-          )
           .addTags(
-            BlockTags.LOGS,
-            BlockTags.CORAL_BLOCKS,
-            BlockTags.WART_BLOCKS,
-            ModTags.EXTRA_BLOCKS,
-            ModTags.BRICKS
+            ModTags.FENCE_MATERIALS
           );
-
     }
 
     @Override
