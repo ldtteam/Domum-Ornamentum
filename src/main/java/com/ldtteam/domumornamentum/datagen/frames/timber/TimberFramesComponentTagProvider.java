@@ -24,81 +24,41 @@ public class TimberFramesComponentTagProvider extends BlockTagsProvider
     @Override
     protected void addTags()
     {
-
         this.tag(ModTags.TIMBERFRAMES_FRAME)
           .add(
-            Blocks.COPPER_BLOCK,
-            Blocks.CUT_COPPER,
-            Blocks.EXPOSED_COPPER,
-            Blocks.OXIDIZED_COPPER,
-            Blocks.WEATHERED_COPPER,
-            Blocks.WEATHERED_CUT_COPPER,
-            Blocks.WAXED_COPPER_BLOCK,
-            Blocks.WAXED_CUT_COPPER,
-            Blocks.WAXED_EXPOSED_COPPER,
-            Blocks.WAXED_OXIDIZED_COPPER,
-            Blocks.WAXED_WEATHERED_COPPER,
-            Blocks.WAXED_WEATHERED_CUT_COPPER,
-            Blocks.DEEPSLATE,
-            Blocks.DEEPSLATE_BRICKS,
-            Blocks.COBBLED_DEEPSLATE,
-            Blocks.POLISHED_DEEPSLATE,
-            Blocks.POLISHED_BLACKSTONE,
-            Blocks.POLISHED_BLACKSTONE_BRICKS
-          )
-          .addTags(
-            BlockTags.LOGS,
-            BlockTags.PLANKS,
-            Tags.Blocks.OBSIDIAN,
-            ModTags.EXTRA_BLOCKS,
-            Tags.Blocks.STORAGE_BLOCKS,
-            ModTags.BRICKS,
-            BlockTags.DIRT,
-            Tags.Blocks.STONE,
-            Tags.Blocks.GLASS,
-            ModTags.CONCRETE
-          );
-
-        this.tag(ModTags.TIMBERFRAMES_CENTER)
-          .add(
-            Blocks.COPPER_BLOCK,
-            Blocks.CUT_COPPER,
-            Blocks.EXPOSED_COPPER,
-            Blocks.OXIDIZED_COPPER,
-            Blocks.WEATHERED_COPPER,
-            Blocks.WEATHERED_CUT_COPPER,
-            Blocks.WAXED_COPPER_BLOCK,
-            Blocks.WAXED_CUT_COPPER,
-            Blocks.WAXED_EXPOSED_COPPER,
-            Blocks.WAXED_OXIDIZED_COPPER,
-            Blocks.WAXED_WEATHERED_COPPER,
-            Blocks.WAXED_WEATHERED_CUT_COPPER,
             Blocks.BRICKS,
             Blocks.DEEPSLATE,
             Blocks.DEEPSLATE_BRICKS,
             Blocks.COBBLED_DEEPSLATE,
             Blocks.POLISHED_DEEPSLATE,
-            Blocks.POLISHED_BLACKSTONE,
-            Blocks.POLISHED_BLACKSTONE_BRICKS
+            Blocks.POLISHED_BLACKSTONE
           )
           .addTags(
-            BlockTags.LOGS,
+            ModTags.GLOBAL_DEFAULT,
             BlockTags.PLANKS,
-            BlockTags.CORAL_BLOCKS,
-            BlockTags.WART_BLOCKS,
+            Tags.Blocks.OBSIDIAN,
+            Tags.Blocks.STONE
+          );
+
+        this.tag(ModTags.TIMBERFRAMES_CENTER)
+          .add(
+            Blocks.BRICKS,
+            Blocks.DEEPSLATE,
+            Blocks.DEEPSLATE_BRICKS,
+            Blocks.COBBLED_DEEPSLATE,
+            Blocks.POLISHED_DEEPSLATE,
+            Blocks.POLISHED_BLACKSTONE
+          )
+          .addTags(
+            ModTags.GLOBAL_DEFAULT,
+            BlockTags.PLANKS,
             Tags.Blocks.COBBLESTONE,
             Tags.Blocks.STONE,
             Tags.Blocks.END_STONES,
             Tags.Blocks.NETHERRACK,
             Tags.Blocks.OBSIDIAN,
-            Tags.Blocks.STORAGE_BLOCKS,
             Tags.Blocks.SANDSTONE,
-            ModTags.EXTRA_BLOCKS,
-            ModTags.BRICKS,
-            BlockTags.DIRT,
-            BlockTags.WOOL,
-            Tags.Blocks.GLASS,
-            ModTags.CONCRETE
+            BlockTags.DIRT
           );
 
     }

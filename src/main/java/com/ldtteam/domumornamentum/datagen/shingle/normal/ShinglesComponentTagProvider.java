@@ -6,7 +6,6 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -24,94 +23,27 @@ public class ShinglesComponentTagProvider extends BlockTagsProvider
     @Override
     protected void addTags()
     {
-
         this.tag(ModTags.SHINGLES_ROOF)
           .add(
             Blocks.CLAY,
-            Blocks.TERRACOTTA,
-            Blocks.WHITE_TERRACOTTA,
-            Blocks.ORANGE_TERRACOTTA,
-            Blocks.MAGENTA_TERRACOTTA,
-            Blocks.LIGHT_BLUE_TERRACOTTA,
-            Blocks.YELLOW_TERRACOTTA,
-            Blocks.LIME_TERRACOTTA,
-            Blocks.PINK_TERRACOTTA,
-            Blocks.GRAY_TERRACOTTA,
-            Blocks.LIGHT_GRAY_TERRACOTTA,
-            Blocks.CYAN_TERRACOTTA,
-            Blocks.PURPLE_TERRACOTTA,
-            Blocks.BLUE_TERRACOTTA,
-            Blocks.BROWN_TERRACOTTA,
-            Blocks.GREEN_TERRACOTTA,
-            Blocks.RED_TERRACOTTA,
-            Blocks.BLACK_TERRACOTTA,
-            Blocks.BLACK_TERRACOTTA,
-            Blocks.BLACKSTONE,
-            Blocks.GILDED_BLACKSTONE,
-            Blocks.HAY_BLOCK,
-            Blocks.COPPER_BLOCK,
-            Blocks.CUT_COPPER,
-            Blocks.EXPOSED_COPPER,
-            Blocks.OXIDIZED_COPPER,
-            Blocks.WEATHERED_COPPER,
-            Blocks.WEATHERED_CUT_COPPER,
-            Blocks.WAXED_COPPER_BLOCK,
-            Blocks.WAXED_CUT_COPPER,
-            Blocks.WAXED_EXPOSED_COPPER,
-            Blocks.WAXED_OXIDIZED_COPPER,
-            Blocks.WAXED_WEATHERED_COPPER,
-            Blocks.WAXED_WEATHERED_CUT_COPPER,
             Blocks.BRICKS,
             Blocks.DEEPSLATE,
-            Blocks.DEEPSLATE_BRICKS,
             Blocks.COBBLED_DEEPSLATE,
-            Blocks.POLISHED_DEEPSLATE,
-            Blocks.POLISHED_BLACKSTONE,
-            Blocks.POLISHED_BLACKSTONE_BRICKS
+            Blocks.POLISHED_BLACKSTONE
           )
           .addTags(
-            BlockTags.LOGS,
-            BlockTags.PLANKS,
-            BlockTags.CORAL_BLOCKS,
-            BlockTags.WART_BLOCKS,
-            ModTags.EXTRA_BLOCKS,
-            ModTags.BRICKS,
-            Tags.Blocks.SANDSTONE,
-            BlockTags.WOOL,
-            ModTags.CONCRETE
+            ModTags.GLOBAL_DEFAULT,
+            BlockTags.LEAVES
           );
 
         this.tag(ModTags.SHINGLES_SUPPORT)
           .add(
-            Blocks.COPPER_BLOCK,
-            Blocks.CUT_COPPER,
-            Blocks.EXPOSED_COPPER,
-            Blocks.OXIDIZED_COPPER,
-            Blocks.WEATHERED_COPPER,
-            Blocks.WEATHERED_CUT_COPPER,
-            Blocks.WAXED_COPPER_BLOCK,
-            Blocks.WAXED_CUT_COPPER,
-            Blocks.WAXED_EXPOSED_COPPER,
-            Blocks.WAXED_OXIDIZED_COPPER,
-            Blocks.WAXED_WEATHERED_COPPER,
-            Blocks.WAXED_WEATHERED_CUT_COPPER,
             Blocks.DEEPSLATE,
-            Blocks.DEEPSLATE_BRICKS,
             Blocks.COBBLED_DEEPSLATE,
-            Blocks.POLISHED_DEEPSLATE,
-            Blocks.POLISHED_BLACKSTONE,
-            Blocks.POLISHED_BLACKSTONE_BRICKS
+            Blocks.POLISHED_BLACKSTONE
           )
           .addTags(
-            BlockTags.LOGS,
-            BlockTags.PLANKS,
-            Tags.Blocks.STONE,
-            Tags.Blocks.END_STONES,
-            Tags.Blocks.NETHERRACK,
-            Tags.Blocks.OBSIDIAN,
-            ModTags.BRICKS,
-            Tags.Blocks.STORAGE_BLOCKS,
-            ModTags.CONCRETE
+            ModTags.GLOBAL_DEFAULT
           );
     }
 

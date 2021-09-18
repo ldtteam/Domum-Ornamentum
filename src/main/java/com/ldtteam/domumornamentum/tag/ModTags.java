@@ -33,6 +33,8 @@ public class ModTags
     public static final Tags.IOptionalNamedTag<Block> WALL_MATERIALS = tag("wall_materials");
     public static final Tags.IOptionalNamedTag<Block> STAIRS_MATERIALS = tag("stairs_materials");
     public static final Tags.IOptionalNamedTag<Block> TRAPDOORS_MATERIALS = tag("trapdoors_materials");
+    public static final Tags.IOptionalNamedTag<Block> FANCY_TRAPDOORS_MATERIALS = tag("fancy_trapdoors_materials");
+
     public static final Tags.IOptionalNamedTag<Block> DOORS_MATERIALS = tag("doors_materials");
 
     public static final Tags.IOptionalNamedTag<Block> FANCY_DOORS_MATERIALS = tag("fancy_doors_materials");
@@ -40,6 +42,11 @@ public class ModTags
     public static final Tags.IOptionalNamedTag<Block> BRICKS = tag("bricks");
 
     public static final Tags.IOptionalNamedTag<Block> CONCRETE = tag("concrete");
+    public static final Tags.IOptionalNamedTag<Block> COPPER = tag("copper");
+    public static final Tags.IOptionalNamedTag<Block> TERRACOTTA = tag("terracotta");
+
+    public static final Tags.IOptionalNamedTag<Block> GLOBAL_DEFAULT = tag("default");
+
 
     private static Tags.IOptionalNamedTag<Block> tag(String name)
     {

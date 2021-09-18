@@ -1,15 +1,6 @@
 {
   "replace": false,
   "values": [
-    "#minecraft:logs",
-    "#minecraft:planks",
-    "#forge:stone",
-    "#forge:end_stones",
-    "#forge:netherrack",
-    "#forge:obsidian",
-    "#forge:glass",
-    "#domum_ornamentum:extra_block",
-    "#domum_ornamentum:bricks",
-    "#minecraft:wool"
+    "#domum_ornamentum:default"
   ]
 }
