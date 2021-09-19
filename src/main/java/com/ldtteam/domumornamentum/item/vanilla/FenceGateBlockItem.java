@@ -47,6 +47,14 @@ public class FenceGateBlockItem extends BlockItem
     {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
         tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".origin.tooltip"));
+
+        final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
+        final MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
+
+        final IMateriallyTexturedBlockComponent component = fenceBlock.getComponents().get(0);
+        final Block block = textureData.getTexturedComponents().getOrDefault(component.getId(), component.getDefault());
+        final Component nameComponent = BlockUtils.getHoverName(block);
+        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".block.format", nameComponent));
     }
 }
 

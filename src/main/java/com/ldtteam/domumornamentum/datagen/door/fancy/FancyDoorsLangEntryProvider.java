@@ -25,12 +25,17 @@ public class FancyDoorsLangEntryProvider implements DataProvider
     @Override
     public void run(@NotNull HashCache cache) throws IOException
     {
-        backingLangJson.put(Constants.MOD_ID + ".door.fancy.name.format", "%s Door");
-        backingLangJson.put(Constants.MOD_ID + ".door.fancy.type.format", "Variant: %s");
+        backingLangJson.put(Constants.MOD_ID + ".fancydoor.name.format", "Fancy %s Door");
+        backingLangJson.put(Constants.MOD_ID + ".fancydoor.type.format", "Variant: %s");
+
+        backingLangJson.put(Constants.MOD_ID + ".fancydoor.frame.header", "Frame:");
+        backingLangJson.put(Constants.MOD_ID + ".fancydoor.center.header", "Center:");
+        backingLangJson.put(Constants.MOD_ID + ".fancydoor.center.block.format", "  - Material: %s");
+        backingLangJson.put(Constants.MOD_ID + ".fancydoor.frame.block.format", "  - Material: %s");
 
         for (final FancyDoorType value : FancyDoorType.values())
         {
-            backingLangJson.put(Constants.MOD_ID + ".door.fancy.type.name." + value.getTranslationKeySuffix(), value.getDefaultEnglishTranslation());
+            backingLangJson.put(Constants.MOD_ID + ".fancydoor.type.name." + value.getTranslationKeySuffix(), value.getDefaultEnglishTranslation());
         }
     }
 

@@ -26,6 +26,7 @@ public class TrapdoorsLangEntryProvider implements DataProvider
     {
         backingLangJson.put(Constants.MOD_ID + ".trapdoor.name.format", "%s Trapdoor");
         backingLangJson.put(Constants.MOD_ID + ".trapdoor.type.format", "Variant: %s");
+        backingLangJson.put(Constants.MOD_ID + ".trapdoor.block.format", "Material: %s");
 
         for (final TrapdoorType value : TrapdoorType.values())
         {

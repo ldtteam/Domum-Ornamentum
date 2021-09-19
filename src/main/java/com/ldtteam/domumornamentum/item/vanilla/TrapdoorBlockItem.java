@@ -48,12 +48,19 @@ public class TrapdoorBlockItem extends BlockItem
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
 
         TrapdoorType trapdoorType;
-        try {
+        try
+        {
             if (stack.getOrCreateTag().contains("type"))
+            {
                 trapdoorType = TrapdoorType.valueOf(stack.getOrCreateTag().getString("type").toUpperCase());
+            }
             else
+            {
                 trapdoorType = TrapdoorType.FULL;
-        } catch (Exception ex) {
+            }
+        }
+        catch (Exception ex)
+        {
             trapdoorType = TrapdoorType.FULL;
         }
 
@@ -61,10 +68,15 @@ public class TrapdoorBlockItem extends BlockItem
         tooltip.add(new TextComponent(""));
         tooltip.add(new TranslatableComponent(
           Constants.MOD_ID + ".trapdoor.type.format",
-          new TranslatableComponent(
-            Constants.MOD_ID + ".trapdoor.type.name." + trapdoorType.getTranslationKeySuffix()
-          )
-      ));
+          new TranslatableComponent(Constants.MOD_ID + ".trapdoor.type.name." + trapdoorType.getTranslationKeySuffix())
+        ));
+
+        final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
+        final MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
+
+        final IMateriallyTexturedBlockComponent trapDoorComponent = trapdoorBlock.getComponents().get(0);
+        final Block trapDoorBlock = textureData.getTexturedComponents().getOrDefault(trapDoorComponent.getId(), trapDoorComponent.getDefault());
+        final Component trapDoorBlockName = BlockUtils.getHoverName(trapDoorBlock);
+        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".trapdoor.block.format", trapDoorBlockName));
     }
 }
-

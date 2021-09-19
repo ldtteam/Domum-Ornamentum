@@ -51,12 +51,19 @@ public class DoorBlockItem extends DoubleHighBlockItem
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
 
         DoorType doorType;
-        try {
+        try
+        {
             if (stack.getOrCreateTag().contains("type"))
+            {
                 doorType = DoorType.valueOf(stack.getOrCreateTag().getString("type").toUpperCase());
+            }
             else
+            {
                 doorType = DoorType.FULL;
-        } catch (Exception ex) {
+            }
+        }
+        catch (Exception ex)
+        {
             doorType = DoorType.FULL;
         }
 
@@ -67,7 +74,14 @@ public class DoorBlockItem extends DoubleHighBlockItem
           new TranslatableComponent(
             Constants.MOD_ID + ".door.type.name." + doorType.getTranslationKeySuffix()
           )
-      ));
+        ));
+
+        final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
+        final MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
+
+        final IMateriallyTexturedBlockComponent doorComponent = doorBlock.getComponents().get(0);
+        final Block doorBlock = textureData.getTexturedComponents().getOrDefault(doorComponent.getId(), doorComponent.getDefault());
+        final Component doorBlockName = BlockUtils.getHoverName(doorBlock);
+        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".door.block.format", doorBlockName));
     }
 }
-

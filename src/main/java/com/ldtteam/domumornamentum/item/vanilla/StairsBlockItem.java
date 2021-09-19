@@ -20,12 +20,12 @@ import java.util.List;
 
 public class StairsBlockItem extends BlockItem
 {
-    private final StairBlock fenceBlock;
+    private final StairBlock stairBlock;
 
     public StairsBlockItem(final StairBlock blockIn, final Properties builder)
     {
         super(blockIn, builder);
-        this.fenceBlock = blockIn;
+        this.stairBlock = blockIn;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class StairsBlockItem extends BlockItem
         final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
         final MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
 
-        final IMateriallyTexturedBlockComponent coverComponent = fenceBlock.getComponents().get(0);
+        final IMateriallyTexturedBlockComponent coverComponent = stairBlock.getComponents().get(0);
         final Block centerBlock = textureData.getTexturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
         final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
 
@@ -46,6 +46,14 @@ public class StairsBlockItem extends BlockItem
     {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
         tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".origin.tooltip"));
+
+        final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
+        final MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
+
+        final IMateriallyTexturedBlockComponent component = stairBlock.getComponents().get(0);
+        final Block block = textureData.getTexturedComponents().getOrDefault(component.getId(), component.getDefault());
+        final Component nameComponent = BlockUtils.getHoverName(block);
+        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".block.format", nameComponent));
     }
 }
 

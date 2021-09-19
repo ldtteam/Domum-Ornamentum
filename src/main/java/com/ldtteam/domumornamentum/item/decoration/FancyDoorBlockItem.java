@@ -2,9 +2,7 @@ package com.ldtteam.domumornamentum.item.decoration;
 
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.decorative.FancyDoorBlock;
-import com.ldtteam.domumornamentum.block.types.DoorType;
 import com.ldtteam.domumornamentum.block.types.FancyDoorType;
-import com.ldtteam.domumornamentum.block.vanilla.DoorBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.Constants;
@@ -42,7 +40,7 @@ public class FancyDoorBlockItem extends DoubleHighBlockItem
         final Block centerBlock = textureData.getTexturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
         final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
 
-        return new TranslatableComponent(Constants.MOD_ID + ".door.fancy.name.format", centerBlockName);
+        return new TranslatableComponent(Constants.MOD_ID + ".fancydoor.name.format", centerBlockName);
     }
 
     @Override
@@ -52,23 +50,45 @@ public class FancyDoorBlockItem extends DoubleHighBlockItem
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
 
         FancyDoorType doorType;
-        try {
+        try
+        {
             if (stack.getOrCreateTag().contains("type"))
+            {
                 doorType = FancyDoorType.valueOf(stack.getOrCreateTag().getString("type").toUpperCase());
+            }
             else
+            {
                 doorType = FancyDoorType.FULL;
-        } catch (Exception ex) {
+            }
+        }
+        catch (Exception ex)
+        {
             doorType = FancyDoorType.FULL;
         }
 
         tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".origin.tooltip"));
         tooltip.add(new TextComponent(""));
         tooltip.add(new TranslatableComponent(
-          Constants.MOD_ID + ".door.fancy.type.format",
+          Constants.MOD_ID + ".fancydoor.type.format",
           new TranslatableComponent(
-            Constants.MOD_ID + ".door.fancy.type.name." + doorType.getTranslationKeySuffix()
+            Constants.MOD_ID + ".fancydoor.type.name." + doorType.getTranslationKeySuffix()
           )
-      ));
+        ));
+
+        final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
+        final MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
+
+        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".fancydoor.center.header"));
+        final IMateriallyTexturedBlockComponent trapDoorComponent = doorBlock.getComponents().get(0);
+        final Block trapDoorBlock = textureData.getTexturedComponents().getOrDefault(trapDoorComponent.getId(), trapDoorComponent.getDefault());
+        final Component trapDoorBlockName = BlockUtils.getHoverName(trapDoorBlock);
+        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".fancydoor.center.block.format", trapDoorBlockName));
+
+        tooltip.add(new TextComponent(""));
+        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".fancydoor.frame.header"));
+        final IMateriallyTexturedBlockComponent trapDoorFrameComponent = doorBlock.getComponents().get(1);
+        final Block trapDoorFrameBlock = textureData.getTexturedComponents().getOrDefault(trapDoorFrameComponent.getId(), trapDoorFrameComponent.getDefault());
+        final Component trapDoorFrameBlockName = BlockUtils.getHoverName(trapDoorFrameBlock);
+        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".fancydoor.frame.block.format", trapDoorFrameBlockName));
     }
 }
-
