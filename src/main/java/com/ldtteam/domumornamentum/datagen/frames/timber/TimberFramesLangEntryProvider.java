@@ -40,6 +40,8 @@ public class TimberFramesLangEntryProvider implements DataProvider
         backingLangJson.put(Constants.MOD_ID + ".timber.frame.header", "Framing:");
         backingLangJson.put(Constants.MOD_ID + ".timber.frame.type.format", "  - Type:     %s");
         backingLangJson.put(Constants.MOD_ID + ".timber.frame.block.format", "  - Material: %s");
+        backingLangJson.put(Constants.MOD_ID + ".timber.center.header", "Center:");
+        backingLangJson.put(Constants.MOD_ID + ".timber.center.block.format", "  - Material: %s");
     }
 
     @Override

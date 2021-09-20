@@ -26,7 +26,7 @@ public class FancyDoorsComponentTagProvider extends BlockTagsProvider
     {
         this.tag(ModTags.FANCY_DOORS_MATERIALS)
           .addTags(
-            ModTags.FANCY_DOORS_MATERIALS
+            ModTags.DOORS_MATERIALS
           );
     }
 

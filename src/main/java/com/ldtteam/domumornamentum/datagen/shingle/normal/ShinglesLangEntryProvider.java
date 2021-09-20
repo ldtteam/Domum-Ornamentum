@@ -25,6 +25,7 @@ public class ShinglesLangEntryProvider implements DataProvider
     {
         backingLangJson.put(Constants.MOD_ID + ".shingle.name.format", "%s Shingles");
         backingLangJson.put(Constants.MOD_ID + ".shingle.support.format", "Supported by: %s");
+        backingLangJson.put(Constants.MOD_ID + ".shingle.main.format", "Main Material: %s");
     }
 
     @Override

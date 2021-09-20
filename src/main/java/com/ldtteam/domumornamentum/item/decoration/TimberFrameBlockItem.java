@@ -64,5 +64,12 @@ public class TimberFrameBlockItem extends BlockItem
         final Block frameBlock = textureData.getTexturedComponents().getOrDefault(frameComponent.getId(), frameComponent.getDefault());
         final Component frameBlockName = BlockUtils.getHoverName(frameBlock);
         tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".timber.frame.block.format", frameBlockName));
+
+        tooltip.add(new TextComponent(""));
+        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".timber.center.header"));
+        final IMateriallyTexturedBlockComponent centerComponent = timberFrameBlock.getComponents().get(1);
+        final Block centerBlock = textureData.getTexturedComponents().getOrDefault(centerComponent.getId(), centerComponent.getDefault());
+        final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
+        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".timber.center.block.format", centerBlockName));
     }
 }

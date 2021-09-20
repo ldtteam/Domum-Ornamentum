@@ -41,6 +41,7 @@ public class GlobalLangEntryProvider implements DataProvider
         backingLangJson.put("block." + Constants.MOD_ID + ".architectscutter", "Architects cutter");
         backingLangJson.put(Constants.MOD_ID + ".architectscutter", "Architects cutter");
         backingLangJson.put(Constants.MOD_ID + ".origin.tooltip", "Crafted in the Architects cutter");
+        backingLangJson.put(Constants.MOD_ID + ".block.format", "Material: %s");
         backingLangJson.put(ModBlocks.getInstance().getStandingBarrel().getDescriptionId(), "Standing Barrel");
         backingLangJson.put(ModBlocks.getInstance().getLayingBarrel().getDescriptionId(), "Laying Barrel");
 

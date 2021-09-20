@@ -26,6 +26,7 @@ public class DoorsLangEntryProvider implements DataProvider
     {
         backingLangJson.put(Constants.MOD_ID + ".door.name.format", "%s Door");
         backingLangJson.put(Constants.MOD_ID + ".door.type.format", "Variant: %s");
+        backingLangJson.put(Constants.MOD_ID + ".door.block.format", "Material: %s");
 
         for (final DoorType value : DoorType.values())
         {

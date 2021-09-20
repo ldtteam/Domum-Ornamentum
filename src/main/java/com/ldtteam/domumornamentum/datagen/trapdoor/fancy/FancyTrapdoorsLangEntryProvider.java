@@ -24,12 +24,16 @@ public class FancyTrapdoorsLangEntryProvider implements DataProvider
     @Override
     public void run(@NotNull HashCache cache) throws IOException
     {
-        backingLangJson.put(Constants.MOD_ID + ".trapdoor.fancy.name.format", "%s Trapdoor");
-        backingLangJson.put(Constants.MOD_ID + ".trapdoor.fancy.type.format", "Variant: %s");
+        backingLangJson.put(Constants.MOD_ID + ".fancytrapdoor.name.format", "Fancy %s Trapdoor");
+        backingLangJson.put(Constants.MOD_ID + ".fancytrapdoor.type.format", "Variant: %s");
+        backingLangJson.put(Constants.MOD_ID + ".fancytrapdoor.frame.header", "Frame:");
+        backingLangJson.put(Constants.MOD_ID + ".fancytrapdoor.center.header", "Center:");
+        backingLangJson.put(Constants.MOD_ID + ".fancytrapdoor.center.block.format", "  - Material: %s");
+        backingLangJson.put(Constants.MOD_ID + ".fancytrapdoor.frame.block.format", "  - Material: %s");
 
         for (final FancyTrapdoorType value : FancyTrapdoorType.values())
         {
-            backingLangJson.put(Constants.MOD_ID + ".trapdoor.fancy.type.name." + value.getTranslationKeySuffix(), value.getDefaultEnglishTranslation());
+            backingLangJson.put(Constants.MOD_ID + ".fancytrapdoor.type.name." + value.getTranslationKeySuffix(), value.getDefaultEnglishTranslation());
         }
     }
 
