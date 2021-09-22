@@ -33,7 +33,8 @@ public class ShinglesComponentTagProvider extends BlockTagsProvider
           )
           .addTags(
             ModTags.GLOBAL_DEFAULT,
-            BlockTags.LEAVES
+            BlockTags.LEAVES,
+            BlockTags.PLANKS
           );
 
         this.tag(ModTags.SHINGLES_SUPPORT)
@@ -43,7 +44,8 @@ public class ShinglesComponentTagProvider extends BlockTagsProvider
             Blocks.POLISHED_BLACKSTONE
           )
           .addTags(
-            ModTags.GLOBAL_DEFAULT
+            ModTags.GLOBAL_DEFAULT,
+            BlockTags.PLANKS
           );
     }
 

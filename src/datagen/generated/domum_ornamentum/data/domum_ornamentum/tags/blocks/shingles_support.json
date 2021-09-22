@@ -4,6 +4,7 @@
     "minecraft:deepslate",
     "minecraft:cobbled_deepslate",
     "minecraft:polished_blackstone",
-    "#domum_ornamentum:default"
+    "#domum_ornamentum:default",
+    "#minecraft:planks"
   ]
 }

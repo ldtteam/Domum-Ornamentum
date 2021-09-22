@@ -26,7 +26,8 @@ public class DoorsComponentTagProvider extends BlockTagsProvider
     {
         this.tag(ModTags.DOORS_MATERIALS)
           .addTags(
-            ModTags.GLOBAL_DEFAULT
+            ModTags.GLOBAL_DEFAULT,
+            BlockTags.PLANKS
           );
     }
 

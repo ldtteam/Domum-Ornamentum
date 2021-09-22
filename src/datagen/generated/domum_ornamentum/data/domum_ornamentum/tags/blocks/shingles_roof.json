@@ -7,6 +7,7 @@
     "minecraft:cobbled_deepslate",
     "minecraft:polished_blackstone",
     "#domum_ornamentum:default",
-    "#minecraft:leaves"
+    "#minecraft:leaves",
+    "#minecraft:planks"
   ]
 }

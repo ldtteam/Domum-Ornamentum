@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#domum_ornamentum:default"
+    "#domum_ornamentum:default",
+    "#minecraft:planks"
   ]
 }
