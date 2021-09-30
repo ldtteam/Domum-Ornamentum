@@ -39,6 +39,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
@@ -197,6 +198,10 @@ public class FancyDoorBlock extends AbstractBlockDoor<FancyDoorBlock> implements
     @Override
     public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootContext.Builder builder)
     {
+        if (state.getValue(HALF) == DoubleBlockHalf.LOWER)
+        {
+            return Collections.emptyList();
+        }
         return BlockUtils.getMaterializedItemStack(builder, (s, e) -> {
             s.getOrCreateTag().putString("type", e.getBlockState().getValue(TYPE).toString().toUpperCase());
             return s;
