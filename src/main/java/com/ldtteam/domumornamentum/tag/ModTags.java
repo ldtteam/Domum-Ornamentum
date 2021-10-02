@@ -3,6 +3,8 @@ package com.ldtteam.domumornamentum.tag;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 
@@ -25,6 +27,7 @@ public class ModTags
     public static final Tags.IOptionalNamedTag<Block> PAPERWALL_CENTER = tag("paper_wall_center");
 
     public static final Tags.IOptionalNamedTag<Block> EXTRA_BLOCKS    = tag("extra_block");
+
     public static final Tags.IOptionalNamedTag<Block> FLOATING_CARPETS = tag("floating_carpet");
 
     public static final Tags.IOptionalNamedTag<Block> FENCE_MATERIALS = tag("fence_materials");
@@ -47,9 +50,18 @@ public class ModTags
 
     public static final Tags.IOptionalNamedTag<Block> GLOBAL_DEFAULT = tag("default");
 
+    public static final Tags.IOptionalNamedTag<Item> EXTRA_BLOCK_ITEMS = itemTag("extra_block");
+    public static final Tags.IOptionalNamedTag<Item> BRICK_ITEMS       = itemTag("bricks");
+
 
     private static Tags.IOptionalNamedTag<Block> tag(String name)
     {
         return BlockTags.createOptional(new ResourceLocation(Constants.MOD_ID, name));
     }
+
+    private static Tags.IOptionalNamedTag<Item> itemTag(String name)
+    {
+        return ItemTags.createOptional(new ResourceLocation(Constants.MOD_ID, name));
+    }
+
 }

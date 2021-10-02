@@ -22,6 +22,7 @@ import com.ldtteam.domumornamentum.datagen.trapdoor.fancy.*;
 import com.ldtteam.domumornamentum.datagen.wall.paper.*;
 import com.ldtteam.domumornamentum.datagen.wall.vanilla.*;
 import com.ldtteam.domumornamentum.util.Constants;
+import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
@@ -40,16 +41,20 @@ public class ModBusEventHandler
         event.getGenerator().addProvider(new ExtraItemModelProvider(event.getGenerator()));
         event.getGenerator().addProvider(new ExtraBlockModelProvider(event.getGenerator()));
         event.getGenerator().addProvider(new ExtraRecipeProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new ExtraBlockTagProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(new ExtraLangEntryProvider(event.getGenerator(), langJson));
+        final ExtraBlockTagProvider extraBlockTagProvider = new ExtraBlockTagProvider(event.getGenerator(), event.getExistingFileHelper());
+        event.getGenerator().addProvider(extraBlockTagProvider);
+        event.getGenerator().addProvider(new ExtraItemTagProvider(event.getGenerator(), extraBlockTagProvider, event.getExistingFileHelper()));
 
         //Brick blocks
         event.getGenerator().addProvider(new BrickBlockStateProvider(event.getGenerator()));
         event.getGenerator().addProvider(new BrickItemModelProvider(event.getGenerator()));
         event.getGenerator().addProvider(new BrickBlockModelProvider(event.getGenerator()));
         event.getGenerator().addProvider(new BrickRecipeProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new BrickBlockTagProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(new BrickLangEntryProvider(event.getGenerator(), langJson));
+        final BrickBlockTagProvider brickBlockTagProvider = new BrickBlockTagProvider(event.getGenerator(), event.getExistingFileHelper());
+        event.getGenerator().addProvider(brickBlockTagProvider);
+        event.getGenerator().addProvider(new BrickItemTagProvider(event.getGenerator(), brickBlockTagProvider, event.getExistingFileHelper()));
 
         event.getGenerator().addProvider(new GlobalTagProvider(event.getGenerator(), event.getExistingFileHelper()));
 
