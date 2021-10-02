@@ -50,8 +50,8 @@ public class ModTags
 
     public static final Tags.IOptionalNamedTag<Block> GLOBAL_DEFAULT = tag("default");
 
-    public static final Tags.IOptionalNamedTag<Item> EXTRA_BLOCK_ITEMS = itemTag("extra_block");
-    public static final Tags.IOptionalNamedTag<Item> BRICK_ITEMS       = itemTag("bricks");
+    public static final Tags.IOptionalNamedTag<Item> EXTRA_BLOCK_ITEMS = itemTag("extra_block_items");
+    public static final Tags.IOptionalNamedTag<Item> BRICK_ITEMS       = itemTag("brick_items");
 
 
     private static Tags.IOptionalNamedTag<Block> tag(String name)
