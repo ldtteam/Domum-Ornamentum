@@ -1,10 +1,12 @@
 package com.ldtteam.domumornamentum.datagen.global;
 
+import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -108,6 +110,19 @@ public class GlobalTagProvider extends BlockTagsProvider
             BlockTags.LOGS,
             BlockTags.WART_BLOCKS
           );
+
+        this.tag(BlockTags.MINEABLE_WITH_AXE)
+          .add(ModBlocks.getInstance().getArchitectsCutter(),
+            ModBlocks.getInstance().getLayingBarrel(),
+            ModBlocks.getInstance().getStandingBarrel(),
+            ModBlocks.getInstance().getShingle(),
+            ModBlocks.getInstance().getShingleSlab())
+        .add(ModBlocks.getInstance().getTimberFrames().toArray(new Block[0]));
+
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
+          .addTags(ModTags.BRICKS,
+            ModTags.EXTRA_BLOCKS);
+
     }
 
     @Override

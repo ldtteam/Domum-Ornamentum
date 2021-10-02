@@ -1,7 +1,9 @@
 package com.ldtteam.domumornamentum.block;
 
 import com.ldtteam.domumornamentum.container.ArchitectsCutterContainer;
+import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.Constants;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.player.Player;
@@ -13,6 +15,7 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.util.*;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -30,6 +33,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.inventory.ContainerLevelAccess;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings("deprecation")
 public final class ArchitectsCutterBlock extends AbstractBlock<ArchitectsCutterBlock>
@@ -93,5 +99,13 @@ public final class ArchitectsCutterBlock extends AbstractBlock<ArchitectsCutterB
 
     public boolean isPathfindable(@NotNull BlockState state, @NotNull BlockGetter worldIn, @NotNull BlockPos pos, @NotNull PathComputationType type) {
         return false;
+    }
+
+    @Override
+    public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootContext.Builder builder)
+    {
+        final List<ItemStack> list = new ArrayList<>();
+        list.add(new ItemStack(this));
+        return list;
     }
 }
