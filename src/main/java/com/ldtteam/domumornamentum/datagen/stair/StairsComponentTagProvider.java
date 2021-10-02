@@ -44,7 +44,18 @@ public class StairsComponentTagProvider extends BlockTagsProvider
             Blocks.WAXED_COPPER_BLOCK,
             Blocks.WAXED_EXPOSED_COPPER,
             Blocks.WAXED_OXIDIZED_COPPER,
-            Blocks.WAXED_WEATHERED_COPPER
+            Blocks.WAXED_WEATHERED_COPPER,
+            Blocks.AMETHYST_BLOCK,
+            Blocks.BUDDING_AMETHYST,
+            Blocks.CUT_SANDSTONE,
+            Blocks.CHISELED_SANDSTONE,
+            Blocks.CHISELED_QUARTZ_BLOCK,
+            Blocks.QUARTZ_PILLAR,
+            Blocks.PACKED_ICE,
+            Blocks.SNOW_BLOCK,
+            Blocks.CHISELED_STONE_BRICKS,
+            Blocks.CRACKED_STONE_BRICKS,
+            Blocks.OBSIDIAN
           )
           .addTags(
             ModTags.EXTRA_BLOCKS,

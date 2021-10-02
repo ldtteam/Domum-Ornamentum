@@ -96,7 +96,29 @@ public class GlobalTagProvider extends BlockTagsProvider
           Blocks.POLISHED_DEEPSLATE,
           Blocks.PURPUR_BLOCK,
           Blocks.PURPUR_PILLAR,
-          Blocks.END_STONE
+          Blocks.END_STONE,
+          Blocks.OBSIDIAN,
+          Blocks.AMETHYST_BLOCK,
+          Blocks.BUDDING_AMETHYST,
+          Blocks.PACKED_ICE,
+          Blocks.SNOW_BLOCK,
+          Blocks.CRACKED_STONE_BRICKS,
+          Blocks.SMOOTH_STONE,
+          Blocks.CHISELED_STONE_BRICKS,
+          Blocks.SANDSTONE,
+          Blocks.CUT_SANDSTONE,
+          Blocks.CHISELED_SANDSTONE,
+          Blocks.RED_SANDSTONE,
+          Blocks.CHISELED_RED_SANDSTONE,
+          Blocks.CUT_RED_SANDSTONE,
+          Blocks.SMOOTH_SANDSTONE,
+          Blocks.SMOOTH_RED_SANDSTONE,
+          Blocks.QUARTZ_PILLAR,
+          Blocks.QUARTZ_BLOCK,
+          Blocks.QUARTZ_BRICKS,
+          Blocks.SMOOTH_QUARTZ,
+          Blocks.CHISELED_QUARTZ_BLOCK,
+          Blocks.RED_NETHER_BRICKS
         )
           .addTags(
             ModTags.EXTRA_BLOCKS,
@@ -108,7 +130,9 @@ public class GlobalTagProvider extends BlockTagsProvider
             Tags.Blocks.STORAGE_BLOCKS,
             Tags.Blocks.GLASS,
             BlockTags.LOGS,
-            BlockTags.WART_BLOCKS
+            BlockTags.WART_BLOCKS,
+            Tags.Blocks.STONE,
+            Tags.Blocks.COBBLESTONE
           );
 
         this.tag(BlockTags.MINEABLE_WITH_AXE)

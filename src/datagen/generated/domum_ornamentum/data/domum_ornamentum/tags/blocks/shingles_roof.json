@@ -8,6 +8,7 @@
     "minecraft:polished_blackstone",
     "#domum_ornamentum:default",
     "#minecraft:leaves",
-    "#minecraft:planks"
+    "#minecraft:planks",
+    "#minecraft:dirt"
   ]
 }

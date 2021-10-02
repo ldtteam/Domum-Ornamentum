@@ -34,7 +34,8 @@ public class ShinglesComponentTagProvider extends BlockTagsProvider
           .addTags(
             ModTags.GLOBAL_DEFAULT,
             BlockTags.LEAVES,
-            BlockTags.PLANKS
+            BlockTags.PLANKS,
+            BlockTags.DIRT
           );
 
         this.tag(ModTags.SHINGLES_SUPPORT)
