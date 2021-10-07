@@ -2,7 +2,6 @@ package com.ldtteam.domumornamentum.block.vanilla;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.ldtteam.domumornamentum.block.AbstractBlockFence;
 import com.ldtteam.domumornamentum.block.ICachedItemGroupBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
@@ -19,7 +18,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.Tag;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
@@ -35,14 +33,12 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.storage.loot.LootContext;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
@@ -81,25 +77,14 @@ public class FenceBlock extends AbstractBlockFence<FenceBlock> implements IMater
             return;
         }
 
-        IMateriallyTexturedBlockComponent materialComponent = getComponents().get(0);
-
-        final Tag<Block> materialCandidate = materialComponent.getValidSkins();
-
         try {
-            materialCandidate.getValues().forEach(cover -> {
-                final Map<ResourceLocation, Block> textureData = Maps.newHashMap();
+            final MaterialTextureData materialTextureData = getRandomMaterials();
+            final CompoundTag textureNbt = materialTextureData.serializeNBT();
 
-                textureData.put(materialComponent.getId(), cover);
+            final ItemStack result = new ItemStack(this);
+            result.getOrCreateTag().put("textureData", textureNbt);
 
-                final MaterialTextureData materialTextureData = new MaterialTextureData(textureData);
-
-                final CompoundTag textureNbt = materialTextureData.serializeNBT();
-
-                final ItemStack result = new ItemStack(this);
-                result.getOrCreateTag().put("textureData", textureNbt);
-
-                fillItemGroupCache.add(result);
-            });
+            fillItemGroupCache.add(result);
         } catch (IllegalStateException exception)
         {
             //Ignored. Thrown during start up.

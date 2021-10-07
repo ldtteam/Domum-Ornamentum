@@ -4,16 +4,14 @@ import com.google.common.collect.Lists;
 import com.ldtteam.domumornamentum.block.decorative.*;
 import com.ldtteam.domumornamentum.block.types.BrickType;
 import com.ldtteam.domumornamentum.block.types.ExtraBlockType;
-import com.ldtteam.domumornamentum.block.types.FancyTrapdoorType;
 import com.ldtteam.domumornamentum.block.types.TimberFrameType;
 import com.ldtteam.domumornamentum.block.vanilla.*;
-import com.ldtteam.domumornamentum.block.vanilla.SlabBlock;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.Material;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -225,16 +223,16 @@ public final class ModBlocks implements IModBlocks
         final IForgeRegistry<Item> registry = event.getRegistry();
         ARCHITECTS_CUTTER.registerItemBlock(registry, (new Item.Properties().tab(ModCreativeTabs.GENERAL)));
 
-        final Item.Properties timberframeProperties = new Item.Properties();
+        final Item.Properties timberframeProperties = new Item.Properties().tab(ModCreativeTabs.GENERAL);
 
         for (final TimberFrameBlock frame : TIMBER_FRAMES)
         {
             frame.registerItemBlock(registry, timberframeProperties);
         }
 
-        SHINGLE.registerItemBlock(registry, new Item.Properties());
-        SHINGLE_SLAB.registerItemBlock(registry, new Item.Properties());
-        PAPER_WALL.registerItemBlock(registry, new Item.Properties());
+        SHINGLE.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.GENERAL));
+        SHINGLE_SLAB.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.GENERAL));
+        PAPER_WALL.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.GENERAL));
 
         for (final ExtraBlock block : EXTRA_TOP_BLOCKS)
         {
@@ -254,15 +252,15 @@ public final class ModBlocks implements IModBlocks
         STANDING_BARREL.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.EXTRA_BLOCKS));
         LAYING_BARREL.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.EXTRA_BLOCKS));
 
-        FENCE.registerItemBlock(registry, new Item.Properties());
-        FENCE_GATE.registerItemBlock(registry, new Item.Properties());
-        SLAB.registerItemBlock(registry, new Item.Properties());
-        WALL.registerItemBlock(registry, new Item.Properties());
-        STAIR.registerItemBlock(registry, new Item.Properties());
-        TRAPDOOR.registerItemBlock(registry, new Item.Properties());
-        DOOR.registerItemBlock(registry, new Item.Properties());
+        FENCE.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.GENERAL));
+        FENCE_GATE.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.GENERAL));
+        SLAB.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.GENERAL));
+        WALL.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.GENERAL));
+        STAIR.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.GENERAL));
+        TRAPDOOR.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.GENERAL));
+        DOOR.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.GENERAL));
 
-        FANCY_DOOR.registerItemBlock(registry, new Item.Properties());
-        FANCY_TRAPDOOR.registerItemBlock(registry, new Item.Properties());
+        FANCY_DOOR.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.GENERAL));
+        FANCY_TRAPDOOR.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.GENERAL));
     }
 }

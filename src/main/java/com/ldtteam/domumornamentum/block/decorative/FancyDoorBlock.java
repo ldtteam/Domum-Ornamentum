@@ -2,20 +2,17 @@ package com.ldtteam.domumornamentum.block.decorative;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.gson.JsonObject;
 import com.ldtteam.domumornamentum.block.AbstractBlockDoor;
 import com.ldtteam.domumornamentum.block.ICachedItemGroupBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.components.SimpleRetexturableComponent;
-import com.ldtteam.domumornamentum.block.types.DoorType;
 import com.ldtteam.domumornamentum.block.types.FancyDoorType;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
 import com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes;
 import com.ldtteam.domumornamentum.item.decoration.FancyDoorBlockItem;
-import com.ldtteam.domumornamentum.item.vanilla.DoorBlockItem;
 import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.BlockUtils;
@@ -24,7 +21,6 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.Tag;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
@@ -106,50 +102,18 @@ public class FancyDoorBlock extends AbstractBlockDoor<FancyDoorBlock> implements
             return;
         }
 
-        IMateriallyTexturedBlockComponent innerComponent = getComponents().get(0);
-        IMateriallyTexturedBlockComponent outerComponent = getComponents().get(1);
-
-        final Tag<Block> innerCandidate = innerComponent.getValidSkins();
-        final Tag<Block> outerCandidate = innerComponent.getValidSkins();
-
-
         try {
             for (final FancyDoorType fancyDoorType : FancyDoorType.values())
             {
-                innerCandidate.getValues().forEach(cover -> {
-                    final Map<ResourceLocation, Block> textureData = Maps.newHashMap();
+                final MaterialTextureData materialTextureData = getRandomMaterials();
+                final CompoundTag textureNbt = materialTextureData.serializeNBT();
 
-                    textureData.put(innerComponent.getId(), cover);
+                final ItemStack result = new ItemStack(this);
+                result.getOrCreateTag().put("textureData", textureNbt);
+                result.getOrCreateTag().putString("type", fancyDoorType.toString().toUpperCase());
 
-                    final MaterialTextureData materialTextureData = new MaterialTextureData(textureData);
-
-                    final CompoundTag textureNbt = materialTextureData.serializeNBT();
-
-                    final ItemStack result = new ItemStack(this);
-                    result.getOrCreateTag().put("textureData", textureNbt);
-                    result.getOrCreateTag().putString("type", fancyDoorType.toString().toUpperCase());
-
-                    fillItemGroupCache.add(result);
-
-                    outerCandidate.getValues().forEach(outer -> {
-                        final Map<ResourceLocation, Block> combinedTextureData = Maps.newHashMap(textureData);
-
-                        combinedTextureData.put(outerComponent.getId(), outer);
-
-                        final MaterialTextureData combinedMaterialTextureData = new MaterialTextureData(combinedTextureData);
-
-                        final CompoundTag combinedTextureNbt = combinedMaterialTextureData.serializeNBT();
-
-                        final ItemStack combinedResult = new ItemStack(this);
-                        combinedResult.getOrCreateTag().put("textureData", combinedTextureNbt);
-                        combinedResult.getOrCreateTag().putString("type", fancyDoorType.toString().toUpperCase());
-
-                        fillItemGroupCache.add(combinedResult);
-                    });
-                });
+                fillItemGroupCache.add(result);
             }
-
-
         } catch (IllegalStateException exception)
         {
             //Ignored. Thrown during start up.
