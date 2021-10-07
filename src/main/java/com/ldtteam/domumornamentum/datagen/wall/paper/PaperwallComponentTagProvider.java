@@ -26,11 +26,14 @@ public class PaperwallComponentTagProvider extends BlockTagsProvider
     {
         this.tag(ModTags.PAPERWALL_FRAME)
           .addTags(
+            BlockTags.PLANKS,
             ModTags.GLOBAL_DEFAULT
           );
 
         this.tag(ModTags.PAPERWALL_CENTER)
           .addTags(
+            BlockTags.PLANKS,
+            Tags.Blocks.STONE,
             ModTags.GLOBAL_DEFAULT
           );
 

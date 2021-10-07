@@ -122,6 +122,7 @@ public class GlobalTagProvider extends BlockTagsProvider
         )
           .addTags(
             ModTags.EXTRA_BLOCKS,
+            Tags.Blocks.END_STONES,
             ModTags.BRICKS,
             ModTags.CONCRETE,
             ModTags.TERRACOTTA,
@@ -132,8 +133,9 @@ public class GlobalTagProvider extends BlockTagsProvider
             BlockTags.LOGS,
             BlockTags.WART_BLOCKS,
             Tags.Blocks.STONE,
-            Tags.Blocks.COBBLESTONE
-          );
+            Tags.Blocks.COBBLESTONE,
+            Tags.Blocks.OBSIDIAN
+            );
 
         this.tag(BlockTags.MINEABLE_WITH_AXE)
           .add(ModBlocks.getInstance().getArchitectsCutter(),
