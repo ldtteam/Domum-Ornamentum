@@ -116,7 +116,13 @@ public class ArchitectsCutterCategory implements IRecipeCategory<ArchitectsCutte
         final List<List<ItemStack>> inputs = components.stream()
                 .map(component -> component.getValidSkins().getValues().stream()
                         .map(ItemStack::new)
-                        .collect(Collectors.toList()))
+                        .collect(Collectors.collectingAndThen(
+                                Collectors.toCollection(ArrayList::new),
+                                list ->
+                                {
+                                    Collections.shuffle(list);
+                                    return list;
+                                })))
                 .collect(Collectors.toList());
         ingredients.setInputLists(VanillaTypes.ITEM, inputs);
 
