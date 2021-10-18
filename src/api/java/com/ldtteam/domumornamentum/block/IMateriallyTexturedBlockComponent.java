@@ -11,4 +11,6 @@ public interface IMateriallyTexturedBlockComponent
     Tag<Block> getValidSkins();
 
     Block getDefault();
+
+    boolean isOptional();
 }

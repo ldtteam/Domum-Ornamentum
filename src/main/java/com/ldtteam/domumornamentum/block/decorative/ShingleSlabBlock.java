@@ -3,6 +3,7 @@ package com.ldtteam.domumornamentum.block.decorative;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.gson.JsonObject;
 import com.ldtteam.domumornamentum.block.AbstractBlockDirectional;
 import com.ldtteam.domumornamentum.block.ICachedItemGroupBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
@@ -13,8 +14,13 @@ import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
 import com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes;
 import com.ldtteam.domumornamentum.item.decoration.ShingleSlabBlockItem;
+import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
 import com.ldtteam.domumornamentum.tag.ModTags;
+import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.Constants;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -41,6 +47,9 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.level.BlockGetter;
@@ -50,6 +59,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -362,5 +372,64 @@ public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock>
     public void resetCache()
     {
         fillItemGroupCache.clear();
+    }
+
+    @Override
+    public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootContext.Builder builder)
+    {
+        return BlockUtils.getMaterializedItemStack(builder);
+    }
+
+    @Override
+    public ItemStack getPickBlock(
+      final BlockState state, final HitResult target, final BlockGetter world, final BlockPos pos, final Player player)
+    {
+        return BlockUtils.getMaterializedItemStack(player, world, pos);
+    }
+
+    @Override
+    public @NotNull Block getBlock()
+    {
+        return this;
+    }
+
+
+    @NotNull
+    public Collection<FinishedRecipe> getValidCutterRecipes() {
+        return Lists.newArrayList(
+          new FinishedRecipe() {
+              @Override
+              public void serializeRecipeData(final @NotNull JsonObject json)
+              {
+                  json.addProperty("count", COMPONENTS.size() * 3);
+              }
+
+              @Override
+              public @NotNull ResourceLocation getId()
+              {
+                  return Objects.requireNonNull(getBlock().getRegistryName());
+              }
+
+              @Override
+              public @NotNull RecipeSerializer<?> getType()
+              {
+                  return ModRecipeSerializers.ARCHITECTS_CUTTER;
+              }
+
+              @org.jetbrains.annotations.Nullable
+              @Override
+              public JsonObject serializeAdvancement()
+              {
+                  return null;
+              }
+
+              @org.jetbrains.annotations.Nullable
+              @Override
+              public ResourceLocation getAdvancementId()
+              {
+                  return null;
+              }
+          }
+        );
     }
 }

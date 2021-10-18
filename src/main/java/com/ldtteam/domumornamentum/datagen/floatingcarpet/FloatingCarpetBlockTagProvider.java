@@ -23,7 +23,7 @@ public class FloatingCarpetBlockTagProvider extends BlockTagsProvider
     @Override
     protected void addTags()
     {
-        for (final Block block : ModBlocks.getFloatingCarpets())
+        for (final Block block : ModBlocks.getInstance().getFloatingCarpets())
         {
             this.tag(ModTags.FLOATING_CARPETS).add(block);
         }

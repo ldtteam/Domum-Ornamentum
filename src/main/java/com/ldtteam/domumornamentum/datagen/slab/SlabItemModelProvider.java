@@ -37,10 +37,10 @@ public class SlabItemModelProvider implements DataProvider
         modelJson.setParent(modelLocation);
         modelJson.setLoader(Constants.MATERIALLY_TEXTURED_MODEL_LOADER.toString());
 
-        if (ModBlocks.getSlab().getRegistryName() == null)
+        if (ModBlocks.getInstance().getSlab().getRegistryName() == null)
             return;
 
-        final String name = ModBlocks.getSlab().getRegistryName().getPath();
+        final String name = ModBlocks.getInstance().getSlab().getRegistryName().getPath();
         DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(modelJson), generator.getOutputFolder().resolve(DataGeneratorConstants.ITEM_MODEL_DIR).resolve(name + ".json"));
     }
 

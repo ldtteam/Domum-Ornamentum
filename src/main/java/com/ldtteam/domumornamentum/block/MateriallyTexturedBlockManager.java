@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-public final class MateriallyTexturedBlockManager
+public final class MateriallyTexturedBlockManager implements IMateriallyTexturedBlockManager
 {
     private static final MateriallyTexturedBlockManager INSTANCE = new MateriallyTexturedBlockManager();
 
@@ -28,6 +28,7 @@ public final class MateriallyTexturedBlockManager
     private List<IMateriallyTexturedBlock> blocks = Lists.newArrayList();
     private int maxTexturableComponentCount = -1;
 
+    @Override
     public int getMaxTexturableComponentCount() {
         if (this.maxTexturableComponentCount >= 0)
             return this.maxTexturableComponentCount;
@@ -48,6 +49,7 @@ public final class MateriallyTexturedBlockManager
         return this.maxTexturableComponentCount;
     }
 
+    @Override
     public boolean doesItemStackContainsMaterialForSlot(final int slotIndex, final ItemStack stack) {
         if (stack.isEmpty())
             return true;

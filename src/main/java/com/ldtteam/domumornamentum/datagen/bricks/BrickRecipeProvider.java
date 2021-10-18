@@ -6,6 +6,7 @@ import com.ldtteam.datagenerators.recipes.RecipeResultJson;
 import com.ldtteam.datagenerators.recipes.shaped.ShapedPatternJson;
 import com.ldtteam.datagenerators.recipes.shaped.ShapedRecipeJson;
 import com.ldtteam.datagenerators.recipes.shapeless.ShapelessRecipeJson;
+import com.ldtteam.domumornamentum.block.IModBlocks;
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.decorative.BrickBlock;
 import com.ldtteam.domumornamentum.block.decorative.ExtraBlock;
@@ -38,7 +39,7 @@ public class BrickRecipeProvider implements DataProvider
     @Override
     public void run(@NotNull final HashCache cache) throws IOException
     {
-        for (final BrickBlock block : ModBlocks.getBricks())
+        for (final BrickBlock block : ModBlocks.getInstance().getBricks())
         {
             final List<RecipeIngredientKeyJson> keys = List.of(
               new RecipeIngredientKeyJson(new RecipeIngredientJson(block.getType().getIngredient().getRegistryName().toString(), false)),

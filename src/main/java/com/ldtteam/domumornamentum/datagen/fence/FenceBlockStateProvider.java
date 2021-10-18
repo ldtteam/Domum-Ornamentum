@@ -34,7 +34,7 @@ public class FenceBlockStateProvider implements DataProvider
     @Override
     public void run(@NotNull final HashCache cache) throws IOException
     {
-        createBlockstateFile(cache, ModBlocks.getFence());
+        createBlockstateFile(cache, ModBlocks.getInstance().getFence());
     }
 
     private void createBlockstateFile(final HashCache cache, final FenceBlock fenceBlock) throws IOException

@@ -1,10 +1,15 @@
 {
   "replace": false,
   "values": [
-    "#minecraft:logs",
+    "minecraft:bricks",
+    "minecraft:deepslate",
+    "minecraft:deepslate_bricks",
+    "minecraft:cobbled_deepslate",
+    "minecraft:polished_deepslate",
+    "minecraft:polished_blackstone",
+    "#domum_ornamentum:default",
     "#minecraft:planks",
     "#forge:obsidian",
-    "#domum_ornamentum:extra_block",
-    "#domum_ornamentum:bricks"
+    "#forge:stone"
   ]
 }

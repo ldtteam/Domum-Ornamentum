@@ -34,7 +34,7 @@ public class ShinglesBlockStateProvider implements DataProvider
     @Override
     public void run(@NotNull final HashCache cache) throws IOException
     {
-        createBlockstateFile(cache, ModBlocks.getShingle());
+        createBlockstateFile(cache, ModBlocks.getInstance().getShingle());
     }
 
     private void createBlockstateFile(final HashCache cache, final ShingleBlock shingle) throws IOException
@@ -90,37 +90,33 @@ public class ShinglesBlockStateProvider implements DataProvider
         {
             if (shape == StairsShape.STRAIGHT)
             {
-                return 180;
+                return 0;
             }
             return 90;
         }
-        return 0;
+        else
+        {
+            return 180;
+        }
     }
 
     private int getYFromShape(final StairsShape shape)
     {
-        switch (shape)
-        {
-            default:
-                return 0;
-            case OUTER_RIGHT:
-            case INNER_RIGHT:
-                return 90;
-        }
+        return switch (shape)
+                 {
+                     default -> 0;
+                     case OUTER_LEFT, INNER_LEFT -> -90;
+                 };
     }
 
     private int getYFromFacing(final Direction facing)
     {
-        switch (facing)
-        {
-            default:
-                return 0;
-            case WEST:
-                return 90;
-            case NORTH:
-                return 180;
-            case EAST:
-                return 270;
-        }
+        return switch (facing)
+                 {
+                     default -> 0;
+                     case SOUTH -> 90;
+                     case WEST -> 180;
+                     case NORTH -> 270;
+                 };
     }
 }

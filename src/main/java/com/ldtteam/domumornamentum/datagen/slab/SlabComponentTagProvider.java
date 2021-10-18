@@ -6,6 +6,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -26,37 +27,50 @@ public class SlabComponentTagProvider extends BlockTagsProvider
 
         this.tag(ModTags.SLAB_MATERIALS)
           .add(
-            Blocks.CLAY,
-            Blocks.TERRACOTTA,
-            Blocks.WHITE_TERRACOTTA,
-            Blocks.ORANGE_TERRACOTTA,
-            Blocks.MAGENTA_TERRACOTTA,
-            Blocks.LIGHT_BLUE_TERRACOTTA,
-            Blocks.YELLOW_TERRACOTTA,
-            Blocks.LIME_TERRACOTTA,
-            Blocks.PINK_TERRACOTTA,
-            Blocks.GRAY_TERRACOTTA,
-            Blocks.LIGHT_GRAY_TERRACOTTA,
-            Blocks.CYAN_TERRACOTTA,
-            Blocks.PURPLE_TERRACOTTA,
-            Blocks.BLUE_TERRACOTTA,
-            Blocks.BROWN_TERRACOTTA,
-            Blocks.GREEN_TERRACOTTA,
-            Blocks.RED_TERRACOTTA,
-            Blocks.BLACK_TERRACOTTA,
-            Blocks.BLACK_TERRACOTTA,
             Blocks.BLACKSTONE,
             Blocks.GILDED_BLACKSTONE,
-            Blocks.HAY_BLOCK
+            Blocks.NETHERRACK,
+            Blocks.CRIMSON_NYLIUM,
+            Blocks.WARPED_NYLIUM,
+            Blocks.BASALT,
+            Blocks.POLISHED_BASALT,
+            Blocks.SMOOTH_BASALT,
+            Blocks.HAY_BLOCK,
+            Blocks.COPPER_BLOCK,
+            Blocks.CUT_COPPER,
+            Blocks.EXPOSED_COPPER,
+            Blocks.OXIDIZED_COPPER,
+            Blocks.WEATHERED_COPPER,
+            Blocks.WAXED_COPPER_BLOCK,
+            Blocks.WAXED_EXPOSED_COPPER,
+            Blocks.WAXED_OXIDIZED_COPPER,
+            Blocks.WAXED_WEATHERED_COPPER,
+            Blocks.BOOKSHELF,
+            Blocks.AMETHYST_BLOCK,
+            Blocks.BUDDING_AMETHYST,
+            Blocks.CHISELED_SANDSTONE,
+            Blocks.CHISELED_QUARTZ_BLOCK,
+            Blocks.QUARTZ_PILLAR,
+            Blocks.PACKED_ICE,
+            Blocks.SNOW_BLOCK,
+            Blocks.CHISELED_STONE_BRICKS,
+            Blocks.CRACKED_STONE_BRICKS,
+            Blocks.OBSIDIAN
           )
           .addTags(
+            ModTags.EXTRA_BLOCKS,
+            ModTags.BRICKS,
+            ModTags.CONCRETE,
+            ModTags.TERRACOTTA,
+            BlockTags.DIRT,
+            BlockTags.WOOL,
+            BlockTags.LEAVES,
+            Tags.Blocks.STORAGE_BLOCKS,
+            Tags.Blocks.GLASS,
             BlockTags.LOGS,
             BlockTags.CORAL_BLOCKS,
-            BlockTags.WART_BLOCKS,
-            ModTags.EXTRA_BLOCKS,
-            ModTags.BRICKS
+            BlockTags.WART_BLOCKS
           );
-
     }
 
     @Override

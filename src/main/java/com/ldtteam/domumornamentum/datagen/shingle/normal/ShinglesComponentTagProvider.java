@@ -6,7 +6,6 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -24,50 +23,30 @@ public class ShinglesComponentTagProvider extends BlockTagsProvider
     @Override
     protected void addTags()
     {
-
         this.tag(ModTags.SHINGLES_ROOF)
           .add(
             Blocks.CLAY,
-            Blocks.TERRACOTTA,
-            Blocks.WHITE_TERRACOTTA,
-            Blocks.ORANGE_TERRACOTTA,
-            Blocks.MAGENTA_TERRACOTTA,
-            Blocks.LIGHT_BLUE_TERRACOTTA,
-            Blocks.YELLOW_TERRACOTTA,
-            Blocks.LIME_TERRACOTTA,
-            Blocks.PINK_TERRACOTTA,
-            Blocks.GRAY_TERRACOTTA,
-            Blocks.LIGHT_GRAY_TERRACOTTA,
-            Blocks.CYAN_TERRACOTTA,
-            Blocks.PURPLE_TERRACOTTA,
-            Blocks.BLUE_TERRACOTTA,
-            Blocks.BROWN_TERRACOTTA,
-            Blocks.GREEN_TERRACOTTA,
-            Blocks.RED_TERRACOTTA,
-            Blocks.BLACK_TERRACOTTA,
-            Blocks.BLACK_TERRACOTTA,
-            Blocks.BLACKSTONE,
-            Blocks.GILDED_BLACKSTONE,
-            Blocks.HAY_BLOCK
+            Blocks.BRICKS,
+            Blocks.DEEPSLATE,
+            Blocks.COBBLED_DEEPSLATE,
+            Blocks.POLISHED_BLACKSTONE
           )
           .addTags(
-            BlockTags.LOGS,
+            ModTags.GLOBAL_DEFAULT,
+            BlockTags.LEAVES,
             BlockTags.PLANKS,
-            BlockTags.CORAL_BLOCKS,
-            BlockTags.WART_BLOCKS,
-            ModTags.EXTRA_BLOCKS,
-            ModTags.BRICKS
+            BlockTags.DIRT
           );
 
         this.tag(ModTags.SHINGLES_SUPPORT)
+          .add(
+            Blocks.DEEPSLATE,
+            Blocks.COBBLED_DEEPSLATE,
+            Blocks.POLISHED_BLACKSTONE
+          )
           .addTags(
-            BlockTags.LOGS,
-            BlockTags.PLANKS,
-            Tags.Blocks.STONE,
-            Tags.Blocks.END_STONES,
-            Tags.Blocks.NETHERRACK,
-            Tags.Blocks.OBSIDIAN,
-            ModTags.BRICKS
+            ModTags.GLOBAL_DEFAULT,
+            BlockTags.PLANKS
           );
     }
 

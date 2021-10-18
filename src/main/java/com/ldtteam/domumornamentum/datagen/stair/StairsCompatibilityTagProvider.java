@@ -24,12 +24,12 @@ public class StairsCompatibilityTagProvider extends BlockTagsProvider
     {
         this.tag(BlockTags.STAIRS)
           .add(
-            ModBlocks.getStair()
+            ModBlocks.getInstance().getStair()
           );
 
         this.tag(BlockTags.WOODEN_STAIRS)
           .add(
-            ModBlocks.getStair()
+            ModBlocks.getInstance().getStair()
           );
     }
 

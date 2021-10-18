@@ -1,0 +1,240 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"textures": {
+		"0": "block/oak_planks",
+		"2": "block/oak_planks",
+		"particle": "block/oak_planks"
+	},
+	"elements": [
+		{
+			"name": "jungle_door_top_0",
+			"from": [0, 27, 0],
+			"to": [3, 32, 5],
+			"faces": {
+				"north": {"uv": [0, 0, 1, 5], "texture": "#0"},
+				"east": {"uv": [0, 5, 5, 0], "rotation": 180, "texture": "#0"},
+				"south": {"uv": [4, 0, 5, 5], "texture": "#0"},
+				"west": {"uv": [0, 0, 5, 5], "texture": "#0"},
+				"up": {"uv": [5, 0, 0, 1], "rotation": 270, "texture": "#0"},
+				"down": {"uv": [0, 4, 5, 5], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "jungle_door_top_1",
+			"from": [0, 29, 5],
+			"to": [3, 32, 16],
+			"faces": {
+				"north": {"uv": [5, 0, 6, 3], "texture": "#0"},
+				"east": {"uv": [5, 3, 16, 0], "rotation": 180, "texture": "#0"},
+				"south": {"uv": [15, 0, 16, 3], "texture": "#0"},
+				"west": {"uv": [5, 0, 16, 3], "texture": "#0"},
+				"up": {"uv": [16, 0, 5, 1], "rotation": 270, "texture": "#0"},
+				"down": {"uv": [5, 2, 16, 3], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "jungle_door_top_2",
+			"from": [0, 28, 5],
+			"to": [3, 29, 7],
+			"faces": {
+				"north": {"uv": [5, 3, 6, 4], "texture": "#0"},
+				"east": {"uv": [5, 4, 7, 3], "rotation": 180, "texture": "#0"},
+				"south": {"uv": [6, 3, 7, 4], "texture": "#0"},
+				"west": {"uv": [5, 3, 7, 4], "texture": "#0"},
+				"up": {"uv": [7, 3, 5, 4], "rotation": 270, "texture": "#0"},
+				"down": {"uv": [5, 3, 7, 4], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "jungle_door_top_3",
+			"from": [0, 28, 9],
+			"to": [3, 29, 16],
+			"faces": {
+				"north": {"uv": [9, 3, 10, 4], "texture": "#0"},
+				"east": {"uv": [9, 4, 16, 3], "rotation": 180, "texture": "#0"},
+				"south": {"uv": [15, 3, 16, 4], "texture": "#0"},
+				"west": {"uv": [9, 3, 16, 4], "texture": "#0"},
+				"up": {"uv": [16, 3, 9, 4], "rotation": 270, "texture": "#0"},
+				"down": {"uv": [9, 3, 16, 4], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "jungle_door_top_4",
+			"from": [0, 22, 6],
+			"to": [3, 28, 7],
+			"faces": {
+				"north": {"uv": [6, 4, 7, 10], "texture": "#0"},
+				"east": {"uv": [6, 10, 7, 4], "rotation": 180, "texture": "#0"},
+				"south": {"uv": [6, 4, 7, 10], "texture": "#0"},
+				"west": {"uv": [6, 4, 7, 10], "texture": "#0"},
+				"up": {"uv": [7, 4, 6, 5], "rotation": 270, "texture": "#0"},
+				"down": {"uv": [6, 9, 7, 10], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "jungle_door_top_5",
+			"from": [0, 22, 9],
+			"to": [3, 28, 10],
+			"faces": {
+				"north": {"uv": [9, 4, 10, 10], "texture": "#0"},
+				"east": {"uv": [9, 10, 10, 4], "rotation": 180, "texture": "#0"},
+				"south": {"uv": [9, 4, 10, 10], "texture": "#0"},
+				"west": {"uv": [9, 4, 10, 10], "texture": "#0"},
+				"up": {"uv": [10, 4, 9, 5], "rotation": 270, "texture": "#0"},
+				"down": {"uv": [9, 9, 10, 10], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "jungle_door_top_6",
+			"from": [0, 27, 11],
+			"to": [3, 28, 16],
+			"faces": {
+				"north": {"uv": [11, 4, 12, 5], "texture": "#0"},
+				"east": {"uv": [11, 5, 16, 4], "rotation": 180, "texture": "#0"},
+				"south": {"uv": [15, 4, 16, 5], "texture": "#0"},
+				"west": {"uv": [11, 4, 16, 5], "texture": "#0"},
+				"up": {"uv": [16, 4, 11, 5], "rotation": 270, "texture": "#0"},
+				"down": {"uv": [11, 4, 16, 5], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "jungle_door_top_7",
+			"from": [0, 16, 0],
+			"to": [3, 27, 4],
+			"faces": {
+				"north": {"uv": [0, 5, 1, 16], "texture": "#0"},
+				"east": {"uv": [0, 16, 4, 5], "rotation": 180, "texture": "#0"},
+				"south": {"uv": [3, 5, 4, 16], "texture": "#0"},
+				"west": {"uv": [0, 5, 4, 16], "texture": "#0"},
+				"up": {"uv": [4, 5, 0, 6], "rotation": 270, "texture": "#0"},
+				"down": {"uv": [0, 15, 4, 16], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "jungle_door_top_8",
+			"from": [0, 16, 12],
+			"to": [3, 27, 16],
+			"faces": {
+				"north": {"uv": [12, 5, 13, 16], "texture": "#0"},
+				"east": {"uv": [12, 16, 16, 5], "rotation": 180, "texture": "#0"},
+				"south": {"uv": [15, 5, 16, 16], "texture": "#0"},
+				"west": {"uv": [12, 5, 16, 16], "texture": "#0"},
+				"up": {"uv": [16, 5, 12, 6], "rotation": 270, "texture": "#0"},
+				"down": {"uv": [12, 15, 16, 16], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "jungle_door_top_9",
+			"from": [0, 16, 4],
+			"to": [3, 24, 6],
+			"faces": {
+				"north": {"uv": [4, 8, 5, 16], "texture": "#0"},
+				"east": {"uv": [4, 16, 6, 8], "rotation": 180, "texture": "#0"},
+				"south": {"uv": [5, 8, 6, 16], "texture": "#0"},
+				"west": {"uv": [4, 8, 6, 16], "texture": "#0"},
+				"up": {"uv": [6, 8, 4, 9], "rotation": 270, "texture": "#0"},
+				"down": {"uv": [4, 15, 6, 16], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "jungle_door_top_10",
+			"from": [0, 22, 7],
+			"to": [3, 24, 9],
+			"faces": {
+				"north": {"uv": [7, 8, 8, 10], "texture": "#0"},
+				"east": {"uv": [7, 10, 9, 8], "rotation": 180, "texture": "#0"},
+				"south": {"uv": [8, 8, 9, 10], "texture": "#0"},
+				"west": {"uv": [7, 8, 9, 10], "texture": "#0"},
+				"up": {"uv": [9, 8, 7, 9], "rotation": 270, "texture": "#0"},
+				"down": {"uv": [7, 9, 9, 10], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "jungle_door_top_11",
+			"from": [0, 16, 10],
+			"to": [3, 24, 12],
+			"faces": {
+				"north": {"uv": [10, 8, 11, 16], "texture": "#0"},
+				"east": {"uv": [10, 16, 12, 8], "rotation": 180, "texture": "#0"},
+				"south": {"uv": [11, 8, 12, 16], "texture": "#0"},
+				"west": {"uv": [10, 8, 12, 16], "texture": "#0"},
+				"up": {"uv": [12, 8, 10, 9], "rotation": 270, "texture": "#0"},
+				"down": {"uv": [10, 15, 12, 16], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "jungle_door_top_12",
+			"from": [0, 16, 6],
+			"to": [3, 21, 7],
+			"faces": {
+				"north": {"uv": [6, 11, 7, 16], "texture": "#0"},
+				"east": {"uv": [6, 16, 7, 11], "rotation": 180, "texture": "#0"},
+				"south": {"uv": [6, 11, 7, 16], "texture": "#0"},
+				"west": {"uv": [6, 11, 7, 16], "texture": "#0"},
+				"up": {"uv": [7, 11, 6, 12], "rotation": 270, "texture": "#0"},
+				"down": {"uv": [6, 15, 7, 16], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "jungle_door_top_13",
+			"from": [0, 16, 9],
+			"to": [3, 21, 10],
+			"faces": {
+				"north": {"uv": [9, 11, 10, 16], "texture": "#0"},
+				"east": {"uv": [9, 16, 10, 11], "rotation": 180, "texture": "#0"},
+				"south": {"uv": [9, 11, 10, 16], "texture": "#0"},
+				"west": {"uv": [9, 11, 10, 16], "texture": "#0"},
+				"up": {"uv": [10, 11, 9, 12], "rotation": 270, "texture": "#0"},
+				"down": {"uv": [9, 15, 10, 16], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "jungle_door_top_14",
+			"from": [0, 16, 7],
+			"to": [3, 20, 9],
+			"faces": {
+				"north": {"uv": [7, 12, 8, 16], "texture": "#0"},
+				"east": {"uv": [7, 16, 9, 12], "rotation": 180, "texture": "#0"},
+				"south": {"uv": [8, 12, 9, 16], "texture": "#0"},
+				"west": {"uv": [7, 12, 9, 16], "texture": "#0"},
+				"up": {"uv": [9, 12, 7, 13], "rotation": 270, "texture": "#0"},
+				"down": {"uv": [7, 15, 9, 16], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "birch_door_bottom_0",
+			"from": [0, 0, 0],
+			"to": [3, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 1, 16], "texture": "#2"},
+				"east": {"uv": [0, 16, 16, 0], "rotation": 180, "texture": "#2"},
+				"south": {"uv": [15, 0, 16, 16], "texture": "#2"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#2"},
+				"up": {"uv": [16, 0, 0, 1], "rotation": 270, "texture": "#2"},
+				"down": {"uv": [0, 15, 16, 16], "rotation": 270, "texture": "#2"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "jungle_door_top",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+		},
+		{
+			"name": "door_port_manteau_spec",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [
+				{
+					"name": "birch_door_bottom",
+					"origin": [8, 8, 8],
+					"color": 0,
+					"children": [15]
+				}
+			]
+		}
+	]
+}

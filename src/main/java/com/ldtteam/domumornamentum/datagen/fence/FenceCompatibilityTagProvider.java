@@ -28,12 +28,12 @@ public class FenceCompatibilityTagProvider extends BlockTagsProvider
 
         this.tag(BlockTags.FENCES)
           .add(
-            ModBlocks.getFence()
+            ModBlocks.getInstance().getFence()
           );
 
         this.tag(BlockTags.WOODEN_FENCES)
           .add(
-            ModBlocks.getFence()
+            ModBlocks.getInstance().getFence()
           );
     }
 

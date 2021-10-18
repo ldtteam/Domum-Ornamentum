@@ -1,6 +1,5 @@
 package com.ldtteam.domumornamentum.block.types;
 
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
@@ -36,7 +35,10 @@ public enum ExtraBlockType implements StringRepresentable
     BASE_THATCHED(null, Items.WHEAT),
     WHITE_CLAY(DyeColor.WHITE, Items.BRICK),
     YELLOW_CLAY(DyeColor.YELLOW, Items.BRICK),
-    BASE_PAPER(null, Items.PAPER);
+    BASE_PAPER(null, Items.PAPER),
+    BASE_CACTUS(null, Items.CACTUS),
+    GREEN_CACTUS(DyeColor.GREEN, Items.CACTUS),
+    LIGHT_PAPER(DyeColor.WHITE, Items.PAPER);
 
     private final DyeColor color;
     private final Item material;

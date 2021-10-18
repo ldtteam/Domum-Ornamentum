@@ -36,7 +36,7 @@ public class StairsBlockStateProvider implements DataProvider
     @Override
     public void run(@NotNull final HashCache cache) throws IOException
     {
-        createBlockstateFile(cache, ModBlocks.getStair());
+        createBlockstateFile(cache, ModBlocks.getInstance().getStair());
     }
 
     private void createBlockstateFile(final HashCache cache, final StairBlock shingle) throws IOException

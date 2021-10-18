@@ -1,6 +1,6 @@
 package com.ldtteam.domumornamentum.datagen.bricks;
 
-import com.ldtteam.domumornamentum.block.ModBlocks;
+import com.ldtteam.domumornamentum.block.IModBlocks;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.data.DataGenerator;
@@ -12,9 +12,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class BrickBlockTagProvider extends BlockTagsProvider
 {
-    public BrickBlockTagProvider(
-      final DataGenerator generatorIn,
-      @Nullable final ExistingFileHelper existingFileHelper)
+    public BrickBlockTagProvider(final DataGenerator generatorIn, @Nullable final ExistingFileHelper existingFileHelper)
     {
         super(generatorIn, Constants.MOD_ID, existingFileHelper);
     }
@@ -23,7 +21,7 @@ public class BrickBlockTagProvider extends BlockTagsProvider
     @Override
     protected void addTags()
     {
-        for (final Block block : ModBlocks.getBricks())
+        for (final Block block : IModBlocks.getInstance().getBricks())
         {
             this.tag(ModTags.BRICKS).add(block);
         }

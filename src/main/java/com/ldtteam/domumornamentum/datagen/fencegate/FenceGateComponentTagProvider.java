@@ -23,40 +23,10 @@ public class FenceGateComponentTagProvider extends BlockTagsProvider
     @Override
     protected void addTags()
     {
-
         this.tag(ModTags.FENCE_GATE_MATERIALS)
-          .add(
-            Blocks.CLAY,
-            Blocks.TERRACOTTA,
-            Blocks.WHITE_TERRACOTTA,
-            Blocks.ORANGE_TERRACOTTA,
-            Blocks.MAGENTA_TERRACOTTA,
-            Blocks.LIGHT_BLUE_TERRACOTTA,
-            Blocks.YELLOW_TERRACOTTA,
-            Blocks.LIME_TERRACOTTA,
-            Blocks.PINK_TERRACOTTA,
-            Blocks.GRAY_TERRACOTTA,
-            Blocks.LIGHT_GRAY_TERRACOTTA,
-            Blocks.CYAN_TERRACOTTA,
-            Blocks.PURPLE_TERRACOTTA,
-            Blocks.BLUE_TERRACOTTA,
-            Blocks.BROWN_TERRACOTTA,
-            Blocks.GREEN_TERRACOTTA,
-            Blocks.RED_TERRACOTTA,
-            Blocks.BLACK_TERRACOTTA,
-            Blocks.BLACK_TERRACOTTA,
-            Blocks.BLACKSTONE,
-            Blocks.GILDED_BLACKSTONE,
-            Blocks.HAY_BLOCK
-          )
           .addTags(
-            BlockTags.LOGS,
-            BlockTags.CORAL_BLOCKS,
-            BlockTags.WART_BLOCKS,
-            ModTags.EXTRA_BLOCKS,
-            ModTags.BRICKS
+            ModTags.FENCE_MATERIALS
           );
-
     }
 
     @Override

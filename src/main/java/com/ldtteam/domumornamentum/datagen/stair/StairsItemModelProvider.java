@@ -38,10 +38,10 @@ public class StairsItemModelProvider implements DataProvider
 
         modelJson.setParent(modelLocation);
 
-        if (ModBlocks.getStair().getRegistryName() == null)
+        if (ModBlocks.getInstance().getStair().getRegistryName() == null)
             return;
 
-        final String name = ModBlocks.getStair().getRegistryName().getPath();
+        final String name = ModBlocks.getInstance().getStair().getRegistryName().getPath();
         DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(modelJson), generator.getOutputFolder().resolve(DataGeneratorConstants.ITEM_MODEL_DIR).resolve(name + ".json"));
     }
 

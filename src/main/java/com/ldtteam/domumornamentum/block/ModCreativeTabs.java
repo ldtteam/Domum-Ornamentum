@@ -15,68 +15,7 @@ public final class ModCreativeTabs
         @Override
         public @NotNull ItemStack makeIcon()
         {
-            return new ItemStack(ModBlocks.getArchitectsCutter());
-        }
-
-        @Override
-        public boolean hasSearchBar()
-        {
-            return false;
-        }
-    };
-
-
-    public static final CreativeModeTab TIMBER_FRAMES = new CreativeModeTab(Constants.MOD_ID + ".timber_frames")
-    {
-        @Override
-        public @NotNull ItemStack makeIcon()
-        {
-            return new ItemStack(ModBlocks.getTimberFrames().stream().findFirst().orElse(null));
-        }
-
-        @Override
-        public boolean hasSearchBar()
-        {
-            return false;
-        }
-    };
-
-    public static final CreativeModeTab SHINGLES = new CreativeModeTab(Constants.MOD_ID + ".shingles")
-    {
-        @Override
-        public @NotNull ItemStack makeIcon()
-        {
-            return new ItemStack(ModBlocks.getShingle());
-        }
-
-        @Override
-        public boolean hasSearchBar()
-        {
-            return false;
-        }
-    };
-
-    public static final CreativeModeTab SHINGLE_SLABS = new CreativeModeTab(Constants.MOD_ID + ".shingle_slabs")
-    {
-        @Override
-        public @NotNull ItemStack makeIcon()
-        {
-            return new ItemStack(ModBlocks.getShingleSlab());
-        }
-
-        @Override
-        public boolean hasSearchBar()
-        {
-            return false;
-        }
-    };
-
-    public static final CreativeModeTab PAPERWALLS = new CreativeModeTab(Constants.MOD_ID + ".paperwalls")
-    {
-        @Override
-        public @NotNull ItemStack makeIcon()
-        {
-            return new ItemStack(ModBlocks.getPaperWall());
+            return new ItemStack(IModBlocks.getInstance().getArchitectsCutter());
         }
 
         @Override
@@ -91,7 +30,7 @@ public final class ModCreativeTabs
         @Override
         public @NotNull ItemStack makeIcon()
         {
-            return new ItemStack(ModBlocks.getExtraTopBlocks().get(0));
+            return new ItemStack(IModBlocks.getInstance().getExtraTopBlocks().get(0));
         }
 
         @Override
@@ -106,67 +45,7 @@ public final class ModCreativeTabs
         @Override
         public @NotNull ItemStack makeIcon()
         {
-            return new ItemStack(ModBlocks.getFloatingCarpets().get(0));
-        }
-
-        @Override
-        public boolean hasSearchBar()
-        {
-            return false;
-        }
-    };
-
-    public static final CreativeModeTab FENCES = new CreativeModeTab(Constants.MOD_ID + ".fences")
-    {
-        @Override
-        public @NotNull ItemStack makeIcon()
-        {
-            return new ItemStack(ModBlocks.getFence());
-        }
-
-        @Override
-        public boolean hasSearchBar()
-        {
-            return false;
-        }
-    };
-
-    public static final CreativeModeTab SLABS = new CreativeModeTab(Constants.MOD_ID + ".slabs")
-    {
-        @Override
-        public @NotNull ItemStack makeIcon()
-        {
-            return new ItemStack(ModBlocks.getSlab());
-        }
-
-        @Override
-        public boolean hasSearchBar()
-        {
-            return false;
-        }
-    };
-
-    public static final CreativeModeTab WALLS = new CreativeModeTab(Constants.MOD_ID + ".walls")
-    {
-        @Override
-        public @NotNull ItemStack makeIcon()
-        {
-            return new ItemStack(ModBlocks.getWall());
-        }
-
-        @Override
-        public boolean hasSearchBar()
-        {
-            return false;
-        }
-    };
-
-    public static final CreativeModeTab STAIRS = new CreativeModeTab(Constants.MOD_ID + ".stairs")
-    {
-        @Override
-        public @NotNull ItemStack makeIcon()
-        {
-            return new ItemStack(ModBlocks.getStair());
+            return new ItemStack(IModBlocks.getInstance().getFloatingCarpets().get(0));
         }
 
         @Override

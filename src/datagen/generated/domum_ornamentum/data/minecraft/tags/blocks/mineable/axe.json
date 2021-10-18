@@ -1,0 +1,20 @@
+{
+  "replace": false,
+  "values": [
+    "domum_ornamentum:architectscutter",
+    "domum_ornamentum:blockbarreldeco_onside",
+    "domum_ornamentum:blockbarreldeco_standing",
+    "domum_ornamentum:shingle",
+    "domum_ornamentum:shingle_slab",
+    "domum_ornamentum:plain",
+    "domum_ornamentum:double_crossed",
+    "domum_ornamentum:framed",
+    "domum_ornamentum:side_framed",
+    "domum_ornamentum:up_gated",
+    "domum_ornamentum:down_gated",
+    "domum_ornamentum:one_crossed_lr",
+    "domum_ornamentum:one_crossed_rl",
+    "domum_ornamentum:horizontal_plain",
+    "domum_ornamentum:side_framed_horizontal"
+  ]
+}

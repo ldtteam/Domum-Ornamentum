@@ -27,13 +27,21 @@ public class RetexturedBakedModelBuilder
 
     public static RetexturedBakedModelBuilder createFor(final BakedModel target)
     {
-        return new RetexturedBakedModelBuilder(target);
+        return new RetexturedBakedModelBuilder(target, target);
     }
 
+    public static RetexturedBakedModelBuilder createFor(final BakedModel sourceModel, final BakedModel target)
+    {
+        return new RetexturedBakedModelBuilder(sourceModel, target);
+    }
+
+    private final BakedModel sourceModel;
     private final BakedModel target;
     private final Map<ResourceLocation, BakedModel> retexturingMaps = Maps.newHashMap();
 
-    private RetexturedBakedModelBuilder(final BakedModel target) {this.target = target;}
+    private RetexturedBakedModelBuilder(final BakedModel sourceModel, final BakedModel target) {
+        this.sourceModel = sourceModel;
+        this.target = target;}
 
     public RetexturedBakedModelBuilder with(
       final ResourceLocation source,
@@ -84,25 +92,25 @@ public class RetexturedBakedModelBuilder
               @Override
               public boolean isShadedInGui()
               {
-                  return target.isGui3d();
+                  return sourceModel.isGui3d();
               }
 
               @Override
               public boolean isSideLit()
               {
-                  return target.usesBlockLight();
+                  return sourceModel.usesBlockLight();
               }
 
               @Override
               public boolean useSmoothLighting()
               {
-                  return target.useAmbientOcclusion();
+                  return sourceModel.useAmbientOcclusion();
               }
 
               @Override
               public ItemTransforms getCameraTransforms()
               {
-                  return target.getTransforms();
+                  return sourceModel.getTransforms();
               }
 
               @Override

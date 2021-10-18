@@ -29,7 +29,7 @@ public class ExtraBlockStateProvider implements DataProvider
     @Override
     public void run(@NotNull final HashCache cache) throws IOException
     {
-        for (final ExtraBlock state : ModBlocks.getExtraTopBlocks())
+        for (final ExtraBlock state : ModBlocks.getInstance().getExtraTopBlocks())
         {
             final Map<String, BlockstateVariantJson> variants = new HashMap<>();
             variants.put("", new BlockstateVariantJson(new BlockstateModelJson(Constants.MOD_ID + ":block/extra/" + state.getRegistryName().getPath())));

@@ -48,6 +48,7 @@ public class ShingleSlabBlockItem extends BlockItem
       final @NotNull ItemStack stack, @Nullable final Level worldIn, final @NotNull List<Component> tooltip, final @NotNull TooltipFlag flagIn)
     {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
+        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".origin.tooltip"));
 
         final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
         final MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
@@ -61,5 +62,10 @@ public class ShingleSlabBlockItem extends BlockItem
         final Block coverBlock = textureData.getTexturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
         final Component coverBlockName = BlockUtils.getHoverName(coverBlock);
         tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".shingle_slab.cover.format", coverBlockName));
+
+        final IMateriallyTexturedBlockComponent mainComponent = shingleBlock.getComponents().get(0);
+        final Block mainBlock = textureData.getTexturedComponents().getOrDefault(mainComponent.getId(), mainComponent.getDefault());
+        final Component mainBlockName = BlockUtils.getHoverName(mainBlock);
+        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".shingle_slab.main.format", mainBlockName));
     }
 }

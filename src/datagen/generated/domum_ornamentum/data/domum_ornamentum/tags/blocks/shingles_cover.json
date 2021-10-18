@@ -1,13 +1,6 @@
 {
   "replace": false,
   "values": [
-    "#minecraft:logs",
-    "#minecraft:planks",
-    "#forge:stone",
-    "#forge:end_stones",
-    "#forge:netherrack",
-    "#forge:obsidian",
-    "#domum_ornamentum:extra_block",
-    "#domum_ornamentum:bricks"
+    "#domum_ornamentum:shingles_roof"
   ]
 }

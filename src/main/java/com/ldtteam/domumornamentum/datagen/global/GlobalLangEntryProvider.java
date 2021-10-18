@@ -37,11 +37,13 @@ public class GlobalLangEntryProvider implements DataProvider
         backingLangJson.put("itemGroup." + Constants.MOD_ID + ".slabs", "DO - Slabs");
         backingLangJson.put("itemGroup." + Constants.MOD_ID + ".walls", "DO - Walls");
         backingLangJson.put("itemGroup." + Constants.MOD_ID + ".stairs", "DO - Stairs");
+        backingLangJson.put("itemGroup." + Constants.MOD_ID + ".doors", "DO - Doors");
         backingLangJson.put("block." + Constants.MOD_ID + ".architectscutter", "Architects cutter");
         backingLangJson.put(Constants.MOD_ID + ".architectscutter", "Architects cutter");
-
-        backingLangJson.put(ModBlocks.getStandingBarrel().getDescriptionId(), "Standing Barrel");
-        backingLangJson.put(ModBlocks.getLayingBarrel().getDescriptionId(), "Laying Barrel");
+        backingLangJson.put(Constants.MOD_ID + ".origin.tooltip", "Crafted in the Architects cutter");
+        backingLangJson.put(Constants.MOD_ID + ".block.format", "Material: %s");
+        backingLangJson.put(ModBlocks.getInstance().getStandingBarrel().getDescriptionId(), "Standing Barrel");
+        backingLangJson.put(ModBlocks.getInstance().getLayingBarrel().getDescriptionId(), "Laying Barrel");
 
         DataProvider.save(DataGeneratorConstants.GSONLang, cache, backingLangJson.serialize(), dataGenerator.getOutputFolder().resolve(DataGeneratorConstants.EN_US_LANG));
     }

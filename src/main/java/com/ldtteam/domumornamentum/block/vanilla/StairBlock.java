@@ -13,6 +13,7 @@ import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
 import com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes;
 import com.ldtteam.domumornamentum.item.vanilla.StairsBlockItem;
 import com.ldtteam.domumornamentum.tag.ModTags;
+import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
@@ -39,7 +40,10 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -62,7 +66,7 @@ public class StairBlock extends AbstractBlockStairs<StairBlock> implements IMate
 
     public StairBlock()
     {
-        super(OAK_PLANKS::defaultBlockState, Properties.of(Material.WOOD, OAK_PLANKS.defaultMaterialColor()).strength(2.0F, 3.0F).sound(SoundType.WOOD));
+        super(OAK_PLANKS::defaultBlockState, Properties.of(Material.WOOD, OAK_PLANKS.defaultMaterialColor()).noOcclusion().strength(2.0F, 3.0F).sound(SoundType.WOOD));
         setRegistryName(Constants.MOD_ID, "vanilla_stairs_compat");
     }
 
@@ -210,14 +214,36 @@ public class StairBlock extends AbstractBlockStairs<StairBlock> implements IMate
         state.getBlock().wasExploded(p_56878_, p_56879_, p_56880_);
     }
 
+    @Override
+    public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootContext.Builder builder)
+    {
+        return BlockUtils.getMaterializedItemStack(builder);
+    }
+
+    @Override
+    public ItemStack getPickBlock(
+      final BlockState state, final HitResult target, final BlockGetter world, final BlockPos pos, final Player player)
+    {
+        return BlockUtils.getMaterializedItemStack(player, world, pos);
+    }
+
     private BlockState getBlockState(final BlockGetter blockGetter, final BlockPos blockPos) {
         final BlockEntity blockEntity = blockGetter.getBlockEntity(blockPos);
 
         if (blockEntity instanceof MateriallyTexturedBlockEntity) {
             final MaterialTextureData data = ((MateriallyTexturedBlockEntity) blockEntity).getTextureData();
-            return data.getTexturedComponents().get(MATERIAL_COMPONENT.getId()).defaultBlockState();
+            final Block block = data.getTexturedComponents().get(MATERIAL_COMPONENT.getId());
+            if (block != null) {
+                return block.defaultBlockState();
+            }
         }
 
         return Blocks.AIR.defaultBlockState();
+    }
+
+    @Override
+    public @NotNull Block getBlock()
+    {
+        return this;
     }
 }

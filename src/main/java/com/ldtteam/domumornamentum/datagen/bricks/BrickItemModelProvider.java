@@ -1,6 +1,7 @@
 package com.ldtteam.domumornamentum.datagen.bricks;
 
 import com.ldtteam.datagenerators.models.item.ItemModelJson;
+import com.ldtteam.domumornamentum.block.IModBlocks;
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.decorative.BrickBlock;
 import com.ldtteam.domumornamentum.util.Constants;
@@ -8,6 +9,7 @@ import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
+import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -26,7 +28,7 @@ public class BrickItemModelProvider implements DataProvider
     {
         final ItemModelJson modelJson = new ItemModelJson();
 
-        for (final BrickBlock state : ModBlocks.getBricks())
+        for (final Block state : IModBlocks.getInstance().getBricks())
         {
             final String modelLocation = Constants.MOD_ID + ":block/brick/" + state.getRegistryName().getPath();
 

@@ -47,14 +47,14 @@ public class PaperwallBlockItem extends BlockItem
     }
 
     @Override
-    public void appendHoverText(
-      @NotNull final ItemStack stack, @Nullable final Level worldIn, @NotNull final List<Component> tooltip, @NotNull final TooltipFlag flagIn)
+    public void appendHoverText(@NotNull final ItemStack stack, @Nullable final Level worldIn, @NotNull final List<Component> tooltip, @NotNull final TooltipFlag flagIn)
     {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
 
         final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
         final MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
 
+        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".origin.tooltip"));
         tooltip.add(new TextComponent(""));
         tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".paperwall.header"));
 

@@ -35,7 +35,7 @@ public class TimberFramesItemModelProvider implements DataProvider
         final ItemModelJson modelJson = new ItemModelJson();
         modelJson.setDisplay(getDisplay());
 
-        for (TimberFrameBlock timberFrame : ModBlocks.getTimberFrames())
+        for (TimberFrameBlock timberFrame : ModBlocks.getInstance().getTimberFrames())
         {
             final String modelLocation = new ResourceLocation(Constants.MOD_ID, "block/timber_frames/" + Objects.requireNonNull(timberFrame.getRegistryName()).getPath()).toString();
 

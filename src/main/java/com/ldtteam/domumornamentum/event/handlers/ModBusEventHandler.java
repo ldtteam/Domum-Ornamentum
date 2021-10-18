@@ -2,21 +2,28 @@ package com.ldtteam.domumornamentum.event.handlers;
 
 import com.ldtteam.datagenerators.lang.LangJson;
 import com.ldtteam.domumornamentum.datagen.bricks.*;
+import com.ldtteam.domumornamentum.datagen.door.*;
+import com.ldtteam.domumornamentum.datagen.door.fancy.*;
 import com.ldtteam.domumornamentum.datagen.extra.*;
 import com.ldtteam.domumornamentum.datagen.fence.*;
 import com.ldtteam.domumornamentum.datagen.fencegate.*;
 import com.ldtteam.domumornamentum.datagen.floatingcarpet.*;
 import com.ldtteam.domumornamentum.datagen.frames.timber.*;
+import com.ldtteam.domumornamentum.datagen.global.GlobalTagProvider;
 import com.ldtteam.domumornamentum.datagen.global.GlobalLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.global.GlobalLootTableProvider;
+import com.ldtteam.domumornamentum.datagen.global.GlobalRecipeProvider;
 import com.ldtteam.domumornamentum.datagen.global.MateriallyTexturedBlockRecipeProvider;
 import com.ldtteam.domumornamentum.datagen.shingle.normal.*;
 import com.ldtteam.domumornamentum.datagen.shingle.slab.*;
 import com.ldtteam.domumornamentum.datagen.slab.*;
 import com.ldtteam.domumornamentum.datagen.stair.*;
+import com.ldtteam.domumornamentum.datagen.trapdoor.*;
+import com.ldtteam.domumornamentum.datagen.trapdoor.fancy.*;
 import com.ldtteam.domumornamentum.datagen.wall.paper.*;
 import com.ldtteam.domumornamentum.datagen.wall.vanilla.*;
 import com.ldtteam.domumornamentum.util.Constants;
+import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
@@ -35,16 +42,22 @@ public class ModBusEventHandler
         event.getGenerator().addProvider(new ExtraItemModelProvider(event.getGenerator()));
         event.getGenerator().addProvider(new ExtraBlockModelProvider(event.getGenerator()));
         event.getGenerator().addProvider(new ExtraRecipeProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new ExtraBlockTagProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(new ExtraLangEntryProvider(event.getGenerator(), langJson));
+        final ExtraBlockTagProvider extraBlockTagProvider = new ExtraBlockTagProvider(event.getGenerator(), event.getExistingFileHelper());
+        event.getGenerator().addProvider(extraBlockTagProvider);
+        event.getGenerator().addProvider(new ExtraItemTagProvider(event.getGenerator(), extraBlockTagProvider, event.getExistingFileHelper()));
 
         //Brick blocks
         event.getGenerator().addProvider(new BrickBlockStateProvider(event.getGenerator()));
         event.getGenerator().addProvider(new BrickItemModelProvider(event.getGenerator()));
         event.getGenerator().addProvider(new BrickBlockModelProvider(event.getGenerator()));
         event.getGenerator().addProvider(new BrickRecipeProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new BrickBlockTagProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(new BrickLangEntryProvider(event.getGenerator(), langJson));
+        final BrickBlockTagProvider brickBlockTagProvider = new BrickBlockTagProvider(event.getGenerator(), event.getExistingFileHelper());
+        event.getGenerator().addProvider(brickBlockTagProvider);
+        event.getGenerator().addProvider(new BrickItemTagProvider(event.getGenerator(), brickBlockTagProvider, event.getExistingFileHelper()));
+
+        event.getGenerator().addProvider(new GlobalTagProvider(event.getGenerator(), event.getExistingFileHelper()));
 
         // Timber Frames
         event.getGenerator().addProvider(new TimberFramesBlockStateProvider(event.getGenerator()));
@@ -113,6 +126,42 @@ public class ModBusEventHandler
         event.getGenerator().addProvider(new StairsComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(new StairsCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(new StairsLangEntryProvider(event.getGenerator(), langJson));
+        
+        //Trapdoor
+        event.getGenerator().addProvider(new TrapdoorsBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new TrapdoorsItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new TrapdoorsItemModelSpecProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new TrapdoorsBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new TrapdoorsComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(new TrapdoorsCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(new TrapdoorsLangEntryProvider(event.getGenerator(), langJson));
+
+        //Fancy Trapdoor
+        event.getGenerator().addProvider(new FancyTrapdoorsBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new FancyTrapdoorsItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new FancyTrapdoorsItemModelSpecProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new FancyTrapdoorsBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new FancyTrapdoorsComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(new FancyTrapdoorsCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(new FancyTrapdoorsLangEntryProvider(event.getGenerator(), langJson));
+
+        //Door
+        event.getGenerator().addProvider(new DoorsBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new DoorsItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new DoorsItemModelSpecProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new DoorsBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new DoorsComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(new DoorsCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(new DoorsLangEntryProvider(event.getGenerator(), langJson));
+
+        //FancyDoor
+        event.getGenerator().addProvider(new FancyDoorsBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new FancyDoorsItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new FancyDoorsItemModelSpecProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new FancyDoorsBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new FancyDoorsComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(new FancyDoorsCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(new FancyDoorsLangEntryProvider(event.getGenerator(), langJson));
 
         //Floating carpets
         event.getGenerator().addProvider(new FloatingCarpetBlockStateProvider(event.getGenerator()));
@@ -120,6 +169,8 @@ public class ModBusEventHandler
         event.getGenerator().addProvider(new FloatingCarpetItemModelProvider(event.getGenerator()));
         event.getGenerator().addProvider(new FloatingCarpetLangEntryProvider(event.getGenerator(), langJson));
         event.getGenerator().addProvider(new FloatingCarpetRecipeProvider(event.getGenerator()));
+
+        event.getGenerator().addProvider(new GlobalRecipeProvider(event.getGenerator()));
 
         //Global
         //IMPORTANT: Needs to be last since this writes the lang data actually to disk!!!!!

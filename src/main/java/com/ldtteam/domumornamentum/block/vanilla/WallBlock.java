@@ -11,6 +11,7 @@ import com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes;
 import com.ldtteam.domumornamentum.item.vanilla.FenceBlockItem;
 import com.ldtteam.domumornamentum.item.vanilla.WallBlockItem;
 import com.ldtteam.domumornamentum.tag.ModTags;
+import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
@@ -18,9 +19,11 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.Tag;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -28,6 +31,9 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -41,7 +47,7 @@ import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
 public class WallBlock extends AbstractBlockWall<WallBlock> implements IMateriallyTexturedBlock, EntityBlock, ICachedItemGroupBlock
 {
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
-                                                                               .add(new SimpleRetexturableComponent(new ResourceLocation("minecraft:block/oak_planks"), ModTags.FENCE_MATERIALS, OAK_PLANKS))
+                                                                               .add(new SimpleRetexturableComponent(new ResourceLocation("minecraft:block/oak_planks"), ModTags.WALL_MATERIALS, OAK_PLANKS))
                                                                                .build();
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
@@ -123,5 +129,24 @@ public class WallBlock extends AbstractBlockWall<WallBlock> implements IMaterial
     public void resetCache()
     {
         fillItemGroupCache.clear();
+    }
+
+    @Override
+    public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootContext.Builder builder)
+    {
+        return BlockUtils.getMaterializedItemStack(builder);
+    }
+
+    @Override
+    public ItemStack getPickBlock(
+      final BlockState state, final HitResult target, final BlockGetter world, final BlockPos pos, final Player player)
+    {
+        return BlockUtils.getMaterializedItemStack(player, world, pos);
+    }
+
+    @Override
+    public @NotNull Block getBlock()
+    {
+        return this;
     }
 }

@@ -37,10 +37,10 @@ public class WallItemModelProvider implements DataProvider
         modelJson.setParent(modelLocation);
         modelJson.setLoader(Constants.MATERIALLY_TEXTURED_MODEL_LOADER.toString());
 
-        if (ModBlocks.getWall().getRegistryName() == null)
+        if (ModBlocks.getInstance().getWall().getRegistryName() == null)
             return;
 
-        final String name = ModBlocks.getWall().getRegistryName().getPath();
+        final String name = ModBlocks.getInstance().getWall().getRegistryName().getPath();
         DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(modelJson), generator.getOutputFolder().resolve(DataGeneratorConstants.ITEM_MODEL_DIR).resolve(name + ".json"));
     }
 

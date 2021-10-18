@@ -3,6 +3,8 @@ package com.ldtteam.domumornamentum.entity.block;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.client.model.properties.ModProperties;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -12,7 +14,7 @@ import net.minecraftforge.client.model.data.ModelDataMap;
 import net.minecraftforge.common.util.Constants;
 import org.jetbrains.annotations.NotNull;
 
-public class MateriallyTexturedBlockEntity extends BlockEntity
+public class MateriallyTexturedBlockEntity extends BlockEntity implements IMateriallyTexturedBlockEntity
 {
 
     private MaterialTextureData textureData = MaterialTextureData.EMPTY;
@@ -22,6 +24,7 @@ public class MateriallyTexturedBlockEntity extends BlockEntity
         super(tileEntityTypeIn, pos, state);
     }
 
+    @Override
     public void updateTextureDataWith(final MaterialTextureData materialTextureData)
     {
         this.textureData = materialTextureData;
@@ -32,6 +35,25 @@ public class MateriallyTexturedBlockEntity extends BlockEntity
     public @NotNull CompoundTag getUpdateTag()
     {
         return save(new CompoundTag());
+    }
+
+    @Override
+    public void onDataPacket(final Connection net, final ClientboundBlockEntityDataPacket packet)
+    {
+        this.load(packet.getTag());
+    }
+
+    @Override
+    public void handleUpdateTag(final CompoundTag tag)
+    {
+        this.load(tag);
+    }
+
+    @Override
+    public ClientboundBlockEntityDataPacket getUpdatePacket()
+    {
+        final CompoundTag compound = new CompoundTag();
+        return new ClientboundBlockEntityDataPacket(this.worldPosition, 0, this.save(compound));
     }
 
     @NotNull
@@ -68,6 +90,7 @@ public class MateriallyTexturedBlockEntity extends BlockEntity
           .build();
     }
 
+    @Override
     @NotNull
     public MaterialTextureData getTextureData()
     {

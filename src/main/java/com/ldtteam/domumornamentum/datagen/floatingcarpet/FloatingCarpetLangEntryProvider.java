@@ -25,7 +25,7 @@ public class FloatingCarpetLangEntryProvider implements DataProvider
     @Override
     public void run(@NotNull HashCache cache) throws IOException
     {
-        for (final FloatingCarpetBlock floatingCarpet : ModBlocks.getFloatingCarpets())
+        for (final FloatingCarpetBlock floatingCarpet : ModBlocks.getInstance().getFloatingCarpets())
         {
             backingLangJson.put(floatingCarpet.getDescriptionId(), floatingCarpet.getColor().getName().substring(0, 1).toUpperCase() +
                                  floatingCarpet.getColor().getName().substring(1) + " Floating carpet");

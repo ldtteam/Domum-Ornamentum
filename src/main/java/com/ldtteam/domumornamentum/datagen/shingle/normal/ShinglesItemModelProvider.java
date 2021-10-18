@@ -38,10 +38,10 @@ public class ShinglesItemModelProvider implements DataProvider
 
         modelJson.setParent(modelLocation);
 
-        if (ModBlocks.getShingle().getRegistryName() == null)
+        if (ModBlocks.getInstance().getShingle().getRegistryName() == null)
             return;
 
-        final String name = ModBlocks.getShingle().getRegistryName().getPath();
+        final String name = ModBlocks.getInstance().getShingle().getRegistryName().getPath();
         DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(modelJson), generator.getOutputFolder().resolve(DataGeneratorConstants.ITEM_MODEL_DIR).resolve(name + ".json"));
     }
 

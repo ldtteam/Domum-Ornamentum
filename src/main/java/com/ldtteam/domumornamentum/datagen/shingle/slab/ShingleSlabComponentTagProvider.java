@@ -7,6 +7,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
@@ -26,16 +27,7 @@ public class ShingleSlabComponentTagProvider extends BlockTagsProvider
     protected void addTags()
     {
         this.tag(ModTags.SHINGLES_COVER)
-          .addTags(
-            BlockTags.LOGS,
-            BlockTags.PLANKS,
-            Tags.Blocks.STONE,
-            Tags.Blocks.END_STONES,
-            Tags.Blocks.NETHERRACK,
-            Tags.Blocks.OBSIDIAN,
-            ModTags.EXTRA_BLOCKS,
-            ModTags.BRICKS
-          );
+          .addTags(ModTags.SHINGLES_ROOF);
     }
 
     @Override

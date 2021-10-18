@@ -37,7 +37,7 @@ public class WallBlockStateProvider implements DataProvider
     @Override
     public void run(@NotNull final HashCache cache) throws IOException
     {
-        createBlockstateFile(cache, ModBlocks.getWall());
+        createBlockstateFile(cache, ModBlocks.getInstance().getWall());
     }
 
     private void createBlockstateFile(final HashCache cache, final WallBlock wallBlock) throws IOException

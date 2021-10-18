@@ -1,8 +1,7 @@
 package com.ldtteam.domumornamentum.container;
 
 import com.google.common.collect.Lists;
-import com.ldtteam.domumornamentum.block.MateriallyTexturedBlockManager;
-import com.ldtteam.domumornamentum.block.ModBlocks;
+import com.ldtteam.domumornamentum.block.*;
 import com.ldtteam.domumornamentum.recipe.ModRecipeTypes;
 import com.ldtteam.domumornamentum.recipe.architectscutter.ArchitectsCutterRecipe;
 import net.minecraft.core.NonNullList;
@@ -13,6 +12,7 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
@@ -22,8 +22,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class ArchitectsCutterContainer extends AbstractContainerMenu
 {
@@ -80,11 +79,26 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
                 stack.onCraftedBy(thePlayer.level, thePlayer, stack.getCount());
                 ArchitectsCutterContainer.this.inventory.awardUsedRecipes(thePlayer);
                 boolean anyEmpty = false;
-                for (final Slot inputInventorySlot : ArchitectsCutterContainer.this.inputInventorySlots)
+                List<Slot> inventorySlots = ArchitectsCutterContainer.this.inputInventorySlots;
+
+                final boolean craftingMateriallyTexturedBlock = stack.getItem() instanceof BlockItem blockItem && blockItem.getBlock() instanceof IMateriallyTexturedBlock;
+                final List<IMateriallyTexturedBlockComponent>
+                  components = craftingMateriallyTexturedBlock ? Lists.newArrayList(((IMateriallyTexturedBlock) ((BlockItem) stack.getItem()).getBlock()).getComponents()) : Collections.emptyList();
+
+                for (int i = 0; i < inventorySlots.size(); i++)
                 {
-                    if (!inputInventorySlot.getItem().isEmpty())
+                    final Slot inputInventorySlot = inventorySlots.get(i);
+
+                    final boolean isRequiredBlock = !craftingMateriallyTexturedBlock ||
+                                                      (i < components.size());
+
+                    if (!inputInventorySlot.getItem().isEmpty() && isRequiredBlock)
+                    {
                         if (!thePlayer.isCreative() && inputInventorySlot.remove(1).isEmpty())
+                        {
                             anyEmpty = true;
+                        }
+                    }
                 }
                 if (!anyEmpty) {
                     ArchitectsCutterContainer.this.updateRecipeResultSlot();
@@ -141,7 +155,7 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
      * Determines whether supplied player can use this container
      */
     public boolean stillValid(@NotNull Player playerIn) {
-        return stillValid(this.worldPosCallable, playerIn, ModBlocks.getArchitectsCutter());
+        return stillValid(this.worldPosCallable, playerIn, IModBlocks.getInstance().getArchitectsCutter());
     }
 
     /**
@@ -194,6 +208,7 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
         this.outputInventorySlot.set(ItemStack.EMPTY);
         if (!stacks.stream().allMatch(ItemStack::isEmpty)) {
             this.recipes = this.world.getRecipeManager().getRecipesFor(ModRecipeTypes.ARCHITECTS_CUTTER, inventoryIn, this.world);
+            this.recipes.sort(Comparator.comparing(ArchitectsCutterRecipe::getBlockName).thenComparing(ArchitectsCutterRecipe::getId));
         }
 
     }
