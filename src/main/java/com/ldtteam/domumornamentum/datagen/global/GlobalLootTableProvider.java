@@ -38,24 +38,24 @@ public class GlobalLootTableProvider implements DataProvider
     @Override
     public void run(@NotNull final HashCache cache) throws IOException
     {
-        for (final BrickBlock block : ModBlocks.getBricks())
+        for (final BrickBlock block : ModBlocks.getInstance().getBricks())
         {
             saveBlock(block, cache);
         }
 
-        for (final ExtraBlock block : ModBlocks.getExtraTopBlocks())
+        for (final ExtraBlock block : ModBlocks.getInstance().getExtraTopBlocks())
         {
             saveBlock(block, cache);
         }
 
-        for (final FloatingCarpetBlock block : ModBlocks.getFloatingCarpets())
+        for (final FloatingCarpetBlock block : ModBlocks.getInstance().getFloatingCarpets())
         {
             saveBlock(block, cache);
         }
 
-        saveBlock(ModBlocks.getStandingBarrel(), cache);
-        saveBlock(ModBlocks.getLayingBarrel(), cache);
-        saveBlock(ModBlocks.getArchitectsCutter(), cache);
+        saveBlock(ModBlocks.getInstance().getStandingBarrel(), cache);
+        saveBlock(ModBlocks.getInstance().getLayingBarrel(), cache);
+        saveBlock(ModBlocks.getInstance().getArchitectsCutter(), cache);
     }
 
     private void saveBlock(final Block block, final HashCache cache) throws IOException
