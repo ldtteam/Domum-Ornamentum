@@ -16,6 +16,7 @@ repositories {
 dependencies {
     implementation fg.deobf("mezz.jei:jei-${project.minecraftVersion}:${project.jei_version}")
 
-    apiImplementation "com.ldtteam:datagenerators:${project.dataGeneratorsVersion}"
+    apiLibrary "com.ldtteam:datagenerators:${project.dataGeneratorsVersion}"
+    datagenLibrary "com.ldtteam:datagenerators:${project.dataGeneratorsVersion}"
     library "com.ldtteam:datagenerators:${project.dataGeneratorsVersion}"
 }
