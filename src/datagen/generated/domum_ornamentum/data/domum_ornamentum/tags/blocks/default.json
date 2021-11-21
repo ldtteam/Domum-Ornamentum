@@ -38,6 +38,8 @@
     "minecraft:smooth_quartz",
     "minecraft:chiseled_quartz_block",
     "minecraft:red_nether_bricks",
+    "minecraft:tuff",
+    "minecraft:nether_bricks",
     "#domum_ornamentum:extra_block",
     "#forge:end_stones",
     "#domum_ornamentum:bricks",
@@ -51,6 +53,8 @@
     "#minecraft:wart_blocks",
     "#forge:stone",
     "#forge:cobblestone",
-    "#forge:obsidian"
+    "#forge:obsidian",
+    "#minecraft:stone_bricks",
+    "#minecraft:base_stone_nether"
   ]
 }

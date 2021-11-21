@@ -62,7 +62,8 @@ public class WallComponentTagProvider extends BlockTagsProvider
             Tags.Blocks.STORAGE_BLOCKS,
             Tags.Blocks.GLASS,
             BlockTags.LOGS,
-            BlockTags.WART_BLOCKS
+            BlockTags.WART_BLOCKS,
+            BlockTags.PLANKS
           );
     }
 

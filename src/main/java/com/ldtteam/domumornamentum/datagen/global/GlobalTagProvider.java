@@ -118,7 +118,9 @@ public class GlobalTagProvider extends BlockTagsProvider
           Blocks.QUARTZ_BRICKS,
           Blocks.SMOOTH_QUARTZ,
           Blocks.CHISELED_QUARTZ_BLOCK,
-          Blocks.RED_NETHER_BRICKS
+          Blocks.RED_NETHER_BRICKS,
+          Blocks.TUFF,
+          Blocks.NETHER_BRICKS
         )
           .addTags(
             ModTags.EXTRA_BLOCKS,
@@ -134,7 +136,9 @@ public class GlobalTagProvider extends BlockTagsProvider
             BlockTags.WART_BLOCKS,
             Tags.Blocks.STONE,
             Tags.Blocks.COBBLESTONE,
-            Tags.Blocks.OBSIDIAN
+            Tags.Blocks.OBSIDIAN,
+            BlockTags.STONE_BRICKS,
+            BlockTags.BASE_STONE_NETHER
             );
 
         this.tag(BlockTags.MINEABLE_WITH_AXE)

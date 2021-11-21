@@ -36,6 +36,7 @@
     "#forge:storage_blocks",
     "#forge:glass",
     "#minecraft:logs",
-    "#minecraft:wart_blocks"
+    "#minecraft:wart_blocks",
+    "#minecraft:planks"
   ]
 }
