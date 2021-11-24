@@ -116,8 +116,8 @@ repositories {
 3) Add the Domum Ornamentum API-jar as a Compile-time and the Domum Ornamentum Main-jar as a Run-time dependency:
 ```groovy
 dependencies {
-    compileOnly fg.deobf("com.ldtteam:domom-ornamentum:${project.exactMinecraftVersion}-${project.DomumOrnamentumVersion}:api")
-    runtimeOnly fg.deobf("com.ldtteam:domom-ornamentum:${project.exactMinecraftVersion}-${project.DomumOrnamentumVersion}:universal")
+    compileOnly fg.deobf("com.ldtteam:domum-ornamentum:${project.exactMinecraftVersion}-${project.DomumOrnamentumVersion}:api")
+    runtimeOnly fg.deobf("com.ldtteam:domum-ornamentum:${project.exactMinecraftVersion}-${project.DomumOrnamentumVersion}:universal")
 }
 ```
 
