@@ -45,7 +45,6 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.HitResult;
-import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -168,12 +167,12 @@ public class FancyDoorBlock extends AbstractBlockDoor<FancyDoorBlock> implements
         worldIn.setBlock(
           pos,
           worldIn.getBlockState(pos).setValue(TYPE, FancyDoorType.valueOf(type.toUpperCase())),
-          Constants.BlockFlags.DEFAULT_AND_RERENDER
+          Block.UPDATE_ALL
         );
         worldIn.setBlock(
           pos.above(),
           worldIn.getBlockState(pos.above()).setValue(TYPE, FancyDoorType.valueOf(type.toUpperCase())),
-          Constants.BlockFlags.DEFAULT_AND_RERENDER
+          Block.UPDATE_ALL
         );
 
         final CompoundTag textureData = stack.getOrCreateTagElement("textureData");
@@ -208,9 +207,8 @@ public class FancyDoorBlock extends AbstractBlockDoor<FancyDoorBlock> implements
         });
     }
 
-    @Override
-    public ItemStack getPickBlock(
-      final BlockState state, final HitResult target, final BlockGetter world, final BlockPos pos, final Player player)
+@Override
+    public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final BlockGetter world, final BlockPos pos, final Player player)
     {
         return BlockUtils.getMaterializedItemStack(player, world, pos, (s, e) -> {
             s.getOrCreateTag().putString("type", e.getBlockState().getValue(TYPE).toString().toUpperCase());

@@ -36,14 +36,10 @@ public class BarrelBlock extends AbstractBlock<BarrelBlock> implements SimpleWat
 
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-    private final boolean standing;
-
     public BarrelBlock(boolean standing)
     {
         super(AbstractBlock.Properties.copy(Blocks.OAK_PLANKS).strength(3f, 1f));
         this.registerDefaultState(this.getStateDefinition().any().setValue(WATERLOGGED, false));
-
-        this.standing = standing;
 
         if (!standing)
             this.setRegistryName(Constants.MOD_ID, "blockbarreldeco_onside");
@@ -94,7 +90,7 @@ public class BarrelBlock extends AbstractBlock<BarrelBlock> implements SimpleWat
     {
         if (stateIn.getValue(WATERLOGGED))
         {
-            worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
+            worldIn.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
         }
 
         return stateIn;

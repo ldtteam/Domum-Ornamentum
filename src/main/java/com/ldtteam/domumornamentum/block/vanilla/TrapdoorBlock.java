@@ -9,7 +9,6 @@ import com.ldtteam.domumornamentum.block.ICachedItemGroupBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.components.SimpleRetexturableComponent;
-import com.ldtteam.domumornamentum.block.types.FancyDoorType;
 import com.ldtteam.domumornamentum.block.types.TrapdoorType;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
@@ -42,9 +41,7 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.storage.loot.LootContext;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.HitResult;
-import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -56,10 +53,10 @@ import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
 @SuppressWarnings("deprecation")
 public class TrapdoorBlock extends AbstractBlockTrapdoor<TrapdoorBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock
 {
-    public static final EnumProperty<TrapdoorType> TYPE = EnumProperty.create("type", TrapdoorType.class);
+    public static final EnumProperty<TrapdoorType>              TYPE       = EnumProperty.create("type", TrapdoorType.class);
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
-                                                                               .add(new SimpleRetexturableComponent(new ResourceLocation("minecraft:block/oak_planks"), ModTags.TRAPDOORS_MATERIALS, OAK_PLANKS))
-                                                                               .build();
+      .add(new SimpleRetexturableComponent(new ResourceLocation("minecraft:block/oak_planks"), ModTags.TRAPDOORS_MATERIALS, OAK_PLANKS))
+      .build();
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
 
@@ -84,6 +81,26 @@ public class TrapdoorBlock extends AbstractBlockTrapdoor<TrapdoorBlock> implemen
     }
 
     @Override
+    public void setPlacedBy(
+      final @NotNull Level worldIn, final @NotNull BlockPos pos, final @NotNull BlockState state, @Nullable final LivingEntity placer, final @NotNull ItemStack stack)
+    {
+        super.setPlacedBy(worldIn, pos, state, placer, stack);
+
+        final String type = stack.getOrCreateTag().getString("type");
+        worldIn.setBlock(
+          pos,
+          state.setValue(TYPE, TrapdoorType.valueOf(type.toUpperCase())),
+          Block.UPDATE_ALL
+        );
+
+        final CompoundTag textureData = stack.getOrCreateTagElement("textureData");
+        final BlockEntity tileEntity = worldIn.getBlockEntity(pos);
+
+        if (tileEntity instanceof MateriallyTexturedBlockEntity)
+        {
+            ((MateriallyTexturedBlockEntity) tileEntity).updateTextureDataWith(MaterialTextureData.deserializeFromNBT(textureData));
+        }
+    }    @Override
     public List<IMateriallyTexturedBlockComponent> getComponents()
     {
         return COMPONENTS;
@@ -92,7 +109,8 @@ public class TrapdoorBlock extends AbstractBlockTrapdoor<TrapdoorBlock> implemen
     @Override
     public void fillItemCategory(final @NotNull CreativeModeTab group, final @NotNull NonNullList<ItemStack> items)
     {
-        if (!fillItemGroupCache.isEmpty()) {
+        if (!fillItemGroupCache.isEmpty())
+        {
             items.addAll(fillItemGroupCache);
             return;
         }
@@ -101,7 +119,8 @@ public class TrapdoorBlock extends AbstractBlockTrapdoor<TrapdoorBlock> implemen
 
         final Tag<Block> materialCandidate = materialComponent.getValidSkins();
 
-        try {
+        try
+        {
             for (final TrapdoorType trapdoorType : TrapdoorType.values())
             {
                 materialCandidate.getValues().forEach(cover -> {
@@ -120,34 +139,13 @@ public class TrapdoorBlock extends AbstractBlockTrapdoor<TrapdoorBlock> implemen
                     fillItemGroupCache.add(result);
                 });
             }
-
-
-        } catch (IllegalStateException exception)
+        }
+        catch (IllegalStateException exception)
         {
             //Ignored. Thrown during start up.
         }
 
         items.addAll(fillItemGroupCache);
-    }
-
-    @Override
-    public void setPlacedBy(
-      final @NotNull Level worldIn, final @NotNull BlockPos pos, final @NotNull BlockState state, @Nullable final LivingEntity placer, final @NotNull ItemStack stack)
-    {
-        super.setPlacedBy(worldIn, pos, state, placer, stack);
-
-        final String type = stack.getOrCreateTag().getString("type");
-        worldIn.setBlock(
-          pos,
-          state.setValue(TYPE, TrapdoorType.valueOf(type.toUpperCase())),
-          Constants.BlockFlags.DEFAULT_AND_RERENDER
-        );
-
-        final CompoundTag textureData = stack.getOrCreateTagElement("textureData");
-        final BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-
-        if (tileEntity instanceof MateriallyTexturedBlockEntity)
-            ((MateriallyTexturedBlockEntity) tileEntity).updateTextureDataWith(MaterialTextureData.deserializeFromNBT(textureData));
     }
 
     @Nullable
@@ -167,8 +165,7 @@ public class TrapdoorBlock extends AbstractBlockTrapdoor<TrapdoorBlock> implemen
     }
 
     @Override
-    public ItemStack getPickBlock(
-      final BlockState state, final HitResult target, final BlockGetter world, final BlockPos pos, final Player player)
+    public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final BlockGetter world, final BlockPos pos, final Player player)
     {
         return BlockUtils.getMaterializedItemStack(player, world, pos, (s, e) -> {
             s.getOrCreateTag().putString("type", e.getBlockState().getValue(TYPE).toString().toUpperCase());
@@ -181,6 +178,8 @@ public class TrapdoorBlock extends AbstractBlockTrapdoor<TrapdoorBlock> implemen
     {
         fillItemGroupCache.clear();
     }
+
+
 
     @Override
     public @NotNull Block getBlock()
@@ -196,7 +195,8 @@ public class TrapdoorBlock extends AbstractBlockTrapdoor<TrapdoorBlock> implemen
         for (final TrapdoorType value : TrapdoorType.values())
         {
             recipes.add(
-              new FinishedRecipe() {
+              new FinishedRecipe()
+              {
                   @Override
                   public void serializeRecipeData(final @NotNull JsonObject jsonObject)
                   {

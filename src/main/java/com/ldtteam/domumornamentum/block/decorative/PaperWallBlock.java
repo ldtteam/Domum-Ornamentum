@@ -198,8 +198,7 @@ public class PaperWallBlock extends AbstractBlockPane<PaperWallBlock> implements
     }
 
     @Override
-    public ItemStack getPickBlock(
-      final BlockState state, final HitResult target, final BlockGetter world, final BlockPos pos, final Player player)
+    public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final BlockGetter world, final BlockPos pos, final Player player)
     {
         return BlockUtils.getMaterializedItemStack(player, world, pos);
     }
@@ -209,7 +208,6 @@ public class PaperWallBlock extends AbstractBlockPane<PaperWallBlock> implements
     {
         return this;
     }
-
 
     @NotNull
     public Collection<FinishedRecipe> getValidCutterRecipes() {

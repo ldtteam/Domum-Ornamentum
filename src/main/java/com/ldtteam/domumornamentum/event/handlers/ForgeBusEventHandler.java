@@ -6,9 +6,9 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fmlserverevents.FMLServerStartedEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,7 +24,7 @@ public class ForgeBusEventHandler
     private static final Logger LOGGER = LogManager.getLogger();
 
     @SubscribeEvent
-    public static void onServerStarted(final FMLServerStartedEvent event) {
+    public static void onServerStarted(final ServerStartedEvent event) {
         if (!ACTIVE)
             return;
 

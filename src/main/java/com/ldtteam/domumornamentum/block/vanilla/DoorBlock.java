@@ -10,7 +10,6 @@ import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.components.SimpleRetexturableComponent;
 import com.ldtteam.domumornamentum.block.types.DoorType;
-import com.ldtteam.domumornamentum.block.types.FancyDoorType;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
 import com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes;
@@ -44,7 +43,6 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.HitResult;
-import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -140,12 +138,12 @@ public class DoorBlock extends AbstractBlockDoor<DoorBlock> implements IMaterial
         worldIn.setBlock(
           pos,
           worldIn.getBlockState(pos).setValue(TYPE, DoorType.valueOf(type.toUpperCase())),
-          Constants.BlockFlags.DEFAULT_AND_RERENDER
+          Block.UPDATE_ALL
         );
         worldIn.setBlock(
           pos.above(),
           worldIn.getBlockState(pos.above()).setValue(TYPE, DoorType.valueOf(type.toUpperCase())),
-          Constants.BlockFlags.DEFAULT_AND_RERENDER
+          Block.UPDATE_ALL
         );
 
         final CompoundTag textureData = stack.getOrCreateTagElement("textureData");
@@ -180,9 +178,8 @@ public class DoorBlock extends AbstractBlockDoor<DoorBlock> implements IMaterial
         });
     }
 
-    @Override
-    public ItemStack getPickBlock(
-      final BlockState state, final HitResult target, final BlockGetter world, final BlockPos pos, final Player player)
+@Override
+    public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final BlockGetter world, final BlockPos pos, final Player player)
     {
         return BlockUtils.getMaterializedItemStack(player, world, pos, (s, e) -> {
             s.getOrCreateTag().putString("type", e.getBlockState().getValue(TYPE).toString().toUpperCase());
