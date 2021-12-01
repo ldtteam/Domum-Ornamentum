@@ -5,7 +5,7 @@ import com.ldtteam.domumornamentum.block.decorative.ShingleBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.Constants;
-import net.minecraft.world.item.Item;
+import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.BlockItem;
@@ -18,8 +18,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-
-import net.minecraft.world.item.Item.Properties;
 
 public class ShingleBlockItem extends BlockItem
 {
@@ -51,7 +49,10 @@ public class ShingleBlockItem extends BlockItem
         tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".origin.tooltip"));
 
         final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
-        final MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
+        MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
+        if (textureData.isEmpty()) {
+            textureData = MaterialTextureDataUtil.generateRandomTextureDataFrom(stack);
+        }
 
         final IMateriallyTexturedBlockComponent supportComponent = shingleBlock.getComponents().get(1);
         final Block supportBlock = textureData.getTexturedComponents().getOrDefault(supportComponent.getId(), supportComponent.getDefault());

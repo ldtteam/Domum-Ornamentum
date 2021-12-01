@@ -2,7 +2,6 @@ package com.ldtteam.domumornamentum.block.decorative;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.gson.JsonObject;
 import com.ldtteam.domumornamentum.block.AbstractBlock;
 import com.ldtteam.domumornamentum.block.ICachedItemGroupBlock;
@@ -11,33 +10,35 @@ import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.components.SimpleRetexturableComponent;
 import com.ldtteam.domumornamentum.block.types.TimberFrameType;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
-import com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
+import com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes;
 import com.ldtteam.domumornamentum.item.decoration.TimberFrameBlockItem;
 import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.BlockUtils;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.tags.Tag;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.core.NonNullList;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.storage.loot.LootContext;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.jetbrains.annotations.NotNull;
@@ -45,13 +46,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
-
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.BlockPlaceContext;
 
 /**
  * Decorative block
@@ -79,7 +74,7 @@ public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements
     /**
      * The type of this timber frame type.
      */
-    private TimberFrameType timberFrameType;
+    private final TimberFrameType timberFrameType;
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
 
@@ -137,7 +132,7 @@ public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements
     }
 
     @Override
-    public List<IMateriallyTexturedBlockComponent> getComponents()
+    public @NotNull List<IMateriallyTexturedBlockComponent> getComponents()
     {
         return COMPONENTS;
     }
@@ -150,30 +145,10 @@ public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements
             return;
         }
 
-        IMateriallyTexturedBlockComponent outerComponent = getComponents().get(0);
-        IMateriallyTexturedBlockComponent innerComponent = getComponents().get(1);
-
-        final Tag<Block> outerCandidates = outerComponent.getValidSkins();
-        final Tag<Block> innerCandidates = innerComponent.getValidSkins();
-
         try {
-            outerCandidates.getValues().forEach(outer -> {
-                innerCandidates.getValues().forEach(inner ->{
-                    final Map<ResourceLocation, Block> textureData = Maps.newHashMap();
+            final ItemStack result = new ItemStack(this);
 
-                    textureData.put(outerComponent.getId(), outer);
-                    textureData.put(innerComponent.getId(), inner);
-
-                    final MaterialTextureData materialTextureData = new MaterialTextureData(textureData);
-
-                    final CompoundTag textureNbt = materialTextureData.serializeNBT();
-
-                    final ItemStack result = new ItemStack(this);
-                    result.getOrCreateTag().put("textureData", textureNbt);
-
-                    fillItemGroupCache.add(result);
-                });
-            });
+            fillItemGroupCache.add(result);
         } catch (IllegalStateException exception)
         {
             //Ignored. Thrown during start up.

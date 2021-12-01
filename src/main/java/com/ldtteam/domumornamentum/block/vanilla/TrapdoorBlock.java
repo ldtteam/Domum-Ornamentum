@@ -2,14 +2,12 @@ package com.ldtteam.domumornamentum.block.vanilla;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.gson.JsonObject;
 import com.ldtteam.domumornamentum.block.AbstractBlockTrapdoor;
 import com.ldtteam.domumornamentum.block.ICachedItemGroupBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.components.SimpleRetexturableComponent;
-import com.ldtteam.domumornamentum.block.types.FancyDoorType;
 import com.ldtteam.domumornamentum.block.types.TrapdoorType;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
@@ -23,7 +21,6 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.Tag;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
@@ -42,14 +39,16 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.storage.loot.LootContext;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
 
 import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
 
@@ -84,7 +83,7 @@ public class TrapdoorBlock extends AbstractBlockTrapdoor<TrapdoorBlock> implemen
     }
 
     @Override
-    public List<IMateriallyTexturedBlockComponent> getComponents()
+    public @NotNull List<IMateriallyTexturedBlockComponent> getComponents()
     {
         return COMPONENTS;
     }
@@ -97,31 +96,14 @@ public class TrapdoorBlock extends AbstractBlockTrapdoor<TrapdoorBlock> implemen
             return;
         }
 
-        IMateriallyTexturedBlockComponent materialComponent = getComponents().get(0);
-
-        final Tag<Block> materialCandidate = materialComponent.getValidSkins();
-
         try {
             for (final TrapdoorType trapdoorType : TrapdoorType.values())
             {
-                materialCandidate.getValues().forEach(cover -> {
-                    final Map<ResourceLocation, Block> textureData = Maps.newHashMap();
+                final ItemStack result = new ItemStack(this);
+                result.getOrCreateTag().putString("type", trapdoorType.toString().toUpperCase());
 
-                    textureData.put(materialComponent.getId(), cover);
-
-                    final MaterialTextureData materialTextureData = new MaterialTextureData(textureData);
-
-                    final CompoundTag textureNbt = materialTextureData.serializeNBT();
-
-                    final ItemStack result = new ItemStack(this);
-                    result.getOrCreateTag().put("textureData", textureNbt);
-                    result.getOrCreateTag().putString("type", trapdoorType.toString().toUpperCase());
-
-                    fillItemGroupCache.add(result);
-                });
+                fillItemGroupCache.add(result);
             }
-
-
         } catch (IllegalStateException exception)
         {
             //Ignored. Thrown during start up.

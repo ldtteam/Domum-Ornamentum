@@ -3,11 +3,10 @@ package com.ldtteam.domumornamentum.item.decoration;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.decorative.FancyTrapdoorBlock;
 import com.ldtteam.domumornamentum.block.types.FancyTrapdoorType;
-import com.ldtteam.domumornamentum.block.types.TrapdoorType;
-import com.ldtteam.domumornamentum.block.vanilla.TrapdoorBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.Constants;
+import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
@@ -68,7 +67,10 @@ public class FancyTrapdoorBlockItem extends BlockItem
           )));
 
         final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
-        final MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
+        MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
+        if (textureData.isEmpty()) {
+            textureData = MaterialTextureDataUtil.generateRandomTextureDataFrom(stack);
+        }
 
         tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".fancytrapdoor.center.header"));
         final IMateriallyTexturedBlockComponent trapDoorComponent = trapdoorBlock.getComponents().get(0);
