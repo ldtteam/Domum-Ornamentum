@@ -12,5 +12,4 @@ buildscript {
     }
 }
 
-//apply from: 'https://raw.githubusercontent.com/ldtteam/OperaPublicaCreator/main/gradle/mod.gradle'
-apply from: 'D:\\Java\\Modding\\OperaPublicaCreator\\gradle\\mod.gradle'
+apply from: 'https://raw.githubusercontent.com/ldtteam/OperaPublicaCreator/main/gradle/mod.gradle'
