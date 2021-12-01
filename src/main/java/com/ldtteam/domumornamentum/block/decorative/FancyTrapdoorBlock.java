@@ -101,11 +101,7 @@ public class FancyTrapdoorBlock extends AbstractBlockTrapdoor<FancyTrapdoorBlock
         try {
             for (final FancyTrapdoorType trapdoorType : FancyTrapdoorType.values())
             {
-                final MaterialTextureData materialTextureData = getRandomMaterials();
-                final CompoundTag textureNbt = materialTextureData.serializeNBT();
-
                 final ItemStack result = new ItemStack(this);
-                result.getOrCreateTag().put("textureData", textureNbt);
                 result.getOrCreateTag().putString("type", trapdoorType.toString().toUpperCase());
 
                 fillItemGroupCache.add(result);

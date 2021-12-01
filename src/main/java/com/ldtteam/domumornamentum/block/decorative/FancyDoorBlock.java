@@ -105,11 +105,7 @@ public class FancyDoorBlock extends AbstractBlockDoor<FancyDoorBlock> implements
         try {
             for (final FancyDoorType fancyDoorType : FancyDoorType.values())
             {
-                final MaterialTextureData materialTextureData = getRandomMaterials();
-                final CompoundTag textureNbt = materialTextureData.serializeNBT();
-
                 final ItemStack result = new ItemStack(this);
-                result.getOrCreateTag().put("textureData", textureNbt);
                 result.getOrCreateTag().putString("type", fancyDoorType.toString().toUpperCase());
 
                 fillItemGroupCache.add(result);

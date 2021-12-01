@@ -74,7 +74,7 @@ public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements
     /**
      * The type of this timber frame type.
      */
-    private TimberFrameType timberFrameType;
+    private final TimberFrameType timberFrameType;
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
 
@@ -132,7 +132,7 @@ public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements
     }
 
     @Override
-    public List<IMateriallyTexturedBlockComponent> getComponents()
+    public @NotNull List<IMateriallyTexturedBlockComponent> getComponents()
     {
         return COMPONENTS;
     }
@@ -146,11 +146,7 @@ public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements
         }
 
         try {
-            final MaterialTextureData materialTextureData = getRandomMaterials();
-            final CompoundTag textureNbt = materialTextureData.serializeNBT();
-
             final ItemStack result = new ItemStack(this);
-            result.getOrCreateTag().put("textureData", textureNbt);
 
             fillItemGroupCache.add(result);
         } catch (IllegalStateException exception)

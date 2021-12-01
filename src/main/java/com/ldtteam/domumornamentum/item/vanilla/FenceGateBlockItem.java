@@ -1,11 +1,11 @@
 package com.ldtteam.domumornamentum.item.vanilla;
 
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
-import com.ldtteam.domumornamentum.block.vanilla.FenceBlock;
 import com.ldtteam.domumornamentum.block.vanilla.FenceGateBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.Constants;
+import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -49,7 +49,10 @@ public class FenceGateBlockItem extends BlockItem
         tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".origin.tooltip"));
 
         final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
-        final MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
+        MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
+        if (textureData.isEmpty()) {
+            textureData = MaterialTextureDataUtil.generateRandomTextureDataFrom(stack);
+        }
 
         final IMateriallyTexturedBlockComponent component = fenceBlock.getComponents().get(0);
         final Block block = textureData.getTexturedComponents().getOrDefault(component.getId(), component.getDefault());

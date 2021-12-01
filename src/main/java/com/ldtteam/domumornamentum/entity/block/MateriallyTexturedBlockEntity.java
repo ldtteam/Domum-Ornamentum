@@ -2,6 +2,7 @@ package com.ldtteam.domumornamentum.entity.block;
 
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.client.model.properties.ModProperties;
+import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -28,6 +29,10 @@ public class MateriallyTexturedBlockEntity extends BlockEntity implements IMater
     public void updateTextureDataWith(final MaterialTextureData materialTextureData)
     {
         this.textureData = materialTextureData;
+        if (this.textureData.isEmpty()) {
+            this.textureData = MaterialTextureDataUtil.generateRandomTextureDataFrom(this.getBlockState().getBlock());
+        }
+
         this.requestModelDataUpdate();
     }
 

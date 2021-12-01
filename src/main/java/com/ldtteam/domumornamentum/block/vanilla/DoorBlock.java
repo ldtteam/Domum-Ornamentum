@@ -81,7 +81,7 @@ public class DoorBlock extends AbstractBlockDoor<DoorBlock> implements IMaterial
     }
 
     @Override
-    public List<IMateriallyTexturedBlockComponent> getComponents()
+    public @NotNull List<IMateriallyTexturedBlockComponent> getComponents()
     {
         return COMPONENTS;
     }
@@ -97,11 +97,7 @@ public class DoorBlock extends AbstractBlockDoor<DoorBlock> implements IMaterial
         try {
             for (final DoorType DoorType : DoorType.values())
             {
-                final MaterialTextureData materialTextureData = getRandomMaterials();
-                final CompoundTag textureNbt = materialTextureData.serializeNBT();
-
                 final ItemStack result = new ItemStack(this);
-                result.getOrCreateTag().put("textureData", textureNbt);
                 result.getOrCreateTag().putString("type", DoorType.toString().toUpperCase());
 
                 fillItemGroupCache.add(result);

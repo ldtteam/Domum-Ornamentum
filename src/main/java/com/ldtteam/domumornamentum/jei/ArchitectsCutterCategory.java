@@ -188,7 +188,7 @@ public class ArchitectsCutterCategory implements IRecipeCategory<ArchitectsCutte
 
         this.button.draw(stack, 74, 21);
         this.plugin.getIngredientManager().getIngredientRenderer(VanillaTypes.ITEM)
-            .render(stack, 74, 22, recipe.getResultItem());
+            .render(stack, 75, 22, displayData.getOutput());
 
         displayData.reassembleIfNeeded();
         Objects.requireNonNull(displayData.getItemStacks()).set(0, List.of(displayData.getOutput()));

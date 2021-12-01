@@ -63,7 +63,7 @@ public class WallBlock extends AbstractBlockWall<WallBlock> implements IMaterial
     }
 
     @Override
-    public List<IMateriallyTexturedBlockComponent> getComponents()
+    public @NotNull List<IMateriallyTexturedBlockComponent> getComponents()
     {
         return COMPONENTS;
     }
@@ -77,11 +77,7 @@ public class WallBlock extends AbstractBlockWall<WallBlock> implements IMaterial
         }
 
         try {
-            final MaterialTextureData materialTextureData = getRandomMaterials();
-            final CompoundTag textureNbt = materialTextureData.serializeNBT();
-
             final ItemStack result = new ItemStack(this);
-            result.getOrCreateTag().put("textureData", textureNbt);
 
             fillItemGroupCache.add(result);
         } catch (IllegalStateException exception)

@@ -83,7 +83,7 @@ public class TrapdoorBlock extends AbstractBlockTrapdoor<TrapdoorBlock> implemen
     }
 
     @Override
-    public List<IMateriallyTexturedBlockComponent> getComponents()
+    public @NotNull List<IMateriallyTexturedBlockComponent> getComponents()
     {
         return COMPONENTS;
     }
@@ -99,11 +99,7 @@ public class TrapdoorBlock extends AbstractBlockTrapdoor<TrapdoorBlock> implemen
         try {
             for (final TrapdoorType trapdoorType : TrapdoorType.values())
             {
-                final MaterialTextureData materialTextureData = getRandomMaterials();
-                final CompoundTag textureNbt = materialTextureData.serializeNBT();
-
                 final ItemStack result = new ItemStack(this);
-                result.getOrCreateTag().put("textureData", textureNbt);
                 result.getOrCreateTag().putString("type", trapdoorType.toString().toUpperCase());
 
                 fillItemGroupCache.add(result);

@@ -1,15 +1,21 @@
 package com.ldtteam.domumornamentum.client.model.data;
 
 import com.google.common.collect.Maps;
+import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class MaterialTextureData implements INBTSerializable<CompoundTag>
 {
@@ -86,5 +92,10 @@ public class MaterialTextureData implements INBTSerializable<CompoundTag>
         final MaterialTextureData newData = new MaterialTextureData();
         newData.deserializeNBT(nbt);
         return newData;
+    }
+
+    public boolean isEmpty()
+    {
+        return this.equals(EMPTY);
     }
 }
