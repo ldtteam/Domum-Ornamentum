@@ -14,6 +14,8 @@ import net.minecraftforge.client.model.data.IModelData;
 import net.minecraftforge.client.model.data.ModelDataMap;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 public class MateriallyTexturedBlockEntity extends BlockEntity implements IMateriallyTexturedBlockEntity
 {
 
@@ -34,13 +36,13 @@ public class MateriallyTexturedBlockEntity extends BlockEntity implements IMater
     @Override
     public @NotNull CompoundTag getUpdateTag()
     {
-        return save(new CompoundTag());
+        return this.saveWithId();
     }
 
     @Override
     public void onDataPacket(final Connection net, final ClientboundBlockEntityDataPacket packet)
     {
-        this.load(packet.getTag());
+        this.load(Objects.requireNonNull(packet.getTag()));
     }
 
     @Override
@@ -55,15 +57,11 @@ public class MateriallyTexturedBlockEntity extends BlockEntity implements IMater
         return ClientboundBlockEntityDataPacket.create(this);
     }
 
-    @NotNull
     @Override
-    public CompoundTag save(@NotNull final CompoundTag compound)
+    public void saveAdditional(@NotNull final CompoundTag compound)
     {
-        final CompoundTag superData = super.save(compound);
-
-        superData.put("textureData", textureData.serializeNBT());
-
-        return superData;
+        super.saveAdditional(compound);
+        compound.put("textureData", textureData.serializeNBT());
     }
 
     @Override
