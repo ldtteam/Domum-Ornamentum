@@ -2,11 +2,11 @@ package com.ldtteam.domumornamentum.item.vanilla;
 
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.types.DoorType;
-import com.ldtteam.domumornamentum.block.types.TrapdoorType;
 import com.ldtteam.domumornamentum.block.vanilla.DoorBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.Constants;
+import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
@@ -77,7 +77,10 @@ public class DoorBlockItem extends DoubleHighBlockItem
         ));
 
         final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
-        final MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
+        MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
+        if (textureData.isEmpty()) {
+            textureData = MaterialTextureDataUtil.generateRandomTextureDataFrom(stack);
+        }
 
         final IMateriallyTexturedBlockComponent doorComponent = doorBlock.getComponents().get(0);
         final Block doorBlock = textureData.getTexturedComponents().getOrDefault(doorComponent.getId(), doorComponent.getDefault());

@@ -2,7 +2,6 @@ package com.ldtteam.domumornamentum.block.vanilla;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.gson.JsonObject;
 import com.ldtteam.domumornamentum.block.AbstractBlockDoor;
 import com.ldtteam.domumornamentum.block.ICachedItemGroupBlock;
@@ -22,7 +21,6 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.Tag;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
@@ -82,7 +80,7 @@ public class DoorBlock extends AbstractBlockDoor<DoorBlock> implements IMaterial
     }
 
     @Override
-    public List<IMateriallyTexturedBlockComponent> getComponents()
+    public @NotNull List<IMateriallyTexturedBlockComponent> getComponents()
     {
         return COMPONENTS;
     }
@@ -95,31 +93,14 @@ public class DoorBlock extends AbstractBlockDoor<DoorBlock> implements IMaterial
             return;
         }
 
-        IMateriallyTexturedBlockComponent materialComponent = getComponents().get(0);
-
-        final Tag<Block> materialCandidate = materialComponent.getValidSkins();
-
         try {
             for (final DoorType DoorType : DoorType.values())
             {
-                materialCandidate.getValues().forEach(cover -> {
-                    final Map<ResourceLocation, Block> textureData = Maps.newHashMap();
+                final ItemStack result = new ItemStack(this);
+                result.getOrCreateTag().putString("type", DoorType.toString().toUpperCase());
 
-                    textureData.put(materialComponent.getId(), cover);
-
-                    final MaterialTextureData materialTextureData = new MaterialTextureData(textureData);
-
-                    final CompoundTag textureNbt = materialTextureData.serializeNBT();
-
-                    final ItemStack result = new ItemStack(this);
-                    result.getOrCreateTag().put("textureData", textureNbt);
-                    result.getOrCreateTag().putString("type", DoorType.toString().toUpperCase());
-
-                    fillItemGroupCache.add(result);
-                });
+                fillItemGroupCache.add(result);
             }
-
-
         } catch (IllegalStateException exception)
         {
             //Ignored. Thrown during start up.

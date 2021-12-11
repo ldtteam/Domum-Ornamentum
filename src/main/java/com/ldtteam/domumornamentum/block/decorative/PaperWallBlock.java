@@ -2,7 +2,6 @@ package com.ldtteam.domumornamentum.block.decorative;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.gson.JsonObject;
 import com.ldtteam.domumornamentum.block.AbstractBlockPane;
 import com.ldtteam.domumornamentum.block.ICachedItemGroupBlock;
@@ -21,7 +20,6 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.Tag;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
@@ -40,7 +38,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.storage.loot.LootContext;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.jetbrains.annotations.NotNull;
@@ -48,7 +45,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -119,7 +115,7 @@ public class PaperWallBlock extends AbstractBlockPane<PaperWallBlock> implements
     }
 
     @Override
-    public List<IMateriallyTexturedBlockComponent> getComponents()
+    public @NotNull List<IMateriallyTexturedBlockComponent> getComponents()
     {
         return COMPONENTS;
     }
@@ -133,30 +129,10 @@ public class PaperWallBlock extends AbstractBlockPane<PaperWallBlock> implements
             return;
         }
 
-        IMateriallyTexturedBlockComponent frameComponent = getComponents().get(0);
-        IMateriallyTexturedBlockComponent centerComponent = getComponents().get(1);
-
-        final Tag<Block> frameCandidates = frameComponent.getValidSkins();
-        final Tag<Block> centerCandidates = centerComponent.getValidSkins();
-
         try {
-            frameCandidates.getValues().forEach(cover -> {
-                centerCandidates.getValues().forEach(support ->{
-                    final Map<ResourceLocation, Block> textureData = Maps.newHashMap();
+            final ItemStack result = new ItemStack(this);
 
-                    textureData.put(frameComponent.getId(), cover);
-                    textureData.put(centerComponent.getId(), support);
-
-                    final MaterialTextureData materialTextureData = new MaterialTextureData(textureData);
-
-                    final CompoundTag textureNbt = materialTextureData.serializeNBT();
-
-                    final ItemStack result = new ItemStack(this);
-                    result.getOrCreateTag().put("textureData", textureNbt);
-
-                    fillItemGroupCache.add(result);
-                });
-            });
+            fillItemGroupCache.add(result);
         } catch (IllegalStateException exception)
         {
             //Ignored. Thrown during start up.

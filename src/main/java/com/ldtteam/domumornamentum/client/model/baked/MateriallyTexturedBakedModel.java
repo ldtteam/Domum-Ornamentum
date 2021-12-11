@@ -2,6 +2,8 @@ package com.ldtteam.domumornamentum.client.model.baked;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
+import com.ldtteam.domumornamentum.client.event.handlers.ClientTickEventHandler;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.client.model.properties.ModProperties;
 import com.mojang.datafixers.util.Pair;
@@ -16,7 +18,10 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.data.IModelData;
 import org.apache.logging.log4j.LogManager;
@@ -27,6 +32,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
+
+import static com.ldtteam.domumornamentum.util.MaterialTextureDataUtil.generateRandomTextureDataFrom;
 
 public class MateriallyTexturedBakedModel implements BakedModel
 {
@@ -201,7 +208,11 @@ public class MateriallyTexturedBakedModel implements BakedModel
           @Nullable final LivingEntity entity,
           final int random)
         {
-            final MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(stack.getOrCreateTagElement("textureData"));
+             MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(stack.getOrCreateTagElement("textureData"));
+            if (textureData.isEmpty()) {
+                textureData = generateRandomTextureDataFrom(stack);
+            }
+
             return this.model.getBakedInnerModelFor(stack, textureData, level, entity, random);
         }
     }

@@ -20,7 +20,7 @@ import java.util.Objects;
 public class ForgeBusEventHandler
 {
 
-    private static final boolean ACTIVE = true;
+    private static final boolean ACTIVE = false;
     private static final Logger LOGGER = LogManager.getLogger();
 
     @SubscribeEvent

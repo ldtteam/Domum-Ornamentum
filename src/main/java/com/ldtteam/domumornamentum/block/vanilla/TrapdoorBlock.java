@@ -2,7 +2,6 @@ package com.ldtteam.domumornamentum.block.vanilla;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.gson.JsonObject;
 import com.ldtteam.domumornamentum.block.AbstractBlockTrapdoor;
 import com.ldtteam.domumornamentum.block.ICachedItemGroupBlock;
@@ -22,7 +21,6 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.Tag;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
@@ -46,7 +44,10 @@ import net.minecraftforge.registries.IForgeRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
 
 import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
 
@@ -81,27 +82,7 @@ public class TrapdoorBlock extends AbstractBlockTrapdoor<TrapdoorBlock> implemen
     }
 
     @Override
-    public void setPlacedBy(
-      final @NotNull Level worldIn, final @NotNull BlockPos pos, final @NotNull BlockState state, @Nullable final LivingEntity placer, final @NotNull ItemStack stack)
-    {
-        super.setPlacedBy(worldIn, pos, state, placer, stack);
-
-        final String type = stack.getOrCreateTag().getString("type");
-        worldIn.setBlock(
-          pos,
-          state.setValue(TYPE, TrapdoorType.valueOf(type.toUpperCase())),
-          Block.UPDATE_ALL
-        );
-
-        final CompoundTag textureData = stack.getOrCreateTagElement("textureData");
-        final BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-
-        if (tileEntity instanceof MateriallyTexturedBlockEntity)
-        {
-            ((MateriallyTexturedBlockEntity) tileEntity).updateTextureDataWith(MaterialTextureData.deserializeFromNBT(textureData));
-        }
-    }    @Override
-    public List<IMateriallyTexturedBlockComponent> getComponents()
+    public @NotNull List<IMateriallyTexturedBlockComponent> getComponents()
     {
         return COMPONENTS;
     }
@@ -115,32 +96,15 @@ public class TrapdoorBlock extends AbstractBlockTrapdoor<TrapdoorBlock> implemen
             return;
         }
 
-        IMateriallyTexturedBlockComponent materialComponent = getComponents().get(0);
-
-        final Tag<Block> materialCandidate = materialComponent.getValidSkins();
-
-        try
-        {
+        try {
             for (final TrapdoorType trapdoorType : TrapdoorType.values())
             {
-                materialCandidate.getValues().forEach(cover -> {
-                    final Map<ResourceLocation, Block> textureData = Maps.newHashMap();
+                final ItemStack result = new ItemStack(this);
+                result.getOrCreateTag().putString("type", trapdoorType.toString().toUpperCase());
 
-                    textureData.put(materialComponent.getId(), cover);
-
-                    final MaterialTextureData materialTextureData = new MaterialTextureData(textureData);
-
-                    final CompoundTag textureNbt = materialTextureData.serializeNBT();
-
-                    final ItemStack result = new ItemStack(this);
-                    result.getOrCreateTag().put("textureData", textureNbt);
-                    result.getOrCreateTag().putString("type", trapdoorType.toString().toUpperCase());
-
-                    fillItemGroupCache.add(result);
-                });
+                fillItemGroupCache.add(result);
             }
-        }
-        catch (IllegalStateException exception)
+        } catch (IllegalStateException exception)
         {
             //Ignored. Thrown during start up.
         }
