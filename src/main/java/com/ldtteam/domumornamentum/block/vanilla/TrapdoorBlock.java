@@ -8,6 +8,7 @@ import com.ldtteam.domumornamentum.block.ICachedItemGroupBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.components.SimpleRetexturableComponent;
+import com.ldtteam.domumornamentum.block.types.FancyTrapdoorType;
 import com.ldtteam.domumornamentum.block.types.TrapdoorType;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
@@ -117,6 +118,26 @@ public class TrapdoorBlock extends AbstractBlockTrapdoor<TrapdoorBlock> implemen
     public BlockEntity newBlockEntity(final @NotNull BlockPos blockPos, final @NotNull BlockState blockState)
     {
         return new MateriallyTexturedBlockEntity(ModBlockEntityTypes.MATERIALLY_TEXTURED, blockPos, blockState);
+    }
+
+    @Override
+    public void setPlacedBy(
+      final @NotNull Level worldIn, final @NotNull BlockPos pos, final @NotNull BlockState state, @Nullable final LivingEntity placer, final @NotNull ItemStack stack)
+    {
+        super.setPlacedBy(worldIn, pos, state, placer, stack);
+
+        final String type = stack.getOrCreateTag().getString("type");
+        worldIn.setBlock(
+          pos,
+          state.setValue(TYPE, TrapdoorType.valueOf(type.toUpperCase())),
+          Block.UPDATE_ALL
+        );
+
+        final CompoundTag textureData = stack.getOrCreateTagElement("textureData");
+        final BlockEntity tileEntity = worldIn.getBlockEntity(pos);
+
+        if (tileEntity instanceof MateriallyTexturedBlockEntity)
+            ((MateriallyTexturedBlockEntity) tileEntity).updateTextureDataWith(MaterialTextureData.deserializeFromNBT(textureData));
     }
 
     @Override
