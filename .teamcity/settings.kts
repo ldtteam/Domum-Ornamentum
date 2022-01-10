@@ -51,12 +51,11 @@ project {
             }
         }
     }
-    subProjectsOrder = arrayListOf(RelativeId("Release"), RelativeId("UpgradeBetaRelease"), RelativeId("Beta"), RelativeId("UpgradeAlphaBeta"), RelativeId("Alpha"), RelativeId("OfficialPublications"), RelativeId("Branches"), RelativeId("PullRequests2"))
+    subProjectsOrder = arrayListOf(RelativeId("Release"), RelativeId("UpgradeBetaRelease"), RelativeId("UpgradeAlphaBeta"), RelativeId("Alpha"), RelativeId("OfficialPublications"), RelativeId("Branches"), RelativeId("PullRequests2"))
 
     subProject(UpgradeBetaRelease)
     subProject(Alpha)
     subProject(PullRequests2)
-    subProject(Beta)
     subProject(Branches)
     subProject(OfficialPublications)
     subProject(Release)
@@ -88,37 +87,8 @@ object Alpha_Release : BuildType({
         param("env.Version.Patch", "${OfficialPublications_CommonB.depParamRefs.buildNumber}")
     }
 
-    dependencies {
-        snapshot(OfficialPublications_CommonB) {
-            reuseBuilds = ReuseBuilds.NO
-            onDependencyFailure = FailureAction.FAIL_TO_START
-        }
-    }
-})
-
-
-object Beta : Project({
-    name = "Beta"
-    description = "Beta version builds of domum ornamentum"
-
-    buildType(Beta_Release)
-
-    params {
-        param("Default.Branch", "testing/%Current Minecraft Version%")
-        param("VCS.Branches", "+:refs/heads/testing/(*)")
-        param("env.CURSERELEASETYPE", "beta")
-        param("env.Version.Suffix", "-BETA")
-    }
-})
-
-object Beta_Release : BuildType({
-    templates(AbsoluteId("LetSDevTogether_BuildWithRelease"))
-    name = "Release"
-    description = "Releases the mod as Alpha to CurseForge"
-
-    params {
-        param("Project.Type", "mods")
-        param("env.Version.Patch", "${OfficialPublications_CommonB.depParamRefs.buildNumber}")
+    vcs {
+        branchFilter = "+:*"
     }
 
     dependencies {
