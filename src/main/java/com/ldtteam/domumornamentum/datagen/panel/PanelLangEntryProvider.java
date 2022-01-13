@@ -1,4 +1,4 @@
-package com.ldtteam.domumornamentum.datagen.trapdoor.stat;
+package com.ldtteam.domumornamentum.datagen.panel;
 
 import com.ldtteam.datagenerators.lang.LangJson;
 import com.ldtteam.domumornamentum.block.types.TrapdoorType;
@@ -10,12 +10,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
-public class StaticTrapdoorsLangEntryProvider implements DataProvider
+public class PanelLangEntryProvider implements DataProvider
 {
     private final DataGenerator dataGenerator;
     private final LangJson backingLangJson;
 
-    public StaticTrapdoorsLangEntryProvider(final DataGenerator dataGenerator, LangJson backingLangJson)
+    public PanelLangEntryProvider(final DataGenerator dataGenerator, LangJson backingLangJson)
     {
         this.dataGenerator = dataGenerator;
         this.backingLangJson = backingLangJson;
@@ -24,13 +24,13 @@ public class StaticTrapdoorsLangEntryProvider implements DataProvider
     @Override
     public void run(@NotNull HashCache cache) throws IOException
     {
-        backingLangJson.put(Constants.MOD_ID + ".statictrapdoor.name.format", "%s Panel");
-        backingLangJson.put(Constants.MOD_ID + ".statictrapdoor.type.format", "Variant: %s");
-        backingLangJson.put(Constants.MOD_ID + ".statictrapdoor.block.format", "Material: %s");
+        backingLangJson.put(Constants.MOD_ID + ".panel.name.format", "%s Panel");
+        backingLangJson.put(Constants.MOD_ID + ".panel.type.format", "Variant: %s");
+        backingLangJson.put(Constants.MOD_ID + ".panel.block.format", "Material: %s");
 
         for (final TrapdoorType value : TrapdoorType.values())
         {
-            backingLangJson.put(Constants.MOD_ID + ".statictrapdoor.type.name." + value.getTranslationKeySuffix(), value.getDefaultEnglishTranslation());
+            backingLangJson.put(Constants.MOD_ID + ".panel.type.name." + value.getTranslationKeySuffix(), value.getDefaultEnglishTranslation());
         }
     }
 
@@ -38,6 +38,6 @@ public class StaticTrapdoorsLangEntryProvider implements DataProvider
     @NotNull
     public String getName()
     {
-        return "Static Trapdoors Lang Provider";
+        return "Panel Lang Provider";
     }
 }

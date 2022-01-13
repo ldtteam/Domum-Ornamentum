@@ -1,10 +1,10 @@
-package com.ldtteam.domumornamentum.datagen.trapdoor.stat;
+package com.ldtteam.domumornamentum.datagen.panel;
 
 import com.ldtteam.datagenerators.blockstate.BlockstateJson;
 import com.ldtteam.datagenerators.blockstate.BlockstateModelJson;
 import com.ldtteam.datagenerators.blockstate.BlockstateVariantJson;
 import com.ldtteam.domumornamentum.block.ModBlocks;
-import com.ldtteam.domumornamentum.block.decorative.StaticTrapdoorBlock;
+import com.ldtteam.domumornamentum.block.decorative.PanelBlock;
 import com.ldtteam.domumornamentum.block.types.TrapdoorType;
 import com.ldtteam.domumornamentum.block.vanilla.TrapdoorBlock;
 import com.ldtteam.domumornamentum.util.Constants;
@@ -21,15 +21,15 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.ldtteam.domumornamentum.block.AbstractStaticBlockTrapdoor.OPEN;
-import static net.minecraft.world.level.block.TrapDoorBlock.HALF;
+import static com.ldtteam.domumornamentum.block.AbstractPanelBlockTrapdoor.OPEN;
+import static com.ldtteam.domumornamentum.block.AbstractPanelBlockTrapdoor.HALF;
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
-public class StaticTrapdoorsBlockStateProvider implements DataProvider
+public class PanelBlockStateProvider implements DataProvider
 {
     private final DataGenerator generator;
 
-    public StaticTrapdoorsBlockStateProvider(DataGenerator generator)
+    public PanelBlockStateProvider(DataGenerator generator)
     {
         this.generator = generator;
     }
@@ -37,10 +37,10 @@ public class StaticTrapdoorsBlockStateProvider implements DataProvider
     @Override
     public void run(@NotNull final HashCache cache) throws IOException
     {
-        createBlockstateFile(cache, ModBlocks.getInstance().getStaticTrapdoor());
+        createBlockstateFile(cache, ModBlocks.getInstance().getPanel());
     }
 
-    private void createBlockstateFile(final HashCache cache, final StaticTrapdoorBlock shingle) throws IOException
+    private void createBlockstateFile(final HashCache cache, final PanelBlock shingle) throws IOException
     {
         if (shingle.getRegistryName() == null)
         {
@@ -64,7 +64,7 @@ public class StaticTrapdoorsBlockStateProvider implements DataProvider
 
                         int x = getXFromOpenAndHalf(openValue, halfValue);
 
-                        final String modelLocation = Constants.MOD_ID + ":block/trapdoors/trapdoor_" + typeValue.getSerializedName();
+                        final String modelLocation = Constants.MOD_ID + ":block/panels/panel_" + typeValue.getSerializedName();
 
                         final BlockstateModelJson model = new BlockstateModelJson(modelLocation, x, y);
                         final BlockstateVariantJson variant = new BlockstateVariantJson(model);
@@ -113,6 +113,6 @@ public class StaticTrapdoorsBlockStateProvider implements DataProvider
     @Override
     public String getName()
     {
-        return "Static Trapdoor BlockStates Provider";
+        return "Panel BlockStates Provider";
     }
 }

@@ -1,15 +1,11 @@
-package com.ldtteam.domumornamentum.datagen.trapdoor.stat;
+package com.ldtteam.domumornamentum.datagen.panel;
 
-import com.google.common.collect.ImmutableMap;
 import com.ldtteam.datagenerators.models.ModelDisplayPositionJson;
 import com.ldtteam.datagenerators.models.ModelDisplayPositionsEnum;
 import com.ldtteam.datagenerators.models.XYZDoubleListJson;
 import com.ldtteam.datagenerators.models.XYZIntListJson;
 import com.ldtteam.datagenerators.models.item.ItemModelJson;
-import com.ldtteam.datagenerators.models.item.OverrideCaseJson;
-import com.ldtteam.datagenerators.models.item.OverridePredicateJson;
 import com.ldtteam.domumornamentum.block.ModBlocks;
-import com.ldtteam.domumornamentum.block.types.TrapdoorType;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.data.DataGenerator;
@@ -18,16 +14,14 @@ import net.minecraft.data.HashCache;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
-public class StaticTrapdoorsItemModelSpecProvider implements DataProvider
+public class PanelItemModelProvider implements DataProvider
 {
     private final DataGenerator generator;
 
-    public StaticTrapdoorsItemModelSpecProvider(final DataGenerator generator)
+    public PanelItemModelProvider(final DataGenerator generator)
     {
         this.generator = generator;
     }
@@ -38,30 +32,15 @@ public class StaticTrapdoorsItemModelSpecProvider implements DataProvider
         final ItemModelJson modelJson = new ItemModelJson();
         modelJson.setDisplay(getDisplay());
 
-        if (ModBlocks.getInstance().getStaticTrapdoor().getRegistryName() == null)
+        if (ModBlocks.getInstance().getPanel().getRegistryName() == null)
             return;
 
-        modelJson.setOverrides(new ArrayList<>());
-        TrapdoorType[] values = TrapdoorType.values();
-        for (int i = 0; i < values.length; i++)
-        {
-            final TrapdoorType value = values[i];
-            Objects.requireNonNull(modelJson.getOverrides()).add(
-              new OverrideCaseJson(
-                new OverridePredicateJson(
-                  ImmutableMap.<String, Float>builder()
-                  .put(Constants.TRAPDOOR_MODEL_OVERRIDE, (float) i)
-                  .build()
-                ),
-                Constants.MOD_ID + ":block/trapdoors/trapdoor_" + value.getSerializedName()
-              )
-            );
-        }
+        final String name = ModBlocks.getInstance().getPanel().getRegistryName().getPath();
+        final String modelLocation = Constants.MOD_ID + ":item/" + name + "_spec";
 
-        modelJson.setParent("block/thin_block");
-
-        final String name = ModBlocks.getInstance().getStaticTrapdoor().getRegistryName().getPath();
-        DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(modelJson), generator.getOutputFolder().resolve(DataGeneratorConstants.ITEM_MODEL_DIR).resolve(name + "_spec.json"));
+        modelJson.setParent(modelLocation);
+        modelJson.setLoader(Constants.MATERIALLY_TEXTURED_MODEL_LOADER);
+        DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(modelJson), generator.getOutputFolder().resolve(DataGeneratorConstants.ITEM_MODEL_DIR).resolve(name + ".json"));
     }
 
     private Map<ModelDisplayPositionsEnum, ModelDisplayPositionJson> getDisplay()
@@ -125,6 +104,6 @@ public class StaticTrapdoorsItemModelSpecProvider implements DataProvider
     @NotNull
     public String getName()
     {
-        return "Static Trapdoors Item Model Provider";
+        return "Panel Item Model Provider";
     }
 }

@@ -1,5 +1,5 @@
 {
   "type": "domum_ornamentum:architects_cutter",
-  "block": "domum_ornamentum:static_trapdoors",
+  "block": "domum_ornamentum:panel",
   "nbt": "{type:\"WAFFLE\"}"
 }

@@ -49,8 +49,8 @@ public final class ModBlocks implements IModBlocks
     private static WallBlock WALL;
     private static StairBlock STAIR;
     private static TrapdoorBlock TRAPDOOR;
-    private static DoorBlock DOOR;
-    private static StaticTrapdoorBlock STATIC_TRAPDOOR;
+    private static DoorBlock  DOOR;
+    private static PanelBlock STATIC_TRAPDOOR;
 
     private static FancyDoorBlock FANCY_DOOR;
     private static FancyTrapdoorBlock FANCY_TRAPDOOR;
@@ -162,7 +162,7 @@ public final class ModBlocks implements IModBlocks
     }
 
     @Override
-    public StaticTrapdoorBlock getStaticTrapdoor()
+    public PanelBlock getPanel()
     {
         return ModBlocks.STATIC_TRAPDOOR;
     }
@@ -219,7 +219,7 @@ public final class ModBlocks implements IModBlocks
         STAIR = new StairBlock().registerBlock(registry);
         TRAPDOOR = new TrapdoorBlock().registerBlock(registry);
         DOOR = new DoorBlock().registerBlock(registry);
-        STATIC_TRAPDOOR = new StaticTrapdoorBlock().registerBlock(registry);
+        STATIC_TRAPDOOR = new PanelBlock().registerBlock(registry);
 
         FANCY_DOOR = new FancyDoorBlock().registerBlock(registry);
         FANCY_TRAPDOOR = new FancyTrapdoorBlock().registerBlock(registry);

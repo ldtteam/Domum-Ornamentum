@@ -14,16 +14,13 @@ import com.ldtteam.domumornamentum.datagen.global.GlobalLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.global.GlobalLootTableProvider;
 import com.ldtteam.domumornamentum.datagen.global.GlobalRecipeProvider;
 import com.ldtteam.domumornamentum.datagen.global.MateriallyTexturedBlockRecipeProvider;
+import com.ldtteam.domumornamentum.datagen.panel.*;
 import com.ldtteam.domumornamentum.datagen.shingle.normal.*;
 import com.ldtteam.domumornamentum.datagen.shingle.slab.*;
 import com.ldtteam.domumornamentum.datagen.slab.*;
 import com.ldtteam.domumornamentum.datagen.stair.*;
 import com.ldtteam.domumornamentum.datagen.trapdoor.*;
 import com.ldtteam.domumornamentum.datagen.trapdoor.fancy.*;
-import com.ldtteam.domumornamentum.datagen.trapdoor.stat.StaticTrapdoorsBlockStateProvider;
-import com.ldtteam.domumornamentum.datagen.trapdoor.stat.StaticTrapdoorsItemModelProvider;
-import com.ldtteam.domumornamentum.datagen.trapdoor.stat.StaticTrapdoorsItemModelSpecProvider;
-import com.ldtteam.domumornamentum.datagen.trapdoor.stat.StaticTrapdoorsLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.wall.paper.*;
 import com.ldtteam.domumornamentum.datagen.wall.vanilla.*;
 import com.ldtteam.domumornamentum.util.Constants;
@@ -139,10 +136,11 @@ public class ModBusEventHandler
         event.getGenerator().addProvider(new TrapdoorsCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(new TrapdoorsLangEntryProvider(event.getGenerator(), langJson));
 
-        event.getGenerator().addProvider(new StaticTrapdoorsBlockStateProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new StaticTrapdoorsItemModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new StaticTrapdoorsItemModelSpecProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new StaticTrapdoorsLangEntryProvider(event.getGenerator(), langJson));
+        event.getGenerator().addProvider(new PanelBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new PanelBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new PanelItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new PanelItemModelSpecProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new PanelLangEntryProvider(event.getGenerator(), langJson));
 
         //Fancy Trapdoor
         event.getGenerator().addProvider(new FancyTrapdoorsBlockStateProvider(event.getGenerator()));

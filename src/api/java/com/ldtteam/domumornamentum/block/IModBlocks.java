@@ -43,7 +43,7 @@ public interface IModBlocks
 
     Block getTrapdoor();
 
-    Block getStaticTrapdoor();
+    Block getPanel();
 
     Block getDoor();
 

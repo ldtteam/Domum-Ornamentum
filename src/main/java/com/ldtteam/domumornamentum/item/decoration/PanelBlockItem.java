@@ -1,7 +1,7 @@
 package com.ldtteam.domumornamentum.item.decoration;
 
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
-import com.ldtteam.domumornamentum.block.decorative.StaticTrapdoorBlock;
+import com.ldtteam.domumornamentum.block.decorative.PanelBlock;
 import com.ldtteam.domumornamentum.block.types.TrapdoorType;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.util.BlockUtils;
@@ -20,14 +20,14 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class StaticTrapdoorBlockItem extends BlockItem
+public class PanelBlockItem extends BlockItem
 {
-    private final StaticTrapdoorBlock trapdoorBlock;
+    private final PanelBlock panelBlock;
 
-    public StaticTrapdoorBlockItem(final StaticTrapdoorBlock blockIn, final Properties builder)
+    public PanelBlockItem(final PanelBlock blockIn, final Properties builder)
     {
         super(blockIn, builder);
-        this.trapdoorBlock = blockIn;
+        this.panelBlock = blockIn;
     }
 
     @Override
@@ -36,11 +36,11 @@ public class StaticTrapdoorBlockItem extends BlockItem
         final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
         final MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
 
-        final IMateriallyTexturedBlockComponent coverComponent = trapdoorBlock.getComponents().get(0);
+        final IMateriallyTexturedBlockComponent coverComponent = panelBlock.getComponents().get(0);
         final Block centerBlock = textureData.getTexturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
         final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
 
-        return new TranslatableComponent(Constants.MOD_ID + ".statictrapdoor.name.format", centerBlockName);
+        return new TranslatableComponent(Constants.MOD_ID + ".panel.name.format", centerBlockName);
     }
 
     @Override
@@ -78,7 +78,7 @@ public class StaticTrapdoorBlockItem extends BlockItem
             textureData = MaterialTextureDataUtil.generateRandomTextureDataFrom(stack);
         }
 
-        final IMateriallyTexturedBlockComponent trapDoorComponent = trapdoorBlock.getComponents().get(0);
+        final IMateriallyTexturedBlockComponent trapDoorComponent = panelBlock.getComponents().get(0);
         final Block trapDoorBlock = textureData.getTexturedComponents().getOrDefault(trapDoorComponent.getId(), trapDoorComponent.getDefault());
         final Component trapDoorBlockName = BlockUtils.getHoverName(trapDoorBlock);
         tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".trapdoor.block.format", trapDoorBlockName));

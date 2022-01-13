@@ -25,7 +25,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class AbstractStaticBlockTrapdoor<B extends AbstractStaticBlockTrapdoor<B>> extends HorizontalDirectionalBlock implements IDOBlock<B>, SimpleWaterloggedBlock
+public abstract class AbstractPanelBlockTrapdoor<B extends AbstractPanelBlockTrapdoor<B>> extends HorizontalDirectionalBlock implements IDOBlock<B>, SimpleWaterloggedBlock
 {
     public static final BooleanProperty    OPEN = BlockStateProperties.OPEN;
     public static final EnumProperty<Half> HALF = BlockStateProperties.HALF;
@@ -38,7 +38,7 @@ public abstract class AbstractStaticBlockTrapdoor<B extends AbstractStaticBlockT
     protected static final VoxelShape BOTTOM_AABB     = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 3.0D, 16.0D);
     protected static final VoxelShape TOP_AABB        = Block.box(0.0D, 13.0D, 0.0D, 16.0D, 16.0D, 16.0D);
 
-    public AbstractStaticBlockTrapdoor(final Properties properties)
+    public AbstractPanelBlockTrapdoor(final Properties properties)
     {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, Boolean.FALSE));

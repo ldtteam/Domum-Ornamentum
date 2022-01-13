@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/thin_block",
 	"textures": {
-		"1": "block/oak_planks",
-		"particle": "block/oak_planks"
+      "1": "block/oak_planks",
+      "particle": "block/oak_planks"
 	},
 	"elements": [
 		{

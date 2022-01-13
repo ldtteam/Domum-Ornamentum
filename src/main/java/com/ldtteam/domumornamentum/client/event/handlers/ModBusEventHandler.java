@@ -46,7 +46,7 @@ public class ModBusEventHandler
           (itemStack, clientLevel, livingEntity, i) -> handleFancyDoorTypeOverride(itemStack)));
         event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getFancyTrapdoor().asItem(), new ResourceLocation(Constants.TRAPDOOR_MODEL_OVERRIDE),
           (itemStack, clientLevel, livingEntity, i) -> handleFancyTrapdoorTypeOverride(itemStack)));
-        event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getStaticTrapdoor().asItem(), new ResourceLocation(Constants.TRAPDOOR_MODEL_OVERRIDE),
+        event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getPanel().asItem(), new ResourceLocation(Constants.TRAPDOOR_MODEL_OVERRIDE),
           (itemStack, clientLevel, livingEntity, i) -> handleStaticTrapdoorTypeOverride(itemStack)));
         event.enqueueWork(() -> MenuScreens.register(
           ModContainerTypes.ARCHITECTS_CUTTER,
@@ -72,7 +72,7 @@ public class ModBusEventHandler
             ItemBlockRenderTypes.setRenderLayer(IModBlocks.getInstance().getFancyTrapdoor(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(IModBlocks.getInstance().getTrapdoor(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(IModBlocks.getInstance().getDoor(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(IModBlocks.getInstance().getStaticTrapdoor(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(IModBlocks.getInstance().getPanel(), RenderType.translucent());
         });
     }
 

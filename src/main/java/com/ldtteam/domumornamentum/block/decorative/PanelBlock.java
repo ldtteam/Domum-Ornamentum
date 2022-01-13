@@ -9,7 +9,7 @@ import com.ldtteam.domumornamentum.block.types.TrapdoorType;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
 import com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes;
-import com.ldtteam.domumornamentum.item.decoration.StaticTrapdoorBlockItem;
+import com.ldtteam.domumornamentum.item.decoration.PanelBlockItem;
 import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.BlockUtils;
@@ -49,7 +49,7 @@ import java.util.Objects;
 import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
 
 @SuppressWarnings("deprecation")
-public class StaticTrapdoorBlock extends AbstractStaticBlockTrapdoor<StaticTrapdoorBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock
+public class PanelBlock extends AbstractPanelBlockTrapdoor<PanelBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock
 {
     public static final EnumProperty<TrapdoorType>              TYPE       = EnumProperty.create("type", TrapdoorType.class);
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
@@ -58,11 +58,11 @@ public class StaticTrapdoorBlock extends AbstractStaticBlockTrapdoor<StaticTrapd
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
 
-    public StaticTrapdoorBlock()
+    public PanelBlock()
     {
         super(Properties.of(Material.WOOD, MaterialColor.WOOD).strength(3.0F).sound(SoundType.WOOD).noOcclusion().isValidSpawn((state, blockGetter, pos, type) -> false));
         this.registerDefaultState(this.defaultBlockState().setValue(TYPE, TrapdoorType.FULL));
-        setRegistryName(com.ldtteam.domumornamentum.util.Constants.MOD_ID, "static_trapdoors");
+        setRegistryName(com.ldtteam.domumornamentum.util.Constants.MOD_ID, "panel");
     }
 
     @Override
@@ -75,7 +75,7 @@ public class StaticTrapdoorBlock extends AbstractStaticBlockTrapdoor<StaticTrapd
     @Override
     public void registerItemBlock(final IForgeRegistry<Item> registry, final Item.Properties properties)
     {
-        registry.register((new StaticTrapdoorBlockItem(this, properties)).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
+        registry.register((new PanelBlockItem(this, properties)).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
     }
 
     @Override
