@@ -46,6 +46,8 @@ public class ModBusEventHandler
           (itemStack, clientLevel, livingEntity, i) -> handleFancyDoorTypeOverride(itemStack)));
         event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getFancyTrapdoor().asItem(), new ResourceLocation(Constants.TRAPDOOR_MODEL_OVERRIDE),
           (itemStack, clientLevel, livingEntity, i) -> handleFancyTrapdoorTypeOverride(itemStack)));
+        event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getStaticTrapdoor().asItem(), new ResourceLocation(Constants.TRAPDOOR_MODEL_OVERRIDE),
+          (itemStack, clientLevel, livingEntity, i) -> handleStaticTrapdoorTypeOverride(itemStack)));
         event.enqueueWork(() -> MenuScreens.register(
           ModContainerTypes.ARCHITECTS_CUTTER,
           ArchitectsCutterScreen::new
@@ -70,6 +72,7 @@ public class ModBusEventHandler
             ItemBlockRenderTypes.setRenderLayer(IModBlocks.getInstance().getFancyTrapdoor(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(IModBlocks.getInstance().getTrapdoor(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(IModBlocks.getInstance().getDoor(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(IModBlocks.getInstance().getStaticTrapdoor(), RenderType.translucent());
         });
     }
 
@@ -128,6 +131,26 @@ public class ModBusEventHandler
         catch (Exception ex)
         {
             doorType = FancyTrapdoorType.FULL;
+        }
+
+        return doorType.ordinal();
+    }
+
+    private static float handleStaticTrapdoorTypeOverride(ItemStack itemStack)
+    {
+        if (!itemStack.getOrCreateTag().contains("type"))
+        {
+            return 0f;
+        }
+
+        TrapdoorType doorType;
+        try
+        {
+            doorType = TrapdoorType.valueOf(itemStack.getOrCreateTag().getString("type").toUpperCase());
+        }
+        catch (Exception ex)
+        {
+            doorType = TrapdoorType.FULL;
         }
 
         return doorType.ordinal();

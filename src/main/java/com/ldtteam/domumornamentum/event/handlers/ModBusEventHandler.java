@@ -20,10 +20,13 @@ import com.ldtteam.domumornamentum.datagen.slab.*;
 import com.ldtteam.domumornamentum.datagen.stair.*;
 import com.ldtteam.domumornamentum.datagen.trapdoor.*;
 import com.ldtteam.domumornamentum.datagen.trapdoor.fancy.*;
+import com.ldtteam.domumornamentum.datagen.trapdoor.stat.StaticTrapdoorsBlockStateProvider;
+import com.ldtteam.domumornamentum.datagen.trapdoor.stat.StaticTrapdoorsItemModelProvider;
+import com.ldtteam.domumornamentum.datagen.trapdoor.stat.StaticTrapdoorsItemModelSpecProvider;
+import com.ldtteam.domumornamentum.datagen.trapdoor.stat.StaticTrapdoorsLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.wall.paper.*;
 import com.ldtteam.domumornamentum.datagen.wall.vanilla.*;
 import com.ldtteam.domumornamentum.util.Constants;
-import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
@@ -135,6 +138,11 @@ public class ModBusEventHandler
         event.getGenerator().addProvider(new TrapdoorsComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(new TrapdoorsCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(new TrapdoorsLangEntryProvider(event.getGenerator(), langJson));
+
+        event.getGenerator().addProvider(new StaticTrapdoorsBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new StaticTrapdoorsItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new StaticTrapdoorsItemModelSpecProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new StaticTrapdoorsLangEntryProvider(event.getGenerator(), langJson));
 
         //Fancy Trapdoor
         event.getGenerator().addProvider(new FancyTrapdoorsBlockStateProvider(event.getGenerator()));

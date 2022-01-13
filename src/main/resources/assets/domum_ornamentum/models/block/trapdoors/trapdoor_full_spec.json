@@ -1,8 +1,9 @@
 {
-    "parent": "block/thin_block",
+	"credit": "Made with Blockbench",
+	"parent": "block/thin_block",
 	"textures": {
-		"0": "block/oak_planks",
-		"particle": "block/oak_planks"
+		"1": "domum_ornamentum:block/brick/beige_bricks",
+		"particle": "domum_ornamentum:block/oak_planks"
 	},
 	"elements": [
 		{
@@ -10,12 +11,12 @@
 			"from": [0, 0, 0],
 			"to": [16, 3, 16],
 			"faces": {
-				"north": {"uv": [16, 0, 0, 1], "texture": "#0"},
-				"east": {"uv": [15, 0, 16, 16], "rotation": 90, "texture": "#0"},
-				"south": {"uv": [0, 15, 16, 16], "texture": "#0"},
-				"west": {"uv": [0, 0, 1, 16], "rotation": 270, "texture": "#0"},
-				"up": {"uv": [0, 0, 16, 16], "texture": "#0"},
-				"down": {"uv": [0, 16, 16, 0], "texture": "#0"}
+				"north": {"uv": [16, 0, 0, 3], "texture": "#1"},
+				"east": {"uv": [13, 0, 16, 16], "rotation": 90, "texture": "#1"},
+				"south": {"uv": [0, 13, 16, 16], "texture": "#1"},
+				"west": {"uv": [0, 0, 3, 16], "rotation": 270, "texture": "#1"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#1"},
+				"down": {"uv": [0, 16, 16, 0], "texture": "#1"}
 			}
 		}
 	],
@@ -23,7 +24,6 @@
 		{
 			"name": "birch_trapdoor",
 			"origin": [8, 8, 8],
-			"color": 0,
 			"children": [0]
 		}
 	]

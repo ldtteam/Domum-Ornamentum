@@ -1,0 +1,5 @@
+{
+  "type": "domum_ornamentum:architects_cutter",
+  "block": "domum_ornamentum:static_trapdoors",
+  "nbt": "{type:\"VERTICALLY_STRIPED\"}"
+}
