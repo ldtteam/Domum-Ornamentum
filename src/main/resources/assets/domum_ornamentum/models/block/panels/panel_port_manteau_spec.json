@@ -1,0 +1,264 @@
+{
+  "parent": "block/thin_block",
+	"textures": {
+		"0": "block/oak_planks",
+		"particle": "block/oak_planks"
+	},
+	"elements": [
+		{
+			"name": "jungle_trapdoor_0",
+			"from": [0, 0, 0],
+			"to": [5, 3, 4],
+			"faces": {
+				"north": {"uv": [5, 0, 0, 1], "texture": "#0"},
+				"east": {"uv": [4, 0, 5, 4], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [0, 3, 5, 4], "texture": "#0"},
+				"west": {"uv": [0, 0, 1, 4], "rotation": 270, "texture": "#0"},
+				"up": {"uv": [0, 0, 5, 4], "texture": "#0"},
+				"down": {"uv": [0, 4, 5, 0], "texture": "#0"}
+			}
+		},
+		{
+			"name": "jungle_trapdoor_1",
+			"from": [5, 0, 0],
+			"to": [16, 3, 3],
+			"faces": {
+				"north": {"uv": [16, 0, 5, 1], "texture": "#0"},
+				"east": {"uv": [15, 0, 16, 3], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [5, 2, 16, 3], "texture": "#0"},
+				"west": {"uv": [5, 0, 6, 3], "rotation": 270, "texture": "#0"},
+				"up": {"uv": [5, 0, 16, 3], "texture": "#0"},
+				"down": {"uv": [5, 3, 16, 0], "texture": "#0"}
+			}
+		},
+		{
+			"name": "jungle_trapdoor_2",
+			"from": [6, 0, 3],
+			"to": [7, 3, 16],
+			"faces": {
+				"north": {"uv": [7, 3, 6, 4], "texture": "#0"},
+				"east": {"uv": [6, 3, 7, 16], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [6, 15, 7, 16], "texture": "#0"},
+				"west": {"uv": [6, 3, 7, 16], "rotation": 270, "texture": "#0"},
+				"up": {"uv": [6, 3, 7, 16], "texture": "#0"},
+				"down": {"uv": [6, 16, 7, 3], "texture": "#0"}
+			}
+		},
+		{
+			"name": "jungle_trapdoor_3",
+			"from": [9, 0, 3],
+			"to": [10, 3, 16],
+			"faces": {
+				"north": {"uv": [10, 3, 9, 4], "texture": "#0"},
+				"east": {"uv": [9, 3, 10, 16], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [9, 15, 10, 16], "texture": "#0"},
+				"west": {"uv": [9, 3, 10, 16], "rotation": 270, "texture": "#0"},
+				"up": {"uv": [9, 3, 10, 16], "texture": "#0"},
+				"down": {"uv": [9, 16, 10, 3], "texture": "#0"}
+			}
+		},
+		{
+			"name": "jungle_trapdoor_4",
+			"from": [11, 0, 3],
+			"to": [16, 3, 4],
+			"faces": {
+				"north": {"uv": [16, 3, 11, 4], "texture": "#0"},
+				"east": {"uv": [15, 3, 16, 4], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [11, 3, 16, 4], "texture": "#0"},
+				"west": {"uv": [11, 3, 12, 4], "rotation": 270, "texture": "#0"},
+				"up": {"uv": [11, 3, 16, 4], "texture": "#0"},
+				"down": {"uv": [11, 4, 16, 3], "texture": "#0"}
+			}
+		},
+		{
+			"name": "jungle_trapdoor_5",
+			"from": [0, 0, 4],
+			"to": [3, 3, 16],
+			"faces": {
+				"north": {"uv": [3, 4, 0, 5], "texture": "#0"},
+				"east": {"uv": [2, 4, 3, 16], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [0, 15, 3, 16], "texture": "#0"},
+				"west": {"uv": [0, 4, 1, 16], "rotation": 270, "texture": "#0"},
+				"up": {"uv": [0, 4, 3, 16], "texture": "#0"},
+				"down": {"uv": [0, 16, 3, 4], "texture": "#0"}
+			}
+		},
+		{
+			"name": "jungle_trapdoor_6",
+			"from": [3, 0, 4],
+			"to": [4, 3, 5],
+			"faces": {
+				"north": {"uv": [4, 4, 3, 5], "texture": "#0"},
+				"east": {"uv": [3, 4, 4, 5], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [3, 4, 4, 5], "texture": "#0"},
+				"west": {"uv": [3, 4, 4, 5], "rotation": 270, "texture": "#0"},
+				"up": {"uv": [3, 4, 4, 5], "texture": "#0"},
+				"down": {"uv": [3, 5, 4, 4], "texture": "#0"}
+			}
+		},
+		{
+			"name": "jungle_trapdoor_7",
+			"from": [12, 0, 4],
+			"to": [16, 3, 5],
+			"faces": {
+				"north": {"uv": [16, 4, 12, 5], "texture": "#0"},
+				"east": {"uv": [15, 4, 16, 5], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [12, 4, 16, 5], "texture": "#0"},
+				"west": {"uv": [12, 4, 13, 5], "rotation": 270, "texture": "#0"},
+				"up": {"uv": [12, 4, 16, 5], "texture": "#0"},
+				"down": {"uv": [12, 5, 16, 4], "texture": "#0"}
+			}
+		},
+		{
+			"name": "jungle_trapdoor_8",
+			"from": [13, 0, 5],
+			"to": [16, 3, 16],
+			"faces": {
+				"north": {"uv": [16, 5, 13, 6], "texture": "#0"},
+				"east": {"uv": [15, 5, 16, 16], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [13, 15, 16, 16], "texture": "#0"},
+				"west": {"uv": [13, 5, 14, 16], "rotation": 270, "texture": "#0"},
+				"up": {"uv": [13, 5, 16, 16], "texture": "#0"},
+				"down": {"uv": [13, 16, 16, 5], "texture": "#0"}
+			}
+		},
+		{
+			"name": "jungle_trapdoor_9",
+			"from": [3, 0, 7],
+			"to": [6, 3, 9],
+			"faces": {
+				"north": {"uv": [6, 7, 3, 8], "texture": "#0"},
+				"east": {"uv": [5, 7, 6, 9], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [3, 8, 6, 9], "texture": "#0"},
+				"west": {"uv": [3, 7, 4, 9], "rotation": 270, "texture": "#0"},
+				"up": {"uv": [3, 7, 6, 9], "texture": "#0"},
+				"down": {"uv": [3, 9, 6, 7], "texture": "#0"}
+			}
+		},
+		{
+			"name": "jungle_trapdoor_10",
+			"from": [7, 0, 7],
+			"to": [9, 3, 9],
+			"faces": {
+				"north": {"uv": [9, 7, 7, 8], "texture": "#0"},
+				"east": {"uv": [8, 7, 9, 9], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [7, 8, 9, 9], "texture": "#0"},
+				"west": {"uv": [7, 7, 8, 9], "rotation": 270, "texture": "#0"},
+				"up": {"uv": [7, 7, 9, 9], "texture": "#0"},
+				"down": {"uv": [7, 9, 9, 7], "texture": "#0"}
+			}
+		},
+		{
+			"name": "jungle_trapdoor_11",
+			"from": [10, 0, 7],
+			"to": [13, 3, 9],
+			"faces": {
+				"north": {"uv": [13, 7, 10, 8], "texture": "#0"},
+				"east": {"uv": [12, 7, 13, 9], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [10, 8, 13, 9], "texture": "#0"},
+				"west": {"uv": [10, 7, 11, 9], "rotation": 270, "texture": "#0"},
+				"up": {"uv": [10, 7, 13, 9], "texture": "#0"},
+				"down": {"uv": [10, 9, 13, 7], "texture": "#0"}
+			}
+		},
+		{
+			"name": "jungle_trapdoor_12",
+			"from": [3, 0, 9],
+			"to": [4, 3, 16],
+			"faces": {
+				"north": {"uv": [4, 9, 3, 10], "texture": "#0"},
+				"east": {"uv": [3, 9, 4, 16], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [3, 15, 4, 16], "texture": "#0"},
+				"west": {"uv": [3, 9, 4, 16], "rotation": 270, "texture": "#0"},
+				"up": {"uv": [3, 9, 4, 16], "texture": "#0"},
+				"down": {"uv": [3, 16, 4, 9], "texture": "#0"}
+			}
+		},
+		{
+			"name": "jungle_trapdoor_13",
+			"from": [12, 0, 9],
+			"to": [13, 3, 16],
+			"faces": {
+				"north": {"uv": [13, 9, 12, 10], "texture": "#0"},
+				"east": {"uv": [12, 9, 13, 16], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [12, 15, 13, 16], "texture": "#0"},
+				"west": {"uv": [12, 9, 13, 16], "rotation": 270, "texture": "#0"},
+				"up": {"uv": [12, 9, 13, 16], "texture": "#0"},
+				"down": {"uv": [12, 16, 13, 9], "texture": "#0"}
+			}
+		},
+		{
+			"name": "jungle_trapdoor_14",
+			"from": [4, 0, 11],
+			"to": [5, 3, 16],
+			"faces": {
+				"north": {"uv": [5, 11, 4, 12], "texture": "#0"},
+				"east": {"uv": [4, 11, 5, 16], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [4, 15, 5, 16], "texture": "#0"},
+				"west": {"uv": [4, 11, 5, 16], "rotation": 270, "texture": "#0"},
+				"up": {"uv": [4, 11, 5, 16], "texture": "#0"},
+				"down": {"uv": [4, 16, 5, 11], "texture": "#0"}
+			}
+		},
+		{
+			"name": "jungle_trapdoor_15",
+			"from": [11, 0, 11],
+			"to": [12, 3, 16],
+			"faces": {
+				"north": {"uv": [12, 11, 11, 12], "texture": "#0"},
+				"east": {"uv": [11, 11, 12, 16], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [11, 15, 12, 16], "texture": "#0"},
+				"west": {"uv": [11, 11, 12, 16], "rotation": 270, "texture": "#0"},
+				"up": {"uv": [11, 11, 12, 16], "texture": "#0"},
+				"down": {"uv": [11, 16, 12, 11], "texture": "#0"}
+			}
+		},
+		{
+			"name": "jungle_trapdoor_16",
+			"from": [5, 0, 12],
+			"to": [6, 3, 16],
+			"faces": {
+				"north": {"uv": [6, 12, 5, 13], "texture": "#0"},
+				"east": {"uv": [5, 12, 6, 16], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [5, 15, 6, 16], "texture": "#0"},
+				"west": {"uv": [5, 12, 6, 16], "rotation": 270, "texture": "#0"},
+				"up": {"uv": [5, 12, 6, 16], "texture": "#0"},
+				"down": {"uv": [5, 16, 6, 12], "texture": "#0"}
+			}
+		},
+		{
+			"name": "jungle_trapdoor_17",
+			"from": [7, 0, 12],
+			"to": [9, 3, 16],
+			"faces": {
+				"north": {"uv": [9, 12, 7, 13], "texture": "#0"},
+				"east": {"uv": [8, 12, 9, 16], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [7, 15, 9, 16], "texture": "#0"},
+				"west": {"uv": [7, 12, 8, 16], "rotation": 270, "texture": "#0"},
+				"up": {"uv": [7, 12, 9, 16], "texture": "#0"},
+				"down": {"uv": [7, 16, 9, 12], "texture": "#0"}
+			}
+		},
+		{
+			"name": "jungle_trapdoor_18",
+			"from": [10, 0, 12],
+			"to": [11, 3, 16],
+			"faces": {
+				"north": {"uv": [11, 12, 10, 13], "texture": "#0"},
+				"east": {"uv": [10, 12, 11, 16], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [10, 15, 11, 16], "texture": "#0"},
+				"west": {"uv": [10, 12, 11, 16], "rotation": 270, "texture": "#0"},
+				"up": {"uv": [10, 12, 11, 16], "texture": "#0"},
+				"down": {"uv": [10, 16, 11, 12], "texture": "#0"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "jungle_trapdoor",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+		}
+	]
+}
