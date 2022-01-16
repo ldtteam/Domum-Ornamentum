@@ -134,7 +134,7 @@ public abstract class AbstractPanelBlockTrapdoor<B extends AbstractPanelBlockTra
     {
         if (state.getValue(WATERLOGGED))
         {
-            level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+            level.getLiquidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
         return super.updateShape(state, direction, stateOut, level, pos, pos2);

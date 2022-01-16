@@ -89,8 +89,7 @@ public class WallBlock extends AbstractBlockWall<WallBlock> implements IMaterial
     }
 
     @Override
-    public void setPlacedBy(
-      final @NotNull Level worldIn, final @NotNull BlockPos pos, final @NotNull BlockState state, @Nullable final LivingEntity placer, final @NotNull ItemStack stack)
+    public void setPlacedBy(final @NotNull Level worldIn, final @NotNull BlockPos pos, final @NotNull BlockState state, @Nullable final LivingEntity placer, final @NotNull ItemStack stack)
     {
         super.setPlacedBy(worldIn, pos, state, placer, stack);
 
