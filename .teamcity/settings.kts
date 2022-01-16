@@ -26,26 +26,28 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 version = "2021.2"
 
 project {
-    description = "Structure based world modification using creative wants."
+    description = "All the blocks for all the Materials"
 
     params {
+        param("env.JDK_VERSION", "jdk16")
         password("env.crowdinKey", "credentialsJSON:444bd785-791b-42ae-9fae-10ee93a2fbd3")
         select("Current Minecraft Version", "latest", label = "Current Minecraft Version",
                 options = listOf("1.12", "1.13", "1.14", "1.15", "1.16", "1.17"))
-        text("Repository", "ldtteam/Domum-Ornamentum", label = "Repository", description = "The repository for minecolonies.", readOnly = true, allowEmpty = true)
+        text("Repository", "ldtteam/Domum-Ornamentum", label = "Repository", description = "The repository for Domum Ornamentum.", readOnly = true, allowEmpty = true)
         param("env.Version.Minor", "0")
         param("env.Version.Patch", "0")
-        param("Upsource.Project.Id", "structurize")
+        param("Upsource.Project.Id", "domum-ornamentum")
         param("env.Version.Suffix", "")
         param("env.Version.Major", "1")
+        param("env.GRADLE_VERSION", "7.2")
         text("env.Version", "%env.Version.Major%.%env.Version.Minor%.%env.Version.Patch%%env.Version.Suffix%", label = "Version", description = "The version of the project.", display = ParameterDisplay.HIDDEN, allowEmpty = true)
     }
 
     features {
         githubIssues {
             id = "PROJECT_EXT_35"
-            displayName = "ldtteam/minecolonies"
-            repositoryURL = "https://github.com/ldtteam/minecolonies"
+            displayName = "ldtteam/domum-ornamentum"
+            repositoryURL = "https://github.com/ldtteam/Domum-Ornamentum"
             authType = accessToken {
                 accessToken = "credentialsJSON:47381468-aceb-4992-93c9-1ccd4d7aa67f"
             }
