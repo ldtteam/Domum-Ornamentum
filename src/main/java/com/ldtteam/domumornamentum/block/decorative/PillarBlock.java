@@ -110,7 +110,7 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(NORTH, EAST, WEST, SOUTH, WATERLOGGED, DirectionProperty.create("verticalAxis", Direction.Axis.X));
+        builder.add(NORTH, EAST, WEST, SOUTH, WATERLOGGED);
     }
 
     @Override

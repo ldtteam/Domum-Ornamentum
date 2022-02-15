@@ -23,7 +23,7 @@ public class PillarComponentTagProvider extends BlockTagsProvider
     @Override
     protected void addTags()
     {
-        this.tag(ModTags.SHINGLES_ROOF)
+        this.tag(ModTags.PILLAR_CAPITAL)
           .add(
             Blocks.CLAY,
             Blocks.BRICKS,
@@ -38,7 +38,7 @@ public class PillarComponentTagProvider extends BlockTagsProvider
             BlockTags.DIRT
           );
 
-        this.tag(ModTags.SHINGLES_SUPPORT)
+        this.tag(ModTags.PILLAR_COLUMN)
           .add(
             Blocks.DEEPSLATE,
             Blocks.COBBLED_DEEPSLATE,
@@ -48,6 +48,16 @@ public class PillarComponentTagProvider extends BlockTagsProvider
             ModTags.GLOBAL_DEFAULT,
             BlockTags.PLANKS
           );
+
+        this.tag(ModTags.PILLAR_BASE)
+            .add(
+              Blocks.DEEPSLATE,
+              Blocks.COBBLED_DEEPSLATE,
+              Blocks.POLISHED_BLACKSTONE
+            )
+            .addTags(
+              ModTags.GLOBAL_DEFAULT
+            );
     }
 
     @Override

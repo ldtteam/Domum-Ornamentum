@@ -6,5 +6,4 @@ public enum PillarShapeType
     PILLAR_CAPITAL,
     PILLAR_COLUMN,
     FULL_PILLAR
-
 }
