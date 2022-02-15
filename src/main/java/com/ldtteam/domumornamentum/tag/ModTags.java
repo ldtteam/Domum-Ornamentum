@@ -4,12 +4,14 @@ import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.Tag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 
 public class ModTags
 {
+
 
     private ModTags()
     {
@@ -48,10 +50,15 @@ public class ModTags
     public static final Tags.IOptionalNamedTag<Block> COPPER = tag("copper");
     public static final Tags.IOptionalNamedTag<Block> TERRACOTTA = tag("terracotta");
 
+    public static final Tags.IOptionalNamedTag<Block> PILLAR_BASE = tag("pillar_base_materials");
+    public static final Tags.IOptionalNamedTag<Block> PILLAR_COLUMN = tag("pillar_column_materials");
+    public static final Tags.IOptionalNamedTag<Block> PILLAR_CAPITAL = tag("pillar_capital_materials");
+
     public static final Tags.IOptionalNamedTag<Block> GLOBAL_DEFAULT = tag("default");
 
     public static final Tags.IOptionalNamedTag<Item> EXTRA_BLOCK_ITEMS = itemTag("extra_block_items");
     public static final Tags.IOptionalNamedTag<Item> BRICK_ITEMS       = itemTag("brick_items");
+
 
 
     private static Tags.IOptionalNamedTag<Block> tag(String name)
