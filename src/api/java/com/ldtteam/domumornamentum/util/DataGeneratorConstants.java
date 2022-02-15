@@ -11,6 +11,7 @@ public class DataGeneratorConstants
     public static final Gson GSON     = new GsonBuilder().disableHtmlEscaping().create();
     public static final Gson GSONLang = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
 
+
     private static final String DATAPACK_DIR = "data/" + Constants.MOD_ID + "/";
     private static final String RESOURCEPACK_DIR = "assets/" + Constants.MOD_ID + "/";
 
@@ -40,6 +41,7 @@ public class DataGeneratorConstants
     public static final String FANCY_DOORS_BLOCK_MODELS_DIR = DOORS_BLOCK_MODELS_DIR + "fancy/";
     public static final String FANCY_TRAPDOORS_BLOCK_MODELS_DIR = TRAPDOORS_BLOCK_MODELS_DIR + "fancy/";
     public static final String PANELS_BLOCK_MODELS_DIR = RESOURCEPACK_DIR + "models/block/panels/";
+    public static final String PILLAR_BLOCK_MODELS_DIR = "models/block/pillars";
 
     public static final String TIMBER_FRAMES_BLOCK_MODELS_DIR = RESOURCEPACK_DIR + "models/block/timber_frames/";
 

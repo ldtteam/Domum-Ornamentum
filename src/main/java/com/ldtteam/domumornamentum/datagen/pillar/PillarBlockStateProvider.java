@@ -1,8 +1,11 @@
 package com.ldtteam.domumornamentum.datagen.pillar;
 
+import com.google.common.collect.Lists;
 import com.ldtteam.datagenerators.blockstate.BlockstateJson;
 import com.ldtteam.datagenerators.blockstate.BlockstateModelJson;
 import com.ldtteam.datagenerators.blockstate.BlockstateVariantJson;
+import com.ldtteam.datagenerators.blockstate.multipart.MultipartCaseJson;
+import com.ldtteam.datagenerators.blockstate.multipart.MultipartWhenJson;
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.decorative.PillarBlock;
 import com.ldtteam.domumornamentum.block.decorative.ShingleBlock;
@@ -12,6 +15,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
+import net.minecraft.world.level.block.DirectionalBlock;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.block.state.properties.StairsShape;
@@ -20,6 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -45,29 +51,18 @@ public class PillarBlockStateProvider implements DataProvider
 
         final Map<String, BlockstateVariantJson> variants = new HashMap<>();
 
-        for (Direction facingValue : StairBlock.FACING.getPossibleValues())
-        {
-            for (StairsShape shapeValue : StairBlock.SHAPE.getPossibleValues())
-            {
-                for (Half halfValue : StairBlock.HALF.getPossibleValues())
-                {
-                    final String variantKey = "facing=" + facingValue + ",shape=" + shapeValue + ",half=" + halfValue;
+        final List<MultipartCaseJson> cases = Lists.newArrayList();
+        cases.add(
+                new MultipartCaseJson(
+                        new BlockstateVariantJson(
+                                new BlockstateModelJson(
+                                        Constants.MOD_ID + ":block/pillars/full_pillar"
+                                )
+                        ),
+                        null
+                )
+        );
 
-                    int y = getYFromFacing(facingValue);
-                    y = y + getYFromShape(shapeValue);
-                    y = y + getYFromHalf(halfValue, shapeValue);
-
-                    int x = halfValue == Half.TOP ? 180 : 0;
-
-                    final String modelLocation = Constants.MOD_ID + ":block/shingle/" + ShingleBlock.getTypeFromShape(shapeValue).name().toLowerCase(Locale.ROOT);
-
-                    final BlockstateModelJson model = new BlockstateModelJson(modelLocation, x, y);
-                    final BlockstateVariantJson variant = new BlockstateVariantJson(model);
-
-                    variants.put(variantKey, variant);
-                }
-            }
-        }
 
         final BlockstateJson blockstate = new BlockstateJson(variants);
 
@@ -78,46 +73,11 @@ public class PillarBlockStateProvider implements DataProvider
 
     }
 
+
     @NotNull
     @Override
     public String getName()
     {
         return "Shingles BlockStates Provider";
-    }
-
-    private int getYFromHalf(final Half half, final StairsShape shape)
-    {
-        if (half == Half.TOP)
-        {
-            if (shape == StairsShape.STRAIGHT)
-            {
-                return 0;
-            }
-            return 90;
-        }
-        else
-        {
-            return 180;
-        }
-    }
-
-    private int getYFromShape(final StairsShape shape)
-    {
-        return switch (shape)
-                 {
-                     default -> 0;
-                     case OUTER_LEFT, INNER_LEFT -> -90;
-                 };
-    }
-
-    private int getYFromFacing(final Direction facing)
-    {
-        return switch (facing)
-                 {
-                     default -> 0;
-                     case SOUTH -> 90;
-                     case WEST -> 180;
-                     case NORTH -> 270;
-                 };
     }
 }
