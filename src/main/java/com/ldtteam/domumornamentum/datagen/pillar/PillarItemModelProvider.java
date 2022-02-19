@@ -6,6 +6,7 @@ import com.ldtteam.datagenerators.models.XYZDoubleListJson;
 import com.ldtteam.datagenerators.models.XYZIntListJson;
 import com.ldtteam.datagenerators.models.item.ItemModelJson;
 import com.ldtteam.domumornamentum.block.ModBlocks;
+import com.ldtteam.domumornamentum.block.types.PillarShapeType;
 import com.ldtteam.domumornamentum.block.types.ShingleShapeType;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
@@ -34,14 +35,14 @@ public class PillarItemModelProvider implements DataProvider
         final ItemModelJson modelJson = new ItemModelJson();
         modelJson.setDisplay(getDisplay());
 
-        final String modelLocation = Constants.MOD_ID + ":block/shingle/" + ShingleShapeType.STRAIGHT.name().toLowerCase(Locale.ROOT);
+        final String modelLocation = Constants.MOD_ID + ":block/pillars/" + PillarShapeType.full_pillar.name().toLowerCase(Locale.ROOT);
 
         modelJson.setParent(modelLocation);
 
-        if (ModBlocks.getInstance().getShingle().getRegistryName() == null)
+        if (ModBlocks.getInstance().getPillar().getRegistryName() == null)
             return;
 
-        final String name = ModBlocks.getInstance().getShingle().getRegistryName().getPath();
+        final String name = ModBlocks.getInstance().getPillar().getRegistryName().getPath();
         DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(modelJson), generator.getOutputFolder().resolve(DataGeneratorConstants.ITEM_MODEL_DIR).resolve(name + ".json"));
     }
 
@@ -106,6 +107,6 @@ public class PillarItemModelProvider implements DataProvider
     @NotNull
     public String getName()
     {
-        return "Shingles Item Model Provider";
+        return "Pillar Item Model Provider";
     }
 }

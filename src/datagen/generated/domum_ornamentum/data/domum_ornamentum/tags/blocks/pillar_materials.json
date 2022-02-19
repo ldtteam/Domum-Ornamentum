@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:clay",
+    "minecraft:bricks",
+    "minecraft:deepslate",
+    "minecraft:cobbled_deepslate",
+    "minecraft:polished_blackstone",
+    "#domum_ornamentum:default",
+    "#minecraft:leaves",
+    "#minecraft:planks",
+    "#minecraft:dirt"
+  ]
+}

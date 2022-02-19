@@ -36,7 +36,7 @@ public class PillarBlockItem extends BlockItem
         final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
         final MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
 
-        final IMateriallyTexturedBlockComponent columnComponent = pillarBlock.getComponents().get(1);
+        final IMateriallyTexturedBlockComponent columnComponent = pillarBlock.getComponents().get(0);
         final Block columnBlock = textureData.getTexturedComponents().getOrDefault(columnComponent.getId(), columnComponent.getDefault());
         final Component columnBlockName = BlockUtils.getHoverName(columnBlock);
 
@@ -63,10 +63,6 @@ public class PillarBlockItem extends BlockItem
         final Component frameBlockName = BlockUtils.getHoverName(frameBlock);
         tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".pillar.capital.format", frameBlockName));
 
-        final IMateriallyTexturedBlockComponent columnComponent = pillarBlock.getComponents().get(1);
-        final Block centerBlock = textureData.getTexturedComponents().getOrDefault(columnComponent.getId(), columnComponent.getDefault());
-        final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
-        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".pillar.column.format", centerBlockName));
 
     }
 }

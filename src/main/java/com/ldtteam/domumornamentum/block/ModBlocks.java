@@ -247,7 +247,7 @@ public final class ModBlocks implements IModBlocks
         SHINGLE.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.GENERAL));
         SHINGLE_SLAB.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.GENERAL));
         PAPER_WALL.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.GENERAL));
-        PILLAR.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.EXTRA_BLOCKS));
+        PILLAR.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.GENERAL));
         for (final ExtraBlock block : EXTRA_TOP_BLOCKS)
         {
             block.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.EXTRA_BLOCKS));

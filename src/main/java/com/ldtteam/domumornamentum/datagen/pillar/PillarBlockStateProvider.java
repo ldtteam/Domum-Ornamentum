@@ -29,6 +29,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HALF;
+
 public class PillarBlockStateProvider implements DataProvider
 {
     private final DataGenerator generator;
@@ -49,22 +51,51 @@ public class PillarBlockStateProvider implements DataProvider
         if (pillar.getRegistryName() == null)
             return;
 
-        final Map<String, BlockstateVariantJson> variants = new HashMap<>();
+        //final Map<String, BlockstateVariantJson> variants = new HashMap<>();
 
         final List<MultipartCaseJson> cases = Lists.newArrayList();
         cases.add(
                 new MultipartCaseJson(
                         new BlockstateVariantJson(
                                 new BlockstateModelJson(
-                                        Constants.MOD_ID + ":block/pillars/full_pillar"
+                                        Constants.MOD_ID + ":block/pillars/pillar_column"
+                                )
+                        ), new MultipartWhenJson("column","pillar_column")
+                )
+        );
+        cases.add(
+                new MultipartCaseJson(
+                    new BlockstateVariantJson(
+                            new BlockstateModelJson(
+                                Constants.MOD_ID + ":block/pillars/pillar_base"
+                            )
+                    ),
+                    new MultipartWhenJson("column", "pillar_base"
+                    )
+                )
+        );
+        cases.add(
+                new MultipartCaseJson(
+                        new BlockstateVariantJson(
+                                new BlockstateModelJson(
+                                        Constants.MOD_ID + ":block/pillars/pillar_capital"
                                 )
                         ),
-                        null
+                        new MultipartWhenJson("column","pillar_capital"
+                        )
+                )
+        );
+        cases.add(
+                new MultipartCaseJson(
+                        new BlockstateVariantJson(
+                                new BlockstateModelJson(
+                                        Constants.MOD_ID+":block/pillars/full_pillar"
+                                )
+                        ), new MultipartWhenJson("column","full_pillar")
                 )
         );
 
-
-        final BlockstateJson blockstate = new BlockstateJson(variants);
+        final BlockstateJson blockstate = new BlockstateJson(cases);
 
         final Path blockstateFolder = this.generator.getOutputFolder().resolve(DataGeneratorConstants.BLOCKSTATE_DIR);
         final Path blockstatePath = blockstateFolder.resolve(pillar.getRegistryName().getPath() + ".json");

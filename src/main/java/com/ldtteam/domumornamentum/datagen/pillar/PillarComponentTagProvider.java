@@ -23,7 +23,7 @@ public class PillarComponentTagProvider extends BlockTagsProvider
     @Override
     protected void addTags()
     {
-        this.tag(ModTags.PILLAR_CAPITAL)
+        this.tag(ModTags.PILLAR_MATERIALS)
           .add(
             Blocks.CLAY,
             Blocks.BRICKS,
@@ -38,32 +38,12 @@ public class PillarComponentTagProvider extends BlockTagsProvider
             BlockTags.DIRT
           );
 
-        this.tag(ModTags.PILLAR_COLUMN)
-          .add(
-            Blocks.DEEPSLATE,
-            Blocks.COBBLED_DEEPSLATE,
-            Blocks.POLISHED_BLACKSTONE
-          )
-          .addTags(
-            ModTags.GLOBAL_DEFAULT,
-            BlockTags.PLANKS
-          );
-
-        this.tag(ModTags.PILLAR_BASE)
-            .add(
-              Blocks.DEEPSLATE,
-              Blocks.COBBLED_DEEPSLATE,
-              Blocks.POLISHED_BLACKSTONE
-            )
-            .addTags(
-              ModTags.GLOBAL_DEFAULT
-            );
     }
 
     @Override
     @NotNull
     public String getName()
     {
-        return "Shingles Tag Provider";
+        return "Pillar Tag Provider";
     }
 }
