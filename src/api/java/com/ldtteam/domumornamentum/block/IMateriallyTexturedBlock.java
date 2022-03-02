@@ -5,18 +5,19 @@ import com.google.common.collect.Maps;
 import com.google.gson.JsonObject;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.StreamSupport;
 
 public interface IMateriallyTexturedBlock
 {
@@ -70,7 +71,10 @@ public interface IMateriallyTexturedBlock
         final Map<ResourceLocation, Block> textureData = Maps.newHashMap();
         for (final IMateriallyTexturedBlockComponent component : getComponents())
         {
-            final List<Block> candidates = component.getValidSkins().getValues();
+            final List<Block> candidates = new ArrayList<>(
+              StreamSupport
+                .stream(Registry.BLOCK.getTagOrEmpty(component.getValidSkins()).spliterator(), false)
+                .map(Holder::value).toList());
             if (candidates.isEmpty()) continue;
 
             final Block texture = candidates.get(ThreadLocalRandom.current().nextInt(candidates.size()));

@@ -67,6 +67,6 @@ public final class MateriallyTexturedBlockManager implements IMateriallyTextured
                  .filter(c -> c.size() > slotIndex)
                  .map(ArrayList::new)
                  .map(l -> l.get(slotIndex))
-                 .anyMatch(c -> c.getValidSkins().contains(block));
+                 .anyMatch(c -> block.defaultBlockState().is(c.getValidSkins()));
     }
 }
