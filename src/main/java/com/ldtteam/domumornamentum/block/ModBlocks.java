@@ -224,8 +224,6 @@ public final class ModBlocks implements IModBlocks
 
         FANCY_DOOR = new FancyDoorBlock().registerBlock(registry);
         FANCY_TRAPDOOR = new FancyTrapdoorBlock().registerBlock(registry);
-
-        ModRecipeTypes.init();
     }
 
     @SubscribeEvent
@@ -273,5 +271,7 @@ public final class ModBlocks implements IModBlocks
         STATIC_TRAPDOOR.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.GENERAL));
         FANCY_DOOR.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.GENERAL));
         FANCY_TRAPDOOR.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.GENERAL));
+
+        ModRecipeTypes.init();
     }
 }
