@@ -77,7 +77,7 @@ public class ArchitectsCutterRecipe implements Recipe<Container>
 
             final Block blockInSlot = blockItem.getBlock();
 
-            if (!component.getValidSkins().contains(blockInSlot))
+            if (!blockInSlot.defaultBlockState().is(component.getValidSkins()))
                 return false;
         }
 
@@ -113,7 +113,7 @@ public class ArchitectsCutterRecipe implements Recipe<Container>
 
             final Block blockInSlot = blockItem.getBlock();
 
-            if (!component.getValidSkins().contains(blockInSlot))
+            if (!blockInSlot.defaultBlockState().is(component.getValidSkins()))
                 return ItemStack.EMPTY;
 
             textureData.put(component.getId(), blockInSlot);
