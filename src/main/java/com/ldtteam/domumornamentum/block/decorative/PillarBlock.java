@@ -38,6 +38,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.HitResult;
@@ -136,37 +137,74 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
         Boolean base = this.connectsTo(stateBelow);
         Boolean capital = this.connectsTo(stateAbove);
         if (base){
-            updateBelow(context, blockBelow,stateBelow);
+            updateBelow((Level) levelReader, blockBelow,stateBelow);
         }
         if (capital){
-            updateAbove(context,blockAbove, stateAbove);
+            updateAbove((Level) levelReader,blockAbove, stateAbove);
         }
-        BlockState current = updateShape(this.defaultBlockState(), base, capital);
-        return current;
+        return updateShape(this.defaultBlockState(), base, capital);
 
     }
 
-    private void updateBelow(BlockPlaceContext context, BlockPos blockPos,BlockState state){
+    @Override
+    public boolean onDestroyedByPlayer(BlockState state, Level world, BlockPos pos, Player player, boolean willHarvest, FluidState fluid)
+    {
+        Comparable column_property = state.getValue(column);
+        if (column_property == PillarShapeType.pillar_column){
+            if (world.getBlockState(pos.above()).getValue(column)== PillarShapeType.pillar_column){
+                world.setBlockAndUpdate(pos.above(),state.setValue(column,PillarShapeType.pillar_base));
+            }
+            else{
+                world.setBlockAndUpdate(pos.above(),state.setValue(column,PillarShapeType.full_pillar));
+            }
 
-        LevelAccessor level = context.getLevel();
-        BlockPos checkBelow = context.getClickedPos().below(2);
+            if (world.getBlockState(pos.below()).getValue(column)== PillarShapeType.pillar_column){
+                world.setBlockAndUpdate(pos.below(),state.setValue(column,PillarShapeType.pillar_capital));
+            }
+            else{
+                world.setBlockAndUpdate(pos.below(),state.setValue(column,PillarShapeType.full_pillar));
+            }
+        }
+        if (column_property == PillarShapeType.pillar_base){
+            if (world.getBlockState(pos.above()).getValue(column)== PillarShapeType.pillar_column){
+                world.setBlockAndUpdate(pos.above(),state.setValue(column,PillarShapeType.pillar_base));
+            }
+            else{
+                world.setBlockAndUpdate(pos.above(),state.setValue(column,PillarShapeType.full_pillar));
+            }
+
+        }
+        if (column_property == PillarShapeType.pillar_capital) {
+            if (world.getBlockState(pos.below()).getValue(column)== PillarShapeType.pillar_column){
+                world.setBlockAndUpdate(pos.below(),state.setValue(column,PillarShapeType.pillar_capital));
+            }
+            else{
+                world.setBlockAndUpdate(pos.below(),state.setValue(column,PillarShapeType.full_pillar));
+            }
+        }
+        return super.onDestroyedByPlayer(state, world, pos, player, willHarvest, fluid);
+    }
+
+    private void updateBelow(Level level, BlockPos blockPos, BlockState state){
+
+
+        BlockPos checkBelow = blockPos.below();
         if (level.getBlockState(checkBelow).getBlock() instanceof PillarBlock){
-            level.setBlock(blockPos, state.setValue(column,PillarShapeType.pillar_column),0);
+            level.setBlockAndUpdate(blockPos, state.setValue(column,PillarShapeType.pillar_column));
         }
         else {
-            level.setBlock(blockPos,state.setValue(column,PillarShapeType.pillar_base),0);
+            level.setBlockAndUpdate(blockPos,state.setValue(column,PillarShapeType.pillar_base));
         }
     }
 
-    private void updateAbove(BlockPlaceContext context, BlockPos blockPos,BlockState state){
+    private void updateAbove(Level level, BlockPos blockPos,BlockState state){
 
-        LevelAccessor level = context.getLevel();
-        BlockPos checkAbove = context.getClickedPos().above(2);
+        BlockPos checkAbove = blockPos.above();
         if (level.getBlockState(checkAbove).getBlock() instanceof PillarBlock){
-            level.setBlock(blockPos, state.setValue(column,PillarShapeType.pillar_column),0);
+            level.setBlockAndUpdate(blockPos, state.setValue(column,PillarShapeType.pillar_column));
         }
         else {
-            level.setBlock(blockPos,state.setValue(column,PillarShapeType.pillar_capital),0);
+            level.setBlockAndUpdate(blockPos,state.setValue(column,PillarShapeType.pillar_capital));
         }
     }
     private BlockState updateShape(BlockState blockState, Boolean base, Boolean capital)
