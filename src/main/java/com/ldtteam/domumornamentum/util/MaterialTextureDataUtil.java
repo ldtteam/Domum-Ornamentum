@@ -4,6 +4,8 @@ import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.client.event.handlers.ClientTickEventHandler;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -12,8 +14,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistry;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.StreamSupport;
 
 public class MaterialTextureDataUtil
 {
@@ -45,7 +48,10 @@ public class MaterialTextureDataUtil
             int offsetIndex = 0;
             for (IMateriallyTexturedBlockComponent component : materiallyTexturedBlock.getComponents())
             {
-                final List<Block> candidates = component.getValidSkins().getValues();
+                final List<Block> candidates = new ArrayList<>(
+                  StreamSupport
+                    .stream(Registry.BLOCK.getTagOrEmpty(component.getValidSkins()).spliterator(), false)
+                    .map(Holder::value).toList());
                 if (candidates.isEmpty())
                 {
                     continue;

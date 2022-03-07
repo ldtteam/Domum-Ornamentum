@@ -18,6 +18,7 @@ import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -33,6 +34,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import static com.ldtteam.domumornamentum.util.Constants.MOD_ID;
 
@@ -114,8 +116,8 @@ public class ArchitectsCutterCategory implements IRecipeCategory<ArchitectsCutte
 
         final Collection<IMateriallyTexturedBlockComponent> components = materiallyTexturedBlock.getComponents();
         final List<List<ItemStack>> inputs = components.stream()
-                .map(component -> component.getValidSkins().getValues().stream()
-                        .map(ItemStack::new)
+                .map(component -> StreamSupport.stream(Registry.BLOCK.getTagOrEmpty(component.getValidSkins()).spliterator(), false)
+                        .map(m -> new ItemStack(m.value()))
                         .collect(Collectors.collectingAndThen(
                                 Collectors.toCollection(ArrayList::new),
                                 list ->

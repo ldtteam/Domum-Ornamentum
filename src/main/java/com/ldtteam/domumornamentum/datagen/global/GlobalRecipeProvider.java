@@ -42,7 +42,7 @@ public class GlobalRecipeProvider implements DataProvider
         final Map<String, RecipeIngredientKeyJson> keys = new HashMap<>();
         keys.put("X", new RecipeIngredientKeyJson(new RecipeIngredientJson(Items.IRON_INGOT.getRegistryName().toString(), false)));
         keys.put("S", new RecipeIngredientKeyJson(new RecipeIngredientJson(Items.STONE_SLAB.getRegistryName().toString(), false)));
-        keys.put("L", new RecipeIngredientKeyJson(new RecipeIngredientJson(BlockTags.LOGS.getName().toString(), true)));
+        keys.put("L", new RecipeIngredientKeyJson(new RecipeIngredientJson(BlockTags.LOGS.location().toString(), true)));
 
         final ShapedRecipeJson json = new ShapedRecipeJson("global", pattern, keys, new RecipeResultJson(1, block.asItem().getRegistryName().toString()));
         final Path recipeFolder = this.generator.getOutputFolder().resolve(DataGeneratorConstants.RECIPES_DIR);
@@ -54,7 +54,7 @@ public class GlobalRecipeProvider implements DataProvider
         final ShapedPatternJson standingBarrelPattern =  new ShapedPatternJson("SWS","SWS","SWS");
         final Map<String, RecipeIngredientKeyJson> standingBarrelKeys = new HashMap<>();
         standingBarrelKeys.put("S", new RecipeIngredientKeyJson(new RecipeIngredientJson(Items.STICK.getRegistryName().toString(), false)));
-        standingBarrelKeys.put("W", new RecipeIngredientKeyJson(new RecipeIngredientJson(BlockTags.PLANKS.getName().toString(), true)));
+        standingBarrelKeys.put("W", new RecipeIngredientKeyJson(new RecipeIngredientJson(BlockTags.PLANKS.location().toString(), true)));
 
         final ShapedRecipeJson standingBarrelJson = new ShapedRecipeJson("global", standingBarrelPattern, standingBarrelKeys, new RecipeResultJson(1, standingBarrel.asItem().getRegistryName().toString()));
         final Path standingBarrelPath = recipeFolder.resolve(standingBarrel.getRegistryName().getPath() + ".json");
@@ -65,7 +65,7 @@ public class GlobalRecipeProvider implements DataProvider
         final ShapedPatternJson layingBarrelPattern =  new ShapedPatternJson("SSS","WWW","SSS");
         final Map<String, RecipeIngredientKeyJson> layingBarrelKeys = new HashMap<>();
         layingBarrelKeys.put("S", new RecipeIngredientKeyJson(new RecipeIngredientJson(Items.STICK.getRegistryName().toString(), false)));
-        layingBarrelKeys.put("W", new RecipeIngredientKeyJson(new RecipeIngredientJson(BlockTags.PLANKS.getName().toString(), true)));
+        layingBarrelKeys.put("W", new RecipeIngredientKeyJson(new RecipeIngredientJson(BlockTags.PLANKS.location().toString(), true)));
 
         final ShapedRecipeJson layingBarrelJson = new ShapedRecipeJson("global", layingBarrelPattern, layingBarrelKeys, new RecipeResultJson(1, layingBarrel.asItem().getRegistryName().toString()));
         final Path layingBarrelPath = recipeFolder.resolve(layingBarrel.getRegistryName().getPath() + ".json");

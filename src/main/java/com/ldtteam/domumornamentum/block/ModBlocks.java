@@ -7,6 +7,7 @@ import com.ldtteam.domumornamentum.block.types.ExtraBlockType;
 import com.ldtteam.domumornamentum.block.types.PillarShapeType;
 import com.ldtteam.domumornamentum.block.types.TimberFrameType;
 import com.ldtteam.domumornamentum.block.vanilla.*;
+import com.ldtteam.domumornamentum.recipe.ModRecipeTypes;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
@@ -276,6 +277,8 @@ public final class ModBlocks implements IModBlocks
         STATIC_TRAPDOOR.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.GENERAL));
         FANCY_DOOR.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.GENERAL));
         FANCY_TRAPDOOR.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.GENERAL));
+
+        ModRecipeTypes.init();
     }
 
 }

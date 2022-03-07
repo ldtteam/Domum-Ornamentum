@@ -1,9 +1,11 @@
 package com.ldtteam.domumornamentum.block;
 
 import com.ldtteam.domumornamentum.container.ArchitectsCutterContainer;
-import com.ldtteam.domumornamentum.util.BlockUtils;
+import com.ldtteam.domumornamentum.recipe.ModRecipeTypes;
+import com.ldtteam.domumornamentum.recipe.architectscutter.ArchitectsCutterRecipe;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.player.Player;
@@ -13,7 +15,6 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.util.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.BlockHitResult;

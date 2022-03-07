@@ -38,7 +38,7 @@ public class FloatingCarpetRecipeProvider implements DataProvider
             final ShapedPatternJson pattern =  new ShapedPatternJson("C  ","S  ","   ");
             final Map<String, RecipeIngredientKeyJson> keys = new HashMap<>();
             keys.put("C", new RecipeIngredientKeyJson(new RecipeIngredientJson("minecraft:" + color.getName() + "_carpet", false)));
-            keys.put("S", new RecipeIngredientKeyJson(new RecipeIngredientJson(Tags.Items.STRING.getName().toString(), true)));
+            keys.put("S", new RecipeIngredientKeyJson(new RecipeIngredientJson(Tags.Items.STRING.location().toString(), true)));
 
             final ShapedRecipeJson json = new ShapedRecipeJson("floating_carpets", pattern, keys, new RecipeResultJson(4, block.asItem().getRegistryName().toString()));
             final Path recipeFolder = this.generator.getOutputFolder().resolve(DataGeneratorConstants.RECIPES_DIR);
