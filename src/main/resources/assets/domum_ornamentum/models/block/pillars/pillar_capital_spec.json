@@ -2,8 +2,9 @@
 	"credit": "Made with Blockbench",
 	"parent": "block",
 	"textures": {
-	"capital": "block/oak_planks",
-	"column": "block/oak_planks"
+		"capital": "block/oak_planks",
+		"column": "block/oak_planks",
+		"particle": "block/oak_planks"
 },
 	"elements": [
 		{

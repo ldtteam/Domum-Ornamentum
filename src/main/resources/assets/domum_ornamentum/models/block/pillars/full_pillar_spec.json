@@ -4,7 +4,8 @@
 	"textures": {
 		"capital": "block/oak_planks",
 		"column": "block/oak_planks",
-		"base": "block/oak_planks"
+		"base": "block/oak_planks",
+		"particle": "block/oak_planks"
 	},
 	"elements": [
 		{

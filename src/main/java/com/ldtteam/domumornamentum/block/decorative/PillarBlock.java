@@ -42,6 +42,7 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -114,6 +115,9 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
         return pillar_capital_shape.orElse(Shapes.block());
     }
 
+    public VoxelShape getVisualShape(BlockState p_53311_, BlockGetter p_53312_, BlockPos p_53313_, CollisionContext p_53314_) {
+        return pillar_capital_shape.orElse(Shapes.block());
+    }
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(column);
@@ -177,6 +181,7 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
         if (base && !capital) {
             return blockState.setValue(column, PillarShapeType.pillar_capital);
         }
+        blockState.setValue(column,PillarShapeType.full_pillar);
         return blockState;
     }
 
