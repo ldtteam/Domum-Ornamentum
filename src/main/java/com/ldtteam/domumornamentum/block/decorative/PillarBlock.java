@@ -41,12 +41,17 @@ import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 public class PillarBlock extends AbstractBlock<PillarBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock
 {
@@ -55,6 +60,19 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
         .build();
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
+    private static final Optional<VoxelShape> pillar_capital_shape = Stream.of(
+     Shapes.box(0, 0.875, 0, 1, 1, 1),
+     Shapes.box(0.0625, 0.8125, 0.0625, 0.9375, 0.875, 0.9375),
+     Shapes.box(0.125, 0.75, 0.125, 0.875, 0.8125, 0.875),
+     Shapes.box(0.4375, 0, 0.1875, 0.5625, 0.75, 0.8125),
+     Shapes.box(0.4375, 0, 0.1875, 0.5625, 0.75, 0.8125),
+     Shapes.box(0.4375, 0, 0.1875, 0.5625, 0.75, 0.8125),
+     Shapes.box(0.1875, 0, 0.4375, 0.8125, 0.75, 0.5625),
+     Shapes.box(0.1875, 0, 0.4375, 0.8125, 0.75, 0.5625),
+     Shapes.box(0.1875, 0, 0.4375, 0.8125, 0.75, 0.5625),
+     Shapes.box(0.1875, 0, 0.4375, 0.8125, 0.75, 0.5625),
+     Shapes.box(0.4375, 0, 0.1875, 0.5625, 0.75, 0.8125)
+     ).reduce((v1,v2) ->Shapes.join(v1, v2,BooleanOp.OR));
 
     /**
      * This block's name.
@@ -88,6 +106,12 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
     public void registerItemBlock(final IForgeRegistry<Item> registry, final Item.Properties properties)
     {
         registry.register((new PillarBlockItem(this, properties)).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
+    }
+
+    @Override
+    public VoxelShape getOcclusionShape(BlockState p_60578_, BlockGetter p_60579_, BlockPos p_60580_)
+    {
+        return pillar_capital_shape.orElse(Shapes.block());
     }
 
     @Override

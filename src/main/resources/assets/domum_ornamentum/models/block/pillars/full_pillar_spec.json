@@ -1,10 +1,10 @@
 {
-	"credit": "Made with Blockbench",
+	"credit": "Made with Blockbench by Shindria",
 	"parent": "block",
 	"textures": {
-		"capital": "block/cobblestone",
-		"column": "block/cobblestone",
-		"base": "block/cobblestone"
+		"capital": "block/oak_planks",
+		"column": "block/oak_planks",
+		"base": "block/oak_planks"
 	},
 	"elements": [
 		{
@@ -94,14 +94,25 @@
 			}
 		},
 		{
+			"name": "NNE-SSW",
+			"from": [7, 4, 3],
+			"to": [9, 12, 13],
+			"rotation": {"angle": -22.5, "axis": "y", "origin": [8, 8, 8]},
+			"color": 3,
+			"faces": {
+				"north": {"uv": [14, 4, 16, 12], "texture": "#column"},
+				"south": {"uv": [6, 4, 8, 12], "texture": "#column"}
+			}
+		},
+		{
 			"name": "N-S",
 			"from": [7, 4, 3],
 			"to": [9, 12, 13],
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
 			"color": 6,
 			"faces": {
-				"north": {"uv": [7, 4, 9, 12], "texture": "#column"},
-				"south": {"uv": [7, 4, 9, 12], "texture": "#column"}
+				"north": {"uv": [0, 4, 2, 12], "texture": "#column"},
+				"south": {"uv": [8, 4, 10, 12], "texture": "#column"}
 			}
 		},
 		{
@@ -111,8 +122,8 @@
 			"rotation": {"angle": 22.5, "axis": "y", "origin": [8, 8, 8]},
 			"color": 3,
 			"faces": {
-				"north": {"uv": [9, 4, 11, 12], "texture": "#column"},
-				"south": {"uv": [9, 4, 11, 12], "texture": "#column"}
+				"north": {"uv": [2, 4, 4, 12], "texture": "#column"},
+				"south": {"uv": [10, 4, 12, 12], "texture": "#column"}
 			}
 		},
 		{
@@ -122,8 +133,8 @@
 			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8]},
 			"color": 3,
 			"faces": {
-				"north": {"uv": [3, 4, 5, 12], "texture": "#column"},
-				"south": {"uv": [11, 4, 13, 12], "texture": "#column"}
+				"north": {"uv": [4, 4, 6, 12], "texture": "#column"},
+				"south": {"uv": [12, 4, 14, 12], "texture": "#column"}
 			}
 		},
 		{
@@ -133,8 +144,8 @@
 			"rotation": {"angle": -22.5, "axis": "y", "origin": [8, 8, 8]},
 			"color": 3,
 			"faces": {
-				"east": {"uv": [5, 4, 7, 12], "texture": "#column"},
-				"west": {"uv": [5, 4, 7, 12], "texture": "#column"}
+				"east": {"uv": [14, 4, 16, 12], "texture": "#column"},
+				"west": {"uv": [6, 4, 8, 12], "texture": "#column"}
 			}
 		},
 		{
@@ -144,8 +155,8 @@
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
 			"color": 3,
 			"faces": {
-				"east": {"uv": [7, 4, 9, 12], "texture": "#column"},
-				"west": {"uv": [7, 4, 9, 12], "texture": "#column"}
+				"east": {"uv": [0, 4, 2, 12], "texture": "#column"},
+				"west": {"uv": [8, 4, 10, 12], "texture": "#column"}
 			}
 		},
 		{
@@ -155,30 +166,19 @@
 			"rotation": {"angle": 22.5, "axis": "y", "origin": [8, 8, 8]},
 			"color": 3,
 			"faces": {
-				"east": {"uv": [9, 4, 11, 12], "texture": "#column"},
-				"west": {"uv": [9, 4, 11, 12], "texture": "#column"}
+				"east": {"uv": [2, 4, 4, 12], "texture": "#column"},
+				"west": {"uv": [10, 4, 12, 12], "texture": "#column"}
 			}
 		},
 		{
-			"name": "NE-SW",
+			"name": "SW-NE",
 			"from": [3, 4, 7],
 			"to": [13, 12, 9],
 			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8]},
 			"color": 3,
 			"faces": {
-				"east": {"uv": [3, 4, 5, 12], "texture": "#column"},
-				"west": {"uv": [11, 4, 13, 12], "texture": "#column"}
-			}
-		},
-		{
-			"name": "ENE-WSW",
-			"from": [7, 4, 3],
-			"to": [9, 12, 13],
-			"rotation": {"angle": -22.5, "axis": "y", "origin": [8, 8, 8]},
-			"color": 3,
-			"faces": {
-				"north": {"uv": [5, 4, 7, 12], "texture": "#column"},
-				"south": {"uv": [5, 4, 7, 12], "texture": "#column"}
+				"east": {"uv": [4, 4, 6, 12], "texture": "#column"},
+				"west": {"uv": [12, 4, 14, 12], "texture": "#column"}
 			}
 		}
 	]
