@@ -57,11 +57,15 @@ import java.util.stream.Stream;
 
 public class PillarBlock extends AbstractBlock<PillarBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock
 {
+
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
         .add(new SimpleRetexturableComponent(new ResourceLocation("block/oak_planks"), ModTags.PILLAR_MATERIALS, Blocks.OAK_PLANKS))
         .build();
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
+    /**
+     * the shape of the column section
+     */
     private static final Optional<VoxelShape> pillar_capital_shape = Stream.of(
      Shapes.box(0.4375, 0, 0.1875, 0.5625, 0.75, 0.8125),
      Shapes.box(0.4375, 0, 0.1875, 0.5625, 0.75, 0.8125),
@@ -87,8 +91,14 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
      * The resistance this block has.
      */
     private static final float                      RESISTANCE     = 1F;
-    private static final Property column = EnumProperty.create("column", PillarShapeType.class);
+    /**
+     * the types of pillar shapes that can be rendered
+     */
+    private static final EnumProperty<PillarShapeType> column = EnumProperty.create("column", PillarShapeType.class);
 
+    /**
+     * base constructor
+     */
     public PillarBlock()
     {
         super(BlockBehaviour.Properties.of(Material.GLASS).strength(BLOCK_HARDNESS, RESISTANCE));
@@ -107,17 +117,36 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
         registry.register((new PillarBlockItem(this, properties)).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
     }
 
+    /**
+     * Returns the internal shape of the pillar column.
+     * @param state   The current blockstate.
+     * @param worldIn The world the block is in.
+     * @param pos The position of the block.
+     * @param context The selection context.
+     * @return The VoxelShape of the Block
+     */
     @Override
-    public @NotNull VoxelShape getOcclusionShape(@NotNull BlockState state, @NotNull BlockGetter getter, @NotNull BlockPos pos)
+    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context)
     {
         return pillar_capital_shape.orElse(Shapes.block());
     }
 
+    /**
+     * Adds the BlockState property "column", used to determine the correct shape to render.
+     * @param builder the state builder used to create the BlockStateDefinition
+     */
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
         builder.add(column);
     }
+
+    /**
+     * Finds the correct blockstate on placement by checking the blocks above and below the clicked position from the context. Then calls updateAbove and upDateBelow
+     * to correct their blockstates based on their upper/lower neighbor and this block.
+     * @param context The world and location data for the block's placement.
+     * @return
+     */
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context)
     {
@@ -141,6 +170,16 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
 
     }
 
+    /**
+     * Called to correct the blockstates of surrounding blocks when blocks are destroyed.
+     * @param state The current blockstate.
+     * @param world The world the block is in.
+     * @param pos The location of the block in the world.
+     * @param player The destroying entity, may be null.
+     * @param willHarvest True if Block.harvestBlock will be called after this, if the return in true. Can be useful to delay the destruction of tile entities till after harvestBlock
+     * @param fluid The fluid to replace the block with if waterlogged == true.
+     * @return
+     */
     @Override
     public boolean onDestroyedByPlayer(BlockState state, Level world, BlockPos pos, Player player, boolean willHarvest, FluidState fluid)
     {
@@ -190,6 +229,12 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
         return super.onDestroyedByPlayer(state, world, pos, player, willHarvest, fluid);
     }
 
+    /**
+     * Called on block placement to update the blockstate of the neighbor below the current block.
+     * @param level The world the block is in.
+     * @param blockPos The location of the block to be updated.
+     * @param state The current blockstate.
+     */
     private void updateBelow(Level level, BlockPos blockPos, BlockState state)
     {
 
@@ -204,7 +249,12 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
             level.setBlockAndUpdate(blockPos,state.setValue(column,PillarShapeType.pillar_base));
         }
     }
-
+    /**
+     * Called on block placement to update the blockstate of the neighbor above the current block.
+     * @param level The world the block is in.
+     * @param blockPos The location of the block to be updated.
+     * @param state The current blockstate.
+     */
     private void updateAbove(Level level, BlockPos blockPos,BlockState state)
     {
 
@@ -219,9 +269,16 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
         }
     }
 
+    /**
+     * Called when block is placed to set the correct blockstate for the current block.
+     * @param blockState The current blockstate.
+     * @param base If true, there is a PillarBlock below this one.
+     * @param capital If true, there is a PillarBlock above this one.
+     * @return
+     */
     private BlockState updateShape(BlockState blockState, Boolean base, Boolean capital)
     {
-        //someone tell me why early returns are working, but it wouldn't work when it was set up correctly. Was I missing an assignment or something?
+
         if (base && capital)
         {
             return blockState.setValue(column, PillarShapeType.pillar_column);
@@ -238,6 +295,11 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
         return blockState;
     }
 
+    /**
+     * checks that the block passed in is allowed to connect.
+     * @param state The blockstate to be checked.
+     * @return
+     */
     private boolean connectsTo(BlockState state )
     {
         return state.getBlock() instanceof PillarBlock;
