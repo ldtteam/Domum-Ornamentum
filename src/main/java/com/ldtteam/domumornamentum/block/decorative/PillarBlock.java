@@ -123,7 +123,7 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
      * @return The VoxelShape of the Block
      */
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context)
+    public @NotNull VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter worldIn, @NotNull BlockPos pos, @NotNull CollisionContext context)
     {
         return pillar_capital_shape.orElse(Shapes.block());
     }
@@ -142,7 +142,7 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
      * Finds the correct blockstate on placement by checking the blocks above and below the clicked position from the context. Then calls updateAbove and upDateBelow
      * to correct their blockstates based on their upper/lower neighbor and this block.
      * @param context The world and location data for the block's placement.
-     * @return
+     * @return The final blockstate for placement
      */
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context)
@@ -174,12 +174,12 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
      * @param player The destroying entity, may be null.
      * @param willHarvest True if Block.harvestBlock will be called after this, if the return in true. Can be useful to delay the destruction of tile entities till after harvestBlock
      * @param fluid The fluid to replace the block with if waterlogged == true.
-     * @return
+     * @return If true, the block will be destroyed
      */
     @Override
     public boolean onDestroyedByPlayer(BlockState state, Level world, BlockPos pos, Player player, boolean willHarvest, FluidState fluid)
     {
-        Comparable column_property = state.getValue(column);
+        Comparable<PillarShapeType> column_property = state.getValue(column);
         if (column_property == PillarShapeType.PILLAR_COLUMN)
         {
             if (world.getBlockState(pos.above()).getValue(column)== PillarShapeType.PILLAR_COLUMN)
@@ -267,7 +267,7 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
      * @param blockState The current blockstate.
      * @param base If true, there is a PillarBlock below this one.
      * @param capital If true, there is a PillarBlock above this one.
-     * @return
+     * @return The correct blockstate for placement
      */
     private BlockState updateShape(BlockState blockState, Boolean base, Boolean capital)
     {
@@ -290,7 +290,7 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
     /**
      * checks that the block passed in is allowed to connect.
      * @param state The blockstate to be checked.
-     * @return
+     * @return If true, allows connection to this block
      */
     private boolean connectsTo(BlockState state )
     {
