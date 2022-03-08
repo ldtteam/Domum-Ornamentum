@@ -63,9 +63,6 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
     private static final Optional<VoxelShape> pillar_capital_shape = Stream.of(
-     Shapes.box(0, 0.875, 0, 1, 1, 1),
-     Shapes.box(0.0625, 0.8125, 0.0625, 0.9375, 0.875, 0.9375),
-     Shapes.box(0.125, 0.75, 0.125, 0.875, 0.8125, 0.875),
      Shapes.box(0.4375, 0, 0.1875, 0.5625, 0.75, 0.8125),
      Shapes.box(0.4375, 0, 0.1875, 0.5625, 0.75, 0.8125),
      Shapes.box(0.4375, 0, 0.1875, 0.5625, 0.75, 0.8125),
@@ -111,19 +108,17 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
     }
 
     @Override
-    public VoxelShape getOcclusionShape(BlockState p_60578_, BlockGetter p_60579_, BlockPos p_60580_)
+    public VoxelShape getOcclusionShape(BlockState state, BlockGetter getter, BlockPos pos)
     {
         return pillar_capital_shape.orElse(Shapes.block());
     }
 
-    public VoxelShape getVisualShape(BlockState p_53311_, BlockGetter p_53312_, BlockPos p_53313_, CollisionContext p_53314_) {
-        return pillar_capital_shape.orElse(Shapes.block());
-    }
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
+    {
         builder.add(column);
     }
-
+    @Override
     public BlockState getStateForPlacement(BlockPlaceContext context)
     {
 
@@ -150,73 +145,93 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
     public boolean onDestroyedByPlayer(BlockState state, Level world, BlockPos pos, Player player, boolean willHarvest, FluidState fluid)
     {
         Comparable column_property = state.getValue(column);
-        if (column_property == PillarShapeType.pillar_column){
-            if (world.getBlockState(pos.above()).getValue(column)== PillarShapeType.pillar_column){
+        if (column_property == PillarShapeType.pillar_column)
+        {
+            if (world.getBlockState(pos.above()).getValue(column)== PillarShapeType.pillar_column)
+            {
                 world.setBlockAndUpdate(pos.above(),state.setValue(column,PillarShapeType.pillar_base));
             }
-            else{
+            else
+            {
                 world.setBlockAndUpdate(pos.above(),state.setValue(column,PillarShapeType.full_pillar));
             }
 
-            if (world.getBlockState(pos.below()).getValue(column)== PillarShapeType.pillar_column){
+            if (world.getBlockState(pos.below()).getValue(column)== PillarShapeType.pillar_column)
+            {
                 world.setBlockAndUpdate(pos.below(),state.setValue(column,PillarShapeType.pillar_capital));
             }
-            else{
+            else
+            {
                 world.setBlockAndUpdate(pos.below(),state.setValue(column,PillarShapeType.full_pillar));
             }
         }
         if (column_property == PillarShapeType.pillar_base){
-            if (world.getBlockState(pos.above()).getValue(column)== PillarShapeType.pillar_column){
+            if (world.getBlockState(pos.above()).getValue(column)== PillarShapeType.pillar_column)
+            {
                 world.setBlockAndUpdate(pos.above(),state.setValue(column,PillarShapeType.pillar_base));
             }
-            else{
+            else
+            {
                 world.setBlockAndUpdate(pos.above(),state.setValue(column,PillarShapeType.full_pillar));
             }
 
         }
-        if (column_property == PillarShapeType.pillar_capital) {
-            if (world.getBlockState(pos.below()).getValue(column)== PillarShapeType.pillar_column){
+        if (column_property == PillarShapeType.pillar_capital)
+        {
+            if (world.getBlockState(pos.below()).getValue(column)== PillarShapeType.pillar_column)
+            {
                 world.setBlockAndUpdate(pos.below(),state.setValue(column,PillarShapeType.pillar_capital));
             }
-            else{
+            else
+            {
                 world.setBlockAndUpdate(pos.below(),state.setValue(column,PillarShapeType.full_pillar));
             }
         }
         return super.onDestroyedByPlayer(state, world, pos, player, willHarvest, fluid);
     }
 
-    private void updateBelow(Level level, BlockPos blockPos, BlockState state){
+    private void updateBelow(Level level, BlockPos blockPos, BlockState state)
+    {
 
 
         BlockPos checkBelow = blockPos.below();
-        if (level.getBlockState(checkBelow).getBlock() instanceof PillarBlock){
+        if (level.getBlockState(checkBelow).getBlock() instanceof PillarBlock)
+        {
             level.setBlockAndUpdate(blockPos, state.setValue(column,PillarShapeType.pillar_column));
         }
-        else {
+        else
+        {
             level.setBlockAndUpdate(blockPos,state.setValue(column,PillarShapeType.pillar_base));
         }
     }
 
-    private void updateAbove(Level level, BlockPos blockPos,BlockState state){
+    private void updateAbove(Level level, BlockPos blockPos,BlockState state)
+    {
 
         BlockPos checkAbove = blockPos.above();
-        if (level.getBlockState(checkAbove).getBlock() instanceof PillarBlock){
+        if (level.getBlockState(checkAbove).getBlock() instanceof PillarBlock)
+        {
             level.setBlockAndUpdate(blockPos, state.setValue(column,PillarShapeType.pillar_column));
         }
-        else {
+        else
+        {
             level.setBlockAndUpdate(blockPos,state.setValue(column,PillarShapeType.pillar_capital));
         }
     }
+
     private BlockState updateShape(BlockState blockState, Boolean base, Boolean capital)
     {
         //someone tell me why early returns are working, but it wouldn't work when it was set up correctly. Was I missing an assignment or something?
-        if (base && capital) {
+        if (base && capital)
+        {
             return blockState.setValue(column, PillarShapeType.pillar_column);
         }
-        if (!base && capital) {
+        if (!base && capital)
+        {
             return blockState.setValue(column,PillarShapeType.pillar_base);
         }
-        if (base && !capital) {
+        if (base && !capital)
+        {
             return blockState.setValue(column, PillarShapeType.pillar_capital);
         }
         blockState.setValue(column,PillarShapeType.full_pillar);
@@ -225,7 +240,8 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
 
     private boolean connectsTo(BlockState state )
     {
-        if (state.getBlock() instanceof PillarBlock){
+        if (state.getBlock() instanceof PillarBlock)
+        {
             return true;
         }
         return false;
@@ -300,9 +316,11 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
     public @NotNull Block getBlock() { return this; }
 
     @NotNull
-    public Collection<FinishedRecipe> getValidCutterRecipes() {
+    public Collection<FinishedRecipe> getValidCutterRecipes()
+    {
         return Lists.newArrayList(
-                new FinishedRecipe() {
+                new FinishedRecipe()
+                {
                     @Override
                     public void serializeRecipeData(final @NotNull JsonObject json)
                     {
