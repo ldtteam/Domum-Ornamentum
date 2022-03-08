@@ -251,7 +251,6 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
      */
     private void updateAbove(Level level, BlockPos blockPos,BlockState state)
     {
-
         BlockPos checkAbove = blockPos.above();
         if (level.getBlockState(checkAbove).getBlock() instanceof PillarBlock)
         {
@@ -272,7 +271,6 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
      */
     private BlockState updateShape(BlockState blockState, Boolean base, Boolean capital)
     {
-
         if (base && capital)
         {
             return blockState.setValue(column, PillarShapeType.PILLAR_COLUMN);
