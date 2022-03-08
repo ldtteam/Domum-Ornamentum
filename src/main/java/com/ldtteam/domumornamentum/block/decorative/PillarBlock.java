@@ -108,7 +108,7 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
     }
 
     @Override
-    public VoxelShape getOcclusionShape(BlockState state, BlockGetter getter, BlockPos pos)
+    public @NotNull VoxelShape getOcclusionShape(@NotNull BlockState state, @NotNull BlockGetter getter, @NotNull BlockPos pos)
     {
         return pillar_capital_shape.orElse(Shapes.block());
     }
@@ -122,20 +122,20 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
     public BlockState getStateForPlacement(BlockPlaceContext context)
     {
 
-        LevelReader levelReader = context.getLevel();
+        Level level = context.getLevel();
         BlockPos blockPos = context.getClickedPos();
         BlockPos blockAbove = blockPos.above();
         BlockPos blockBelow = blockPos.below();
-        BlockState stateAbove = levelReader.getBlockState(blockAbove);
-        BlockState stateBelow = levelReader.getBlockState(blockBelow);
+        BlockState stateAbove = level.getBlockState(blockAbove);
+        BlockState stateBelow = level.getBlockState(blockBelow);
 
         Boolean base = this.connectsTo(stateBelow);
         Boolean capital = this.connectsTo(stateAbove);
         if (base){
-            updateBelow((Level) levelReader, blockBelow,stateBelow);
+            updateBelow(level, blockBelow,stateBelow);
         }
         if (capital){
-            updateAbove((Level) levelReader,blockAbove, stateAbove);
+            updateAbove(level,blockAbove, stateAbove);
         }
         return updateShape(this.defaultBlockState(), base, capital);
 
@@ -240,11 +240,7 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
 
     private boolean connectsTo(BlockState state )
     {
-        if (state.getBlock() instanceof PillarBlock)
-        {
-            return true;
-        }
-        return false;
+        return state.getBlock() instanceof PillarBlock;
     }
 
 

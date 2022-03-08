@@ -50,17 +50,6 @@
 			}
 		},
 		{
-			"name": "north-south",
-			"from": [7, 4, 3],
-			"to": [9, 16, 13],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
-			"color": 5,
-			"faces": {
-				"north": {"uv": [0, 4, 2, 12], "texture": "#column"},
-				"south": {"uv": [0, 4, 2, 12], "texture": "#column"}
-			}
-		},
-		{
 			"name": "NNE-SSW",
 			"from": [7, 4, 3],
 			"to": [9, 16, 13],
