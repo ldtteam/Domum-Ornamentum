@@ -7,7 +7,6 @@ import com.ldtteam.datagenerators.models.XYZIntListJson;
 import com.ldtteam.datagenerators.models.item.ItemModelJson;
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.types.PillarShapeType;
-import com.ldtteam.domumornamentum.block.types.ShingleShapeType;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.data.DataGenerator;
@@ -35,7 +34,7 @@ public class PillarItemModelProvider implements DataProvider
         final ItemModelJson modelJson = new ItemModelJson();
         modelJson.setDisplay(getDisplay());
 
-        final String modelLocation = Constants.MOD_ID + ":block/pillars/" + PillarShapeType.full_pillar.name().toLowerCase(Locale.ROOT);
+        final String modelLocation = Constants.MOD_ID + ":block/pillars/" + PillarShapeType.FULL_PILLAR.name().toLowerCase(Locale.ROOT);
 
         modelJson.setParent(modelLocation);
 

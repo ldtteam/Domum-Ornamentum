@@ -90,7 +90,10 @@ public final class ModBlocks implements IModBlocks
     }
 
     @Override
-    public PillarBlock getPillar() {return ModBlocks.PILLAR;}
+    public PillarBlock getPillar()
+    {
+        return ModBlocks.PILLAR;
+    }
 
     @Override
     public ShingleSlabBlock getShingleSlab()

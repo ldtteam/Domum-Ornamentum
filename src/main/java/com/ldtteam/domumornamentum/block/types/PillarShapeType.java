@@ -1,13 +1,14 @@
 package com.ldtteam.domumornamentum.block.types;
 
 import net.minecraft.util.StringRepresentable;
+import org.jetbrains.annotations.NotNull;
 
 public enum PillarShapeType implements StringRepresentable
 {
-    pillar_base ("pillar_base"),
-    pillar_capital ("pillar_capital"),
-    pillar_column ("pillar_column"),
-    full_pillar ("full_pillar");
+    PILLAR_BASE("pillar_base"),
+    PILLAR_CAPITAL("pillar_capital"),
+    PILLAR_COLUMN("pillar_column"),
+    FULL_PILLAR("full_pillar");
 
     private final String name;
 
@@ -17,7 +18,7 @@ public enum PillarShapeType implements StringRepresentable
     }
 
     @Override
-    public String getSerializedName()
+    public @NotNull String getSerializedName()
     {
         return this.name();
     }

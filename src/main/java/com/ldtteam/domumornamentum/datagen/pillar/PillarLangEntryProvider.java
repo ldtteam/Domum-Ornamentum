@@ -24,9 +24,7 @@ public class PillarLangEntryProvider implements DataProvider
     public void run(@NotNull HashCache cache) throws IOException
     {
         backingLangJson.put(Constants.MOD_ID + ".pillar.name.format", "%s Pillar");
-        backingLangJson.put(Constants.MOD_ID + ".pillar.base.format", "Supported by: %s");
         backingLangJson.put(Constants.MOD_ID + ".pillar.column.format", "Main Material: %s");
-        backingLangJson.put(Constants.MOD_ID + ".pillar.capital.format","Covered By: %s");
     }
 
     @Override

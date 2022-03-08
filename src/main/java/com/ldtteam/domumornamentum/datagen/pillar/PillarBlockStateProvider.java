@@ -51,8 +51,6 @@ public class PillarBlockStateProvider implements DataProvider
         if (pillar.getRegistryName() == null)
             return;
 
-        //final Map<String, BlockstateVariantJson> variants = new HashMap<>();
-
         final List<MultipartCaseJson> cases = Lists.newArrayList();
         cases.add(
                 new MultipartCaseJson(

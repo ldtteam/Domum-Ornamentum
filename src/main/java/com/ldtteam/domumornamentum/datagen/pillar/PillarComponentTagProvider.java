@@ -25,7 +25,6 @@ public class PillarComponentTagProvider extends BlockTagsProvider
     {
         this.tag(ModTags.PILLAR_MATERIALS)
           .add(
-            Blocks.CLAY,
             Blocks.BRICKS,
             Blocks.DEEPSLATE,
             Blocks.COBBLED_DEEPSLATE,
@@ -33,11 +32,8 @@ public class PillarComponentTagProvider extends BlockTagsProvider
           )
           .addTags(
             ModTags.GLOBAL_DEFAULT,
-            BlockTags.LEAVES,
-            BlockTags.PLANKS,
-            BlockTags.DIRT
+            BlockTags.PLANKS
           );
-
     }
 
     @Override

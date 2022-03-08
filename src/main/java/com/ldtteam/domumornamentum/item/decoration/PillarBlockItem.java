@@ -61,7 +61,7 @@ public class PillarBlockItem extends BlockItem
         final IMateriallyTexturedBlockComponent frameComponent = pillarBlock.getComponents().get(0);
         final Block frameBlock = textureData.getTexturedComponents().getOrDefault(frameComponent.getId(), frameComponent.getDefault());
         final Component frameBlockName = BlockUtils.getHoverName(frameBlock);
-        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".pillar.capital.format", frameBlockName));
+        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".pillar.column.format", frameBlockName));
 
 
     }
