@@ -15,6 +15,7 @@ import com.ldtteam.domumornamentum.datagen.global.GlobalLootTableProvider;
 import com.ldtteam.domumornamentum.datagen.global.GlobalRecipeProvider;
 import com.ldtteam.domumornamentum.datagen.global.MateriallyTexturedBlockRecipeProvider;
 import com.ldtteam.domumornamentum.datagen.panel.*;
+import com.ldtteam.domumornamentum.datagen.pillar.*;
 import com.ldtteam.domumornamentum.datagen.shingle.normal.*;
 import com.ldtteam.domumornamentum.datagen.shingle.slab.*;
 import com.ldtteam.domumornamentum.datagen.slab.*;
@@ -175,6 +176,14 @@ public class ModBusEventHandler
         event.getGenerator().addProvider(new FloatingCarpetItemModelProvider(event.getGenerator()));
         event.getGenerator().addProvider(new FloatingCarpetLangEntryProvider(event.getGenerator(), langJson));
         event.getGenerator().addProvider(new FloatingCarpetRecipeProvider(event.getGenerator()));
+
+        //Pillars
+        event.getGenerator().addProvider(new PillarBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new PillarBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new PillarComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(new PillarItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new PillarLangEntryProvider(event.getGenerator(), langJson));
+
 
         event.getGenerator().addProvider(new GlobalRecipeProvider(event.getGenerator()));
 

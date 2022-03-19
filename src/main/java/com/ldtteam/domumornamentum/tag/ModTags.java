@@ -49,6 +49,7 @@ public class ModTags
     public static final Tags.IOptionalNamedTag<Block> TERRACOTTA = tag("terracotta");
 
     public static final Tags.IOptionalNamedTag<Block> GLOBAL_DEFAULT = tag("default");
+    public static final Tags.IOptionalNamedTag<Block> PILLAR_MATERIALS = tag("pillar_materials");
 
     public static final Tags.IOptionalNamedTag<Item> EXTRA_BLOCK_ITEMS = itemTag("extra_block_items");
     public static final Tags.IOptionalNamedTag<Item> BRICK_ITEMS       = itemTag("brick_items");
