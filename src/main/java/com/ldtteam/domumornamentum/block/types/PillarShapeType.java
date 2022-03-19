@@ -20,6 +20,6 @@ public enum PillarShapeType implements StringRepresentable
     @Override
     public @NotNull String getSerializedName()
     {
-        return this.name();
+        return this.name;
     }
 }
