@@ -50,4 +50,6 @@ public interface IModBlocks
     Block getFancyDoor();
 
     Block getFancyTrapdoor();
+
+    Block getPillar();
 }

@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.ldtteam.domumornamentum.block.decorative.*;
 import com.ldtteam.domumornamentum.block.types.BrickType;
 import com.ldtteam.domumornamentum.block.types.ExtraBlockType;
+import com.ldtteam.domumornamentum.block.types.PillarShapeType;
 import com.ldtteam.domumornamentum.block.types.TimberFrameType;
 import com.ldtteam.domumornamentum.block.vanilla.*;
 import com.ldtteam.domumornamentum.recipe.ModRecipeTypes;
@@ -40,9 +41,10 @@ public final class ModBlocks implements IModBlocks
     private static       PaperWallBlock         PAPER_WALL;
     private static final List<ExtraBlock> EXTRA_TOP_BLOCKS = Lists.newArrayList();
     private static final List<FloatingCarpetBlock> FLOATING_CARPETS = Lists.newArrayList();
-    private static       BarrelBlock STANDING_BARREL;
+    private static       BarrelBlock      STANDING_BARREL;
     private static       BarrelBlock      LAYING_BARREL;
     private static final List<BrickBlock> BRICK = new ArrayList<>();
+    private static       PillarBlock      PILLAR ;
 
     private static FenceBlock     FENCE;
     private static FenceGateBlock FENCE_GATE;
@@ -85,6 +87,12 @@ public final class ModBlocks implements IModBlocks
     public List<TimberFrameBlock> getTimberFrames()
     {
         return new ArrayList<>(ModBlocks.TIMBER_FRAMES);
+    }
+
+    @Override
+    public PillarBlock getPillar()
+    {
+        return ModBlocks.PILLAR;
     }
 
     @Override
@@ -194,6 +202,7 @@ public final class ModBlocks implements IModBlocks
         SHINGLE = new ShingleBlock().registerBlock(registry);
         SHINGLE_SLAB = new ShingleSlabBlock().registerBlock(registry);
         PAPER_WALL = new PaperWallBlock().registerBlock(registry);
+        PILLAR = new PillarBlock().registerBlock(registry);
 
         for (final ExtraBlockType blockType : ExtraBlockType.values())
         {
@@ -242,7 +251,7 @@ public final class ModBlocks implements IModBlocks
         SHINGLE.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.GENERAL));
         SHINGLE_SLAB.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.GENERAL));
         PAPER_WALL.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.GENERAL));
-
+        PILLAR.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.GENERAL));
         for (final ExtraBlock block : EXTRA_TOP_BLOCKS)
         {
             block.registerItemBlock(registry, new Item.Properties().tab(ModCreativeTabs.EXTRA_BLOCKS));
@@ -274,4 +283,5 @@ public final class ModBlocks implements IModBlocks
 
         ModRecipeTypes.init();
     }
+
 }

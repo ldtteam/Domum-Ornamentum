@@ -48,6 +48,8 @@ public class ModTags
     public static final TagKey<Block> TERRACOTTA = tag("terracotta");
 
     public static final TagKey<Block> GLOBAL_DEFAULT = tag("default");
+    public static final TagKey<Block> PILLAR_MATERIALS = tag("pillar_materials");
+
 
     public static final TagKey<Item> EXTRA_BLOCK_ITEMS = itemTag("extra_block_items");
     public static final TagKey<Item> BRICK_ITEMS       = itemTag("brick_items");
