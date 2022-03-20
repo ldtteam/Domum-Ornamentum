@@ -275,7 +275,8 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
      */
     private BlockState updateShape(BlockState blockState, Boolean base, Boolean capital)
     {
-        if (isPillarBlock(blockState)) {
+        if (isPillarBlock(blockState))
+        {
             if (base && capital) {
                 return blockState.setValue(column, PillarShapeType.pillar_column);
             }
