@@ -5,7 +5,6 @@ import org.jetbrains.annotations.NotNull;
 
 public enum PillarShapeType implements StringRepresentable
 {
-
     PILLAR_BASE("pillar_base"),
     PILLAR_CAPITAL("pillar_capital"),
     PILLAR_COLUMN("pillar_column"),
@@ -23,12 +22,5 @@ public enum PillarShapeType implements StringRepresentable
     {
         return this.name;
     }
-
-
-    public @NotNull String getName()
-    {
-        return this.name;
-    }
-
 
 }
