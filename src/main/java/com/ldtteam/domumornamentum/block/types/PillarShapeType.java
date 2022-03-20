@@ -5,9 +5,7 @@ import org.jetbrains.annotations.NotNull;
 
 public enum PillarShapeType implements StringRepresentable
 {
-    /**
-     * these constants do not follow our naming conventions because forge does not allow the use of uppercase constants when creating an EnumProperty
-     */
+
     PILLAR_BASE("pillar_base"),
     PILLAR_CAPITAL("pillar_capital"),
     PILLAR_COLUMN("pillar_column"),
