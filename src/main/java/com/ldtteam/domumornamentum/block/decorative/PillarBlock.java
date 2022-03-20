@@ -184,7 +184,7 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
         {
             if (world.getBlockState(pos.above()).getValue(column)== PillarShapeType.PILLAR_COLUMN)
             {
-                world.setBlockAndUpdate(pos.above(),state.setValue(column,PillarShapeType.PILLAR_COLUMN));
+                world.setBlockAndUpdate(pos.above(),state.setValue(column,PillarShapeType.PILLAR_BASE));
             }
             else
             {
