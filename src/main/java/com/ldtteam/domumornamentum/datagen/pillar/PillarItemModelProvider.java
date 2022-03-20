@@ -34,7 +34,7 @@ public class PillarItemModelProvider implements DataProvider
         final ItemModelJson modelJson = new ItemModelJson();
         modelJson.setDisplay(getDisplay());
 
-        final String modelLocation = Constants.MOD_ID + ":block/pillars/" + PillarShapeType.full_pillar.name().toLowerCase(Locale.ROOT);
+        final String modelLocation = Constants.MOD_ID + ":block/pillars/" + PillarShapeType.FULL_PILLAR.name().toLowerCase(Locale.ROOT);
 
         modelJson.setParent(modelLocation);
 

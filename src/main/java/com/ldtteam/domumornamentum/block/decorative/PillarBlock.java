@@ -99,7 +99,7 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
     public PillarBlock()
     {
         super(BlockBehaviour.Properties.of(Material.STONE).strength(BLOCK_HARDNESS, RESISTANCE));
-        this.registerDefaultState(this.stateDefinition.any().setValue(column,PillarShapeType.full_pillar));
+        this.registerDefaultState(this.stateDefinition.any().setValue(column,PillarShapeType.FULL_PILLAR));
         setRegistryName(BLOCK_NAME);
     }
 
@@ -180,49 +180,49 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
     public boolean onDestroyedByPlayer(BlockState state, Level world, BlockPos pos, Player player, boolean willHarvest, FluidState fluid)
     {
         Comparable<PillarShapeType> column_property = state.getValue(column);
-        if (column_property == PillarShapeType.pillar_column)
+        if (column_property == PillarShapeType.PILLAR_COLUMN)
         {
-            if (world.getBlockState(pos.above()).getValue(column)== PillarShapeType.pillar_column)
+            if (world.getBlockState(pos.above()).getValue(column)== PillarShapeType.PILLAR_COLUMN)
             {
-                world.setBlockAndUpdate(pos.above(),state.setValue(column,PillarShapeType.pillar_column));
+                world.setBlockAndUpdate(pos.above(),state.setValue(column,PillarShapeType.PILLAR_COLUMN));
             }
             else
             {
-                world.setBlockAndUpdate(pos.above(),state.setValue(column,PillarShapeType.full_pillar));
+                world.setBlockAndUpdate(pos.above(),state.setValue(column,PillarShapeType.FULL_PILLAR));
             }
 
-            if (world.getBlockState(pos.below()).getValue(column)== PillarShapeType.pillar_column)
+            if (world.getBlockState(pos.below()).getValue(column)== PillarShapeType.PILLAR_COLUMN)
             {
-                world.setBlockAndUpdate(pos.below(),state.setValue(column,PillarShapeType.pillar_capital));
+                world.setBlockAndUpdate(pos.below(),state.setValue(column,PillarShapeType.PILLAR_CAPITAL));
             }
             else
             {
-                world.setBlockAndUpdate(pos.below(),state.setValue(column,PillarShapeType.full_pillar));
+                world.setBlockAndUpdate(pos.below(),state.setValue(column,PillarShapeType.FULL_PILLAR));
             }
         }
         if (isPillarBlock(world.getBlockState(pos.above())))
         {
-            if (column_property == PillarShapeType.pillar_base && isPillarBlock(world.getBlockState(pos.above())))
+            if (column_property == PillarShapeType.PILLAR_BASE && isPillarBlock(world.getBlockState(pos.above())))
             {
-                if (world.getBlockState(pos.above()).getValue(column) == PillarShapeType.pillar_column)
+                if (world.getBlockState(pos.above()).getValue(column) == PillarShapeType.PILLAR_COLUMN)
                 {
-                    world.setBlockAndUpdate(pos.above(), state.setValue(column, PillarShapeType.pillar_base));
+                    world.setBlockAndUpdate(pos.above(), state.setValue(column, PillarShapeType.PILLAR_BASE));
                 } else
                 {
-                    world.setBlockAndUpdate(pos.above(), state.setValue(column, PillarShapeType.full_pillar));
+                    world.setBlockAndUpdate(pos.above(), state.setValue(column, PillarShapeType.FULL_PILLAR));
                 }
             }
         }
         if (isPillarBlock(world.getBlockState(pos.below())))
         {
-            if (column_property == PillarShapeType.pillar_capital)
+            if (column_property == PillarShapeType.PILLAR_CAPITAL)
             {
-                if (world.getBlockState(pos.below()).getValue(column) == PillarShapeType.pillar_column)
+                if (world.getBlockState(pos.below()).getValue(column) == PillarShapeType.PILLAR_COLUMN)
                 {
-                    world.setBlockAndUpdate(pos.below(), state.setValue(column, PillarShapeType.pillar_capital));
+                    world.setBlockAndUpdate(pos.below(), state.setValue(column, PillarShapeType.PILLAR_CAPITAL));
                 } else
                 {
-                    world.setBlockAndUpdate(pos.below(), state.setValue(column, PillarShapeType.full_pillar));
+                    world.setBlockAndUpdate(pos.below(), state.setValue(column, PillarShapeType.FULL_PILLAR));
                 }
             }
         }
@@ -240,11 +240,11 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
         BlockPos checkBelow = blockPos.below();
         if (isPillarBlock(level.getBlockState(checkBelow)))
         {
-            level.setBlockAndUpdate(blockPos, state.setValue(column,PillarShapeType.pillar_column));
+            level.setBlockAndUpdate(blockPos, state.setValue(column,PillarShapeType.PILLAR_COLUMN));
         }
         else
         {
-            level.setBlockAndUpdate(blockPos,state.setValue(column,PillarShapeType.pillar_base));
+            level.setBlockAndUpdate(blockPos,state.setValue(column,PillarShapeType.PILLAR_BASE));
         }
     }
     /**
@@ -258,11 +258,11 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
         BlockPos checkAbove = blockPos.above();
         if (isPillarBlock(level.getBlockState(checkAbove)))
         {
-            level.setBlockAndUpdate(blockPos, state.setValue(column,PillarShapeType.pillar_column));
+            level.setBlockAndUpdate(blockPos, state.setValue(column,PillarShapeType.PILLAR_COLUMN));
         }
         else
         {
-            level.setBlockAndUpdate(blockPos,state.setValue(column,PillarShapeType.pillar_capital));
+            level.setBlockAndUpdate(blockPos,state.setValue(column,PillarShapeType.PILLAR_CAPITAL));
         }
     }
 
@@ -279,17 +279,17 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
         {
             if (base && capital)
             {
-                return blockState.setValue(column, PillarShapeType.pillar_column);
+                return blockState.setValue(column, PillarShapeType.PILLAR_COLUMN);
             }
             if (!base && capital)
             {
-                return blockState.setValue(column, PillarShapeType.pillar_base);
+                return blockState.setValue(column, PillarShapeType.PILLAR_BASE);
             }
             if (base && !capital)
             {
-                return blockState.setValue(column, PillarShapeType.pillar_capital);
+                return blockState.setValue(column, PillarShapeType.PILLAR_CAPITAL);
             }
-            blockState.setValue(column, PillarShapeType.full_pillar);
+            blockState.setValue(column, PillarShapeType.FULL_PILLAR);
         }
         return blockState;
     }
