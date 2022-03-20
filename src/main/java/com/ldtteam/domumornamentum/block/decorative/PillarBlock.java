@@ -200,26 +200,30 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
                 world.setBlockAndUpdate(pos.below(),state.setValue(column,PillarShapeType.full_pillar));
             }
         }
-        if (column_property == PillarShapeType.pillar_base && isPillarBlock(world.getBlockState(pos.above()))){
-            if (world.getBlockState(pos.above()).getValue(column)== PillarShapeType.pillar_column)
-            {
-                world.setBlockAndUpdate(pos.above(),state.setValue(column,PillarShapeType.pillar_base));
-            }
-            else
-            {
-                world.setBlockAndUpdate(pos.above(),state.setValue(column,PillarShapeType.full_pillar));
-            }
-
-        }
-        if (column_property == PillarShapeType.pillar_capital && isPillarBlock(world.getBlockState(pos.below())))
+        if (isPillarBlock(world.getBlockState(pos.above())))
         {
-            if (world.getBlockState(pos.below()).getValue(column)== PillarShapeType.pillar_column)
+            if (column_property == PillarShapeType.pillar_base && isPillarBlock(world.getBlockState(pos.above())))
             {
-                world.setBlockAndUpdate(pos.below(),state.setValue(column,PillarShapeType.pillar_capital));
+                if (world.getBlockState(pos.above()).getValue(column) == PillarShapeType.pillar_column)
+                {
+                    world.setBlockAndUpdate(pos.above(), state.setValue(column, PillarShapeType.pillar_base));
+                } else
+                {
+                    world.setBlockAndUpdate(pos.above(), state.setValue(column, PillarShapeType.full_pillar));
+                }
             }
-            else
+        }
+        if (isPillarBlock(world.getBlockState(pos.below())))
+        {
+            if (column_property == PillarShapeType.pillar_capital)
             {
-                world.setBlockAndUpdate(pos.below(),state.setValue(column,PillarShapeType.full_pillar));
+                if (world.getBlockState(pos.below()).getValue(column) == PillarShapeType.pillar_column)
+                {
+                    world.setBlockAndUpdate(pos.below(), state.setValue(column, PillarShapeType.pillar_capital));
+                } else
+                {
+                    world.setBlockAndUpdate(pos.below(), state.setValue(column, PillarShapeType.full_pillar));
+                }
             }
         }
         return super.onDestroyedByPlayer(state, world, pos, player, willHarvest, fluid);
