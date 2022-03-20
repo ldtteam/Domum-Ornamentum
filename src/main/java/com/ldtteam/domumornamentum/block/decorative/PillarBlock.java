@@ -277,13 +277,16 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
     {
         if (isPillarBlock(blockState))
         {
-            if (base && capital) {
+            if (base && capital)
+            {
                 return blockState.setValue(column, PillarShapeType.pillar_column);
             }
-            if (!base && capital) {
+            if (!base && capital)
+            {
                 return blockState.setValue(column, PillarShapeType.pillar_base);
             }
-            if (base && !capital) {
+            if (base && !capital)
+            {
                 return blockState.setValue(column, PillarShapeType.pillar_capital);
             }
             blockState.setValue(column, PillarShapeType.full_pillar);
