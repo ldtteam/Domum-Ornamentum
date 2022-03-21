@@ -154,8 +154,8 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
         BlockState stateAbove = level.getBlockState(blockAbove);
         BlockState stateBelow = level.getBlockState(blockBelow);
 
-        Boolean base = this.connectsTo(stateBelow);
-        Boolean capital = this.connectsTo(stateAbove);
+        Boolean base = this.isPillarBlock(stateBelow);
+        Boolean capital = this.isPillarBlock(stateAbove);
         if (base){
             updateBelow(level, blockBelow,stateBelow);
         }
@@ -200,26 +200,30 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
                 world.setBlockAndUpdate(pos.below(),state.setValue(column,PillarShapeType.FULL_PILLAR));
             }
         }
-        if (column_property == PillarShapeType.PILLAR_BASE){
-            if (world.getBlockState(pos.above()).getValue(column)== PillarShapeType.PILLAR_COLUMN)
-            {
-                world.setBlockAndUpdate(pos.above(),state.setValue(column,PillarShapeType.PILLAR_BASE));
-            }
-            else
-            {
-                world.setBlockAndUpdate(pos.above(),state.setValue(column,PillarShapeType.FULL_PILLAR));
-            }
-
-        }
-        if (column_property == PillarShapeType.PILLAR_CAPITAL)
+        if (isPillarBlock(world.getBlockState(pos.above())))
         {
-            if (world.getBlockState(pos.below()).getValue(column)== PillarShapeType.PILLAR_COLUMN)
+            if (column_property == PillarShapeType.PILLAR_BASE && isPillarBlock(world.getBlockState(pos.above())))
             {
-                world.setBlockAndUpdate(pos.below(),state.setValue(column,PillarShapeType.PILLAR_CAPITAL));
+                if (world.getBlockState(pos.above()).getValue(column) == PillarShapeType.PILLAR_COLUMN)
+                {
+                    world.setBlockAndUpdate(pos.above(), state.setValue(column, PillarShapeType.PILLAR_BASE));
+                } else
+                {
+                    world.setBlockAndUpdate(pos.above(), state.setValue(column, PillarShapeType.FULL_PILLAR));
+                }
             }
-            else
+        }
+        if (isPillarBlock(world.getBlockState(pos.below())))
+        {
+            if (column_property == PillarShapeType.PILLAR_CAPITAL)
             {
-                world.setBlockAndUpdate(pos.below(),state.setValue(column,PillarShapeType.FULL_PILLAR));
+                if (world.getBlockState(pos.below()).getValue(column) == PillarShapeType.PILLAR_COLUMN)
+                {
+                    world.setBlockAndUpdate(pos.below(), state.setValue(column, PillarShapeType.PILLAR_CAPITAL));
+                } else
+                {
+                    world.setBlockAndUpdate(pos.below(), state.setValue(column, PillarShapeType.FULL_PILLAR));
+                }
             }
         }
         return super.onDestroyedByPlayer(state, world, pos, player, willHarvest, fluid);
@@ -234,7 +238,7 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
     private void updateBelow(Level level, BlockPos blockPos, BlockState state)
     {
         BlockPos checkBelow = blockPos.below();
-        if (level.getBlockState(checkBelow).getBlock() instanceof PillarBlock)
+        if (isPillarBlock(level.getBlockState(checkBelow)))
         {
             level.setBlockAndUpdate(blockPos, state.setValue(column,PillarShapeType.PILLAR_COLUMN));
         }
@@ -252,7 +256,7 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
     private void updateAbove(Level level, BlockPos blockPos,BlockState state)
     {
         BlockPos checkAbove = blockPos.above();
-        if (level.getBlockState(checkAbove).getBlock() instanceof PillarBlock)
+        if (isPillarBlock(level.getBlockState(checkAbove)))
         {
             level.setBlockAndUpdate(blockPos, state.setValue(column,PillarShapeType.PILLAR_COLUMN));
         }
@@ -271,19 +275,22 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
      */
     private BlockState updateShape(BlockState blockState, Boolean base, Boolean capital)
     {
-        if (base && capital)
+        if (isPillarBlock(blockState))
         {
-            return blockState.setValue(column, PillarShapeType.PILLAR_COLUMN);
+            if (base && capital)
+            {
+                return blockState.setValue(column, PillarShapeType.PILLAR_COLUMN);
+            }
+            if (!base && capital)
+            {
+                return blockState.setValue(column, PillarShapeType.PILLAR_BASE);
+            }
+            if (base && !capital)
+            {
+                return blockState.setValue(column, PillarShapeType.PILLAR_CAPITAL);
+            }
+            blockState.setValue(column, PillarShapeType.FULL_PILLAR);
         }
-        if (!base && capital)
-        {
-            return blockState.setValue(column,PillarShapeType.PILLAR_BASE);
-        }
-        if (base && !capital)
-        {
-            return blockState.setValue(column, PillarShapeType.PILLAR_CAPITAL);
-        }
-        blockState.setValue(column,PillarShapeType.FULL_PILLAR);
         return blockState;
     }
 
@@ -292,7 +299,7 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
      * @param state The blockstate to be checked.
      * @return If true, allows connection to this block
      */
-    private boolean connectsTo(BlockState state )
+    private boolean isPillarBlock(BlockState state )
     {
         return state.getBlock() instanceof PillarBlock;
     }
