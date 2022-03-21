@@ -22,4 +22,5 @@ public enum PillarShapeType implements StringRepresentable
     {
         return this.name;
     }
+
 }
