@@ -39,9 +39,7 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.jetbrains.annotations.NotNull;
@@ -49,8 +47,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.stream.Stream;
 
 public class PillarBlock extends AbstractBlock<PillarBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock
 {
@@ -60,19 +56,11 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
         .build();
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
+
     /**
      * the shape of the column section
      */
-    private static final Optional<VoxelShape> pillar_capital_shape = Stream.of(
-     Shapes.box(0.4375, 0, 0.1875, 0.5625, 0.75, 0.8125),
-     Shapes.box(0.4375, 0, 0.1875, 0.5625, 0.75, 0.8125),
-     Shapes.box(0.4375, 0, 0.1875, 0.5625, 0.75, 0.8125),
-     Shapes.box(0.1875, 0, 0.4375, 0.8125, 0.75, 0.5625),
-     Shapes.box(0.1875, 0, 0.4375, 0.8125, 0.75, 0.5625),
-     Shapes.box(0.1875, 0, 0.4375, 0.8125, 0.75, 0.5625),
-     Shapes.box(0.1875, 0, 0.4375, 0.8125, 0.75, 0.5625),
-     Shapes.box(0.4375, 0, 0.1875, 0.5625, 0.75, 0.8125)
-     ).reduce((v1,v2) ->Shapes.join(v1, v2,BooleanOp.OR));
+    private static final VoxelShape PILLAR = Block.box(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D);
 
     /**
      * This block's name.
@@ -125,7 +113,7 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
     @Override
     public @NotNull VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter worldIn, @NotNull BlockPos pos, @NotNull CollisionContext context)
     {
-        return pillar_capital_shape.orElse(Shapes.block());
+        return PILLAR;
     }
 
     /**
