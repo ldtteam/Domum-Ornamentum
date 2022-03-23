@@ -29,10 +29,12 @@ public class BrickLangEntryProvider implements DataProvider
         backingLangJson.put("block." + Constants.MOD_ID + "." + BrickType.BEIGE.getSerializedName(), "Beige Bricks");
         backingLangJson.put("block." + Constants.MOD_ID + "." + BrickType.BROWN.getSerializedName(), "Brown Bricks");
         backingLangJson.put("block." + Constants.MOD_ID + "." + BrickType.CREAM.getSerializedName(), "Cream Bricks");
+        backingLangJson.put("block." + Constants.MOD_ID + "." + BrickType.SAND.getSerializedName(), "Sand Bricks");
 
         backingLangJson.put("block." + Constants.MOD_ID + "." + BrickType.BEIGE_STONE.getSerializedName(), "Beige Stone Bricks");
         backingLangJson.put("block." + Constants.MOD_ID + "." + BrickType.BROWN_STONE.getSerializedName(), "Brown Stone Bricks");
         backingLangJson.put("block." + Constants.MOD_ID + "." + BrickType.CREAM_STONE.getSerializedName(), "Cream Stone Bricks");
+        backingLangJson.put("block." + Constants.MOD_ID + "." + BrickType.SAND_STONE.getSerializedName(), "Sand Stone Bricks");
     }
 
     @Override
