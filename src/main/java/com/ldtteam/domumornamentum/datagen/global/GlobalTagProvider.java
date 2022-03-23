@@ -120,7 +120,17 @@ public class GlobalTagProvider extends BlockTagsProvider
           Blocks.CHISELED_QUARTZ_BLOCK,
           Blocks.RED_NETHER_BRICKS,
           Blocks.TUFF,
-          Blocks.NETHER_BRICKS
+          Blocks.NETHER_BRICKS,
+          Blocks.SMOOTH_STONE,
+          Blocks.END_STONE_BRICKS,
+          Blocks.PRISMARINE,
+          Blocks.PRISMARINE_BRICKS,
+          Blocks.DARK_PRISMARINE,
+          Blocks.CHISELED_NETHER_BRICKS,
+          Blocks.CHISELED_DEEPSLATE,
+          Blocks.DEEPSLATE_BRICKS,
+          Blocks.POLISHED_DEEPSLATE,
+          Blocks.COBBLED_DEEPSLATE
         )
           .addTags(
             ModTags.EXTRA_BLOCKS,
