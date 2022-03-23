@@ -50,7 +50,9 @@ public class WallComponentTagProvider extends BlockTagsProvider
           Blocks.CHISELED_STONE_BRICKS,
           Blocks.POLISHED_ANDESITE,
           Blocks.POLISHED_DIORITE,
-          Blocks.POLISHED_GRANITE
+          Blocks.POLISHED_GRANITE,
+          Blocks.SMOOTH_SANDSTONE,
+          Blocks.CUT_SANDSTONE
         )
           .addTags(
             ModTags.EXTRA_BLOCKS,
