@@ -17,14 +17,16 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
+import static com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes.MATERIALLY_TEXTURED;
+
 public class MateriallyTexturedBlockEntity extends BlockEntity implements IMateriallyTexturedBlockEntity
 {
 
     private MaterialTextureData textureData = MaterialTextureData.EMPTY;
 
-    public MateriallyTexturedBlockEntity(final BlockEntityType<?> tileEntityTypeIn, BlockPos pos, BlockState state)
+    public MateriallyTexturedBlockEntity(BlockPos pos, BlockState state)
     {
-        super(tileEntityTypeIn, pos, state);
+        super(MATERIALLY_TEXTURED.get(), pos, state);
     }
 
     @Override

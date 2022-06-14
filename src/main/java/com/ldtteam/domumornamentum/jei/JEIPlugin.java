@@ -1,5 +1,5 @@
 package com.ldtteam.domumornamentum.jei;
-
+/*
 import com.ldtteam.domumornamentum.IDomumOrnamentumApi;
 import com.ldtteam.domumornamentum.block.IModBlocks;
 import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
@@ -77,3 +77,4 @@ public class JEIPlugin implements IModPlugin
         this.ingredientManager = jeiRuntime.getIngredientManager();
     }
 }
+*/

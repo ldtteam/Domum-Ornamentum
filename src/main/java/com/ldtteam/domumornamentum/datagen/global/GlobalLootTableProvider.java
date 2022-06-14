@@ -12,8 +12,9 @@ import com.ldtteam.domumornamentum.block.decorative.ExtraBlock;
 import com.ldtteam.domumornamentum.block.decorative.FloatingCarpetBlock;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
-import net.minecraft.data.HashCache;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -36,7 +37,7 @@ public class GlobalLootTableProvider implements DataProvider
     }
 
     @Override
-    public void run(@NotNull final HashCache cache) throws IOException
+    public void run(@NotNull final CachedOutput cache) throws IOException
     {
         for (final BrickBlock block : ModBlocks.getInstance().getBricks())
         {
@@ -58,11 +59,11 @@ public class GlobalLootTableProvider implements DataProvider
         saveBlock(ModBlocks.getInstance().getArchitectsCutter(), cache);
     }
 
-    private void saveBlock(final Block block, final HashCache cache) throws IOException
+    private void saveBlock(final Block block, final CachedOutput cache) throws IOException
     {
         final EntryJson entryJson = new EntryJson();
         entryJson.setType(EntryTypeEnum.ITEM);
-        entryJson.setName(block.getRegistryName().toString());
+        entryJson.setName(ForgeRegistries.BLOCKS.getKey(block).toString());
 
         final PoolJson poolJson = new PoolJson();
         poolJson.setEntries(Collections.singletonList(entryJson));
@@ -73,8 +74,8 @@ public class GlobalLootTableProvider implements DataProvider
         lootTableJson.setType(LootTableTypeEnum.BLOCK);
         lootTableJson.setPools(Collections.singletonList(poolJson));
 
-        final Path savePath = generator.getOutputFolder().resolve(LOOT_TABLES_DIR).resolve(block.getRegistryName().getPath() + ".json");
-        DataProvider.save(GSON, cache, lootTableJson.serialize(), savePath);
+        final Path savePath = generator.getOutputFolder().resolve(LOOT_TABLES_DIR).resolve(ForgeRegistries.BLOCKS.getKey(block).getPath() + ".json");
+        DataProvider.saveStable(cache, lootTableJson.serialize(), savePath);
     }
 
     @Override

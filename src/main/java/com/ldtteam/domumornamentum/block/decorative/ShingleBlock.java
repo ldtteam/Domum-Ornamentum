@@ -12,11 +12,9 @@ import com.ldtteam.domumornamentum.block.types.ShingleShapeType;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
 import com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes;
-import com.ldtteam.domumornamentum.item.decoration.ShingleBlockItem;
 import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.BlockUtils;
-import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -25,7 +23,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.BlockGetter;
@@ -39,7 +36,6 @@ import net.minecraft.world.level.block.state.properties.StairsShape;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.HitResult;
-import net.minecraftforge.registries.IForgeRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -72,13 +68,6 @@ public class ShingleBlock extends AbstractBlockStairs<ShingleBlock> implements I
     public ShingleBlock()
     {
         super(Blocks.OAK_PLANKS::defaultBlockState, Properties.of(Material.WOOD).strength(BLOCK_HARDNESS, RESISTANCE).noOcclusion());
-        setRegistryName(Constants.MOD_ID, "shingle");
-    }
-
-    @Override
-    public void registerItemBlock(final IForgeRegistry<Item> registry, final Item.Properties properties)
-    {
-        registry.register((new ShingleBlockItem(this, properties)).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
     }
 
     /**
@@ -145,7 +134,7 @@ public class ShingleBlock extends AbstractBlockStairs<ShingleBlock> implements I
     @Override
     public BlockEntity newBlockEntity(final @NotNull BlockPos blockPos, final @NotNull BlockState blockState)
     {
-        return new MateriallyTexturedBlockEntity(ModBlockEntityTypes.MATERIALLY_TEXTURED, blockPos, blockState);
+        return new MateriallyTexturedBlockEntity(blockPos, blockState);
     }
 
     @Override
@@ -186,13 +175,13 @@ public class ShingleBlock extends AbstractBlockStairs<ShingleBlock> implements I
               @Override
               public @NotNull ResourceLocation getId()
               {
-                  return Objects.requireNonNull(getBlock().getRegistryName());
+                  return Objects.requireNonNull(getRegistryName(getBlock()));
               }
 
               @Override
               public @NotNull RecipeSerializer<?> getType()
               {
-                  return ModRecipeSerializers.ARCHITECTS_CUTTER;
+                  return ModRecipeSerializers.ARCHITECTS_CUTTER.get();
               }
 
               @Nullable

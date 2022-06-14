@@ -7,7 +7,7 @@ import com.ldtteam.domumornamentum.block.types.TimberFrameType;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.HashCache;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import org.jetbrains.annotations.NotNull;
 
@@ -26,7 +26,7 @@ public class TimberFramesLangEntryProvider implements DataProvider
     }
 
     @Override
-    public void run(@NotNull HashCache cache) throws IOException
+    public void run(@NotNull CachedOutput cache) throws IOException
     {
         for (final TimberFrameType type : TimberFrameType.values())
         {

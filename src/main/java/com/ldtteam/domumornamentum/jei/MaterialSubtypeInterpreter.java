@@ -1,5 +1,5 @@
 package com.ldtteam.domumornamentum.jei;
-
+/*
 import mezz.jei.api.ingredients.subtypes.IIngredientSubtypeInterpreter;
 import mezz.jei.api.ingredients.subtypes.UidContext;
 import net.minecraft.world.item.ItemStack;
@@ -24,3 +24,5 @@ public class MaterialSubtypeInterpreter implements IIngredientSubtypeInterpreter
         return itemStack.getTag().getString("type");
     }
 }
+*/
+

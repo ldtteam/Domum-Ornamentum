@@ -1,17 +1,17 @@
 package com.ldtteam.domumornamentum.block;
 
 import com.ldtteam.domumornamentum.container.ArchitectsCutterContainer;
-import com.ldtteam.domumornamentum.recipe.ModRecipeTypes;
-import com.ldtteam.domumornamentum.recipe.architectscutter.ArchitectsCutterRecipe;
 import com.ldtteam.domumornamentum.util.Constants;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -21,7 +21,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
@@ -30,7 +29,6 @@ import javax.annotation.Nullable;
 
 
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.inventory.ContainerLevelAccess;
@@ -41,14 +39,20 @@ import java.util.List;
 @SuppressWarnings("deprecation")
 public final class ArchitectsCutterBlock extends AbstractBlock<ArchitectsCutterBlock>
 {
-    private static final   Component    CONTAINER_NAME = new TranslatableComponent(Constants.MOD_ID + ".architectscutter");
+    private static final   Component    CONTAINER_NAME = Component.translatable(Constants.MOD_ID + ".architectscutter");
     public static final    DirectionProperty FACING         = HorizontalDirectionalBlock.FACING;
     protected static final VoxelShape SHAPE = Block.box(0.01D, 0.01D, 0.01D, 15.99D, 9.9D, 15.99D);
 
-    public ArchitectsCutterBlock(AbstractBlock.Properties propertiesIn) {
-        super(propertiesIn);
+    public ArchitectsCutterBlock()
+    {
+        super(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.5F));
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
-        this.setRegistryName(new ResourceLocation(Constants.MOD_ID, "architectscutter"));
+    }
+
+    @Override
+    public ResourceLocation getRegistryName()
+    {
+        return getRegistryName(this);
     }
 
     public BlockState getStateForPlacement(BlockPlaceContext context) {

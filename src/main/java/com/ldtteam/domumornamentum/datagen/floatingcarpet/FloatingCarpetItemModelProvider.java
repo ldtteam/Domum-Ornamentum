@@ -7,7 +7,7 @@ import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
-import net.minecraft.data.HashCache;
+import net.minecraft.data.CachedOutput;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -22,7 +22,7 @@ public class FloatingCarpetItemModelProvider implements DataProvider
     }
 
     @Override
-    public void run(@NotNull HashCache cache) throws IOException
+    public void run(@NotNull CachedOutput cache) throws IOException
     {
         final ItemModelJson modelJson = new ItemModelJson();
 
@@ -32,7 +32,7 @@ public class FloatingCarpetItemModelProvider implements DataProvider
 
             modelJson.setParent(modelLocation);
 
-            DataProvider.save(DataGeneratorConstants.GSON,
+            DataProvider.saveStable(
               cache,
               DataGeneratorConstants.serialize(modelJson),
               generator.getOutputFolder().resolve(DataGeneratorConstants.ITEM_MODEL_DIR).resolve(state.getRegistryName().getPath() + ".json"));

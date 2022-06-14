@@ -7,7 +7,7 @@ import com.ldtteam.domumornamentum.block.types.BrickType;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
-import net.minecraft.data.HashCache;
+import net.minecraft.data.CachedOutput;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -24,7 +24,7 @@ public class BrickLangEntryProvider implements DataProvider
     }
 
     @Override
-    public void run(@NotNull HashCache cache) throws IOException
+    public void run(@NotNull CachedOutput cache) throws IOException
     {
         backingLangJson.put("block." + Constants.MOD_ID + "." + BrickType.BEIGE.getSerializedName(), "Beige Bricks");
         backingLangJson.put("block." + Constants.MOD_ID + "." + BrickType.BROWN.getSerializedName(), "Brown Bricks");

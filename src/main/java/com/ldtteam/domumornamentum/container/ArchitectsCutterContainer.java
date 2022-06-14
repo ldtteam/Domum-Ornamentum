@@ -207,7 +207,7 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
         this.selectedRecipe.set(-1);
         this.outputInventorySlot.set(ItemStack.EMPTY);
         if (!stacks.stream().allMatch(ItemStack::isEmpty)) {
-            this.recipes = this.world.getRecipeManager().getRecipesFor(ModRecipeTypes.ARCHITECTS_CUTTER, inventoryIn, this.world);
+            this.recipes = this.world.getRecipeManager().getRecipesFor(ModRecipeTypes.ARCHITECTS_CUTTER.get(), inventoryIn, this.world);
             this.recipes.sort(Comparator.comparing(ArchitectsCutterRecipe::getBlockName).thenComparing(ArchitectsCutterRecipe::getId));
         }
 

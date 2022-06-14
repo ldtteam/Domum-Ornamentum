@@ -5,7 +5,7 @@ import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
-import net.minecraft.data.HashCache;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,7 +22,7 @@ public class WallBlockModelProvider implements DataProvider
     }
 
     @Override
-    public void run(@NotNull HashCache cache) throws IOException
+    public void run(@NotNull CachedOutput cache) throws IOException
     {
         final BlockModelJson postJson = new BlockModelJson();
 
@@ -32,7 +32,7 @@ public class WallBlockModelProvider implements DataProvider
         final String postName = "wall_post.json";
         final Path postSavePath = this.generator.getOutputFolder().resolve(DataGeneratorConstants.WALLS_BLOCK_MODELS_DIR).resolve(postName);
 
-        DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(postJson), postSavePath);
+        DataProvider.saveStable(cache, DataGeneratorConstants.serialize(postJson), postSavePath);
 
         final BlockModelJson onSideJson = new BlockModelJson();
 
@@ -42,7 +42,7 @@ public class WallBlockModelProvider implements DataProvider
         final String onSideName = "wall_side.json";
         final Path onSideSavePath = this.generator.getOutputFolder().resolve(DataGeneratorConstants.WALLS_BLOCK_MODELS_DIR).resolve(onSideName);
 
-        DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(onSideJson), onSideSavePath);
+        DataProvider.saveStable(cache, DataGeneratorConstants.serialize(onSideJson), onSideSavePath);
 
         final BlockModelJson onSideTallJson = new BlockModelJson();
 
@@ -52,7 +52,7 @@ public class WallBlockModelProvider implements DataProvider
         final String onSideTallName = "wall_side_tall.json";
         final Path onSideTallSavePath = this.generator.getOutputFolder().resolve(DataGeneratorConstants.WALLS_BLOCK_MODELS_DIR).resolve(onSideTallName);
 
-        DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(onSideTallJson), onSideTallSavePath);
+        DataProvider.saveStable(cache, DataGeneratorConstants.serialize(onSideTallJson), onSideTallSavePath);
     }
 
     @Override

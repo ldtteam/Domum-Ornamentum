@@ -12,7 +12,6 @@ import com.ldtteam.domumornamentum.block.types.TimberFrameType;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
 import com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes;
-import com.ldtteam.domumornamentum.item.decoration.TimberFrameBlockItem;
 import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.BlockUtils;
@@ -24,7 +23,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -40,7 +38,6 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.HitResult;
-import net.minecraftforge.registries.IForgeRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -84,15 +81,7 @@ public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements
     public TimberFrameBlock(final TimberFrameType timberFrameType)
     {
         super(Properties.of(Material.WOOD).strength(BLOCK_HARDNESS, RESISTANCE).noOcclusion());
-        setRegistryName(getName(timberFrameType));
-
         this.timberFrameType = timberFrameType;
-    }
-
-    @Override
-    public void registerItemBlock(final IForgeRegistry<Item> registry, final Item.Properties properties)
-    {
-        registry.register((new TimberFrameBlockItem(this, properties)).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
     }
 
     public static String getName(final TimberFrameType timberFrameType)
@@ -180,7 +169,7 @@ public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements
     @Override
     public BlockEntity newBlockEntity(final @NotNull BlockPos blockPos, final @NotNull BlockState blockState)
     {
-        return new MateriallyTexturedBlockEntity(ModBlockEntityTypes.MATERIALLY_TEXTURED, blockPos, blockState);
+        return new MateriallyTexturedBlockEntity(blockPos, blockState);
     }
 
     @Override
@@ -221,13 +210,13 @@ public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements
               @Override
               public @NotNull ResourceLocation getId()
               {
-                  return Objects.requireNonNull(getBlock().getRegistryName());
+                  return Objects.requireNonNull(getRegistryName(getBlock()));
               }
 
               @Override
               public @NotNull RecipeSerializer<?> getType()
               {
-                  return ModRecipeSerializers.ARCHITECTS_CUTTER;
+                  return ModRecipeSerializers.ARCHITECTS_CUTTER.get();
               }
 
               @Nullable

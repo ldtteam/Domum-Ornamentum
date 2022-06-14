@@ -4,7 +4,7 @@ import com.ldtteam.datagenerators.models.block.BlockModelJson;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.HashCache;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.properties.StairsShape;
@@ -27,7 +27,7 @@ public class StairsBlockModelProvider implements DataProvider
     }
 
     @Override
-    public void run(@NotNull HashCache cache) throws IOException
+    public void run(@NotNull CachedOutput cache) throws IOException
     {
         Set<String> uniqueValues = new HashSet<>();
         for (StairsShape stairsShape : StairsShape.values())
@@ -43,7 +43,7 @@ public class StairsBlockModelProvider implements DataProvider
                 final String name = shapeName + ".json";
                 final Path saveFile = this.generator.getOutputFolder().resolve(DataGeneratorConstants.STAIRS_BLOCK_MODELS_DIR).resolve(name);
 
-                DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(modelJson), saveFile);
+                DataProvider.saveStable(cache, DataGeneratorConstants.serialize(modelJson), saveFile);
             }
         }
     }

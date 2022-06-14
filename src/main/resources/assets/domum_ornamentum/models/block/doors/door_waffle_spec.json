@@ -1,6 +1,6 @@
 {
 	"credit": "Made with Blockbench",
-	"parent": "minecraft:block/door_bottom",
+	"parent": "minecraft:block/door_bottom_left",
 	"ambientocclusion": false,
 	"textures": {
 		"0": "block/oak_planks",

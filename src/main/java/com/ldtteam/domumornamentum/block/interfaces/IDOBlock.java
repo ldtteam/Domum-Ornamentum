@@ -1,23 +1,15 @@
 package com.ldtteam.domumornamentum.block.interfaces;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.item.Item;
-import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public interface IDOBlock<B extends IDOBlock<B>>
 {
-    /**
-     * Registery block at gameregistry.
-     *
-     * @param registry the registry to use.
-     * @return the block itself.
-     */
-    B registerBlock(final IForgeRegistry<Block> registry);
+    default ResourceLocation getRegistryName(final Block block)
+    {
+        return ForgeRegistries.BLOCKS.getKey(block);
+    }
 
-    /**
-     * Registery block at gameregistry.
-     *
-     * @param registry the registry to use.
-     */
-    void registerItemBlock(final IForgeRegistry<Item> registry, final Item.Properties properties);
+    ResourceLocation getRegistryName();
 }

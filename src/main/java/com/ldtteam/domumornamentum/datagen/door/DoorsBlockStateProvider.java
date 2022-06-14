@@ -11,7 +11,7 @@ import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
-import net.minecraft.data.HashCache;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.world.level.block.state.properties.DoorHingeSide;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import org.jetbrains.annotations.NotNull;
@@ -36,12 +36,12 @@ public class DoorsBlockStateProvider implements DataProvider
     }
 
     @Override
-    public void run(@NotNull final HashCache cache) throws IOException
+    public void run(@NotNull final CachedOutput cache) throws IOException
     {
         createBlockstateFile(cache, ModBlocks.getInstance().getDoor());
     }
 
-    private void createBlockstateFile(final HashCache cache, final DoorBlock shingle) throws IOException
+    private void createBlockstateFile(final CachedOutput cache, final DoorBlock shingle) throws IOException
     {
         if (shingle.getRegistryName() == null)
         {
@@ -81,7 +81,7 @@ public class DoorsBlockStateProvider implements DataProvider
         final Path blockstateFolder = this.generator.getOutputFolder().resolve(DataGeneratorConstants.BLOCKSTATE_DIR);
         final Path blockstatePath = blockstateFolder.resolve(shingle.getRegistryName().getPath() + ".json");
 
-        DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(blockstate), blockstatePath);
+        DataProvider.saveStable(cache, DataGeneratorConstants.serialize(blockstate), blockstatePath);
     }
 
     private int getYFromFacing(final Direction facing)

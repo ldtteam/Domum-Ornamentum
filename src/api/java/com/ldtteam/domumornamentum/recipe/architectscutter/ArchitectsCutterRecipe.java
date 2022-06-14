@@ -164,13 +164,13 @@ public class ArchitectsCutterRecipe implements Recipe<Container>
     @Override
     public @NotNull RecipeSerializer<?> getSerializer()
     {
-        return ModRecipeSerializers.ARCHITECTS_CUTTER;
+        return ModRecipeSerializers.ARCHITECTS_CUTTER.get();
     }
 
     @Override
     public @NotNull RecipeType<?> getType()
     {
-        return ModRecipeTypes.ARCHITECTS_CUTTER;
+        return ModRecipeTypes.ARCHITECTS_CUTTER.get();
     }
 
     public @NotNull CompoundTag getAdditionalTag()

@@ -39,158 +39,158 @@ public class ModBusEventHandler
         final LangJson langJson = new LangJson();
 
         //Extra blocks
-        event.getGenerator().addProvider(new ExtraBlockStateProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new ExtraItemModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new ExtraBlockModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new ExtraRecipeProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new ExtraLangEntryProvider(event.getGenerator(), langJson));
+        event.getGenerator().addProvider(true, new ExtraBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new ExtraItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new ExtraBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new ExtraRecipeProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new ExtraLangEntryProvider(event.getGenerator(), langJson));
         final ExtraBlockTagProvider extraBlockTagProvider = new ExtraBlockTagProvider(event.getGenerator(), event.getExistingFileHelper());
-        event.getGenerator().addProvider(extraBlockTagProvider);
-        event.getGenerator().addProvider(new ExtraItemTagProvider(event.getGenerator(), extraBlockTagProvider, event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, extraBlockTagProvider);
+        event.getGenerator().addProvider(true, new ExtraItemTagProvider(event.getGenerator(), extraBlockTagProvider, event.getExistingFileHelper()));
 
         //Brick blocks
-        event.getGenerator().addProvider(new BrickBlockStateProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new BrickItemModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new BrickBlockModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new BrickRecipeProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new BrickLangEntryProvider(event.getGenerator(), langJson));
+        event.getGenerator().addProvider(true, new BrickBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new BrickItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new BrickBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new BrickRecipeProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new BrickLangEntryProvider(event.getGenerator(), langJson));
         final BrickBlockTagProvider brickBlockTagProvider = new BrickBlockTagProvider(event.getGenerator(), event.getExistingFileHelper());
-        event.getGenerator().addProvider(brickBlockTagProvider);
-        event.getGenerator().addProvider(new BrickItemTagProvider(event.getGenerator(), brickBlockTagProvider, event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, brickBlockTagProvider);
+        event.getGenerator().addProvider(true, new BrickItemTagProvider(event.getGenerator(), brickBlockTagProvider, event.getExistingFileHelper()));
 
-        event.getGenerator().addProvider(new GlobalTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new GlobalTagProvider(event.getGenerator(), event.getExistingFileHelper()));
 
         // Timber Frames
-        event.getGenerator().addProvider(new TimberFramesBlockStateProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new TimberFramesItemModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new TimberFramesBlockModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new TimberFramesComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(new TimberFramesLangEntryProvider(event.getGenerator(), langJson));
+        event.getGenerator().addProvider(true, new TimberFramesBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new TimberFramesItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new TimberFramesBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new TimberFramesComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new TimberFramesLangEntryProvider(event.getGenerator(), langJson));
 
         //Shingles
-        event.getGenerator().addProvider(new ShinglesBlockStateProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new ShinglesItemModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new ShinglesBlockModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new ShinglesComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(new ShinglesLangEntryProvider(event.getGenerator(), langJson));
+        event.getGenerator().addProvider(true, new ShinglesBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new ShinglesItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new ShinglesBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new ShinglesComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new ShinglesLangEntryProvider(event.getGenerator(), langJson));
 
         //ShingleSlab
-        event.getGenerator().addProvider(new ShingleSlabBlockStateProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new ShingleSlabItemModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new ShingleSlabBlockModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new ShingleSlabComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(new ShingleSlabLangEntryProvider(event.getGenerator(), langJson));
+        event.getGenerator().addProvider(true, new ShingleSlabBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new ShingleSlabItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new ShingleSlabBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new ShingleSlabComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new ShingleSlabLangEntryProvider(event.getGenerator(), langJson));
         
         //Paper wall
-        event.getGenerator().addProvider(new PaperwallBlockStateProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new PaperwallItemModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new PaperwallBlockModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new PaperwallComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(new PaperwallLangEntryProvider(event.getGenerator(), langJson));
+        event.getGenerator().addProvider(true, new PaperwallBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new PaperwallItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new PaperwallBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new PaperwallComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new PaperwallLangEntryProvider(event.getGenerator(), langJson));
 
         //Fence
-        event.getGenerator().addProvider(new FenceBlockStateProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new FenceItemModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new FenceBlockModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new FenceComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(new FenceCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(new FenceLangEntryProvider(event.getGenerator(), langJson));
+        event.getGenerator().addProvider(true, new FenceBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new FenceItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new FenceBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new FenceComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new FenceCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new FenceLangEntryProvider(event.getGenerator(), langJson));
 
         //FenceGate
-        event.getGenerator().addProvider(new FenceGateBlockStateProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new FenceGateItemModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new FenceGateBlockModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new FenceGateComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(new FenceGateCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(new FenceGateLangEntryProvider(event.getGenerator(), langJson));
+        event.getGenerator().addProvider(true, new FenceGateBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new FenceGateItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new FenceGateBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new FenceGateComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new FenceGateCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new FenceGateLangEntryProvider(event.getGenerator(), langJson));
 
         //Slab
-        event.getGenerator().addProvider(new SlabBlockStateProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new SlabItemModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new SlabBlockModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new SlabComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(new SlabCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(new SlabLangEntryProvider(event.getGenerator(), langJson));
+        event.getGenerator().addProvider(true, new SlabBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new SlabItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new SlabBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new SlabComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new SlabCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new SlabLangEntryProvider(event.getGenerator(), langJson));
 
         //Wall
-        event.getGenerator().addProvider(new WallBlockStateProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new WallItemModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new WallBlockModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new WallComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(new WallCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(new WallLangEntryProvider(event.getGenerator(), langJson));
+        event.getGenerator().addProvider(true, new WallBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new WallItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new WallBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new WallComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new WallCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new WallLangEntryProvider(event.getGenerator(), langJson));
 
         //Stair
-        event.getGenerator().addProvider(new StairsBlockStateProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new StairsItemModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new StairsBlockModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new StairsComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(new StairsCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(new StairsLangEntryProvider(event.getGenerator(), langJson));
+        event.getGenerator().addProvider(true, new StairsBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new StairsItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new StairsBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new StairsComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new StairsCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new StairsLangEntryProvider(event.getGenerator(), langJson));
         
         //Trapdoor
-        event.getGenerator().addProvider(new TrapdoorsBlockStateProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new TrapdoorsItemModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new TrapdoorsItemModelSpecProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new TrapdoorsBlockModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new TrapdoorsComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(new TrapdoorsCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(new TrapdoorsLangEntryProvider(event.getGenerator(), langJson));
+        event.getGenerator().addProvider(true, new TrapdoorsBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new TrapdoorsItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new TrapdoorsItemModelSpecProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new TrapdoorsBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new TrapdoorsComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new TrapdoorsCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new TrapdoorsLangEntryProvider(event.getGenerator(), langJson));
 
-        event.getGenerator().addProvider(new PanelBlockStateProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new PanelBlockModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new PanelItemModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new PanelItemModelSpecProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new PanelLangEntryProvider(event.getGenerator(), langJson));
+        event.getGenerator().addProvider(true, new PanelBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new PanelBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new PanelItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new PanelItemModelSpecProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new PanelLangEntryProvider(event.getGenerator(), langJson));
 
         //Fancy Trapdoor
-        event.getGenerator().addProvider(new FancyTrapdoorsBlockStateProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new FancyTrapdoorsItemModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new FancyTrapdoorsItemModelSpecProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new FancyTrapdoorsBlockModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new FancyTrapdoorsComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(new FancyTrapdoorsCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(new FancyTrapdoorsLangEntryProvider(event.getGenerator(), langJson));
+        event.getGenerator().addProvider(true, new FancyTrapdoorsBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new FancyTrapdoorsItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new FancyTrapdoorsItemModelSpecProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new FancyTrapdoorsBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new FancyTrapdoorsComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new FancyTrapdoorsCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new FancyTrapdoorsLangEntryProvider(event.getGenerator(), langJson));
 
         //Door
-        event.getGenerator().addProvider(new DoorsBlockStateProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new DoorsItemModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new DoorsItemModelSpecProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new DoorsBlockModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new DoorsComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(new DoorsCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(new DoorsLangEntryProvider(event.getGenerator(), langJson));
+        event.getGenerator().addProvider(true, new DoorsBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new DoorsItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new DoorsItemModelSpecProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new DoorsBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new DoorsComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new DoorsCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new DoorsLangEntryProvider(event.getGenerator(), langJson));
 
         //FancyDoor
-        event.getGenerator().addProvider(new FancyDoorsBlockStateProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new FancyDoorsItemModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new FancyDoorsItemModelSpecProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new FancyDoorsBlockModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new FancyDoorsComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(new FancyDoorsCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(new FancyDoorsLangEntryProvider(event.getGenerator(), langJson));
+        event.getGenerator().addProvider(true, new FancyDoorsBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new FancyDoorsItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new FancyDoorsItemModelSpecProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new FancyDoorsBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new FancyDoorsComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new FancyDoorsCompatibilityTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new FancyDoorsLangEntryProvider(event.getGenerator(), langJson));
 
         //Floating carpets
-        event.getGenerator().addProvider(new FloatingCarpetBlockStateProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new FloatingCarpetBlockTagProvider(event.getGenerator(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(new FloatingCarpetItemModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new FloatingCarpetLangEntryProvider(event.getGenerator(), langJson));
-        event.getGenerator().addProvider(new FloatingCarpetRecipeProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new FloatingCarpetBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new FloatingCarpetBlockTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new FloatingCarpetItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new FloatingCarpetLangEntryProvider(event.getGenerator(), langJson));
+        event.getGenerator().addProvider(true, new FloatingCarpetRecipeProvider(event.getGenerator()));
 
         //Pillars
-        event.getGenerator().addProvider(new PillarBlockStateProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new PillarBlockModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new PillarComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(new PillarItemModelProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new PillarLangEntryProvider(event.getGenerator(), langJson));
+        event.getGenerator().addProvider(true, new PillarBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new PillarBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new PillarComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new PillarItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new PillarLangEntryProvider(event.getGenerator(), langJson));
 
 
-        event.getGenerator().addProvider(new GlobalRecipeProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new GlobalRecipeProvider(event.getGenerator()));
 
         //Global
         //IMPORTANT: Needs to be last since this writes the lang data actually to disk!!!!!
-        event.getGenerator().addProvider(new GlobalLangEntryProvider(event.getGenerator(), langJson));
-        event.getGenerator().addProvider(new GlobalLootTableProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new MateriallyTexturedBlockRecipeProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new GlobalLangEntryProvider(event.getGenerator(), langJson));
+        event.getGenerator().addProvider(true, new GlobalLootTableProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new MateriallyTexturedBlockRecipeProvider(event.getGenerator()));
     }
 }

@@ -12,7 +12,6 @@ import com.ldtteam.domumornamentum.block.types.FancyDoorType;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
 import com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes;
-import com.ldtteam.domumornamentum.item.decoration.FancyDoorBlockItem;
 import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.BlockUtils;
@@ -24,7 +23,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.BlockGetter;
@@ -41,7 +39,6 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.HitResult;
-import net.minecraftforge.registries.IForgeRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -65,7 +62,6 @@ public class FancyDoorBlock extends AbstractBlockDoor<FancyDoorBlock> implements
     {
         super(Properties.of(Material.WOOD, MaterialColor.WOOD).strength(3.0F).sound(SoundType.WOOD).noOcclusion().isValidSpawn((state, blockGetter, pos, type) -> false));
         this.registerDefaultState(this.defaultBlockState().setValue(TYPE, FancyDoorType.FULL));
-        setRegistryName(com.ldtteam.domumornamentum.util.Constants.MOD_ID, "fancy_door");
     }
 
     @Override
@@ -73,12 +69,6 @@ public class FancyDoorBlock extends AbstractBlockDoor<FancyDoorBlock> implements
     {
         super.createBlockStateDefinition(builder);
         builder.add(TYPE);
-    }
-
-    @Override
-    public void registerItemBlock(final IForgeRegistry<Item> registry, final Item.Properties properties)
-    {
-        registry.register((new FancyDoorBlockItem(this, properties)).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
     }
 
     @Override
@@ -151,7 +141,7 @@ public class FancyDoorBlock extends AbstractBlockDoor<FancyDoorBlock> implements
     @Override
     public BlockEntity newBlockEntity(final @NotNull BlockPos blockPos, final @NotNull BlockState blockState)
     {
-        return new MateriallyTexturedBlockEntity(ModBlockEntityTypes.MATERIALLY_TEXTURED, blockPos, blockState);
+        return new MateriallyTexturedBlockEntity(blockPos, blockState);
     }
 
     @Override
@@ -197,20 +187,20 @@ public class FancyDoorBlock extends AbstractBlockDoor<FancyDoorBlock> implements
                       final CompoundTag tag = new CompoundTag();
                       tag.putString("type", value.toString().toUpperCase());
 
-                      jsonObject.addProperty("block", Objects.requireNonNull(getBlock().getRegistryName()).toString());
+                      jsonObject.addProperty("block", Objects.requireNonNull(getRegistryName(getBlock())).toString());
                       jsonObject.addProperty("nbt", tag.toString());
                   }
 
                   @Override
                   public @NotNull ResourceLocation getId()
                   {
-                      return new ResourceLocation(Objects.requireNonNull(getBlock().getRegistryName()).toString() + "_" + value.getSerializedName());
+                      return new ResourceLocation(Objects.requireNonNull(getRegistryName(getBlock())) + "_" + value.getSerializedName());
                   }
 
                   @Override
                   public @NotNull RecipeSerializer<?> getType()
                   {
-                      return ModRecipeSerializers.ARCHITECTS_CUTTER;
+                      return ModRecipeSerializers.ARCHITECTS_CUTTER.get();
                   }
 
                   @Nullable

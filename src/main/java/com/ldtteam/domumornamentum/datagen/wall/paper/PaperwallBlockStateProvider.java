@@ -12,7 +12,7 @@ import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.HashCache;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.core.Direction;
 import org.jetbrains.annotations.NotNull;
@@ -31,12 +31,12 @@ public class PaperwallBlockStateProvider implements DataProvider
     }
 
     @Override
-    public void run(@NotNull final HashCache cache) throws IOException
+    public void run(@NotNull final CachedOutput cache) throws IOException
     {
         createBlockstateFile(cache, ModBlocks.getInstance().getPaperWall());
     }
 
-    private void createBlockstateFile(final HashCache cache, final PaperWallBlock paperWallBlock) throws IOException
+    private void createBlockstateFile(final CachedOutput cache, final PaperWallBlock paperWallBlock) throws IOException
     {
         if (paperWallBlock.getRegistryName() == null)
             return;
@@ -89,7 +89,7 @@ public class PaperwallBlockStateProvider implements DataProvider
         final Path blockstateFolder = this.generator.getOutputFolder().resolve(DataGeneratorConstants.BLOCKSTATE_DIR);
         final Path blockstatePath = blockstateFolder.resolve(paperWallBlock.getRegistryName().getPath() + ".json");
 
-        DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(blockstate), blockstatePath);
+        DataProvider.saveStable(cache, DataGeneratorConstants.serialize(blockstate), blockstatePath);
 
     }
 

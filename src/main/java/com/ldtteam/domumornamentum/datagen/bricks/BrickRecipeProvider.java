@@ -14,9 +14,10 @@ import com.ldtteam.domumornamentum.block.types.ExtraBlockType;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
-import net.minecraft.data.HashCache;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.Items;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -37,22 +38,22 @@ public class BrickRecipeProvider implements DataProvider
     }
 
     @Override
-    public void run(@NotNull final HashCache cache) throws IOException
+    public void run(@NotNull final CachedOutput cache) throws IOException
     {
         for (final BrickBlock block : ModBlocks.getInstance().getBricks())
         {
             final List<RecipeIngredientKeyJson> keys = List.of(
-              new RecipeIngredientKeyJson(new RecipeIngredientJson(block.getType().getIngredient().getRegistryName().toString(), false)),
-              new RecipeIngredientKeyJson(new RecipeIngredientJson(block.getType().getIngredient().getRegistryName().toString(), false)),
-              new RecipeIngredientKeyJson(new RecipeIngredientJson(block.getType().getIngredient2().getRegistryName().toString(), false)),
-              new RecipeIngredientKeyJson(new RecipeIngredientJson(block.getType().getIngredient2().getRegistryName().toString(), false))
+              new RecipeIngredientKeyJson(new RecipeIngredientJson(ForgeRegistries.ITEMS.getKey(block.getType().getIngredient()).toString(), false)),
+              new RecipeIngredientKeyJson(new RecipeIngredientJson(ForgeRegistries.ITEMS.getKey(block.getType().getIngredient()).toString(), false)),
+              new RecipeIngredientKeyJson(new RecipeIngredientJson(ForgeRegistries.ITEMS.getKey(block.getType().getIngredient2()).toString(), false)),
+              new RecipeIngredientKeyJson(new RecipeIngredientJson(ForgeRegistries.ITEMS.getKey(block.getType().getIngredient2()).toString(), false))
             );
 
-            final ShapelessRecipeJson json = new ShapelessRecipeJson("brick", keys, new RecipeResultJson(4, block.asItem().getRegistryName().toString()));
+            final ShapelessRecipeJson json = new ShapelessRecipeJson("brick", keys, new RecipeResultJson(4, ForgeRegistries.ITEMS.getKey(block.asItem()).toString()));
             final Path recipeFolder = this.generator.getOutputFolder().resolve(DataGeneratorConstants.RECIPES_DIR);
             final Path blockstatePath = recipeFolder.resolve(block.getRegistryName().getPath() + ".json");
 
-            DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(json), blockstatePath);
+            DataProvider.saveStable(cache, DataGeneratorConstants.serialize(json), blockstatePath);
         }
     }
 

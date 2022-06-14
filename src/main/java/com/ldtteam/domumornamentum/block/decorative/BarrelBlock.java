@@ -1,7 +1,6 @@
 package com.ldtteam.domumornamentum.block.decorative;
 
 import com.ldtteam.domumornamentum.block.AbstractBlock;
-import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -36,16 +35,10 @@ public class BarrelBlock extends AbstractBlock<BarrelBlock> implements SimpleWat
 
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-    public BarrelBlock(boolean standing)
+    public BarrelBlock()
     {
         super(AbstractBlock.Properties.copy(Blocks.OAK_PLANKS).strength(3f, 1f));
         this.registerDefaultState(this.getStateDefinition().any().setValue(WATERLOGGED, false));
-
-        if (!standing)
-            this.setRegistryName(Constants.MOD_ID, "blockbarreldeco_onside");
-        else
-            this.setRegistryName(Constants.MOD_ID, "blockbarreldeco_standing");
-
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {

@@ -12,7 +12,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -39,7 +39,7 @@ public class ShingleSlabBlockItem extends BlockItem
         final Block centerBlock = textureData.getTexturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
         final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
 
-        return new TranslatableComponent(Constants.MOD_ID + ".shingle_slab.name.format", centerBlockName);
+        return Component.translatable(Constants.MOD_ID + ".shingle_slab.name.format", centerBlockName);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class ShingleSlabBlockItem extends BlockItem
       final @NotNull ItemStack stack, @Nullable final Level worldIn, final @NotNull List<Component> tooltip, final @NotNull TooltipFlag flagIn)
     {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
-        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".origin.tooltip"));
+        tooltip.add(Component.translatable(Constants.MOD_ID + ".origin.tooltip"));
 
         final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
         MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
@@ -58,16 +58,16 @@ public class ShingleSlabBlockItem extends BlockItem
         final IMateriallyTexturedBlockComponent supportComponent = shingleBlock.getComponents().get(1);
         final Block supportBlock = textureData.getTexturedComponents().getOrDefault(supportComponent.getId(), supportComponent.getDefault());
         final Component supportBlockName = BlockUtils.getHoverName(supportBlock);
-        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".shingle_slab.support.format", supportBlockName));
+        tooltip.add(Component.translatable(Constants.MOD_ID + ".shingle_slab.support.format", supportBlockName));
 
         final IMateriallyTexturedBlockComponent coverComponent = shingleBlock.getComponents().get(2);
         final Block coverBlock = textureData.getTexturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
         final Component coverBlockName = BlockUtils.getHoverName(coverBlock);
-        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".shingle_slab.cover.format", coverBlockName));
+        tooltip.add(Component.translatable(Constants.MOD_ID + ".shingle_slab.cover.format", coverBlockName));
 
         final IMateriallyTexturedBlockComponent mainComponent = shingleBlock.getComponents().get(0);
         final Block mainBlock = textureData.getTexturedComponents().getOrDefault(mainComponent.getId(), mainComponent.getDefault());
         final Component mainBlockName = BlockUtils.getHoverName(mainBlock);
-        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".shingle_slab.main.format", mainBlockName));
+        tooltip.add(Component.translatable(Constants.MOD_ID + ".shingle_slab.main.format", mainBlockName));
     }
 }

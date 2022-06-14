@@ -5,7 +5,7 @@ import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
-import net.minecraft.data.HashCache;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,7 +22,7 @@ public class SlabBlockModelProvider implements DataProvider
     }
 
     @Override
-    public void run(@NotNull HashCache cache) throws IOException
+    public void run(@NotNull CachedOutput cache) throws IOException
     {
         final BlockModelJson fullJson = new BlockModelJson();
 
@@ -32,7 +32,7 @@ public class SlabBlockModelProvider implements DataProvider
         final String fullName = "slab_full.json";
         final Path fullSavePath = this.generator.getOutputFolder().resolve(DataGeneratorConstants.SLABS_BLOCK_MODELS_DIR).resolve(fullName);
 
-        DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(fullJson), fullSavePath);
+        DataProvider.saveStable(cache, DataGeneratorConstants.serialize(fullJson), fullSavePath);
 
         final BlockModelJson lowerJson = new BlockModelJson();
 
@@ -42,7 +42,7 @@ public class SlabBlockModelProvider implements DataProvider
         final String lowerName = "slab_lower.json";
         final Path lowerSavePath = this.generator.getOutputFolder().resolve(DataGeneratorConstants.SLABS_BLOCK_MODELS_DIR).resolve(lowerName);
 
-        DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(lowerJson), lowerSavePath);
+        DataProvider.saveStable(cache, DataGeneratorConstants.serialize(lowerJson), lowerSavePath);
 
         final BlockModelJson upperJson = new BlockModelJson();
 
@@ -52,7 +52,7 @@ public class SlabBlockModelProvider implements DataProvider
         final String upperName = "slab_upper.json";
         final Path upperSavePath = this.generator.getOutputFolder().resolve(DataGeneratorConstants.SLABS_BLOCK_MODELS_DIR).resolve(upperName);
 
-        DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(upperJson), upperSavePath);
+        DataProvider.saveStable(cache, DataGeneratorConstants.serialize(upperJson), upperSavePath);
     }
 
     @Override

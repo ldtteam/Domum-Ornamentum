@@ -29,7 +29,7 @@ public class MateriallyTexturedBlockRecipeProvider extends RecipeProvider
     {
         ForgeRegistries.BLOCKS.forEach(
           block -> {
-              if (Objects.requireNonNull(block.getRegistryName()).getNamespace().equals(Constants.MOD_ID) && block instanceof IMateriallyTexturedBlock materiallyTexturedBlock) {
+              if (Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(block)).getNamespace().equals(Constants.MOD_ID) && block instanceof IMateriallyTexturedBlock materiallyTexturedBlock) {
                   materiallyTexturedBlock.getValidCutterRecipes().forEach(builder);
               }
           }

@@ -2,8 +2,6 @@ package com.ldtteam.domumornamentum.block.decorative;
 
 import com.ldtteam.domumornamentum.block.AbstractBlock;
 import com.ldtteam.domumornamentum.block.types.BrickType;
-import com.ldtteam.domumornamentum.util.Constants;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.material.Material;
 
 /**
@@ -32,7 +30,6 @@ public class BrickBlock extends AbstractBlock<BrickBlock>
     public BrickBlock(final BrickType type)
     {
         super(Properties.of(Material.WOOD).strength(BLOCK_HARDNESS, RESISTANCE));
-        setRegistryName(new ResourceLocation(Constants.MOD_ID, type.getSerializedName()));
         this.type = type;
     }
 

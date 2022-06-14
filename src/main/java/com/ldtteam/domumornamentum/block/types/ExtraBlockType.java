@@ -4,6 +4,7 @@ import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -53,7 +54,7 @@ public enum ExtraBlockType implements StringRepresentable
     @Override
     public String getSerializedName()
     {
-        return (this.color == null ? "" : this.color.getSerializedName() + "_") + this.material.getRegistryName().getPath() + "_extra";
+        return (this.color == null ? "" : this.color.getSerializedName() + "_") + ForgeRegistries.ITEMS.getKey(this.material).getPath() + "_extra";
     }
 
     @Nullable

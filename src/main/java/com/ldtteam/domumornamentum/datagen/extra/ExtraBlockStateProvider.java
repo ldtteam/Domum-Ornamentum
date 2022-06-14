@@ -9,7 +9,7 @@ import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
-import net.minecraft.data.HashCache;
+import net.minecraft.data.CachedOutput;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -27,7 +27,7 @@ public class ExtraBlockStateProvider implements DataProvider
     }
 
     @Override
-    public void run(@NotNull final HashCache cache) throws IOException
+    public void run(@NotNull final CachedOutput cache) throws IOException
     {
         for (final ExtraBlock state : ModBlocks.getInstance().getExtraTopBlocks())
         {
@@ -39,7 +39,7 @@ public class ExtraBlockStateProvider implements DataProvider
             final Path blockstateFolder = this.generator.getOutputFolder().resolve(DataGeneratorConstants.BLOCKSTATE_DIR);
             final Path blockstatePath = blockstateFolder.resolve(state.getRegistryName().getPath() + ".json");
 
-            DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(blockstate), blockstatePath);
+            DataProvider.saveStable(cache, DataGeneratorConstants.serialize(blockstate), blockstatePath);
         }
     }
 

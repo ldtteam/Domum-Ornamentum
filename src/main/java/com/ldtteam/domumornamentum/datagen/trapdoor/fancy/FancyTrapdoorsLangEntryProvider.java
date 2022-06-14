@@ -5,7 +5,7 @@ import com.ldtteam.domumornamentum.block.types.FancyTrapdoorType;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
-import net.minecraft.data.HashCache;
+import net.minecraft.data.CachedOutput;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -22,7 +22,7 @@ public class FancyTrapdoorsLangEntryProvider implements DataProvider
     }
 
     @Override
-    public void run(@NotNull HashCache cache) throws IOException
+    public void run(@NotNull CachedOutput cache) throws IOException
     {
         backingLangJson.put(Constants.MOD_ID + ".fancytrapdoor.name.format", "Fancy %s Trapdoor");
         backingLangJson.put(Constants.MOD_ID + ".fancytrapdoor.type.format", "Variant: %s");

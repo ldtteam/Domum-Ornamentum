@@ -9,8 +9,7 @@ import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
+
 import net.minecraft.world.item.DoubleHighBlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -41,7 +40,7 @@ public class DoorBlockItem extends DoubleHighBlockItem
         final Block centerBlock = textureData.getTexturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
         final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
 
-        return new TranslatableComponent(Constants.MOD_ID + ".door.name.format", centerBlockName);
+        return Component.translatable(Constants.MOD_ID + ".door.name.format", centerBlockName);
     }
 
     @Override
@@ -67,11 +66,11 @@ public class DoorBlockItem extends DoubleHighBlockItem
             doorType = DoorType.FULL;
         }
 
-        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".origin.tooltip"));
-        tooltip.add(new TextComponent(""));
-        tooltip.add(new TranslatableComponent(
+        tooltip.add(Component.translatable(Constants.MOD_ID + ".origin.tooltip"));
+        tooltip.add(Component.literal(""));
+        tooltip.add(Component.translatable(
           Constants.MOD_ID + ".door.type.format",
-          new TranslatableComponent(
+          Component.translatable(
             Constants.MOD_ID + ".door.type.name." + doorType.getTranslationKeySuffix()
           )
         ));
@@ -85,6 +84,6 @@ public class DoorBlockItem extends DoubleHighBlockItem
         final IMateriallyTexturedBlockComponent doorComponent = doorBlock.getComponents().get(0);
         final Block doorBlock = textureData.getTexturedComponents().getOrDefault(doorComponent.getId(), doorComponent.getDefault());
         final Component doorBlockName = BlockUtils.getHoverName(doorBlock);
-        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".door.block.format", doorBlockName));
+        tooltip.add(Component.translatable(Constants.MOD_ID + ".door.block.format", doorBlockName));
     }
 }

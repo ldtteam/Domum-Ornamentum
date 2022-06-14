@@ -17,6 +17,7 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -60,14 +61,14 @@ public class MateriallyTexturedBakedModel implements BakedModel
 
     @Override
     public List<BakedQuad> getQuads(
-      @Nullable final BlockState state, @Nullable final Direction side, final Random rand)
+      @Nullable final BlockState state, @Nullable final Direction side, final RandomSource rand)
     {
         return innerModel.getQuads(state, side, rand);
     }
 
     @NotNull
     @Override
-    public List<BakedQuad> getQuads(@Nullable final BlockState state, @Nullable final Direction side, @NotNull final Random rand, @NotNull final IModelData extraData)
+    public List<BakedQuad> getQuads(@Nullable final BlockState state, @Nullable final Direction side, @NotNull final RandomSource rand, @NotNull final IModelData extraData)
     {
         final BakedModel remappedModel = getBakedInnerModelFor(extraData);
         return remappedModel.getQuads(state, side, rand, extraData);

@@ -14,7 +14,7 @@ import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
-import net.minecraft.data.HashCache;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.StairBlock;
@@ -41,12 +41,12 @@ public class PillarBlockStateProvider implements DataProvider
     }
 
     @Override
-    public void run(@NotNull final HashCache cache) throws IOException
+    public void run(@NotNull final CachedOutput cache) throws IOException
     {
         createBlockstateFile(cache, ModBlocks.getInstance().getPillar());
     }
 
-    private void createBlockstateFile(final HashCache cache, final PillarBlock pillar) throws IOException
+    private void createBlockstateFile(final CachedOutput cache, final PillarBlock pillar) throws IOException
     {
         if (pillar.getRegistryName() == null)
             return;
@@ -98,7 +98,7 @@ public class PillarBlockStateProvider implements DataProvider
         final Path blockstateFolder = this.generator.getOutputFolder().resolve(DataGeneratorConstants.BLOCKSTATE_DIR);
         final Path blockstatePath = blockstateFolder.resolve(pillar.getRegistryName().getPath() + ".json");
 
-        DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(blockstate), blockstatePath);
+        DataProvider.saveStable(cache, DataGeneratorConstants.serialize(blockstate), blockstatePath);
 
     }
 

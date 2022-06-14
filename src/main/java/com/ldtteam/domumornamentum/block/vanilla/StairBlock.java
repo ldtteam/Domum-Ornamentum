@@ -10,22 +10,20 @@ import com.ldtteam.domumornamentum.block.components.SimpleRetexturableComponent;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
 import com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes;
-import com.ldtteam.domumornamentum.item.vanilla.StairsBlockItem;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.BlockUtils;
-import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
@@ -41,12 +39,10 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.minecraftforge.registries.IForgeRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 
 import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
@@ -63,13 +59,6 @@ public class StairBlock extends AbstractBlockStairs<StairBlock> implements IMate
     public StairBlock()
     {
         super(OAK_PLANKS::defaultBlockState, Properties.of(Material.WOOD, OAK_PLANKS.defaultMaterialColor()).noOcclusion().strength(2.0F, 3.0F).sound(SoundType.WOOD));
-        setRegistryName(Constants.MOD_ID, "vanilla_stairs_compat");
-    }
-
-    @Override
-    public void registerItemBlock(final IForgeRegistry<Item> registry, final Item.Properties properties)
-    {
-        registry.register((new StairsBlockItem(this, properties)).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
     }
 
     @Override
@@ -115,7 +104,7 @@ public class StairBlock extends AbstractBlockStairs<StairBlock> implements IMate
     @Override
     public BlockEntity newBlockEntity(final @NotNull BlockPos blockPos, final @NotNull BlockState blockState)
     {
-        return new MateriallyTexturedBlockEntity(ModBlockEntityTypes.MATERIALLY_TEXTURED, blockPos, blockState);
+        return new MateriallyTexturedBlockEntity(blockPos, blockState);
     }
 
     @Override
@@ -125,7 +114,7 @@ public class StairBlock extends AbstractBlockStairs<StairBlock> implements IMate
     }
 
     @Override
-    public void animateTick(final @NotNull BlockState p_56914_, final @NotNull Level p_56915_, final @NotNull BlockPos p_56916_, final @NotNull Random p_56917_)
+    public void animateTick(final @NotNull BlockState p_56914_, final @NotNull Level p_56915_, final @NotNull BlockPos p_56916_, final @NotNull RandomSource p_56917_)
     {
         final BlockState state = getBlockState(p_56915_, p_56916_);
         state.getBlock().animateTick(state, p_56915_, p_56916_, p_56917_);
@@ -167,14 +156,14 @@ public class StairBlock extends AbstractBlockStairs<StairBlock> implements IMate
     }
 
     @Override
-    public void randomTick(final @NotNull BlockState p_56951_, final @NotNull ServerLevel p_56952_, final @NotNull BlockPos p_56953_, final @NotNull Random p_56954_)
+    public void randomTick(final @NotNull BlockState p_56951_, final @NotNull ServerLevel p_56952_, final @NotNull BlockPos p_56953_, final @NotNull RandomSource p_56954_)
     {
         final BlockState state = getBlockState(p_56952_, p_56953_);
         state.randomTick(p_56952_, p_56953_, p_56954_);
     }
 
     @Override
-    public void tick(final @NotNull BlockState p_56886_, final @NotNull ServerLevel p_56887_, final @NotNull BlockPos p_56888_, final @NotNull Random p_56889_)
+    public void tick(final @NotNull BlockState p_56886_, final @NotNull ServerLevel p_56887_, final @NotNull BlockPos p_56888_, final @NotNull RandomSource p_56889_)
     {
         final BlockState state = getBlockState(p_56887_, p_56888_);
         state.tick(p_56887_, p_56888_, p_56889_);

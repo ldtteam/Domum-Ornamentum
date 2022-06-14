@@ -10,7 +10,7 @@ import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
-import net.minecraft.data.HashCache;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.block.state.properties.StairsShape;
@@ -32,12 +32,12 @@ public class ShinglesBlockStateProvider implements DataProvider
     }
 
     @Override
-    public void run(@NotNull final HashCache cache) throws IOException
+    public void run(@NotNull final CachedOutput cache) throws IOException
     {
         createBlockstateFile(cache, ModBlocks.getInstance().getShingle());
     }
 
-    private void createBlockstateFile(final HashCache cache, final ShingleBlock shingle) throws IOException
+    private void createBlockstateFile(final CachedOutput cache, final ShingleBlock shingle) throws IOException
     {
         if (shingle.getRegistryName() == null)
             return;
@@ -73,7 +73,7 @@ public class ShinglesBlockStateProvider implements DataProvider
         final Path blockstateFolder = this.generator.getOutputFolder().resolve(DataGeneratorConstants.BLOCKSTATE_DIR);
         final Path blockstatePath = blockstateFolder.resolve(shingle.getRegistryName().getPath() + ".json");
 
-        DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(blockstate), blockstatePath);
+        DataProvider.saveStable(cache, DataGeneratorConstants.serialize(blockstate), blockstatePath);
 
     }
 

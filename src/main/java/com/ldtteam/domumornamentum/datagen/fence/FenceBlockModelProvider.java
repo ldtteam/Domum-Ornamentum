@@ -6,7 +6,7 @@ import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
-import net.minecraft.data.HashCache;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import org.jetbrains.annotations.NotNull;
@@ -25,7 +25,7 @@ public class FenceBlockModelProvider implements DataProvider
     }
 
     @Override
-    public void run(@NotNull HashCache cache) throws IOException
+    public void run(@NotNull CachedOutput cache) throws IOException
     {
         final BlockModelJson postJson = new BlockModelJson();
 
@@ -35,7 +35,7 @@ public class FenceBlockModelProvider implements DataProvider
         final String postName = "fence_post.json";
         final Path postSavePath = this.generator.getOutputFolder().resolve(DataGeneratorConstants.FENCES_BLOCK_MODELS_DIR).resolve(postName);
 
-        DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(postJson), postSavePath);
+        DataProvider.saveStable(cache, DataGeneratorConstants.serialize(postJson), postSavePath);
 
         final BlockModelJson onSideJson = new BlockModelJson();
 
@@ -45,7 +45,7 @@ public class FenceBlockModelProvider implements DataProvider
         final String onSideName = "fence_side.json";
         final Path onSideSavePath = this.generator.getOutputFolder().resolve(DataGeneratorConstants.FENCES_BLOCK_MODELS_DIR).resolve(onSideName);
 
-        DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(onSideJson), onSideSavePath);
+        DataProvider.saveStable(cache, DataGeneratorConstants.serialize(onSideJson), onSideSavePath);
     }
 
     @Override

@@ -11,8 +11,10 @@ import com.ldtteam.domumornamentum.block.types.ExtraBlockType;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
-import net.minecraft.data.HashCache;
+import net.minecraft.data.CachedOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeItem;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -30,21 +32,22 @@ public class ExtraRecipeProvider implements DataProvider
     }
 
     @Override
-    public void run(@NotNull final HashCache cache) throws IOException
+    public void run(@NotNull final CachedOutput cache) throws IOException
     {
         for (final ExtraBlock block : ModBlocks.getInstance().getExtraTopBlocks())
         {
             final ExtraBlockType type = block.getType();
             final ShapedPatternJson pattern =  new ShapedPatternJson("X X"," Z ","X X");
             final Map<String, RecipeIngredientKeyJson> keys = new HashMap<>();
-            keys.put("X", new RecipeIngredientKeyJson(new RecipeIngredientJson(type.getMaterial().getRegistryName().toString(), false)));
-            keys.put("Z", new RecipeIngredientKeyJson(new RecipeIngredientJson(type.getColor() == null ? type.getMaterial().getRegistryName().toString() : DyeItem.byColor(type.getColor()).getRegistryName().toString(), false)));
+            final ResourceLocation registryName = ForgeRegistries.ITEMS.getKey(type.getMaterial());
+            keys.put("X", new RecipeIngredientKeyJson(new RecipeIngredientJson(registryName.toString(), false)));
+            keys.put("Z", new RecipeIngredientKeyJson(new RecipeIngredientJson(type.getColor() == null ? registryName.toString() : ForgeRegistries.ITEMS.getKey(DyeItem.byColor(type.getColor())).toString(), false)));
 
-            final ShapedRecipeJson json = new ShapedRecipeJson("extra", pattern, keys, new RecipeResultJson(4, block.asItem().getRegistryName().toString()));
+            final ShapedRecipeJson json = new ShapedRecipeJson("extra", pattern, keys, new RecipeResultJson(4, ForgeRegistries.ITEMS.getKey(block.asItem()).toString()));
             final Path recipeFolder = this.generator.getOutputFolder().resolve(DataGeneratorConstants.RECIPES_DIR);
             final Path blockstatePath = recipeFolder.resolve(block.getRegistryName().getPath() + ".json");
 
-            DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(json), blockstatePath);
+            DataProvider.saveStable(cache, DataGeneratorConstants.serialize(json), blockstatePath);
         }
     }
 

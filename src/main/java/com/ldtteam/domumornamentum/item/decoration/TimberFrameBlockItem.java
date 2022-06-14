@@ -13,8 +13,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
+
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
@@ -40,7 +39,7 @@ public class TimberFrameBlockItem extends BlockItem
         final Block centerBlock = textureData.getTexturedComponents().getOrDefault(centerComponent.getId(), centerComponent.getDefault());
         final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
 
-        return new TranslatableComponent(Constants.MOD_ID + ".timber.frame.name.format", centerBlockName);
+        return Component.translatable(Constants.MOD_ID + ".timber.frame.name.format", centerBlockName);
     }
 
     @Override
@@ -56,21 +55,21 @@ public class TimberFrameBlockItem extends BlockItem
         }
 
         final TimberFrameType type = timberFrameBlock.getTimberFrameType();
-        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".origin.tooltip"));
-        tooltip.add(new TextComponent(""));
-        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".timber.frame.header"));
-        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".timber.frame.type.format", new TranslatableComponent(Constants.MOD_ID + ".timber.frame.type." + type.getName())));
+        tooltip.add(Component.translatable(Constants.MOD_ID + ".origin.tooltip"));
+        tooltip.add(Component.literal(""));
+        tooltip.add(Component.translatable(Constants.MOD_ID + ".timber.frame.header"));
+        tooltip.add(Component.translatable(Constants.MOD_ID + ".timber.frame.type.format", Component.translatable(Constants.MOD_ID + ".timber.frame.type." + type.getName())));
 
         final IMateriallyTexturedBlockComponent frameComponent = timberFrameBlock.getComponents().get(0);
         final Block frameBlock = textureData.getTexturedComponents().getOrDefault(frameComponent.getId(), frameComponent.getDefault());
         final Component frameBlockName = BlockUtils.getHoverName(frameBlock);
-        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".timber.frame.block.format", frameBlockName));
+        tooltip.add(Component.translatable(Constants.MOD_ID + ".timber.frame.block.format", frameBlockName));
 
-        tooltip.add(new TextComponent(""));
-        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".timber.center.header"));
+        tooltip.add(Component.literal(""));
+        tooltip.add(Component.translatable(Constants.MOD_ID + ".timber.center.header"));
         final IMateriallyTexturedBlockComponent centerComponent = timberFrameBlock.getComponents().get(1);
         final Block centerBlock = textureData.getTexturedComponents().getOrDefault(centerComponent.getId(), centerComponent.getDefault());
         final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
-        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".timber.center.block.format", centerBlockName));
+        tooltip.add(Component.translatable(Constants.MOD_ID + ".timber.center.block.format", centerBlockName));
     }
 }

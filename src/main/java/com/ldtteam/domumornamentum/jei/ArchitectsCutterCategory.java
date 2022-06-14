@@ -1,5 +1,5 @@
 package com.ldtteam.domumornamentum.jei;
-
+/*
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
@@ -20,7 +20,7 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -88,7 +88,7 @@ public class ArchitectsCutterCategory implements IRecipeCategory<ArchitectsCutte
     @Override
     public Component getTitle()
     {
-        return new TranslatableComponent(MOD_ID + ".architectscutter");
+        return Component.translatable(MOD_ID + ".architectscutter");
     }
 
     @NotNull
@@ -277,3 +277,5 @@ public class ArchitectsCutterCategory implements IRecipeCategory<ArchitectsCutte
         }
     }
 }
+*/
+

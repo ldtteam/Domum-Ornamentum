@@ -8,7 +8,7 @@ import com.ldtteam.domumornamentum.block.decorative.TimberFrameBlock;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.HashCache;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -30,7 +30,7 @@ public class TimberFramesBlockStateProvider implements DataProvider
     }
 
     @Override
-    public void run(@NotNull final HashCache cache) throws IOException
+    public void run(@NotNull final CachedOutput cache) throws IOException
     {
         for (final TimberFrameBlock timberFrame : ModBlocks.getInstance().getTimberFrames())
         {
@@ -38,7 +38,7 @@ public class TimberFramesBlockStateProvider implements DataProvider
         }
     }
 
-    private void createBlockstateFile(final HashCache cache, final TimberFrameBlock timberFrame) throws IOException
+    private void createBlockstateFile(final CachedOutput cache, final TimberFrameBlock timberFrame) throws IOException
     {
         if (timberFrame.getRegistryName() == null)
             return;
@@ -70,7 +70,7 @@ public class TimberFramesBlockStateProvider implements DataProvider
         final Path blockstateFolder = this.generator.getOutputFolder().resolve(DataGeneratorConstants.BLOCKSTATE_DIR);
         final Path blockstatePath = blockstateFolder.resolve(timberFrame.getRegistryName().getPath() + ".json");
 
-        DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(blockstate), blockstatePath);
+        DataProvider.saveStable(cache, DataGeneratorConstants.serialize(blockstate), blockstatePath);
 
     }
 

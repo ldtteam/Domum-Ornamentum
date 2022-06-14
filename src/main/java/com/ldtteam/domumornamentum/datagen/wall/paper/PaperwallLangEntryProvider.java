@@ -3,7 +3,7 @@ package com.ldtteam.domumornamentum.datagen.wall.paper;
 import com.ldtteam.datagenerators.lang.LangJson;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.HashCache;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import org.jetbrains.annotations.NotNull;
 
@@ -21,7 +21,7 @@ public class PaperwallLangEntryProvider implements DataProvider
     }
 
     @Override
-    public void run(@NotNull HashCache cache) throws IOException
+    public void run(@NotNull CachedOutput cache) throws IOException
     {
         backingLangJson.put(Constants.MOD_ID + ".paperwall.name.format", "%s framed thin wall");
         backingLangJson.put(Constants.MOD_ID + ".paperwall.header", "Materials:");

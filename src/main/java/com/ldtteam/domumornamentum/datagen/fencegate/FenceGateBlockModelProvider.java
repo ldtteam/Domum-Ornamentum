@@ -5,7 +5,7 @@ import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
-import net.minecraft.data.HashCache;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,7 +22,7 @@ public class FenceGateBlockModelProvider implements DataProvider
     }
 
     @Override
-    public void run(@NotNull HashCache cache) throws IOException
+    public void run(@NotNull CachedOutput cache) throws IOException
     {
         final BlockModelJson gateJson = new BlockModelJson();
 
@@ -32,7 +32,7 @@ public class FenceGateBlockModelProvider implements DataProvider
         final String gateName = "fence_gate.json";
         final Path gateSavePath = this.generator.getOutputFolder().resolve(DataGeneratorConstants.FENCE_GATES_BLOCK_MODELS_DIR).resolve(gateName);
 
-        DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(gateJson), gateSavePath);
+        DataProvider.saveStable(cache, DataGeneratorConstants.serialize(gateJson), gateSavePath);
 
         final BlockModelJson gateWallJson = new BlockModelJson();
 
@@ -42,7 +42,7 @@ public class FenceGateBlockModelProvider implements DataProvider
         final String gateWallName = "fence_gate_wall.json";
         final Path gateWallSavePath = this.generator.getOutputFolder().resolve(DataGeneratorConstants.FENCE_GATES_BLOCK_MODELS_DIR).resolve(gateWallName);
 
-        DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(gateWallJson), gateWallSavePath);
+        DataProvider.saveStable(cache, DataGeneratorConstants.serialize(gateWallJson), gateWallSavePath);
 
         final BlockModelJson openGateJson = new BlockModelJson();
 
@@ -52,7 +52,7 @@ public class FenceGateBlockModelProvider implements DataProvider
         final String openGateName = "fence_gate_open.json";
         final Path openGateSavePath = this.generator.getOutputFolder().resolve(DataGeneratorConstants.FENCE_GATES_BLOCK_MODELS_DIR).resolve(openGateName);
 
-        DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(openGateJson), openGateSavePath);
+        DataProvider.saveStable(cache, DataGeneratorConstants.serialize(openGateJson), openGateSavePath);
 
         final BlockModelJson openWallGateJson = new BlockModelJson();
 
@@ -62,7 +62,7 @@ public class FenceGateBlockModelProvider implements DataProvider
         final String openWallGateName = "fence_gate_wall_open.json";
         final Path openWallGateSavePath = this.generator.getOutputFolder().resolve(DataGeneratorConstants.FENCE_GATES_BLOCK_MODELS_DIR).resolve(openWallGateName);
 
-        DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(openWallGateJson), openWallGateSavePath);
+        DataProvider.saveStable(cache, DataGeneratorConstants.serialize(openWallGateJson), openWallGateSavePath);
 
     }
 

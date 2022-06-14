@@ -10,9 +10,10 @@ import com.ldtteam.domumornamentum.block.decorative.FloatingCarpetBlock;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
-import net.minecraft.data.HashCache;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.world.item.DyeColor;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -30,7 +31,7 @@ public class FloatingCarpetRecipeProvider implements DataProvider
     }
 
     @Override
-    public void run(@NotNull final HashCache cache) throws IOException
+    public void run(@NotNull final CachedOutput cache) throws IOException
     {
         for (final FloatingCarpetBlock block : ModBlocks.getInstance().getFloatingCarpets())
         {
@@ -40,11 +41,11 @@ public class FloatingCarpetRecipeProvider implements DataProvider
             keys.put("C", new RecipeIngredientKeyJson(new RecipeIngredientJson("minecraft:" + color.getName() + "_carpet", false)));
             keys.put("S", new RecipeIngredientKeyJson(new RecipeIngredientJson(Tags.Items.STRING.location().toString(), true)));
 
-            final ShapedRecipeJson json = new ShapedRecipeJson("floating_carpets", pattern, keys, new RecipeResultJson(4, block.asItem().getRegistryName().toString()));
+            final ShapedRecipeJson json = new ShapedRecipeJson("floating_carpets", pattern, keys, new RecipeResultJson(4, ForgeRegistries.ITEMS.getKey(block.asItem()).toString()));
             final Path recipeFolder = this.generator.getOutputFolder().resolve(DataGeneratorConstants.RECIPES_DIR);
             final Path blockstatePath = recipeFolder.resolve(block.getRegistryName().getPath() + ".json");
 
-            DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(json), blockstatePath);
+            DataProvider.saveStable(cache, DataGeneratorConstants.serialize(json), blockstatePath);
         }
     }
 

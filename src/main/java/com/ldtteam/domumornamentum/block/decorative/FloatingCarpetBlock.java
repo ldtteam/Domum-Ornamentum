@@ -1,7 +1,6 @@
 package com.ldtteam.domumornamentum.block.decorative;
 
 import com.ldtteam.domumornamentum.block.AbstractBlock;
-import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.BlockGetter;
@@ -12,8 +11,6 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Locale;
 
 public class FloatingCarpetBlock extends AbstractBlock<FloatingCarpetBlock>
 {
@@ -31,7 +28,6 @@ public class FloatingCarpetBlock extends AbstractBlock<FloatingCarpetBlock>
     {
         super(AbstractBlock.Properties.of(Material.CLOTH_DECORATION).strength(0.1F).sound(SoundType.WOOL));
         this.color = color;
-        this.setRegistryName(Constants.MOD_ID, color.getName().toLowerCase(Locale.ROOT) + "_floating_carpet");
     }
 
     public DyeColor getColor()

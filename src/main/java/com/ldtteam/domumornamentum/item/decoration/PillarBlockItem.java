@@ -8,8 +8,7 @@ import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
+
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -40,7 +39,7 @@ public class PillarBlockItem extends BlockItem
         final Block columnBlock = textureData.getTexturedComponents().getOrDefault(columnComponent.getId(), columnComponent.getDefault());
         final Component columnBlockName = BlockUtils.getHoverName(columnBlock);
 
-        return new TranslatableComponent(Constants.MOD_ID + ".pillar.name.format", columnBlockName);
+        return Component.translatable(Constants.MOD_ID + ".pillar.name.format", columnBlockName);
     }
 
     @Override
@@ -54,14 +53,14 @@ public class PillarBlockItem extends BlockItem
             textureData = MaterialTextureDataUtil.generateRandomTextureDataFrom(stack);
         }
 
-        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".origin.tooltip"));
-        tooltip.add(new TextComponent(""));
-        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".pillar.header"));
+        tooltip.add(Component.translatable(Constants.MOD_ID + ".origin.tooltip"));
+        tooltip.add(Component.literal(""));
+        tooltip.add(Component.translatable(Constants.MOD_ID + ".pillar.header"));
 
         final IMateriallyTexturedBlockComponent frameComponent = pillarBlock.getComponents().get(0);
         final Block frameBlock = textureData.getTexturedComponents().getOrDefault(frameComponent.getId(), frameComponent.getDefault());
         final Component frameBlockName = BlockUtils.getHoverName(frameBlock);
-        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".pillar.column.format", frameBlockName));
+        tooltip.add(Component.translatable(Constants.MOD_ID + ".pillar.column.format", frameBlockName));
 
 
     }

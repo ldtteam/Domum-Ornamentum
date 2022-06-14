@@ -33,13 +33,14 @@ public class ForgeBusEventHandler
         final Map<ResourceLocation, Integer> dataCount = Maps.newHashMap();
         for (final Item value : ForgeRegistries.ITEMS.getValues())
         {
-            if (Objects.requireNonNull(value.getRegistryName()).getNamespace().equals(Constants.MOD_ID)) {
+            final ResourceLocation key = ForgeRegistries.ITEMS.getKey(value);
+            if (Objects.requireNonNull(key).getNamespace().equals(Constants.MOD_ID)) {
                 final NonNullList<ItemStack> stacks = NonNullList.create();
                 if (value.getItemCategory() != null)
                 {
                     value.fillItemCategory(Objects.requireNonNull(value.getItemCategory()), stacks);
                 }
-                dataCount.put(value.getRegistryName(), dataCount.getOrDefault(value.getRegistryName(), 0) + stacks.size());
+                dataCount.put(key, dataCount.getOrDefault(key, 0) + stacks.size());
             }
         }
         dataCount.forEach((rl, count) -> {

@@ -6,7 +6,7 @@ import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
-import net.minecraft.data.HashCache;
+import net.minecraft.data.CachedOutput;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -24,7 +24,7 @@ public class ExtraBlockModelProvider implements DataProvider
     }
 
     @Override
-    public void run(@NotNull HashCache cache) throws IOException
+    public void run(@NotNull CachedOutput cache) throws IOException
     {
         for (final ExtraBlockType type : ExtraBlockType.values())
         {
@@ -38,7 +38,7 @@ public class ExtraBlockModelProvider implements DataProvider
             final String name = type.getSerializedName().toLowerCase(Locale.ROOT) + ".json";
             final Path saveFile = this.generator.getOutputFolder().resolve(DataGeneratorConstants.EXTRA_BLOCK_MODELS_DIR).resolve(name);
 
-            DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(modelJson), saveFile);
+            DataProvider.saveStable(cache, DataGeneratorConstants.serialize(modelJson), saveFile);
         }
     }
 

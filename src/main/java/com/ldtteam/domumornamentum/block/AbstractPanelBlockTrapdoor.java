@@ -1,11 +1,9 @@
 package com.ldtteam.domumornamentum.block;
 
 import com.ldtteam.domumornamentum.block.interfaces.IDOBlock;
-import com.ldtteam.domumornamentum.util.Suppression;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
@@ -22,7 +20,6 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.registries.IForgeRegistry;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class AbstractPanelBlockTrapdoor<B extends AbstractPanelBlockTrapdoor<B>> extends HorizontalDirectionalBlock implements IDOBlock<B>, SimpleWaterloggedBlock
@@ -44,24 +41,10 @@ public abstract class AbstractPanelBlockTrapdoor<B extends AbstractPanelBlockTra
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, Boolean.FALSE));
     }
 
-    /**
-     * Registery block at gameregistry.
-     *
-     * @param registry the registry to use.
-     * @return the block itself.
-     */
     @Override
-    @SuppressWarnings(Suppression.UNCHECKED)
-    public B registerBlock(final IForgeRegistry<Block> registry)
+    public ResourceLocation getRegistryName()
     {
-        registry.register(this);
-        return (B) this;
-    }
-
-    @Override
-    public void registerItemBlock(final IForgeRegistry<Item> registry, final Item.Properties properties)
-    {
-        registry.register((new BlockItem(this, properties)).setRegistryName(this.getRegistryName()));
+        return getRegistryName(this);
     }
 
     @NotNull

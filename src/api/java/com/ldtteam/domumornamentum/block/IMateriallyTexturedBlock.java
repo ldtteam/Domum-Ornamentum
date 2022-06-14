@@ -39,13 +39,13 @@ public interface IMateriallyTexturedBlock
               @Override
               public @NotNull ResourceLocation getId()
               {
-                  return Objects.requireNonNull(getBlock().getRegistryName());
+                  return Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(getBlock()));
               }
 
               @Override
               public @NotNull RecipeSerializer<?> getType()
               {
-                  return ModRecipeSerializers.ARCHITECTS_CUTTER;
+                  return ModRecipeSerializers.ARCHITECTS_CUTTER.get();
               }
 
               @Nullable

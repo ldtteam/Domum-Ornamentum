@@ -4,9 +4,10 @@ import com.ldtteam.datagenerators.models.block.BlockModelJson;
 import com.ldtteam.domumornamentum.block.types.TrapdoorType;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
-import net.minecraft.data.HashCache;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,7 +26,7 @@ public class PanelBlockModelProvider implements DataProvider
     }
 
     @Override
-    public void run(@NotNull HashCache cache) throws IOException
+    public void run(@NotNull CachedOutput cache) throws IOException
     {
         Set<String> uniqueValues = new HashSet<>();
         for (TrapdoorType trapdoorsShape : TrapdoorType.values())
@@ -41,7 +42,7 @@ public class PanelBlockModelProvider implements DataProvider
                 final String name = "panel_" + shapeName + ".json";
                 final Path saveFile = this.generator.getOutputFolder().resolve(DataGeneratorConstants.PANELS_BLOCK_MODELS_DIR).resolve(name);
 
-                DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(modelJson), saveFile);
+                DataProvider.saveStable(cache, DataGeneratorConstants.serialize(modelJson), saveFile);
             }
         }
     }

@@ -6,7 +6,7 @@ import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
-import net.minecraft.data.HashCache;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,7 +25,7 @@ public class DoorsBlockModelProvider implements DataProvider
     }
 
     @Override
-    public void run(@NotNull HashCache cache) throws IOException
+    public void run(@NotNull CachedOutput cache) throws IOException
     {
         Set<String> uniqueValues = new HashSet<>();
         for (DoorType doorsShape : DoorType.values())
@@ -41,7 +41,7 @@ public class DoorsBlockModelProvider implements DataProvider
                 final String bottomName = "door_" + shapeName + ".json";
                 final Path bottomPath = this.generator.getOutputFolder().resolve(DataGeneratorConstants.DOORS_BLOCK_MODELS_DIR).resolve(bottomName);
 
-                DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(bottomJson), bottomPath);
+                DataProvider.saveStable(cache, DataGeneratorConstants.serialize(bottomJson), bottomPath);
 
                 final BlockModelJson topJson = new BlockModelJson();
 
@@ -51,7 +51,7 @@ public class DoorsBlockModelProvider implements DataProvider
                 final String topName = "door_top_" + shapeName + ".json";
                 final Path topPath = this.generator.getOutputFolder().resolve(DataGeneratorConstants.DOORS_BLOCK_MODELS_DIR).resolve(topName);
 
-                DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(topJson), topPath);
+                DataProvider.saveStable(cache, DataGeneratorConstants.serialize(topJson), topPath);
             }
         }
     }

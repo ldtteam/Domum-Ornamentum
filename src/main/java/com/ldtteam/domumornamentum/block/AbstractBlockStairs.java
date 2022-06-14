@@ -3,6 +3,7 @@ package com.ldtteam.domumornamentum.block;
 import java.util.function.Supplier;
 import com.ldtteam.domumornamentum.util.Suppression;
 import com.ldtteam.domumornamentum.block.interfaces.IDOBlock;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.StairBlock;
@@ -20,16 +21,8 @@ public abstract class AbstractBlockStairs<B extends AbstractBlockStairs<B>> exte
     }
 
     @Override
-    @SuppressWarnings(Suppression.UNCHECKED)
-    public B registerBlock(final IForgeRegistry<Block> registry)
+    public ResourceLocation getRegistryName()
     {
-        registry.register(this);
-        return (B) this;
-    }
-
-    @Override
-    public void registerItemBlock(final IForgeRegistry<Item> registry, final Item.Properties properties)
-    {
-        registry.register((new BlockItem(this, properties)).setRegistryName(this.getRegistryName()));
+        return getRegistryName(this);
     }
 }

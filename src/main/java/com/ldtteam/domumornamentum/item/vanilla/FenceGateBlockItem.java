@@ -8,7 +8,7 @@ import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -39,14 +39,14 @@ public class FenceGateBlockItem extends BlockItem
         final Block centerBlock = textureData.getTexturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
         final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
 
-        return new TranslatableComponent(Constants.MOD_ID + ".fence-gate.name.format", centerBlockName);
+        return Component.translatable(Constants.MOD_ID + ".fence-gate.name.format", centerBlockName);
     }
 
     @Override
     public void appendHoverText(@NotNull final ItemStack stack, @Nullable final Level worldIn, @NotNull final List<Component> tooltip, @NotNull final TooltipFlag flagIn)
     {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
-        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".origin.tooltip"));
+        tooltip.add(Component.translatable(Constants.MOD_ID + ".origin.tooltip"));
 
         final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
         MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
@@ -57,7 +57,7 @@ public class FenceGateBlockItem extends BlockItem
         final IMateriallyTexturedBlockComponent component = fenceBlock.getComponents().get(0);
         final Block block = textureData.getTexturedComponents().getOrDefault(component.getId(), component.getDefault());
         final Component nameComponent = BlockUtils.getHoverName(block);
-        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".block.format", nameComponent));
+        tooltip.add(Component.translatable(Constants.MOD_ID + ".block.format", nameComponent));
     }
 }
 

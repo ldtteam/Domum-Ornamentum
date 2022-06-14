@@ -5,7 +5,7 @@ import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.HashCache;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -25,7 +25,7 @@ public class PaperwallBlockModelProvider implements DataProvider
     }
 
     @Override
-    public void run(@NotNull HashCache cache) throws IOException
+    public void run(@NotNull CachedOutput cache) throws IOException
     {
         final BlockModelJson postJson = new BlockModelJson();
 
@@ -35,7 +35,7 @@ public class PaperwallBlockModelProvider implements DataProvider
         final String postName = "blockpaperwall_post.json";
         final Path postSavePath = this.generator.getOutputFolder().resolve(DataGeneratorConstants.PAPERWALLS_BLOCK_MODELS_DIR).resolve(postName);
 
-        DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(postJson), postSavePath);
+        DataProvider.saveStable(cache, DataGeneratorConstants.serialize(postJson), postSavePath);
 
         for (final Direction possibleValue : HorizontalDirectionalBlock.FACING.getPossibleValues())
         {
@@ -47,7 +47,7 @@ public class PaperwallBlockModelProvider implements DataProvider
             final String onSideName = "blockpaperwall_" + possibleValue.name().toLowerCase(Locale.ROOT) + "_side.json";
             final Path onSideSavePath = this.generator.getOutputFolder().resolve(DataGeneratorConstants.PAPERWALLS_BLOCK_MODELS_DIR).resolve(onSideName);
 
-            DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(onSideJson), onSideSavePath);
+            DataProvider.saveStable(cache, DataGeneratorConstants.serialize(onSideJson), onSideSavePath);
 
 
             final BlockModelJson offSideJson = new BlockModelJson();
@@ -58,7 +58,7 @@ public class PaperwallBlockModelProvider implements DataProvider
             final String offSideName = "blockpaperwall_off_" + possibleValue.name().toLowerCase(Locale.ROOT) + "_side.json";
             final Path offSideSavePath = this.generator.getOutputFolder().resolve(DataGeneratorConstants.PAPERWALLS_BLOCK_MODELS_DIR).resolve(offSideName);
 
-            DataProvider.save(DataGeneratorConstants.GSON, cache, DataGeneratorConstants.serialize(offSideJson), offSideSavePath);
+            DataProvider.saveStable(cache, DataGeneratorConstants.serialize(offSideJson), offSideSavePath);
         }
         
         

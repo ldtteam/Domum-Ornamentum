@@ -9,8 +9,7 @@ import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
+
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -40,7 +39,7 @@ public class TrapdoorBlockItem extends BlockItem
         final Block centerBlock = textureData.getTexturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
         final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
 
-        return new TranslatableComponent(Constants.MOD_ID + ".trapdoor.name.format", centerBlockName);
+        return Component.translatable(Constants.MOD_ID + ".trapdoor.name.format", centerBlockName);
     }
 
     @Override
@@ -65,11 +64,11 @@ public class TrapdoorBlockItem extends BlockItem
             trapdoorType = TrapdoorType.FULL;
         }
 
-        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".origin.tooltip"));
-        tooltip.add(new TextComponent(""));
-        tooltip.add(new TranslatableComponent(
+        tooltip.add(Component.translatable(Constants.MOD_ID + ".origin.tooltip"));
+        tooltip.add(Component.literal(""));
+        tooltip.add(Component.translatable(
           Constants.MOD_ID + ".trapdoor.type.format",
-          new TranslatableComponent(Constants.MOD_ID + ".trapdoor.type.name." + trapdoorType.getTranslationKeySuffix())
+          Component.translatable(Constants.MOD_ID + ".trapdoor.type.name." + trapdoorType.getTranslationKeySuffix())
         ));
 
         final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
@@ -81,6 +80,6 @@ public class TrapdoorBlockItem extends BlockItem
         final IMateriallyTexturedBlockComponent trapDoorComponent = trapdoorBlock.getComponents().get(0);
         final Block trapDoorBlock = textureData.getTexturedComponents().getOrDefault(trapDoorComponent.getId(), trapDoorComponent.getDefault());
         final Component trapDoorBlockName = BlockUtils.getHoverName(trapDoorBlock);
-        tooltip.add(new TranslatableComponent(Constants.MOD_ID + ".trapdoor.block.format", trapDoorBlockName));
+        tooltip.add(Component.translatable(Constants.MOD_ID + ".trapdoor.block.format", trapDoorBlockName));
     }
 }
