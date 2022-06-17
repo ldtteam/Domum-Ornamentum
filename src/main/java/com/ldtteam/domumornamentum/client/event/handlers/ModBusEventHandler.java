@@ -49,7 +49,7 @@ public class ModBusEventHandler
         event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getPanel().asItem(), new ResourceLocation(Constants.TRAPDOOR_MODEL_OVERRIDE),
           (itemStack, clientLevel, livingEntity, i) -> handleStaticTrapdoorTypeOverride(itemStack)));
         event.enqueueWork(() -> MenuScreens.register(
-          ModContainerTypes.ARCHITECTS_CUTTER,
+          ModContainerTypes.ARCHITECTS_CUTTER.get(),
           ArchitectsCutterScreen::new
         ));
         event.enqueueWork(() -> {

@@ -50,7 +50,7 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
     }
 
     public ArchitectsCutterContainer(int windowIdIn, Inventory playerInventoryIn, final ContainerLevelAccess worldPosCallableIn) {
-        super(ModContainerTypes.ARCHITECTS_CUTTER, windowIdIn);
+        super(ModContainerTypes.ARCHITECTS_CUTTER.get(), windowIdIn);
         this.worldPosCallable = worldPosCallableIn;
         this.world = playerInventoryIn.player.level;
         for (int i = 0; i < MateriallyTexturedBlockManager.getInstance().getMaxTexturableComponentCount(); i++)
@@ -227,7 +227,7 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
 
     @NotNull
     public MenuType<?> getType() {
-        return ModContainerTypes.ARCHITECTS_CUTTER;
+        return ModContainerTypes.ARCHITECTS_CUTTER.get();
     }
 
     @OnlyIn(Dist.CLIENT)
