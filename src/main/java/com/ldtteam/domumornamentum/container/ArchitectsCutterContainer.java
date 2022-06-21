@@ -84,13 +84,12 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
                 final boolean craftingMateriallyTexturedBlock = stack.getItem() instanceof BlockItem blockItem && blockItem.getBlock() instanceof IMateriallyTexturedBlock;
                 final List<IMateriallyTexturedBlockComponent>
                   components = craftingMateriallyTexturedBlock ? Lists.newArrayList(((IMateriallyTexturedBlock) ((BlockItem) stack.getItem()).getBlock()).getComponents()) : Collections.emptyList();
-
+                final int componentSize = craftingMateriallyTexturedBlock ? components.size() : 1;
                 for (int i = 0; i < inventorySlots.size(); i++)
                 {
                     final Slot inputInventorySlot = inventorySlots.get(i);
 
-                    final boolean isRequiredBlock = !craftingMateriallyTexturedBlock ||
-                                                      (i < components.size());
+                    final boolean isRequiredBlock = (i < componentSize);
 
                     if (!inputInventorySlot.getItem().isEmpty() && isRequiredBlock)
                     {
@@ -248,47 +247,44 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
      * inventory and the other inventory(s).
      */
     @NotNull
-    public ItemStack quickMoveStack(@NotNull Player playerIn, int index) {
+    public ItemStack quickMoveStack(@NotNull Player player, int clickedSlot) {
         ItemStack itemstack = ItemStack.EMPTY;
-        Slot slot = this.slots.get(index);
-        if (slot.hasItem()) {
+        Slot slot = this.slots.get(clickedSlot);
+        if (slot != null && slot.hasItem()) {
             ItemStack itemstack1 = slot.getItem();
-            Item item = itemstack1.getItem();
             itemstack = itemstack1.copy();
-            if (index == 1) {
-                item.onCraftedBy(itemstack1, playerIn.level, playerIn);
-                if (!this.moveItemStackTo(itemstack1, 2, 38, true)) {
+            if (clickedSlot == 3) {
+                if (!this.moveItemStackTo(itemstack1, 4, 40, true)) {
                     return ItemStack.EMPTY;
                 }
 
                 slot.onQuickCraft(itemstack1, itemstack);
-            } else if (index == 0) {
-                if (!this.moveItemStackTo(itemstack1, 2, 38, false)) {
+            } else if (clickedSlot > 3) {
+                if (!this.moveItemStackTo(itemstack1, 0, 2, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (this.world.getRecipeManager().getRecipeFor(RecipeType.STONECUTTING, new SimpleContainer(itemstack1), this.world).isPresent()) {
-                if (!this.moveItemStackTo(itemstack1, 0, 1, false)) {
+               else if (clickedSlot < 31) {
+                    if (!this.moveItemStackTo(itemstack1, 31, 40, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (clickedSlot < 40 && !this.moveItemStackTo(itemstack1, 3, 30, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (index < 29) {
-                if (!this.moveItemStackTo(itemstack1, 29, 38, false)) {
-                    return ItemStack.EMPTY;
-                }
-            } else if (index < 38 && !this.moveItemStackTo(itemstack1, 2, 29, false)) {
+            } else if (!this.moveItemStackTo(itemstack1, 4, 40, false)) {
                 return ItemStack.EMPTY;
             }
 
             if (itemstack1.isEmpty()) {
                 slot.set(ItemStack.EMPTY);
+            } else {
+                slot.setChanged();
             }
 
-            slot.setChanged();
             if (itemstack1.getCount() == itemstack.getCount()) {
                 return ItemStack.EMPTY;
             }
 
-            slot.onTake(playerIn, itemstack1);
-            this.broadcastChanges();
+            slot.onTake(player, itemstack1);
         }
 
         return itemstack;
