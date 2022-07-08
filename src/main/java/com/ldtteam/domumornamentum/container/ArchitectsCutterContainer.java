@@ -259,6 +259,8 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
                 }
 
                 slot.onQuickCraft(itemstack1, itemstack);
+                slot.onTake(player, itemstack);
+                return itemstack;
             } else if (clickedSlot > 3) {
                 if (!this.moveItemStackTo(itemstack1, 0, 2, false)) {
                     return ItemStack.EMPTY;
