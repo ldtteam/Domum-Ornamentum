@@ -25,9 +25,9 @@ import com.ldtteam.domumornamentum.datagen.trapdoor.fancy.*;
 import com.ldtteam.domumornamentum.datagen.wall.paper.*;
 import com.ldtteam.domumornamentum.datagen.wall.vanilla.*;
 import com.ldtteam.domumornamentum.util.Constants;
+import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 
 @Mod.EventBusSubscriber(modid = Constants.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModBusEventHandler

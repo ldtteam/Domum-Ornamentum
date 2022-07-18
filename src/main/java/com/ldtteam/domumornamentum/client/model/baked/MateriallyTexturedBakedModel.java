@@ -2,13 +2,12 @@ package com.ldtteam.domumornamentum.client.model.baked;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
-import com.ldtteam.domumornamentum.client.event.handlers.ClientTickEventHandler;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.client.model.properties.ModProperties;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
@@ -18,101 +17,108 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.client.model.data.IModelData;
+import net.minecraftforge.client.ChunkRenderTypeSet;
+import net.minecraftforge.client.RenderTypeGroup;
+import net.minecraftforge.client.model.data.ModelData;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import static com.ldtteam.domumornamentum.util.MaterialTextureDataUtil.generateRandomTextureDataFrom;
 
-public class MateriallyTexturedBakedModel implements BakedModel
-{
-
+public class MateriallyTexturedBakedModel implements BakedModel {
     private static final Logger LOGGER = LogManager.getLogger();
+    private static final RandomSource RANDOM = RandomSource.create();
 
     private final Cache<MaterialTextureData, BakedModel> cache = CacheBuilder.newBuilder()
-        .expireAfterAccess(2, TimeUnit.MINUTES)
-        .concurrencyLevel(4)
-        .maximumSize(10000)
-        .build();
+            .expireAfterAccess(2, TimeUnit.MINUTES)
+            .concurrencyLevel(4)
+            .maximumSize(10000)
+            .build();
 
     private final Cache<Pair<MaterialTextureData, CompoundTag>, BakedModel> itemCache = CacheBuilder.newBuilder()
-                                                                   .expireAfterAccess(2, TimeUnit.MINUTES)
-                                                                   .concurrencyLevel(4)
-                                                                   .maximumSize(10000)
-                                                                   .build();
+            .expireAfterAccess(2, TimeUnit.MINUTES)
+            .concurrencyLevel(4)
+            .maximumSize(10000)
+            .build();
 
     private final BakedModel innerModel;
 
-    private final ItemOverrides overrideList = new OverrideList(this);
-
-    public MateriallyTexturedBakedModel(final BakedModel innerModel) {this.innerModel = innerModel;}
+    public MateriallyTexturedBakedModel(final BakedModel innerModel) {
+        this.innerModel = innerModel;
+    }
 
     @Override
-    public List<BakedQuad> getQuads(
-      @Nullable final BlockState state, @Nullable final Direction side, final RandomSource rand)
-    {
+    public @NotNull List<BakedQuad> getQuads(
+            @Nullable final BlockState state, @Nullable final Direction side, final @NotNull RandomSource rand) {
         return innerModel.getQuads(state, side, rand);
     }
 
-    @NotNull
     @Override
-    public List<BakedQuad> getQuads(@Nullable final BlockState state, @Nullable final Direction side, @NotNull final RandomSource rand, @NotNull final IModelData extraData)
-    {
-        final BakedModel remappedModel = getBakedInnerModelFor(extraData);
-        return remappedModel.getQuads(state, side, rand, extraData);
+    public @NotNull ChunkRenderTypeSet getRenderTypes(@NotNull BlockState state, @NotNull RandomSource rand, @NotNull ModelData data) {
+        if (!data.has(ModProperties.MATERIAL_TEXTURE_PROPERTY)) {
+            return ChunkRenderTypeSet.none();
+        }
+
+        final MaterialTextureData textureData = data.get(ModProperties.MATERIAL_TEXTURE_PROPERTY);
+        if (textureData == null) {
+            return ChunkRenderTypeSet.none();
+        }
+
+        return ChunkRenderTypeSet.union(textureData.getTexturedComponents().values().stream()
+                .map(block -> Minecraft.getInstance().getBlockRenderer().getBlockModel(block.defaultBlockState())
+                        .getRenderTypes(block.defaultBlockState(), rand, ModelData.EMPTY))
+                .toArray(ChunkRenderTypeSet[]::new)
+        );
     }
 
     @Override
-    public boolean useAmbientOcclusion()
-    {
+    public @NotNull List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull RandomSource rand, @NotNull ModelData data, @Nullable RenderType renderType) {
+
+        final BakedModel remappedModel = getBakedInnerModelFor(data, state, renderType);
+        return remappedModel.getQuads(state, side, rand, data, renderType);
+    }
+
+    @Override
+    public boolean useAmbientOcclusion() {
         return innerModel.useAmbientOcclusion();
     }
 
     @Override
-    public boolean isGui3d()
-    {
+    public boolean isGui3d() {
         return innerModel.isGui3d();
     }
 
     @Override
-    public boolean usesBlockLight()
-    {
+    public boolean usesBlockLight() {
         return innerModel.usesBlockLight();
     }
 
     @Override
-    public boolean isCustomRenderer()
-    {
+    public boolean isCustomRenderer() {
         return innerModel.isCustomRenderer();
     }
 
     @Override
-    public TextureAtlasSprite getParticleIcon()
-    {
+    public @NotNull TextureAtlasSprite getParticleIcon() {
         return innerModel.getParticleIcon();
     }
 
     @Override
-    public TextureAtlasSprite getParticleIcon(@NotNull final IModelData modelData)
-    {
-        if (!modelData.hasProperty(ModProperties.MATERIAL_TEXTURE_PROPERTY))
-        {
+    public @NotNull TextureAtlasSprite getParticleIcon(@NotNull final ModelData modelData) {
+        if (!modelData.has(ModProperties.MATERIAL_TEXTURE_PROPERTY)) {
             return getParticleIcon();
         }
 
-        final MaterialTextureData textureData = modelData.getData(ModProperties.MATERIAL_TEXTURE_PROPERTY);
+        final MaterialTextureData textureData = modelData.get(ModProperties.MATERIAL_TEXTURE_PROPERTY);
         if (textureData == null)
             return getParticleIcon();
 
@@ -121,100 +127,152 @@ public class MateriallyTexturedBakedModel implements BakedModel
             return getParticleIcon();
 
         return Minecraft.getInstance().getBlockRenderer().getBlockModel(textureData.getTexturedComponents().get(particleTextureName).defaultBlockState())
-          .getParticleIcon(modelData);
+                .getParticleIcon(modelData);
     }
 
     @Override
-    public ItemOverrides getOverrides()
-    {
-        return this.overrideList;
-    }
-
-    @Override
-    public ItemTransforms getTransforms()
-    {
+    public @NotNull ItemTransforms getTransforms() {
         return this.innerModel.getTransforms();
     }
 
-    private BakedModel getBakedInnerModelFor(final IModelData modelData)
-    {
-        if (!modelData.hasProperty(ModProperties.MATERIAL_TEXTURE_PROPERTY))
-        {
-            return getBakedInnerModelFor(MaterialTextureData.EMPTY);
-        }
-
-        return getBakedInnerModelFor(modelData.getData(ModProperties.MATERIAL_TEXTURE_PROPERTY));
+    @Override
+    public @NotNull ItemOverrides getOverrides() {
+        return ItemOverrides.EMPTY;
     }
 
-    private BakedModel getBakedInnerModelFor(final MaterialTextureData modelData)
-    {
-        try
-        {
+    @Override
+    public @NotNull List<RenderType> getRenderTypes(ItemStack itemStack, boolean fabulous) {
+        if (!(itemStack.getItem() instanceof BlockItem blockItem)) {
+            return Collections.emptyList();
+        }
+
+        MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(itemStack.getOrCreateTagElement("textureData"));
+        if (textureData.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        return getRenderTypes(blockItem, textureData);
+    }
+
+    private List<RenderType> getRenderTypes(BlockItem blockItem, MaterialTextureData textureData) {
+        return getRenderTypes(blockItem.getBlock().defaultBlockState(), RANDOM, ModelData.builder().with(ModProperties.MATERIAL_TEXTURE_PROPERTY, textureData).build()).asList();
+    }
+
+    @Override
+    public @NotNull List<BakedModel> getRenderPasses(ItemStack itemStack, boolean fabulous) {
+        if (!(itemStack.getItem() instanceof BlockItem blockItem)) {
+            return Collections.emptyList();
+        }
+
+        MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(itemStack.getOrCreateTagElement("textureData"));
+        if (textureData.isEmpty()) {
+            textureData = generateRandomTextureDataFrom(itemStack);
+        }
+
+        List<RenderType> renderTypes = getRenderTypes(blockItem, textureData);
+        if (renderTypes.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        MaterialTextureData finalTextureData = textureData;
+        final List<BakedModel> models = new ArrayList<>();
+        renderTypes.stream()
+                .map(type -> getRenderType(type, fabulous))
+                .distinct()
+                .map(type -> new SpecificRenderTypeBakedModelWrapper(
+                        type,
+                        getBakedInnerModelFor(itemStack, finalTextureData, blockItem.getBlock().defaultBlockState(), type)
+                )).forEach(models::add);
+        return models;
+    }
+
+    private BakedModel getBakedInnerModelFor(final ModelData modelData, final BlockState sourceState, final RenderType renderType) {
+        if (!modelData.has(ModProperties.MATERIAL_TEXTURE_PROPERTY)) {
+            return getBakedInnerModelFor(MaterialTextureData.EMPTY, sourceState, renderType);
+        }
+
+        return getBakedInnerModelFor(modelData.get(ModProperties.MATERIAL_TEXTURE_PROPERTY), sourceState, renderType);
+    }
+
+    private BakedModel getBakedInnerModelFor(final MaterialTextureData modelData, final BlockState sourceState, final RenderType renderType) {
+        try {
             return cache.get(modelData, () -> {
                 final RetexturedBakedModelBuilder builder = RetexturedBakedModelBuilder.createFor(
-                  this.innerModel
+                        sourceState,
+                        renderType,
+                        false,
+                        this.innerModel
                 );
 
                 modelData.getTexturedComponents().forEach(builder::with);
 
                 return builder.build();
             });
-        }
-        catch (Exception exception)
-        {
+        } catch (Exception exception) {
             LOGGER.error(String.format("Failed to build baked materially textured model for: %s", modelData), exception);
             return Minecraft.getInstance().getModelManager().getMissingModel();
         }
     }
 
-    private BakedModel getBakedInnerModelFor(final ItemStack stack, final MaterialTextureData textureData,
-      @Nullable final ClientLevel level,
-      @Nullable final LivingEntity entity,
-      final int random)
-    {
-        try
-        {
+    private BakedModel getBakedInnerModelFor(final ItemStack stack,
+                                             final MaterialTextureData textureData,
+                                             final BlockState blockState,
+                                             final RenderType renderType) {
+        try {
             return itemCache.get(
-              Pair.of(textureData, stack.serializeNBT())
-              , () -> {
-                final RetexturedBakedModelBuilder builder = RetexturedBakedModelBuilder.createFor(
-                  this.innerModel,
-                  this.innerModel.getOverrides().resolve(this.innerModel, stack, level, entity, random)
-                );
+                    Pair.of(textureData, stack.serializeNBT())
+                    , () -> {
+                        final RetexturedBakedModelBuilder builder = RetexturedBakedModelBuilder.createFor(
+                                blockState,
+                                renderType,
+                                true,
+                                this.innerModel
+                        );
 
-                textureData.getTexturedComponents().forEach(builder::with);
+                        textureData.getTexturedComponents().forEach(builder::with);
 
-                return builder.build();
-            });
-        }
-        catch (Exception exception)
-        {
+                        return builder.build();
+                    });
+        } catch (Exception exception) {
             LOGGER.error(String.format("Failed to build baked materially textured model for: %s for item: %s", textureData, stack), exception);
             return Minecraft.getInstance().getModelManager().getMissingModel();
         }
     }
 
-    private static class OverrideList extends ItemOverrides {
 
-        private final MateriallyTexturedBakedModel model;
+    private ChunkRenderTypeSet createAdaptedSetForEntity(ChunkRenderTypeSet renderTypes, boolean fabulous) {
+        return ChunkRenderTypeSet.of(
+                renderTypes.asList().stream()
+                        .map(renderType -> getRenderType(renderType, fabulous))
+                        .collect(Collectors.toSet())
+        );
+    }
 
-        private OverrideList(final MateriallyTexturedBakedModel model) {this.model = model;}
-
-        @Nullable
-        @Override
-        public BakedModel resolve(
-          final @NotNull BakedModel model,
-          final ItemStack stack,
-          @Nullable final ClientLevel level,
-          @Nullable final LivingEntity entity,
-          final int random)
-        {
-             MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(stack.getOrCreateTagElement("textureData"));
-            if (textureData.isEmpty()) {
-                textureData = generateRandomTextureDataFrom(stack);
+    public static RenderType getRenderType(RenderType renderType, boolean fabulous) {
+        if (renderType == RenderType.translucent()) {
+            if (!Minecraft.useShaderTransparency()) {
+                return Sheets.translucentCullBlockSheet();
+            } else {
+                return fabulous ? Sheets.translucentCullBlockSheet() : Sheets.translucentItemSheet();
             }
+        } else {
+            return Sheets.cutoutBlockSheet();
+        }
+    }
 
-            return this.model.getBakedInnerModelFor(stack, textureData, level, entity, random);
+    public static RenderType getFabulousRenderType(RenderType renderType) {
+        if (renderType == RenderType.translucent()) {
+            return Sheets.translucentCullBlockSheet();
+        } else {
+            return Sheets.cutoutBlockSheet();
+        }
+    }
+
+    public static RenderType getNoneFabulousRenderType(RenderType renderType) {
+        if (renderType == RenderType.translucent()) {
+            return !Minecraft.useShaderTransparency() ? Sheets.translucentCullBlockSheet() : Sheets.translucentItemSheet();
+        } else {
+            return Sheets.cutoutBlockSheet();
         }
     }
 }

@@ -1,19 +1,14 @@
 package com.ldtteam.domumornamentum.client.model.utils;
 
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import net.minecraft.core.Direction;
-import net.minecraftforge.client.model.pipeline.IVertexConsumer;
 
-public abstract class BaseModelReader implements IVertexConsumer
+public abstract class BaseModelReader implements VertexConsumer
 {
 
-    @Override
-    public VertexFormat getVertexFormat()
-    {
-        return DefaultVertexFormat.BLOCK;
-    }
 
     @Override
     public void setQuadTint(

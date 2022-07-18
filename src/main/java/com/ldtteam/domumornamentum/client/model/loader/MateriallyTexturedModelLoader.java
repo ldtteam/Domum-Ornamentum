@@ -2,39 +2,32 @@ package com.ldtteam.domumornamentum.client.model.loader;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 import com.ldtteam.domumornamentum.client.model.geometry.MateriallyTexturedGeometry;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.client.model.IModelLoader;
-import net.minecraftforge.client.model.ModelLoaderRegistry;
+import net.minecraftforge.client.event.ModelEvent;
+import net.minecraftforge.client.model.geometry.GeometryLoaderManager;
+import net.minecraftforge.client.model.geometry.IGeometryLoader;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-public class MateriallyTexturedModelLoader implements IModelLoader<MateriallyTexturedGeometry>
+public class MateriallyTexturedModelLoader implements IGeometryLoader<MateriallyTexturedGeometry>
 {
 
     @SubscribeEvent
-    public static void onModelRegistry(final ModelRegistryEvent event)
+    public static void onModelRegistry(final ModelEvent.RegisterGeometryLoaders event)
     {
-        ModelLoaderRegistry.registerLoader(new ResourceLocation(Constants.MATERIALLY_TEXTURED_MODEL_LOADER), new MateriallyTexturedModelLoader());
+        event.register(Constants.MATERIALLY_TEXTURED_MODEL_LOADER, new MateriallyTexturedModelLoader());
     }
 
     @Override
-    public void onResourceManagerReload(@NotNull final ResourceManager resourceManager)
-    {
-        //The models clean up their own inner caches, since they are not static.
-    }
-
-    @NotNull
-    @Override
-    public MateriallyTexturedGeometry read(@NotNull final JsonDeserializationContext deserializationContext, final JsonObject modelContents)
-    {
-        final String parent = modelContents.get("parent").getAsString();
+    public MateriallyTexturedGeometry read(JsonObject jsonObject, JsonDeserializationContext deserializationContext) throws JsonParseException {
+        final String parent = jsonObject.get("parent").getAsString();
         final ResourceLocation parentLocation = new ResourceLocation(parent);
 
         return new MateriallyTexturedGeometry(parentLocation);
