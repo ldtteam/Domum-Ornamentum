@@ -3,7 +3,7 @@ license="LGPLv3"
 loaderVersion="[28,)" #mandatory (26 is current forge version)
 [[mods]] #mandatory
 modId="domum_ornamentum" #mandatory
-version="${version}" #mandatory
+version="${file.jarVersion}" #mandatory
 displayName="Domum Ornamentum" #mandatory
 authors="LDTTeam, OrionDevelopment" #optional
 description='''

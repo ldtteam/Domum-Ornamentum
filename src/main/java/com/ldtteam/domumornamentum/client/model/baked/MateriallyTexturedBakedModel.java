@@ -38,13 +38,17 @@ public class MateriallyTexturedBakedModel implements BakedModel {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final RandomSource RANDOM = RandomSource.create();
 
-    private final Cache<MaterialTextureData, BakedModel> cache = CacheBuilder.newBuilder()
+    private record BlockModelCacheKey (MaterialTextureData data, RenderType renderType) { }
+
+    private record ItemModelCacheKey (MaterialTextureData data, RenderType renderType, CompoundTag tag) { }
+
+    private final Cache<BlockModelCacheKey, BakedModel> cache = CacheBuilder.newBuilder()
             .expireAfterAccess(2, TimeUnit.MINUTES)
             .concurrencyLevel(4)
             .maximumSize(10000)
             .build();
 
-    private final Cache<Pair<MaterialTextureData, CompoundTag>, BakedModel> itemCache = CacheBuilder.newBuilder()
+    private final Cache<ItemModelCacheKey, BakedModel> itemCache = CacheBuilder.newBuilder()
             .expireAfterAccess(2, TimeUnit.MINUTES)
             .concurrencyLevel(4)
             .maximumSize(10000)
@@ -196,7 +200,8 @@ public class MateriallyTexturedBakedModel implements BakedModel {
 
     private BakedModel getBakedInnerModelFor(final MaterialTextureData modelData, final BlockState sourceState, final RenderType renderType) {
         try {
-            return cache.get(modelData, () -> {
+            final BlockModelCacheKey key = new BlockModelCacheKey(modelData, renderType);
+            return cache.get(key, () -> {
                 final RetexturedBakedModelBuilder builder = RetexturedBakedModelBuilder.createFor(
                         sourceState,
                         renderType,
@@ -219,8 +224,9 @@ public class MateriallyTexturedBakedModel implements BakedModel {
                                              final BlockState blockState,
                                              final RenderType renderType) {
         try {
+            final ItemModelCacheKey key = new ItemModelCacheKey(textureData, renderType, stack.serializeNBT());
             return itemCache.get(
-                    Pair.of(textureData, stack.serializeNBT())
+                    key
                     , () -> {
                         final RetexturedBakedModelBuilder builder = RetexturedBakedModelBuilder.createFor(
                                 blockState,

@@ -15,8 +15,9 @@ import net.minecraftforge.registries.RegistryObject;
  */
 public final class ModBlockEntityTypes
 {
-    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, Constants.MOD_ID);
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, Constants.MOD_ID);
 
+    @SuppressWarnings({"SuspiciousToArrayCall", "ConstantConditions"}) //Not really true.
     public static RegistryObject<BlockEntityType<BlockEntity>> MATERIALLY_TEXTURED = BLOCK_ENTITIES.register(Constants.BlockEntityTypes.MATERIALLY_RETEXTURABLE,
       () -> BlockEntityType.Builder.of((BlockEntityType.BlockEntitySupplier<BlockEntity>) MateriallyTexturedBlockEntity::new,
         ForgeRegistries.BLOCKS.getValues().stream().filter(IMateriallyTexturedBlock.class::isInstance).toArray(Block[]::new)
@@ -28,10 +29,5 @@ public final class ModBlockEntityTypes
      */
     private ModBlockEntityTypes()
     {
-    }
-
-    static
-    {
-
     }
 }

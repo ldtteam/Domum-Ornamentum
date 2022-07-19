@@ -1,7 +1,7 @@
 package com.ldtteam.domumornamentum.client.model.baked;
 
 import com.google.common.collect.Maps;
-import com.ldtteam.domumornamentum.client.model.utils.ModelUVAdapter;
+import com.ldtteam.domumornamentum.client.model.utils.ModelSpriteQuadTransformer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
@@ -15,6 +15,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.client.model.IQuadTransformer;
 import net.minecraftforge.client.model.data.ModelData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -70,7 +71,7 @@ public class RetexturedBakedModelBuilder
 
        if (!itemStackMode && bakedModel.getRenderTypes(target.defaultBlockState(), RANDOM, ModelData.EMPTY).contains(this.renderType)) {
            return this.with(source, bakedModel);
-       } else if (itemStackMode && bakedModel.getRenderTypes(new ItemStack(target), Minecraft.useShaderTransparency()).contains(getRenderTypeAdapted())) {
+       } else if (itemStackMode && bakedModel.getRenderTypes(new ItemStack(target), Minecraft.useShaderTransparency()).contains(this.renderType)) {
            return this.with(source, bakedModel);
        }
 
@@ -79,14 +80,14 @@ public class RetexturedBakedModelBuilder
 
     public BakedModel build() {
         final SimpleBakedModel.Builder builder = new SimpleBakedModel.Builder(
-                sourceModel.useAmbientOcclusion(this.sourceState, getRenderTypeAdapted()),
+                sourceModel.useAmbientOcclusion(this.sourceState, this.renderType),
                 sourceModel.usesBlockLight(),
                 sourceModel.isGui3d(),
                 sourceModel.getTransforms(),
                 sourceModel.getOverrides()
         );
 
-        this.target.getQuads(null, null, RANDOM, ModelData.EMPTY, getRenderTypeAdapted()).forEach(quad -> {
+        this.target.getQuads(null, null, RANDOM, ModelData.EMPTY, this.renderType).forEach(quad -> {
             if (this.retexturingMaps.containsKey(quad.getSprite().getName()))
             {
                 retexture(quad, null).ifPresent(builder::addUnculledFace);
@@ -95,7 +96,7 @@ public class RetexturedBakedModelBuilder
 
         for (final Direction value : Direction.values())
         {
-            this.target.getQuads(null, value, RANDOM, ModelData.EMPTY, getRenderTypeAdapted()).forEach(quad -> {
+            this.target.getQuads(null, value, RANDOM, ModelData.EMPTY, this.renderType).forEach(quad -> {
                 if (this.retexturingMaps.containsKey(quad.getSprite().getName()))
                 {
                     retexture(quad, value).ifPresent(newQuad -> builder.addCulledFace(value, newQuad));
@@ -122,11 +123,8 @@ public class RetexturedBakedModelBuilder
         final Optional<TextureAtlasSprite> retexturingSprite = this.getTexture(quad, direction);
 
         return retexturingSprite.map(sprite -> {
-            final ModelUVAdapter adapter = new ModelUVAdapter(
-                    quad,
-                    sprite
-            );
-            return adapter.build();
+            final IQuadTransformer quadTransformer = ModelSpriteQuadTransformer.create(sprite);
+            return quadTransformer.process(quad);
         });
     }
 
@@ -160,16 +158,5 @@ public class RetexturedBakedModelBuilder
             return Optional.empty();
 
         return Optional.of(targetQuads.get(0).getSprite());
-    }
-
-    private RenderType getRenderTypeAdapted() {
-        if (!this.itemStackMode)
-            return this.renderType;
-
-        if (renderType == RenderType.translucent()) {
-            return !Minecraft.useShaderTransparency() ? Sheets.translucentCullBlockSheet() : Sheets.translucentItemSheet();
-        } else {
-            return Sheets.cutoutBlockSheet();
-        }
     }
 }

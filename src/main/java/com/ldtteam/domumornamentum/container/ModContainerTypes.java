@@ -8,7 +8,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModContainerTypes
 {
-    public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, Constants.MOD_ID);
+    public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.MENU_TYPES, Constants.MOD_ID);
 
     public static RegistryObject<MenuType<ArchitectsCutterContainer>> ARCHITECTS_CUTTER = CONTAINERS.register("architects_cutter", () -> new MenuType<>(ArchitectsCutterContainer::new));
 

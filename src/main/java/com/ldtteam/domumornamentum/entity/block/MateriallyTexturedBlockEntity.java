@@ -4,15 +4,13 @@ import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.client.model.properties.ModProperties;
 import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraftforge.client.model.data.IModelData;
-import net.minecraftforge.client.model.data.ModelDataMap;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.client.model.data.ModelData;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
@@ -87,10 +85,10 @@ public class MateriallyTexturedBlockEntity extends BlockEntity implements IMater
 
     @NotNull
     @Override
-    public IModelData getModelData()
+    public ModelData getModelData()
     {
-        return new ModelDataMap.Builder()
-          .withInitial(ModProperties.MATERIAL_TEXTURE_PROPERTY, this.textureData)
+        return ModelData.builder()
+          .with(ModProperties.MATERIAL_TEXTURE_PROPERTY, this.textureData)
           .build();
     }
 
