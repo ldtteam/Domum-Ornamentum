@@ -150,27 +150,27 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
         Comparable<PillarShapeType> column_property = state.getValue(column);
         if (column_property == PillarShapeType.PILLAR_COLUMN)
         {
-            if (world.getBlockState(pos.above()).getValue(column)== PillarShapeType.PILLAR_COLUMN)
+            if (isPillarBlock(world.getBlockState(pos.above())) && world.getBlockState(pos.above()).getValue(column)== PillarShapeType.PILLAR_COLUMN)
             {
                 world.setBlockAndUpdate(pos.above(),state.setValue(column,PillarShapeType.PILLAR_BASE));
             }
-            else
+            else if (isPillarBlock(world.getBlockState(pos.above())))
             {
                 world.setBlockAndUpdate(pos.above(),state.setValue(column,PillarShapeType.FULL_PILLAR));
             }
 
-            if (world.getBlockState(pos.below()).getValue(column)== PillarShapeType.PILLAR_COLUMN)
+            if (isPillarBlock(world.getBlockState(pos.below())) && world.getBlockState(pos.below()).getValue(column)== PillarShapeType.PILLAR_COLUMN)
             {
                 world.setBlockAndUpdate(pos.below(),state.setValue(column,PillarShapeType.PILLAR_CAPITAL));
             }
-            else
+            else if (isPillarBlock(world.getBlockState(pos.below())))
             {
                 world.setBlockAndUpdate(pos.below(),state.setValue(column,PillarShapeType.FULL_PILLAR));
             }
         }
         if (isPillarBlock(world.getBlockState(pos.above())))
         {
-            if (column_property == PillarShapeType.PILLAR_BASE && isPillarBlock(world.getBlockState(pos.above())))
+            if (column_property == PillarShapeType.PILLAR_BASE)
             {
                 if (world.getBlockState(pos.above()).getValue(column) == PillarShapeType.PILLAR_COLUMN)
                 {

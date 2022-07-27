@@ -1,4 +1,5 @@
 {
+  "__comment": "Datagen-only lang entries above",
   "block.domum_ornamentum.architectscutter": "Architects cutter",
   "block.domum_ornamentum.beige_bricks": "Beige Bricks",
   "block.domum_ornamentum.beige_stone_bricks": "Beige Stone Bricks",
@@ -118,6 +119,5 @@
   "itemGroup.domum_ornamentum.slabs": "DO - Slabs",
   "itemGroup.domum_ornamentum.stairs": "DO - Stairs",
   "itemGroup.domum_ornamentum.timber_frames": "DO - Framed Blocks",
-  "itemGroup.domum_ornamentum.walls": "DO - Walls",
-  "__comment": "Datagen-only lang entries above"
+  "itemGroup.domum_ornamentum.walls": "DO - Walls"
 }

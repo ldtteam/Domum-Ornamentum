@@ -35,7 +35,7 @@ public class SlabItemModelProvider implements DataProvider
         final String modelLocation = Constants.MOD_ID + ":item/slabs/slab_spec";
 
         modelJson.setParent(modelLocation);
-        modelJson.setLoader(Constants.MATERIALLY_TEXTURED_MODEL_LOADER.toString());
+        modelJson.setLoader(Constants.MOD_ID + ":" + Constants.MATERIALLY_TEXTURED_MODEL_LOADER.toString());
 
         if (ModBlocks.getInstance().getSlab().getRegistryName() == null)
             return;

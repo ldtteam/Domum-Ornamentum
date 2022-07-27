@@ -26,7 +26,7 @@ public class WallBlockModelProvider implements DataProvider
     {
         final BlockModelJson postJson = new BlockModelJson();
 
-        postJson.setLoader(Constants.MATERIALLY_TEXTURED_MODEL_LOADER);
+        postJson.setLoader(Constants.MOD_ID + ":" + Constants.MATERIALLY_TEXTURED_MODEL_LOADER);
         postJson.setParent(new ResourceLocation(Constants.MOD_ID, "block/walls/wall_post_spec").toString());
 
         final String postName = "wall_post.json";
@@ -36,7 +36,7 @@ public class WallBlockModelProvider implements DataProvider
 
         final BlockModelJson onSideJson = new BlockModelJson();
 
-        onSideJson.setLoader(Constants.MATERIALLY_TEXTURED_MODEL_LOADER);
+        onSideJson.setLoader(Constants.MOD_ID + ":" + Constants.MATERIALLY_TEXTURED_MODEL_LOADER);
         onSideJson.setParent(new ResourceLocation(Constants.MOD_ID, "block/walls/wall_side_spec").toString());
 
         final String onSideName = "wall_side.json";
@@ -46,7 +46,7 @@ public class WallBlockModelProvider implements DataProvider
 
         final BlockModelJson onSideTallJson = new BlockModelJson();
 
-        onSideTallJson.setLoader(Constants.MATERIALLY_TEXTURED_MODEL_LOADER);
+        onSideTallJson.setLoader(Constants.MOD_ID + ":" + Constants.MATERIALLY_TEXTURED_MODEL_LOADER);
         onSideTallJson.setParent(new ResourceLocation(Constants.MOD_ID, "block/walls/wall_side_tall_spec").toString());
 
         final String onSideTallName = "wall_side_tall.json";

@@ -26,7 +26,7 @@ public class SlabBlockModelProvider implements DataProvider
     {
         final BlockModelJson fullJson = new BlockModelJson();
 
-        fullJson.setLoader(Constants.MATERIALLY_TEXTURED_MODEL_LOADER);
+        fullJson.setLoader(Constants.MOD_ID + ":" + Constants.MATERIALLY_TEXTURED_MODEL_LOADER);
         fullJson.setParent(new ResourceLocation(Constants.MOD_ID, "block/slabs/slab_full_spec").toString());
 
         final String fullName = "slab_full.json";
@@ -36,7 +36,7 @@ public class SlabBlockModelProvider implements DataProvider
 
         final BlockModelJson lowerJson = new BlockModelJson();
 
-        lowerJson.setLoader(Constants.MATERIALLY_TEXTURED_MODEL_LOADER);
+        lowerJson.setLoader(Constants.MOD_ID + ":" + Constants.MATERIALLY_TEXTURED_MODEL_LOADER);
         lowerJson.setParent(new ResourceLocation(Constants.MOD_ID, "block/slabs/slab_lower_spec").toString());
 
         final String lowerName = "slab_lower.json";
@@ -46,7 +46,7 @@ public class SlabBlockModelProvider implements DataProvider
 
         final BlockModelJson upperJson = new BlockModelJson();
 
-        upperJson.setLoader(Constants.MATERIALLY_TEXTURED_MODEL_LOADER);
+        upperJson.setLoader(Constants.MOD_ID + ":" + Constants.MATERIALLY_TEXTURED_MODEL_LOADER);
         upperJson.setParent(new ResourceLocation(Constants.MOD_ID, "block/slabs/slab_upper_spec").toString());
 
         final String upperName = "slab_upper.json";

@@ -35,7 +35,7 @@ public class WallItemModelProvider implements DataProvider
         final String modelLocation = Constants.MOD_ID + ":item/walls/wall_spec";
 
         modelJson.setParent(modelLocation);
-        modelJson.setLoader(Constants.MATERIALLY_TEXTURED_MODEL_LOADER.toString());
+        modelJson.setLoader(Constants.MOD_ID + ":" + Constants.MATERIALLY_TEXTURED_MODEL_LOADER.toString());
 
         if (ModBlocks.getInstance().getWall().getRegistryName() == null)
             return;

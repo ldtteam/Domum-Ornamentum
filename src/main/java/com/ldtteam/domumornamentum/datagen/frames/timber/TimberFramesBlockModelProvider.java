@@ -31,7 +31,7 @@ public class TimberFramesBlockModelProvider implements DataProvider
         {
             final BlockModelJson modelJson = new BlockModelJson();
 
-            modelJson.setLoader(Constants.MATERIALLY_TEXTURED_MODEL_LOADER.toString());
+            modelJson.setLoader(Constants.MOD_ID + ":" + Constants.MATERIALLY_TEXTURED_MODEL_LOADER.toString());
             modelJson.setParent(new ResourceLocation(Constants.MOD_ID, "block/timber_frames/" + Objects.requireNonNull(timberFrame.getRegistryName()).getPath() + "_spec").toString());
 
             final String name = Objects.requireNonNull(timberFrame.getRegistryName()).getPath() + ".json";

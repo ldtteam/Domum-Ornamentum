@@ -232,7 +232,7 @@ public class MateriallyTexturedBakedModel implements BakedModel {
                                 blockState,
                                 renderType,
                                 true,
-                                this.innerModel
+                                this.innerModel.getOverrides().resolve(this.innerModel, stack, null, null, 0)
                         );
 
                         textureData.getTexturedComponents().forEach(builder::with);

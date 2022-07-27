@@ -53,7 +53,7 @@ public class PanelItemModelSpecProvider implements DataProvider
                   .put(Constants.TRAPDOOR_MODEL_OVERRIDE, (float) i)
                   .build()
                 ),
-                Constants.MOD_ID + ":block/panels/panel_" + value.getSerializedName()
+                Constants.MOD_ID + ":block/panels/panel_" + value.getSerializedName() + "_spec"
               )
             );
         }

@@ -130,7 +130,12 @@ public class GlobalTagProvider extends BlockTagsProvider
           Blocks.CHISELED_DEEPSLATE,
           Blocks.DEEPSLATE_BRICKS,
           Blocks.POLISHED_DEEPSLATE,
-          Blocks.COBBLED_DEEPSLATE
+          Blocks.COBBLED_DEEPSLATE,
+          Blocks.CRACKED_DEEPSLATE_BRICKS,
+          Blocks.DEEPSLATE_TILES,
+          Blocks.CRACKED_DEEPSLATE_TILES,
+          Blocks.CALCITE,
+          Blocks.TUFF
         )
           .addTags(
             ModTags.EXTRA_BLOCKS,

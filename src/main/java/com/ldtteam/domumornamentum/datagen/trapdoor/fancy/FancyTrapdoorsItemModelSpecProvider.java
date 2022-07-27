@@ -53,7 +53,7 @@ public class FancyTrapdoorsItemModelSpecProvider implements DataProvider
                   .put(Constants.TRAPDOOR_MODEL_OVERRIDE, (float) i)
                   .build()
                 ),
-                Constants.MOD_ID + ":block/trapdoors/fancy/trapdoor_" + value.getSerializedName()
+                Constants.MOD_ID + ":block/trapdoors/fancy/trapdoor_" + value.getSerializedName() + "_spec"
               )
             );
         }

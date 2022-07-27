@@ -26,7 +26,7 @@ public class FenceGateBlockModelProvider implements DataProvider
     {
         final BlockModelJson gateJson = new BlockModelJson();
 
-        gateJson.setLoader(Constants.MATERIALLY_TEXTURED_MODEL_LOADER);
+        gateJson.setLoader(Constants.MOD_ID + ":" + Constants.MATERIALLY_TEXTURED_MODEL_LOADER);
         gateJson.setParent(new ResourceLocation(Constants.MOD_ID, "block/fence_gates/fence_gate_spec").toString());
 
         final String gateName = "fence_gate.json";
@@ -36,7 +36,7 @@ public class FenceGateBlockModelProvider implements DataProvider
 
         final BlockModelJson gateWallJson = new BlockModelJson();
 
-        gateWallJson.setLoader(Constants.MATERIALLY_TEXTURED_MODEL_LOADER);
+        gateWallJson.setLoader(Constants.MOD_ID + ":" + Constants.MATERIALLY_TEXTURED_MODEL_LOADER);
         gateWallJson.setParent(new ResourceLocation(Constants.MOD_ID, "block/fence_gates/fence_gate_wall_spec").toString());
 
         final String gateWallName = "fence_gate_wall.json";
@@ -46,7 +46,7 @@ public class FenceGateBlockModelProvider implements DataProvider
 
         final BlockModelJson openGateJson = new BlockModelJson();
 
-        openGateJson.setLoader(Constants.MATERIALLY_TEXTURED_MODEL_LOADER);
+        openGateJson.setLoader(Constants.MOD_ID + ":" + Constants.MATERIALLY_TEXTURED_MODEL_LOADER);
         openGateJson.setParent(new ResourceLocation(Constants.MOD_ID, "block/fence_gates/fence_gate_open_spec").toString());
 
         final String openGateName = "fence_gate_open.json";
@@ -56,7 +56,7 @@ public class FenceGateBlockModelProvider implements DataProvider
 
         final BlockModelJson openWallGateJson = new BlockModelJson();
 
-        openWallGateJson.setLoader(Constants.MATERIALLY_TEXTURED_MODEL_LOADER);
+        openWallGateJson.setLoader(Constants.MOD_ID + ":" + Constants.MATERIALLY_TEXTURED_MODEL_LOADER);
         openWallGateJson.setParent(new ResourceLocation(Constants.MOD_ID, "block/fence_gates/fence_gate_wall_open_spec").toString());
 
         final String openWallGateName = "fence_gate_wall_open.json";

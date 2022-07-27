@@ -1,0 +1,4 @@
+{
+  "parent": "domum_ornamentum:block/doors/door_waffle_top_right_spec",
+  "loader": "domum_ornamentum:materially_textured"
+}

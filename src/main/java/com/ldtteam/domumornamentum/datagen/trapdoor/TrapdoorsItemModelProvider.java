@@ -46,7 +46,7 @@ public class TrapdoorsItemModelProvider implements DataProvider
         final String modelLocation = Constants.MOD_ID + ":item/" + name + "_spec";
 
         modelJson.setParent(modelLocation);
-        modelJson.setLoader(Constants.MATERIALLY_TEXTURED_MODEL_LOADER);
+        modelJson.setLoader(Constants.MOD_ID + ":" + Constants.MATERIALLY_TEXTURED_MODEL_LOADER);
         DataProvider.saveStable(cache, DataGeneratorConstants.serialize(modelJson), generator.getOutputFolder().resolve(DataGeneratorConstants.ITEM_MODEL_DIR).resolve(name + ".json"));
     }
 

@@ -1,1 +1,19 @@
-{"type":"minecraft:block","pools":[{"conditions":[{"condition":"minecraft:survives_explosion"}],"rolls":1,"entries":[{"type":"minecraft:item","name":"domum_ornamentum:beige_stone_bricks"}]}]}
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "domum_ornamentum:beige_stone_bricks"
+        }
+      ],
+      "rolls": 1
+    }
+  ]
+}

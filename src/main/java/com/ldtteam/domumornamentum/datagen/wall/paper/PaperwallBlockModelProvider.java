@@ -29,7 +29,7 @@ public class PaperwallBlockModelProvider implements DataProvider
     {
         final BlockModelJson postJson = new BlockModelJson();
 
-        postJson.setLoader(Constants.MATERIALLY_TEXTURED_MODEL_LOADER.toString());
+        postJson.setLoader(Constants.MOD_ID + ":" + Constants.MATERIALLY_TEXTURED_MODEL_LOADER.toString());
         postJson.setParent(new ResourceLocation(Constants.MOD_ID, "block/paperwalls/blockpaperwall_post_spec").toString());
 
         final String postName = "blockpaperwall_post.json";
@@ -41,7 +41,7 @@ public class PaperwallBlockModelProvider implements DataProvider
         {
             final BlockModelJson onSideJson = new BlockModelJson();
 
-            onSideJson.setLoader(Constants.MATERIALLY_TEXTURED_MODEL_LOADER.toString());
+            onSideJson.setLoader(Constants.MOD_ID + ":" + Constants.MATERIALLY_TEXTURED_MODEL_LOADER.toString());
             onSideJson.setParent(new ResourceLocation(Constants.MOD_ID, "block/paperwalls/blockpaperwall_side_" + possibleValue.name().toLowerCase(Locale.ROOT) + "_spec").toString());
 
             final String onSideName = "blockpaperwall_" + possibleValue.name().toLowerCase(Locale.ROOT) + "_side.json";
@@ -52,7 +52,7 @@ public class PaperwallBlockModelProvider implements DataProvider
 
             final BlockModelJson offSideJson = new BlockModelJson();
 
-            offSideJson.setLoader(Constants.MATERIALLY_TEXTURED_MODEL_LOADER.toString());
+            offSideJson.setLoader(Constants.MOD_ID + ":" + Constants.MATERIALLY_TEXTURED_MODEL_LOADER.toString());
             offSideJson.setParent(new ResourceLocation(Constants.MOD_ID, "block/paperwalls/blockpaperwall_side_off_" + possibleValue.name().toLowerCase(Locale.ROOT) + "_spec").toString());
 
             final String offSideName = "blockpaperwall_off_" + possibleValue.name().toLowerCase(Locale.ROOT) + "_side.json";

@@ -47,8 +47,6 @@ public class MateriallyTexturedGeometry implements IUnbakedGeometry<MateriallyTe
         return new MateriallyTexturedBakedModel(innerBakedModel);
     }
 
-
-
     @Override
     public Collection<Material> getMaterials(
       final IGeometryBakingContext owner, final Function<ResourceLocation, UnbakedModel> modelGetter, final Set<Pair<String, String>> missingTextureErrors)

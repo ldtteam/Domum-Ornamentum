@@ -29,7 +29,7 @@ public class FenceBlockModelProvider implements DataProvider
     {
         final BlockModelJson postJson = new BlockModelJson();
 
-        postJson.setLoader(Constants.MATERIALLY_TEXTURED_MODEL_LOADER);
+        postJson.setLoader(Constants.MOD_ID + ":" + Constants.MATERIALLY_TEXTURED_MODEL_LOADER);
         postJson.setParent(new ResourceLocation(Constants.MOD_ID, "block/fences/fence_post_spec").toString());
 
         final String postName = "fence_post.json";
@@ -39,7 +39,7 @@ public class FenceBlockModelProvider implements DataProvider
 
         final BlockModelJson onSideJson = new BlockModelJson();
 
-        onSideJson.setLoader(Constants.MATERIALLY_TEXTURED_MODEL_LOADER);
+        onSideJson.setLoader(Constants.MOD_ID + ":" + Constants.MATERIALLY_TEXTURED_MODEL_LOADER);
         onSideJson.setParent(new ResourceLocation(Constants.MOD_ID, "block/fences/fence_side_spec").toString());
 
         final String onSideName = "fence_side.json";

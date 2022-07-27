@@ -37,7 +37,7 @@ public class StairsBlockModelProvider implements DataProvider
             {
                 final BlockModelJson modelJson = new BlockModelJson();
 
-                modelJson.setLoader(Constants.MATERIALLY_TEXTURED_MODEL_LOADER.toString());
+                modelJson.setLoader(Constants.MOD_ID + ":" + Constants.MATERIALLY_TEXTURED_MODEL_LOADER.toString());
                 modelJson.setParent(new ResourceLocation(Constants.MOD_ID, "block/stairs/" + shapeName + "_spec").toString());
 
                 final String name = shapeName + ".json";
