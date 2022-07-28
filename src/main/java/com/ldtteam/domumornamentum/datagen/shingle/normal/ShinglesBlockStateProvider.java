@@ -90,9 +90,9 @@ public class ShinglesBlockStateProvider implements DataProvider
         {
             if (shape == StairsShape.STRAIGHT)
             {
-                return 0;
+                return 180;
             }
-            return 90;
+            return 270;
         }
         else
         {
@@ -113,10 +113,10 @@ public class ShinglesBlockStateProvider implements DataProvider
     {
         return switch (facing)
                  {
-                     default -> 0;
-                     case SOUTH -> 90;
-                     case WEST -> 180;
-                     case NORTH -> 270;
+                     default -> 180;
+                     case SOUTH -> 270;
+                     case WEST -> 0;
+                     case NORTH -> 90;
                  };
     }
 }

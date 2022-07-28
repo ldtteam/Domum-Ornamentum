@@ -3,49 +3,52 @@
   "variants": {
     "facing=east,shape=inner_left,half=bottom": {
       "model": "domum_ornamentum:block/shingle/concave",
-      "y": 90
+      "y": 270
     },
     "facing=east,shape=inner_left,half=top": {
       "model": "domum_ornamentum:block/shingle/concave",
-      "x": 180
+      "x": 180,
+      "y": 360
     },
     "facing=east,shape=inner_right,half=bottom": {
       "model": "domum_ornamentum:block/shingle/concave",
-      "y": 180
+      "y": 360
     },
     "facing=east,shape=inner_right,half=top": {
       "model": "domum_ornamentum:block/shingle/concave",
       "x": 180,
-      "y": 90
+      "y": 450
     },
     "facing=east,shape=outer_left,half=bottom": {
       "model": "domum_ornamentum:block/shingle/convex",
-      "y": 90
+      "y": 270
     },
     "facing=east,shape=outer_left,half=top": {
       "model": "domum_ornamentum:block/shingle/convex",
-      "x": 180
+      "x": 180,
+      "y": 360
     },
     "facing=east,shape=outer_right,half=bottom": {
       "model": "domum_ornamentum:block/shingle/convex",
-      "y": 180
+      "y": 360
     },
     "facing=east,shape=outer_right,half=top": {
       "model": "domum_ornamentum:block/shingle/convex",
       "x": 180,
-      "y": 90
+      "y": 450
     },
     "facing=east,shape=straight,half=bottom": {
       "model": "domum_ornamentum:block/shingle/straight",
-      "y": 180
+      "y": 360
     },
     "facing=east,shape=straight,half=top": {
       "model": "domum_ornamentum:block/shingle/straight",
-      "x": 180
+      "x": 180,
+      "y": 360
     },
     "facing=north,shape=inner_left,half=bottom": {
       "model": "domum_ornamentum:block/shingle/concave",
-      "y": 360
+      "y": 180
     },
     "facing=north,shape=inner_left,half=top": {
       "model": "domum_ornamentum:block/shingle/concave",
@@ -54,7 +57,7 @@
     },
     "facing=north,shape=inner_right,half=bottom": {
       "model": "domum_ornamentum:block/shingle/concave",
-      "y": 450
+      "y": 270
     },
     "facing=north,shape=inner_right,half=top": {
       "model": "domum_ornamentum:block/shingle/concave",
@@ -63,7 +66,7 @@
     },
     "facing=north,shape=outer_left,half=bottom": {
       "model": "domum_ornamentum:block/shingle/convex",
-      "y": 360
+      "y": 180
     },
     "facing=north,shape=outer_left,half=top": {
       "model": "domum_ornamentum:block/shingle/convex",
@@ -72,7 +75,7 @@
     },
     "facing=north,shape=outer_right,half=bottom": {
       "model": "domum_ornamentum:block/shingle/convex",
-      "y": 450
+      "y": 270
     },
     "facing=north,shape=outer_right,half=top": {
       "model": "domum_ornamentum:block/shingle/convex",
@@ -81,7 +84,7 @@
     },
     "facing=north,shape=straight,half=bottom": {
       "model": "domum_ornamentum:block/shingle/straight",
-      "y": 450
+      "y": 270
     },
     "facing=north,shape=straight,half=top": {
       "model": "domum_ornamentum:block/shingle/straight",
@@ -90,52 +93,52 @@
     },
     "facing=south,shape=inner_left,half=bottom": {
       "model": "domum_ornamentum:block/shingle/concave",
-      "y": 180
+      "y": 360
     },
     "facing=south,shape=inner_left,half=top": {
       "model": "domum_ornamentum:block/shingle/concave",
       "x": 180,
-      "y": 90
+      "y": 450
     },
     "facing=south,shape=inner_right,half=bottom": {
       "model": "domum_ornamentum:block/shingle/concave",
-      "y": 270
+      "y": 450
     },
     "facing=south,shape=inner_right,half=top": {
       "model": "domum_ornamentum:block/shingle/concave",
       "x": 180,
-      "y": 180
+      "y": 540
     },
     "facing=south,shape=outer_left,half=bottom": {
       "model": "domum_ornamentum:block/shingle/convex",
-      "y": 180
+      "y": 360
     },
     "facing=south,shape=outer_left,half=top": {
       "model": "domum_ornamentum:block/shingle/convex",
       "x": 180,
-      "y": 90
+      "y": 450
     },
     "facing=south,shape=outer_right,half=bottom": {
       "model": "domum_ornamentum:block/shingle/convex",
-      "y": 270
+      "y": 450
     },
     "facing=south,shape=outer_right,half=top": {
       "model": "domum_ornamentum:block/shingle/convex",
       "x": 180,
-      "y": 180
+      "y": 540
     },
     "facing=south,shape=straight,half=bottom": {
       "model": "domum_ornamentum:block/shingle/straight",
-      "y": 270
+      "y": 450
     },
     "facing=south,shape=straight,half=top": {
       "model": "domum_ornamentum:block/shingle/straight",
       "x": 180,
-      "y": 90
+      "y": 450
     },
     "facing=west,shape=inner_left,half=bottom": {
       "model": "domum_ornamentum:block/shingle/concave",
-      "y": 270
+      "y": 90
     },
     "facing=west,shape=inner_left,half=top": {
       "model": "domum_ornamentum:block/shingle/concave",
@@ -144,7 +147,7 @@
     },
     "facing=west,shape=inner_right,half=bottom": {
       "model": "domum_ornamentum:block/shingle/concave",
-      "y": 360
+      "y": 180
     },
     "facing=west,shape=inner_right,half=top": {
       "model": "domum_ornamentum:block/shingle/concave",
@@ -153,7 +156,7 @@
     },
     "facing=west,shape=outer_left,half=bottom": {
       "model": "domum_ornamentum:block/shingle/convex",
-      "y": 270
+      "y": 90
     },
     "facing=west,shape=outer_left,half=top": {
       "model": "domum_ornamentum:block/shingle/convex",
@@ -162,7 +165,7 @@
     },
     "facing=west,shape=outer_right,half=bottom": {
       "model": "domum_ornamentum:block/shingle/convex",
-      "y": 360
+      "y": 180
     },
     "facing=west,shape=outer_right,half=top": {
       "model": "domum_ornamentum:block/shingle/convex",
@@ -171,7 +174,7 @@
     },
     "facing=west,shape=straight,half=bottom": {
       "model": "domum_ornamentum:block/shingle/straight",
-      "y": 360
+      "y": 180
     },
     "facing=west,shape=straight,half=top": {
       "model": "domum_ornamentum:block/shingle/straight",
