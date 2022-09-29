@@ -2,6 +2,7 @@ package com.ldtteam.domumornamentum.block.decorative;
 
 import com.ldtteam.domumornamentum.block.AbstractBlock;
 import com.ldtteam.domumornamentum.block.types.BrickType;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.Material;
 
 /**
@@ -29,7 +30,7 @@ public class BrickBlock extends AbstractBlock<BrickBlock>
      */
     public BrickBlock(final BrickType type)
     {
-        super(Properties.of(Material.WOOD).strength(BLOCK_HARDNESS, RESISTANCE));
+        super(Properties.of(Material.WOOD).strength(BLOCK_HARDNESS, RESISTANCE).sound(SoundType.STONE));
         this.type = type;
     }
 
