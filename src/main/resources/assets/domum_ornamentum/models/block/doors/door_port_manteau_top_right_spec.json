@@ -3,7 +3,7 @@
 	"ambientocclusion": false,
 	"textures": {
 		"0": "block/oak_planks",
-		"1": "block/acacia_planks",
+		"1": "block/oak_planks",
 		"2": "block/iron_block",
 		"particle": "block/oak_planks"
 	},

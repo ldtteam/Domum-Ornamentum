@@ -73,6 +73,7 @@ public class GlobalTagProvider extends BlockTagsProvider
           Blocks.WAXED_WEATHERED_COPPER,
           Blocks.OXIDIZED_COPPER,
           Blocks.WAXED_OXIDIZED_COPPER,
+          Blocks.CUT_COPPER,
           Blocks.WAXED_CUT_COPPER,
           Blocks.EXPOSED_CUT_COPPER,
           Blocks.WAXED_EXPOSED_CUT_COPPER,
