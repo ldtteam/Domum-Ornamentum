@@ -82,6 +82,7 @@ public class GlobalTagProvider extends BlockTagsProvider
           Blocks.WAXED_OXIDIZED_CUT_COPPER);
 
         this.tag(ModTags.GLOBAL_DEFAULT).add(
+          Blocks.CALCITE,
           Blocks.HAY_BLOCK,
           Blocks.BLACKSTONE,
           Blocks.GILDED_BLACKSTONE,
