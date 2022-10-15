@@ -52,7 +52,11 @@ public class WallComponentTagProvider extends BlockTagsProvider
           Blocks.POLISHED_DIORITE,
           Blocks.POLISHED_GRANITE,
           Blocks.SMOOTH_SANDSTONE,
-          Blocks.CUT_SANDSTONE
+          Blocks.CUT_SANDSTONE,
+          Blocks.QUARTZ_BLOCK,
+          Blocks.QUARTZ_BRICKS,
+          Blocks.QUARTZ_PILLAR,
+          Blocks.CHISELED_QUARTZ_BLOCK
         )
           .addTags(
             ModTags.EXTRA_BLOCKS,
