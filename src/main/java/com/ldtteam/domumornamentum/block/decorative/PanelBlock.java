@@ -171,6 +171,7 @@ public class PanelBlock extends AbstractPanelBlockTrapdoor<PanelBlock> implement
 
                       jsonObject.addProperty("block", Objects.requireNonNull(getRegistryName(getBlock())).toString());
                       jsonObject.addProperty("nbt", tag.toString());
+                      jsonObject.addProperty("count", COMPONENTS.size() * 4);
                   }
 
                   @Override
