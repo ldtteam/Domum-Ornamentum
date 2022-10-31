@@ -1,0 +1,23 @@
+{
+  "credit": "Made with Blockbench by Shindria",
+  "parent": "block/cube_all",
+  "textures": {
+    "capital": "block/oak_planks",
+    "column": "block/oak_planks",
+    "base": "block/oak_planks",
+    "particle": "block/oak_planks"
+  },
+  "elements": [
+		{
+			"name": "Body",
+			"from": [3, 0, 3],
+			"to": [13, 16, 13],
+			"faces": {
+				"north": {"uv": [3, 0, 13, 16], "texture": "#column"},
+				"east": {"uv": [3, 0, 13, 16], "texture": "#column"},
+				"south": {"uv": [3, 0, 13, 16], "texture": "#column"},
+				"west": {"uv": [3, 0, 13, 16], "texture": "#column"}
+			}
+		}
+	]
+}

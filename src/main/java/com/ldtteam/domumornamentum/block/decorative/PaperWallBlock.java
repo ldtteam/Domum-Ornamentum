@@ -57,11 +57,6 @@ public class PaperWallBlock extends AbstractBlockPane<PaperWallBlock> implements
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
 
     /**
-     * This block's name.
-     */
-    public static final String                      BLOCK_NAME     = "blockpaperwall";
-
-    /**
      * The hardness this block has.
      */
     private static final float                      BLOCK_HARDNESS = 3F;

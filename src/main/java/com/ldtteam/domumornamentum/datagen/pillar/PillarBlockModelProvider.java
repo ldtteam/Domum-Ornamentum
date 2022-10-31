@@ -3,7 +3,6 @@ package com.ldtteam.domumornamentum.datagen.pillar;
 import com.ldtteam.datagenerators.models.block.BlockModelJson;
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.decorative.PillarBlock;
-import com.ldtteam.domumornamentum.block.decorative.TimberFrameBlock;
 import com.ldtteam.domumornamentum.block.types.PillarShapeType;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
@@ -30,17 +29,20 @@ public class PillarBlockModelProvider implements DataProvider
     @Override
     public void run(@NotNull CachedOutput cache) throws IOException
     {
-        for (final PillarShapeType shapeType : PillarShapeType.values())
+        for (final PillarBlock type : ModBlocks.getInstance().getPillars())
         {
-            final BlockModelJson modelJson = new BlockModelJson();
+            for (final PillarShapeType shapeType : PillarShapeType.values())
+            {
+                final BlockModelJson modelJson = new BlockModelJson();
 
-            modelJson.setLoader(Constants.MOD_ID + ":" + Constants.MATERIALLY_TEXTURED_MODEL_LOADER.toString());
-            modelJson.setParent(new ResourceLocation(Constants.MOD_ID, "block/pillars/" + shapeType.name().toLowerCase(Locale.ROOT) + "_spec").toString());
+                modelJson.setLoader(Constants.MOD_ID + ":" + Constants.MATERIALLY_TEXTURED_MODEL_LOADER);
+                modelJson.setParent(new ResourceLocation(Constants.MOD_ID, "block/pillars/" + type.getRegistryName().getPath() + "_" + shapeType.name().toLowerCase(Locale.ROOT) + "_spec").toString());
 
-            final String name = shapeType.name().toLowerCase(Locale.ROOT) + ".json";
-            final Path saveFile = this.generator.getOutputFolder().resolve(DataGeneratorConstants.PILLAR_BLOCK_MODELS_DIR).resolve(name);
+                final String name = type.getRegistryName().getPath() + "/" + shapeType.name().toLowerCase(Locale.ROOT) + ".json";
+                final Path saveFile = this.generator.getOutputFolder().resolve(DataGeneratorConstants.PILLAR_BLOCK_MODELS_DIR).resolve(name);
 
-            DataProvider.saveStable(cache, DataGeneratorConstants.serialize(modelJson), saveFile);
+                DataProvider.saveStable(cache, DataGeneratorConstants.serialize(modelJson), saveFile);
+            }
         }
     }
 

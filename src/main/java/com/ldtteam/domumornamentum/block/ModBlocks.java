@@ -54,7 +54,7 @@ public final class ModBlocks implements IModBlocks
     private static       RegistryObject<BarrelBlock>     STANDING_BARREL;
     private static       RegistryObject<BarrelBlock>      LAYING_BARREL;
     private static final List<RegistryObject<BrickBlock>> BRICK = new ArrayList<>();
-    private static       RegistryObject<PillarBlock>      PILLAR ;
+    private static final List<RegistryObject<PillarBlock>> PILLARS = new ArrayList<>();
 
     private static RegistryObject<FenceBlock>     FENCE;
     private static RegistryObject<FenceGateBlock> FENCE_GATE;
@@ -116,9 +116,9 @@ public final class ModBlocks implements IModBlocks
     }
 
     @Override
-    public PillarBlock getPillar()
+    public List<PillarBlock> getPillars()
     {
-        return ModBlocks.PILLAR.get();
+        return ModBlocks.PILLARS.stream().map(RegistryObject::get).collect(Collectors.toList());
     }
 
     @Override
@@ -226,7 +226,10 @@ public final class ModBlocks implements IModBlocks
         SHINGLE = register("shingle", ShingleBlock::new, b -> new ShingleBlockItem(b, new Item.Properties().tab(ModCreativeTabs.GENERAL)));
         SHINGLE_SLAB = register("shingle_slab", ShingleSlabBlock::new, b -> new ShingleSlabBlockItem(b, new Item.Properties().tab(ModCreativeTabs.GENERAL)));
         PAPER_WALL = register("blockpaperwall", PaperWallBlock::new, b -> new PaperwallBlockItem(b, new Item.Properties().tab(ModCreativeTabs.GENERAL)));
-        PILLAR = register("blockpillar", PillarBlock::new, b -> new PillarBlockItem(b, new Item.Properties().tab(ModCreativeTabs.GENERAL)));
+
+        PILLARS.add(register("blockpillar", PillarBlock::new, b -> new PillarBlockItem(b, new Item.Properties().tab(ModCreativeTabs.GENERAL))));
+        PILLARS.add(register("blockypillar", PillarBlock::new, b -> new PillarBlockItem(b, new Item.Properties().tab(ModCreativeTabs.GENERAL))));
+        PILLARS.add(register("squarepillar", PillarBlock::new, b -> new PillarBlockItem(b, new Item.Properties().tab(ModCreativeTabs.GENERAL))));
 
         for (final ExtraBlockType blockType : ExtraBlockType.values())
         {

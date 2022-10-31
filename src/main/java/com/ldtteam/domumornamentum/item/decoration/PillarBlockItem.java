@@ -39,7 +39,7 @@ public class PillarBlockItem extends BlockItem
         final Block columnBlock = textureData.getTexturedComponents().getOrDefault(columnComponent.getId(), columnComponent.getDefault());
         final Component columnBlockName = BlockUtils.getHoverName(columnBlock);
 
-        return Component.translatable(Constants.MOD_ID + ".pillar.name.format", columnBlockName);
+        return Component.translatable(Constants.MOD_ID + "." + ((PillarBlock) getBlock()).getRegistryName().getPath() + ".name.format", columnBlockName);
     }
 
     @Override

@@ -6,6 +6,7 @@ import com.ldtteam.datagenerators.models.XYZDoubleListJson;
 import com.ldtteam.datagenerators.models.XYZIntListJson;
 import com.ldtteam.datagenerators.models.item.ItemModelJson;
 import com.ldtteam.domumornamentum.block.ModBlocks;
+import com.ldtteam.domumornamentum.block.decorative.PillarBlock;
 import com.ldtteam.domumornamentum.block.types.PillarShapeType;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
@@ -31,18 +32,20 @@ public class PillarItemModelProvider implements DataProvider
     @Override
     public void run(@NotNull CachedOutput cache) throws IOException
     {
-        final ItemModelJson modelJson = new ItemModelJson();
-        modelJson.setDisplay(getDisplay());
+        for (final PillarBlock pillar : ModBlocks.getInstance().getPillars())
+        {
+            final ItemModelJson modelJson = new ItemModelJson();
+            modelJson.setDisplay(getDisplay());
 
-        final String modelLocation = Constants.MOD_ID + ":block/pillars/" + PillarShapeType.FULL_PILLAR.name().toLowerCase(Locale.ROOT);
+            final String name = pillar.getRegistryName().getPath();
+            final String modelLocation = Constants.MOD_ID + ":block/pillars/" + name + "/" + PillarShapeType.FULL_PILLAR.name().toLowerCase(Locale.ROOT);
 
-        modelJson.setParent(modelLocation);
+            modelJson.setParent(modelLocation);
 
-        if (ModBlocks.getInstance().getPillar().getRegistryName() == null)
-            return;
-
-        final String name = ModBlocks.getInstance().getPillar().getRegistryName().getPath();
-        DataProvider.saveStable(cache, DataGeneratorConstants.serialize(modelJson), generator.getOutputFolder().resolve(DataGeneratorConstants.ITEM_MODEL_DIR).resolve(name + ".json"));
+            DataProvider.saveStable(cache,
+              DataGeneratorConstants.serialize(modelJson),
+              generator.getOutputFolder().resolve(DataGeneratorConstants.ITEM_MODEL_DIR).resolve(name + ".json"));
+        }
     }
 
     private Map<ModelDisplayPositionsEnum, ModelDisplayPositionJson> getDisplay()
