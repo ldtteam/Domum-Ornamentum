@@ -17,6 +17,8 @@ public interface IModBlocks
 
     List<? extends Block> getTimberFrames();
 
+    List<? extends Block> getFramedLights();
+
     Block getShingleSlab();
 
     Block getPaperWall();

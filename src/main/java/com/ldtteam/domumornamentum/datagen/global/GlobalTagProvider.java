@@ -168,10 +168,20 @@ public class GlobalTagProvider extends BlockTagsProvider
             ModBlocks.getInstance().getLayingBarrel(),
             ModBlocks.getInstance().getStandingBarrel(),
             ModBlocks.getInstance().getShingle(),
-            ModBlocks.getInstance().getShingleSlab())
+            ModBlocks.getInstance().getShingleSlab(),
+            ModBlocks.getInstance().getDoor(),
+            ModBlocks.getInstance().getFancyDoor(),
+            ModBlocks.getInstance().getTrapdoor(),
+            ModBlocks.getInstance().getFancyTrapdoor(),
+            ModBlocks.getInstance().getFence(),
+            ModBlocks.getInstance().getFenceGate(),
+            ModBlocks.getInstance().getPanel(),
+            ModBlocks.getInstance().getSlab(),
+            ModBlocks.getInstance().getStair())
         .add(ModBlocks.getInstance().getTimberFrames().toArray(new Block[0]));
 
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
+          .add(ModBlocks.getInstance().getPillars().toArray(new Block[0]))
           .addTags(ModTags.BRICKS,
             ModTags.EXTRA_BLOCKS);
 

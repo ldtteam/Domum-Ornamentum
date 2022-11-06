@@ -1,5 +1,8 @@
 {
   "values": [
+    "domum_ornamentum:blockpillar",
+    "domum_ornamentum:blockypillar",
+    "domum_ornamentum:squarepillar",
     "#domum_ornamentum:bricks",
     "#domum_ornamentum:extra_block"
   ]

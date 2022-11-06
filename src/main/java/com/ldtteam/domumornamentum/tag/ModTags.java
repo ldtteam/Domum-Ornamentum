@@ -18,6 +18,7 @@ public class ModTags
     public static final TagKey<Block> TIMBERFRAMES_FRAME  = tag("timber_frames_frame");
     public static final TagKey<Block> TIMBERFRAMES_CENTER = tag("timber_frames_center");
 
+    public static final TagKey<Block> FRAMED_LIGHT_CENTER = tag("framed_light_center");
     public static final TagKey<Block> SHINGLES_ROOF    = tag("shingles_roof");
     public static final TagKey<Block> SHINGLES_SUPPORT = tag("shingles_support");
     public static final TagKey<Block> SHINGLES_COVER = tag("shingles_cover");

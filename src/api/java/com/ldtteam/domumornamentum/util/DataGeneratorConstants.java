@@ -42,6 +42,7 @@ public class DataGeneratorConstants
     public static final String PANELS_BLOCK_MODELS_DIR = RESOURCEPACK_DIR + "models/block/panels/";
     public static final String PILLAR_BLOCK_MODELS_DIR = RESOURCEPACK_DIR + "models/block/pillars/";
     public static final String TIMBER_FRAMES_BLOCK_MODELS_DIR = RESOURCEPACK_DIR + "models/block/timber_frames/";
+    public static final String FRAMED_LIGHT_BLOCK_MODELS_DIR = RESOURCEPACK_DIR + "models/block/framed_light/";
 
     public static final String EN_US_LANG = RESOURCEPACK_DIR +  "/lang/en_us.json";
 

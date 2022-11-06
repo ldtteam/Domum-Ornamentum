@@ -38,6 +38,7 @@ import com.ldtteam.domumornamentum.datagen.floatingcarpet.FloatingCarpetBlockTag
 import com.ldtteam.domumornamentum.datagen.floatingcarpet.FloatingCarpetItemModelProvider;
 import com.ldtteam.domumornamentum.datagen.floatingcarpet.FloatingCarpetLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.floatingcarpet.FloatingCarpetRecipeProvider;
+import com.ldtteam.domumornamentum.datagen.frames.light.*;
 import com.ldtteam.domumornamentum.datagen.frames.timber.TimberFramesBlockModelProvider;
 import com.ldtteam.domumornamentum.datagen.frames.timber.TimberFramesBlockStateProvider;
 import com.ldtteam.domumornamentum.datagen.frames.timber.TimberFramesComponentTagProvider;
@@ -145,6 +146,13 @@ public class ModBusEventHandler
         event.getGenerator().addProvider(true, new TimberFramesBlockModelProvider(event.getGenerator()));
         event.getGenerator().addProvider(true, new TimberFramesComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(true, new TimberFramesLangEntryProvider(event.getGenerator(), langJson));
+
+        // Framed Light
+        event.getGenerator().addProvider(true, new FramedLightBlockStateProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new FramedLightItemModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new FramedLightBlockModelProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new FramedLightComponentTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new FramedLightLangEntryProvider(event.getGenerator(), langJson));
 
         //Shingles
         event.getGenerator().addProvider(true, new ShinglesBlockStateProvider(event.getGenerator()));

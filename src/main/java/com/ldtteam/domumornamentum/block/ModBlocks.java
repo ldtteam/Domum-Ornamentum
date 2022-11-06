@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.ldtteam.domumornamentum.block.decorative.*;
 import com.ldtteam.domumornamentum.block.types.BrickType;
 import com.ldtteam.domumornamentum.block.types.ExtraBlockType;
+import com.ldtteam.domumornamentum.block.types.FramedLightType;
 import com.ldtteam.domumornamentum.block.types.TimberFrameType;
 import com.ldtteam.domumornamentum.block.vanilla.*;
 import com.ldtteam.domumornamentum.item.decoration.*;
@@ -46,6 +47,7 @@ public final class ModBlocks implements IModBlocks
      */
     private static       RegistryObject<ArchitectsCutterBlock>  ARCHITECTS_CUTTER;
     private static final List<RegistryObject<TimberFrameBlock>> TIMBER_FRAMES = Lists.newArrayList();
+    private static final List<RegistryObject<FramedLightBlock>> FRAMED_LIGHT = Lists.newArrayList();
     private static       RegistryObject<ShingleBlock>           SHINGLE;
     private static       RegistryObject<ShingleSlabBlock>       SHINGLE_SLAB;
     private static       RegistryObject<PaperWallBlock  >       PAPER_WALL;
@@ -113,6 +115,12 @@ public final class ModBlocks implements IModBlocks
     public List<TimberFrameBlock> getTimberFrames()
     {
         return ModBlocks.TIMBER_FRAMES.stream().map(RegistryObject::get).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<FramedLightBlock> getFramedLights()
+    {
+        return ModBlocks.FRAMED_LIGHT.stream().map(RegistryObject::get).collect(Collectors.toList());
     }
 
     @Override
@@ -221,6 +229,11 @@ public final class ModBlocks implements IModBlocks
         for (final TimberFrameType blockType : TimberFrameType.values())
         {
             TIMBER_FRAMES.add(register(blockType.getName(), () -> new TimberFrameBlock(blockType), b -> new TimberFrameBlockItem(b, new Item.Properties().tab(ModCreativeTabs.GENERAL))));
+        }
+
+        for (final FramedLightType blockType : FramedLightType.values())
+        {
+            FRAMED_LIGHT.add(register(blockType.getName(), () -> new FramedLightBlock(blockType), b -> new FramedLightBlockItem(b, new Item.Properties().tab(ModCreativeTabs.GENERAL))));
         }
 
         SHINGLE = register("shingle", ShingleBlock::new, b -> new ShingleBlockItem(b, new Item.Properties().tab(ModCreativeTabs.GENERAL)));
