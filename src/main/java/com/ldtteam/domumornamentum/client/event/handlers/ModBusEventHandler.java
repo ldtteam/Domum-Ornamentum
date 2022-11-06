@@ -1,6 +1,7 @@
 package com.ldtteam.domumornamentum.client.event.handlers;
 
 import com.ldtteam.domumornamentum.block.IModBlocks;
+import com.ldtteam.domumornamentum.block.decorative.ExtraBlock;
 import com.ldtteam.domumornamentum.block.types.DoorType;
 import com.ldtteam.domumornamentum.block.types.FancyDoorType;
 import com.ldtteam.domumornamentum.block.types.FancyTrapdoorType;
@@ -73,6 +74,11 @@ public class ModBusEventHandler
             ItemBlockRenderTypes.setRenderLayer(IModBlocks.getInstance().getTrapdoor(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(IModBlocks.getInstance().getDoor(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(IModBlocks.getInstance().getPanel(), RenderType.translucent());
+
+            IModBlocks.getInstance().getExtraTopBlocks().stream()
+                    .filter(ExtraBlock.class::isInstance)
+                    .map(ExtraBlock.class::cast)
+                    .forEach(b -> ItemBlockRenderTypes.setRenderLayer(b, RenderType.translucent()));
         });
     }
 
