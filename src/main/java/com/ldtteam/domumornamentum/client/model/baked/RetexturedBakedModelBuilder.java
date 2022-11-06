@@ -57,7 +57,7 @@ public class RetexturedBakedModelBuilder
 
     public RetexturedBakedModelBuilder with(
       final ResourceLocation source,
-      final BakedModel target
+      @Nullable final BakedModel target
     ) {
         this.retexturingMaps.putIfAbsent(source, target);
         return this;
@@ -70,13 +70,29 @@ public class RetexturedBakedModelBuilder
         final BlockState defaultState = target.defaultBlockState();
         final BakedModel bakedModel = Minecraft.getInstance().getBlockRenderer().getBlockModel(defaultState);
 
-       if (!itemStackMode && bakedModel.getRenderTypes(target.defaultBlockState(), RANDOM, ModelData.EMPTY).contains(this.renderType)) {
-           return this.with(source, bakedModel);
-       } else if (itemStackMode && bakedModel.getRenderTypes(new ItemStack(target), Minecraft.useShaderTransparency()).contains(this.renderType)) {
-           return this.with(source, bakedModel);
+       if (!itemStackMode) {
+           if (bakedModel.getRenderTypes(target.defaultBlockState(), RANDOM, ModelData.EMPTY).contains(this.renderType)) {
+               return this.with(source, bakedModel);
+           }
+           else {
+               return this.withOut(source);
+           }
+       } else {
+           if (bakedModel.getRenderTypes(new ItemStack(target), Minecraft.useShaderTransparency()).contains(this.renderType)) {
+               return this.with(source, bakedModel);
+           }
+           else {
+               return this.withOut(source);
+           }
        }
 
-       return this;
+    }
+
+    public RetexturedBakedModelBuilder withOut(
+            final ResourceLocation source
+    ) {
+        this.retexturingMaps.putIfAbsent(source, null);
+        return this;
     }
 
     public BakedModel build() {
@@ -89,11 +105,11 @@ public class RetexturedBakedModelBuilder
         );
 
         this.target.getQuads(null, null, RANDOM, ModelData.EMPTY, this.renderType).forEach(quad -> {
-            if (this.retexturingMaps.containsKey(quad.getSprite().getName()))
+            if (needsRetexturing(this.retexturingMaps, quad.getSprite()))
             {
                 retexture(quad, null).ifPresent(builder::addUnculledFace);
             }
-            else
+            else if (!needsErasure(this.retexturingMaps, quad.getSprite()))
             {
                 builder.addUnculledFace(quad);
             }
@@ -102,19 +118,20 @@ public class RetexturedBakedModelBuilder
         for (final Direction value : Direction.values())
         {
             this.target.getQuads(null, value, RANDOM, ModelData.EMPTY, this.renderType).forEach(quad -> {
-                if (this.retexturingMaps.containsKey(quad.getSprite().getName()))
+                if (needsRetexturing(this.retexturingMaps, quad.getSprite()))
                 {
                     retexture(quad, value).ifPresent(newQuad -> builder.addCulledFace(value, newQuad));
                 }
-                else
+
+                else if (!needsErasure(this.retexturingMaps, quad.getSprite()))
                 {
-                    builder.addCulledFace(value, quad);
+                    builder.addUnculledFace(quad);
                 }
             });
         }
 
         TextureAtlasSprite particleTexture = this.target.getParticleIcon(ModelData.EMPTY);
-        if (this.retexturingMaps.containsKey(particleTexture.getName()))
+        if (needsRetexturing(this.retexturingMaps, particleTexture))
         {
             final BakedModel particleOverrideTextureModel = this.retexturingMaps.get(particleTexture.getName());
             particleTexture = particleOverrideTextureModel.getParticleIcon(ModelData.EMPTY);
@@ -124,9 +141,20 @@ public class RetexturedBakedModelBuilder
         return builder.build();
     }
 
+    private boolean needsRetexturing(Map<ResourceLocation, BakedModel> retexturingMaps, TextureAtlasSprite quad) {
+        return retexturingMaps.containsKey(quad.getName()) && retexturingMaps.get(quad.getName()) != null;
+    }
+
+    private boolean needsErasure(Map<ResourceLocation, BakedModel> retexturingMaps, TextureAtlasSprite quad) {
+        return retexturingMaps.containsKey(quad.getName()) && retexturingMaps.get(quad.getName()) == null;
+    }
+
     private Optional<BakedQuad> retexture(@NotNull BakedQuad quad, @Nullable Direction direction)
     {
-        if (!this.retexturingMaps.containsKey(quad.getSprite().getName()))
+        if (!needsRetexturing(this.retexturingMaps, quad.getSprite()))
+            return Optional.empty();
+
+        if (needsErasure(this.retexturingMaps, quad.getSprite()))
             return Optional.empty();
 
         final Optional<TextureAtlasSprite> retexturingSprite = this.getTexture(quad, direction);
@@ -139,7 +167,11 @@ public class RetexturedBakedModelBuilder
 
     private Optional<TextureAtlasSprite> getTexture(@NotNull BakedQuad quad, @Nullable Direction direction)
     {
-        if (!retexturingMaps.containsKey(quad.getSprite().getName())) {
+        if (!needsRetexturing(retexturingMaps, quad.getSprite())) {
+            return Optional.empty();
+        }
+
+        if (needsErasure(retexturingMaps, quad.getSprite())) {
             return Optional.empty();
         }
 
