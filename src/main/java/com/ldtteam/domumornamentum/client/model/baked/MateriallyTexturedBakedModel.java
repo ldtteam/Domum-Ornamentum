@@ -2,6 +2,7 @@ package com.ldtteam.domumornamentum.client.model.baked;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import com.google.common.collect.Lists;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.client.model.properties.ModProperties;
 import com.mojang.datafixers.util.Pair;
@@ -31,12 +32,14 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.ldtteam.domumornamentum.util.MaterialTextureDataUtil.generateRandomTextureDataFrom;
 
 public class MateriallyTexturedBakedModel implements BakedModel {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final RandomSource RANDOM = RandomSource.create();
+    private static final ChunkRenderTypeSet SOLID_ONLY = ChunkRenderTypeSet.of(RenderType.solid());
 
     private record BlockModelCacheKey (MaterialTextureData data, RenderType renderType) { }
 
@@ -77,9 +80,12 @@ public class MateriallyTexturedBakedModel implements BakedModel {
             return ChunkRenderTypeSet.none();
         }
 
-        return ChunkRenderTypeSet.union(textureData.getTexturedComponents().values().stream()
-                .map(block -> Minecraft.getInstance().getBlockRenderer().getBlockModel(block.defaultBlockState())
-                        .getRenderTypes(block.defaultBlockState(), rand, ModelData.EMPTY))
+        return ChunkRenderTypeSet.union(
+                Stream.concat(
+                        textureData.getTexturedComponents().values().stream()
+                                .map(block -> Minecraft.getInstance().getBlockRenderer().getBlockModel(block.defaultBlockState())
+                                        .getRenderTypes(block.defaultBlockState(), rand, ModelData.EMPTY)),
+                        Stream.of(SOLID_ONLY))
                 .toArray(ChunkRenderTypeSet[]::new)
         );
     }
@@ -155,11 +161,16 @@ public class MateriallyTexturedBakedModel implements BakedModel {
             return Collections.emptyList();
         }
 
-        return getRenderTypes(blockItem, textureData);
+        return Lists.newArrayList(getRenderTypes(blockItem, textureData));
     }
 
-    private List<RenderType> getRenderTypes(BlockItem blockItem, MaterialTextureData textureData) {
-        return getRenderTypes(blockItem.getBlock().defaultBlockState(), RANDOM, ModelData.builder().with(ModProperties.MATERIAL_TEXTURE_PROPERTY, textureData).build()).asList();
+    private Collection<RenderType> getRenderTypes(BlockItem blockItem, MaterialTextureData textureData) {
+        final List<RenderType> renderTypes = getRenderTypes(blockItem.getBlock().defaultBlockState(), RANDOM, ModelData.builder().with(ModProperties.MATERIAL_TEXTURE_PROPERTY, textureData).build()).asList();
+
+        final Set<RenderType> renderTypesWithAdditionalComponents = new HashSet<>(renderTypes);
+        renderTypesWithAdditionalComponents.add(RenderType.solid());
+
+        return renderTypesWithAdditionalComponents;
     }
 
     @Override
@@ -173,7 +184,7 @@ public class MateriallyTexturedBakedModel implements BakedModel {
             textureData = generateRandomTextureDataFrom(itemStack);
         }
 
-        List<RenderType> renderTypes = getRenderTypes(blockItem, textureData);
+        Collection<RenderType> renderTypes = getRenderTypes(blockItem, textureData);
         if (renderTypes.isEmpty()) {
             return Collections.emptyList();
         }

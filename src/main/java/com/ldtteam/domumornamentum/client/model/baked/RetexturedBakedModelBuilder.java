@@ -15,6 +15,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.client.RenderTypeGroup;
 import net.minecraftforge.client.model.IQuadTransformer;
 import net.minecraftforge.client.model.data.ModelData;
 import org.jetbrains.annotations.NotNull;
@@ -92,6 +93,10 @@ public class RetexturedBakedModelBuilder
             {
                 retexture(quad, null).ifPresent(builder::addUnculledFace);
             }
+            else
+            {
+                builder.addUnculledFace(quad);
+            }
         });
 
         for (final Direction value : Direction.values())
@@ -100,6 +105,10 @@ public class RetexturedBakedModelBuilder
                 if (this.retexturingMaps.containsKey(quad.getSprite().getName()))
                 {
                     retexture(quad, value).ifPresent(newQuad -> builder.addCulledFace(value, newQuad));
+                }
+                else
+                {
+                    builder.addCulledFace(value, quad);
                 }
             });
         }
