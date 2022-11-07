@@ -1,11 +1,11 @@
 package com.ldtteam.domumornamentum.jei;
-/*
 import com.ldtteam.domumornamentum.IDomumOrnamentumApi;
 import com.ldtteam.domumornamentum.block.IModBlocks;
 import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
 import com.ldtteam.domumornamentum.recipe.ModRecipeTypes;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.registration.*;
 import mezz.jei.api.runtime.IIngredientManager;
 import mezz.jei.api.runtime.IJeiRuntime;
@@ -60,15 +60,15 @@ public class JEIPlugin implements IModPlugin
     {
         final RecipeManager recipeManager = Minecraft.getInstance().level.getRecipeManager();
 
-        registration.addRecipes(recipeManager.getAllRecipesFor(ModRecipeTypes.ARCHITECTS_CUTTER), ModRecipeSerializers.ARCHITECTS_CUTTER.getRegistryName());
+        registration.addRecipes(ArchitectsCutterCategory.TYPE, recipeManager.getAllRecipesFor(ModRecipeTypes.ARCHITECTS_CUTTER.get()));
     }
 
     @Override
     public void registerRecipeCatalysts(@NotNull final IRecipeCatalystRegistration registration)
     {
-        registration.addRecipeCatalyst(
+        registration.addRecipeCatalyst(VanillaTypes.ITEM_STACK,
                 new ItemStack(IDomumOrnamentumApi.getInstance().getBlocks().getArchitectsCutter()),
-                ModRecipeSerializers.ARCHITECTS_CUTTER.getRegistryName());
+                ArchitectsCutterCategory.TYPE);
     }
 
     @Override
@@ -77,4 +77,3 @@ public class JEIPlugin implements IModPlugin
         this.ingredientManager = jeiRuntime.getIngredientManager();
     }
 }
-*/
