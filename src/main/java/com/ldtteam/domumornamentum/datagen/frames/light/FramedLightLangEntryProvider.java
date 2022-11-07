@@ -1,6 +1,7 @@
 package com.ldtteam.domumornamentum.datagen.frames.light;
 
 import com.ldtteam.datagenerators.lang.LangJson;
+import com.ldtteam.domumornamentum.block.types.FramedLightType;
 import com.ldtteam.domumornamentum.block.types.TimberFrameType;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.data.CachedOutput;
@@ -24,7 +25,7 @@ public class FramedLightLangEntryProvider implements DataProvider
     @Override
     public void run(@NotNull CachedOutput cache) throws IOException
     {
-        for (final TimberFrameType type : TimberFrameType.values())
+        for (final FramedLightType type : FramedLightType.values())
         {
             final String reference = Constants.MOD_ID + ".light.frame.type." + type.getName();
             final String value = type.getLangName();

@@ -31,7 +31,9 @@ public class PillarLangEntryProvider implements DataProvider
         backingLangJson.put(Constants.MOD_ID + ".blockypillar.name.format", "Voxel %s Pillar");
         backingLangJson.put(Constants.MOD_ID + ".squarepillar.name.format", "Square %s Pillar");
 
-        backingLangJson.put(Constants.MOD_ID + ".squarepillar.column.format", "Main Material: %s");
+        backingLangJson.put(Constants.MOD_ID + ".pillar.header", "Type:");
+        backingLangJson.put(Constants.MOD_ID + ".pillar.column.format", "Main Material: %s");
+
     }
 
     @Override
