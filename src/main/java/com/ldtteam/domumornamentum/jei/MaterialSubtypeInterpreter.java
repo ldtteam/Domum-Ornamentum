@@ -1,8 +1,8 @@
 package com.ldtteam.domumornamentum.jei;
-/*
 import mezz.jei.api.ingredients.subtypes.IIngredientSubtypeInterpreter;
 import mezz.jei.api.ingredients.subtypes.UidContext;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 public class MaterialSubtypeInterpreter implements IIngredientSubtypeInterpreter<ItemStack>
 {
@@ -13,8 +13,10 @@ public class MaterialSubtypeInterpreter implements IIngredientSubtypeInterpreter
     {
     }
 
+    @NotNull
     @Override
-    public String apply(ItemStack itemStack, UidContext context)
+    public String apply(@NotNull final ItemStack itemStack,
+                        @NotNull final UidContext context)
     {
         if (!itemStack.hasTag())
         {
@@ -24,5 +26,3 @@ public class MaterialSubtypeInterpreter implements IIngredientSubtypeInterpreter
         return itemStack.getTag().getString("type");
     }
 }
-*/
-
