@@ -29,7 +29,7 @@
 <hr />
 <div align="center"><a name="menu"></a>
   <h4>
-    <a href="https://discord.gg/C63JEm3aQt">
+    <a href="https://discord.gg/Tb3PagMpaG">
       Discord
     </a>
     <span> | </span>
