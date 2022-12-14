@@ -23,7 +23,7 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 'Debug' option is available in the context menu for the task.
 */
 
-version = "2021.2"
+version = "2022.04"
 
 project {
     description = "All the blocks for all the Materials"
