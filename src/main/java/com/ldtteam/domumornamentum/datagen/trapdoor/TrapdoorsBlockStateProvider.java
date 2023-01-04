@@ -1,53 +1,39 @@
 package com.ldtteam.domumornamentum.datagen.trapdoor;
 
-import com.ldtteam.datagenerators.blockstate.BlockstateJson;
-import com.ldtteam.datagenerators.blockstate.BlockstateModelJson;
-import com.ldtteam.datagenerators.blockstate.BlockstateVariantJson;
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.types.TrapdoorType;
 import com.ldtteam.domumornamentum.block.vanilla.TrapdoorBlock;
+import com.ldtteam.domumornamentum.datagen.MateriallyTexturedModelBuilder;
+import com.ldtteam.domumornamentum.datagen.utils.ModelBuilderUtils;
 import com.ldtteam.domumornamentum.util.Constants;
-import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DataProvider;
-import net.minecraft.data.CachedOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.properties.Half;
+import net.minecraftforge.client.model.generators.BlockStateProvider;
+import net.minecraftforge.client.model.generators.ItemModelBuilder;
+import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
-
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.Map;
 
 import static net.minecraft.world.level.block.TrapDoorBlock.HALF;
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.OPEN;
 
-public class TrapdoorsBlockStateProvider implements DataProvider
+public class TrapdoorsBlockStateProvider extends BlockStateProvider
 {
-    private final DataGenerator generator;
-
-    public TrapdoorsBlockStateProvider(DataGenerator generator)
-    {
-        this.generator = generator;
+    public TrapdoorsBlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
+        super(gen.getPackOutput(), Constants.MOD_ID, exFileHelper);
     }
 
     @Override
-    public void run(@NotNull final CachedOutput cache) throws IOException
-    {
-        createBlockstateFile(cache, ModBlocks.getInstance().getTrapdoor());
+    protected void registerStatesAndModels() {
+        createBlockstateFile(ModBlocks.getInstance().getTrapdoor());
     }
 
-    private void createBlockstateFile(final CachedOutput cache, final TrapdoorBlock shingle) throws IOException
+    private void createBlockstateFile(final TrapdoorBlock shingle)
     {
-        if (shingle.getRegistryName() == null)
-        {
-            return;
-        }
-
-        final Map<String, BlockstateVariantJson> variants = new HashMap<>();
-
+        final MultiPartBlockStateBuilder builder = getMultipartBuilder(shingle);
         for (Direction facingValue : HORIZONTAL_FACING.getPossibleValues())
         {
             for (TrapdoorType typeValue : TrapdoorBlock.TYPE.getPossibleValues())
@@ -56,30 +42,39 @@ public class TrapdoorsBlockStateProvider implements DataProvider
                 {
                     for (boolean openValue : OPEN.getPossibleValues())
                     {
-                        final String variantKey = "facing=" + facingValue + ",type=" + typeValue.getSerializedName() + ",half=" + halfValue + ",open=" + openValue;
-
-                        int y = getYFromFacing(facingValue);
-                        y = y + getYFromOpenAndHalf(openValue, halfValue);
-
-                        int x = getXFromOpenAndHalf(openValue, halfValue);
-
-                        final String modelLocation = Constants.MOD_ID + ":block/trapdoors/trapdoor_" + typeValue.getSerializedName();
-
-                        final BlockstateModelJson model = new BlockstateModelJson(modelLocation, x, y);
-                        final BlockstateVariantJson variant = new BlockstateVariantJson(model);
-
-                        variants.put(variantKey, variant);
+                        builder.part()
+                                .modelFile(models().withExistingParent("block/trapdoors/trapdoor_" + typeValue.getSerializedName(), modLoc("block/trapdoors/trapdoor_" + typeValue.getSerializedName() + "_spec"))
+                                        .customLoader(MateriallyTexturedModelBuilder::new)
+                                        .end())
+                                .rotationY(getYFromFacing(facingValue) + getYFromOpenAndHalf(openValue, halfValue))
+                                .rotationX(getXFromOpenAndHalf(openValue, halfValue))
+                                .addModel()
+                                .condition(HORIZONTAL_FACING, facingValue)
+                                .condition(TrapdoorBlock.TYPE, typeValue)
+                                .condition(HALF, halfValue)
+                                .condition(OPEN, openValue)
+                                .end();
                     }
                 }
             }
         }
 
-        final BlockstateJson blockstate = new BlockstateJson(variants);
+        final ItemModelBuilder itemModelBuilderSpec = itemModels().withExistingParent(ModBlocks.getInstance().getTrapdoor().getRegistryName().getPath() + "_spec", mcLoc("block/thin_block"));
+        ModelBuilderUtils.applyDefaultItemTransforms(itemModelBuilderSpec);
 
-        final Path blockstateFolder = this.generator.getOutputFolder().resolve(DataGeneratorConstants.BLOCKSTATE_DIR);
-        final Path blockstatePath = blockstateFolder.resolve(shingle.getRegistryName().getPath() + ".json");
+        for (int i = 0; i < TrapdoorType.values().length; i++) {
+            final TrapdoorType type = TrapdoorType.values()[i];
+            itemModelBuilderSpec.override()
+                    .model(itemModels().getExistingFile(modLoc("block/trapdoors/trapdoor_" + type.getSerializedName() + "_spec")))
+                    .predicate(new ResourceLocation(Constants.TRAPDOOR_MODEL_OVERRIDE), i)
+                    .end();
+        }
 
-        DataProvider.saveStable(cache, DataGeneratorConstants.serialize(blockstate), blockstatePath);
+        final ItemModelBuilder itemModelBuilder = itemModels().getBuilder(ModBlocks.getInstance().getTrapdoor().getRegistryName().getPath())
+                .parent(itemModelBuilderSpec)
+                .customLoader(MateriallyTexturedModelBuilder::new)
+                .end();
+        ModelBuilderUtils.applyDefaultItemTransforms(itemModelBuilder);
     }
 
     private int getYFromFacing(final Direction facing)

@@ -2,6 +2,7 @@
   "type": "minecraft:block",
   "pools": [
     {
+      "bonus_rolls": 0.0,
       "conditions": [
         {
           "condition": "minecraft:survives_explosion"
@@ -13,7 +14,7 @@
           "name": "domum_ornamentum:white_floating_carpet"
         }
       ],
-      "rolls": 1
+      "rolls": 1.0
     }
   ]
 }

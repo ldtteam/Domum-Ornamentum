@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+@SuppressWarnings("resource")
 public class RetexturedBakedModelBuilder
 {
 
@@ -133,7 +134,7 @@ public class RetexturedBakedModelBuilder
         TextureAtlasSprite particleTexture = this.target.getParticleIcon(ModelData.EMPTY);
         if (needsRetexturing(this.retexturingMaps, particleTexture))
         {
-            final BakedModel particleOverrideTextureModel = this.retexturingMaps.get(particleTexture.getName());
+            final BakedModel particleOverrideTextureModel = this.retexturingMaps.get(particleTexture.contents().name());
             particleTexture = particleOverrideTextureModel.getParticleIcon(ModelData.EMPTY);
         }
         builder.particle(particleTexture);
@@ -142,11 +143,11 @@ public class RetexturedBakedModelBuilder
     }
 
     private boolean needsRetexturing(Map<ResourceLocation, BakedModel> retexturingMaps, TextureAtlasSprite quad) {
-        return retexturingMaps.containsKey(quad.getName()) && retexturingMaps.get(quad.getName()) != null;
+        return retexturingMaps.containsKey(quad.contents().name()) && retexturingMaps.get(quad.contents().name()) != null;
     }
 
     private boolean needsErasure(Map<ResourceLocation, BakedModel> retexturingMaps, TextureAtlasSprite quad) {
-        return retexturingMaps.containsKey(quad.getName()) && retexturingMaps.get(quad.getName()) == null;
+        return retexturingMaps.containsKey(quad.contents().name()) && retexturingMaps.get(quad.contents().name()) == null;
     }
 
     private Optional<BakedQuad> retexture(@NotNull BakedQuad quad, @Nullable Direction direction)
@@ -175,7 +176,7 @@ public class RetexturedBakedModelBuilder
             return Optional.empty();
         }
 
-        final BakedModel targetModel = this.retexturingMaps.get(quad.getSprite().getName());
+        final BakedModel targetModel = this.retexturingMaps.get(quad.getSprite().contents().name());
         List<BakedQuad> targetQuads = targetModel.getQuads(
           null,
           direction,

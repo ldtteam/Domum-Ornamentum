@@ -6,6 +6,7 @@ import com.ldtteam.domumornamentum.client.event.handlers.ClientTickEventHandler;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -50,7 +51,7 @@ public class MaterialTextureDataUtil
             {
                 final List<Block> candidates = new ArrayList<>(
                   StreamSupport
-                    .stream(Registry.BLOCK.getTagOrEmpty(component.getValidSkins()).spliterator(), false)
+                    .stream(BuiltInRegistries.BLOCK.getTagOrEmpty(component.getValidSkins()).spliterator(), false)
                     .map(Holder::value).toList());
                 if (candidates.isEmpty())
                 {

@@ -1,81 +1,69 @@
 package com.ldtteam.domumornamentum.datagen.global;
 
-import com.ldtteam.datagenerators.loot_table.LootTableJson;
-import com.ldtteam.datagenerators.loot_table.LootTableTypeEnum;
-import com.ldtteam.datagenerators.loot_table.pool.PoolJson;
-import com.ldtteam.datagenerators.loot_table.pool.conditions.survives_explosion.SurvivesExplosionConditionJson;
-import com.ldtteam.datagenerators.loot_table.pool.entry.EntryJson;
-import com.ldtteam.datagenerators.loot_table.pool.entry.EntryTypeEnum;
+import com.google.common.collect.ImmutableList;
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.decorative.BrickBlock;
 import com.ldtteam.domumornamentum.block.decorative.ExtraBlock;
 import com.ldtteam.domumornamentum.block.decorative.FloatingCarpetBlock;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DataProvider;
-import net.minecraft.data.CachedOutput;
+import net.minecraft.data.PackOutput;
+import net.minecraft.data.loot.BlockLootSubProvider;
+import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.Collections;
-
-import static com.ldtteam.domumornamentum.util.DataGeneratorConstants.GSON;
-import static com.ldtteam.domumornamentum.util.DataGeneratorConstants.LOOT_TABLES_DIR;
+import java.util.List;
+import java.util.Set;
 
 /**
  * This class generates the default loot_table for blocks (if a block is destroyed, it drops its item).
  */
-public class GlobalLootTableProvider implements DataProvider
+public class GlobalLootTableProvider extends LootTableProvider
 {
-    private final DataGenerator generator;
 
-    public GlobalLootTableProvider(final DataGenerator generator)
-    {
-        this.generator = generator;
+    public GlobalLootTableProvider(PackOutput packOutput) {
+        super(packOutput, Set.of(), List.of(new SubProviderEntry(GlobalLootTableEntries::new, LootContextParamSets.BLOCK)));
     }
 
-    @Override
-    public void run(@NotNull final CachedOutput cache) throws IOException
-    {
-        for (final BrickBlock block : ModBlocks.getInstance().getBricks())
-        {
-            saveBlock(block, cache);
+    private static final class GlobalLootTableEntries extends BlockLootSubProvider {
+
+        private GlobalLootTableEntries() {
+            super(Set.of(), FeatureFlags.REGISTRY.allFlags());
         }
 
-        for (final ExtraBlock block : ModBlocks.getInstance().getExtraTopBlocks())
-        {
-            saveBlock(block, cache);
+        @Override
+        protected void generate() {
+            for (final BrickBlock block : ModBlocks.getInstance().getBricks())
+            {
+                dropSelf(block);
+            }
+
+            for (final ExtraBlock block : ModBlocks.getInstance().getExtraTopBlocks())
+            {
+                dropSelf(block);
+            }
+
+            for (final FloatingCarpetBlock block : ModBlocks.getInstance().getFloatingCarpets())
+            {
+                dropSelf(block);
+            }
+
+            dropSelf(ModBlocks.getInstance().getStandingBarrel());
+            dropSelf(ModBlocks.getInstance().getLayingBarrel());
+            dropSelf(ModBlocks.getInstance().getArchitectsCutter());
         }
 
-        for (final FloatingCarpetBlock block : ModBlocks.getInstance().getFloatingCarpets())
-        {
-            saveBlock(block, cache);
+        @Override
+        protected @NotNull Iterable<Block> getKnownBlocks() {
+            return ImmutableList.<Block>builder()
+                    .addAll(ModBlocks.getInstance().getBricks())
+                    .addAll(ModBlocks.getInstance().getExtraTopBlocks())
+                    .addAll(ModBlocks.getInstance().getFloatingCarpets())
+                    .add(ModBlocks.getInstance().getStandingBarrel())
+                    .add(ModBlocks.getInstance().getLayingBarrel())
+                    .add(ModBlocks.getInstance().getArchitectsCutter()).build();
         }
-
-        saveBlock(ModBlocks.getInstance().getStandingBarrel(), cache);
-        saveBlock(ModBlocks.getInstance().getLayingBarrel(), cache);
-        saveBlock(ModBlocks.getInstance().getArchitectsCutter(), cache);
-    }
-
-    private void saveBlock(final Block block, final CachedOutput cache) throws IOException
-    {
-        final EntryJson entryJson = new EntryJson();
-        entryJson.setType(EntryTypeEnum.ITEM);
-        entryJson.setName(ForgeRegistries.BLOCKS.getKey(block).toString());
-
-        final PoolJson poolJson = new PoolJson();
-        poolJson.setEntries(Collections.singletonList(entryJson));
-        poolJson.setRolls(1);
-        poolJson.setConditions(Collections.singletonList(new SurvivesExplosionConditionJson()));
-
-        final LootTableJson lootTableJson = new LootTableJson();
-        lootTableJson.setType(LootTableTypeEnum.BLOCK);
-        lootTableJson.setPools(Collections.singletonList(poolJson));
-
-        final Path savePath = generator.getOutputFolder().resolve(LOOT_TABLES_DIR).resolve(ForgeRegistries.BLOCKS.getKey(block).getPath() + ".json");
-        DataProvider.saveStable(cache, lootTableJson.serialize(), savePath);
     }
 
     @Override

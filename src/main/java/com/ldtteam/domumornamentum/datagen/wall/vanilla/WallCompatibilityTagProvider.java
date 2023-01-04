@@ -2,26 +2,26 @@ package com.ldtteam.domumornamentum.datagen.wall.vanilla;
 
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.util.Constants;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
+import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.concurrent.CompletableFuture;
+
 public class WallCompatibilityTagProvider extends BlockTagsProvider
 {
-    public WallCompatibilityTagProvider(
-      final DataGenerator generatorIn,
-      @Nullable final ExistingFileHelper existingFileHelper)
-    {
-        super(generatorIn, Constants.MOD_ID, existingFileHelper);
+    public WallCompatibilityTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
+        super(output, lookupProvider, Constants.MOD_ID, existingFileHelper);
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    protected void addTags()
-    {
+    protected void addTags(HolderLookup.@NotNull Provider provider) {
+
 
         this.tag(BlockTags.WALLS)
           .add(
@@ -33,6 +33,6 @@ public class WallCompatibilityTagProvider extends BlockTagsProvider
     @NotNull
     public String getName()
     {
-        return "Wall Tag Provider";
+        return "Wall Compatibility Tag Provider";
     }
 }

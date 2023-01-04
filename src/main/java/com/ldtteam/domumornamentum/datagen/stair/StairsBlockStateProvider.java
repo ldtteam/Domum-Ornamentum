@@ -1,82 +1,63 @@
 package com.ldtteam.domumornamentum.datagen.stair;
 
-import com.ldtteam.datagenerators.blockstate.BlockstateJson;
-import com.ldtteam.datagenerators.blockstate.BlockstateModelJson;
-import com.ldtteam.datagenerators.blockstate.BlockstateVariantJson;
 import com.ldtteam.domumornamentum.block.ModBlocks;
-import com.ldtteam.domumornamentum.block.types.ShingleShapeType;
 import com.ldtteam.domumornamentum.block.vanilla.StairBlock;
+import com.ldtteam.domumornamentum.datagen.MateriallyTexturedModelBuilder;
+import com.ldtteam.domumornamentum.datagen.utils.ModelBuilderUtils;
 import com.ldtteam.domumornamentum.util.Constants;
-import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
+import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.CachedOutput;
-import net.minecraft.data.DataProvider;
 import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.block.state.properties.StairsShape;
-import net.minecraft.core.Direction;
+import net.minecraftforge.client.model.generators.BlockStateProvider;
+import net.minecraftforge.client.model.generators.ItemModelBuilder;
+import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
+import static net.minecraft.world.level.block.StairBlock.FACING;
+import static net.minecraft.world.level.block.StairBlock.HALF;
+import static net.minecraft.world.level.block.StairBlock.SHAPE;
 
-import static net.minecraft.world.level.block.StairBlock.*;
-
-public class StairsBlockStateProvider implements DataProvider
+public class StairsBlockStateProvider extends BlockStateProvider
 {
-    private final DataGenerator generator;
 
-    public StairsBlockStateProvider(DataGenerator generator)
-    {
-        this.generator = generator;
+    public StairsBlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
+        super(gen.getPackOutput(), Constants.MOD_ID, exFileHelper);
     }
 
     @Override
-    public void run(@NotNull final CachedOutput cache) throws IOException
-    {
-        createBlockstateFile(cache, ModBlocks.getInstance().getStair());
+    protected void registerStatesAndModels() {
+        createBlockstateFile(ModBlocks.getInstance().getStair());
     }
 
-    private void createBlockstateFile(final CachedOutput cache, final StairBlock shingle) throws IOException
-    {
-        if (shingle.getRegistryName() == null)
-            return;
-
-        final Map<String, BlockstateVariantJson> variants = new HashMap<>();
-
+    private void createBlockstateFile(final StairBlock stairBlock) {
+        final MultiPartBlockStateBuilder builder = getMultipartBuilder(stairBlock);
         for (Direction facingValue : FACING.getPossibleValues())
         {
             for (StairsShape shapeValue : SHAPE.getPossibleValues())
             {
                 for (Half halfValue : HALF.getPossibleValues())
                 {
-                    final String variantKey = "facing=" + facingValue + ",shape=" + shapeValue + ",half=" + halfValue;
-
-                    int y = getYFromFacing(facingValue);
-                    y = y + getYFromShape(shapeValue);
-                    y = y + getYFromHalf(halfValue, shapeValue);
-
-                    int x = halfValue == Half.TOP ? 180 : 0;
-
-                    final String modelLocation = Constants.MOD_ID + ":block/stairs/" + getTypeFromShape(shapeValue);
-
-                    final BlockstateModelJson model = new BlockstateModelJson(modelLocation, x, y);
-                    final BlockstateVariantJson variant = new BlockstateVariantJson(model);
-
-                    variants.put(variantKey, variant);
+                    builder.part()
+                            .modelFile(models().withExistingParent("block/stairs/" + getTypeFromShape(shapeValue), modLoc("block/stairs/" + getTypeFromShape(shapeValue) + "_spec"))
+                                    .customLoader(MateriallyTexturedModelBuilder::new)
+                                    .end())
+                            .rotationY(getYFromFacing(facingValue) + getYFromShape(shapeValue) + getYFromHalf(halfValue, shapeValue))
+                            .rotationX(halfValue == Half.TOP ? 180 : 0)
+                            .addModel()
+                            .condition(FACING, facingValue)
+                            .condition(SHAPE, shapeValue)
+                            .condition(HALF, halfValue)
+                            .end();
                 }
             }
         }
 
-        final BlockstateJson blockstate = new BlockstateJson(variants);
-
-        final Path blockstateFolder = this.generator.getOutputFolder().resolve(DataGeneratorConstants.BLOCKSTATE_DIR);
-        final Path blockstatePath = blockstateFolder.resolve(shingle.getRegistryName().getPath() + ".json");
-
-        DataProvider.saveStable(cache, DataGeneratorConstants.serialize(blockstate), blockstatePath);
-
+        final ItemModelBuilder itemModelBuilder = itemModels().withExistingParent(stairBlock.getRegistryName().getPath(), modLoc("block/stairs/stairs"))
+                .customLoader(MateriallyTexturedModelBuilder::new)
+                .end();
+        ModelBuilderUtils.applyDefaultItemTransforms(itemModelBuilder);
     }
 
     @NotNull

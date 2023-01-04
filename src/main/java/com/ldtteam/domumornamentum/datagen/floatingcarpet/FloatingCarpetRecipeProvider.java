@@ -1,51 +1,58 @@
 package com.ldtteam.domumornamentum.datagen.floatingcarpet;
 
-import com.ldtteam.datagenerators.recipes.RecipeIngredientJson;
-import com.ldtteam.datagenerators.recipes.RecipeIngredientKeyJson;
-import com.ldtteam.datagenerators.recipes.RecipeResultJson;
-import com.ldtteam.datagenerators.recipes.shaped.ShapedPatternJson;
-import com.ldtteam.datagenerators.recipes.shaped.ShapedRecipeJson;
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.decorative.FloatingCarpetBlock;
-import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DataProvider;
-import net.minecraft.data.CachedOutput;
+import net.minecraft.data.PackOutput;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.WoolCarpetBlock;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
-import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 
-public class FloatingCarpetRecipeProvider implements DataProvider
+public class FloatingCarpetRecipeProvider extends RecipeProvider
 {
-    private final DataGenerator generator;
-
-    public FloatingCarpetRecipeProvider(DataGenerator generator)
-    {
-        this.generator = generator;
+    public FloatingCarpetRecipeProvider(PackOutput packOutput) {
+        super(packOutput);
     }
 
     @Override
-    public void run(@NotNull final CachedOutput cache) throws IOException
-    {
+    protected void buildRecipes(Consumer<FinishedRecipe> builder) {
+        final Map<DyeColor, WoolCarpetBlock> carpets = new HashMap<>();
+        carpets.put(((WoolCarpetBlock) Blocks.WHITE_CARPET).getColor(), (WoolCarpetBlock) Blocks.WHITE_CARPET);
+        carpets.put(((WoolCarpetBlock) Blocks.LIGHT_GRAY_CARPET).getColor(), (WoolCarpetBlock) Blocks.LIGHT_GRAY_CARPET);
+        carpets.put(((WoolCarpetBlock) Blocks.GRAY_CARPET).getColor(), (WoolCarpetBlock) Blocks.GRAY_CARPET);
+        carpets.put(((WoolCarpetBlock) Blocks.BLACK_CARPET).getColor(), (WoolCarpetBlock) Blocks.BLACK_CARPET);
+        carpets.put(((WoolCarpetBlock) Blocks.BROWN_CARPET).getColor(), (WoolCarpetBlock) Blocks.BROWN_CARPET);
+        carpets.put(((WoolCarpetBlock) Blocks.RED_CARPET).getColor(), (WoolCarpetBlock) Blocks.RED_CARPET);
+        carpets.put(((WoolCarpetBlock) Blocks.ORANGE_CARPET).getColor(), (WoolCarpetBlock) Blocks.ORANGE_CARPET);
+        carpets.put(((WoolCarpetBlock) Blocks.YELLOW_CARPET).getColor(), (WoolCarpetBlock) Blocks.YELLOW_CARPET);
+        carpets.put(((WoolCarpetBlock) Blocks.LIME_CARPET).getColor(), (WoolCarpetBlock) Blocks.LIME_CARPET);
+        carpets.put(((WoolCarpetBlock) Blocks.GREEN_CARPET).getColor(), (WoolCarpetBlock) Blocks.GREEN_CARPET);
+        carpets.put(((WoolCarpetBlock) Blocks.CYAN_CARPET).getColor(), (WoolCarpetBlock) Blocks.CYAN_CARPET);
+        carpets.put(((WoolCarpetBlock) Blocks.LIGHT_BLUE_CARPET).getColor(), (WoolCarpetBlock) Blocks.LIGHT_BLUE_CARPET);
+        carpets.put(((WoolCarpetBlock) Blocks.BLUE_CARPET).getColor(), (WoolCarpetBlock) Blocks.BLUE_CARPET);
+        carpets.put(((WoolCarpetBlock) Blocks.PURPLE_CARPET).getColor(), (WoolCarpetBlock) Blocks.PURPLE_CARPET);
+        carpets.put(((WoolCarpetBlock) Blocks.MAGENTA_CARPET).getColor(), (WoolCarpetBlock) Blocks.MAGENTA_CARPET);
+        carpets.put(((WoolCarpetBlock) Blocks.PINK_CARPET).getColor(), (WoolCarpetBlock) Blocks.PINK_CARPET);
+
         for (final FloatingCarpetBlock block : ModBlocks.getInstance().getFloatingCarpets())
         {
             final DyeColor color = block.getColor();
-            final ShapedPatternJson pattern =  new ShapedPatternJson("C  ","S  ","   ");
-            final Map<String, RecipeIngredientKeyJson> keys = new HashMap<>();
-            keys.put("C", new RecipeIngredientKeyJson(new RecipeIngredientJson("minecraft:" + color.getName() + "_carpet", false)));
-            keys.put("S", new RecipeIngredientKeyJson(new RecipeIngredientJson(Tags.Items.STRING.location().toString(), true)));
-
-            final ShapedRecipeJson json = new ShapedRecipeJson("floating_carpets", pattern, keys, new RecipeResultJson(4, ForgeRegistries.ITEMS.getKey(block.asItem()).toString()));
-            final Path recipeFolder = this.generator.getOutputFolder().resolve(DataGeneratorConstants.RECIPES_DIR);
-            final Path blockstatePath = recipeFolder.resolve(block.getRegistryName().getPath() + ".json");
-
-            DataProvider.saveStable(cache, DataGeneratorConstants.serialize(json), blockstatePath);
+            ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, block, 4)
+                    .pattern("C  ")
+                    .pattern("S  ")
+                    .pattern("   ")
+                    .define('C', carpets.get(color))
+                    .define('S', Tags.Items.STRING)
+                    .group("floating_carpets");
         }
     }
 

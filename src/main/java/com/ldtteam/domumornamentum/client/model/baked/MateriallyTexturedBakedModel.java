@@ -36,6 +36,7 @@ import java.util.stream.Stream;
 
 import static com.ldtteam.domumornamentum.util.MaterialTextureDataUtil.generateRandomTextureDataFrom;
 
+@SuppressWarnings("resource")
 public class MateriallyTexturedBakedModel implements BakedModel {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final RandomSource RANDOM = RandomSource.create();
@@ -132,7 +133,7 @@ public class MateriallyTexturedBakedModel implements BakedModel {
         if (textureData == null)
             return getParticleIcon();
 
-        final ResourceLocation particleTextureName = getParticleIcon().getName();
+        final ResourceLocation particleTextureName = getParticleIcon().contents().name();
         if (!textureData.getTexturedComponents().containsKey(particleTextureName))
             return getParticleIcon();
 

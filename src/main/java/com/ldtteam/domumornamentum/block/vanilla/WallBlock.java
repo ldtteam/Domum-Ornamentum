@@ -1,6 +1,7 @@
 package com.ldtteam.domumornamentum.block.vanilla;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.ldtteam.domumornamentum.block.AbstractBlockWall;
 import com.ldtteam.domumornamentum.block.ICachedItemGroupBlock;
@@ -13,6 +14,7 @@ import com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -27,6 +29,9 @@ import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.WallSide;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.HitResult;
@@ -43,6 +48,13 @@ public class WallBlock extends AbstractBlockWall<WallBlock> implements IMaterial
                                                                                .add(new SimpleRetexturableComponent(new ResourceLocation("minecraft:block/oak_planks"), ModTags.WALL_MATERIALS, OAK_PLANKS))
                                                                                .build();
 
+    public static ImmutableMap<Direction, EnumProperty<WallSide>> PROPERTIES = ImmutableMap.of(
+            Direction.NORTH, WallBlock.NORTH_WALL,
+            Direction.EAST, WallBlock.EAST_WALL,
+            Direction.SOUTH, WallBlock.SOUTH_WALL,
+            Direction.WEST, WallBlock.WEST_WALL
+    );
+
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
 
     public WallBlock()
@@ -57,7 +69,7 @@ public class WallBlock extends AbstractBlockWall<WallBlock> implements IMaterial
     }
 
     @Override
-    public void fillItemCategory(final @NotNull CreativeModeTab group, final @NotNull NonNullList<ItemStack> items)
+    public void fillItemCategory(final @NotNull NonNullList<ItemStack> items)
     {
         if (!fillItemGroupCache.isEmpty()) {
             items.addAll(fillItemGroupCache);

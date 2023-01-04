@@ -1,35 +1,12 @@
 package com.ldtteam.domumornamentum.datagen.extra;
 
-import com.ldtteam.datagenerators.lang.LangJson;
+import com.ldtteam.data.LanguageProvider;
 import com.ldtteam.domumornamentum.util.Constants;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DataProvider;
-import net.minecraft.data.CachedOutput;
-import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
-
-public class ExtraLangEntryProvider implements DataProvider
+public class ExtraLangEntryProvider implements LanguageProvider.SubProvider
 {
-    private final DataGenerator dataGenerator;
-    private final LangJson backingLangJson;
-
-    public ExtraLangEntryProvider(final DataGenerator dataGenerator, LangJson backingLangJson)
-    {
-        this.dataGenerator = dataGenerator;
-        this.backingLangJson = backingLangJson;
-    }
-
     @Override
-    public void run(@NotNull CachedOutput cache) throws IOException
-    {
-        backingLangJson.put(Constants.MOD_ID + ".extra.name.format", "%s %s Extra");
-    }
-
-    @Override
-    @NotNull
-    public String getName()
-    {
-        return "Extra Lang Provider";
+    public void addTranslations(LanguageProvider.LanguageAcceptor acceptor) {
+        acceptor.add(Constants.MOD_ID + ".extra.name.format", "%s %s Extra");
     }
 }

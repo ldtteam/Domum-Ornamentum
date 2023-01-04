@@ -1,84 +1,68 @@
 package com.ldtteam.domumornamentum.datagen.global;
 
-import com.ldtteam.datagenerators.recipes.RecipeIngredientJson;
-import com.ldtteam.datagenerators.recipes.RecipeIngredientKeyJson;
-import com.ldtteam.datagenerators.recipes.RecipeResultJson;
-import com.ldtteam.datagenerators.recipes.shaped.ShapedPatternJson;
-import com.ldtteam.datagenerators.recipes.shaped.ShapedRecipeJson;
-import com.ldtteam.domumornamentum.block.ArchitectsCutterBlock;
 import com.ldtteam.domumornamentum.block.ModBlocks;
-import com.ldtteam.domumornamentum.block.decorative.BarrelBlock;
-import com.ldtteam.domumornamentum.block.decorative.ExtraBlock;
-import com.ldtteam.domumornamentum.block.types.ExtraBlockType;
-import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DataProvider;
-import net.minecraft.data.CachedOutput;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.DyeItem;
+import net.minecraft.data.PackOutput;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.function.Consumer;
 
-public class GlobalRecipeProvider implements DataProvider
-{
-    private final DataGenerator generator;
+public class GlobalRecipeProvider extends RecipeProvider {
 
-    public GlobalRecipeProvider(DataGenerator generator)
-    {
-        this.generator = generator;
+    public GlobalRecipeProvider(PackOutput packOutput) {
+        super(packOutput);
+    }
+
+    private static void buildCutterRecipe(Consumer<FinishedRecipe> writer) {
+        final ShapedRecipeBuilder cutterRecipeBuilder = new ShapedRecipeBuilder(RecipeCategory.TOOLS, ModBlocks.getInstance().getArchitectsCutter().asItem(), 1);
+        cutterRecipeBuilder.define('X', Items.IRON_INGOT);
+        cutterRecipeBuilder.define('S', Items.STONE_SLAB);
+        cutterRecipeBuilder.define('L', ItemTags.LOGS);
+        cutterRecipeBuilder.pattern(" X ");
+        cutterRecipeBuilder.pattern("SSS");
+        cutterRecipeBuilder.pattern("LLL");
+        cutterRecipeBuilder.unlockedBy("has_iron_ingot", has(Items.IRON_INGOT));
+        cutterRecipeBuilder.unlockedBy("has_stone_slab", has(Items.STONE_SLAB));
+        cutterRecipeBuilder.unlockedBy("has_log", has(ItemTags.LOGS));
+        cutterRecipeBuilder.save(writer);
     }
 
     @Override
-    public void run(@NotNull final CachedOutput cache) throws IOException
-    {
-        final ArchitectsCutterBlock block = ModBlocks.getInstance().getArchitectsCutter();
-        final ShapedPatternJson pattern =  new ShapedPatternJson(" X ","SSS","LLL");
-        final Map<String, RecipeIngredientKeyJson> keys = new HashMap<>();
+    protected void buildRecipes(@NotNull Consumer<FinishedRecipe> writer) {
+        buildCutterRecipe(writer);
+        buildBarrelRecipe(writer);
+    }
 
-        keys.put("X", new RecipeIngredientKeyJson(new RecipeIngredientJson(ForgeRegistries.ITEMS.getKey(Items.IRON_INGOT).toString(), false)));
-        keys.put("S", new RecipeIngredientKeyJson(new RecipeIngredientJson(ForgeRegistries.ITEMS.getKey(Items.STONE_SLAB).toString(), false)));
-        keys.put("L", new RecipeIngredientKeyJson(new RecipeIngredientJson(BlockTags.LOGS.location().toString(), true)));
+    private void buildBarrelRecipe(Consumer<FinishedRecipe> writer) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.getInstance().getStandingBarrel())
+                .define('S', Items.STICK)
+                .define('W', ItemTags.PLANKS)
+                .pattern("SWS")
+                .pattern("SWS")
+                .pattern("SWS")
+                .unlockedBy("has_stick", has(Items.STICK))
+                .unlockedBy("has_planks", has(ItemTags.PLANKS))
+                .save(writer);
 
-        final ShapedRecipeJson json = new ShapedRecipeJson("global", pattern, keys, new RecipeResultJson(1, ForgeRegistries.ITEMS.getKey(block.asItem()).toString()));
-        final Path recipeFolder = this.generator.getOutputFolder().resolve(DataGeneratorConstants.RECIPES_DIR);
-        final Path blockstatePath = recipeFolder.resolve(block.getRegistryName().getPath() + ".json");
-
-        DataProvider.saveStable(cache, DataGeneratorConstants.serialize(json), blockstatePath);
-
-        final BarrelBlock standingBarrel = ModBlocks.getInstance().getStandingBarrel();
-        final ShapedPatternJson standingBarrelPattern =  new ShapedPatternJson("SWS","SWS","SWS");
-        final Map<String, RecipeIngredientKeyJson> standingBarrelKeys = new HashMap<>();
-        standingBarrelKeys.put("S", new RecipeIngredientKeyJson(new RecipeIngredientJson(ForgeRegistries.ITEMS.getKey(Items.STICK).toString(), false)));
-        standingBarrelKeys.put("W", new RecipeIngredientKeyJson(new RecipeIngredientJson(BlockTags.PLANKS.location().toString(), true)));
-
-        final ShapedRecipeJson standingBarrelJson = new ShapedRecipeJson("global", standingBarrelPattern, standingBarrelKeys, new RecipeResultJson(1, ForgeRegistries.ITEMS.getKey(standingBarrel.asItem()).toString()));
-        final Path standingBarrelPath = recipeFolder.resolve(standingBarrel.getRegistryName().getPath() + ".json");
-
-        DataProvider.saveStable(cache, DataGeneratorConstants.serialize(standingBarrelJson), standingBarrelPath);
-
-        final BarrelBlock layingBarrel = ModBlocks.getInstance().getLayingBarrel();
-        final ShapedPatternJson layingBarrelPattern =  new ShapedPatternJson("SSS","WWW","SSS");
-        final Map<String, RecipeIngredientKeyJson> layingBarrelKeys = new HashMap<>();
-        layingBarrelKeys.put("S", new RecipeIngredientKeyJson(new RecipeIngredientJson(ForgeRegistries.ITEMS.getKey(Items.STICK).toString(), false)));
-        layingBarrelKeys.put("W", new RecipeIngredientKeyJson(new RecipeIngredientJson(BlockTags.PLANKS.location().toString(), true)));
-
-        final ShapedRecipeJson layingBarrelJson = new ShapedRecipeJson("global", layingBarrelPattern, layingBarrelKeys, new RecipeResultJson(1, ForgeRegistries.ITEMS.getKey(layingBarrel.asItem()).toString()));
-        final Path layingBarrelPath = recipeFolder.resolve(layingBarrel.getRegistryName().getPath() + ".json");
-
-        DataProvider.saveStable(cache, DataGeneratorConstants.serialize(layingBarrelJson), layingBarrelPath);
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.getInstance().getLayingBarrel())
+                .define('S', Items.STICK)
+                .define('W', ItemTags.PLANKS)
+                .pattern("SSS")
+                .pattern("WWW")
+                .pattern("SSS")
+                .unlockedBy("has_stick", has(Items.STICK))
+                .unlockedBy("has_planks", has(ItemTags.PLANKS))
+                .save(writer);
     }
 
     @NotNull
     @Override
-    public String getName()
-    {
+    public String getName() {
         return "Global Blocks Recipe Provider";
     }
 }

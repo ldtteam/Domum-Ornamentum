@@ -1,111 +1,74 @@
 package com.ldtteam.domumornamentum.datagen.frames.timber;
 
-import com.ldtteam.datagenerators.blockstate.BlockstateJson;
-import com.ldtteam.datagenerators.blockstate.BlockstateModelJson;
-import com.ldtteam.datagenerators.blockstate.BlockstateVariantJson;
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.decorative.TimberFrameBlock;
+import com.ldtteam.domumornamentum.datagen.MateriallyTexturedModelBuilder;
+import com.ldtteam.domumornamentum.datagen.utils.ModelBuilderUtils;
 import com.ldtteam.domumornamentum.util.Constants;
-import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.CachedOutput;
-import net.minecraft.data.DataProvider;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.data.DataGenerator;
+import net.minecraftforge.client.model.generators.BlockStateProvider;
+import net.minecraftforge.client.model.generators.ConfiguredModel;
+import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
-public class TimberFramesBlockStateProvider implements DataProvider
-{
-    private final DataGenerator generator;
-
-    public TimberFramesBlockStateProvider(DataGenerator generator)
-    {
-        this.generator = generator;
+public class TimberFramesBlockStateProvider extends BlockStateProvider {
+    public TimberFramesBlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
+        super(gen.getPackOutput(), Constants.MOD_ID, exFileHelper);
     }
 
     @Override
-    public void run(@NotNull final CachedOutput cache) throws IOException
-    {
-        for (final TimberFrameBlock timberFrame : ModBlocks.getInstance().getTimberFrames())
-        {
-            createBlockstateFile(cache, timberFrame);
-        }
+    protected void registerStatesAndModels() {
+        ModBlocks.getInstance().getTimberFrames().forEach(this::registerStatesAndModelsFor);
     }
 
-    private void createBlockstateFile(final CachedOutput cache, final TimberFrameBlock timberFrame) throws IOException
-    {
-        if (timberFrame.getRegistryName() == null)
-            return;
+    private void registerStatesAndModelsFor(TimberFrameBlock timberFrameBlock) {
+        final MultiPartBlockStateBuilder builder = getMultipartBuilder(timberFrameBlock);
 
-        final Map<String, BlockstateVariantJson> variants = new HashMap<>();
+        final ModelFile blockModel = models().withExistingParent(
+                        "block/timber_frames/" + Objects.requireNonNull(timberFrameBlock.getRegistryName()).getPath(),
+                        modLoc("block/timber_frames/" + Objects.requireNonNull(timberFrameBlock.getRegistryName()).getPath() + "_spec").toString()
+                )
+                .customLoader(MateriallyTexturedModelBuilder::new)
+                .end();
 
-        for (final Direction direction : TimberFrameBlock.FACING.getPossibleValues())
-        {
-            final String modelLocation = new ResourceLocation(Constants.MOD_ID, "block/timber_frames/" + Objects.requireNonNull(timberFrame.getRegistryName()).getPath()).toString();
-
-            int x = 0;
-            int y = 0;
-
-            if (timberFrame.getTimberFrameType().isRotatable())
-            {
-                x = getXfromDirection(direction);
-                y = getYfromDirection(direction);
+        TimberFrameBlock.FACING.getPossibleValues().forEach(direction -> {
+            final ConfiguredModel.Builder<MultiPartBlockStateBuilder.PartBuilder> partBuilder = builder.part().modelFile(blockModel);
+            if (timberFrameBlock.getTimberFrameType().isRotatable()) {
+                partBuilder.rotationX(getXFromDirection(direction));
+                partBuilder.rotationY(getYFromDirection(direction));
             }
+            partBuilder.addModel().condition(TimberFrameBlock.FACING, direction);
+        });
 
-            final BlockstateModelJson model = new BlockstateModelJson(modelLocation, x, y);
-
-            final BlockstateVariantJson variant = new BlockstateVariantJson(model);
-
-            variants.put("facing=" + direction.getSerializedName(), variant);
-        }
-
-        final BlockstateJson blockstate = new BlockstateJson(variants);
-
-        final Path blockstateFolder = this.generator.getOutputFolder().resolve(DataGeneratorConstants.BLOCKSTATE_DIR);
-        final Path blockstatePath = blockstateFolder.resolve(timberFrame.getRegistryName().getPath() + ".json");
-
-        DataProvider.saveStable(cache, DataGeneratorConstants.serialize(blockstate), blockstatePath);
-
+        ModelBuilderUtils.applyDefaultItemTransforms(itemModels().getBuilder(timberFrameBlock.getRegistryName().getPath()).parent(blockModel));
     }
 
-    private int getXfromDirection(final Direction direction)
-    {
-        switch (direction)
-        {
-            case UP:
-                return 0;
-            case DOWN:
-                return 180;
-            default:
-                return 90;
-        }
+
+    private int getXFromDirection(final Direction direction) {
+        return switch (direction) {
+            case UP -> 0;
+            case DOWN -> 180;
+            default -> 90;
+        };
     }
 
-    private int getYfromDirection(final Direction direction)
-    {
-        switch (direction)
-        {
-            default:
-                return 0;
-            case EAST:
-                return 90;
-            case SOUTH:
-                return 180;
-            case WEST:
-                return 270;
-        }
+    private int getYFromDirection(final Direction direction) {
+        return switch (direction) {
+            default -> 0;
+            case EAST -> 90;
+            case SOUTH -> 180;
+            case WEST -> 270;
+        };
     }
 
     @NotNull
     @Override
-    public String getName()
-    {
+    public String getName() {
         return "Timber Frames BlockStates Provider";
     }
 }

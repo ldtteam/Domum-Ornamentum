@@ -1,5 +1,6 @@
 package com.ldtteam.domumornamentum.datagen.frames.light;
 
+import com.ldtteam.data.LanguageProvider;
 import com.ldtteam.datagenerators.lang.LangJson;
 import com.ldtteam.domumornamentum.block.types.FramedLightType;
 import com.ldtteam.domumornamentum.block.types.TimberFrameType;
@@ -11,40 +12,23 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
-public class FramedLightLangEntryProvider implements DataProvider
+public class FramedLightLangEntryProvider implements LanguageProvider.SubProvider
 {
-    private final DataGenerator dataGenerator;
-    private final LangJson backingLangJson;
-
-    public FramedLightLangEntryProvider(final DataGenerator dataGenerator, LangJson backingLangJson)
-    {
-        this.dataGenerator = dataGenerator;
-        this.backingLangJson = backingLangJson;
-    }
-
     @Override
-    public void run(@NotNull CachedOutput cache) throws IOException
-    {
+    public void addTranslations(LanguageProvider.LanguageAcceptor acceptor) {
         for (final FramedLightType type : FramedLightType.values())
         {
             final String reference = Constants.MOD_ID + ".light.frame.type." + type.getName();
             final String value = type.getLangName();
 
-            backingLangJson.put(reference, value);
+            acceptor.add(reference, value);
         }
 
-        backingLangJson.put(Constants.MOD_ID + ".light.frame.name.format", "Framed %s");
-        backingLangJson.put(Constants.MOD_ID + ".light.frame.header", "Framing:");
-        backingLangJson.put(Constants.MOD_ID + ".light.frame.type.format", "  - Type:     %s");
-        backingLangJson.put(Constants.MOD_ID + ".light.frame.block.format", "  - Material: %s");
-        backingLangJson.put(Constants.MOD_ID + ".light.center.header", "Center:");
-        backingLangJson.put(Constants.MOD_ID + ".light.center.block.format", "  - Material: %s");
-    }
-
-    @Override
-    @NotNull
-    public String getName()
-    {
-        return "Framed Light Lang Provider";
+        acceptor.add(Constants.MOD_ID + ".light.frame.name.format", "Framed %s");
+        acceptor.add(Constants.MOD_ID + ".light.frame.header", "Framing:");
+        acceptor.add(Constants.MOD_ID + ".light.frame.type.format", "  - Type:     %s");
+        acceptor.add(Constants.MOD_ID + ".light.frame.block.format", "  - Material: %s");
+        acceptor.add(Constants.MOD_ID + ".light.center.header", "Center:");
+        acceptor.add(Constants.MOD_ID + ".light.center.block.format", "  - Material: %s");
     }
 }

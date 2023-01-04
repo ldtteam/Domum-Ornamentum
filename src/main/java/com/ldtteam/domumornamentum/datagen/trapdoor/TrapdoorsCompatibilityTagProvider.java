@@ -2,26 +2,26 @@ package com.ldtteam.domumornamentum.datagen.trapdoor;
 
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.util.Constants;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
+import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.concurrent.CompletableFuture;
+
 public class TrapdoorsCompatibilityTagProvider extends BlockTagsProvider
 {
-    public TrapdoorsCompatibilityTagProvider(
-      final DataGenerator generatorIn,
-      @Nullable final ExistingFileHelper existingFileHelper)
-    {
-        super(generatorIn, Constants.MOD_ID, existingFileHelper);
+    public TrapdoorsCompatibilityTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
+        super(output, lookupProvider, Constants.MOD_ID, existingFileHelper);
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    protected void addTags()
-    {
+    protected void addTags(HolderLookup.@NotNull Provider provider) {
+
         this.tag(BlockTags.TRAPDOORS)
           .add(
             ModBlocks.getInstance().getTrapdoor()
@@ -37,6 +37,6 @@ public class TrapdoorsCompatibilityTagProvider extends BlockTagsProvider
     @NotNull
     public String getName()
     {
-        return "Trapdoor Tag Provider";
+        return "Trapdoor Compatibility Tag Provider";
     }
 }

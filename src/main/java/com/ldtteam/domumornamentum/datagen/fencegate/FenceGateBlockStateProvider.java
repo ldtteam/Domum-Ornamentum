@@ -1,103 +1,127 @@
 package com.ldtteam.domumornamentum.datagen.fencegate;
 
-import com.google.common.collect.Lists;
-import com.ldtteam.datagenerators.blockstate.BlockstateJson;
-import com.ldtteam.datagenerators.blockstate.BlockstateModelJson;
-import com.ldtteam.datagenerators.blockstate.BlockstateVariantJson;
-import com.ldtteam.datagenerators.blockstate.multipart.MultipartCaseJson;
-import com.ldtteam.datagenerators.blockstate.multipart.MultipartWhenJson;
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.vanilla.FenceGateBlock;
+import com.ldtteam.domumornamentum.datagen.MateriallyTexturedModelBuilder;
 import com.ldtteam.domumornamentum.util.Constants;
-import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DataProvider;
-import net.minecraft.data.CachedOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraftforge.client.model.generators.BlockStateProvider;
+import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
-import java.nio.file.Path;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
-public class FenceGateBlockStateProvider implements DataProvider
-{
-    private final DataGenerator generator;
-
-    public FenceGateBlockStateProvider(DataGenerator generator)
-    {
-        this.generator = generator;
+public class FenceGateBlockStateProvider extends BlockStateProvider {
+    public FenceGateBlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
+        super(gen.getPackOutput(), Constants.MOD_ID, exFileHelper);
     }
 
     @Override
-    public void run(@NotNull final CachedOutput cache) throws IOException
-    {
-        createBlockstateFile(cache, ModBlocks.getInstance().getFenceGate());
-    }
+    protected void registerStatesAndModels() {
+        final MultiPartBlockStateBuilder builder = getMultipartBuilder(ModBlocks.getInstance().getFenceGate());
 
-    private void createBlockstateFile(final CachedOutput cache, final FenceGateBlock fenceGateBlock) throws IOException
-    {
-        if (fenceGateBlock.getRegistryName() == null)
-            return;
+        record FenceGateModelData(boolean wallState, boolean open) { }
 
-        final Map<String, BlockstateVariantJson> variants = new HashMap<>();
+        Map<FenceGateModelData, ModelFile> models = new HashMap<>();
+        for (final boolean wallState : FenceGateBlock.IN_WALL.getPossibleValues()) {
+            for (final boolean open : FenceGateBlock.OPEN.getPossibleValues()) {
+                models.put(
+                        new FenceGateModelData(wallState, open),
+                        generateBlockModel(wallState, open)
+                );
+            }
+        }
+
         for (final Direction direction : HorizontalDirectionalBlock.FACING.getPossibleValues()) {
-            for(final boolean wallState : FenceGateBlock.IN_WALL.getPossibleValues()) {
-                for(final boolean open : FenceGateBlock.OPEN.getPossibleValues()) {
-                    final String key = HorizontalDirectionalBlock.FACING.getName() + "=" + direction.toString() + "," +
-                                         FenceGateBlock.IN_WALL.getName() + "=" + wallState + "," +
-                                         FenceGateBlock.OPEN.getName() + "=" + open;
+            for (final boolean wallState : FenceGateBlock.IN_WALL.getPossibleValues()) {
+                for (final boolean open : FenceGateBlock.OPEN.getPossibleValues()) {
+                    final ModelFile blockModel = models.get(new FenceGateModelData(wallState, open));
 
-                    final int yRot = getYFromFacing(direction);
-                    String model = Constants.MOD_ID + ":block/fence_gates/fence_gate_"
-                                           + (wallState ? "wall_" : "")
-                                           + (open ? "open_" : "");
-                    model = model.substring(0, model.length() - 1);
-
-                    variants.put(
-                      key,
-                      new BlockstateVariantJson(
-                        new BlockstateModelJson(
-                          model, 0, yRot
-                        )
-                      )
-                    );
+                    builder.part()
+                            .modelFile(blockModel)
+                            .rotationY(getYFromFacing(direction))
+                            .addModel()
+                            .condition(HorizontalDirectionalBlock.FACING, direction)
+                            .condition(FenceGateBlock.IN_WALL, wallState)
+                            .condition(FenceGateBlock.OPEN, open);
                 }
             }
         }
 
-        final BlockstateJson blockstate = new BlockstateJson(variants);
+        simpleBlockItem(ModBlocks.getInstance().getFence(),
+                itemModels().withExistingParent(ModBlocks.getInstance().getFenceGate().getRegistryName().getPath(), modLoc("item/fence_gates/fence_gate_spec"))
+                        .transforms()
+                        .transform(ItemTransforms.TransformType.GUI)
+                        .rotation(30, 225, 0)
+                        .translation(0,0.5f,0)
+                        .scale(0.625f)
+                        .end()
+                        .transform(ItemTransforms.TransformType.THIRD_PERSON_LEFT_HAND)
+                        .rotation(75, 45, 0)
+                        .translation(0, 2.5f, 0)
+                        .scale(0.375f)
+                        .end()
+                        .transform(ItemTransforms.TransformType.THIRD_PERSON_RIGHT_HAND)
+                        .rotation(75, 45, 0)
+                        .translation(0, 2.5f, 0)
+                        .scale(0.375f)
+                        .end()
+                        .transform(ItemTransforms.TransformType.FIRST_PERSON_LEFT_HAND)
+                        .rotation(0, 225, 0)
+                        .scale(0.4f)
+                        .end()
+                        .transform(ItemTransforms.TransformType.FIRST_PERSON_RIGHT_HAND)
+                        .rotation(0, 225, 0)
+                        .scale(0.4f)
+                        .end()
+                        .transform(ItemTransforms.TransformType.GROUND)
+                        .translation(0,3,0)
+                        .scale(0.25f)
+                        .end()
+                        .transform(ItemTransforms.TransformType.FIXED)
+                        .scale(0.5f)
+                        .end()
+                        .transform(ItemTransforms.TransformType.HEAD)
+                        .scale(1.03f)
+                        .end()
+                        .end()
+                        .customLoader(MateriallyTexturedModelBuilder::new)
+                        .end());
+    }
 
-        final Path blockstateFolder = this.generator.getOutputFolder().resolve(DataGeneratorConstants.BLOCKSTATE_DIR);
-        final Path blockstatePath = blockstateFolder.resolve(fenceGateBlock.getRegistryName().getPath() + ".json");
+    private ModelFile generateBlockModel(boolean wallState, boolean open) {
+        final String name = "fence_gates/fence_gate_"
+                + (wallState ? "wall_" : "")
+                + (open ? "open" : "");
 
-        DataProvider.saveStable(cache, DataGeneratorConstants.serialize(blockstate), blockstatePath);
+        final ResourceLocation specLocation = new ResourceLocation(Constants.MOD_ID, "block/fence_gates/fence_gate_"
+                + (wallState ? "wall_" : "")
+                + (open ? "open_" : "") + "spec");
 
+        return models().withExistingParent(name, specLocation)
+                .customLoader(MateriallyTexturedModelBuilder::new)
+                .end();
     }
 
     @NotNull
     @Override
-    public String getName()
-    {
+    public String getName() {
         return "FenceGate BlockStates Provider";
     }
 
-    private int getYFromFacing(final Direction facing)
-    {
-        switch (facing)
-        {
-            default:
-                return 0;
-            case EAST:
-                return 90;
-            case SOUTH:
-                return 180;
-            case WEST:
-                return 270;
-        }
+    private int getYFromFacing(final Direction facing) {
+        return switch (facing) {
+            default -> 0;
+            case EAST -> 90;
+            case SOUTH -> 180;
+            case WEST -> 270;
+        };
     }
 }

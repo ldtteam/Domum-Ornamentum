@@ -98,7 +98,7 @@ public class ShingleBlock extends AbstractBlockStairs<ShingleBlock> implements I
     }
 
     @Override
-    public void fillItemCategory(final CreativeModeTab group, final NonNullList<ItemStack> items)
+    public void fillItemCategory(final @NotNull NonNullList<ItemStack> items)
     {
         if (!fillItemGroupCache.isEmpty()) {
             items.addAll(fillItemGroupCache);

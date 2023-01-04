@@ -6,7 +6,7 @@ import com.google.gson.JsonObject;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
 import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -15,7 +15,11 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.StreamSupport;
 
@@ -73,7 +77,7 @@ public interface IMateriallyTexturedBlock
         {
             final List<Block> candidates = new ArrayList<>(
               StreamSupport
-                .stream(Registry.BLOCK.getTagOrEmpty(component.getValidSkins()).spliterator(), false)
+                .stream(BuiltInRegistries.BLOCK.getTagOrEmpty(component.getValidSkins()).spliterator(), false)
                 .map(Holder::value).toList());
             if (candidates.isEmpty()) continue;
 

@@ -1,120 +1,81 @@
 package com.ldtteam.domumornamentum.datagen.wall.vanilla;
 
-import com.google.common.collect.Lists;
-import com.ldtteam.datagenerators.blockstate.BlockstateJson;
-import com.ldtteam.datagenerators.blockstate.BlockstateModelJson;
-import com.ldtteam.datagenerators.blockstate.BlockstateVariantJson;
-import com.ldtteam.datagenerators.blockstate.multipart.MultipartCaseJson;
-import com.ldtteam.datagenerators.blockstate.multipart.MultipartWhenJson;
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.vanilla.WallBlock;
+import com.ldtteam.domumornamentum.datagen.MateriallyTexturedModelBuilder;
+import com.ldtteam.domumornamentum.datagen.utils.ModelBuilderUtils;
 import com.ldtteam.domumornamentum.util.Constants;
-import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DataProvider;
-import net.minecraft.data.CachedOutput;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.properties.WallSide;
+import net.minecraftforge.client.model.generators.BlockStateProvider;
+import net.minecraftforge.client.model.generators.ItemModelBuilder;
+import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.List;
-import java.util.Locale;
+import java.util.Objects;
 
 import static net.minecraft.world.level.block.WallBlock.UP;
 
-public class WallBlockStateProvider implements DataProvider
-{
-    private final DataGenerator generator;
+public class WallBlockStateProvider extends BlockStateProvider {
 
-    public WallBlockStateProvider(DataGenerator generator)
-    {
-        this.generator = generator;
+    public WallBlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
+        super(gen.getPackOutput(), Constants.MOD_ID, exFileHelper);
     }
 
     @Override
-    public void run(@NotNull final CachedOutput cache) throws IOException
-    {
-        createBlockstateFile(cache, ModBlocks.getInstance().getWall());
+    protected void registerStatesAndModels() {
+        createBlockstateFile(ModBlocks.getInstance().getWall());
     }
 
-    private void createBlockstateFile(final CachedOutput cache, final WallBlock wallBlock) throws IOException
-    {
-        if (wallBlock.getRegistryName() == null)
-            return;
+    private void createBlockstateFile(final WallBlock wallBlock) {
+        final MultiPartBlockStateBuilder builder = getMultipartBuilder(wallBlock);
+        builder.part()
+                .modelFile(models().withExistingParent("block/walls/wall_post", modLoc("block/walls/wall_post_spec"))
+                        .customLoader(MateriallyTexturedModelBuilder::new)
+                        .end())
+                .addModel()
+                .condition(UP, true)
+                .end();
 
-        final List<MultipartCaseJson> cases = Lists.newArrayList();
-        cases.add(
-          new MultipartCaseJson(
-            new BlockstateVariantJson(
-              new BlockstateModelJson(
-                Constants.MOD_ID + ":block/walls/wall_post"
-              )
-            ),
-            new MultipartWhenJson(
-              UP.getName().toLowerCase(),
-              "true"
-            )
-          )
-        );
-
-        for (final Direction possibleValue : HorizontalDirectionalBlock.FACING.getPossibleValues())
-        {
-            for (final WallSide value : WallSide.values())
-            {
+        for (final Direction possibleValue : HorizontalDirectionalBlock.FACING.getPossibleValues()) {
+            for (final WallSide value : WallSide.values()) {
                 if (value == WallSide.NONE)
                     continue;
 
-                cases.add(
-                  new MultipartCaseJson(
-                    new BlockstateVariantJson(
-                      new BlockstateModelJson(
-                        Constants.MOD_ID + ":block/walls/wall_side" + (value == WallSide.TALL ? "_tall" : ""),
-                        0,
-                        getYFromFacing(possibleValue)
-                      )
-                    ),
-                    new MultipartWhenJson(
-                      possibleValue.getName().toLowerCase(Locale.ROOT),
-                      value.toString()
-                    )
-                  )
-                );
+                builder.part()
+                        .modelFile(models().withExistingParent("block/walls/wall_side" + (value == WallSide.TALL ? "_tall" : ""), modLoc("block/walls/wall_side" + (value == WallSide.TALL ? "_tall" : "") + "_spec"))
+                                .customLoader(MateriallyTexturedModelBuilder::new)
+                                .end())
+                        .rotationY(getYFromFacing(possibleValue))
+                        .addModel()
+                        .condition(Objects.requireNonNull(WallBlock.PROPERTIES.get(possibleValue)), value)
+                        .end();
             }
-
-
         }
 
-        final BlockstateJson blockstate = new BlockstateJson(cases);
+        final ItemModelBuilder itemModelBuilder = itemModels()
+                .withExistingParent(wallBlock.getRegistryName().getPath(), modLoc("item/walls/wall_spec"))
+                .customLoader(MateriallyTexturedModelBuilder::new)
+                .end();
 
-        final Path blockstateFolder = this.generator.getOutputFolder().resolve(DataGeneratorConstants.BLOCKSTATE_DIR);
-        final Path blockstatePath = blockstateFolder.resolve(wallBlock.getRegistryName().getPath() + ".json");
-
-        DataProvider.saveStable(cache, DataGeneratorConstants.serialize(blockstate), blockstatePath);
-
+        ModelBuilderUtils.applyDefaultItemTransforms(itemModelBuilder);
     }
 
     @NotNull
     @Override
-    public String getName()
-    {
+    public String getName() {
         return "Wall BlockStates Provider";
     }
 
-    private int getYFromFacing(final Direction facing)
-    {
-        switch (facing)
-        {
-            default:
-                return 0;
-            case EAST:
-                return 90;
-            case SOUTH:
-                return 180;
-            case WEST:
-                return 270;
-        }
+    private int getYFromFacing(final Direction facing) {
+        return switch (facing) {
+            default -> 0;
+            case EAST -> 90;
+            case SOUTH -> 180;
+            case WEST -> 270;
+        };
     }
 }

@@ -23,4 +23,9 @@ public enum PillarShapeType implements StringRepresentable
         return this.name;
     }
 
+    public @NotNull String getSpecificationName()
+    {
+        return this.name + "_spec";
+    }
+
 }

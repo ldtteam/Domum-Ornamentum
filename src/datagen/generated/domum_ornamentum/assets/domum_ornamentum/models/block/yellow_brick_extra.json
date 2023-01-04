@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "domum_ornamentum:block/extra/yellow_brick_extra"
+  }
+}

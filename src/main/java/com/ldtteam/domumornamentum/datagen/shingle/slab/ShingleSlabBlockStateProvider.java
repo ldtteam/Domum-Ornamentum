@@ -1,72 +1,59 @@
 package com.ldtteam.domumornamentum.datagen.shingle.slab;
 
-import com.ldtteam.datagenerators.blockstate.BlockstateJson;
-import com.ldtteam.datagenerators.blockstate.BlockstateModelJson;
-import com.ldtteam.datagenerators.blockstate.BlockstateVariantJson;
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.decorative.ShingleSlabBlock;
+import com.ldtteam.domumornamentum.block.types.ShingleShapeType;
 import com.ldtteam.domumornamentum.block.types.ShingleSlabShapeType;
+import com.ldtteam.domumornamentum.datagen.MateriallyTexturedModelBuilder;
+import com.ldtteam.domumornamentum.datagen.utils.ModelBuilderUtils;
 import com.ldtteam.domumornamentum.util.Constants;
-import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.CachedOutput;
-import net.minecraft.data.DataProvider;
 import net.minecraft.core.Direction;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.world.level.block.StairBlock;
+import net.minecraftforge.client.model.generators.BlockStateProvider;
+import net.minecraftforge.client.model.generators.ItemModelBuilder;
+import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.Locale;
+import java.util.EnumMap;
 import java.util.Map;
 
-public class ShingleSlabBlockStateProvider implements DataProvider
+public class ShingleSlabBlockStateProvider extends BlockStateProvider
 {
-    private final DataGenerator generator;
 
-    public ShingleSlabBlockStateProvider(DataGenerator generator)
-    {
-        this.generator = generator;
+    public ShingleSlabBlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
+        super(gen.getPackOutput(), Constants.MOD_ID, exFileHelper);
     }
 
     @Override
-    public void run(@NotNull final CachedOutput cache) throws IOException
-    {
-        createBlockstateFile(cache, ModBlocks.getInstance().getShingleSlab());
+    protected void registerStatesAndModels() {
+        createBlockstateFile(ModBlocks.getInstance().getShingleSlab());
     }
 
-    private void createBlockstateFile(final CachedOutput cache, final ShingleSlabBlock shingleSlab) throws IOException
-    {
-        if (shingleSlab.getRegistryName() == null)
-            return;
 
-        final Map<String, BlockstateVariantJson> variants = new HashMap<>();
-
-        for (Direction facingValue : HorizontalDirectionalBlock.FACING.getPossibleValues())
+    private void createBlockstateFile(final ShingleSlabBlock shingle) {
+        final MultiPartBlockStateBuilder builder = getMultipartBuilder(shingle);
+        final Map<ShingleSlabShapeType, ModelFile> models = new EnumMap<>(ShingleSlabShapeType.class);
+        for (Direction facingValue : StairBlock.FACING.getPossibleValues())
         {
-            for (ShingleSlabShapeType shapeValue : ShingleSlabShapeType.values())
+            for (ShingleSlabShapeType shapeValue : ShingleSlabBlock.SHAPE.getPossibleValues())
             {
-                final String variantKey = "facing=" + facingValue.getName() + ",shape=" + shapeValue.getSerializedName();
-
-                int y = getYFromFacing(facingValue);
-
-                final String modelLocation = Constants.MOD_ID + ":block/shingle_slab/" + shapeValue.name().toLowerCase(Locale.ROOT);
-
-                final BlockstateModelJson model = new BlockstateModelJson(modelLocation, 0, y);
-                final BlockstateVariantJson variant = new BlockstateVariantJson(model);
-
-                variants.put(variantKey, variant);
+                builder.part()
+                        .modelFile(models.computeIfAbsent(shapeValue, shape -> models().withExistingParent("shingle_slab/" + shapeValue.name().toLowerCase(), modLoc("block/shingle_slab/shingle_slab_" + shapeValue.name().toLowerCase() + "_spec"))
+                                .customLoader(MateriallyTexturedModelBuilder::new)
+                                .end()))
+                        .rotationY(getYFromFacing(facingValue))
+                        .addModel()
+                        .condition(StairBlock.FACING, facingValue)
+                        .condition(ShingleSlabBlock.SHAPE, shapeValue)
+                        .end();
             }
         }
 
-        final BlockstateJson blockstate = new BlockstateJson(variants);
-
-        final Path blockstateFolder = this.generator.getOutputFolder().resolve(DataGeneratorConstants.BLOCKSTATE_DIR);
-        final Path blockstatePath = blockstateFolder.resolve(shingleSlab.getRegistryName().getPath() + ".json");
-
-        DataProvider.saveStable(cache, DataGeneratorConstants.serialize(blockstate), blockstatePath);
-
+        final ItemModelBuilder itemModelBuilder = itemModels().getBuilder(shingle.getRegistryName().getPath()).parent(models.get(ShingleSlabShapeType.TOP));
+        ModelBuilderUtils.applyDefaultItemTransforms(itemModelBuilder);
     }
 
     @NotNull
@@ -78,16 +65,11 @@ public class ShingleSlabBlockStateProvider implements DataProvider
 
     private int getYFromFacing(final Direction facing)
     {
-        switch (facing)
-        {
-            default:
-                return 0;
-            case EAST:
-                return 90;
-            case SOUTH:
-                return 180;
-            case WEST:
-                return 270;
-        }
+        return switch (facing) {
+            default -> 0;
+            case EAST -> 90;
+            case SOUTH -> 180;
+            case WEST -> 270;
+        };
     }
 }

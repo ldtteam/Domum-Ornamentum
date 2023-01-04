@@ -47,72 +47,70 @@ public final class ModBlocks implements IModBlocks {
     private static final List<RegistryObject<BrickBlock>> BRICK = new ArrayList<>();
     private static final List<RegistryObject<PillarBlock>> PILLARS = new ArrayList<>();
     private static final ModBlocks INSTANCE = new ModBlocks();
-    /**
-     * All the modblocks.
-     */
-    private static RegistryObject<ArchitectsCutterBlock> ARCHITECTS_CUTTER;
-    private static RegistryObject<ShingleBlock> SHINGLE;
-    private static RegistryObject<ShingleSlabBlock> SHINGLE_SLAB;
-    private static RegistryObject<PaperWallBlock> PAPER_WALL;
-    private static RegistryObject<BarrelBlock> STANDING_BARREL;
-    private static RegistryObject<BarrelBlock> LAYING_BARREL;
-    private static RegistryObject<FenceBlock> FENCE;
-    private static RegistryObject<FenceGateBlock> FENCE_GATE;
-    private static RegistryObject<SlabBlock> SLAB;
-    private static RegistryObject<WallBlock> WALL;
-    private static RegistryObject<StairBlock> STAIR;
-    private static RegistryObject<TrapdoorBlock> TRAPDOOR;
-    private static RegistryObject<DoorBlock> DOOR;
-    private static RegistryObject<PanelBlock> STATIC_TRAPDOOR;
-    private static RegistryObject<FancyDoorBlock> FANCY_DOOR;
-    private static RegistryObject<FancyTrapdoorBlock> FANCY_TRAPDOOR;
+
+    private static final RegistryObject<ArchitectsCutterBlock> ARCHITECTS_CUTTER;
+    private static final RegistryObject<ShingleBlock> SHINGLE;
+    private static final RegistryObject<ShingleSlabBlock> SHINGLE_SLAB;
+    private static final RegistryObject<PaperWallBlock> PAPER_WALL;
+    private static final RegistryObject<BarrelBlock> STANDING_BARREL;
+    private static final RegistryObject<BarrelBlock> LAYING_BARREL;
+    private static final RegistryObject<FenceBlock> FENCE;
+    private static final RegistryObject<FenceGateBlock> FENCE_GATE;
+    private static final RegistryObject<SlabBlock> SLAB;
+    private static final RegistryObject<WallBlock> WALL;
+    private static final RegistryObject<StairBlock> STAIR;
+    private static final RegistryObject<TrapdoorBlock> TRAPDOOR;
+    private static final RegistryObject<DoorBlock> DOOR;
+    private static final RegistryObject<PanelBlock> PANEL;
+    private static final RegistryObject<FancyDoorBlock> FANCY_DOOR;
+    private static final RegistryObject<FancyTrapdoorBlock> FANCY_TRAPDOOR;
 
     static {
-        ARCHITECTS_CUTTER = register("architectscutter", ArchitectsCutterBlock::new, b -> new BlockItem(b, new Item.Properties().tab(ModCreativeTabs.GENERAL)));
+        ARCHITECTS_CUTTER = register("architectscutter", ArchitectsCutterBlock::new, b -> new BlockItem(b, new Item.Properties()));
 
         for (final TimberFrameType blockType : TimberFrameType.values()) {
-            TIMBER_FRAMES.add(register(blockType.getName(), () -> new TimberFrameBlock(blockType), b -> new TimberFrameBlockItem(b, new Item.Properties().tab(ModCreativeTabs.GENERAL))));
+            TIMBER_FRAMES.add(register(blockType.getName(), () -> new TimberFrameBlock(blockType), b -> new TimberFrameBlockItem(b, new Item.Properties())));
         }
 
-        SHINGLE = register("shingle", ShingleBlock::new, b -> new ShingleBlockItem(b, new Item.Properties().tab(ModCreativeTabs.GENERAL)));
-        SHINGLE_SLAB = register("shingle_slab", ShingleSlabBlock::new, b -> new ShingleSlabBlockItem(b, new Item.Properties().tab(ModCreativeTabs.GENERAL)));
-        PAPER_WALL = register("blockpaperwall", PaperWallBlock::new, b -> new PaperwallBlockItem(b, new Item.Properties().tab(ModCreativeTabs.GENERAL)));
+        SHINGLE = register("shingle", ShingleBlock::new, b -> new ShingleBlockItem(b, new Item.Properties()));
+        SHINGLE_SLAB = register("shingle_slab", ShingleSlabBlock::new, b -> new ShingleSlabBlockItem(b, new Item.Properties()));
+        PAPER_WALL = register("blockpaperwall", PaperWallBlock::new, b -> new PaperwallBlockItem(b, new Item.Properties()));
 
-        PILLARS.add(register("blockpillar", PillarBlock::new, b -> new PillarBlockItem(b, new Item.Properties().tab(ModCreativeTabs.GENERAL))));
-        PILLARS.add(register("blockypillar", PillarBlock::new, b -> new PillarBlockItem(b, new Item.Properties().tab(ModCreativeTabs.GENERAL))));
-        PILLARS.add(register("squarepillar", PillarBlock::new, b -> new PillarBlockItem(b, new Item.Properties().tab(ModCreativeTabs.GENERAL))));
+        PILLARS.add(register("blockpillar", PillarBlock::new, b -> new PillarBlockItem(b, new Item.Properties())));
+        PILLARS.add(register("blockypillar", PillarBlock::new, b -> new PillarBlockItem(b, new Item.Properties())));
+        PILLARS.add(register("squarepillar", PillarBlock::new, b -> new PillarBlockItem(b, new Item.Properties())));
 
         for (final ExtraBlockType blockType : ExtraBlockType.values()) {
-            EXTRA_TOP_BLOCKS.add(register(blockType.getSerializedName(), () -> new ExtraBlock(blockType), b -> new ExtraBlockItem(b, new Item.Properties().tab(ModCreativeTabs.EXTRA_BLOCKS))));
+            EXTRA_TOP_BLOCKS.add(register(blockType.getSerializedName(), () -> new ExtraBlock(blockType), b -> new ExtraBlockItem(b, new Item.Properties())));
         }
 
         for (final FramedLightType blockType : FramedLightType.values())
         {
-            FRAMED_LIGHT.add(register(blockType.getName(), () -> new FramedLightBlock(blockType), b -> new FramedLightBlockItem(b, new Item.Properties().tab(ModCreativeTabs.GENERAL))));
+            FRAMED_LIGHT.add(register(blockType.getName(), () -> new FramedLightBlock(blockType), b -> new FramedLightBlockItem(b, new Item.Properties())));
         }
 
         for (final DyeColor color : DyeColor.values()) {
-            FLOATING_CARPETS.add(register(color.getName().toLowerCase(Locale.ROOT) + "_floating_carpet", () -> new FloatingCarpetBlock(color), b -> new BlockItem(b, new Item.Properties().tab(ModCreativeTabs.FLOATING_CARPETS))));
+            FLOATING_CARPETS.add(register(color.getName().toLowerCase(Locale.ROOT) + "_floating_carpet", () -> new FloatingCarpetBlock(color), b -> new BlockItem(b, new Item.Properties())));
         }
 
         for (final BrickType type : BrickType.values()) {
-            BRICK.add(register(type.getSerializedName(), () -> new BrickBlock(type), b -> new BlockItem(b, new Item.Properties().tab(ModCreativeTabs.EXTRA_BLOCKS))));
+            BRICK.add(register(type.getSerializedName(), () -> new BrickBlock(type), b -> new BlockItem(b, new Item.Properties())));
         }
 
-        STANDING_BARREL = register("blockbarreldeco_standing", BarrelBlock::new, b -> new BlockItem(b, new Item.Properties().tab(ModCreativeTabs.EXTRA_BLOCKS)));
-        LAYING_BARREL = register("blockbarreldeco_onside", BarrelBlock::new, b -> new BlockItem(b, new Item.Properties().tab(ModCreativeTabs.EXTRA_BLOCKS)));
+        STANDING_BARREL = register("blockbarreldeco_standing", BarrelBlock::new, b -> new BlockItem(b, new Item.Properties()));
+        LAYING_BARREL = register("blockbarreldeco_onside", BarrelBlock::new, b -> new BlockItem(b, new Item.Properties()));
 
-        FENCE = register("vanilla_fence_compat", FenceBlock::new, b -> new FenceBlockItem(b, new Item.Properties().tab(ModCreativeTabs.GENERAL)));
-        FENCE_GATE = register("vanilla_fence_gate_compat", FenceGateBlock::new, b -> new FenceGateBlockItem(b, new Item.Properties().tab(ModCreativeTabs.GENERAL)));
-        SLAB = register("vanilla_slab_compat", SlabBlock::new, b -> new SlabBlockItem(b, new Item.Properties().tab(ModCreativeTabs.GENERAL)));
-        WALL = register("vanilla_wall_compat", WallBlock::new, b -> new WallBlockItem(b, new Item.Properties().tab(ModCreativeTabs.GENERAL)));
-        STAIR = register("vanilla_stairs_compat", StairBlock::new, b -> new StairsBlockItem(b, new Item.Properties().tab(ModCreativeTabs.GENERAL)));
-        TRAPDOOR = register("vanilla_trapdoors_compat", TrapdoorBlock::new, b -> new TrapdoorBlockItem(b, new Item.Properties().tab(ModCreativeTabs.GENERAL)));
-        DOOR = register("vanilla_doors_compat", DoorBlock::new, b -> new DoorBlockItem(b, new Item.Properties().tab(ModCreativeTabs.GENERAL)));
-        STATIC_TRAPDOOR = register("panel", PanelBlock::new, b -> new PanelBlockItem(b, new Item.Properties().tab(ModCreativeTabs.GENERAL)));
+        FENCE = register("vanilla_fence_compat", FenceBlock::new, b -> new FenceBlockItem(b, new Item.Properties()));
+        FENCE_GATE = register("vanilla_fence_gate_compat", FenceGateBlock::new, b -> new FenceGateBlockItem(b, new Item.Properties()));
+        SLAB = register("vanilla_slab_compat", SlabBlock::new, b -> new SlabBlockItem(b, new Item.Properties()));
+        WALL = register("vanilla_wall_compat", WallBlock::new, b -> new WallBlockItem(b, new Item.Properties()));
+        STAIR = register("vanilla_stairs_compat", StairBlock::new, b -> new StairsBlockItem(b, new Item.Properties()));
+        TRAPDOOR = register("vanilla_trapdoors_compat", TrapdoorBlock::new, b -> new TrapdoorBlockItem(b, new Item.Properties()));
+        DOOR = register("vanilla_doors_compat", DoorBlock::new, b -> new DoorBlockItem(b, new Item.Properties()));
+        PANEL = register("panel", PanelBlock::new, b -> new PanelBlockItem(b, new Item.Properties()));
 
-        FANCY_DOOR = register("fancy_door", FancyDoorBlock::new, b -> new FancyDoorBlockItem(b, new Item.Properties().tab(ModCreativeTabs.GENERAL)));
-        FANCY_TRAPDOOR = register("fancy_trapdoors", FancyTrapdoorBlock::new, b -> new FancyTrapdoorBlockItem(b, new Item.Properties().tab(ModCreativeTabs.GENERAL)));
+        FANCY_DOOR = register("fancy_door", FancyDoorBlock::new, b -> new FancyDoorBlockItem(b, new Item.Properties()));
+        FANCY_TRAPDOOR = register("fancy_trapdoors", FancyTrapdoorBlock::new, b -> new FancyTrapdoorBlockItem(b, new Item.Properties()));
     }
 
     /**
@@ -234,7 +232,7 @@ public final class ModBlocks implements IModBlocks {
 
     @Override
     public PanelBlock getPanel() {
-        return ModBlocks.STATIC_TRAPDOOR.get();
+        return ModBlocks.PANEL.get();
     }
 
     @Override

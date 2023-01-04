@@ -100,9 +100,8 @@ public class PaperWallBlock extends AbstractBlockPane<PaperWallBlock> implements
         return COMPONENTS;
     }
 
-
     @Override
-    public void fillItemCategory(final @NotNull CreativeModeTab group, final @NotNull NonNullList<ItemStack> items)
+    public void fillItemCategory(final @NotNull NonNullList<ItemStack> items)
     {
         if (!fillItemGroupCache.isEmpty()) {
             items.addAll(fillItemGroupCache);

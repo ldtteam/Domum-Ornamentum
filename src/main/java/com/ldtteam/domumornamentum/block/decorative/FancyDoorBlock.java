@@ -84,7 +84,7 @@ public class FancyDoorBlock extends AbstractBlockDoor<FancyDoorBlock> implements
     }
 
     @Override
-    public void fillItemCategory(final @NotNull CreativeModeTab group, final @NotNull NonNullList<ItemStack> items)
+    public void fillItemCategory(final @NotNull NonNullList<ItemStack> items)
     {
         if (!fillItemGroupCache.isEmpty()) {
             items.addAll(fillItemGroupCache);
