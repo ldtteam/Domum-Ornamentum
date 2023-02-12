@@ -60,6 +60,7 @@ public final class ModCreativeTabs {
                             .title(Component.translatable("itemGroup." + Constants.MOD_ID + ".extra-blocks"))
                             .displayItems(new OutputAwareGenerator((featureFlagSet, output, hasOpPermissions) -> {
                                 ModBlocks.getInstance().getExtraTopBlocks().forEach(output::accept);
+                                ModBlocks.getInstance().getBricks().forEach(output::accept);
                             }));
                 }
         );
