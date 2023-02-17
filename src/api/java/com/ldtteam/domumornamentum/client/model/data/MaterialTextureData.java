@@ -92,4 +92,12 @@ public class MaterialTextureData implements INBTSerializable<CompoundTag>
     {
         return this.equals(EMPTY);
     }
+
+    @Override
+    public String toString()
+    {
+        return "MaterialTextureData{" +
+                 "texturedComponents=" + texturedComponents +
+                 '}';
+    }
 }
