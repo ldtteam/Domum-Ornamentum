@@ -225,7 +225,7 @@ public class MateriallyTexturedBakedModel implements BakedModel {
                 return builder.build();
             });
         } catch (Exception exception) {
-            LOGGER.error(String.format("Failed to build baked materially textured model for: %s", modelData), exception);
+            LOGGER.error(String.format("Failed to build baked materially textured model for: %s %s", sourceState, modelData), exception);
             return Minecraft.getInstance().getModelManager().getMissingModel();
         }
     }
