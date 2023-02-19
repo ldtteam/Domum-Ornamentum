@@ -31,6 +31,7 @@ public class BrickBlockTagProvider extends BlockTagsProvider
     @Override
     protected void addTags(HolderLookup.@NotNull Provider holderLookupProvider) {
         this.tag(ModTags.BRICKS)
-                .add(IModBlocks.getInstance().getBricks().toArray(Block[]::new));
+                .add(IModBlocks.getInstance().getBricks().toArray(Block[]::new))
+                .add(IModBlocks.getInstance().getExtraTopBlocks().toArray(Block[]::new));
     }
 }
