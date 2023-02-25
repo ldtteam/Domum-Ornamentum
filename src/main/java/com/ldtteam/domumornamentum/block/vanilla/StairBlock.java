@@ -29,6 +29,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
@@ -214,5 +215,15 @@ public class StairBlock extends AbstractBlockStairs<StairBlock> implements IMate
     public @NotNull Block getBlock()
     {
         return this;
+    }
+
+    @Override
+    public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be instanceof MateriallyTexturedBlockEntity mtbe) {
+            Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(0).getId());
+            return block.getSoundType(state, level, pos, entity);
+        }
+        return super.getSoundType(state, level, pos, entity);
     }
 }
