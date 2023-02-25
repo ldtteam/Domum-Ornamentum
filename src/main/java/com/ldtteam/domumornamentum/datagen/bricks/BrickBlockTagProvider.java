@@ -22,7 +22,8 @@ public class BrickBlockTagProvider extends BlockTagsProvider
     protected void addTags()
     {
         this.tag(ModTags.BRICKS)
-                .add(IModBlocks.getInstance().getBricks().toArray(Block[]::new));
+          .add(IModBlocks.getInstance().getBricks().toArray(Block[]::new))
+          .add(IModBlocks.getInstance().getExtraTopBlocks().toArray(Block[]::new));
     }
 
     @Override
