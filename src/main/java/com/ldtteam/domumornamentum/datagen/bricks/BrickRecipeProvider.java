@@ -25,9 +25,13 @@ public class BrickRecipeProvider extends RecipeProvider {
     }
 
     private void brickBlockRecipe(Consumer<FinishedRecipe> recipeWriter, BrickBlock brickBlock) {
+
+
         final ShapelessRecipeBuilder builder = ShapelessRecipeBuilder.shapeless(RecipeCategory.TOOLS, brickBlock, 4);
-        builder.requires(brickBlock.getType().getIngredient(), 4);
-        builder.unlockedBy("has_item_" + Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(brickBlock.asItem().asItem())).toString().replace(":", "_"), has(brickBlock.getType().getIngredient()));
+        builder.requires(brickBlock.getType().getIngredient(), 2);
+        builder.requires(brickBlock.getType().getIngredient2(), 2);
+        builder.unlockedBy("has_item1_" + Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(brickBlock.asItem().asItem())).toString().replace(":", "_"), has(brickBlock.getType().getIngredient()));
+        builder.unlockedBy("has_item2_" + Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(brickBlock.asItem().asItem())).toString().replace(":", "_"), has(brickBlock.getType().getIngredient()));
         builder.save(recipeWriter);
     }
 
