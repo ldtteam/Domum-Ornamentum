@@ -30,6 +30,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
@@ -282,6 +283,16 @@ public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock>
     protected void createBlockStateDefinition(final StateDefinition.Builder<Block, BlockState> builder)
     {
         builder.add(FACING, SHAPE, WATERLOGGED);
+    }
+
+    @Override
+    public float getExplosionResistance(BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be instanceof MateriallyTexturedBlockEntity mtbe) {
+            Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(1).getId());
+            return block.getExplosionResistance(state, level, pos, explosion);
+        }
+        return super.getExplosionResistance(state, level, pos, explosion);
     }
 
     @Override

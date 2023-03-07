@@ -63,6 +63,16 @@ public class StairBlock extends AbstractBlockStairs<StairBlock> implements IMate
     }
 
     @Override
+    public float getExplosionResistance(BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be instanceof MateriallyTexturedBlockEntity mtbe) {
+            Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(0).getId());
+            return block.getExplosionResistance(state, level, pos, explosion);
+        }
+        return super.getExplosionResistance(state, level, pos, explosion);
+    }
+
+    @Override
     public @NotNull List<IMateriallyTexturedBlockComponent> getComponents()
     {
         return COMPONENTS;

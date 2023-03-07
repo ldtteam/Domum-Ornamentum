@@ -27,6 +27,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
@@ -92,6 +93,16 @@ public class ShingleBlock extends AbstractBlockStairs<ShingleBlock> implements I
             default:
                 return ShingleShapeType.STRAIGHT;
         }
+    }
+
+    @Override
+    public float getExplosionResistance(BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be instanceof MateriallyTexturedBlockEntity mtbe) {
+            Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(1).getId());
+            return block.getExplosionResistance(state, level, pos, explosion);
+        }
+        return super.getExplosionResistance(state, level, pos, explosion);
     }
 
     @Override

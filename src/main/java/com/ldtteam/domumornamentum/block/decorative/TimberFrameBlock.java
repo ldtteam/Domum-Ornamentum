@@ -29,6 +29,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
@@ -128,6 +129,16 @@ public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements
 
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         return this.defaultBlockState().setValue(FACING, context.getNearestLookingDirection().getOpposite());
+    }
+
+    @Override
+    public float getExplosionResistance(BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be instanceof MateriallyTexturedBlockEntity mtbe) {
+            Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(0).getId());
+            return block.getExplosionResistance(state, level, pos, explosion);
+        }
+        return super.getExplosionResistance(state, level, pos, explosion);
     }
 
     @Override
