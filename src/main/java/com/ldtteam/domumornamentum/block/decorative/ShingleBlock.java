@@ -106,6 +106,16 @@ public class ShingleBlock extends AbstractBlockStairs<ShingleBlock> implements I
     }
 
     @Override
+    public float getDestroyProgress(BlockState state, Player player, BlockGetter level, BlockPos pos) {
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be instanceof MateriallyTexturedBlockEntity mtbe) {
+            Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(1).getId());
+            return super.getDestroyProgress(block.defaultBlockState(), player, level, pos);
+        }
+        return super.getDestroyProgress(state, player, level, pos);
+    }
+
+    @Override
     public @NotNull List<IMateriallyTexturedBlockComponent> getComponents()
     {
         return COMPONENTS;

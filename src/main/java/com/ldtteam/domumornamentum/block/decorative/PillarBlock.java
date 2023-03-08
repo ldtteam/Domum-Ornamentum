@@ -120,6 +120,16 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
         return super.getExplosionResistance(state, level, pos, explosion);
     }
 
+    @Override
+    public float getDestroyProgress(BlockState state, Player player, BlockGetter level, BlockPos pos) {
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be instanceof MateriallyTexturedBlockEntity mtbe) {
+            Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(0).getId());
+            return super.getDestroyProgress(block.defaultBlockState(), player, level, pos);
+        }
+        return super.getDestroyProgress(state, player, level, pos);
+    }
+
     /**
      * Finds the correct blockstate on placement by checking the blocks above and below the clicked position from the context. Then calls updateAbove and upDateBelow
      * to correct their blockstates based on their upper/lower neighbor and this block.
