@@ -27,6 +27,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
@@ -70,7 +71,7 @@ public class ShingleBlock extends AbstractBlockStairs<ShingleBlock> implements I
 
     public ShingleBlock()
     {
-        super(Blocks.OAK_PLANKS::defaultBlockState, Properties.of(Material.WOOD).strength(BLOCK_HARDNESS, RESISTANCE).noOcclusion());
+        super(Blocks.OAK_PLANKS::defaultBlockState, Properties.of(Material.WOOD).strength(BLOCK_HARDNESS, RESISTANCE).requiresCorrectToolForDrops().noOcclusion());
     }
 
     /**
@@ -92,6 +93,26 @@ public class ShingleBlock extends AbstractBlockStairs<ShingleBlock> implements I
             default:
                 return ShingleShapeType.STRAIGHT;
         }
+    }
+
+    @Override
+    public float getExplosionResistance(BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be instanceof MateriallyTexturedBlockEntity mtbe) {
+            Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(1).getId());
+            return block.getExplosionResistance(state, level, pos, explosion);
+        }
+        return super.getExplosionResistance(state, level, pos, explosion);
+    }
+
+    @Override
+    public float getDestroyProgress(BlockState state, Player player, BlockGetter level, BlockPos pos) {
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be instanceof MateriallyTexturedBlockEntity mtbe) {
+            Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(1).getId());
+            return super.getDestroyProgress(block.defaultBlockState(), player, level, pos);
+        }
+        return super.getDestroyProgress(state, player, level, pos);
     }
 
     @Override

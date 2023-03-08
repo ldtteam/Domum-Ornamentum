@@ -24,6 +24,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
@@ -81,7 +82,7 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
      */
     public PillarBlock()
     {
-        super(BlockBehaviour.Properties.of(Material.STONE).strength(BLOCK_HARDNESS, RESISTANCE));
+        super(BlockBehaviour.Properties.of(Material.STONE).strength(BLOCK_HARDNESS, RESISTANCE).requiresCorrectToolForDrops());
         this.registerDefaultState(this.stateDefinition.any().setValue(COLUMN,PillarShapeType.FULL_PILLAR));
     }
 
@@ -107,6 +108,26 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
         builder.add(COLUMN);
+    }
+
+    @Override
+    public float getExplosionResistance(BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be instanceof MateriallyTexturedBlockEntity mtbe) {
+            Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(0).getId());
+            return block.getExplosionResistance(state, level, pos, explosion);
+        }
+        return super.getExplosionResistance(state, level, pos, explosion);
+    }
+
+    @Override
+    public float getDestroyProgress(BlockState state, Player player, BlockGetter level, BlockPos pos) {
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be instanceof MateriallyTexturedBlockEntity mtbe) {
+            Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(0).getId());
+            return super.getDestroyProgress(block.defaultBlockState(), player, level, pos);
+        }
+        return super.getDestroyProgress(state, player, level, pos);
     }
 
     /**

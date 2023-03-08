@@ -30,7 +30,7 @@ public class BrickBlock extends AbstractBlock<BrickBlock>
      */
     public BrickBlock(final BrickType type)
     {
-        super(Properties.of(Material.WOOD).strength(BLOCK_HARDNESS, RESISTANCE).sound(SoundType.STONE));
+        super(Properties.of(Material.WOOD).strength(BLOCK_HARDNESS, RESISTANCE).requiresCorrectToolForDrops().sound(SoundType.STONE));
         this.type = type;
     }
 

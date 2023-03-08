@@ -59,7 +59,27 @@ public class StairBlock extends AbstractBlockStairs<StairBlock> implements IMate
 
     public StairBlock()
     {
-        super(OAK_PLANKS::defaultBlockState, Properties.of(Material.WOOD, OAK_PLANKS.defaultMaterialColor()).noOcclusion().strength(2.0F, 3.0F).sound(SoundType.WOOD));
+        super(OAK_PLANKS::defaultBlockState, Properties.of(Material.WOOD, OAK_PLANKS.defaultMaterialColor()).noOcclusion().strength(2.0F, 3.0F).requiresCorrectToolForDrops().sound(SoundType.WOOD));
+    }
+
+    @Override
+    public float getExplosionResistance(BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be instanceof MateriallyTexturedBlockEntity mtbe) {
+            Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(0).getId());
+            return block.getExplosionResistance(state, level, pos, explosion);
+        }
+        return super.getExplosionResistance(state, level, pos, explosion);
+    }
+
+    @Override
+    public float getDestroyProgress(BlockState state, Player player, BlockGetter level, BlockPos pos) {
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be instanceof MateriallyTexturedBlockEntity mtbe) {
+            Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(0).getId());
+            return super.getDestroyProgress(block.defaultBlockState(), player, level, pos);
+        }
+        return super.getDestroyProgress(state, player, level, pos);
     }
 
     @Override
