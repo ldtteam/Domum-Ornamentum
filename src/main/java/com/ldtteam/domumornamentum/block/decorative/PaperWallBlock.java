@@ -72,7 +72,7 @@ public class PaperWallBlock extends AbstractBlockPane<PaperWallBlock> implements
 
     public PaperWallBlock()
     {
-        super(Properties.of(Material.GLASS).strength(BLOCK_HARDNESS, RESISTANCE));
+        super(Properties.of(Material.GLASS).strength(BLOCK_HARDNESS, RESISTANCE).requiresCorrectToolForDrops());
     }
 
     @Override

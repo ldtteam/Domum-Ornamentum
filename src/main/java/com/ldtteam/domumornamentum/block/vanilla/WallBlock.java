@@ -62,7 +62,7 @@ public class WallBlock extends AbstractBlockWall<WallBlock> implements IMaterial
 
     public WallBlock()
     {
-        super(Properties.of(Material.WOOD, OAK_PLANKS.defaultMaterialColor()).strength(2.0F, 3.0F).sound(SoundType.WOOD));
+        super(Properties.of(Material.WOOD, OAK_PLANKS.defaultMaterialColor()).strength(2.0F, 3.0F).requiresCorrectToolForDrops().sound(SoundType.WOOD));
     }
 
     @Override

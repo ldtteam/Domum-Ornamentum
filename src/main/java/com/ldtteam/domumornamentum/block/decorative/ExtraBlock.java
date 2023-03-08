@@ -26,7 +26,7 @@ public class ExtraBlock extends AbstractBlock<ExtraBlock>
      */
     public ExtraBlock(final ExtraBlockType type)
     {
-        super(Properties.of(Material.WOOD).strength(BLOCK_HARDNESS, RESISTANCE).sound(type.getSoundType()));
+        super(Properties.of(Material.WOOD).strength(BLOCK_HARDNESS, RESISTANCE).requiresCorrectToolForDrops().sound(type.getSoundType()));
         this.type = type;
     }
 

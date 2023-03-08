@@ -57,7 +57,7 @@ public class SlabBlock extends AbstractBlockSlab<SlabBlock> implements IMaterial
 
     public SlabBlock()
     {
-        super(BlockBehaviour.Properties.of(Material.WOOD, OAK_PLANKS.defaultMaterialColor()).noOcclusion().strength(2.0F, 3.0F).sound(SoundType.WOOD));
+        super(BlockBehaviour.Properties.of(Material.WOOD, OAK_PLANKS.defaultMaterialColor()).noOcclusion().strength(2.0F, 3.0F).requiresCorrectToolForDrops().sound(SoundType.WOOD));
     }
 
     @Override

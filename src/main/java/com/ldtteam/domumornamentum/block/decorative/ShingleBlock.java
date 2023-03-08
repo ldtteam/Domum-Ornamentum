@@ -71,7 +71,7 @@ public class ShingleBlock extends AbstractBlockStairs<ShingleBlock> implements I
 
     public ShingleBlock()
     {
-        super(Blocks.OAK_PLANKS::defaultBlockState, Properties.of(Material.WOOD).strength(BLOCK_HARDNESS, RESISTANCE).noOcclusion());
+        super(Blocks.OAK_PLANKS::defaultBlockState, Properties.of(Material.WOOD).strength(BLOCK_HARDNESS, RESISTANCE).requiresCorrectToolForDrops().noOcclusion());
     }
 
     /**

@@ -85,7 +85,7 @@ public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements
      */
     public TimberFrameBlock(final TimberFrameType timberFrameType)
     {
-        super(Properties.of(Material.WOOD).strength(BLOCK_HARDNESS, RESISTANCE).noOcclusion());
+        super(Properties.of(Material.WOOD).strength(BLOCK_HARDNESS, RESISTANCE).requiresCorrectToolForDrops().noOcclusion());
         this.timberFrameType = timberFrameType;
     }
 
