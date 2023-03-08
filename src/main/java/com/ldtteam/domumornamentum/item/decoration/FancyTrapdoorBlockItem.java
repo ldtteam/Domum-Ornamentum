@@ -71,18 +71,18 @@ public class FancyTrapdoorBlockItem extends BlockItem
             textureData = MaterialTextureDataUtil.generateRandomTextureDataFrom(stack);
         }
 
-        tooltip.add(Component.translatable(Constants.MOD_ID + ".fancytrapdoor.center.header"));
+        tooltip.add(Component.translatable(Constants.MOD_ID + ".fancytrapdoor.frame.header"));
         final IMateriallyTexturedBlockComponent trapDoorComponent = trapdoorBlock.getComponents().get(0);
         final Block trapDoorBlock = textureData.getTexturedComponents().getOrDefault(trapDoorComponent.getId(), trapDoorComponent.getDefault());
         final Component trapDoorBlockName = BlockUtils.getHoverName(trapDoorBlock);
-        tooltip.add(Component.translatable(Constants.MOD_ID + ".fancytrapdoor.center.block.format", trapDoorBlockName));
+        tooltip.add(Component.translatable(Constants.MOD_ID + ".fancytrapdoor.frame.block.format", trapDoorBlockName));
 
         tooltip.add(Component.literal(""));
-        tooltip.add(Component.translatable(Constants.MOD_ID + ".fancytrapdoor.frame.header"));
+        tooltip.add(Component.translatable(Constants.MOD_ID + ".fancytrapdoor.center.header"));
         final IMateriallyTexturedBlockComponent trapDoorFrameComponent = trapdoorBlock.getComponents().get(1);
         final Block trapDoorFrameBlock = textureData.getTexturedComponents().getOrDefault(trapDoorFrameComponent.getId(), trapDoorFrameComponent.getDefault());
         final Component trapDoorFrameBlockName = BlockUtils.getHoverName(trapDoorFrameBlock);
-        tooltip.add(Component.translatable(Constants.MOD_ID + ".fancytrapdoor.frame.block.format", trapDoorFrameBlockName));
+        tooltip.add(Component.translatable(Constants.MOD_ID + ".fancytrapdoor.center.block.format", trapDoorFrameBlockName));
     }
 }
 
