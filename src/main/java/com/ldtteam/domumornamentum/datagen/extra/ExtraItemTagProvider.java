@@ -16,7 +16,7 @@ import java.util.concurrent.CompletableFuture;
 public class ExtraItemTagProvider extends ItemTagsProvider
 {
 
-    public ExtraItemTagProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> providerCompletableFuture, TagsProvider<Block> blockTagsProvider, @Nullable ExistingFileHelper existingFileHelper) {
+    public ExtraItemTagProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> providerCompletableFuture, CompletableFuture<TagLookup<Block>> blockTagsProvider, @Nullable ExistingFileHelper existingFileHelper) {
         super(packOutput, providerCompletableFuture, blockTagsProvider, Constants.MOD_ID, existingFileHelper);
     }
 

@@ -15,7 +15,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.inventory.StonecutterMenu;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -61,7 +60,7 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
         int recipeIndexDrawOffset = this.recipeIndexOffset + 12;
         this.drawSlotBackgrounds(matrixStack);
         this.drawRecipeButtonBackgrounds(matrixStack, x, y, recipeAreaLeft, recipeAreaTop, recipeIndexDrawOffset);
-        this.drawRecipesItems(recipeAreaLeft, recipeAreaTop, recipeIndexDrawOffset);
+        this.drawRecipesItems(matrixStack, recipeAreaLeft, recipeAreaTop, recipeIndexDrawOffset);
     }
 
     protected void renderTooltip(@NotNull PoseStack matrixStack, int x, int y) {
@@ -77,7 +76,7 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
                 int j1 = i + i1 % 4 * 16;
                 int k1 = j + i1 / 4 * 18 + 2;
                 if (x >= j1 && x < j1 + 16 && y >= k1 && y < k1 + 18) {
-                    this.renderTooltip(matrixStack, list.get(l).assemble(this.menu.inputInventory), x, y);
+                    this.renderTooltip(matrixStack, list.get(l).assemble(this.menu.inputInventory, this.minecraft.level.registryAccess()), x, y);
                 }
             }
         }
@@ -118,7 +117,7 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
         }
     }
 
-    private void drawRecipesItems(int left, int top, int recipeIndexOffsetMax) {
+    private void drawRecipesItems(final @NotNull PoseStack matrixStack, int left, int top, int recipeIndexOffsetMax) {
         List<ArchitectsCutterRecipe> list = this.menu.getRecipeList();
 
         for(int i = this.recipeIndexOffset; i < recipeIndexOffsetMax && i < this.menu.getRecipeListSize(); ++i) {
@@ -126,7 +125,7 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
             int k = left + j % 4 * 16;
             int l = j / 4;
             int i1 = top + l * 18 + 2;
-            Objects.requireNonNull(this.minecraft).getItemRenderer().renderAndDecorateItem(list.get(i).assemble(this.menu.inputInventory), k, i1);
+            Objects.requireNonNull(this.minecraft).getItemRenderer().renderAndDecorateItem(matrixStack, list.get(i).assemble(this.menu.inputInventory, this.minecraft.level.registryAccess()), k, i1);
         }
 
     }

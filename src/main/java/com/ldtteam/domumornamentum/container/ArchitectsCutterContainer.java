@@ -216,7 +216,7 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
         if (!this.recipes.isEmpty() && this.isValidRecipeIndex(this.selectedRecipe.get())) {
             Recipe<Container> recipe = this.recipes.get(this.selectedRecipe.get());
             this.inventory.setRecipeUsed(recipe);
-            this.outputInventorySlot.set(recipe.assemble(this.inputInventory));
+            this.outputInventorySlot.set(recipe.assemble(this.inputInventory, this.world.registryAccess()));
         } else {
             this.outputInventorySlot.set(ItemStack.EMPTY);
         }

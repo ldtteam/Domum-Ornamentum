@@ -1,6 +1,6 @@
 package com.ldtteam.domumornamentum.datagen.utils;
 
-import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraftforge.client.model.generators.ModelBuilder;
 
 public final class ModelBuilderUtils {
@@ -11,37 +11,37 @@ public final class ModelBuilderUtils {
 
     public static <T extends ModelBuilder<T>> T applyDefaultItemTransforms(final T modelBuilder) {
         return modelBuilder.transforms()
-                .transform(ItemTransforms.TransformType.GUI)
+                .transform(ItemDisplayContext.GUI)
                 .rotation(30, 225, 0)
                 .translation(0,0.5f,0)
                 .scale(0.625f)
                 .end()
-                .transform(ItemTransforms.TransformType.THIRD_PERSON_LEFT_HAND)
+                .transform(ItemDisplayContext.THIRD_PERSON_LEFT_HAND)
                 .rotation(75, 45, 0)
                 .translation(0, 2.5f, 0)
                 .scale(0.375f)
                 .end()
-                .transform(ItemTransforms.TransformType.THIRD_PERSON_RIGHT_HAND)
+                .transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND)
                 .rotation(75, 45, 0)
                 .translation(0, 2.5f, 0)
                 .scale(0.375f)
                 .end()
-                .transform(ItemTransforms.TransformType.FIRST_PERSON_LEFT_HAND)
+                .transform(ItemDisplayContext.FIRST_PERSON_LEFT_HAND)
                 .rotation(0, 225, 0)
                 .scale(0.4f)
                 .end()
-                .transform(ItemTransforms.TransformType.FIRST_PERSON_RIGHT_HAND)
+                .transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND)
                 .rotation(0, 225, 0)
                 .scale(0.4f)
                 .end()
-                .transform(ItemTransforms.TransformType.GROUND)
+                .transform(ItemDisplayContext.GROUND)
                 .translation(0,3,0)
                 .scale(0.25f)
                 .end()
-                .transform(ItemTransforms.TransformType.FIXED)
+                .transform(ItemDisplayContext.FIXED)
                 .scale(0.5f)
                 .end()
-                .transform(ItemTransforms.TransformType.HEAD)
+                .transform(ItemDisplayContext.HEAD)
                 .scale(1.03f)
                 .end()
                 .end();

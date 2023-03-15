@@ -8,6 +8,7 @@ import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockManager;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
 import com.ldtteam.domumornamentum.recipe.ModRecipeTypes;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.BlockItem;
@@ -85,7 +86,7 @@ public class ArchitectsCutterRecipe implements Recipe<Container>
     }
 
     @Override
-    public @NotNull ItemStack assemble(final @NotNull Container inv)
+    public @NotNull ItemStack assemble(final @NotNull Container inv, final RegistryAccess registryAccess)
     {
         if (!ForgeRegistries.BLOCKS.containsKey(getBlockName()))
             return ItemStack.EMPTY;
@@ -139,7 +140,7 @@ public class ArchitectsCutterRecipe implements Recipe<Container>
     }
 
     @Override
-    public @NotNull ItemStack getResultItem()
+    public @NotNull ItemStack getResultItem(final RegistryAccess registryAccess)
     {
         if (!ForgeRegistries.BLOCKS.containsKey(getBlockName()))
             return ItemStack.EMPTY;

@@ -146,10 +146,10 @@ public class ArchitectsCutterCategory implements IRecipeCategory<ArchitectsCutte
             container.setItem(i, defaultInputs.get(i));
         }
 
-        ItemStack output = recipe.assemble(container);
+        ItemStack output = recipe.assemble(container, null);
         if (output.isEmpty())   // wat?
         {
-            output = recipe.getResultItem();
+            output = recipe.getResultItem(null);
             if (output.isEmpty())   // WAT?
             {
                 output = new ItemStack(generatedBlock);
@@ -303,7 +303,7 @@ public class ArchitectsCutterCategory implements IRecipeCategory<ArchitectsCutte
 
             if (!same)
             {
-                this.output = recipe.assemble(this.ingredientContainer);
+                this.output = recipe.assemble(this.ingredientContainer, null);
             }
         }
     }

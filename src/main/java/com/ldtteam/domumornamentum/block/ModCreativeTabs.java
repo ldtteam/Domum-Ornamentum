@@ -31,7 +31,7 @@ public final class ModCreativeTabs {
                 builder -> {
                     builder.icon(() -> new ItemStack(ModBlocks.getInstance().getArchitectsCutter()))
                             .title(Component.translatable("itemGroup." + Constants.MOD_ID + ".general"))
-                            .displayItems(new OutputAwareGenerator((featureFlagSet, output, hasOpPermissions) -> {
+                            .displayItems(new OutputAwareGenerator((featureFlagSet, output) -> {
                                 output.accept(ModBlocks.getInstance().getArchitectsCutter());
                                 ModBlocks.getInstance().getTimberFrames().forEach(output::accept);
                                 output.accept(ModBlocks.getInstance().getShingle());
@@ -58,7 +58,7 @@ public final class ModCreativeTabs {
                 builder -> {
                     builder.icon(() -> new ItemStack(ModBlocks.getInstance().getExtraTopBlocks().get(0)))
                             .title(Component.translatable("itemGroup." + Constants.MOD_ID + ".extra-blocks"))
-                            .displayItems(new OutputAwareGenerator((featureFlagSet, output, hasOpPermissions) -> {
+                            .displayItems(new OutputAwareGenerator((featureFlagSet, output) -> {
                                 ModBlocks.getInstance().getExtraTopBlocks().forEach(output::accept);
                                 ModBlocks.getInstance().getBricks().forEach(output::accept);
                             }));
@@ -70,7 +70,7 @@ public final class ModCreativeTabs {
                 builder -> {
                     builder.icon(() -> new ItemStack(ModBlocks.getInstance().getFloatingCarpets().get(0)))
                             .title(Component.translatable("itemGroup." + Constants.MOD_ID + ".floating-carpets"))
-                            .displayItems(new OutputAwareGenerator((featureFlagSet, output, hasOpPermissions) -> {
+                            .displayItems(new OutputAwareGenerator((featureFlagSet, output) -> {
                                 ModBlocks.getInstance().getFloatingCarpets().forEach(output::accept);
                             }));
                 }
@@ -80,8 +80,8 @@ public final class ModCreativeTabs {
     private record OutputAwareGenerator(CreativeModeTab.DisplayItemsGenerator delegate) implements CreativeModeTab.DisplayItemsGenerator {
 
         @Override
-        public void accept(@NotNull FeatureFlagSet featureFlagSet, CreativeModeTab.@NotNull Output output, boolean hasPermissions) {
-            delegate.accept(featureFlagSet, new Output(output), hasPermissions);
+        public void accept(@NotNull CreativeModeTab.ItemDisplayParameters featureFlagSet, @NotNull final CreativeModeTab.Output output) {
+            delegate.accept(featureFlagSet, new Output(output));
         }
 
         private record Output(CreativeModeTab.Output delegate) implements CreativeModeTab.Output {
