@@ -30,8 +30,8 @@ public class TimberFramesBlockStateProvider extends BlockStateProvider {
         final MultiPartBlockStateBuilder builder = getMultipartBuilder(timberFrameBlock);
 
         final ModelFile blockModel = models().withExistingParent(
-                        "block/timber_frames/" + Objects.requireNonNull(timberFrameBlock.getRegistryName()).getPath(),
-                        modLoc("block/timber_frames/" + Objects.requireNonNull(timberFrameBlock.getRegistryName()).getPath() + "_spec").toString()
+                        "block/timber_frame/" + Objects.requireNonNull(timberFrameBlock.getRegistryName()).getPath(),
+                        modLoc("block/timber_frame/" + Objects.requireNonNull(timberFrameBlock.getRegistryName()).getPath() + "_spec").toString()
                 )
                 .customLoader(MateriallyTexturedModelBuilder::new)
                 .end();

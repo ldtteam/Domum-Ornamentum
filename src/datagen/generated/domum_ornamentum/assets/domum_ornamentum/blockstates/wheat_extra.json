@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "domum_ornamentum:block/wheat_extra"
+      "model": "domum_ornamentum:block/extra/thatched/wheat_extra"
     }
   }
 }

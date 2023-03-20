@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_full",
+        "model": "domum_ornamentum:block/panel/panel_full",
         "x": -90,
         "y": 180
       },
@@ -15,7 +15,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_full",
+        "model": "domum_ornamentum:block/panel/panel_full",
         "x": 180
       },
       "when": {
@@ -27,7 +27,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_full",
+        "model": "domum_ornamentum:block/panel/panel_full",
         "x": 90
       },
       "when": {
@@ -39,7 +39,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_full"
+        "model": "domum_ornamentum:block/panel/panel_full"
       },
       "when": {
         "type": "full",
@@ -50,7 +50,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_horizontally_squiggly_striped",
+        "model": "domum_ornamentum:block/panel/panel_horizontally_squiggly_striped",
         "x": -90,
         "y": 180
       },
@@ -63,7 +63,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_horizontally_squiggly_striped",
+        "model": "domum_ornamentum:block/panel/panel_horizontally_squiggly_striped",
         "x": 180
       },
       "when": {
@@ -75,7 +75,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_horizontally_squiggly_striped",
+        "model": "domum_ornamentum:block/panel/panel_horizontally_squiggly_striped",
         "x": 90
       },
       "when": {
@@ -87,7 +87,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_horizontally_squiggly_striped"
+        "model": "domum_ornamentum:block/panel/panel_horizontally_squiggly_striped"
       },
       "when": {
         "type": "horizontally_squiggly_striped",
@@ -98,7 +98,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_horizontally_striped",
+        "model": "domum_ornamentum:block/panel/panel_horizontally_striped",
         "x": -90,
         "y": 180
       },
@@ -111,7 +111,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_horizontally_striped",
+        "model": "domum_ornamentum:block/panel/panel_horizontally_striped",
         "x": 180
       },
       "when": {
@@ -123,7 +123,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_horizontally_striped",
+        "model": "domum_ornamentum:block/panel/panel_horizontally_striped",
         "x": 90
       },
       "when": {
@@ -135,7 +135,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_horizontally_striped"
+        "model": "domum_ornamentum:block/panel/panel_horizontally_striped"
       },
       "when": {
         "type": "horizontally_striped",
@@ -146,7 +146,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_port_manteau",
+        "model": "domum_ornamentum:block/panel/panel_port_manteau",
         "x": -90,
         "y": 180
       },
@@ -159,7 +159,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_port_manteau",
+        "model": "domum_ornamentum:block/panel/panel_port_manteau",
         "x": 180
       },
       "when": {
@@ -171,7 +171,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_port_manteau",
+        "model": "domum_ornamentum:block/panel/panel_port_manteau",
         "x": 90
       },
       "when": {
@@ -183,7 +183,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_port_manteau"
+        "model": "domum_ornamentum:block/panel/panel_port_manteau"
       },
       "when": {
         "type": "port_manteau",
@@ -194,7 +194,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_vertically_squiggly_striped",
+        "model": "domum_ornamentum:block/panel/panel_vertically_squiggly_striped",
         "x": -90,
         "y": 180
       },
@@ -207,7 +207,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_vertically_squiggly_striped",
+        "model": "domum_ornamentum:block/panel/panel_vertically_squiggly_striped",
         "x": 180
       },
       "when": {
@@ -219,7 +219,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_vertically_squiggly_striped",
+        "model": "domum_ornamentum:block/panel/panel_vertically_squiggly_striped",
         "x": 90
       },
       "when": {
@@ -231,7 +231,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_vertically_squiggly_striped"
+        "model": "domum_ornamentum:block/panel/panel_vertically_squiggly_striped"
       },
       "when": {
         "type": "vertically_squiggly_striped",
@@ -242,7 +242,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_vertically_striped",
+        "model": "domum_ornamentum:block/panel/panel_vertically_striped",
         "x": -90,
         "y": 180
       },
@@ -255,7 +255,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_vertically_striped",
+        "model": "domum_ornamentum:block/panel/panel_vertically_striped",
         "x": 180
       },
       "when": {
@@ -267,7 +267,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_vertically_striped",
+        "model": "domum_ornamentum:block/panel/panel_vertically_striped",
         "x": 90
       },
       "when": {
@@ -279,7 +279,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_vertically_striped"
+        "model": "domum_ornamentum:block/panel/panel_vertically_striped"
       },
       "when": {
         "type": "vertically_striped",
@@ -290,7 +290,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_waffle",
+        "model": "domum_ornamentum:block/panel/panel_waffle",
         "x": -90,
         "y": 180
       },
@@ -303,7 +303,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_waffle",
+        "model": "domum_ornamentum:block/panel/panel_waffle",
         "x": 180
       },
       "when": {
@@ -315,7 +315,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_waffle",
+        "model": "domum_ornamentum:block/panel/panel_waffle",
         "x": 90
       },
       "when": {
@@ -327,7 +327,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_waffle"
+        "model": "domum_ornamentum:block/panel/panel_waffle"
       },
       "when": {
         "type": "waffle",
@@ -338,7 +338,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_full",
+        "model": "domum_ornamentum:block/panel/panel_full",
         "x": -90,
         "y": 360
       },
@@ -351,7 +351,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_full",
+        "model": "domum_ornamentum:block/panel/panel_full",
         "x": 180,
         "y": 180
       },
@@ -364,7 +364,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_full",
+        "model": "domum_ornamentum:block/panel/panel_full",
         "x": 90,
         "y": 180
       },
@@ -377,7 +377,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_full",
+        "model": "domum_ornamentum:block/panel/panel_full",
         "y": 180
       },
       "when": {
@@ -389,7 +389,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_horizontally_squiggly_striped",
+        "model": "domum_ornamentum:block/panel/panel_horizontally_squiggly_striped",
         "x": -90,
         "y": 360
       },
@@ -402,7 +402,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_horizontally_squiggly_striped",
+        "model": "domum_ornamentum:block/panel/panel_horizontally_squiggly_striped",
         "x": 180,
         "y": 180
       },
@@ -415,7 +415,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_horizontally_squiggly_striped",
+        "model": "domum_ornamentum:block/panel/panel_horizontally_squiggly_striped",
         "x": 90,
         "y": 180
       },
@@ -428,7 +428,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_horizontally_squiggly_striped",
+        "model": "domum_ornamentum:block/panel/panel_horizontally_squiggly_striped",
         "y": 180
       },
       "when": {
@@ -440,7 +440,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_horizontally_striped",
+        "model": "domum_ornamentum:block/panel/panel_horizontally_striped",
         "x": -90,
         "y": 360
       },
@@ -453,7 +453,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_horizontally_striped",
+        "model": "domum_ornamentum:block/panel/panel_horizontally_striped",
         "x": 180,
         "y": 180
       },
@@ -466,7 +466,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_horizontally_striped",
+        "model": "domum_ornamentum:block/panel/panel_horizontally_striped",
         "x": 90,
         "y": 180
       },
@@ -479,7 +479,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_horizontally_striped",
+        "model": "domum_ornamentum:block/panel/panel_horizontally_striped",
         "y": 180
       },
       "when": {
@@ -491,7 +491,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_port_manteau",
+        "model": "domum_ornamentum:block/panel/panel_port_manteau",
         "x": -90,
         "y": 360
       },
@@ -504,7 +504,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_port_manteau",
+        "model": "domum_ornamentum:block/panel/panel_port_manteau",
         "x": 180,
         "y": 180
       },
@@ -517,7 +517,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_port_manteau",
+        "model": "domum_ornamentum:block/panel/panel_port_manteau",
         "x": 90,
         "y": 180
       },
@@ -530,7 +530,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_port_manteau",
+        "model": "domum_ornamentum:block/panel/panel_port_manteau",
         "y": 180
       },
       "when": {
@@ -542,7 +542,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_vertically_squiggly_striped",
+        "model": "domum_ornamentum:block/panel/panel_vertically_squiggly_striped",
         "x": -90,
         "y": 360
       },
@@ -555,7 +555,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_vertically_squiggly_striped",
+        "model": "domum_ornamentum:block/panel/panel_vertically_squiggly_striped",
         "x": 180,
         "y": 180
       },
@@ -568,7 +568,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_vertically_squiggly_striped",
+        "model": "domum_ornamentum:block/panel/panel_vertically_squiggly_striped",
         "x": 90,
         "y": 180
       },
@@ -581,7 +581,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_vertically_squiggly_striped",
+        "model": "domum_ornamentum:block/panel/panel_vertically_squiggly_striped",
         "y": 180
       },
       "when": {
@@ -593,7 +593,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_vertically_striped",
+        "model": "domum_ornamentum:block/panel/panel_vertically_striped",
         "x": -90,
         "y": 360
       },
@@ -606,7 +606,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_vertically_striped",
+        "model": "domum_ornamentum:block/panel/panel_vertically_striped",
         "x": 180,
         "y": 180
       },
@@ -619,7 +619,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_vertically_striped",
+        "model": "domum_ornamentum:block/panel/panel_vertically_striped",
         "x": 90,
         "y": 180
       },
@@ -632,7 +632,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_vertically_striped",
+        "model": "domum_ornamentum:block/panel/panel_vertically_striped",
         "y": 180
       },
       "when": {
@@ -644,7 +644,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_waffle",
+        "model": "domum_ornamentum:block/panel/panel_waffle",
         "x": -90,
         "y": 360
       },
@@ -657,7 +657,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_waffle",
+        "model": "domum_ornamentum:block/panel/panel_waffle",
         "x": 180,
         "y": 180
       },
@@ -670,7 +670,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_waffle",
+        "model": "domum_ornamentum:block/panel/panel_waffle",
         "x": 90,
         "y": 180
       },
@@ -683,7 +683,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_waffle",
+        "model": "domum_ornamentum:block/panel/panel_waffle",
         "y": 180
       },
       "when": {
@@ -695,7 +695,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_full",
+        "model": "domum_ornamentum:block/panel/panel_full",
         "x": -90,
         "y": 450
       },
@@ -708,7 +708,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_full",
+        "model": "domum_ornamentum:block/panel/panel_full",
         "x": 180,
         "y": 270
       },
@@ -721,7 +721,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_full",
+        "model": "domum_ornamentum:block/panel/panel_full",
         "x": 90,
         "y": 270
       },
@@ -734,7 +734,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_full",
+        "model": "domum_ornamentum:block/panel/panel_full",
         "y": 270
       },
       "when": {
@@ -746,7 +746,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_horizontally_squiggly_striped",
+        "model": "domum_ornamentum:block/panel/panel_horizontally_squiggly_striped",
         "x": -90,
         "y": 450
       },
@@ -759,7 +759,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_horizontally_squiggly_striped",
+        "model": "domum_ornamentum:block/panel/panel_horizontally_squiggly_striped",
         "x": 180,
         "y": 270
       },
@@ -772,7 +772,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_horizontally_squiggly_striped",
+        "model": "domum_ornamentum:block/panel/panel_horizontally_squiggly_striped",
         "x": 90,
         "y": 270
       },
@@ -785,7 +785,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_horizontally_squiggly_striped",
+        "model": "domum_ornamentum:block/panel/panel_horizontally_squiggly_striped",
         "y": 270
       },
       "when": {
@@ -797,7 +797,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_horizontally_striped",
+        "model": "domum_ornamentum:block/panel/panel_horizontally_striped",
         "x": -90,
         "y": 450
       },
@@ -810,7 +810,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_horizontally_striped",
+        "model": "domum_ornamentum:block/panel/panel_horizontally_striped",
         "x": 180,
         "y": 270
       },
@@ -823,7 +823,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_horizontally_striped",
+        "model": "domum_ornamentum:block/panel/panel_horizontally_striped",
         "x": 90,
         "y": 270
       },
@@ -836,7 +836,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_horizontally_striped",
+        "model": "domum_ornamentum:block/panel/panel_horizontally_striped",
         "y": 270
       },
       "when": {
@@ -848,7 +848,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_port_manteau",
+        "model": "domum_ornamentum:block/panel/panel_port_manteau",
         "x": -90,
         "y": 450
       },
@@ -861,7 +861,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_port_manteau",
+        "model": "domum_ornamentum:block/panel/panel_port_manteau",
         "x": 180,
         "y": 270
       },
@@ -874,7 +874,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_port_manteau",
+        "model": "domum_ornamentum:block/panel/panel_port_manteau",
         "x": 90,
         "y": 270
       },
@@ -887,7 +887,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_port_manteau",
+        "model": "domum_ornamentum:block/panel/panel_port_manteau",
         "y": 270
       },
       "when": {
@@ -899,7 +899,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_vertically_squiggly_striped",
+        "model": "domum_ornamentum:block/panel/panel_vertically_squiggly_striped",
         "x": -90,
         "y": 450
       },
@@ -912,7 +912,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_vertically_squiggly_striped",
+        "model": "domum_ornamentum:block/panel/panel_vertically_squiggly_striped",
         "x": 180,
         "y": 270
       },
@@ -925,7 +925,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_vertically_squiggly_striped",
+        "model": "domum_ornamentum:block/panel/panel_vertically_squiggly_striped",
         "x": 90,
         "y": 270
       },
@@ -938,7 +938,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_vertically_squiggly_striped",
+        "model": "domum_ornamentum:block/panel/panel_vertically_squiggly_striped",
         "y": 270
       },
       "when": {
@@ -950,7 +950,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_vertically_striped",
+        "model": "domum_ornamentum:block/panel/panel_vertically_striped",
         "x": -90,
         "y": 450
       },
@@ -963,7 +963,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_vertically_striped",
+        "model": "domum_ornamentum:block/panel/panel_vertically_striped",
         "x": 180,
         "y": 270
       },
@@ -976,7 +976,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_vertically_striped",
+        "model": "domum_ornamentum:block/panel/panel_vertically_striped",
         "x": 90,
         "y": 270
       },
@@ -989,7 +989,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_vertically_striped",
+        "model": "domum_ornamentum:block/panel/panel_vertically_striped",
         "y": 270
       },
       "when": {
@@ -1001,7 +1001,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_waffle",
+        "model": "domum_ornamentum:block/panel/panel_waffle",
         "x": -90,
         "y": 450
       },
@@ -1014,7 +1014,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_waffle",
+        "model": "domum_ornamentum:block/panel/panel_waffle",
         "x": 180,
         "y": 270
       },
@@ -1027,7 +1027,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_waffle",
+        "model": "domum_ornamentum:block/panel/panel_waffle",
         "x": 90,
         "y": 270
       },
@@ -1040,7 +1040,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_waffle",
+        "model": "domum_ornamentum:block/panel/panel_waffle",
         "y": 270
       },
       "when": {
@@ -1052,7 +1052,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_full",
+        "model": "domum_ornamentum:block/panel/panel_full",
         "x": -90,
         "y": 270
       },
@@ -1065,7 +1065,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_full",
+        "model": "domum_ornamentum:block/panel/panel_full",
         "x": 180,
         "y": 90
       },
@@ -1078,7 +1078,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_full",
+        "model": "domum_ornamentum:block/panel/panel_full",
         "x": 90,
         "y": 90
       },
@@ -1091,7 +1091,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_full",
+        "model": "domum_ornamentum:block/panel/panel_full",
         "y": 90
       },
       "when": {
@@ -1103,7 +1103,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_horizontally_squiggly_striped",
+        "model": "domum_ornamentum:block/panel/panel_horizontally_squiggly_striped",
         "x": -90,
         "y": 270
       },
@@ -1116,7 +1116,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_horizontally_squiggly_striped",
+        "model": "domum_ornamentum:block/panel/panel_horizontally_squiggly_striped",
         "x": 180,
         "y": 90
       },
@@ -1129,7 +1129,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_horizontally_squiggly_striped",
+        "model": "domum_ornamentum:block/panel/panel_horizontally_squiggly_striped",
         "x": 90,
         "y": 90
       },
@@ -1142,7 +1142,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_horizontally_squiggly_striped",
+        "model": "domum_ornamentum:block/panel/panel_horizontally_squiggly_striped",
         "y": 90
       },
       "when": {
@@ -1154,7 +1154,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_horizontally_striped",
+        "model": "domum_ornamentum:block/panel/panel_horizontally_striped",
         "x": -90,
         "y": 270
       },
@@ -1167,7 +1167,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_horizontally_striped",
+        "model": "domum_ornamentum:block/panel/panel_horizontally_striped",
         "x": 180,
         "y": 90
       },
@@ -1180,7 +1180,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_horizontally_striped",
+        "model": "domum_ornamentum:block/panel/panel_horizontally_striped",
         "x": 90,
         "y": 90
       },
@@ -1193,7 +1193,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_horizontally_striped",
+        "model": "domum_ornamentum:block/panel/panel_horizontally_striped",
         "y": 90
       },
       "when": {
@@ -1205,7 +1205,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_port_manteau",
+        "model": "domum_ornamentum:block/panel/panel_port_manteau",
         "x": -90,
         "y": 270
       },
@@ -1218,7 +1218,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_port_manteau",
+        "model": "domum_ornamentum:block/panel/panel_port_manteau",
         "x": 180,
         "y": 90
       },
@@ -1231,7 +1231,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_port_manteau",
+        "model": "domum_ornamentum:block/panel/panel_port_manteau",
         "x": 90,
         "y": 90
       },
@@ -1244,7 +1244,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_port_manteau",
+        "model": "domum_ornamentum:block/panel/panel_port_manteau",
         "y": 90
       },
       "when": {
@@ -1256,7 +1256,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_vertically_squiggly_striped",
+        "model": "domum_ornamentum:block/panel/panel_vertically_squiggly_striped",
         "x": -90,
         "y": 270
       },
@@ -1269,7 +1269,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_vertically_squiggly_striped",
+        "model": "domum_ornamentum:block/panel/panel_vertically_squiggly_striped",
         "x": 180,
         "y": 90
       },
@@ -1282,7 +1282,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_vertically_squiggly_striped",
+        "model": "domum_ornamentum:block/panel/panel_vertically_squiggly_striped",
         "x": 90,
         "y": 90
       },
@@ -1295,7 +1295,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_vertically_squiggly_striped",
+        "model": "domum_ornamentum:block/panel/panel_vertically_squiggly_striped",
         "y": 90
       },
       "when": {
@@ -1307,7 +1307,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_vertically_striped",
+        "model": "domum_ornamentum:block/panel/panel_vertically_striped",
         "x": -90,
         "y": 270
       },
@@ -1320,7 +1320,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_vertically_striped",
+        "model": "domum_ornamentum:block/panel/panel_vertically_striped",
         "x": 180,
         "y": 90
       },
@@ -1333,7 +1333,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_vertically_striped",
+        "model": "domum_ornamentum:block/panel/panel_vertically_striped",
         "x": 90,
         "y": 90
       },
@@ -1346,7 +1346,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_vertically_striped",
+        "model": "domum_ornamentum:block/panel/panel_vertically_striped",
         "y": 90
       },
       "when": {
@@ -1358,7 +1358,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_waffle",
+        "model": "domum_ornamentum:block/panel/panel_waffle",
         "x": -90,
         "y": 270
       },
@@ -1371,7 +1371,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_waffle",
+        "model": "domum_ornamentum:block/panel/panel_waffle",
         "x": 180,
         "y": 90
       },
@@ -1384,7 +1384,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_waffle",
+        "model": "domum_ornamentum:block/panel/panel_waffle",
         "x": 90,
         "y": 90
       },
@@ -1397,7 +1397,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:panels/panel_waffle",
+        "model": "domum_ornamentum:block/panel/panel_waffle",
         "y": 90
       },
       "when": {

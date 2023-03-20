@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "domum_ornamentum:shingle_slab/top"
+        "model": "domum_ornamentum:block/shingle_slab/top"
       },
       "when": {
         "facing": "north",
@@ -11,7 +11,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingle_slab/one_way"
+        "model": "domum_ornamentum:block/shingle_slab/one_way"
       },
       "when": {
         "facing": "north",
@@ -20,7 +20,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingle_slab/two_way"
+        "model": "domum_ornamentum:block/shingle_slab/two_way"
       },
       "when": {
         "facing": "north",
@@ -29,7 +29,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingle_slab/three_way"
+        "model": "domum_ornamentum:block/shingle_slab/three_way"
       },
       "when": {
         "facing": "north",
@@ -38,7 +38,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingle_slab/four_way"
+        "model": "domum_ornamentum:block/shingle_slab/four_way"
       },
       "when": {
         "facing": "north",
@@ -47,7 +47,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingle_slab/curved"
+        "model": "domum_ornamentum:block/shingle_slab/curved"
       },
       "when": {
         "facing": "north",
@@ -56,7 +56,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingle_slab/top",
+        "model": "domum_ornamentum:block/shingle_slab/top",
         "y": 180
       },
       "when": {
@@ -66,7 +66,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingle_slab/one_way",
+        "model": "domum_ornamentum:block/shingle_slab/one_way",
         "y": 180
       },
       "when": {
@@ -76,7 +76,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingle_slab/two_way",
+        "model": "domum_ornamentum:block/shingle_slab/two_way",
         "y": 180
       },
       "when": {
@@ -86,7 +86,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingle_slab/three_way",
+        "model": "domum_ornamentum:block/shingle_slab/three_way",
         "y": 180
       },
       "when": {
@@ -96,7 +96,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingle_slab/four_way",
+        "model": "domum_ornamentum:block/shingle_slab/four_way",
         "y": 180
       },
       "when": {
@@ -106,7 +106,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingle_slab/curved",
+        "model": "domum_ornamentum:block/shingle_slab/curved",
         "y": 180
       },
       "when": {
@@ -116,7 +116,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingle_slab/top",
+        "model": "domum_ornamentum:block/shingle_slab/top",
         "y": 270
       },
       "when": {
@@ -126,7 +126,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingle_slab/one_way",
+        "model": "domum_ornamentum:block/shingle_slab/one_way",
         "y": 270
       },
       "when": {
@@ -136,7 +136,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingle_slab/two_way",
+        "model": "domum_ornamentum:block/shingle_slab/two_way",
         "y": 270
       },
       "when": {
@@ -146,7 +146,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingle_slab/three_way",
+        "model": "domum_ornamentum:block/shingle_slab/three_way",
         "y": 270
       },
       "when": {
@@ -156,7 +156,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingle_slab/four_way",
+        "model": "domum_ornamentum:block/shingle_slab/four_way",
         "y": 270
       },
       "when": {
@@ -166,7 +166,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingle_slab/curved",
+        "model": "domum_ornamentum:block/shingle_slab/curved",
         "y": 270
       },
       "when": {
@@ -176,7 +176,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingle_slab/top",
+        "model": "domum_ornamentum:block/shingle_slab/top",
         "y": 90
       },
       "when": {
@@ -186,7 +186,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingle_slab/one_way",
+        "model": "domum_ornamentum:block/shingle_slab/one_way",
         "y": 90
       },
       "when": {
@@ -196,7 +196,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingle_slab/two_way",
+        "model": "domum_ornamentum:block/shingle_slab/two_way",
         "y": 90
       },
       "when": {
@@ -206,7 +206,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingle_slab/three_way",
+        "model": "domum_ornamentum:block/shingle_slab/three_way",
         "y": 90
       },
       "when": {
@@ -216,7 +216,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingle_slab/four_way",
+        "model": "domum_ornamentum:block/shingle_slab/four_way",
         "y": 90
       },
       "when": {
@@ -226,7 +226,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingle_slab/curved",
+        "model": "domum_ornamentum:block/shingle_slab/curved",
         "y": 90
       },
       "when": {

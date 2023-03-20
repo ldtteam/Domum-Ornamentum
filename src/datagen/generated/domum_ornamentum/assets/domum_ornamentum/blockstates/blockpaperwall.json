@@ -2,12 +2,12 @@
   "multipart": [
     {
       "apply": {
-        "model": "domum_ornamentum:block/paperwalls/blockpaperwall_post"
+        "model": "domum_ornamentum:block/paperwall/blockpaperwall_post"
       }
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/paperwalls/blockpaperwall_side_north"
+        "model": "domum_ornamentum:block/paperwall/blockpaperwall_side_north"
       },
       "when": {
         "north": "true"
@@ -15,7 +15,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/paperwalls/blockpaperwall_side_off_north"
+        "model": "domum_ornamentum:block/paperwall/blockpaperwall_side_off_north"
       },
       "when": {
         "north": "false"
@@ -23,7 +23,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/paperwalls/blockpaperwall_side_south"
+        "model": "domum_ornamentum:block/paperwall/blockpaperwall_side_south"
       },
       "when": {
         "south": "true"
@@ -31,7 +31,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/paperwalls/blockpaperwall_side_off_south"
+        "model": "domum_ornamentum:block/paperwall/blockpaperwall_side_off_south"
       },
       "when": {
         "south": "false"
@@ -39,7 +39,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/paperwalls/blockpaperwall_side_west"
+        "model": "domum_ornamentum:block/paperwall/blockpaperwall_side_west"
       },
       "when": {
         "west": "true"
@@ -47,7 +47,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/paperwalls/blockpaperwall_side_off_west"
+        "model": "domum_ornamentum:block/paperwall/blockpaperwall_side_off_west"
       },
       "when": {
         "west": "false"
@@ -55,7 +55,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/paperwalls/blockpaperwall_side_east"
+        "model": "domum_ornamentum:block/paperwall/blockpaperwall_side_east"
       },
       "when": {
         "east": "true"
@@ -63,7 +63,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/paperwalls/blockpaperwall_side_off_east"
+        "model": "domum_ornamentum:block/paperwall/blockpaperwall_side_off_east"
       },
       "when": {
         "east": "false"

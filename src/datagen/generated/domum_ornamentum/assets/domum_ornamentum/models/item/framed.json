@@ -1,5 +1,5 @@
 {
-  "parent": "domum_ornamentum:block/timber_frames/framed",
+  "parent": "domum_ornamentum:block/timber_frame/framed",
   "display": {
     "firstperson_lefthand": {
       "rotation": [

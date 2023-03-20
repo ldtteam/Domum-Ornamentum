@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/straight",
+        "model": "domum_ornamentum:block/shingle/straight",
         "x": 180,
         "y": 270
       },
@@ -14,7 +14,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/straight",
+        "model": "domum_ornamentum:block/shingle/straight",
         "y": 270
       },
       "when": {
@@ -25,7 +25,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/inner_left",
+        "model": "domum_ornamentum:block/shingle/inner_left",
         "x": 180,
         "y": 270
       },
@@ -37,7 +37,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/inner_left",
+        "model": "domum_ornamentum:block/shingle/inner_left",
         "y": 180
       },
       "when": {
@@ -48,7 +48,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/inner_right",
+        "model": "domum_ornamentum:block/shingle/inner_right",
         "x": 180,
         "y": 360
       },
@@ -60,7 +60,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/inner_right",
+        "model": "domum_ornamentum:block/shingle/inner_right",
         "y": 270
       },
       "when": {
@@ -71,7 +71,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/outer_left",
+        "model": "domum_ornamentum:block/shingle/outer_left",
         "x": 180,
         "y": 270
       },
@@ -83,7 +83,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/outer_left",
+        "model": "domum_ornamentum:block/shingle/outer_left",
         "y": 180
       },
       "when": {
@@ -94,7 +94,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/outer_right",
+        "model": "domum_ornamentum:block/shingle/outer_right",
         "x": 180,
         "y": 360
       },
@@ -106,7 +106,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/outer_right",
+        "model": "domum_ornamentum:block/shingle/outer_right",
         "y": 270
       },
       "when": {
@@ -117,7 +117,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/straight",
+        "model": "domum_ornamentum:block/shingle/straight",
         "x": 180,
         "y": 450
       },
@@ -129,7 +129,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/straight",
+        "model": "domum_ornamentum:block/shingle/straight",
         "y": 450
       },
       "when": {
@@ -140,7 +140,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/inner_left",
+        "model": "domum_ornamentum:block/shingle/inner_left",
         "x": 180,
         "y": 450
       },
@@ -152,7 +152,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/inner_left",
+        "model": "domum_ornamentum:block/shingle/inner_left",
         "y": 360
       },
       "when": {
@@ -163,7 +163,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/inner_right",
+        "model": "domum_ornamentum:block/shingle/inner_right",
         "x": 180,
         "y": 540
       },
@@ -175,7 +175,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/inner_right",
+        "model": "domum_ornamentum:block/shingle/inner_right",
         "y": 450
       },
       "when": {
@@ -186,7 +186,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/outer_left",
+        "model": "domum_ornamentum:block/shingle/outer_left",
         "x": 180,
         "y": 450
       },
@@ -198,7 +198,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/outer_left",
+        "model": "domum_ornamentum:block/shingle/outer_left",
         "y": 360
       },
       "when": {
@@ -209,7 +209,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/outer_right",
+        "model": "domum_ornamentum:block/shingle/outer_right",
         "x": 180,
         "y": 540
       },
@@ -221,7 +221,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/outer_right",
+        "model": "domum_ornamentum:block/shingle/outer_right",
         "y": 450
       },
       "when": {
@@ -232,7 +232,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/straight",
+        "model": "domum_ornamentum:block/shingle/straight",
         "x": 180,
         "y": 180
       },
@@ -244,7 +244,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/straight",
+        "model": "domum_ornamentum:block/shingle/straight",
         "y": 180
       },
       "when": {
@@ -255,7 +255,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/inner_left",
+        "model": "domum_ornamentum:block/shingle/inner_left",
         "x": 180,
         "y": 180
       },
@@ -267,7 +267,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/inner_left",
+        "model": "domum_ornamentum:block/shingle/inner_left",
         "y": 90
       },
       "when": {
@@ -278,7 +278,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/inner_right",
+        "model": "domum_ornamentum:block/shingle/inner_right",
         "x": 180,
         "y": 270
       },
@@ -290,7 +290,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/inner_right",
+        "model": "domum_ornamentum:block/shingle/inner_right",
         "y": 180
       },
       "when": {
@@ -301,7 +301,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/outer_left",
+        "model": "domum_ornamentum:block/shingle/outer_left",
         "x": 180,
         "y": 180
       },
@@ -313,7 +313,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/outer_left",
+        "model": "domum_ornamentum:block/shingle/outer_left",
         "y": 90
       },
       "when": {
@@ -324,7 +324,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/outer_right",
+        "model": "domum_ornamentum:block/shingle/outer_right",
         "x": 180,
         "y": 270
       },
@@ -336,7 +336,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/outer_right",
+        "model": "domum_ornamentum:block/shingle/outer_right",
         "y": 180
       },
       "when": {
@@ -347,7 +347,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/straight",
+        "model": "domum_ornamentum:block/shingle/straight",
         "x": 180,
         "y": 360
       },
@@ -359,7 +359,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/straight",
+        "model": "domum_ornamentum:block/shingle/straight",
         "y": 360
       },
       "when": {
@@ -370,7 +370,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/inner_left",
+        "model": "domum_ornamentum:block/shingle/inner_left",
         "x": 180,
         "y": 360
       },
@@ -382,7 +382,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/inner_left",
+        "model": "domum_ornamentum:block/shingle/inner_left",
         "y": 270
       },
       "when": {
@@ -393,7 +393,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/inner_right",
+        "model": "domum_ornamentum:block/shingle/inner_right",
         "x": 180,
         "y": 450
       },
@@ -405,7 +405,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/inner_right",
+        "model": "domum_ornamentum:block/shingle/inner_right",
         "y": 360
       },
       "when": {
@@ -416,7 +416,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/outer_left",
+        "model": "domum_ornamentum:block/shingle/outer_left",
         "x": 180,
         "y": 360
       },
@@ -428,7 +428,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/outer_left",
+        "model": "domum_ornamentum:block/shingle/outer_left",
         "y": 270
       },
       "when": {
@@ -439,7 +439,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/outer_right",
+        "model": "domum_ornamentum:block/shingle/outer_right",
         "x": 180,
         "y": 450
       },
@@ -451,7 +451,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:shingles/outer_right",
+        "model": "domum_ornamentum:block/shingle/outer_right",
         "y": 360
       },
       "when": {

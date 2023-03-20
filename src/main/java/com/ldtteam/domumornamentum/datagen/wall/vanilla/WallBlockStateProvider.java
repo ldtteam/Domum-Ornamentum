@@ -33,7 +33,7 @@ public class WallBlockStateProvider extends BlockStateProvider {
     private void createBlockstateFile(final WallBlock wallBlock) {
         final MultiPartBlockStateBuilder builder = getMultipartBuilder(wallBlock);
         builder.part()
-                .modelFile(models().withExistingParent("block/walls/wall_post", modLoc("block/walls/wall_post_spec"))
+                .modelFile(models().withExistingParent("block/wall/wall_post", modLoc("block/wall/wall_post_spec"))
                         .customLoader(MateriallyTexturedModelBuilder::new)
                         .end())
                 .addModel()
@@ -46,7 +46,7 @@ public class WallBlockStateProvider extends BlockStateProvider {
                     continue;
 
                 builder.part()
-                        .modelFile(models().withExistingParent("block/walls/wall_side" + (value == WallSide.TALL ? "_tall" : ""), modLoc("block/walls/wall_side" + (value == WallSide.TALL ? "_tall" : "") + "_spec"))
+                        .modelFile(models().withExistingParent("block/wall/wall_side" + (value == WallSide.TALL ? "_tall" : ""), modLoc("block/wall/wall_side" + (value == WallSide.TALL ? "_tall" : "") + "_spec"))
                                 .customLoader(MateriallyTexturedModelBuilder::new)
                                 .end())
                         .rotationY(getYFromFacing(possibleValue))
@@ -57,7 +57,7 @@ public class WallBlockStateProvider extends BlockStateProvider {
         }
 
         final ItemModelBuilder itemModelBuilder = itemModels()
-                .withExistingParent(wallBlock.getRegistryName().getPath(), modLoc("item/walls/wall_spec"))
+                .withExistingParent(wallBlock.getRegistryName().getPath(), modLoc("item/wall/wall_spec"))
                 .customLoader(MateriallyTexturedModelBuilder::new)
                 .end();
 

@@ -44,7 +44,7 @@ public class FancyTrapdoorsBlockStateProvider extends BlockStateProvider
                     for (boolean openValue : OPEN.getPossibleValues())
                     {
                         builder.part()
-                                .modelFile(models().withExistingParent("block/trapdoors/fancy/trapdoor_" + typeValue.getSerializedName(), modLoc("block/trapdoors/fancy/trapdoor_" + typeValue.getSerializedName() + "_spec"))
+                                .modelFile(models().withExistingParent("block/trapdoor/fancy/trapdoor_" + typeValue.getSerializedName(), modLoc("block/trapdoor/fancy/trapdoor_" + typeValue.getSerializedName() + "_spec"))
                                         .customLoader(MateriallyTexturedModelBuilder::new)
                                         .end())
                                 .rotationX(getXFromOpenAndHalf(openValue, halfValue))
@@ -66,7 +66,7 @@ public class FancyTrapdoorsBlockStateProvider extends BlockStateProvider
         for (int i = 0; i < values.length; i++) {
             FancyTrapdoorType value = values[i];
             itemModelBuilderSpec.override()
-                    .model(itemModels().getExistingFile(modLoc("block/trapdoors/fancy/trapdoor_" + value.getSerializedName() + "_spec")))
+                    .model(itemModels().getExistingFile(modLoc("block/trapdoor/fancy/trapdoor_" + value.getSerializedName() + "_spec")))
                     .predicate(new ResourceLocation(Constants.TRAPDOOR_MODEL_OVERRIDE), i)
                     .end();
         }

@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "domum_ornamentum:block/walls/wall_post"
+        "model": "domum_ornamentum:block/wall/wall_post"
       },
       "when": {
         "up": "true"
@@ -10,7 +10,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/walls/wall_side"
+        "model": "domum_ornamentum:block/wall/wall_side"
       },
       "when": {
         "north": "low"
@@ -18,7 +18,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/walls/wall_side_tall"
+        "model": "domum_ornamentum:block/wall/wall_side_tall"
       },
       "when": {
         "north": "tall"
@@ -26,7 +26,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/walls/wall_side",
+        "model": "domum_ornamentum:block/wall/wall_side",
         "y": 180
       },
       "when": {
@@ -35,7 +35,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/walls/wall_side_tall",
+        "model": "domum_ornamentum:block/wall/wall_side_tall",
         "y": 180
       },
       "when": {
@@ -44,7 +44,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/walls/wall_side",
+        "model": "domum_ornamentum:block/wall/wall_side",
         "y": 270
       },
       "when": {
@@ -53,7 +53,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/walls/wall_side_tall",
+        "model": "domum_ornamentum:block/wall/wall_side_tall",
         "y": 270
       },
       "when": {
@@ -62,7 +62,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/walls/wall_side",
+        "model": "domum_ornamentum:block/wall/wall_side",
         "y": 90
       },
       "when": {
@@ -71,7 +71,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/walls/wall_side_tall",
+        "model": "domum_ornamentum:block/wall/wall_side_tall",
         "y": 90
       },
       "when": {

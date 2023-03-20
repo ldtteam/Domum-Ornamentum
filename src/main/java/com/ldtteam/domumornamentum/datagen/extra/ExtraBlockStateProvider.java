@@ -22,9 +22,8 @@ public class ExtraBlockStateProvider extends BlockStateProvider
     }
 
     private void registerStatesAndModelsFor(ExtraBlock extraBlock) {
-        final ModelFile cubeAll = models().cubeAll(extraBlock.getRegistryName().getPath(), modLoc("block/extra/" + extraBlock.getRegistryName().getPath()));
-        simpleBlock(extraBlock, cubeAll);
-        simpleBlockItem(extraBlock, cubeAll);
+        final ModelFile cubeAll = models().cubeAll("block/extra/" + extraBlock.getType().getCategory().name().toLowerCase() + "/" + extraBlock.getRegistryName().getPath(), modLoc("block/extra/" + extraBlock.getRegistryName().getPath()));
+        simpleBlockWithItem(extraBlock, cubeAll);
     }
 
     @NotNull

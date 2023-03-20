@@ -41,7 +41,7 @@ public class ShingleSlabBlockStateProvider extends BlockStateProvider
             for (ShingleSlabShapeType shapeValue : ShingleSlabBlock.SHAPE.getPossibleValues())
             {
                 builder.part()
-                        .modelFile(models.computeIfAbsent(shapeValue, shape -> models().withExistingParent("shingle_slab/" + shapeValue.name().toLowerCase(), modLoc("block/shingle_slab/shingle_slab_" + shapeValue.name().toLowerCase() + "_spec"))
+                        .modelFile(models.computeIfAbsent(shapeValue, shape -> models().withExistingParent("block/shingle_slab/" + shapeValue.name().toLowerCase(), modLoc("block/shingle_slab/shingle_slab_" + shapeValue.name().toLowerCase() + "_spec"))
                                 .customLoader(MateriallyTexturedModelBuilder::new)
                                 .end()))
                         .rotationY(getYFromFacing(facingValue))

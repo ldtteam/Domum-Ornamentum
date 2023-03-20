@@ -105,43 +105,43 @@
   },
   "overrides": [
     {
-      "model": "domum_ornamentum:block/trapdoors/trapdoor_full_spec",
+      "model": "domum_ornamentum:block/trapdoor/trapdoor_full_spec",
       "predicate": {
         "domum_ornamentum:trapdoor_type": 0.0
       }
     },
     {
-      "model": "domum_ornamentum:block/trapdoors/trapdoor_horizontally_squiggly_striped_spec",
+      "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontally_squiggly_striped_spec",
       "predicate": {
         "domum_ornamentum:trapdoor_type": 1.0
       }
     },
     {
-      "model": "domum_ornamentum:block/trapdoors/trapdoor_horizontally_striped_spec",
+      "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontally_striped_spec",
       "predicate": {
         "domum_ornamentum:trapdoor_type": 2.0
       }
     },
     {
-      "model": "domum_ornamentum:block/trapdoors/trapdoor_port_manteau_spec",
+      "model": "domum_ornamentum:block/trapdoor/trapdoor_port_manteau_spec",
       "predicate": {
         "domum_ornamentum:trapdoor_type": 3.0
       }
     },
     {
-      "model": "domum_ornamentum:block/trapdoors/trapdoor_vertically_squiggly_striped_spec",
+      "model": "domum_ornamentum:block/trapdoor/trapdoor_vertically_squiggly_striped_spec",
       "predicate": {
         "domum_ornamentum:trapdoor_type": 4.0
       }
     },
     {
-      "model": "domum_ornamentum:block/trapdoors/trapdoor_vertically_striped_spec",
+      "model": "domum_ornamentum:block/trapdoor/trapdoor_vertically_striped_spec",
       "predicate": {
         "domum_ornamentum:trapdoor_type": 5.0
       }
     },
     {
-      "model": "domum_ornamentum:block/trapdoors/trapdoor_waffle_spec",
+      "model": "domum_ornamentum:block/trapdoor/trapdoor_waffle_spec",
       "predicate": {
         "domum_ornamentum:trapdoor_type": 6.0
       }

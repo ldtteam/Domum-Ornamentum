@@ -37,7 +37,7 @@ public class PanelBlockStateProvider extends BlockStateProvider {
                         final var partBuilder = builder.part();
 
                         partBuilder.modelFile(models()
-                                        .withExistingParent("panels/panel_" + typeValue.getSerializedName(), modLoc("block/panels/panel_%s_spec".formatted(typeValue.getSerializedName())))
+                                        .withExistingParent("block/panel/panel_" + typeValue.getSerializedName(), modLoc("block/panel/panel_%s_spec".formatted(typeValue.getSerializedName())))
                                         .customLoader(MateriallyTexturedModelBuilder::new)
                                         .end())
                                 .rotationY(getYFromFacing(facingValue) + getYFromOpenAndHalf(openValue, halfValue))
@@ -54,23 +54,21 @@ public class PanelBlockStateProvider extends BlockStateProvider {
         }
 
         final ItemModelBuilder itemSpecModelBuilder = itemModels()
-                .withExistingParent("panels/panel_spec", mcLoc("block/thin_block"));
-        final ItemModelBuilder.OverrideBuilder overrideBuilder = itemSpecModelBuilder.override();
+                .withExistingParent("panel_spec", mcLoc("block/thin_block"));
         TrapdoorType[] values = TrapdoorType.values();
         for (int i = 0; i < values.length; i++) {
             TrapdoorType value = values[i];
+            final ItemModelBuilder.OverrideBuilder overrideBuilder = itemSpecModelBuilder.override();
             overrideBuilder.predicate(new ResourceLocation(Constants.TRAPDOOR_MODEL_OVERRIDE), i);
-            overrideBuilder.model(itemModels().getExistingFile(modLoc("block/panels/panel_%s_spec".formatted(value.getSerializedName()))));
+            overrideBuilder.model(itemModels().getExistingFile(modLoc("block/panel/panel_%s_spec".formatted(value.getSerializedName()))));
+            overrideBuilder.end();
         }
-        overrideBuilder.end();
 
         final ItemModelBuilder itemModelBuilder = itemModels()
-                .getBuilder("panels/panel").parent(itemSpecModelBuilder)
+                .getBuilder(ModBlocks.getInstance().getPanel().getRegistryName().getPath()).parent(itemSpecModelBuilder)
                 .customLoader(MateriallyTexturedModelBuilder::new)
                 .end();
-
         ModelBuilderUtils.applyDefaultItemTransforms(itemModelBuilder);
-        simpleBlockItem(ModBlocks.getInstance().getPanel(), itemModelBuilder);
     }
 
     @Contract(pure = true)

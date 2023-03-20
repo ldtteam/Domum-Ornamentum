@@ -105,13 +105,13 @@
   },
   "overrides": [
     {
-      "model": "domum_ornamentum:block/trapdoors/fancy/trapdoor_full_spec",
+      "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full_spec",
       "predicate": {
         "domum_ornamentum:trapdoor_type": 0.0
       }
     },
     {
-      "model": "domum_ornamentum:block/trapdoors/fancy/trapdoor_creeper_spec",
+      "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper_spec",
       "predicate": {
         "domum_ornamentum:trapdoor_type": 1.0
       }

@@ -1,5 +1,5 @@
 {
-  "parent": "domum_ornamentum:item/fence_gates/fence_gate_spec",
+  "parent": "domum_ornamentum:item/fence_gate/fence_gate_spec",
   "display": {
     "firstperson_lefthand": {
       "rotation": [

@@ -17,5 +17,6 @@
   "result": {
     "count": 4,
     "item": "domum_ornamentum:light_gray_brick_extra"
-  }
+  },
+  "show_notification": true
 }

@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "domum_ornamentum:block/pink_brick_extra"
+      "model": "domum_ornamentum:block/extra/clay/pink_brick_extra"
     }
   }
 }

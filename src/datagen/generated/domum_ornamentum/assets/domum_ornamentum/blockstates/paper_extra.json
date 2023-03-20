@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "domum_ornamentum:block/paper_extra"
+      "model": "domum_ornamentum:block/extra/paper/paper_extra"
     }
   }
 }

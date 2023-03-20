@@ -14,43 +14,45 @@ import org.jetbrains.annotations.Nullable;
  */
 public enum ExtraBlockType implements StringRepresentable
 {
-    BLACK_CLAY(DyeColor.BLACK, Items.BRICK, SoundType.STONE),
-    BLUE_CLAY(DyeColor.BLUE, Items.BRICK, SoundType.STONE),
-    BLUE_SLATE(DyeColor.BLUE, Items.COBBLESTONE, SoundType.STONE),
-    BROWN_CLAY(DyeColor.BROWN, Items.BRICK, SoundType.STONE),
-    BASE_CLAY(null, Items.BRICK, SoundType.STONE),
-    CYAN_CLAY(DyeColor.CYAN, Items.BRICK, SoundType.STONE),
-    GRAY_CLAY(DyeColor.GRAY, Items.BRICK, SoundType.STONE),
-    GREEN_CLAY(DyeColor.GREEN, Items.BRICK, SoundType.STONE),
-    GREEN_SLATE(DyeColor.GREEN, Items.COBBLESTONE, SoundType.STONE),
-    LIGHT_BLUE_CLAY(DyeColor.LIGHT_BLUE, Items.BRICK, SoundType.STONE),
-    LIGHT_GRAY_CLAY(DyeColor.LIGHT_GRAY, Items.BRICK, SoundType.STONE),
-    LIME_CLAY(DyeColor.LIME, Items.BRICK, SoundType.STONE),
-    MAGENTA_CLAY(DyeColor.MAGENTA, Items.BRICK, SoundType.STONE),
-    MOSS_SLATE(null, Items.MOSSY_COBBLESTONE, SoundType.STONE),
-    ORANGE_CLAY(DyeColor.ORANGE, Items.BRICK, SoundType.STONE),
-    PINK_CLAY(DyeColor.PINK, Items.BRICK, SoundType.STONE),
-    PURPLE_CLAY(DyeColor.PURPLE, Items.BRICK, SoundType.STONE),
-    PURPLE_SLATE(DyeColor.PURPLE, Items.COBBLESTONE, SoundType.STONE),
-    RED_CLAY(DyeColor.RED, Items.BRICK, SoundType.STONE),
-    BASE_SLATE(null, Items.COBBLESTONE, SoundType.STONE),
-    BASE_THATCHED(null, Items.WHEAT, SoundType.GRASS),
-    WHITE_CLAY(DyeColor.WHITE, Items.BRICK, SoundType.STONE),
-    YELLOW_CLAY(DyeColor.YELLOW, Items.BRICK, SoundType.STONE),
-    BASE_PAPER(null, Items.PAPER, SoundType.WOOL),
-    BASE_CACTUS(null, Items.CACTUS, SoundType.WOOD),
-    GREEN_CACTUS(DyeColor.GREEN, Items.CACTUS, SoundType.WOOD),
-    LIGHT_PAPER(DyeColor.WHITE, Items.PAPER, SoundType.WOOL);
+    BLACK_CLAY(DyeColor.BLACK, Items.BRICK, SoundType.STONE, ExtraBlockCategory.CLAY),
+    BLUE_CLAY(DyeColor.BLUE, Items.BRICK, SoundType.STONE, ExtraBlockCategory.CLAY),
+    BLUE_SLATE(DyeColor.BLUE, Items.COBBLESTONE, SoundType.STONE, ExtraBlockCategory.SLATE),
+    BROWN_CLAY(DyeColor.BROWN, Items.BRICK, SoundType.STONE, ExtraBlockCategory.CLAY),
+    BASE_CLAY(null, Items.BRICK, SoundType.STONE, ExtraBlockCategory.CLAY),
+    CYAN_CLAY(DyeColor.CYAN, Items.BRICK, SoundType.STONE, ExtraBlockCategory.CLAY),
+    GRAY_CLAY(DyeColor.GRAY, Items.BRICK, SoundType.STONE, ExtraBlockCategory.CLAY),
+    GREEN_CLAY(DyeColor.GREEN, Items.BRICK, SoundType.STONE, ExtraBlockCategory.CLAY),
+    GREEN_SLATE(DyeColor.GREEN, Items.COBBLESTONE, SoundType.STONE, ExtraBlockCategory.SLATE),
+    LIGHT_BLUE_CLAY(DyeColor.LIGHT_BLUE, Items.BRICK, SoundType.STONE, ExtraBlockCategory.CLAY),
+    LIGHT_GRAY_CLAY(DyeColor.LIGHT_GRAY, Items.BRICK, SoundType.STONE, ExtraBlockCategory.CLAY),
+    LIME_CLAY(DyeColor.LIME, Items.BRICK, SoundType.STONE, ExtraBlockCategory.CLAY),
+    MAGENTA_CLAY(DyeColor.MAGENTA, Items.BRICK, SoundType.STONE, ExtraBlockCategory.CLAY),
+    MOSS_SLATE(null, Items.MOSSY_COBBLESTONE, SoundType.STONE, ExtraBlockCategory.SLATE),
+    ORANGE_CLAY(DyeColor.ORANGE, Items.BRICK, SoundType.STONE, ExtraBlockCategory.CLAY),
+    PINK_CLAY(DyeColor.PINK, Items.BRICK, SoundType.STONE, ExtraBlockCategory.CLAY),
+    PURPLE_CLAY(DyeColor.PURPLE, Items.BRICK, SoundType.STONE, ExtraBlockCategory.CLAY),
+    PURPLE_SLATE(DyeColor.PURPLE, Items.COBBLESTONE, SoundType.STONE, ExtraBlockCategory.SLATE),
+    RED_CLAY(DyeColor.RED, Items.BRICK, SoundType.STONE, ExtraBlockCategory.CLAY),
+    BASE_SLATE(null, Items.COBBLESTONE, SoundType.STONE, ExtraBlockCategory.SLATE),
+    BASE_THATCHED(null, Items.WHEAT, SoundType.GRASS, ExtraBlockCategory.THATCHED),
+    WHITE_CLAY(DyeColor.WHITE, Items.BRICK, SoundType.STONE, ExtraBlockCategory.CLAY),
+    YELLOW_CLAY(DyeColor.YELLOW, Items.BRICK, SoundType.STONE, ExtraBlockCategory.CLAY),
+    BASE_PAPER(null, Items.PAPER, SoundType.WOOL, ExtraBlockCategory.PAPER),
+    BASE_CACTUS(null, Items.CACTUS, SoundType.WOOD, ExtraBlockCategory.CACTUS),
+    GREEN_CACTUS(DyeColor.GREEN, Items.CACTUS, SoundType.WOOD, ExtraBlockCategory.CACTUS),
+    LIGHT_PAPER(DyeColor.WHITE, Items.PAPER, SoundType.WOOL, ExtraBlockCategory.PAPER);
 
     private final DyeColor color;
     private final Item material;
     private final SoundType soundType;
+    private final ExtraBlockCategory category;
 
-    ExtraBlockType(final DyeColor color, final Item material, final SoundType soundType)
+    ExtraBlockType(final DyeColor color, final Item material, final SoundType soundType, ExtraBlockCategory category)
     {
         this.color = color;
         this.material = material;
         this.soundType = soundType;
+        this.category = category;
     }
 
     @NotNull
@@ -73,5 +75,9 @@ public enum ExtraBlockType implements StringRepresentable
 
     public SoundType getSoundType() {
         return this.soundType;
+    }
+
+    public ExtraBlockCategory getCategory() {
+        return category;
     }
 }

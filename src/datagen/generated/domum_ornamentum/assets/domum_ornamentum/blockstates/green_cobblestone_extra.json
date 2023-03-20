@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "domum_ornamentum:block/green_cobblestone_extra"
+      "model": "domum_ornamentum:block/extra/slate/green_cobblestone_extra"
     }
   }
 }

@@ -1,5 +1,5 @@
 {
-  "parent": "domum_ornamentum:shingles/straight",
+  "parent": "domum_ornamentum:block/shingle/straight",
   "display": {
     "firstperson_lefthand": {
       "rotation": [

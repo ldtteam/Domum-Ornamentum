@@ -109,7 +109,7 @@ public class PanelBlock extends AbstractPanelBlockTrapdoor<PanelBlock> implement
             for (final TrapdoorType trapdoorType : TrapdoorType.values())
             {
                 final ItemStack result = new ItemStack(this);
-                result.getOrCreateTag().putString("type", trapdoorType.toString().toUpperCase());
+                result.getOrCreateTag().putString("type", trapdoorType.name().toUpperCase());
 
                 fillItemGroupCache.add(result);
             }
@@ -126,7 +126,11 @@ public class PanelBlock extends AbstractPanelBlockTrapdoor<PanelBlock> implement
     {
         super.setPlacedBy(worldIn, pos, state, placer, stack);
 
-        final String type = stack.getOrCreateTag().getString("type");
+        String type = stack.getOrCreateTag().getString("type");
+        if (type == "") {
+            type = TrapdoorType.FULL.name();
+        }
+
         worldIn.setBlock(
           pos,
           state.setValue(TYPE, TrapdoorType.valueOf(type.toUpperCase())),

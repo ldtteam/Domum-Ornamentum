@@ -160,10 +160,8 @@ public class ModBusEventHandler
         event.getGenerator().addProvider(true, new PillarBlockStateProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(true, new PillarComponentTagProvider(event.getGenerator().getPackOutput(), event.getLookupProvider(), event.getExistingFileHelper()));
 
-        event.getGenerator().addProvider(true, new GlobalRecipeProvider(event.getGenerator().getPackOutput()));
-
         //Global
-        //IMPORTANT: Needs to be last since this writes the lang data actually to disk!!!!!
+        event.getGenerator().addProvider(true, new GlobalRecipeProvider(event.getGenerator().getPackOutput()));
         event.getGenerator().addProvider(true, new GlobalLanguageProvider(event.getGenerator()));
         event.getGenerator().addProvider(true, new GlobalLootTableProvider(event.getGenerator().getPackOutput()));
         event.getGenerator().addProvider(true, new MateriallyTexturedBlockRecipeProvider(event.getGenerator().getPackOutput()));

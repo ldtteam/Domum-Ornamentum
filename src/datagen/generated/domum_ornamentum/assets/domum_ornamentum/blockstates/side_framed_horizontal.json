@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "domum_ornamentum:block/timber_frames/side_framed_horizontal",
+        "model": "domum_ornamentum:block/timber_frame/side_framed_horizontal",
         "x": 90
       },
       "when": {
@@ -11,7 +11,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/timber_frames/side_framed_horizontal",
+        "model": "domum_ornamentum:block/timber_frame/side_framed_horizontal",
         "x": 90,
         "y": 90
       },
@@ -21,7 +21,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/timber_frames/side_framed_horizontal",
+        "model": "domum_ornamentum:block/timber_frame/side_framed_horizontal",
         "x": 90,
         "y": 180
       },
@@ -31,7 +31,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/timber_frames/side_framed_horizontal",
+        "model": "domum_ornamentum:block/timber_frame/side_framed_horizontal",
         "x": 90,
         "y": 270
       },
@@ -41,7 +41,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/timber_frames/side_framed_horizontal"
+        "model": "domum_ornamentum:block/timber_frame/side_framed_horizontal"
       },
       "when": {
         "facing": "up"
@@ -49,7 +49,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/timber_frames/side_framed_horizontal",
+        "model": "domum_ornamentum:block/timber_frame/side_framed_horizontal",
         "x": 180
       },
       "when": {

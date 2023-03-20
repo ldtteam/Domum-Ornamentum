@@ -61,6 +61,8 @@ public final class ModCreativeTabs {
                             .displayItems(new OutputAwareGenerator((featureFlagSet, output) -> {
                                 ModBlocks.getInstance().getExtraTopBlocks().forEach(output::accept);
                                 ModBlocks.getInstance().getBricks().forEach(output::accept);
+                                output.accept(ModBlocks.getInstance().getStandingBarrel());
+                                output.accept(ModBlocks.getInstance().getLayingBarrel());
                             }));
                 }
         );

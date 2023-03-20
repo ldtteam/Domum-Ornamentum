@@ -7,6 +7,7 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.WoolCarpetBlock;
@@ -46,13 +47,13 @@ public class FloatingCarpetRecipeProvider extends RecipeProvider
         for (final FloatingCarpetBlock block : ModBlocks.getInstance().getFloatingCarpets())
         {
             final DyeColor color = block.getColor();
-            ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, block, 4)
-                    .pattern("C  ")
-                    .pattern("S  ")
-                    .pattern("   ")
-                    .define('C', carpets.get(color))
-                    .define('S', Tags.Items.STRING)
-                    .group("floating_carpets");
+            ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, block)
+                    .requires(carpets.get(color))
+                    .requires(Tags.Items.STRING)
+                    .group("floating_carpets")
+                    .unlockedBy("has_string", has(Tags.Items.STRING))
+                    .unlockedBy("has_carpet", has(carpets.get(color)))
+                    .save(builder);
         }
     }
 

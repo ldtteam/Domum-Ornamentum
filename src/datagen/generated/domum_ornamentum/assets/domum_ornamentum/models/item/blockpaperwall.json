@@ -1,5 +1,5 @@
 {
-  "parent": "domum_ornamentum:item/paperwalls/blockpaperwall_spec",
+  "parent": "domum_ornamentum:item/paperwall/blockpaperwall_spec",
   "display": {
     "firstperson_lefthand": {
       "rotation": [

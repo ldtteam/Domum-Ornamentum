@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoors/fancy/trapdoor_full",
+        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full",
         "x": -90,
         "y": 180
       },
@@ -15,7 +15,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoors/fancy/trapdoor_full",
+        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full",
         "x": 180
       },
       "when": {
@@ -27,7 +27,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoors/fancy/trapdoor_full",
+        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full",
         "x": 90
       },
       "when": {
@@ -39,7 +39,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoors/fancy/trapdoor_full"
+        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full"
       },
       "when": {
         "type": "full",
@@ -50,7 +50,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoors/fancy/trapdoor_creeper",
+        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper",
         "x": -90,
         "y": 180
       },
@@ -63,7 +63,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoors/fancy/trapdoor_creeper",
+        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper",
         "x": 180
       },
       "when": {
@@ -75,7 +75,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoors/fancy/trapdoor_creeper",
+        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper",
         "x": 90
       },
       "when": {
@@ -87,7 +87,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoors/fancy/trapdoor_creeper"
+        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper"
       },
       "when": {
         "type": "creeper",
@@ -98,7 +98,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoors/fancy/trapdoor_full",
+        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full",
         "x": -90,
         "y": 360
       },
@@ -111,7 +111,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoors/fancy/trapdoor_full",
+        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full",
         "x": 180,
         "y": 180
       },
@@ -124,7 +124,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoors/fancy/trapdoor_full",
+        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full",
         "x": 90,
         "y": 180
       },
@@ -137,7 +137,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoors/fancy/trapdoor_full",
+        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full",
         "y": 180
       },
       "when": {
@@ -149,7 +149,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoors/fancy/trapdoor_creeper",
+        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper",
         "x": -90,
         "y": 360
       },
@@ -162,7 +162,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoors/fancy/trapdoor_creeper",
+        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper",
         "x": 180,
         "y": 180
       },
@@ -175,7 +175,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoors/fancy/trapdoor_creeper",
+        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper",
         "x": 90,
         "y": 180
       },
@@ -188,7 +188,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoors/fancy/trapdoor_creeper",
+        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper",
         "y": 180
       },
       "when": {
@@ -200,7 +200,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoors/fancy/trapdoor_full",
+        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full",
         "x": -90,
         "y": 450
       },
@@ -213,7 +213,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoors/fancy/trapdoor_full",
+        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full",
         "x": 180,
         "y": 270
       },
@@ -226,7 +226,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoors/fancy/trapdoor_full",
+        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full",
         "x": 90,
         "y": 270
       },
@@ -239,7 +239,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoors/fancy/trapdoor_full",
+        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full",
         "y": 270
       },
       "when": {
@@ -251,7 +251,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoors/fancy/trapdoor_creeper",
+        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper",
         "x": -90,
         "y": 450
       },
@@ -264,7 +264,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoors/fancy/trapdoor_creeper",
+        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper",
         "x": 180,
         "y": 270
       },
@@ -277,7 +277,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoors/fancy/trapdoor_creeper",
+        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper",
         "x": 90,
         "y": 270
       },
@@ -290,7 +290,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoors/fancy/trapdoor_creeper",
+        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper",
         "y": 270
       },
       "when": {
@@ -302,7 +302,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoors/fancy/trapdoor_full",
+        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full",
         "x": -90,
         "y": 270
       },
@@ -315,7 +315,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoors/fancy/trapdoor_full",
+        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full",
         "x": 180,
         "y": 90
       },
@@ -328,7 +328,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoors/fancy/trapdoor_full",
+        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full",
         "x": 90,
         "y": 90
       },
@@ -341,7 +341,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoors/fancy/trapdoor_full",
+        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full",
         "y": 90
       },
       "when": {
@@ -353,7 +353,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoors/fancy/trapdoor_creeper",
+        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper",
         "x": -90,
         "y": 270
       },
@@ -366,7 +366,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoors/fancy/trapdoor_creeper",
+        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper",
         "x": 180,
         "y": 90
       },
@@ -379,7 +379,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoors/fancy/trapdoor_creeper",
+        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper",
         "x": 90,
         "y": 90
       },
@@ -392,7 +392,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoors/fancy/trapdoor_creeper",
+        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper",
         "y": 90
       },
       "when": {
