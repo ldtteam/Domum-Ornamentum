@@ -1,5 +1,5 @@
 {
-  "parent": "domum_ornamentum:item/slabs/slab_spec",
+  "parent": "domum_ornamentum:item/slab/slab_spec",
   "display": {
     "firstperson_lefthand": {
       "rotation": [

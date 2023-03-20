@@ -33,7 +33,7 @@ public class PaperwallBlockStateProvider extends BlockStateProvider {
     private void createBlockstateFile(final PaperWallBlock paperWallBlock) {
         final MultiPartBlockStateBuilder builder = getMultipartBuilder(paperWallBlock);
         builder.part()
-                .modelFile(models().withExistingParent("block/paperwalls/blockpaperwall_post", modLoc("block/paperwalls/blockpaperwall_post_spec"))
+                .modelFile(models().withExistingParent("block/paperwall/blockpaperwall_post", modLoc("block/paperwall/blockpaperwall_post_spec"))
                         .customLoader(MateriallyTexturedModelBuilder::new)
                         .end())
                 .addModel()
@@ -41,14 +41,14 @@ public class PaperwallBlockStateProvider extends BlockStateProvider {
 
         for (final Direction possibleValue : HorizontalDirectionalBlock.FACING.getPossibleValues()) {
             builder.part()
-                    .modelFile(models().withExistingParent("block/paperwalls/blockpaperwall_side_" + possibleValue.name().toLowerCase(Locale.ROOT), modLoc("block/paperwalls/blockpaperwall_side_" + possibleValue.name().toLowerCase(Locale.ROOT) + "_spec"))
+                    .modelFile(models().withExistingParent("block/paperwall/blockpaperwall_side_" + possibleValue.name().toLowerCase(Locale.ROOT), modLoc("block/paperwall/blockpaperwall_side_" + possibleValue.name().toLowerCase(Locale.ROOT) + "_spec"))
                             .customLoader(MateriallyTexturedModelBuilder::new)
                             .end())
                     .addModel()
                     .condition(Objects.requireNonNull(AbstractBlockPane.PROPERTIES.get(possibleValue)), true)
                     .end()
                     .part()
-                    .modelFile(models().withExistingParent("block/paperwalls/blockpaperwall_side_off_" + possibleValue.name().toLowerCase(Locale.ROOT), modLoc("block/paperwalls/blockpaperwall_side_" + possibleValue.name().toLowerCase(Locale.ROOT) + "_spec"))
+                    .modelFile(models().withExistingParent("block/paperwall/blockpaperwall_side_off_" + possibleValue.name().toLowerCase(Locale.ROOT), modLoc("block/paperwall/blockpaperwall_side_" + possibleValue.name().toLowerCase(Locale.ROOT) + "_spec"))
                             .customLoader(MateriallyTexturedModelBuilder::new)
                             .end())
                     .addModel()
@@ -56,7 +56,7 @@ public class PaperwallBlockStateProvider extends BlockStateProvider {
                     .end();
         }
 
-        final ItemModelBuilder itemModelBuilder = itemModels().withExistingParent(paperWallBlock.getRegistryName().getPath(), modLoc("item/paperwalls/blockpaperwall_spec"))
+        final ItemModelBuilder itemModelBuilder = itemModels().withExistingParent(paperWallBlock.getRegistryName().getPath(), modLoc("item/paperwall/blockpaperwall_spec"))
                 .customLoader(MateriallyTexturedModelBuilder::new)
                 .end();
 
@@ -67,18 +67,5 @@ public class PaperwallBlockStateProvider extends BlockStateProvider {
     @Override
     public String getName() {
         return "Paperwall BlockStates Provider";
-    }
-
-    private int getYFromFacing(final Direction facing) {
-        switch (facing) {
-            default:
-                return 0;
-            case WEST:
-                return 270;
-            case SOUTH:
-                return 180;
-            case EAST:
-                return 90;
-        }
     }
 }

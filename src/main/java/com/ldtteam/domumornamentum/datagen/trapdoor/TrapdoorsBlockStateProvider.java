@@ -43,7 +43,7 @@ public class TrapdoorsBlockStateProvider extends BlockStateProvider
                     for (boolean openValue : OPEN.getPossibleValues())
                     {
                         builder.part()
-                                .modelFile(models().withExistingParent("block/trapdoors/trapdoor_" + typeValue.getSerializedName(), modLoc("block/trapdoors/trapdoor_" + typeValue.getSerializedName() + "_spec"))
+                                .modelFile(models().withExistingParent("block/trapdoor/trapdoor_" + typeValue.getSerializedName(), modLoc("block/trapdoor/trapdoor_" + typeValue.getSerializedName() + "_spec"))
                                         .customLoader(MateriallyTexturedModelBuilder::new)
                                         .end())
                                 .rotationY(getYFromFacing(facingValue) + getYFromOpenAndHalf(openValue, halfValue))
@@ -65,7 +65,7 @@ public class TrapdoorsBlockStateProvider extends BlockStateProvider
         for (int i = 0; i < TrapdoorType.values().length; i++) {
             final TrapdoorType type = TrapdoorType.values()[i];
             itemModelBuilderSpec.override()
-                    .model(itemModels().getExistingFile(modLoc("block/trapdoors/trapdoor_" + type.getSerializedName() + "_spec")))
+                    .model(itemModels().getExistingFile(modLoc("block/trapdoor/trapdoor_" + type.getSerializedName() + "_spec")))
                     .predicate(new ResourceLocation(Constants.TRAPDOOR_MODEL_OVERRIDE), i)
                     .end();
         }

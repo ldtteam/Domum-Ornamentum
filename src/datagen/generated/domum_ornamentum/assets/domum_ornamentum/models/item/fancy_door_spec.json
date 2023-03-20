@@ -50,13 +50,13 @@
         0
       ],
       "scale": [
-        0.625,
-        0.625,
-        0.625
+        0.45,
+        0.45,
+        0.45
       ],
       "translation": [
-        0,
-        0.5,
+        -2,
+        -4,
         0
       ]
     },
@@ -104,13 +104,13 @@
   },
   "overrides": [
     {
-      "model": "domum_ornamentum:item/doors/fancy/door_full_spec",
+      "model": "domum_ornamentum:item/door/fancy/door_full_spec",
       "predicate": {
         "domum_ornamentum:door_type": 0.0
       }
     },
     {
-      "model": "domum_ornamentum:item/doors/fancy/door_creeper_spec",
+      "model": "domum_ornamentum:item/door/fancy/door_creeper_spec",
       "predicate": {
         "domum_ornamentum:door_type": 1.0
       }

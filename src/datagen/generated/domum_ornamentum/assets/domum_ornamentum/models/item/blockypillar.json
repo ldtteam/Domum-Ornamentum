@@ -1,5 +1,5 @@
 {
-  "parent": "domum_ornamentum:block/pillars/blockypillar_full_pillar",
+  "parent": "domum_ornamentum:block/pillar/blockypillar_full_pillar",
   "display": {
     "firstperson_lefthand": {
       "rotation": [

@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "domum_ornamentum:slabs/top"
+        "model": "domum_ornamentum:block/slab/top"
       },
       "when": {
         "type": "top"
@@ -10,7 +10,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:slabs/bottom"
+        "model": "domum_ornamentum:block/slab/bottom"
       },
       "when": {
         "type": "bottom"
@@ -18,7 +18,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:slabs/double"
+        "model": "domum_ornamentum:block/slab/double"
       },
       "when": {
         "type": "double"

@@ -1,5 +1,5 @@
 {
-  "parent": "domum_ornamentum:block/timber_frames/double_crossed",
+  "parent": "domum_ornamentum:block/timber_frame/double_crossed",
   "display": {
     "firstperson_lefthand": {
       "rotation": [

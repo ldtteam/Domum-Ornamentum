@@ -24,7 +24,7 @@ public class FenceBlockStateProvider extends BlockStateProvider
     protected void registerStatesAndModels() {
         final MultiPartBlockStateBuilder builder = getMultipartBuilder(ModBlocks.getInstance().getFence())
                 .part()
-                .modelFile(models().withExistingParent("fences/fence_post", modLoc("block/fences/fence_post_spec"))
+                .modelFile(models().withExistingParent("block/fence/fence_post", modLoc("block/fence/fence_post_spec"))
                         .customLoader(MateriallyTexturedModelBuilder::new)
                         .end())
                 .addModel()
@@ -32,7 +32,7 @@ public class FenceBlockStateProvider extends BlockStateProvider
 
         for (Direction possibleValue : HorizontalDirectionalBlock.FACING.getPossibleValues()) {
             builder.part()
-                    .modelFile(models().withExistingParent("fences/fence_side", modLoc("block/fences/fence_side_spec"))
+                    .modelFile(models().withExistingParent("block/fence/fence_side", modLoc("block/fence/fence_side_spec"))
                             .customLoader(MateriallyTexturedModelBuilder::new)
                             .end())
                     .rotationY(getYFromFacing(possibleValue))
@@ -41,9 +41,8 @@ public class FenceBlockStateProvider extends BlockStateProvider
                     .end();
         }
 
-        final ItemModelBuilder itemModelBuilder = ModelBuilderUtils.applyDefaultItemTransforms(itemModels().withExistingParent("fences/fence", modLoc("item/fences/fence_spec")));
+        final ItemModelBuilder itemModelBuilder = ModelBuilderUtils.applyDefaultItemTransforms(itemModels().withExistingParent(ModBlocks.getInstance().getFence().getRegistryName().getPath(), modLoc("item/fence/fence_spec")));
         itemModelBuilder.customLoader(MateriallyTexturedModelBuilder::new);
-        simpleBlockItem(ModBlocks.getInstance().getFence(), itemModelBuilder);
     }
 
     @NotNull

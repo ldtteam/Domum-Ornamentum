@@ -75,11 +75,11 @@ public class PillarBlockStateProvider extends BlockStateProvider {
     }
 
     private String pillarModelLocation(PillarBlock pillar, PillarShapeType suffix) {
-        return "block/pillars/" + pillar.getRegistryName().getPath() + "_" + suffix.getSerializedName();
+        return "block/pillar/" + pillar.getRegistryName().getPath() + "_" + suffix.getSerializedName();
     }
 
     private String pillarSpecModelLocation(PillarBlock pillar, PillarShapeType suffix) {
-        return "block/pillars/" + pillar.getRegistryName().getPath() + "_" + suffix.getSpecificationName();
+        return "block/pillar/" + pillar.getRegistryName().getPath() + "_" + suffix.getSpecificationName();
     }
 
 

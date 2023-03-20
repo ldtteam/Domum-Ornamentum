@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs",
+        "model": "domum_ornamentum:block/stair/stairs",
         "x": 180,
         "y": 270
       },
@@ -14,7 +14,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs",
+        "model": "domum_ornamentum:block/stair/stairs",
         "y": 270
       },
       "when": {
@@ -25,7 +25,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs_inner",
+        "model": "domum_ornamentum:block/stair/stairs_inner",
         "x": 180,
         "y": 270
       },
@@ -37,7 +37,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs_inner",
+        "model": "domum_ornamentum:block/stair/stairs_inner",
         "y": 180
       },
       "when": {
@@ -48,7 +48,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs_inner",
+        "model": "domum_ornamentum:block/stair/stairs_inner",
         "x": 180,
         "y": 360
       },
@@ -60,7 +60,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs_inner",
+        "model": "domum_ornamentum:block/stair/stairs_inner",
         "y": 270
       },
       "when": {
@@ -71,7 +71,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs_outer",
+        "model": "domum_ornamentum:block/stair/stairs_outer",
         "x": 180,
         "y": 270
       },
@@ -83,7 +83,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs_outer",
+        "model": "domum_ornamentum:block/stair/stairs_outer",
         "y": 180
       },
       "when": {
@@ -94,7 +94,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs_outer",
+        "model": "domum_ornamentum:block/stair/stairs_outer",
         "x": 180,
         "y": 360
       },
@@ -106,7 +106,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs_outer",
+        "model": "domum_ornamentum:block/stair/stairs_outer",
         "y": 270
       },
       "when": {
@@ -117,7 +117,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs",
+        "model": "domum_ornamentum:block/stair/stairs",
         "x": 180,
         "y": 90
       },
@@ -129,7 +129,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs",
+        "model": "domum_ornamentum:block/stair/stairs",
         "y": 90
       },
       "when": {
@@ -140,7 +140,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs_inner",
+        "model": "domum_ornamentum:block/stair/stairs_inner",
         "x": 180,
         "y": 90
       },
@@ -152,7 +152,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs_inner"
+        "model": "domum_ornamentum:block/stair/stairs_inner"
       },
       "when": {
         "facing": "south",
@@ -162,7 +162,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs_inner",
+        "model": "domum_ornamentum:block/stair/stairs_inner",
         "x": 180,
         "y": 180
       },
@@ -174,7 +174,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs_inner",
+        "model": "domum_ornamentum:block/stair/stairs_inner",
         "y": 90
       },
       "when": {
@@ -185,7 +185,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs_outer",
+        "model": "domum_ornamentum:block/stair/stairs_outer",
         "x": 180,
         "y": 90
       },
@@ -197,7 +197,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs_outer"
+        "model": "domum_ornamentum:block/stair/stairs_outer"
       },
       "when": {
         "facing": "south",
@@ -207,7 +207,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs_outer",
+        "model": "domum_ornamentum:block/stair/stairs_outer",
         "x": 180,
         "y": 180
       },
@@ -219,7 +219,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs_outer",
+        "model": "domum_ornamentum:block/stair/stairs_outer",
         "y": 90
       },
       "when": {
@@ -230,7 +230,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs",
+        "model": "domum_ornamentum:block/stair/stairs",
         "x": 180,
         "y": 180
       },
@@ -242,7 +242,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs",
+        "model": "domum_ornamentum:block/stair/stairs",
         "y": 180
       },
       "when": {
@@ -253,7 +253,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs_inner",
+        "model": "domum_ornamentum:block/stair/stairs_inner",
         "x": 180,
         "y": 180
       },
@@ -265,7 +265,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs_inner",
+        "model": "domum_ornamentum:block/stair/stairs_inner",
         "y": 90
       },
       "when": {
@@ -276,7 +276,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs_inner",
+        "model": "domum_ornamentum:block/stair/stairs_inner",
         "x": 180,
         "y": 270
       },
@@ -288,7 +288,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs_inner",
+        "model": "domum_ornamentum:block/stair/stairs_inner",
         "y": 180
       },
       "when": {
@@ -299,7 +299,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs_outer",
+        "model": "domum_ornamentum:block/stair/stairs_outer",
         "x": 180,
         "y": 180
       },
@@ -311,7 +311,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs_outer",
+        "model": "domum_ornamentum:block/stair/stairs_outer",
         "y": 90
       },
       "when": {
@@ -322,7 +322,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs_outer",
+        "model": "domum_ornamentum:block/stair/stairs_outer",
         "x": 180,
         "y": 270
       },
@@ -334,7 +334,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs_outer",
+        "model": "domum_ornamentum:block/stair/stairs_outer",
         "y": 180
       },
       "when": {
@@ -345,7 +345,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs",
+        "model": "domum_ornamentum:block/stair/stairs",
         "x": 180
       },
       "when": {
@@ -356,7 +356,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs"
+        "model": "domum_ornamentum:block/stair/stairs"
       },
       "when": {
         "facing": "east",
@@ -366,7 +366,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs_inner",
+        "model": "domum_ornamentum:block/stair/stairs_inner",
         "x": 180
       },
       "when": {
@@ -377,7 +377,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs_inner",
+        "model": "domum_ornamentum:block/stair/stairs_inner",
         "y": -90
       },
       "when": {
@@ -388,7 +388,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs_inner",
+        "model": "domum_ornamentum:block/stair/stairs_inner",
         "x": 180,
         "y": 90
       },
@@ -400,7 +400,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs_inner"
+        "model": "domum_ornamentum:block/stair/stairs_inner"
       },
       "when": {
         "facing": "east",
@@ -410,7 +410,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs_outer",
+        "model": "domum_ornamentum:block/stair/stairs_outer",
         "x": 180
       },
       "when": {
@@ -421,7 +421,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs_outer",
+        "model": "domum_ornamentum:block/stair/stairs_outer",
         "y": -90
       },
       "when": {
@@ -432,7 +432,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs_outer",
+        "model": "domum_ornamentum:block/stair/stairs_outer",
         "x": 180,
         "y": 90
       },
@@ -444,7 +444,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stairs/stairs_outer"
+        "model": "domum_ornamentum:block/stair/stairs_outer"
       },
       "when": {
         "facing": "east",

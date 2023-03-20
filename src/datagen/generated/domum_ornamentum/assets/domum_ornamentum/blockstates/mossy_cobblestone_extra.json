@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "domum_ornamentum:block/mossy_cobblestone_extra"
+      "model": "domum_ornamentum:block/extra/slate/mossy_cobblestone_extra"
     }
   }
 }

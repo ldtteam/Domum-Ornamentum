@@ -1,5 +1,5 @@
 {
-  "parent": "domum_ornamentum:item/walls/wall_spec",
+  "parent": "domum_ornamentum:item/wall/wall_spec",
   "display": {
     "firstperson_lefthand": {
       "rotation": [

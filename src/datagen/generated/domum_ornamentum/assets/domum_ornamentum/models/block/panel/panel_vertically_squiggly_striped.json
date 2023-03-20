@@ -1,0 +1,4 @@
+{
+  "parent": "domum_ornamentum:block/panel/panel_vertically_squiggly_striped_spec",
+  "loader": "domum_ornamentum:materially_textured"
+}

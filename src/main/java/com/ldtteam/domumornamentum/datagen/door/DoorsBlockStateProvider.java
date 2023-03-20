@@ -48,7 +48,7 @@ public class DoorsBlockStateProvider extends BlockStateProvider
     private Function<DoorType, ModelFile> createModel(Function<DoorType, String> baseName, String stateDescription)
     {
         return type -> models()
-                               .withExistingParent("block/doors/door_" + baseName.apply(type) + "_" + stateDescription, new ResourceLocation(Constants.MOD_ID, "block/doors/door_" + baseName.apply(type) + "_" + stateDescription + "_spec"))
+                               .withExistingParent("block/door/door_" + baseName.apply(type) + "_" + stateDescription, new ResourceLocation(Constants.MOD_ID, "block/door/door_" + baseName.apply(type) + "_" + stateDescription + "_spec"))
                                .customLoader(MateriallyTexturedModelBuilder::new)
                                .end();
     }
@@ -110,21 +110,21 @@ public class DoorsBlockStateProvider extends BlockStateProvider
 
         //Next up generate a single spec model with a variant aware resolver
         final ItemModelBuilder overarchingSpecBuilder = itemModels().getBuilder(ModBlocks.getInstance().getDoor().getRegistryName().getPath() + "_spec");
-        ModelBuilderUtils.applyDefaultItemTransforms(overarchingSpecBuilder);
+        ModelBuilderUtils.applyDoorItemTransforms(overarchingSpecBuilder);
         DoorType[] values = DoorType.values();
         for (int i = 0; i < values.length; i++)
         {
             final DoorType value = values[i];
             overarchingSpecBuilder.override()
                                   .predicate(new ResourceLocation(Constants.DOOR_MODEL_OVERRIDE), i)
-                                  .model(models().getExistingFile(new ResourceLocation(Constants.MOD_ID + ":item/doors/door_" + value.getSerializedName() + "_spec")))
+                                  .model(models().getExistingFile(new ResourceLocation(Constants.MOD_ID + ":item/door/door_" + value.getSerializedName() + "_spec")))
                                   .end();
         }
 
 
         //Now generate the single over arching item model which is loaded by the material manager.
         final ItemModelBuilder rootBuilder = itemModels().getBuilder(ModBlocks.getInstance().getDoor().getRegistryName().getPath());
-        ModelBuilderUtils.applyDefaultItemTransforms(rootBuilder);
+        ModelBuilderUtils.applyDoorItemTransforms(rootBuilder);
         rootBuilder.customLoader(MateriallyTexturedModelBuilder::new);
         rootBuilder.parent(overarchingSpecBuilder);
     }

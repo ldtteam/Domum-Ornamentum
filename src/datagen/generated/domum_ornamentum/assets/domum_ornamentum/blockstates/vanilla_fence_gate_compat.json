@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "domum_ornamentum:fence_gates/fence_gate_wall_open"
+        "model": "domum_ornamentum:block/fence_gate/fence_gate_wall_open"
       },
       "when": {
         "facing": "north",
@@ -12,7 +12,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:fence_gates/fence_gate_wall_"
+        "model": "domum_ornamentum:block/fence_gate/fence_gate_wall_"
       },
       "when": {
         "facing": "north",
@@ -22,7 +22,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:fence_gates/fence_gate_open"
+        "model": "domum_ornamentum:block/fence_gate/fence_gate_open"
       },
       "when": {
         "facing": "north",
@@ -32,7 +32,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:fence_gates/fence_gate_"
+        "model": "domum_ornamentum:block/fence_gate/fence_gate_"
       },
       "when": {
         "facing": "north",
@@ -42,7 +42,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:fence_gates/fence_gate_wall_open",
+        "model": "domum_ornamentum:block/fence_gate/fence_gate_wall_open",
         "y": 180
       },
       "when": {
@@ -53,7 +53,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:fence_gates/fence_gate_wall_",
+        "model": "domum_ornamentum:block/fence_gate/fence_gate_wall_",
         "y": 180
       },
       "when": {
@@ -64,7 +64,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:fence_gates/fence_gate_open",
+        "model": "domum_ornamentum:block/fence_gate/fence_gate_open",
         "y": 180
       },
       "when": {
@@ -75,7 +75,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:fence_gates/fence_gate_",
+        "model": "domum_ornamentum:block/fence_gate/fence_gate_",
         "y": 180
       },
       "when": {
@@ -86,7 +86,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:fence_gates/fence_gate_wall_open",
+        "model": "domum_ornamentum:block/fence_gate/fence_gate_wall_open",
         "y": 270
       },
       "when": {
@@ -97,7 +97,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:fence_gates/fence_gate_wall_",
+        "model": "domum_ornamentum:block/fence_gate/fence_gate_wall_",
         "y": 270
       },
       "when": {
@@ -108,7 +108,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:fence_gates/fence_gate_open",
+        "model": "domum_ornamentum:block/fence_gate/fence_gate_open",
         "y": 270
       },
       "when": {
@@ -119,7 +119,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:fence_gates/fence_gate_",
+        "model": "domum_ornamentum:block/fence_gate/fence_gate_",
         "y": 270
       },
       "when": {
@@ -130,7 +130,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:fence_gates/fence_gate_wall_open",
+        "model": "domum_ornamentum:block/fence_gate/fence_gate_wall_open",
         "y": 90
       },
       "when": {
@@ -141,7 +141,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:fence_gates/fence_gate_wall_",
+        "model": "domum_ornamentum:block/fence_gate/fence_gate_wall_",
         "y": 90
       },
       "when": {
@@ -152,7 +152,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:fence_gates/fence_gate_open",
+        "model": "domum_ornamentum:block/fence_gate/fence_gate_open",
         "y": 90
       },
       "when": {
@@ -163,7 +163,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:fence_gates/fence_gate_",
+        "model": "domum_ornamentum:block/fence_gate/fence_gate_",
         "y": 90
       },
       "when": {

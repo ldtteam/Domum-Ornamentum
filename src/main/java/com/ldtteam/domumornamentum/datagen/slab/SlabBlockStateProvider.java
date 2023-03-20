@@ -32,7 +32,7 @@ public class SlabBlockStateProvider extends BlockStateProvider
         final MultiPartBlockStateBuilder builder = getMultipartBuilder(slabBlock);
         for (SlabType value : SlabType.values()) {
             builder.part()
-                    .modelFile(models().withExistingParent("slabs/" + value.getSerializedName(), modLoc("block/slabs/slab_" + value.getSerializedName() + "_spec"))
+                    .modelFile(models().withExistingParent("block/slab/" + value.getSerializedName(), modLoc("block/slab/slab_" + value.getSerializedName() + "_spec"))
                             .customLoader(MateriallyTexturedModelBuilder::new)
                             .end())
                     .addModel()
@@ -40,7 +40,7 @@ public class SlabBlockStateProvider extends BlockStateProvider
                     .end();
         }
 
-        final ItemModelBuilder itemModelBuilder = itemModels().withExistingParent(slabBlock.getRegistryName().getPath(), modLoc("item/slabs/slab_spec"))
+        final ItemModelBuilder itemModelBuilder = itemModels().withExistingParent(slabBlock.getRegistryName().getPath(), modLoc("item/slab/slab_spec"))
                 .customLoader(MateriallyTexturedModelBuilder::new)
                 .end();
         ModelBuilderUtils.applyDefaultItemTransforms(itemModelBuilder);

@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "domum_ornamentum:block/cactus_extra"
+      "model": "domum_ornamentum:block/extra/cactus/cactus_extra"
     }
   }
 }

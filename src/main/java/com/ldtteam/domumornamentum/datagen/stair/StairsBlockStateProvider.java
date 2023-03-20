@@ -40,7 +40,7 @@ public class StairsBlockStateProvider extends BlockStateProvider
                 for (Half halfValue : HALF.getPossibleValues())
                 {
                     builder.part()
-                            .modelFile(models().withExistingParent("block/stairs/" + getTypeFromShape(shapeValue), modLoc("block/stairs/" + getTypeFromShape(shapeValue) + "_spec"))
+                            .modelFile(models().withExistingParent("block/stair/" + getTypeFromShape(shapeValue), modLoc("block/stair/" + getTypeFromShape(shapeValue) + "_spec"))
                                     .customLoader(MateriallyTexturedModelBuilder::new)
                                     .end())
                             .rotationY(getYFromFacing(facingValue) + getYFromShape(shapeValue) + getYFromHalf(halfValue, shapeValue))
@@ -54,7 +54,7 @@ public class StairsBlockStateProvider extends BlockStateProvider
             }
         }
 
-        final ItemModelBuilder itemModelBuilder = itemModels().withExistingParent(stairBlock.getRegistryName().getPath(), modLoc("block/stairs/stairs"))
+        final ItemModelBuilder itemModelBuilder = itemModels().withExistingParent(stairBlock.getRegistryName().getPath(), modLoc("block/stair/stairs"))
                 .customLoader(MateriallyTexturedModelBuilder::new)
                 .end();
         ModelBuilderUtils.applyDefaultItemTransforms(itemModelBuilder);

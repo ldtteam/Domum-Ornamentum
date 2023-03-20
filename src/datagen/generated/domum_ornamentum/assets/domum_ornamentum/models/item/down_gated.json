@@ -1,5 +1,5 @@
 {
-  "parent": "domum_ornamentum:block/timber_frames/down_gated",
+  "parent": "domum_ornamentum:block/timber_frame/down_gated",
   "display": {
     "firstperson_lefthand": {
       "rotation": [

@@ -1,5 +1,5 @@
 {
-  "parent": "domum_ornamentum:block/timber_frames/one_crossed_lr",
+  "parent": "domum_ornamentum:block/timber_frame/one_crossed_lr",
   "display": {
     "firstperson_lefthand": {
       "rotation": [

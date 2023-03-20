@@ -2,12 +2,12 @@
   "multipart": [
     {
       "apply": {
-        "model": "domum_ornamentum:fences/fence_post"
+        "model": "domum_ornamentum:block/fence/fence_post"
       }
     },
     {
       "apply": {
-        "model": "domum_ornamentum:fences/fence_side"
+        "model": "domum_ornamentum:block/fence/fence_side"
       },
       "when": {
         "north": "true"
@@ -15,7 +15,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:fences/fence_side",
+        "model": "domum_ornamentum:block/fence/fence_side",
         "y": 180
       },
       "when": {
@@ -24,7 +24,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:fences/fence_side",
+        "model": "domum_ornamentum:block/fence/fence_side",
         "y": 270
       },
       "when": {
@@ -33,7 +33,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:fences/fence_side",
+        "model": "domum_ornamentum:block/fence/fence_side",
         "y": 90
       },
       "when": {

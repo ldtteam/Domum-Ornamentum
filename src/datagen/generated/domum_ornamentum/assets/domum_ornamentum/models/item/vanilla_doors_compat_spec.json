@@ -50,13 +50,13 @@
         0
       ],
       "scale": [
-        0.625,
-        0.625,
-        0.625
+        0.45,
+        0.45,
+        0.45
       ],
       "translation": [
-        0,
-        0.5,
+        -2,
+        -4,
         0
       ]
     },
@@ -104,25 +104,25 @@
   },
   "overrides": [
     {
-      "model": "domum_ornamentum:item/doors/door_full_spec",
+      "model": "domum_ornamentum:item/door/door_full_spec",
       "predicate": {
         "domum_ornamentum:door_type": 0.0
       }
     },
     {
-      "model": "domum_ornamentum:item/doors/door_port_manteau_spec",
+      "model": "domum_ornamentum:item/door/door_port_manteau_spec",
       "predicate": {
         "domum_ornamentum:door_type": 1.0
       }
     },
     {
-      "model": "domum_ornamentum:item/doors/door_vertically_striped_spec",
+      "model": "domum_ornamentum:item/door/door_vertically_striped_spec",
       "predicate": {
         "domum_ornamentum:door_type": 2.0
       }
     },
     {
-      "model": "domum_ornamentum:item/doors/door_waffle_spec",
+      "model": "domum_ornamentum:item/door/door_waffle_spec",
       "predicate": {
         "domum_ornamentum:door_type": 3.0
       }

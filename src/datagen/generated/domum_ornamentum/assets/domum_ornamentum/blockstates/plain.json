@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "domum_ornamentum:block/timber_frames/plain"
+        "model": "domum_ornamentum:block/timber_frame/plain"
       },
       "when": {
         "facing": "north"
@@ -10,7 +10,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/timber_frames/plain"
+        "model": "domum_ornamentum:block/timber_frame/plain"
       },
       "when": {
         "facing": "east"
@@ -18,7 +18,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/timber_frames/plain"
+        "model": "domum_ornamentum:block/timber_frame/plain"
       },
       "when": {
         "facing": "south"
@@ -26,7 +26,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/timber_frames/plain"
+        "model": "domum_ornamentum:block/timber_frame/plain"
       },
       "when": {
         "facing": "west"
@@ -34,7 +34,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/timber_frames/plain"
+        "model": "domum_ornamentum:block/timber_frame/plain"
       },
       "when": {
         "facing": "up"
@@ -42,7 +42,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/timber_frames/plain"
+        "model": "domum_ornamentum:block/timber_frame/plain"
       },
       "when": {
         "facing": "down"

@@ -1,0 +1,4 @@
+{
+  "parent": "domum_ornamentum:block/pillar/blockypillar_pillar_base_spec",
+  "loader": "domum_ornamentum:materially_textured"
+}

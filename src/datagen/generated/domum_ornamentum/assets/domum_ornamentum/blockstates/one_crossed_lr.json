@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "domum_ornamentum:block/timber_frames/one_crossed_lr"
+        "model": "domum_ornamentum:block/timber_frame/one_crossed_lr"
       },
       "when": {
         "facing": "north"
@@ -10,7 +10,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/timber_frames/one_crossed_lr"
+        "model": "domum_ornamentum:block/timber_frame/one_crossed_lr"
       },
       "when": {
         "facing": "east"
@@ -18,7 +18,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/timber_frames/one_crossed_lr"
+        "model": "domum_ornamentum:block/timber_frame/one_crossed_lr"
       },
       "when": {
         "facing": "south"
@@ -26,7 +26,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/timber_frames/one_crossed_lr"
+        "model": "domum_ornamentum:block/timber_frame/one_crossed_lr"
       },
       "when": {
         "facing": "west"
@@ -34,7 +34,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/timber_frames/one_crossed_lr"
+        "model": "domum_ornamentum:block/timber_frame/one_crossed_lr"
       },
       "when": {
         "facing": "up"
@@ -42,7 +42,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/timber_frames/one_crossed_lr"
+        "model": "domum_ornamentum:block/timber_frame/one_crossed_lr"
       },
       "when": {
         "facing": "down"

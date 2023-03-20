@@ -56,7 +56,7 @@ public class FenceGateBlockStateProvider extends BlockStateProvider {
         }
 
         simpleBlockItem(ModBlocks.getInstance().getFence(),
-                itemModels().withExistingParent(ModBlocks.getInstance().getFenceGate().getRegistryName().getPath(), modLoc("item/fence_gates/fence_gate_spec"))
+                itemModels().withExistingParent(ModBlocks.getInstance().getFenceGate().getRegistryName().getPath(), modLoc("item/fence_gate/fence_gate_spec"))
                         .transforms()
                         .transform(ItemTransforms.TransformType.GUI)
                         .rotation(30, 225, 0)
@@ -97,11 +97,11 @@ public class FenceGateBlockStateProvider extends BlockStateProvider {
     }
 
     private ModelFile generateBlockModel(boolean wallState, boolean open) {
-        final String name = "fence_gates/fence_gate_"
+        final String name = "block/fence_gate/fence_gate_"
                 + (wallState ? "wall_" : "")
                 + (open ? "open" : "");
 
-        final ResourceLocation specLocation = new ResourceLocation(Constants.MOD_ID, "block/fence_gates/fence_gate_"
+        final ResourceLocation specLocation = new ResourceLocation(Constants.MOD_ID, "block/fence_gate/fence_gate_"
                 + (wallState ? "wall_" : "")
                 + (open ? "open_" : "") + "spec");
 
