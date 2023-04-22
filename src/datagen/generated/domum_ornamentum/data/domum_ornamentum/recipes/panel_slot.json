@@ -1,0 +1,6 @@
+{
+  "type": "domum_ornamentum:architects_cutter",
+  "block": "domum_ornamentum:panel",
+  "count": 4,
+  "nbt": "{type:\"SLOT\"}"
+}

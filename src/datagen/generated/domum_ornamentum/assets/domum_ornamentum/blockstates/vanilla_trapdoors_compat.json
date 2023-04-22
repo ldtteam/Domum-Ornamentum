@@ -338,6 +338,54 @@
     },
     {
       "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_slot",
+        "x": -90,
+        "y": 180
+      },
+      "when": {
+        "type": "slot",
+        "facing": "north",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_slot",
+        "x": 180
+      },
+      "when": {
+        "type": "slot",
+        "facing": "north",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_slot",
+        "x": 90
+      },
+      "when": {
+        "type": "slot",
+        "facing": "north",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_slot"
+      },
+      "when": {
+        "type": "slot",
+        "facing": "north",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_full",
         "x": -90,
         "y": 360
@@ -688,6 +736,57 @@
       },
       "when": {
         "type": "waffle",
+        "facing": "south",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_slot",
+        "x": -90,
+        "y": 360
+      },
+      "when": {
+        "type": "slot",
+        "facing": "south",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_slot",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "type": "slot",
+        "facing": "south",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_slot",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "type": "slot",
+        "facing": "south",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_slot",
+        "y": 180
+      },
+      "when": {
+        "type": "slot",
         "facing": "south",
         "half": "bottom",
         "open": "false"
@@ -1052,6 +1151,57 @@
     },
     {
       "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_slot",
+        "x": -90,
+        "y": 450
+      },
+      "when": {
+        "type": "slot",
+        "facing": "west",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_slot",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "type": "slot",
+        "facing": "west",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_slot",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "type": "slot",
+        "facing": "west",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_slot",
+        "y": 270
+      },
+      "when": {
+        "type": "slot",
+        "facing": "west",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_full",
         "x": -90,
         "y": 270
@@ -1402,6 +1552,57 @@
       },
       "when": {
         "type": "waffle",
+        "facing": "east",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_slot",
+        "x": -90,
+        "y": 270
+      },
+      "when": {
+        "type": "slot",
+        "facing": "east",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_slot",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "type": "slot",
+        "facing": "east",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_slot",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "type": "slot",
+        "facing": "east",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_slot",
+        "y": 90
+      },
+      "when": {
+        "type": "slot",
         "facing": "east",
         "half": "bottom",
         "open": "false"

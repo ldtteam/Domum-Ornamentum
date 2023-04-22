@@ -7,22 +7,15 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-public enum TrapdoorType implements StringRepresentable
+public enum PostType implements StringRepresentable
 {
-    FULL("full"),
-    HORIZONTALLY_SQUIGGLY_STRIPED("horizontally_squiggly_striped"),
-    HORIZONTALLY_STRIPED("horizontally_striped"),
-    PORT_MANTEAU("port_manteau"),
-    VERTICALLY_SQUIGGLY_STRIPED("vertically_squiggly_striped"),
-    VERTICALLY_STRIPED("vertically_striped"),
-    WAFFLE("waffle"),
-    SLOT("slot");
+    PLAIN("plain");
 
 
 
     private final String serializationName;
 
-    TrapdoorType(final String serializationName) {this.serializationName = serializationName;}
+    PostType(final String serializationName) {this.serializationName = serializationName;}
 
     @Override
     public String getSerializedName()

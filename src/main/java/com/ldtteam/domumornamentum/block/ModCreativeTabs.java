@@ -47,6 +47,7 @@ public final class ModCreativeTabs {
                                 output.accept(ModBlocks.getInstance().getTrapdoor());
                                 output.accept(ModBlocks.getInstance().getDoor());
                                 output.accept(ModBlocks.getInstance().getPanel());
+                                output.accept(ModBlocks.getInstance().getPost());
                                 output.accept(ModBlocks.getInstance().getFancyDoor());
                                 output.accept(ModBlocks.getInstance().getFancyTrapdoor());
                             }));

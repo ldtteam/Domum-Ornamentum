@@ -6,6 +6,7 @@ import com.ldtteam.domumornamentum.block.types.DoorType;
 import com.ldtteam.domumornamentum.block.types.FancyDoorType;
 import com.ldtteam.domumornamentum.block.types.FancyTrapdoorType;
 import com.ldtteam.domumornamentum.block.types.TrapdoorType;
+import com.ldtteam.domumornamentum.block.types.PostType;
 import com.ldtteam.domumornamentum.client.screens.ArchitectsCutterScreen;
 import com.ldtteam.domumornamentum.container.ModContainerTypes;
 import com.ldtteam.domumornamentum.util.Constants;
@@ -49,6 +50,8 @@ public class ModBusEventHandler
           (itemStack, clientLevel, livingEntity, i) -> handleFancyTrapdoorTypeOverride(itemStack)));
         event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getPanel().asItem(), new ResourceLocation(Constants.TRAPDOOR_MODEL_OVERRIDE),
           (itemStack, clientLevel, livingEntity, i) -> handleStaticTrapdoorTypeOverride(itemStack)));
+        event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getPost().asItem(), new ResourceLocation(Constants.POST_MODEL_OVERRIDE),
+                (itemStack, clientLevel, livingEntity, i) -> handlePostTypeOverride(itemStack)));
         event.enqueueWork(() -> MenuScreens.register(
           ModContainerTypes.ARCHITECTS_CUTTER.get(),
           ArchitectsCutterScreen::new
@@ -74,6 +77,7 @@ public class ModBusEventHandler
             ItemBlockRenderTypes.setRenderLayer(IModBlocks.getInstance().getTrapdoor(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(IModBlocks.getInstance().getDoor(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(IModBlocks.getInstance().getPanel(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(IModBlocks.getInstance().getPost(), RenderType.translucent());
 
             IModBlocks.getInstance().getExtraTopBlocks().stream()
                     .filter(ExtraBlock.class::isInstance)
@@ -160,5 +164,24 @@ public class ModBusEventHandler
         }
 
         return doorType.ordinal();
+    }
+    private static float handlePostTypeOverride(ItemStack itemStack)
+    {
+        if (!itemStack.getOrCreateTag().contains("type"))
+        {
+            return 0f;
+        }
+
+        PostType postType;
+        try
+        {
+            postType = PostType.valueOf(itemStack.getOrCreateTag().getString("type").toUpperCase());
+        }
+        catch (Exception ex)
+        {
+            postType = PostType.PLAIN;
+        }
+
+        return postType.ordinal();
     }
 }

@@ -42,6 +42,12 @@
       "predicate": {
         "domum_ornamentum:trapdoor_type": 6.0
       }
+    },
+    {
+      "model": "domum_ornamentum:block/panel/panel_slot_spec",
+      "predicate": {
+        "domum_ornamentum:trapdoor_type": 7.0
+      }
     }
   ]
 }

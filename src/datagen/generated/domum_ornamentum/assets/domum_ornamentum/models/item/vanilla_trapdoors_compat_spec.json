@@ -145,6 +145,12 @@
       "predicate": {
         "domum_ornamentum:trapdoor_type": 6.0
       }
+    },
+    {
+      "model": "domum_ornamentum:block/trapdoor/trapdoor_slot_spec",
+      "predicate": {
+        "domum_ornamentum:trapdoor_type": 7.0
+      }
     }
   ]
 }
