@@ -1,4 +1,5 @@
 package com.ldtteam.domumornamentum.datagen.post;
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import com.ldtteam.domumornamentum.block.decorative.PostBlock;
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.types.PostType;
@@ -18,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 
 
 import static com.ldtteam.domumornamentum.block.AbstractPanelBlockTrapdoor.HALF;
-import static com.ldtteam.domumornamentum.block.AbstractPanelBlockTrapdoor.OPEN;
+//import static com.ldtteam.domumornamentum.block.AbstractPanelBlockTrapdoor.OPEN;
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
 
@@ -31,25 +32,26 @@ public class PostBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         final MultiPartBlockStateBuilder builder = getMultipartBuilder(ModBlocks.getInstance().getPost());
-        for (Direction facingValue : HORIZONTAL_FACING.getPossibleValues()) {
+        for (Direction facingValue : FACING.getPossibleValues()) {
             for (PostType typeValue : PostBlock.TYPE.getPossibleValues()) {
                 for (Half halfValue : HALF.getPossibleValues()) {
-                    for (boolean openValue : OPEN.getPossibleValues()) {
+
                         final var partBuilder = builder.part();
 
                         partBuilder.modelFile(models()
                                         .withExistingParent("block/post/post_" + typeValue.getSerializedName(), modLoc("block/post/post_%s_spec".formatted(typeValue.getSerializedName())))
                                         .customLoader(MateriallyTexturedModelBuilder::new)
                                         .end())
-                                .rotationY(getYFromFacing(facingValue) + getYFromOpenAndHalf(openValue, halfValue))
-                                .rotationX(getXFromOpenAndHalf(openValue, halfValue))
+                                //direction.getAxis
+                                .rotationY(getYFromFacing(facingValue) + getFromHalf(halfValue))
+                                .rotationX(getFromHalf(halfValue))
                                 .addModel()
-                                .condition(HORIZONTAL_FACING, facingValue)
+                                .condition(FACING, facingValue)
                                 .condition(PostBlock.TYPE, typeValue)
                                 .condition(HALF, halfValue)
-                                .condition(OPEN, openValue)
+                                //.condition(OPEN, openValue)
                                 .end();
-                    }
+
                 }
             }
         }
@@ -84,17 +86,10 @@ public class PostBlockStateProvider extends BlockStateProvider {
         };
     }
 
-    private int getYFromOpenAndHalf(final boolean open, final Half half) {
-        return half == Half.TOP && open ? 180 : 0;
+    private int getFromHalf(final Half half) {
+        return half == Half.TOP? 180 : 0;
     }
 
-    private int getXFromOpenAndHalf(final boolean open, final Half half) {
-        if (!open) {
-            return half == Half.TOP ? 180 : 0;
-        }
-
-        return half == Half.TOP ? -90 : 90;
-    }
 
     @NotNull
     @Override

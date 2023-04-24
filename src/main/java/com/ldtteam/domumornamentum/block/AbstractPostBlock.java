@@ -28,19 +28,107 @@ import org.jetbrains.annotations.NotNull;
  */
 public abstract class AbstractPostBlock<B extends AbstractPostBlock<B>> extends RotatedPillarBlock implements IDOBlock<B>
 {
+
+    public static final EnumProperty<Half> HALF = BlockStateProperties.HALF;
+    public static final BooleanProperty    WATERLOGGED = BlockStateProperties.WATERLOGGED;
     /** collision objects
     * */
-    protected static final VoxelShape Y_AXIS_AABB = Block.box(6.5D, 0.0D, 6.5D, 9.5D, 16.0D, 9.5D);
-    protected static final VoxelShape Z_AXIS_AABB = Block.box(6.5D, 6.5D, 0.0D, 9.5D, 9.5D, 16.0D);
-    protected static final VoxelShape X_AXIS_AABB = Block.box(0.0D, 6.5D, 6.5D, 16.0D, 9.5D, 9.5D);
+    protected static final VoxelShape Y_AXIS_AABB = Block.box(6.0D, 0.0D, 6.0D, 10.D, 16.0D, 10.0D);
+    protected static final VoxelShape Z_AXIS_AABB = Block.box(6.0D, 6.0D, 0.0D, 10.D, 10.0D, 16.0D);
+    protected static final VoxelShape X_AXIS_AABB = Block.box(0.0D, 6.0D, 6.0D, 16.0D, 10.0D, 10.0D);
     public AbstractPostBlock(final Properties properties)
     {
         super(properties);
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.DOWN).setValue(WATERLOGGED, Boolean.FALSE));
     }
+
 
     @Override
     public ResourceLocation getRegistryName()
     {
         return getRegistryName(this);
+    }
+
+
+    @NotNull
+    @Override
+    public VoxelShape getShape(BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context)
+    {
+
+        if (state.getValue(FACING) == DOWN || UP)
+        {
+            return X_AXIS_AABB;
+        }
+        else
+            switch (state.getValue(FACING))
+            {
+                case NORTH:
+                default:
+                    return Y_AXIS_AABB;
+                case SOUTH:
+                    return Y_AXIS_AABB;
+                case WEST:
+                    return Z_AXIS_AABB;
+                case EAST:
+                    return Z_AXIS_AABB;
+            }
+
+    }
+
+    @Override
+    public BlockState getStateForPlacement(@NotNull final BlockPlaceContext context)
+    {
+        BlockState blockstate = this.defaultBlockState();
+        FluidState fluidstate = context.getLevel().getFluidState(context.getClickedPos());
+        /**
+            Direction direction = context.getClickedFace();
+
+         This is for open trap doors
+
+
+        if (direction.getAxis().isHorizontal())
+        {
+            blockstate = blockstate.setValue(FACING, context.getHorizontalDirection().getOpposite()).setValue(HALF, direction == Direction.UP ? Half.BOTTOM : Half.TOP).setValue(
+                    OPEN, true);
+        }
+        else
+        {
+            blockstate = blockstate.setValue(FACING, context.getPlayer().getDirection()).setValue(HALF, direction == Direction.DOWN ? Half.TOP : Half.BOTTOM).setValue(OPEN, false);
+        }
+ **/
+
+
+        return blockstate.setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER);
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> p_57561_)
+    {
+        p_57561_.add(FACING, HALF, WATERLOGGED);
+    }
+
+    @NotNull
+    @Override
+    public FluidState getFluidState(BlockState state)
+    {
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+    }
+
+    @NotNull
+    @Override
+    public BlockState updateShape(
+            BlockState state,
+            @NotNull Direction direction,
+            @NotNull BlockState stateOut,
+            @NotNull LevelAccessor level,
+            @NotNull BlockPos pos,
+            @NotNull BlockPos pos2)
+    {
+        if (state.getValue(WATERLOGGED))
+        {
+            level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+        }
+
+        return super.updateShape(state, direction, stateOut, level, pos, pos2);
     }
 }

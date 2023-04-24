@@ -65,28 +65,12 @@ public class PostBlock extends AbstractPostBlock<PostBlock> implements IMaterial
     }
 
 
-    /**
-     *
-     send the collision shape, copied from MC Chain, how to write this?
-
-    public VoxelShape getShape(BlockState p_51470_, BlockGetter p_51471_, BlockPos p_51472_, CollisionContext p_51473_) {
-        switch ((Direction.Axis)p_51470_.getValue(AXIS)) {
-            case X:
-            default:
-                return X_AXIS_AABB;
-            case Z:
-                return Z_AXIS_AABB;
-            case Y:
-                return Y_AXIS_AABB;
-        }
-    }
-    */
 
     @Override
     protected void createBlockStateDefinition(final StateDefinition.@NotNull Builder<Block, BlockState> builder)
     {
         super.createBlockStateDefinition(builder);
-        builder.add(AXIS);
+        builder.add(TYPE);
     }
 
     @Override
