@@ -32,11 +32,13 @@ public class PostBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         final MultiPartBlockStateBuilder builder = getMultipartBuilder(ModBlocks.getInstance().getPost());
+
         for (Direction facingValue : FACING.getPossibleValues()) {
             for (PostType typeValue : PostBlock.TYPE.getPossibleValues()) {
                 for (Half halfValue : HALF.getPossibleValues()) {
 
                         final var partBuilder = builder.part();
+
 
                         partBuilder.modelFile(models()
                                         .withExistingParent("block/post/post_" + typeValue.getSerializedName(), modLoc("block/post/post_%s_spec".formatted(typeValue.getSerializedName())))
@@ -46,7 +48,9 @@ public class PostBlockStateProvider extends BlockStateProvider {
                                 .rotationY(getYFromFacing(facingValue) + getFromHalf(halfValue))
                                 .rotationX(getFromHalf(halfValue))
                                 .addModel()
-                                .condition(FACING, facingValue)
+
+
+                                .condition(PostBlock.AXIS, getAxisFromFacing(facingValue))
                                 .condition(PostBlock.TYPE, typeValue)
                                 .condition(HALF, halfValue)
                                 //.condition(OPEN, openValue)
@@ -85,7 +89,17 @@ public class PostBlockStateProvider extends BlockStateProvider {
             case EAST -> 90;
         };
     }
-
+    private Direction getAxisFromFacing(final Direction facing) {
+        return switch (facing) {
+            default -> Axis.Y;
+            case NORTH -> Axis.Z;
+            case SOUTH -> Axis.Z;
+            case WEST -> Axis.X;
+            case EAST -> Axis.X;
+            case UP -> Axis.Y;
+            case DOWN -> Axis.Y;
+        };
+    }
     private int getFromHalf(final Half half) {
         return half == Half.TOP? 180 : 0;
     }

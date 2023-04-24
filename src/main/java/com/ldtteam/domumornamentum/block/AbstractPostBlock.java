@@ -40,7 +40,7 @@ public abstract class AbstractPostBlock<B extends AbstractPostBlock<B>> extends 
     public AbstractPostBlock(final Properties properties)
     {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.DOWN).setValue(WATERLOGGED, Boolean.FALSE));
+        this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, Boolean.FALSE));
     }
 
 
