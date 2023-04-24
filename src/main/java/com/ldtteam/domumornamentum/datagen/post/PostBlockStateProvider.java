@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 
 import static com.ldtteam.domumornamentum.block.AbstractPanelBlockTrapdoor.HALF;
 //import static com.ldtteam.domumornamentum.block.AbstractPanelBlockTrapdoor.OPEN;
-import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING;
 
 
 public class PostBlockStateProvider extends BlockStateProvider {
