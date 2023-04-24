@@ -56,23 +56,15 @@ public abstract class AbstractPostBlock<B extends AbstractPostBlock<B>> extends 
     public VoxelShape getShape(BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context)
     {
 
-        if (state.getValue(FACING) == DOWN || UP)
-        {
-            return X_AXIS_AABB;
+        switch (state.getValue(AXIS)) {
+            case X:
+            default:
+                return X_AXIS_AABB;
+            case Z:
+                return Z_AXIS_AABB;
+            case Y:
+                return Y_AXIS_AABB;
         }
-        else
-            switch (state.getValue(FACING))
-            {
-                case NORTH:
-                default:
-                    return Y_AXIS_AABB;
-                case SOUTH:
-                    return Y_AXIS_AABB;
-                case WEST:
-                    return Z_AXIS_AABB;
-                case EAST:
-                    return Z_AXIS_AABB;
-            }
 
     }
 
