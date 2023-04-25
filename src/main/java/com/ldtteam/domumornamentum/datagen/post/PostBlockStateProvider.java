@@ -21,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
 import static com.ldtteam.domumornamentum.block.AbstractPanelBlockTrapdoor.HALF;
 //import static com.ldtteam.domumornamentum.block.AbstractPanelBlockTrapdoor.OPEN;
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING;
-
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.AXIS;
 
 public class PostBlockStateProvider extends BlockStateProvider {
 
@@ -33,10 +33,13 @@ public class PostBlockStateProvider extends BlockStateProvider {
     protected void registerStatesAndModels() {
         final MultiPartBlockStateBuilder builder = getMultipartBuilder(ModBlocks.getInstance().getPost());
 
+
+
         for (Direction facingValue : FACING.getPossibleValues()) {
             for (PostType typeValue : PostBlock.TYPE.getPossibleValues()) {
                 for (Half halfValue : HALF.getPossibleValues()) {
 
+                        final Direction.Axis axisValue;
                         final var partBuilder = builder.part();
 
 
@@ -50,6 +53,7 @@ public class PostBlockStateProvider extends BlockStateProvider {
                                 .addModel()
 
 //condition?
+
                                 .condition(PostBlock.AXIS, getAxisFromFacing(facingValue))
                                 .condition(PostBlock.TYPE, typeValue)
                                 .condition(HALF, halfValue)
@@ -89,15 +93,15 @@ public class PostBlockStateProvider extends BlockStateProvider {
             case EAST -> 90;
         };
     }
-    private Direction getAxisFromFacing(final Direction facing) {
-        return switch (facing) {
-            default -> Axis.Y;
-            case NORTH -> Axis.Z;
-            case SOUTH -> Axis.Z;
-            case WEST -> Axis.X;
-            case EAST -> Axis.X;
-            case UP -> Axis.Y;
-            case DOWN -> Axis.Y;
+    private Direction getAxisFromFacing(final Direction d) {
+        return switch (d) {
+            default -> d.axis = Y;
+            case d.facing.NORTH -> d.axis = Z;
+            case d.facing.SOUTH -> d.axis = Z;
+            case d.facing.WEST -> d.axis = X;
+            case d.facing.EAST -> d.axis = X;
+            case d.facing.UP -> d.axis = Y;
+            case d.facing.DOWN -> d.axis = Y;
         };
     }
     private int getFromHalf(final Half half) {
