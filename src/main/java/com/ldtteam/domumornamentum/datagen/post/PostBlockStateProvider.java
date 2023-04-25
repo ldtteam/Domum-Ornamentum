@@ -49,7 +49,7 @@ public class PostBlockStateProvider extends BlockStateProvider {
                                 .rotationX(getFromHalf(halfValue))
                                 .addModel()
 
-
+//condition?
                                 .condition(PostBlock.AXIS, getAxisFromFacing(facingValue))
                                 .condition(PostBlock.TYPE, typeValue)
                                 .condition(HALF, halfValue)
