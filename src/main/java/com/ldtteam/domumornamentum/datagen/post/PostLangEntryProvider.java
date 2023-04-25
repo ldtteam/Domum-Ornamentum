@@ -1,4 +1,4 @@
-package com.ldtteam.domumornamentum.datagen.panel;
+package com.ldtteam.domumornamentum.datagen.post;
 
 import com.ldtteam.data.LanguageProvider;
 import com.ldtteam.domumornamentum.block.types.PostType;

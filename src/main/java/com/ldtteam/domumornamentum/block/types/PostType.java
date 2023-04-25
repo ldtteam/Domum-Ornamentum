@@ -9,8 +9,10 @@ import java.util.stream.Collectors;
 
 public enum PostType implements StringRepresentable
 {
-    PLAIN("plain");
-
+    PLAIN("plain"),
+    HEAVY("heavy"),
+    TURNED("turned"),
+    TWEEN("tween");
 
 
     private final String serializationName;

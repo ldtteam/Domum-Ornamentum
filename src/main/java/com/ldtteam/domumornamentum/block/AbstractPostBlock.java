@@ -1,7 +1,7 @@
 package com.ldtteam.domumornamentum.block;
 
 import com.ldtteam.domumornamentum.block.interfaces.IDOBlock;
-import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -27,7 +27,7 @@ import static net.minecraft.world.level.block.state.properties.BlockStatePropert
  * The abstract class for structurize-added posts.
 
  */
-public abstract class AbstractPostBlock<B extends AbstractPostBlock<B>> extends RotatedPillarBlock implements IDOBlock<B>
+public abstract class AbstractPostBlock<B extends AbstractPostBlock<B>> extends HorizontalDirectionalBlock implements IDOBlock<B>
 {
 
     public static final EnumProperty<Half> HALF = BlockStateProperties.HALF;
@@ -40,7 +40,7 @@ public abstract class AbstractPostBlock<B extends AbstractPostBlock<B>> extends 
     public AbstractPostBlock(final Properties properties)
     {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, Boolean.FALSE));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, Boolean.FALSE));
     }
 
 
@@ -56,13 +56,19 @@ public abstract class AbstractPostBlock<B extends AbstractPostBlock<B>> extends 
     public VoxelShape getShape(BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context)
     {
 
-        switch (state.getValue(AXIS)) {
-            case X:
+        switch (state.getValue(FACING)) {
+            case NORTH:
             default:
-                return X_AXIS_AABB;
-            case Z:
                 return Z_AXIS_AABB;
-            case Y:
+            case SOUTH:
+                return Z_AXIS_AABB;
+            case EAST:
+                return X_AXIS_AABB;
+            case WEST:
+                return X_AXIS_AABB;
+            case UP:
+                return Y_AXIS_AABB;
+            case DOWN:
                 return Y_AXIS_AABB;
         }
 
@@ -73,23 +79,16 @@ public abstract class AbstractPostBlock<B extends AbstractPostBlock<B>> extends 
     {
         BlockState blockstate = this.defaultBlockState();
         FluidState fluidstate = context.getLevel().getFluidState(context.getClickedPos());
-        /**
-            Direction direction = context.getClickedFace();
-
-         This is for open trap doors
-
+        Direction direction = context.getClickedFace();
 
         if (direction.getAxis().isHorizontal())
         {
-            blockstate = blockstate.setValue(FACING, context.getHorizontalDirection().getOpposite()).setValue(HALF, direction == Direction.UP ? Half.BOTTOM : Half.TOP).setValue(
-                    OPEN, true);
+            blockstate = blockstate.setValue(FACING, context.getHorizontalDirection().getOpposite()).setValue(HALF, direction == Direction.UP ? Half.BOTTOM : Half.TOP);
         }
         else
         {
-            blockstate = blockstate.setValue(FACING, context.getPlayer().getDirection()).setValue(HALF, direction == Direction.DOWN ? Half.TOP : Half.BOTTOM).setValue(OPEN, false);
+            blockstate = blockstate.setValue(FACING, context.getPlayer().getDirection()).setValue(HALF, direction == Direction.DOWN ? Half.TOP : Half.BOTTOM);
         }
- **/
-
 
         return blockstate.setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER);
     }

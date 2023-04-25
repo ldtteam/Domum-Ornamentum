@@ -36,6 +36,7 @@ import com.ldtteam.domumornamentum.datagen.panel.PanelBlockStateProvider;
 import com.ldtteam.domumornamentum.datagen.pillar.PillarBlockStateProvider;
 import com.ldtteam.domumornamentum.datagen.pillar.PillarComponentTagProvider;
 import com.ldtteam.domumornamentum.datagen.post.PostBlockStateProvider;
+import com.ldtteam.domumornamentum.datagen.post.PostComponentTagProvider;
 import com.ldtteam.domumornamentum.datagen.shingle.normal.ShinglesBlockStateProvider;
 import com.ldtteam.domumornamentum.datagen.shingle.normal.ShinglesComponentTagProvider;
 import com.ldtteam.domumornamentum.datagen.shingle.slab.ShingleSlabBlockStateProvider;
@@ -139,6 +140,8 @@ public class ModBusEventHandler
 
         //Post
         event.getGenerator().addProvider(true, new PostBlockStateProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new PostComponentTagProvider(event.getGenerator().getPackOutput(), event.getLookupProvider(), event.getExistingFileHelper()));
+
 
         //Fancy Trapdoor
         event.getGenerator().addProvider(true, new FancyTrapdoorsBlockStateProvider(event.getGenerator(), event.getExistingFileHelper()));

@@ -1,5 +1,5 @@
 package com.ldtteam.domumornamentum.datagen.post;
-import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import com.ldtteam.domumornamentum.block.decorative.PostBlock;
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.types.PostType;
@@ -17,10 +17,9 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-
-import static com.ldtteam.domumornamentum.block.AbstractPanelBlockTrapdoor.HALF;
-//import static com.ldtteam.domumornamentum.block.AbstractPanelBlockTrapdoor.OPEN;
+import static com.ldtteam.domumornamentum.block.AbstractPostBlock.HALF;
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING;
+
 
 
 public class PostBlockStateProvider extends BlockStateProvider {
@@ -50,7 +49,8 @@ public class PostBlockStateProvider extends BlockStateProvider {
                                 .addModel()
 
 //condition?
-                                .condition(PostBlock.AXIS, getAxisFromFacing(facingValue))
+
+                                .condition(PostBlock.FACING, facingValue)
                                 .condition(PostBlock.TYPE, typeValue)
                                 .condition(HALF, halfValue)
                                 //.condition(OPEN, openValue)
@@ -89,17 +89,7 @@ public class PostBlockStateProvider extends BlockStateProvider {
             case EAST -> 90;
         };
     }
-    private Direction getAxisFromFacing(final Direction facing) {
-        return switch (facing) {
-            default -> Axis.Y;
-            case NORTH -> Axis.Z;
-            case SOUTH -> Axis.Z;
-            case WEST -> Axis.X;
-            case EAST -> Axis.X;
-            case UP -> Axis.Y;
-            case DOWN -> Axis.Y;
-        };
-    }
+
     private int getFromHalf(final Half half) {
         return half == Half.TOP? 180 : 0;
     }
