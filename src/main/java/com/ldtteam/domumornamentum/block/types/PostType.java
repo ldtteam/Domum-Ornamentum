@@ -12,7 +12,7 @@ public enum PostType implements StringRepresentable
     PLAIN("plain"),
     HEAVY("heavy"),
     TURNED("turned"),
-    TWEEN("tween");
+    PINCHED("pinched");
 
 
     private final String serializationName;

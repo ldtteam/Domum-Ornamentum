@@ -3,7 +3,7 @@ package com.ldtteam.domumornamentum.datagen.post;
 import com.ldtteam.data.LanguageProvider;
 import com.ldtteam.domumornamentum.block.types.PostType;
 import com.ldtteam.domumornamentum.util.Constants;
-import com.ldtteam.domumornamentum.block.decorative.PostBlock;
+//import com.ldtteam.domumornamentum.block.decorative.PostBlock;
 
 public class PostLangEntryProvider implements LanguageProvider.SubProvider
 {

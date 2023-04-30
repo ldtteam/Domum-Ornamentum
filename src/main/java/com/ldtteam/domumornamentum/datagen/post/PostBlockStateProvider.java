@@ -1,5 +1,6 @@
 package com.ldtteam.domumornamentum.datagen.post;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+
+import net.minecraft.world.level.block.DirectionalBlock;
 import com.ldtteam.domumornamentum.block.decorative.PostBlock;
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.types.PostType;
@@ -18,7 +19,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import static com.ldtteam.domumornamentum.block.AbstractPostBlock.HALF;
-import static net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING;
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
 
 
@@ -32,7 +33,7 @@ public class PostBlockStateProvider extends BlockStateProvider {
     protected void registerStatesAndModels() {
         final MultiPartBlockStateBuilder builder = getMultipartBuilder(ModBlocks.getInstance().getPost());
 
-        for (Direction facingValue : FACING.getPossibleValues()) {
+        for (Direction facingValue : HORIZONTAL_FACING.getPossibleValues()) {
             for (PostType typeValue : PostBlock.TYPE.getPossibleValues()) {
                 for (Half halfValue : HALF.getPossibleValues()) {
 
@@ -43,14 +44,14 @@ public class PostBlockStateProvider extends BlockStateProvider {
                                     .withExistingParent("block/post/post_" + typeValue.getSerializedName(), modLoc("block/post/post_%s_spec".formatted(typeValue.getSerializedName())))
                                     .customLoader(MateriallyTexturedModelBuilder::new)
                                     .end())
-                            //direction.getAxis
+
                             .rotationY(getYFromFacing(facingValue) + getFromHalf(halfValue))
                             .rotationX(getFromHalf(halfValue))
                             .addModel()
 
-//condition?
 
-                            .condition(PostBlock.FACING, facingValue)
+
+                            .condition(HORIZONTAL_FACING, facingValue)
                             .condition(PostBlock.TYPE, typeValue)
                             .condition(HALF, halfValue)
                             //.condition(OPEN, openValue)
