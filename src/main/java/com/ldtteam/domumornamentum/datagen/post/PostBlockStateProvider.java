@@ -36,25 +36,25 @@ public class PostBlockStateProvider extends BlockStateProvider {
             for (PostType typeValue : PostBlock.TYPE.getPossibleValues()) {
                 for (Half halfValue : HALF.getPossibleValues()) {
 
-                        final var partBuilder = builder.part();
+                    final var partBuilder = builder.part();
 
 
-                        partBuilder.modelFile(models()
-                                        .withExistingParent("block/post/post_" + typeValue.getSerializedName(), modLoc("block/post/post_%s_spec".formatted(typeValue.getSerializedName())))
-                                        .customLoader(MateriallyTexturedModelBuilder::new)
-                                        .end())
-                                //direction.getAxis
-                                .rotationY(getYFromFacing(facingValue) + getFromHalf(halfValue))
-                                .rotationX(getFromHalf(halfValue))
-                                .addModel()
+                    partBuilder.modelFile(models()
+                                    .withExistingParent("block/post/post_" + typeValue.getSerializedName(), modLoc("block/post/post_%s_spec".formatted(typeValue.getSerializedName())))
+                                    .customLoader(MateriallyTexturedModelBuilder::new)
+                                    .end())
+                            //direction.getAxis
+                            .rotationY(getYFromFacing(facingValue) + getFromHalf(halfValue))
+                            .rotationX(getFromHalf(halfValue))
+                            .addModel()
 
 //condition?
 
-                                .condition(PostBlock.FACING, facingValue)
-                                .condition(PostBlock.TYPE, typeValue)
-                                .condition(HALF, halfValue)
-                                //.condition(OPEN, openValue)
-                                .end();
+                            .condition(PostBlock.FACING, facingValue)
+                            .condition(PostBlock.TYPE, typeValue)
+                            .condition(HALF, halfValue)
+                            //.condition(OPEN, openValue)
+                            .end();
 
                 }
             }
