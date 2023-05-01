@@ -24,6 +24,10 @@ NEW TYPES
     -square pilaster
     -round pilaster
 
+MODIFY EXISTING TYPE
+    SLABS
+    -add horizontal blockstates, swapped placement behaviour to match panels
+    (this adds the option to place and double against walls)
 
 EXISTING TYPE ADDITIONS
 
@@ -37,3 +41,4 @@ EXISTING TYPE ADDITIONS
     -conduit
     -porthole (just a round hole)
     -slot (currently single, but could add adjacent states for an extension across an axis)
+
