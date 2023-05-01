@@ -4,12 +4,13 @@ NEW TYPES
 
     POST (baluster)
     places like a panel (sideways possible), looks like a single fence post, doesn't have joining states.
-    Swaps out the panel collision for one of 3 shapes based on facing direction.
-    -plain
-    -turned
-    -heavy
-    -pinched
-    -double (two posts side by side for tiling, maybe swaps out a third collision option that's a little wider)
+    Swaps out the panel collision for one of 3 shapes based on facing direction.  1 material though 2 could be nice too.
+    -plain (a thin box)
+    -turned (like a chess piece in low poly)
+    -heavy (wider at the bottom)
+    -pinched (thin box with wider top and bottom ends)
+    -double (two posts side by side for tiling, maybe swaps out a collision option that's a little wider)
+
 
     DO LADDER
     Inherits all the behaviours of ladders but has a DO swapped model asset with one that allows 1 or 2 picked materials
@@ -18,9 +19,8 @@ NEW TYPES
     "An upright architectural member that is rectangular in plan and is architecturally treated as a column, that usually
     projects a third of its width or less from the wall"
     (this is a cross between a pillar and a panel, a flat (3 thick) geometry that looks like a pillar but placed against
-    facade,to appear submerged.  the behaviour of states exactly as in the pillar types, except in the shape profile of
-    a panel, placed against a surface)
-    (3 assets per any type based on existing pillars)
+    facade,to appear submerged)
+    (adjacent states for crown base and middle)
     -square pilaster
     -round pilaster
 
@@ -49,4 +49,7 @@ EXISTING TYPE ADDITIONS
     -conduit
     -porthole (just a round hole)
     -slot (currently single, but could add adjacent states for an extension across an axis)
+
+    -frieze*
+    -frieze alternatives* (limited to simple repeating shapes)
 
