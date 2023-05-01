@@ -9,7 +9,7 @@ NEW TYPES
     -turned
     -heavy
     -pinched
-    -double (two posts side by side for tiling repetition, maybe swaps out a third collision option that's a little wider)
+    -double (two posts side by side for tiling, maybe swaps out a third collision option that's a little wider)
 
     DO LADDER
     Inherits all the behaviours of ladders but has a DO swapped model asset with one that allows 1 or 2 picked materials
@@ -17,17 +17,25 @@ NEW TYPES
     PILASTER
     "An upright architectural member that is rectangular in plan and is architecturally treated as a column, that usually
     projects a third of its width or less from the wall"
-    (this is a cross between a pillar and a panel, a flat (3 thick) geometry that looks like a pillar but placed against facade,
-    to appear submerged.  the behaviour of states exactly as in the pillar types, except in the shape profile of a panel, placed
-    against a surface)
+    (this is a cross between a pillar and a panel, a flat (3 thick) geometry that looks like a pillar but placed against
+    facade,to appear submerged.  the behaviour of states exactly as in the pillar types, except in the shape profile of
+    a panel, placed against a surface)
     (3 assets per any type based on existing pillars)
     -square pilaster
     -round pilaster
+
+    KNOB
+    (Looks like a square doorknob but larger, could be a stool, a table, a cart wheel, mushroom, gear or belt driver)
+    (2 materials, one for the top, one for the stem)
+
+
 
 MODIFY EXISTING TYPE
     SLABS
     -add horizontal blockstates, swapped placement behaviour to match panels
     (this adds the option to place and double against walls)
+
+
 
 EXISTING TYPE ADDITIONS
 
