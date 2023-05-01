@@ -1,0 +1,29 @@
+{
+  "parent": "minecraft:block/thin_block",
+  "overrides": [
+    {
+      "model": "domum_ornamentum:block/post/post_plain_spec",
+      "predicate": {
+        "domum_ornamentum:post_type": 0.0
+      }
+    },
+    {
+      "model": "domum_ornamentum:block/post/post_heavy_spec",
+      "predicate": {
+        "domum_ornamentum:post_type": 1.0
+      }
+    },
+    {
+      "model": "domum_ornamentum:block/post/post_turned_spec",
+      "predicate": {
+        "domum_ornamentum:post_type": 2.0
+      }
+    },
+    {
+      "model": "domum_ornamentum:block/post/post_pinched_spec",
+      "predicate": {
+        "domum_ornamentum:post_type": 3.0
+      }
+    }
+  ]
+}

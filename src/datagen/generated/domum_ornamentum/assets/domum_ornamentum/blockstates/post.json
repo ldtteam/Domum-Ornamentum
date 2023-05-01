@@ -1,0 +1,544 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_plain",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "type": "plain",
+        "facing": "north",
+        "half": "top"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_plain"
+      },
+      "when": {
+        "type": "plain",
+        "facing": "north",
+        "half": "bottom"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_heavy",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "type": "heavy",
+        "facing": "north",
+        "half": "top"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_heavy"
+      },
+      "when": {
+        "type": "heavy",
+        "facing": "north",
+        "half": "bottom"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_turned",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "type": "turned",
+        "facing": "north",
+        "half": "top"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_turned"
+      },
+      "when": {
+        "type": "turned",
+        "facing": "north",
+        "half": "bottom"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_pinched",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "type": "pinched",
+        "facing": "north",
+        "half": "top"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_pinched"
+      },
+      "when": {
+        "type": "pinched",
+        "facing": "north",
+        "half": "bottom"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_plain",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "type": "plain",
+        "facing": "east",
+        "half": "top"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_plain",
+        "y": 90
+      },
+      "when": {
+        "type": "plain",
+        "facing": "east",
+        "half": "bottom"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_heavy",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "type": "heavy",
+        "facing": "east",
+        "half": "top"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_heavy",
+        "y": 90
+      },
+      "when": {
+        "type": "heavy",
+        "facing": "east",
+        "half": "bottom"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_turned",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "type": "turned",
+        "facing": "east",
+        "half": "top"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_turned",
+        "y": 90
+      },
+      "when": {
+        "type": "turned",
+        "facing": "east",
+        "half": "bottom"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_pinched",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "type": "pinched",
+        "facing": "east",
+        "half": "top"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_pinched",
+        "y": 90
+      },
+      "when": {
+        "type": "pinched",
+        "facing": "east",
+        "half": "bottom"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_plain",
+        "x": 180,
+        "y": 360
+      },
+      "when": {
+        "type": "plain",
+        "facing": "south",
+        "half": "top"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_plain",
+        "y": 180
+      },
+      "when": {
+        "type": "plain",
+        "facing": "south",
+        "half": "bottom"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_heavy",
+        "x": 180,
+        "y": 360
+      },
+      "when": {
+        "type": "heavy",
+        "facing": "south",
+        "half": "top"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_heavy",
+        "y": 180
+      },
+      "when": {
+        "type": "heavy",
+        "facing": "south",
+        "half": "bottom"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_turned",
+        "x": 180,
+        "y": 360
+      },
+      "when": {
+        "type": "turned",
+        "facing": "south",
+        "half": "top"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_turned",
+        "y": 180
+      },
+      "when": {
+        "type": "turned",
+        "facing": "south",
+        "half": "bottom"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_pinched",
+        "x": 180,
+        "y": 360
+      },
+      "when": {
+        "type": "pinched",
+        "facing": "south",
+        "half": "top"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_pinched",
+        "y": 180
+      },
+      "when": {
+        "type": "pinched",
+        "facing": "south",
+        "half": "bottom"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_plain",
+        "x": 180,
+        "y": 450
+      },
+      "when": {
+        "type": "plain",
+        "facing": "west",
+        "half": "top"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_plain",
+        "y": 270
+      },
+      "when": {
+        "type": "plain",
+        "facing": "west",
+        "half": "bottom"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_heavy",
+        "x": 180,
+        "y": 450
+      },
+      "when": {
+        "type": "heavy",
+        "facing": "west",
+        "half": "top"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_heavy",
+        "y": 270
+      },
+      "when": {
+        "type": "heavy",
+        "facing": "west",
+        "half": "bottom"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_turned",
+        "x": 180,
+        "y": 450
+      },
+      "when": {
+        "type": "turned",
+        "facing": "west",
+        "half": "top"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_turned",
+        "y": 270
+      },
+      "when": {
+        "type": "turned",
+        "facing": "west",
+        "half": "bottom"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_pinched",
+        "x": 180,
+        "y": 450
+      },
+      "when": {
+        "type": "pinched",
+        "facing": "west",
+        "half": "top"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_pinched",
+        "y": 270
+      },
+      "when": {
+        "type": "pinched",
+        "facing": "west",
+        "half": "bottom"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_plain",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "type": "plain",
+        "facing": "up",
+        "half": "top"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_plain"
+      },
+      "when": {
+        "type": "plain",
+        "facing": "up",
+        "half": "bottom"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_heavy",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "type": "heavy",
+        "facing": "up",
+        "half": "top"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_heavy"
+      },
+      "when": {
+        "type": "heavy",
+        "facing": "up",
+        "half": "bottom"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_turned",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "type": "turned",
+        "facing": "up",
+        "half": "top"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_turned"
+      },
+      "when": {
+        "type": "turned",
+        "facing": "up",
+        "half": "bottom"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_pinched",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "type": "pinched",
+        "facing": "up",
+        "half": "top"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_pinched"
+      },
+      "when": {
+        "type": "pinched",
+        "facing": "up",
+        "half": "bottom"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_plain",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "type": "plain",
+        "facing": "down",
+        "half": "top"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_plain"
+      },
+      "when": {
+        "type": "plain",
+        "facing": "down",
+        "half": "bottom"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_heavy",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "type": "heavy",
+        "facing": "down",
+        "half": "top"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_heavy"
+      },
+      "when": {
+        "type": "heavy",
+        "facing": "down",
+        "half": "bottom"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_turned",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "type": "turned",
+        "facing": "down",
+        "half": "top"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_turned"
+      },
+      "when": {
+        "type": "turned",
+        "facing": "down",
+        "half": "bottom"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_pinched",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "type": "pinched",
+        "facing": "down",
+        "half": "top"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_pinched"
+      },
+      "when": {
+        "type": "pinched",
+        "facing": "down",
+        "half": "bottom"
+      }
+    }
+  ]
+}

@@ -2,51 +2,93 @@
   "parent": "minecraft:block/thin_block",
   "overrides": [
     {
-      "model": "domum_ornamentum:block/panel/panel_full_spec",
+      "model": "domum_ornamentum:block/panel/panel_boss_spec",
       "predicate": {
         "domum_ornamentum:trapdoor_type": 0.0
       }
     },
     {
-      "model": "domum_ornamentum:block/panel/panel_horizontally_squiggly_striped_spec",
+      "model": "domum_ornamentum:block/panel/panel_coffer_spec",
       "predicate": {
         "domum_ornamentum:trapdoor_type": 1.0
       }
     },
     {
-      "model": "domum_ornamentum:block/panel/panel_horizontally_striped_spec",
+      "model": "domum_ornamentum:block/panel/panel_full_spec",
       "predicate": {
         "domum_ornamentum:trapdoor_type": 2.0
       }
     },
     {
-      "model": "domum_ornamentum:block/panel/panel_port_manteau_spec",
+      "model": "domum_ornamentum:block/panel/panel_horizontal_bars_spec",
       "predicate": {
         "domum_ornamentum:trapdoor_type": 3.0
       }
     },
     {
-      "model": "domum_ornamentum:block/panel/panel_vertically_squiggly_striped_spec",
+      "model": "domum_ornamentum:block/panel/panel_horizontally_squiggly_striped_spec",
       "predicate": {
         "domum_ornamentum:trapdoor_type": 4.0
       }
     },
     {
-      "model": "domum_ornamentum:block/panel/panel_vertically_striped_spec",
+      "model": "domum_ornamentum:block/panel/panel_horizontally_striped_spec",
       "predicate": {
         "domum_ornamentum:trapdoor_type": 5.0
       }
     },
     {
-      "model": "domum_ornamentum:block/panel/panel_waffle_spec",
+      "model": "domum_ornamentum:block/panel/panel_moulding_spec",
       "predicate": {
         "domum_ornamentum:trapdoor_type": 6.0
       }
     },
     {
-      "model": "domum_ornamentum:block/panel/panel_slot_spec",
+      "model": "domum_ornamentum:block/panel/panel_port_manteau_spec",
       "predicate": {
         "domum_ornamentum:trapdoor_type": 7.0
+      }
+    },
+    {
+      "model": "domum_ornamentum:block/panel/panel_porthole_spec",
+      "predicate": {
+        "domum_ornamentum:trapdoor_type": 8.0
+      }
+    },
+    {
+      "model": "domum_ornamentum:block/panel/panel_roundel_spec",
+      "predicate": {
+        "domum_ornamentum:trapdoor_type": 9.0
+      }
+    },
+    {
+      "model": "domum_ornamentum:block/panel/panel_slot_spec",
+      "predicate": {
+        "domum_ornamentum:trapdoor_type": 10.0
+      }
+    },
+    {
+      "model": "domum_ornamentum:block/panel/panel_vertical_bars_spec",
+      "predicate": {
+        "domum_ornamentum:trapdoor_type": 11.0
+      }
+    },
+    {
+      "model": "domum_ornamentum:block/panel/panel_vertically_squiggly_striped_spec",
+      "predicate": {
+        "domum_ornamentum:trapdoor_type": 12.0
+      }
+    },
+    {
+      "model": "domum_ornamentum:block/panel/panel_vertically_striped_spec",
+      "predicate": {
+        "domum_ornamentum:trapdoor_type": 13.0
+      }
+    },
+    {
+      "model": "domum_ornamentum:block/panel/panel_waffle_spec",
+      "predicate": {
+        "domum_ornamentum:trapdoor_type": 14.0
       }
     }
   ]
