@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
@@ -20,12 +21,13 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * The abstract class for structurize-added posts.
-
+ *
+ * Singular fence-like block, one material channel, custom collision, placing alignment with getclickedface() direction
  */
 public abstract class AbstractPostBlock<B extends AbstractPostBlock<B>> extends HorizontalDirectionalBlock implements IDOBlock<B>
 {
 
-    public static final EnumProperty<Half> HALF = BlockStateProperties.HALF;
+    //public static final EnumProperty<Half> HALF = BlockStateProperties.HALF;
     public static final DirectionProperty    FACING = BlockStateProperties.FACING;
     public static final BooleanProperty    WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
@@ -78,11 +80,11 @@ public abstract class AbstractPostBlock<B extends AbstractPostBlock<B>> extends 
 
         if (direction.getAxis().isHorizontal())
         {
-            blockstate = blockstate.setValue(FACING, context.getHorizontalDirection().getOpposite()).setValue(HALF, direction == Direction.UP ? Half.BOTTOM : Half.TOP);
+            blockstate = blockstate.setValue(FACING, context.getHorizontalDirection().getOpposite());
         }
         else
         {
-            blockstate = blockstate.setValue(FACING, context.getPlayer().getDirection()).setValue(HALF, direction == Direction.DOWN ? Half.TOP : Half.BOTTOM);
+            blockstate = blockstate.setValue(FACING, direction);
         }
 
         return blockstate.setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER);
@@ -92,7 +94,7 @@ public abstract class AbstractPostBlock<B extends AbstractPostBlock<B>> extends 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
         super.createBlockStateDefinition(builder);
-        builder.add(FACING, HALF, WATERLOGGED);
+        builder.add(FACING, WATERLOGGED);
     }
 
     @NotNull

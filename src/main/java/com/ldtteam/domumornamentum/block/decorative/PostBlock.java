@@ -61,7 +61,7 @@ public class PostBlock extends AbstractPostBlock<PostBlock> implements IMaterial
 
     public PostBlock()
     {
-        super(Properties.of(Material.WOOD, MaterialColor.WOOD).strength(3.0F).requiresCorrectToolForDrops().sound(SoundType.WOOD).noOcclusion().isValidSpawn((state, blockGetter, pos, type) -> false));
+        super(Properties.of(Material.WOOD, MaterialColor.WOOD).strength(3.0F).requiresCorrectToolForDrops());
         this.registerDefaultState(this.defaultBlockState().setValue(TYPE, PostType.PLAIN));
     }
 

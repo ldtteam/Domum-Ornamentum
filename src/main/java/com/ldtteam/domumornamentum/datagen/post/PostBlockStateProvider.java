@@ -9,7 +9,6 @@ import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
@@ -18,7 +17,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import static com.ldtteam.domumornamentum.block.AbstractPostBlock.FACING;
-import static com.ldtteam.domumornamentum.block.AbstractPostBlock.HALF;
+
 
 public class PostBlockStateProvider extends BlockStateProvider {
 
@@ -32,29 +31,26 @@ public class PostBlockStateProvider extends BlockStateProvider {
 
         for (Direction facingValue : FACING.getPossibleValues()) {
             for (PostType typeValue : PostBlock.TYPE.getPossibleValues()) {
-                for (Half halfValue : HALF.getPossibleValues()) {
+                //for (Half halfValue : AbstractPostBlock.HALF.getPossibleValues()) {
 
                     final var partBuilder = builder.part();
-
 
                     partBuilder.modelFile(models()
                                     .withExistingParent("block/post/post_" + typeValue.getSerializedName(), modLoc("block/post/post_%s_spec".formatted(typeValue.getSerializedName())))
                                     .customLoader(MateriallyTexturedModelBuilder::new)
                                     .end())
 
-                            .rotationY(getYFromFacing(facingValue) + getFromHalf(halfValue))
-                            .rotationX(getFromHalf(halfValue))
+                            .rotationY(getYFromFacing(facingValue)) //+ getFromHalf(halfValue))
+                            .rotationX(getXFromFacing(facingValue)) // + getFromHalf(halfValue))
                             .addModel()
-
 
 
                             .condition(FACING, facingValue)
                             .condition(PostBlock.TYPE, typeValue)
-                            .condition(HALF, halfValue)
-                            //.condition(OPEN, openValue)
+                            //.condition(HALF, halfValue)
                             .end();
 
-                }
+                //}
             }
         }
 
@@ -88,9 +84,19 @@ public class PostBlockStateProvider extends BlockStateProvider {
         };
     }
 
-    private int getFromHalf(final Half half) {
-        return half == Half.TOP? 180 : 0;
+
+    private int getXFromFacing(final Direction facing) {
+        return switch (facing) {
+
+            case UP -> 0;
+            case DOWN -> 180;
+            case NORTH -> 90;
+            case SOUTH -> 90;
+            case WEST -> 90;
+            case EAST -> 90;
+        };
     }
+
 
 
     @NotNull
