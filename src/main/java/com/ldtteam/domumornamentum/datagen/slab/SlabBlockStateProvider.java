@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import com.ldtteam.domumornamentum.block.vanilla.SlabBlock;
 
 import static com.ldtteam.domumornamentum.block.vanilla.SlabBlock.TYPE;
-import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING;
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.SLAB_TYPE;
 
 public class SlabBlockStateProvider extends BlockStateProvider
@@ -34,18 +34,18 @@ public class SlabBlockStateProvider extends BlockStateProvider
     private void createBlockstateFile(final SlabBlock slabBlock)
     {
         final MultiPartBlockStateBuilder builder = getMultipartBuilder(slabBlock);
-        for (Direction facingValue : HORIZONTAL_FACING.getPossibleValues()) {
+        for (Direction facingValue : FACING.getPossibleValues()) {
             for (SlabType value : SlabBlock.TYPE.getPossibleValues()) {
                 builder.part()
-                        .modelFile(models().withExistingParent("block/slab/" + value.getSerializedName(), modLoc("block/slab/slab_" + value.getSerializedName() + "_spec"))
+                        .modelFile(models().withExistingParent("block/slab/slab_" + value.getSerializedName(), modLoc("block/slab/slab_" + value.getSerializedName() + "_spec"))
                                 .customLoader(MateriallyTexturedModelBuilder::new)
                                 .end())
                         .rotationX(getXFromFacing(facingValue))
                         .rotationY(getYFromFacing(facingValue))
 
                         .addModel()
-                        .condition(HORIZONTAL_FACING, facingValue)
-                        .condition(SlabBlock.TYPE, value)
+                        .condition(FACING, facingValue)
+                        .condition(TYPE, value)
                         .end();
             }
         }
@@ -67,8 +67,8 @@ public class SlabBlockStateProvider extends BlockStateProvider
     private int getXFromFacing(final Direction facing) {
         return switch (facing) {
 
-            case UP -> 0;
-            case DOWN -> 180;
+            case UP -> 180;
+            case DOWN -> 0;
             case NORTH -> 90;
             case SOUTH -> 90;
             case WEST -> 90;

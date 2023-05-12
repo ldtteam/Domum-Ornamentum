@@ -174,12 +174,48 @@
     },
     {
       "apply": {
+        "model": "domum_ornamentum:block/post/post_plain"
+      },
+      "when": {
+        "type": "plain",
+        "facing": "up"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_heavy"
+      },
+      "when": {
+        "type": "heavy",
+        "facing": "up"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_turned"
+      },
+      "when": {
+        "type": "turned",
+        "facing": "up"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/post/post_pinched"
+      },
+      "when": {
+        "type": "pinched",
+        "facing": "up"
+      }
+    },
+    {
+      "apply": {
         "model": "domum_ornamentum:block/post/post_plain",
         "x": 180
       },
       "when": {
         "type": "plain",
-        "facing": "up"
+        "facing": "down"
       }
     },
     {
@@ -189,7 +225,7 @@
       },
       "when": {
         "type": "heavy",
-        "facing": "up"
+        "facing": "down"
       }
     },
     {
@@ -199,49 +235,13 @@
       },
       "when": {
         "type": "turned",
-        "facing": "up"
+        "facing": "down"
       }
     },
     {
       "apply": {
         "model": "domum_ornamentum:block/post/post_pinched",
         "x": 180
-      },
-      "when": {
-        "type": "pinched",
-        "facing": "up"
-      }
-    },
-    {
-      "apply": {
-        "model": "domum_ornamentum:block/post/post_plain"
-      },
-      "when": {
-        "type": "plain",
-        "facing": "down"
-      }
-    },
-    {
-      "apply": {
-        "model": "domum_ornamentum:block/post/post_heavy"
-      },
-      "when": {
-        "type": "heavy",
-        "facing": "down"
-      }
-    },
-    {
-      "apply": {
-        "model": "domum_ornamentum:block/post/post_turned"
-      },
-      "when": {
-        "type": "turned",
-        "facing": "down"
-      }
-    },
-    {
-      "apply": {
-        "model": "domum_ornamentum:block/post/post_pinched"
       },
       "when": {
         "type": "pinched",
