@@ -123,13 +123,13 @@ public abstract class AbstractBlockSlab<B extends AbstractBlockSlab<B>> extends 
                     return direction == Direction.UP || yflag && direction.getAxis().isHorizontal();
                 } if (facing == Direction.UP) {
                     return direction == Direction.DOWN || !yflag && direction.getAxis().isHorizontal();
-                } if (facing == Direction.NORTH) {
+                } if (facing == Direction.NORTH && context.isSecondaryUseActive()) {
                     return direction == Direction.SOUTH || !zflag && direction.getAxis().isVertical();
-                } if (facing == Direction.SOUTH) {
+                } if (facing == Direction.SOUTH && context.isSecondaryUseActive()) {
                     return direction == Direction.NORTH || zflag && direction.getAxis().isVertical();
-                } if (facing == Direction.EAST) {
+                } if (facing == Direction.EAST && context.isSecondaryUseActive()) {
                     return direction == Direction.WEST || !xflag && direction.getAxis().isVertical();
-                } if (facing == Direction.WEST) {
+                } if (facing == Direction.WEST && context.isSecondaryUseActive()) {
                     return direction == Direction.EAST || xflag && direction.getAxis().isVertical();
                 }
             }
