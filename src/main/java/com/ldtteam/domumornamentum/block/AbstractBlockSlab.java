@@ -87,7 +87,7 @@ public abstract class AbstractBlockSlab<B extends AbstractBlockSlab<B>> extends 
 
         /** stacking */
         if (blockstate.is(this)) {
-            return defaultstate.setValue(TYPE, SlabType.DOUBLE).setValue(WATERLOGGED, Boolean.valueOf(false));
+           return defaultstate.setValue(TYPE, SlabType.DOUBLE).setValue(WATERLOGGED, Boolean.valueOf(false));
         }
 
         /** if player is holding the shift key while clicking, set slab TYPE (N/E/W/S) based on FACING
@@ -108,17 +108,21 @@ public abstract class AbstractBlockSlab<B extends AbstractBlockSlab<B>> extends 
         return direction != Direction.DOWN && (direction == Direction.UP || !(context.getClickLocation().y - (double)blockpos.getY() > 0.5D)) ? blockstate1 : blockstate1.setValue(FACING, Direction.UP);
     }
 
+    @Override
     public boolean canBeReplaced(BlockState state, BlockPlaceContext context) {
         ItemStack itemstack = context.getItemInHand();
         SlabType slabtype = state.getValue(TYPE);
         Direction facing = state.getValue(FACING);
         if (slabtype != SlabType.DOUBLE && itemstack.is(this.asItem())) {
             if (context.replacingClickedOnBlock()) {
-                /**did you click in the (front) half of the block*/
+                /**did you click in the (other) half of the block*/
                 boolean xflag = context.getClickLocation().x - (double)context.getClickedPos().getX() > 0.5D;
                 boolean yflag = context.getClickLocation().y - (double)context.getClickedPos().getY() > 0.5D;
                 boolean zflag = context.getClickLocation().z - (double)context.getClickedPos().getZ() > 0.5D;
                 Direction direction = context.getClickedFace();
+                /**allow stacking when clicking middle face only, only while holding shift if sideways
+                 * also allow stack when clicking next to the empty space, from perpendicular position
+                 */
                 if (facing == Direction.DOWN) {
                     return direction == Direction.UP || yflag && direction.getAxis().isHorizontal();
                 } if (facing == Direction.UP) {
@@ -130,7 +134,7 @@ public abstract class AbstractBlockSlab<B extends AbstractBlockSlab<B>> extends 
                 } if (facing == Direction.EAST && context.isSecondaryUseActive()) {
                     return direction == Direction.WEST || !xflag && direction.getAxis().isVertical();
                 } if (facing == Direction.WEST && context.isSecondaryUseActive()) {
-                    return direction == Direction.EAST || xflag && direction.getAxis().isVertical();
+                    return direction == Direction.WEST || xflag && direction.getAxis().isVertical();
                 }
             }
             return true;
