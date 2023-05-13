@@ -88,8 +88,6 @@ public abstract class AbstractBlockSlab<B extends AbstractBlockSlab<B>> extends 
         /** stacking */
         if (blockstate.is(this)) {
             return defaultstate.setValue(TYPE, SlabType.DOUBLE).setValue(WATERLOGGED, Boolean.valueOf(false));
-
-            /** TO DO only stack if clicking on the 'mid-way' face*/
         }
 
         /** if player is holding the shift key while clicking, set slab TYPE (N/E/W/S) based on FACING
@@ -121,9 +119,9 @@ public abstract class AbstractBlockSlab<B extends AbstractBlockSlab<B>> extends 
                 boolean yflag = context.getClickLocation().y - (double)context.getClickedPos().getY() > 0.5D;
                 boolean zflag = context.getClickLocation().z - (double)context.getClickedPos().getZ() > 0.5D;
                 Direction direction = context.getClickedFace();
-                if (slabtype == SlabType.BOTTOM) {
+                if (facing == Direction.DOWN) {
                     return direction == Direction.UP || yflag && direction.getAxis().isHorizontal();
-                } if (slabtype == SlabType.TOP) {
+                } if (facing == Direction.UP) {
                     return direction == Direction.DOWN || !yflag && direction.getAxis().isHorizontal();
                 } if (facing == Direction.NORTH) {
                     return direction == Direction.SOUTH || !zflag ;
