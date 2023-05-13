@@ -95,9 +95,14 @@ public abstract class AbstractBlockSlab<B extends AbstractBlockSlab<B>> extends 
         /** if player is holding the shift key while clicking, set slab TYPE (N/E/W/S) based on FACING
          * else use the base class method */
         if (context.isSecondaryUseActive()) {
-           return defaultstate.setValue(FACING, context.getNearestLookingDirection().getOpposite());
-           /** TO DO I want to only do getOpposite on the horizontals.  Need condition here
-            *  I switched to getNearestLookingDirection so it would return up and down as it would not with gethorizontal */
+            if (context.getNearestLookingDirection() == Direction.UP){
+                return defaultstate.setValue(FACING, context.getNearestLookingDirection());
+            }
+            if (context.getNearestLookingDirection() == Direction.DOWN){
+                return defaultstate.setValue(FACING, context.getNearestLookingDirection());
+            }
+           return defaultstate.setValue(FACING, context.getHorizontalDirection().getOpposite());
+
         }
 
         /**default placing */
@@ -108,19 +113,29 @@ public abstract class AbstractBlockSlab<B extends AbstractBlockSlab<B>> extends 
     public boolean canBeReplaced(BlockState state, BlockPlaceContext context) {
         ItemStack itemstack = context.getItemInHand();
         SlabType slabtype = state.getValue(TYPE);
+        Direction facing = state.getValue(FACING);
         if (slabtype != SlabType.DOUBLE && itemstack.is(this.asItem())) {
             if (context.replacingClickedOnBlock()) {
-                /**did you click in the top half of the block*/
-                boolean flag = context.getClickLocation().y - (double)context.getClickedPos().getY() > 0.5D;
+                /**did you click in the (front) half of the block*/
+                boolean xflag = context.getClickLocation().x - (double)context.getClickedPos().getX() > 0.5D;
+                boolean yflag = context.getClickLocation().y - (double)context.getClickedPos().getY() > 0.5D;
+                boolean zflag = context.getClickLocation().z - (double)context.getClickedPos().getZ() > 0.5D;
                 Direction direction = context.getClickedFace();
                 if (slabtype == SlabType.BOTTOM) {
-                    return direction == Direction.UP || flag && direction.getAxis().isHorizontal();
-                } else {
-                    return direction == Direction.DOWN || !flag && direction.getAxis().isHorizontal();
+                    return direction == Direction.UP || yflag && direction.getAxis().isHorizontal();
+                } if (slabtype == SlabType.TOP) {
+                    return direction == Direction.DOWN || !yflag && direction.getAxis().isHorizontal();
+                } if (facing == Direction.NORTH) {
+                    return direction == Direction.SOUTH || !zflag ;
+                } if (facing == Direction.SOUTH) {
+                    return direction == Direction.NORTH || zflag ;
+                } if (facing == Direction.EAST) {
+                    return direction == Direction.WEST || !xflag ;
+                } if (facing == Direction.WEST) {
+                    return direction == Direction.EAST || xflag ;
                 }
-            } else {
-                return true;
             }
+            return true;
         } else {
             return false;
         }
