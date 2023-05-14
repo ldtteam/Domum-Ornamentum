@@ -1,6 +1,8 @@
 package com.ldtteam.domumornamentum.block;
 
 import com.ldtteam.domumornamentum.block.interfaces.IDOBlock;
+import com.sun.tools.jconsole.JConsoleContext;
+import com.sun.tools.jconsole.JConsolePlugin;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -85,24 +87,58 @@ public abstract class AbstractBlockSlab<B extends AbstractBlockSlab<B>> extends 
         FluidState fluidstate = context.getLevel().getFluidState(context.getClickedPos());
         Direction direction = context.getClickedFace();
 
-        /** stacking */
+
+        /** stacking, if clicked position lands RIGHT in middle on any axis
+         * also if clicked in any other side of side facing slabs*/
         if (blockstate.is(this)) {
-           return defaultstate.setValue(TYPE, SlabType.DOUBLE).setValue(WATERLOGGED, Boolean.valueOf(false));
+            boolean xpos = context.getClickLocation().x - (double)context.getClickedPos().getX() == 0.5D;
+            boolean ypos = context.getClickLocation().y - (double)context.getClickedPos().getY() == 0.5D;
+            boolean zpos = context.getClickLocation().z - (double)context.getClickedPos().getZ() == 0.5D;
+            boolean xflag = context.getClickLocation().x - (double)context.getClickedPos().getX() > 0.5D;
+            boolean yflag = context.getClickLocation().y - (double)context.getClickedPos().getY() > 0.5D;
+            boolean zflag = context.getClickLocation().z - (double)context.getClickedPos().getZ() > 0.5D;
+            if (xpos || ypos || zpos){
+                System.out.print(xpos + " " + ypos + " " + zpos);
+                return blockstate.setValue(TYPE, SlabType.DOUBLE).setValue(WATERLOGGED, Boolean.valueOf(false));
+            }
+            if(blockstate.getValue(FACING) == Direction.UP && !yflag && direction != Direction.DOWN){
+                System.out.print("up");
+                return blockstate.setValue(TYPE, SlabType.DOUBLE).setValue(WATERLOGGED, Boolean.valueOf(false));
+            }
+            if(blockstate.getValue(FACING) == Direction.DOWN && yflag && direction != Direction.UP){
+                System.out.print("down");
+                return blockstate.setValue(TYPE, SlabType.DOUBLE).setValue(WATERLOGGED, Boolean.valueOf(false));
+            }
+            if(blockstate.getValue(FACING) == Direction.NORTH && !zflag && direction != Direction.SOUTH){
+                System.out.print("N");
+                return blockstate.setValue(TYPE, SlabType.DOUBLE).setValue(WATERLOGGED, Boolean.valueOf(false));
+            }
+            if(blockstate.getValue(FACING) == Direction.SOUTH && zflag && direction != Direction.NORTH){
+                System.out.print("S");
+                return blockstate.setValue(TYPE, SlabType.DOUBLE).setValue(WATERLOGGED, Boolean.valueOf(false));
+            }
+            if(blockstate.getValue(FACING) == Direction.EAST && xflag && direction != Direction.WEST){
+                System.out.print("E");
+                return blockstate.setValue(TYPE, SlabType.DOUBLE).setValue(WATERLOGGED, Boolean.valueOf(false));
+            }
+            if(blockstate.getValue(FACING) == Direction.WEST && !xflag && direction != Direction.EAST){
+                System.out.print("W");
+                return blockstate.setValue(TYPE, SlabType.DOUBLE).setValue(WATERLOGGED, Boolean.valueOf(false));
+            }
         }
 
-        /** if player is holding the shift key while clicking, set slab TYPE (N/E/W/S) based on FACING
-         * else use the base class method */
+        /**if holding the shift key while clicking, set slab FACING (N/E/W/S)
+         * all facing slabs use BOTTOM TYPE
+         * else use the base class default */
         if (context.isSecondaryUseActive()) {
             if (context.getNearestLookingDirection() == Direction.UP){
-                return defaultstate.setValue(FACING, context.getNearestLookingDirection());
+                return defaultstate.setValue(FACING, Direction.UP);
             }
             if (context.getNearestLookingDirection() == Direction.DOWN){
-                return defaultstate.setValue(FACING, context.getNearestLookingDirection());
+                return defaultstate.setValue(FACING, Direction.DOWN);
             }
            return defaultstate.setValue(FACING, context.getHorizontalDirection().getOpposite());
-
         }
-
         /**default placing */
         BlockState blockstate1 = this.defaultBlockState().setValue(TYPE, SlabType.BOTTOM).setValue(FACING, Direction.DOWN).setValue(WATERLOGGED, Boolean.valueOf(fluidstate.getType() == Fluids.WATER));
         return direction != Direction.DOWN && (direction == Direction.UP || !(context.getClickLocation().y - (double)blockpos.getY() > 0.5D)) ? blockstate1 : blockstate1.setValue(FACING, Direction.UP);
@@ -112,35 +148,34 @@ public abstract class AbstractBlockSlab<B extends AbstractBlockSlab<B>> extends 
     public boolean canBeReplaced(BlockState state, BlockPlaceContext context) {
         ItemStack itemstack = context.getItemInHand();
         SlabType slabtype = state.getValue(TYPE);
-        Direction facing = state.getValue(FACING);
+        Direction slabfacing = state.getValue(FACING);
         if (slabtype != SlabType.DOUBLE && itemstack.is(this.asItem())) {
             if (context.replacingClickedOnBlock()) {
-                /**did you click in the (other) half of the block*/
                 boolean xflag = context.getClickLocation().x - (double)context.getClickedPos().getX() > 0.5D;
                 boolean yflag = context.getClickLocation().y - (double)context.getClickedPos().getY() > 0.5D;
                 boolean zflag = context.getClickLocation().z - (double)context.getClickedPos().getZ() > 0.5D;
                 Direction direction = context.getClickedFace();
-                /**allow stacking when clicking middle face only, only while holding shift if sideways
-                 * also allow stack when clicking next to the empty space, from perpendicular position
-                 */
-                if (facing == Direction.DOWN) {
+
+                if (slabfacing == Direction.DOWN && direction != Direction.UP) {
                     return direction == Direction.UP || yflag && direction.getAxis().isHorizontal();
-                } if (facing == Direction.UP) {
+                } if (slabfacing == Direction.UP && direction != Direction.DOWN) {
                     return direction == Direction.DOWN || !yflag && direction.getAxis().isHorizontal();
-                } if (facing == Direction.NORTH && context.isSecondaryUseActive()) {
-                    return direction == Direction.SOUTH || !zflag && direction.getAxis().isVertical();
-                } if (facing == Direction.SOUTH && context.isSecondaryUseActive()) {
-                    return direction == Direction.NORTH || zflag && direction.getAxis().isVertical();
-                } if (facing == Direction.EAST && context.isSecondaryUseActive()) {
-                    return direction == Direction.WEST || !xflag && direction.getAxis().isVertical();
-                } if (facing == Direction.WEST && context.isSecondaryUseActive()) {
-                    return direction == Direction.WEST || xflag && direction.getAxis().isVertical();
+                } if (slabfacing == Direction.NORTH && direction != Direction.NORTH) {
+                    return direction == Direction.NORTH || !zflag ;
+                } if (slabfacing == Direction.SOUTH && direction != Direction.SOUTH) {
+                    return direction == Direction.SOUTH || zflag ;
+                } if (slabfacing == Direction.EAST && direction != Direction.EAST) {
+                    return direction == Direction.EAST || xflag ;
+                } if (slabfacing == Direction.WEST && direction != Direction.WEST) {
+                    return direction == Direction.WEST || !xflag ;
                 }
+
             }
             return true;
         } else {
             return false;
         }
+
     }
     @Override
     public ResourceLocation getRegistryName()
