@@ -31,26 +31,22 @@ public class PostBlockStateProvider extends BlockStateProvider {
 
         for (Direction facingValue : FACING.getPossibleValues()) {
             for (PostType typeValue : PostBlock.TYPE.getPossibleValues()) {
-                //for (Half halfValue : AbstractPostBlock.HALF.getPossibleValues()) {
 
-                    final var partBuilder = builder.part();
+            final var partBuilder = builder.part();
+            partBuilder.modelFile(models()
+                .withExistingParent("block/post/post_" + typeValue.getSerializedName(), modLoc("block/post/post_%s_spec".formatted(typeValue.getSerializedName())))
+                .customLoader(MateriallyTexturedModelBuilder::new)
+                .end())
 
-                    partBuilder.modelFile(models()
-                                    .withExistingParent("block/post/post_" + typeValue.getSerializedName(), modLoc("block/post/post_%s_spec".formatted(typeValue.getSerializedName())))
-                                    .customLoader(MateriallyTexturedModelBuilder::new)
-                                    .end())
-
-                            .rotationY(getYFromFacing(facingValue)) //+ getFromHalf(halfValue))
-                            .rotationX(getXFromFacing(facingValue)) // + getFromHalf(halfValue))
-                            .addModel()
+                .rotationY(getYFromFacing(facingValue))
+                .rotationX(getXFromFacing(facingValue))
+                .addModel()
 
 
-                            .condition(FACING, facingValue)
-                            .condition(PostBlock.TYPE, typeValue)
-                            //.condition(HALF, halfValue)
-                            .end();
+                .condition(FACING, facingValue)
+                .condition(PostBlock.TYPE, typeValue)
 
-                //}
+                .end();
             }
         }
 
