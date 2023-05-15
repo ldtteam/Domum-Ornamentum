@@ -1,6 +1,7 @@
 package com.ldtteam.domumornamentum.datagen.slab;
 
 import com.ldtteam.domumornamentum.block.ModBlocks;
+import com.ldtteam.domumornamentum.block.vanilla.SlabBlock;
 import com.ldtteam.domumornamentum.datagen.MateriallyTexturedModelBuilder;
 import com.ldtteam.domumornamentum.datagen.utils.ModelBuilderUtils;
 import com.ldtteam.domumornamentum.util.Constants;
@@ -13,11 +14,9 @@ import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import com.ldtteam.domumornamentum.block.vanilla.SlabBlock;
 
 import static com.ldtteam.domumornamentum.block.vanilla.SlabBlock.TYPE;
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING;
-import static net.minecraft.world.level.block.state.properties.BlockStateProperties.SLAB_TYPE;
 
 public class SlabBlockStateProvider extends BlockStateProvider
 {
