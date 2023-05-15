@@ -13,6 +13,7 @@ public enum BrickType implements StringRepresentable
     BROWN("brown", Items.TERRACOTTA, Items.BRICK),
     BEIGE("beige", Items.GRAVEL, Items.BRICK),
     CREAM("cream", Items.SANDSTONE, Items.BRICK),
+    ROAN("roan", Items.WHITE_CONCRETE_POWDER,  Items.BRICK),
     SAND("sand", Items.SAND, Items.SANDSTONE),
 
     BROWN_STONE("brown_stone", Items.TERRACOTTA, Items.STONE_BRICKS),
