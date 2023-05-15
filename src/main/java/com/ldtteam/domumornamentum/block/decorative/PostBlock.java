@@ -52,7 +52,7 @@ import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
 @SuppressWarnings("deprecation")
 public class PostBlock extends AbstractPostBlock<PostBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock
 {
-    public static final EnumProperty<PostType>              TYPE       = EnumProperty.create("type", PostType.class);
+
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
                                                                                .add(new SimpleRetexturableComponent(new ResourceLocation("minecraft:block/oak_planks"), ModTags.POST_MATERIALS, OAK_PLANKS))
                                                                                .build();
@@ -67,12 +67,7 @@ public class PostBlock extends AbstractPostBlock<PostBlock> implements IMaterial
 
 
 
-    @Override
-    protected void createBlockStateDefinition(final StateDefinition.@NotNull Builder<Block, BlockState> builder)
-    {
-        super.createBlockStateDefinition(builder);
-        builder.add(TYPE);
-    }
+
 
     @Override
     public float getExplosionResistance(BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {

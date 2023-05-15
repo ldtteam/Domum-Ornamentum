@@ -98,31 +98,24 @@ public abstract class AbstractBlockSlab<B extends AbstractBlockSlab<B>> extends 
             boolean yflag = context.getClickLocation().y - (double)context.getClickedPos().getY() > 0.5D;
             boolean zflag = context.getClickLocation().z - (double)context.getClickedPos().getZ() > 0.5D;
             if (xpos || ypos || zpos){
-                System.out.print(xpos + " " + ypos + " " + zpos);
                 return blockstate.setValue(TYPE, SlabType.DOUBLE).setValue(WATERLOGGED, Boolean.valueOf(false));
             }
             if(blockstate.getValue(FACING) == Direction.UP && !yflag && direction != Direction.DOWN){
-                System.out.print("up");
                 return blockstate.setValue(TYPE, SlabType.DOUBLE).setValue(WATERLOGGED, Boolean.valueOf(false));
             }
             if(blockstate.getValue(FACING) == Direction.DOWN && yflag && direction != Direction.UP){
-                System.out.print("down");
                 return blockstate.setValue(TYPE, SlabType.DOUBLE).setValue(WATERLOGGED, Boolean.valueOf(false));
             }
             if(blockstate.getValue(FACING) == Direction.NORTH && !zflag && direction != Direction.SOUTH){
-                System.out.print("N");
                 return blockstate.setValue(TYPE, SlabType.DOUBLE).setValue(WATERLOGGED, Boolean.valueOf(false));
             }
             if(blockstate.getValue(FACING) == Direction.SOUTH && zflag && direction != Direction.NORTH){
-                System.out.print("S");
                 return blockstate.setValue(TYPE, SlabType.DOUBLE).setValue(WATERLOGGED, Boolean.valueOf(false));
             }
             if(blockstate.getValue(FACING) == Direction.EAST && xflag && direction != Direction.WEST){
-                System.out.print("E");
                 return blockstate.setValue(TYPE, SlabType.DOUBLE).setValue(WATERLOGGED, Boolean.valueOf(false));
             }
             if(blockstate.getValue(FACING) == Direction.WEST && !xflag && direction != Direction.EAST){
-                System.out.print("W");
                 return blockstate.setValue(TYPE, SlabType.DOUBLE).setValue(WATERLOGGED, Boolean.valueOf(false));
             }
         }

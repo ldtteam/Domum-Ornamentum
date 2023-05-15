@@ -24,6 +24,18 @@
       "predicate": {
         "domum_ornamentum:post_type": 3.0
       }
+    },
+    {
+      "model": "domum_ornamentum:block/post/post_double_spec",
+      "predicate": {
+        "domum_ornamentum:post_type": 4.0
+      }
+    },
+    {
+      "model": "domum_ornamentum:block/post/post_quad_spec",
+      "predicate": {
+        "domum_ornamentum:post_type": 5.0
+      }
     }
   ]
 }

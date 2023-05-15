@@ -16,8 +16,8 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import static com.ldtteam.domumornamentum.block.AbstractPostBlock.UPRIGHT;
 import static com.ldtteam.domumornamentum.block.AbstractPostBlock.FACING;
-
 
 public class PostBlockStateProvider extends BlockStateProvider {
 
@@ -30,23 +30,26 @@ public class PostBlockStateProvider extends BlockStateProvider {
         final MultiPartBlockStateBuilder builder = getMultipartBuilder(ModBlocks.getInstance().getPost());
 
         for (Direction facingValue : FACING.getPossibleValues()) {
-            for (PostType typeValue : PostBlock.TYPE.getPossibleValues()) {
-
-            final var partBuilder = builder.part();
-            partBuilder.modelFile(models()
-                .withExistingParent("block/post/post_" + typeValue.getSerializedName(), modLoc("block/post/post_%s_spec".formatted(typeValue.getSerializedName())))
-                .customLoader(MateriallyTexturedModelBuilder::new)
-                .end())
-
-                .rotationY(getYFromFacing(facingValue))
-                .rotationX(getXFromFacing(facingValue))
-                .addModel()
+            for (Boolean upright : UPRIGHT.getPossibleValues())  {
+                for (PostType typeValue : PostBlock.TYPE.getPossibleValues()) {
 
 
-                .condition(FACING, facingValue)
-                .condition(PostBlock.TYPE, typeValue)
+                    final var partBuilder = builder.part();
+                    partBuilder.modelFile(models()
+                                    .withExistingParent("block/post/post_" + typeValue.getSerializedName(), modLoc("block/post/post_%s_spec".formatted(typeValue.getSerializedName())))
+                                    .customLoader(MateriallyTexturedModelBuilder::new)
+                                    .end())
 
-                .end();
+                            .rotationY(getYFromFacing(facingValue))
+                            .rotationX(getXFromFacing(facingValue) + getUpright(upright, facingValue) )
+                            .addModel()
+
+                            .condition(UPRIGHT, upright)
+                            .condition(FACING, facingValue)
+                            .condition(PostBlock.TYPE, typeValue)
+
+                            .end();
+                }
             }
         }
 
@@ -84,13 +87,23 @@ public class PostBlockStateProvider extends BlockStateProvider {
     private int getXFromFacing(final Direction facing) {
         return switch (facing) {
 
-            case UP -> 0;
-            case DOWN -> 180;
-            case NORTH -> 90;
-            case SOUTH -> 90;
-            case WEST -> 90;
-            case EAST -> 90;
+            case UP -> 180;
+            case DOWN -> 0;
+            case NORTH -> 0;
+            case SOUTH -> 0;
+            case WEST -> 0;
+            case EAST -> 0;
         };
+    }
+    private int getUpright(final Boolean upright, Direction direction) {
+        if(!upright){
+            if(direction != Direction.DOWN){
+                if (direction != Direction.UP){
+                    return 90;
+                }
+            }
+        }
+        return 0;
     }
 
 
