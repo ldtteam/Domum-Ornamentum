@@ -25,9 +25,51 @@ public class PostComponentTagProvider extends BlockTagsProvider
     protected void addTags(HolderLookup.@NotNull Provider provider) {
 
         this.tag(ModTags.POST_MATERIALS)
-          .addTags(
-                  ModTags.GLOBAL_DEFAULT
-          );
+            .add(
+                    Blocks.BLACKSTONE,
+                    Blocks.GILDED_BLACKSTONE,
+                    Blocks.NETHERRACK,
+                    Blocks.CRIMSON_NYLIUM,
+                    Blocks.WARPED_NYLIUM,
+                    Blocks.BASALT,
+                    Blocks.POLISHED_BASALT,
+                    Blocks.SMOOTH_BASALT,
+                    Blocks.HAY_BLOCK,
+                    Blocks.COPPER_BLOCK,
+                    Blocks.CUT_COPPER,
+                    Blocks.EXPOSED_COPPER,
+                    Blocks.OXIDIZED_COPPER,
+                    Blocks.WEATHERED_COPPER,
+                    Blocks.WAXED_COPPER_BLOCK,
+                    Blocks.WAXED_EXPOSED_COPPER,
+                    Blocks.WAXED_OXIDIZED_COPPER,
+                    Blocks.WAXED_WEATHERED_COPPER,
+                    Blocks.BOOKSHELF,
+                    Blocks.AMETHYST_BLOCK,
+                    Blocks.BUDDING_AMETHYST,
+                    Blocks.CHISELED_SANDSTONE,
+                    Blocks.CHISELED_QUARTZ_BLOCK,
+                    Blocks.QUARTZ_PILLAR,
+                    Blocks.PACKED_ICE,
+                    Blocks.SNOW_BLOCK,
+                    Blocks.CHISELED_STONE_BRICKS,
+                    Blocks.CRACKED_STONE_BRICKS,
+                    Blocks.OBSIDIAN
+            )
+            .addTags(
+                    ModTags.EXTRA_BLOCKS,
+                    ModTags.BRICKS,
+                    ModTags.CONCRETE,
+                    ModTags.TERRACOTTA,
+                    BlockTags.DIRT,
+                    BlockTags.WOOL,
+                    BlockTags.LEAVES,
+                    Tags.Blocks.STORAGE_BLOCKS,
+                    Tags.Blocks.GLASS,
+                    BlockTags.LOGS,
+                    BlockTags.CORAL_BLOCKS,
+                    BlockTags.WART_BLOCKS
+            );
     }
 
     @Override

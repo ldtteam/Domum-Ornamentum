@@ -183,12 +183,11 @@ public abstract class AbstractPostBlock<B extends AbstractPostBlock<B>> extends 
         Direction direction = context.getClickedFace();
 
         if( direction.getAxis().isVertical()){
-            System.out.print("clicked horizontal");
             return blockstate.setValue(UPRIGHT, true)
-                    .setValue(FACING, context.getNearestLookingDirection().getOpposite())
-                    .setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER);
+                .setValue(FACING, context.getNearestLookingDirection().getOpposite())
+                .setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER);
         }
-        System.out.print("clicked other");
+
         return blockstate.setValue(UPRIGHT, false)
                 .setValue(FACING, direction)
                 .setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER);
