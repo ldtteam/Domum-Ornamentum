@@ -19,8 +19,8 @@ public enum BrickType implements StringRepresentable
     BROWN_STONE("brown_stone", Items.TERRACOTTA, Items.STONE_BRICKS),
     BEIGE_STONE("beige_stone", Items.GRAVEL, Items.STONE_BRICKS),
     CREAM_STONE("cream_stone", Items.SANDSTONE, Items.STONE_BRICKS),
-    SAND_STONE("sand_stone", Items.SAND, Items.STONE_BRICKS);
-
+    SAND_STONE("sand_stone", Items.SAND, Items.STONE_BRICKS),
+    ROAN_STONE("roan_stone", Items.BRICK, Items.STONE_BRICKS);
     public static final String SUFFIX = "_bricks";
 
     private final String name;

@@ -18,5 +18,6 @@ public class BrickLangEntryProvider implements LanguageProvider.SubProvider
         acceptor.add("block." + Constants.MOD_ID + "." + BrickType.BROWN_STONE.getSerializedName(), "Brown Stone Bricks");
         acceptor.add("block." + Constants.MOD_ID + "." + BrickType.CREAM_STONE.getSerializedName(), "Cream Stone Bricks");
         acceptor.add("block." + Constants.MOD_ID + "." + BrickType.SAND_STONE.getSerializedName(), "Sand Stone Bricks");
+        acceptor.add("block." + Constants.MOD_ID + "." + BrickType.ROAN_STONE.getSerializedName(), "Roan Stone Bricks");
     }
 }
