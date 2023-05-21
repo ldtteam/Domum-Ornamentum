@@ -26,11 +26,13 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * The abstract class for structurize-added posts.
- *
  * Singular fence-like block, one material channel, custom collision, placing alignment with getclickedface() direction
  */
 public abstract class AbstractPostBlock<B extends AbstractPostBlock<B>> extends HorizontalDirectionalBlock implements IDOBlock<B> {
-
+    /** Facing state
+     * Upright flag for y AND x rotation
+     * Collision objects for side facing slabs
+     */
     public static final EnumProperty<PostType> TYPE = EnumProperty.create("type", PostType.class);
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
     public static final BooleanProperty    UPRIGHT = BlockStateProperties.CONDITIONAL;
@@ -39,30 +41,30 @@ public abstract class AbstractPostBlock<B extends AbstractPostBlock<B>> extends 
     protected static final VoxelShape Y_AXIS_AABB = Block.box(6.0D, 0.0D, 6.0D, 10.D, 16.0D, 10.0D);
     protected static final VoxelShape Z_AXIS_AABB = Block.box(6.0D, 6.0D, 0.0D, 10.D, 10.0D, 16.0D);
     protected static final VoxelShape X_AXIS_AABB = Block.box(0.0D, 6.0D, 6.0D, 16.0D, 10.0D, 10.0D);
-    protected static VoxelShape X_DOUBLE_AABB = Shapes.join(
+    protected static final VoxelShape X_DOUBLE_AABB = Shapes.join(
             Block.box(0, 6.75, 2.75, 16, 9.25, 5.25),
             Block.box(0, 6.75, 10.75, 16, 9.25, 13.25), BooleanOp.OR);
-    protected static VoxelShape Y_DOUBLE_AABB = Shapes.join(
+    protected static final VoxelShape Y_DOUBLE_AABB = Shapes.join(
             Block.box(2.75, 0, 6.75, 5.25, 16, 9.25),
             Block.box(10.75, 0, 6.75, 13.25, 16, 9.25), BooleanOp.OR);
-    protected static VoxelShape Z_DOUBLE_AABB = Shapes.join(
+    protected static final VoxelShape Z_DOUBLE_AABB = Shapes.join(
             Block.box(2.75, 6.75, 0, 5.25, 9.25, 16),
             Block.box(10.75, 6.75, 0, 13.25, 9.25, 16), BooleanOp.OR);
-    protected static VoxelShape XY_DOUBLE_AABB = Shapes.join(
+    protected static final VoxelShape XY_DOUBLE_AABB = Shapes.join(
             Block.box(6.75, 0, 10.75, 9.25, 16, 13.25),
             Block.box(6.75, 0, 2.75, 9.25, 16, 5.25), BooleanOp.OR);
 
-    protected static VoxelShape X_QUAD_AABB = Shapes.or(
+    protected static final VoxelShape X_QUAD_AABB = Shapes.or(
             Block.box(0, 0.75, 0.75, 16, 3.25, 3.25),
             Block.box(0, 12.75, 0.75, 16, 15.25, 3.25),
             Block.box(0, 0.75, 12.75, 16, 3.25, 15.25),
             Block.box(0, 12.75, 12.75, 16, 15.25, 15.25));
-    protected static VoxelShape Y_QUAD_AABB = Shapes.or(
+    protected static final VoxelShape Y_QUAD_AABB = Shapes.or(
             Block.box(0.75, 0, 12.75, 3.25, 16, 15.25),
             Block.box(0.75, 0, 0.75, 3.25, 16, 3.25),
             Block.box(12.75, 0, 12.75, 15.25, 16, 15.25),
             Block.box(12.75, 0, 0.75, 15.25, 16, 3.25));
-    protected static VoxelShape Z_QUAD_AABB = Shapes.or(
+    protected static final VoxelShape Z_QUAD_AABB = Shapes.or(
             Block.box(0.75, 0.75, 0, 3.25, 3.25, 16),
             Block.box(0.75, 12.75, 0, 3.25, 15.25, 16),
             Block.box(12.75, 0.75, 0, 15.25, 3.25, 16),

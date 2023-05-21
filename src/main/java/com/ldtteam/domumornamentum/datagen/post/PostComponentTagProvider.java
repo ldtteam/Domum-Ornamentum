@@ -24,6 +24,10 @@ public class PostComponentTagProvider extends BlockTagsProvider
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
 
+
+        /*
+          Exactly as others.  FUTURE, would like to allow the cutter to make slabs with vanilla materials, so those can also be placed sideways
+         */
         this.tag(ModTags.POST_MATERIALS)
 
             .addTags(

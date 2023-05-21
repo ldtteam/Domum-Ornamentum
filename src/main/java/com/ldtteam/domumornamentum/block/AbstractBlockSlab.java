@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.SlabType;
@@ -23,20 +24,32 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
-
-
+/**
+ * Creates an instance of the abstract slab block.
+ * @param <B> the type.
+ */
 public abstract class AbstractBlockSlab<B extends AbstractBlockSlab<B>> extends SlabBlock implements IDOBlock<B>
 {
-
+    /** Facing state
+     * Collision objects for side facing slabs
+     */
     public static final DirectionProperty    FACING = BlockStateProperties.FACING;
     protected static final VoxelShape NORTH_AABB = Block.box(0.0D, 0.0D, 8.0D, 16.0D, 16.0D, 16.0D);
     protected static final VoxelShape SOUTH_AABB = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 8.0D);
     protected static final VoxelShape WEST_AABB = Block.box(8.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
     protected static final VoxelShape EAST_AABB = Block.box(0.0D, 0.0D, 0.0D, 8.0D, 16.0D, 16.0D);
+
     /**
      * Constructor of abstract class.
-     *
+     * @param properties the input properties.
      */
+    public AbstractBlockSlab(final Properties properties)
+    {
+        super(properties);
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.DOWN).setValue(TYPE, SlabType.BOTTOM).setValue(WATERLOGGED, Boolean.FALSE));
+
+    }
+
     @NotNull
     @Override
     public VoxelShape getShape(BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context)
@@ -58,10 +71,10 @@ public abstract class AbstractBlockSlab<B extends AbstractBlockSlab<B>> extends 
                         return BOTTOM_AABB;
             }
         }
-        if (state.getValue(TYPE) == SlabType.TOP)   {
+        else if (state.getValue(TYPE) == SlabType.TOP)   {
                 return TOP_AABB;
         }
-        if (state.getValue(TYPE) == SlabType.BOTTOM)   {
+        else if (state.getValue(TYPE) == SlabType.BOTTOM)   {
             return BOTTOM_AABB;
         }
         return Shapes.block();
@@ -72,12 +85,7 @@ public abstract class AbstractBlockSlab<B extends AbstractBlockSlab<B>> extends 
         super.createBlockStateDefinition(builder);
         builder.add(FACING);
     }
-    public AbstractBlockSlab(final Properties properties)
-    {
-        super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.DOWN).setValue(TYPE, SlabType.BOTTOM).setValue(WATERLOGGED, Boolean.FALSE));
 
-    }
     @Override
     public BlockState getStateForPlacement(@NotNull final BlockPlaceContext context)
     {
@@ -87,9 +95,11 @@ public abstract class AbstractBlockSlab<B extends AbstractBlockSlab<B>> extends 
         FluidState fluidstate = context.getLevel().getFluidState(context.getClickedPos());
         Direction direction = context.getClickedFace();
 
+            /*
+              stacking, if clicked position lands RIGHT in middle on any axis
+                        also if clicked in any other side of side facing slabs
+             */
 
-        /** stacking, if clicked position lands RIGHT in middle on any axis
-         * also if clicked in any other side of side facing slabs*/
         if (blockstate.is(this)) {
             boolean xpos = context.getClickLocation().x - (double)context.getClickedPos().getX() == 0.5D;
             boolean ypos = context.getClickLocation().y - (double)context.getClickedPos().getY() == 0.5D;
@@ -120,9 +130,9 @@ public abstract class AbstractBlockSlab<B extends AbstractBlockSlab<B>> extends 
             }
         }
 
-        /**if holding the shift key while clicking, set slab FACING (N/E/W/S)
-         * all facing slabs use BOTTOM TYPE
-         * else use the base class default */
+        /*if holding the shift key while clicking, set slab FACING (N/E/W/S)
+          all facing slabs use BOTTOM TYPE
+          else use the base class default */
         if (context.isSecondaryUseActive()) {
             if (context.getNearestLookingDirection() == Direction.UP){
                 return defaultstate.setValue(FACING, Direction.UP);
@@ -132,7 +142,7 @@ public abstract class AbstractBlockSlab<B extends AbstractBlockSlab<B>> extends 
             }
            return defaultstate.setValue(FACING, context.getHorizontalDirection().getOpposite());
         }
-        /**default placing */
+        /*default placing */
         BlockState blockstate1 = this.defaultBlockState().setValue(TYPE, SlabType.BOTTOM).setValue(FACING, Direction.DOWN).setValue(WATERLOGGED, Boolean.valueOf(fluidstate.getType() == Fluids.WATER));
         return direction != Direction.DOWN && (direction == Direction.UP || !(context.getClickLocation().y - (double)blockpos.getY() > 0.5D)) ? blockstate1 : blockstate1.setValue(FACING, Direction.UP);
     }

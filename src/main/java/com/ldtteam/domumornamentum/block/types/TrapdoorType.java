@@ -23,8 +23,7 @@ public enum TrapdoorType implements StringRepresentable
     VERTICAL_BARS("vertical_bars"),
     VERTICALLY_SQUIGGLY_STRIPED("vertically_squiggly_striped"),
     VERTICALLY_STRIPED("vertically_striped"),
-    WAFFLE("waffle"),
-    ;
+    WAFFLE("waffle");
 
 
 

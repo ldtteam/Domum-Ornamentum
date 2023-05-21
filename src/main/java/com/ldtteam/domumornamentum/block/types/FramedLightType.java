@@ -12,7 +12,7 @@ public enum FramedLightType implements StringRepresentable
     FRAMED("framed_light", "Framed"),
     HORIZONTAL("horizontal_light", "Horizontal"),
     LANTERN("fancy_light", "Fancy"),
-    SHINDRIA( "shindria_light", "Shindria");
+    GLAZED( "glazed_light", "Glazed");
 
     private final String name;
     private final String langName;

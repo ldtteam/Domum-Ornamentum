@@ -39,7 +39,10 @@ public class PostBlockStateProvider extends BlockStateProvider {
                                     .withExistingParent("block/post/post_" + typeValue.getSerializedName(), modLoc("block/post/post_%s_spec".formatted(typeValue.getSerializedName())))
                                     .customLoader(MateriallyTexturedModelBuilder::new)
                                     .end())
-
+                            /*
+                               posts can be placed upright normally, or against a face if the face is vertical.
+                               If placing horizontally (upright is false), add 90 to X rotation
+                             */
                             .rotationY(getYFromFacing(facingValue))
                             .rotationX(getXFromFacing(facingValue) + getUpright(upright, facingValue) )
                             .addModel()

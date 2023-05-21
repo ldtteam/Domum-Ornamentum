@@ -1,19 +1,20 @@
 package com.ldtteam.domumornamentum.block.types;
 
 import net.minecraft.util.StringRepresentable;
-import net.minecraft.util.StringUtil;
 import org.apache.commons.lang3.StringUtils;
-
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+/**
+ * Enum list of Post type names
+ *
+ */
 public enum PostType implements StringRepresentable
 {
     PLAIN("plain"),
     HEAVY("heavy"),
     TURNED("turned"),
     PINCHED("pinched"),
-
     DOUBLE("double"),
     QUAD("quad");
 

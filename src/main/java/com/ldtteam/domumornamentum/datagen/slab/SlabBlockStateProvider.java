@@ -20,7 +20,6 @@ import static net.minecraft.world.level.block.state.properties.BlockStatePropert
 
 public class SlabBlockStateProvider extends BlockStateProvider
 {
-
     public SlabBlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
         super(gen.getPackOutput(), Constants.MOD_ID, exFileHelper);
     }
@@ -29,7 +28,6 @@ public class SlabBlockStateProvider extends BlockStateProvider
     protected void registerStatesAndModels() {
         createBlockstateFile(ModBlocks.getInstance().getSlab());
     }
-
     private void createBlockstateFile(final SlabBlock slabBlock)
     {
         final MultiPartBlockStateBuilder builder = getMultipartBuilder(slabBlock);
@@ -48,7 +46,6 @@ public class SlabBlockStateProvider extends BlockStateProvider
                         .end();
             }
         }
-
         final ItemModelBuilder itemModelBuilder = itemModels().withExistingParent(slabBlock.getRegistryName().getPath(), modLoc("item/slab/slab_spec"))
                 .customLoader(MateriallyTexturedModelBuilder::new)
                 .end();
@@ -65,7 +62,6 @@ public class SlabBlockStateProvider extends BlockStateProvider
     }
     private int getXFromFacing(final Direction facing) {
         return switch (facing) {
-
             case UP -> 180;
             case DOWN -> 0;
             case NORTH -> 90;
