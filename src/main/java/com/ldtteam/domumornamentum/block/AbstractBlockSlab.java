@@ -1,8 +1,6 @@
 package com.ldtteam.domumornamentum.block;
 
 import com.ldtteam.domumornamentum.block.interfaces.IDOBlock;
-import com.sun.tools.jconsole.JConsoleContext;
-import com.sun.tools.jconsole.JConsolePlugin;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -13,7 +11,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.SlabType;
@@ -110,22 +107,22 @@ public abstract class AbstractBlockSlab<B extends AbstractBlockSlab<B>> extends 
             if (xpos || ypos || zpos){
                 return blockstate.setValue(TYPE, SlabType.DOUBLE).setValue(WATERLOGGED, Boolean.valueOf(false));
             }
-            if(blockstate.getValue(FACING) == Direction.UP && !yflag && direction != Direction.DOWN){
+            else if(blockstate.getValue(FACING) == Direction.UP && !yflag && direction != Direction.DOWN){
                 return blockstate.setValue(TYPE, SlabType.DOUBLE).setValue(WATERLOGGED, Boolean.valueOf(false));
             }
-            if(blockstate.getValue(FACING) == Direction.DOWN && yflag && direction != Direction.UP){
+            else if(blockstate.getValue(FACING) == Direction.DOWN && yflag && direction != Direction.UP){
                 return blockstate.setValue(TYPE, SlabType.DOUBLE).setValue(WATERLOGGED, Boolean.valueOf(false));
             }
-            if(blockstate.getValue(FACING) == Direction.NORTH && !zflag && direction != Direction.SOUTH){
+            else if(blockstate.getValue(FACING) == Direction.NORTH && !zflag && direction != Direction.SOUTH){
                 return blockstate.setValue(TYPE, SlabType.DOUBLE).setValue(WATERLOGGED, Boolean.valueOf(false));
             }
-            if(blockstate.getValue(FACING) == Direction.SOUTH && zflag && direction != Direction.NORTH){
+            else if(blockstate.getValue(FACING) == Direction.SOUTH && zflag && direction != Direction.NORTH){
                 return blockstate.setValue(TYPE, SlabType.DOUBLE).setValue(WATERLOGGED, Boolean.valueOf(false));
             }
-            if(blockstate.getValue(FACING) == Direction.EAST && xflag && direction != Direction.WEST){
+            else if(blockstate.getValue(FACING) == Direction.EAST && xflag && direction != Direction.WEST){
                 return blockstate.setValue(TYPE, SlabType.DOUBLE).setValue(WATERLOGGED, Boolean.valueOf(false));
             }
-            if(blockstate.getValue(FACING) == Direction.WEST && !xflag && direction != Direction.EAST){
+            else if(blockstate.getValue(FACING) == Direction.WEST && !xflag && direction != Direction.EAST){
                 return blockstate.setValue(TYPE, SlabType.DOUBLE).setValue(WATERLOGGED, Boolean.valueOf(false));
             }
         }
@@ -142,7 +139,7 @@ public abstract class AbstractBlockSlab<B extends AbstractBlockSlab<B>> extends 
             }
            return defaultstate.setValue(FACING, context.getHorizontalDirection().getOpposite());
         }
-        /*default placing */
+        /*default placing from vanilla*/
         BlockState blockstate1 = this.defaultBlockState().setValue(TYPE, SlabType.BOTTOM).setValue(FACING, Direction.DOWN).setValue(WATERLOGGED, Boolean.valueOf(fluidstate.getType() == Fluids.WATER));
         return direction != Direction.DOWN && (direction == Direction.UP || !(context.getClickLocation().y - (double)blockpos.getY() > 0.5D)) ? blockstate1 : blockstate1.setValue(FACING, Direction.UP);
     }

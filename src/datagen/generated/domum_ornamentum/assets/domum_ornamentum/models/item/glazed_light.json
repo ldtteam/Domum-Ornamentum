@@ -1,5 +1,5 @@
 {
-  "parent": "domum_ornamentum:block/framed_light/shindria_light",
+  "parent": "domum_ornamentum:block/framed_light/glazed_light",
   "display": {
     "firstperson_lefthand": {
       "rotation": [
