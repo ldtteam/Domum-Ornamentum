@@ -57,6 +57,7 @@ public class SlabComponentTagProvider extends BlockTagsProvider {
                 )
                 .addTags(
                         ModTags.GLOBAL_DEFAULT,
+                        BlockTags.PLANKS,
                         ModTags.EXTRA_BLOCKS,
                         ModTags.BRICKS,
                         ModTags.CONCRETE,
