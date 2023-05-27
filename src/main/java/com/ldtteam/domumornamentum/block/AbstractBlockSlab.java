@@ -95,7 +95,7 @@ public abstract class AbstractBlockSlab<B extends AbstractBlockSlab<B>> extends 
         FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
         Direction direction = context.getClickedFace();
 
-        // stacking, if clicked position lands RIGHT in middle on any axis, also if clicked in any other side of side facing slabs
+        // stacking, if clicked position lands in middle on any axis, also if clicked in any other side of side facing slabs
         if (blockState.is(this)) {
             boolean xpos = context.getClickLocation().x - (double) context.getClickedPos().getX() == 0.5D;
             boolean ypos = context.getClickLocation().y - (double) context.getClickedPos().getY() == 0.5D;
