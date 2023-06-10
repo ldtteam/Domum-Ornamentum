@@ -12,7 +12,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import org.jetbrains.annotations.NotNull;
 
@@ -32,7 +33,7 @@ public class BlockUtils
         return new ItemStack(block).getHoverName();
     }
 
-    public static List<ItemStack> getMaterializedItemStack(final @NotNull LootContext.Builder builder) {
+    public static List<ItemStack> getMaterializedItemStack(final @NotNull LootParams.Builder builder) {
         final ItemStack stack = getMaterializedItemStack(builder.getOptionalParameter(LootContextParams.THIS_ENTITY), builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY), (s, e) -> s);
         if (!stack.isEmpty())
             return Lists.newArrayList(stack);
@@ -48,7 +49,7 @@ public class BlockUtils
         return getMaterializedItemStack(entity, blockEntity, (s, e) -> s);
     }
 
-    public static List<ItemStack> getMaterializedItemStack(final @NotNull LootContext.Builder builder, final BiFunction<ItemStack, MateriallyTexturedBlockEntity, ItemStack> adapter) {
+    public static List<ItemStack> getMaterializedItemStack(final @NotNull LootParams.Builder builder, final BiFunction<ItemStack, MateriallyTexturedBlockEntity, ItemStack> adapter) {
         final ItemStack stack = getMaterializedItemStack(builder.getOptionalParameter(LootContextParams.THIS_ENTITY), builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY), adapter);
         if (!stack.isEmpty())
             return Lists.newArrayList(stack);

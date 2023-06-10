@@ -34,9 +34,10 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
-import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -78,19 +79,13 @@ public class FramedLightBlock extends AbstractBlock<FramedLightBlock> implements
      */
     public FramedLightBlock(final FramedLightType framedLightType)
     {
-        super(Properties.of(Material.WOOD).strength(BLOCK_HARDNESS, RESISTANCE).requiresCorrectToolForDrops().noOcclusion().lightLevel(state -> 15));
+        super(Properties.of().mapColor(MapColor.WOOD).pushReaction(PushReaction.PUSH_ONLY).strength(BLOCK_HARDNESS, RESISTANCE).requiresCorrectToolForDrops().noOcclusion().lightLevel(state -> 15));
         this.framedLightType = framedLightType;
     }
 
     public static String getName(final FramedLightType framedLightType)
     {
         return framedLightType.getName();
-    }
-
-    @Override
-    public @NotNull PushReaction getPistonPushReaction(final BlockState state)
-    {
-        return PushReaction.PUSH_ONLY;
     }
 
     @Override
@@ -178,7 +173,7 @@ public class FramedLightBlock extends AbstractBlock<FramedLightBlock> implements
     }
 
     @Override
-    public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootContext.Builder builder)
+    public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootParams.Builder builder)
     {
         return BlockUtils.getMaterializedItemStack(builder);
     }

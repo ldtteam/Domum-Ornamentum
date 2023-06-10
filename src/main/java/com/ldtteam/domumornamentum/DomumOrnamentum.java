@@ -2,6 +2,7 @@ package com.ldtteam.domumornamentum;
 
 import com.ldtteam.domumornamentum.api.DomumOrnamentumAPI;
 import com.ldtteam.domumornamentum.block.ModBlocks;
+import com.ldtteam.domumornamentum.block.ModCreativeTabs;
 import com.ldtteam.domumornamentum.container.ModContainerTypes;
 import com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes;
 import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
@@ -22,5 +23,6 @@ public class DomumOrnamentum
         ModContainerTypes.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModRecipeTypes.RECIPES.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModRecipeSerializers.SERIALIZERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModCreativeTabs.TAB_REG.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 }

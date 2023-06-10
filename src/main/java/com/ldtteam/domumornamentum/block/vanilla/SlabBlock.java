@@ -35,8 +35,9 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -57,7 +58,7 @@ public class SlabBlock extends AbstractBlockSlab<SlabBlock> implements IMaterial
 
     public SlabBlock()
     {
-        super(BlockBehaviour.Properties.of(Material.WOOD, OAK_PLANKS.defaultMaterialColor()).noOcclusion().strength(2.0F, 3.0F).requiresCorrectToolForDrops().sound(SoundType.WOOD));
+        super(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).noOcclusion().strength(2.0F, 3.0F).requiresCorrectToolForDrops().sound(SoundType.WOOD));
     }
 
     @Override
@@ -135,7 +136,7 @@ public class SlabBlock extends AbstractBlockSlab<SlabBlock> implements IMaterial
 
 
     @Override
-    public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootContext.Builder builder)
+    public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootParams.Builder builder)
     {
         return BlockUtils.getMaterializedItemStack(builder);
     }

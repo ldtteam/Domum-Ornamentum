@@ -13,16 +13,15 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ArchitectsCutterContainer extends AbstractContainerMenu
 {
@@ -52,7 +51,7 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
     public ArchitectsCutterContainer(int windowIdIn, Inventory playerInventoryIn, final ContainerLevelAccess worldPosCallableIn) {
         super(ModContainerTypes.ARCHITECTS_CUTTER.get(), windowIdIn);
         this.worldPosCallable = worldPosCallableIn;
-        this.world = playerInventoryIn.player.level;
+        this.world = playerInventoryIn.player.level();
         for (int i = 0; i < MateriallyTexturedBlockManager.getInstance().getMaxTexturableComponentCount(); i++)
         {
             int rowIndex = i / 2;
@@ -76,10 +75,10 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
             }
 
             public void onTake(@NotNull Player thePlayer, @NotNull ItemStack stack) {
-                stack.onCraftedBy(thePlayer.level, thePlayer, stack.getCount());
-                ArchitectsCutterContainer.this.inventory.awardUsedRecipes(thePlayer);
+                stack.onCraftedBy(thePlayer.level(), thePlayer, stack.getCount());
                 boolean anyEmpty = false;
                 List<Slot> inventorySlots = ArchitectsCutterContainer.this.inputInventorySlots;
+                ArchitectsCutterContainer.this.inventory.awardUsedRecipes(thePlayer, inventorySlots.stream().map(slot -> slot.getItem()).collect(Collectors.toList()));
 
                 final boolean craftingMateriallyTexturedBlock = stack.getItem() instanceof BlockItem blockItem && blockItem.getBlock() instanceof IMateriallyTexturedBlock;
                 final List<IMateriallyTexturedBlockComponent>
