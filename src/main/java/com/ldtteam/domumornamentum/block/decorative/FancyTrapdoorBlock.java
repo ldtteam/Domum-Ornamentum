@@ -64,7 +64,7 @@ public class FancyTrapdoorBlock extends AbstractBlockTrapdoor<FancyTrapdoorBlock
 
     public FancyTrapdoorBlock()
     {
-        super(Properties.of().mapColor(MapColor.WOOD).requiresCorrectToolForDrops().strength(3.0F).sound(SoundType.WOOD).noOcclusion().isValidSpawn((state, blockGetter, pos, type) -> false));
+        super(Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).requiresCorrectToolForDrops().strength(3.0F).sound(SoundType.WOOD).noOcclusion().isValidSpawn((state, blockGetter, pos, type) -> false));
         this.registerDefaultState(this.defaultBlockState().setValue(TYPE, FancyTrapdoorType.FULL));
     }
 

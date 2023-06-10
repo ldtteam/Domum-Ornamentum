@@ -109,7 +109,7 @@ public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock>
      */
     public ShingleSlabBlock()
     {
-        super(Properties.of().mapColor(MapColor.WOOD).strength(BLOCK_HARDNESS, RESISTANCE).requiresCorrectToolForDrops());
+        super(Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(BLOCK_HARDNESS, RESISTANCE).requiresCorrectToolForDrops());
         registerDefaultState(defaultBlockState().setValue(WATERLOGGED, false));
     }
 

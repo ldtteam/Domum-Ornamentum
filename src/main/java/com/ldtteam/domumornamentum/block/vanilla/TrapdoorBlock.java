@@ -63,7 +63,7 @@ public class TrapdoorBlock extends AbstractBlockTrapdoor<TrapdoorBlock> implemen
 
     public TrapdoorBlock()
     {
-        super(Properties.of().mapColor(MapColor.WOOD).strength(3.0F).requiresCorrectToolForDrops().sound(SoundType.WOOD).noOcclusion().isValidSpawn((state, blockGetter, pos, type) -> false));
+        super(Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(3.0F).requiresCorrectToolForDrops().sound(SoundType.WOOD).noOcclusion().isValidSpawn((state, blockGetter, pos, type) -> false));
         this.registerDefaultState(this.defaultBlockState().setValue(TYPE, TrapdoorType.FULL));
     }
 

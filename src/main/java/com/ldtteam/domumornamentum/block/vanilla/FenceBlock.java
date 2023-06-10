@@ -50,7 +50,7 @@ public class FenceBlock extends AbstractBlockFence<FenceBlock> implements IMater
 
     public FenceBlock()
     {
-        super(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).strength(2.0F, 3.0F).requiresCorrectToolForDrops().sound(SoundType.WOOD));
+        super(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(2.0F, 3.0F).requiresCorrectToolForDrops().sound(SoundType.WOOD));
     }
 
     @Override

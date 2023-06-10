@@ -45,7 +45,7 @@ public final class ArchitectsCutterBlock extends AbstractBlock<ArchitectsCutterB
 
     public ArchitectsCutterBlock()
     {
-        super(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).requiresCorrectToolForDrops().strength(3.5F));
+        super(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).sound(SoundType.STONE).requiresCorrectToolForDrops().strength(3.5F));
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
 
