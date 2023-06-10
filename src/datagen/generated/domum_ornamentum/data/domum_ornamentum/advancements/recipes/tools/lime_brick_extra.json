@@ -43,5 +43,6 @@
     "recipes": [
       "domum_ornamentum:lime_brick_extra"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -41,5 +41,6 @@
     "recipes": [
       "domum_ornamentum:green_floating_carpet"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

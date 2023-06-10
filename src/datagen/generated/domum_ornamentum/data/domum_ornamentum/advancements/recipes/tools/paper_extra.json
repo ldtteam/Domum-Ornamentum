@@ -30,5 +30,6 @@
     "recipes": [
       "domum_ornamentum:paper_extra"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

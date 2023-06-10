@@ -43,5 +43,6 @@
     "recipes": [
       "domum_ornamentum:pink_brick_extra"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

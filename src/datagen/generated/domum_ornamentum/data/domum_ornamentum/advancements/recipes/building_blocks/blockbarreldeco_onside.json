@@ -41,5 +41,6 @@
     "recipes": [
       "domum_ornamentum:blockbarreldeco_onside"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -54,5 +54,6 @@
     "recipes": [
       "domum_ornamentum:architectscutter"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }
