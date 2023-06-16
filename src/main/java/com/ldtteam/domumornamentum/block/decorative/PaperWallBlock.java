@@ -10,7 +10,6 @@ import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.components.SimpleRetexturableComponent;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
-import com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes;
 import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.BlockUtils;
@@ -22,18 +21,15 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -73,24 +69,6 @@ public class PaperWallBlock extends AbstractBlockPane<PaperWallBlock> implements
     public PaperWallBlock()
     {
         super(Properties.of().mapColor(MapColor.NONE).isRedstoneConductor((state, getter, pos) -> false).strength(BLOCK_HARDNESS, RESISTANCE).requiresCorrectToolForDrops());
-    }
-
-    @Override
-    public BlockState rotate(final BlockState state, final LevelAccessor world, final BlockPos pos, final Rotation direction)
-    {
-        return switch (direction)
-                 {
-                     case CLOCKWISE_180 -> state.setValue(NORTH, state.getValue(SOUTH))
-                                             .setValue(EAST, state.getValue(WEST)).setValue(SOUTH, state.getValue(NORTH))
-                                             .setValue(WEST, state.getValue(EAST));
-                     case COUNTERCLOCKWISE_90 -> state.setValue(NORTH, state.getValue(EAST))
-                                                   .setValue(EAST, state.getValue(SOUTH)).setValue(SOUTH, state.getValue(WEST))
-                                                   .setValue(WEST, state.getValue(NORTH));
-                     case CLOCKWISE_90 -> state.setValue(NORTH, state.getValue(WEST))
-                                            .setValue(EAST, state.getValue(NORTH)).setValue(SOUTH, state.getValue(EAST))
-                                            .setValue(WEST, state.getValue(SOUTH));
-                     default -> state;
-                 };
     }
 
     @Override
