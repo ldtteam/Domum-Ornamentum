@@ -1,4 +1,4 @@
 {
-  "parent": "domum_ornamentum:block/paperwall/blockpaperwall_side_east_spec",
+  "parent": "domum_ornamentum:block/paperwall/blockpaperwall_side_off_east_spec",
   "loader": "domum_ornamentum:materially_textured"
 }
