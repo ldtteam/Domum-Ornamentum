@@ -125,7 +125,8 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
             int k = left + j % 4 * 16;
             int l = j / 4;
             int i1 = top + l * 18 + 2;
-            graphics.renderItem(list.get(i).getResultItem(this.minecraft.level.registryAccess()), k, i1);
+
+            graphics.renderItem(list.get(i).assemble(this.menu.inputInventory, this.minecraft.level.registryAccess()), k, i1);
         }
     }
 

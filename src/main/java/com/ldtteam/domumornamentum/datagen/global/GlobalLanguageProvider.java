@@ -12,6 +12,7 @@ import com.ldtteam.domumornamentum.datagen.floatingcarpet.FloatingCarpetLangEntr
 import com.ldtteam.domumornamentum.datagen.frames.light.FramedLightLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.frames.timber.TimberFramesLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.panel.PanelLangEntryProvider;
+import com.ldtteam.domumornamentum.datagen.post.PostLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.pillar.PillarLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.shingle.normal.ShinglesLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.shingle.slab.ShingleSlabLangEntryProvider;
@@ -44,6 +45,7 @@ public class GlobalLanguageProvider extends LanguageProvider
                 new TimberFramesLangEntryProvider(),
                 new GlobalLanguageEntries(),
                 new PanelLangEntryProvider(),
+                new PostLangEntryProvider(),
                 new PillarLangEntryProvider(),
                 new ShinglesLangEntryProvider(),
                 new ShingleSlabLangEntryProvider(),
@@ -71,6 +73,7 @@ public class GlobalLanguageProvider extends LanguageProvider
             acceptor.add("itemGroup." + Constants.MOD_ID + ".walls", "DO - Walls");
             acceptor.add("itemGroup." + Constants.MOD_ID + ".stairs", "DO - Stairs");
             acceptor.add("itemGroup." + Constants.MOD_ID + ".doors", "DO - Doors");
+            acceptor.add("itemGroup." + Constants.MOD_ID + ".posts", "DO - Posts");
             acceptor.add("block." + Constants.MOD_ID + ".architectscutter", "Architect's Cutter");
             acceptor.add(Constants.MOD_ID + ".architectscutter", "Architect's Cutter");
             acceptor.add(Constants.MOD_ID + ".origin.tooltip", "Crafted in the Architect's Cutter");

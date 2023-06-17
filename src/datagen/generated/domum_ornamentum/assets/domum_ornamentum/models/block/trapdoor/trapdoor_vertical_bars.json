@@ -1,0 +1,4 @@
+{
+  "parent": "domum_ornamentum:block/trapdoor/trapdoor_vertical_bars_spec",
+  "loader": "domum_ornamentum:materially_textured"
+}

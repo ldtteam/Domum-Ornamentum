@@ -61,6 +61,7 @@ public final class ModBlocks implements IModBlocks {
     private static final RegistryObject<StairBlock> STAIR;
     private static final RegistryObject<TrapdoorBlock> TRAPDOOR;
     private static final RegistryObject<DoorBlock> DOOR;
+    private static final RegistryObject<PostBlock> POST;
     private static final RegistryObject<PanelBlock> PANEL;
     private static final RegistryObject<FancyDoorBlock> FANCY_DOOR;
     private static final RegistryObject<FancyTrapdoorBlock> FANCY_TRAPDOOR;
@@ -108,6 +109,7 @@ public final class ModBlocks implements IModBlocks {
         TRAPDOOR = register("vanilla_trapdoors_compat", TrapdoorBlock::new, b -> new TrapdoorBlockItem(b, new Item.Properties()));
         DOOR = register("vanilla_doors_compat", DoorBlock::new, b -> new DoorBlockItem(b, new Item.Properties()));
         PANEL = register("panel", PanelBlock::new, b -> new PanelBlockItem(b, new Item.Properties()));
+        POST = register("post", PostBlock::new, b -> new PostBlockItem(b, new Item.Properties()));
 
         FANCY_DOOR = register("fancy_door", FancyDoorBlock::new, b -> new FancyDoorBlockItem(b, new Item.Properties()));
         FANCY_TRAPDOOR = register("fancy_trapdoors", FancyTrapdoorBlock::new, b -> new FancyTrapdoorBlockItem(b, new Item.Properties()));
@@ -233,6 +235,11 @@ public final class ModBlocks implements IModBlocks {
     @Override
     public PanelBlock getPanel() {
         return ModBlocks.PANEL.get();
+    }
+
+    @Override
+    public PostBlock getPost() {
+        return ModBlocks.POST.get();
     }
 
     @Override

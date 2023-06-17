@@ -38,7 +38,7 @@ public class ModTags
     public static final TagKey<Block> STAIRS_MATERIALS = tag("stairs_materials");
     public static final TagKey<Block> TRAPDOORS_MATERIALS = tag("trapdoors_materials");
     public static final TagKey<Block> FANCY_TRAPDOORS_MATERIALS = tag("fancy_trapdoors_materials");
-
+    public static final TagKey<Block> POST_MATERIALS = tag("post_materials");
     public static final TagKey<Block> DOORS_MATERIALS = tag("doors_materials");
 
     public static final TagKey<Block> FANCY_DOORS_MATERIALS = tag("fancy_doors_materials");

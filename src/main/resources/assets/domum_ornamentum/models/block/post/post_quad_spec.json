@@ -1,0 +1,67 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+
+	"textures": {
+		"0": "block/oak_planks",
+		"particle": "block/oak_planks"
+	},
+	"elements": [
+		{
+			"from": [0.75, 0, 12.75],
+			"to": [3.25, 16, 15.25],
+			"faces": {
+				"north": {"uv": [10.75, 0, 13.25, 16], "texture": "#0"},
+				"east": {"uv": [2.75, 0, 5.25, 16], "texture": "#0"},
+				"south": {"uv": [2.75, 0, 5.25, 16], "texture": "#0"},
+				"west": {"uv": [10.75, 0, 13.25, 16], "texture": "#0"},
+				"up": {"uv": [2.75, 10.75, 5.25, 13.25], "rotation": 270, "texture": "#0"},
+				"down": {"uv": [2.75, 2.75, 5.25, 5.25], "rotation": 90, "texture": "#0"}
+			}
+		},
+		{
+			"from": [0.75, 0, 0.75],
+			"to": [3.25, 16, 3.25],
+			"faces": {
+				"north": {"uv": [10.75, 0, 13.25, 16], "texture": "#0"},
+				"east": {"uv": [10.75, 0, 13.25, 16], "texture": "#0"},
+				"south": {"uv": [2.75, 0, 5.25, 16], "texture": "#0"},
+				"west": {"uv": [2.75, 0, 5.25, 16], "texture": "#0"},
+				"up": {"uv": [2.75, 2.75, 5.25, 5.25], "rotation": 270, "texture": "#0"},
+				"down": {"uv": [2.75, 10.75, 5.25, 13.25], "rotation": 90, "texture": "#0"}
+			}
+		},
+		{
+			"from": [12.75, 0, 12.75],
+			"to": [15.25, 16, 15.25],
+			"faces": {
+				"north": {"uv": [2.75, 0, 5.25, 16], "texture": "#0"},
+				"east": {"uv": [2.75, 0, 5.25, 16], "texture": "#0"},
+				"south": {"uv": [10.75, 0, 13.25, 16], "texture": "#0"},
+				"west": {"uv": [10.75, 0, 13.25, 16], "texture": "#0"},
+				"up": {"uv": [10.75, 10.75, 13.25, 13.25], "rotation": 270, "texture": "#0"},
+				"down": {"uv": [10.75, 2.75, 13.25, 5.25], "rotation": 90, "texture": "#0"}
+			}
+		},
+		{
+			"from": [12.75, 0, 0.75],
+			"to": [15.25, 16, 3.25],
+			"faces": {
+				"north": {"uv": [2.75, 0, 5.25, 16], "texture": "#0"},
+				"east": {"uv": [10.75, 0, 13.25, 16], "texture": "#0"},
+				"south": {"uv": [10.75, 0, 13.25, 16], "texture": "#0"},
+				"west": {"uv": [2.75, 0, 5.25, 16], "texture": "#0"},
+				"up": {"uv": [10.75, 2.75, 13.25, 5.25], "rotation": 270, "texture": "#0"},
+				"down": {"uv": [10.75, 10.75, 13.25, 13.25], "rotation": 90, "texture": "#0"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "VoxelShapes",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [0, 1, 2, 3]
+		}
+	]
+}

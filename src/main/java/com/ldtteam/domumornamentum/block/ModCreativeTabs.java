@@ -41,10 +41,10 @@ public final class ModCreativeTabs {
         output.accept(ModBlocks.getInstance().getTrapdoor());
         output.accept(ModBlocks.getInstance().getDoor());
         output.accept(ModBlocks.getInstance().getPanel());
+      output.accept(ModBlocks.getInstance().getPost());
         output.accept(ModBlocks.getInstance().getFancyDoor());
         output.accept(ModBlocks.getInstance().getFancyTrapdoor());
     }).build());
-
 
     public static final RegistryObject<CreativeModeTab> EXTRA_BLOCKS = TAB_REG.register("extra_blocks", () -> new CreativeModeTab.Builder(CreativeModeTab.Row.TOP, 1).withTabsBefore(
       CreativeModeTabs.SEARCH).icon(() -> new ItemStack(ModBlocks.getInstance().getExtraTopBlocks().get(0))).title(Component.translatable("itemGroup." + MOD_ID + ".extra-blocks")).displayItems((config, output) -> {

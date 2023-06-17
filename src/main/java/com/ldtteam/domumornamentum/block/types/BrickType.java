@@ -13,13 +13,14 @@ public enum BrickType implements StringRepresentable
     BROWN("brown", Items.TERRACOTTA, Items.BRICK),
     BEIGE("beige", Items.GRAVEL, Items.BRICK),
     CREAM("cream", Items.SANDSTONE, Items.BRICK),
+    ROAN("roan", Items.WHITE_CONCRETE_POWDER,  Items.BRICK),
     SAND("sand", Items.SAND, Items.SANDSTONE),
 
     BROWN_STONE("brown_stone", Items.TERRACOTTA, Items.STONE_BRICKS),
     BEIGE_STONE("beige_stone", Items.GRAVEL, Items.STONE_BRICKS),
     CREAM_STONE("cream_stone", Items.SANDSTONE, Items.STONE_BRICKS),
-    SAND_STONE("sand_stone", Items.SAND, Items.STONE_BRICKS);
-
+    SAND_STONE("sand_stone", Items.SAND, Items.STONE_BRICKS),
+    ROAN_STONE("roan_stone", Items.BRICK, Items.STONE_BRICKS);
     public static final String SUFFIX = "_bricks";
 
     private final String name;
