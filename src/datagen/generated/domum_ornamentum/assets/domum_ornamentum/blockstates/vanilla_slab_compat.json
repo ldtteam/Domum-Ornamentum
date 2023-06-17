@@ -2,188 +2,26 @@
   "multipart": [
     {
       "apply": {
-        "model": "domum_ornamentum:block/slab/slab_top",
-        "x": 90
+        "model": "domum_ornamentum:block/slab/top"
       },
       "when": {
-        "type": "top",
-        "facing": "north"
+        "type": "top"
       }
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/slab/slab_bottom",
-        "x": 90
+        "model": "domum_ornamentum:block/slab/bottom"
       },
       "when": {
-        "type": "bottom",
-        "facing": "north"
+        "type": "bottom"
       }
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/slab/slab_double",
-        "x": 90
+        "model": "domum_ornamentum:block/slab/double"
       },
       "when": {
-        "type": "double",
-        "facing": "north"
-      }
-    },
-    {
-      "apply": {
-        "model": "domum_ornamentum:block/slab/slab_top",
-        "x": 90,
-        "y": 90
-      },
-      "when": {
-        "type": "top",
-        "facing": "east"
-      }
-    },
-    {
-      "apply": {
-        "model": "domum_ornamentum:block/slab/slab_bottom",
-        "x": 90,
-        "y": 90
-      },
-      "when": {
-        "type": "bottom",
-        "facing": "east"
-      }
-    },
-    {
-      "apply": {
-        "model": "domum_ornamentum:block/slab/slab_double",
-        "x": 90,
-        "y": 90
-      },
-      "when": {
-        "type": "double",
-        "facing": "east"
-      }
-    },
-    {
-      "apply": {
-        "model": "domum_ornamentum:block/slab/slab_top",
-        "x": 90,
-        "y": 180
-      },
-      "when": {
-        "type": "top",
-        "facing": "south"
-      }
-    },
-    {
-      "apply": {
-        "model": "domum_ornamentum:block/slab/slab_bottom",
-        "x": 90,
-        "y": 180
-      },
-      "when": {
-        "type": "bottom",
-        "facing": "south"
-      }
-    },
-    {
-      "apply": {
-        "model": "domum_ornamentum:block/slab/slab_double",
-        "x": 90,
-        "y": 180
-      },
-      "when": {
-        "type": "double",
-        "facing": "south"
-      }
-    },
-    {
-      "apply": {
-        "model": "domum_ornamentum:block/slab/slab_top",
-        "x": 90,
-        "y": 270
-      },
-      "when": {
-        "type": "top",
-        "facing": "west"
-      }
-    },
-    {
-      "apply": {
-        "model": "domum_ornamentum:block/slab/slab_bottom",
-        "x": 90,
-        "y": 270
-      },
-      "when": {
-        "type": "bottom",
-        "facing": "west"
-      }
-    },
-    {
-      "apply": {
-        "model": "domum_ornamentum:block/slab/slab_double",
-        "x": 90,
-        "y": 270
-      },
-      "when": {
-        "type": "double",
-        "facing": "west"
-      }
-    },
-    {
-      "apply": {
-        "model": "domum_ornamentum:block/slab/slab_top",
-        "x": 180
-      },
-      "when": {
-        "type": "top",
-        "facing": "up"
-      }
-    },
-    {
-      "apply": {
-        "model": "domum_ornamentum:block/slab/slab_bottom",
-        "x": 180
-      },
-      "when": {
-        "type": "bottom",
-        "facing": "up"
-      }
-    },
-    {
-      "apply": {
-        "model": "domum_ornamentum:block/slab/slab_double",
-        "x": 180
-      },
-      "when": {
-        "type": "double",
-        "facing": "up"
-      }
-    },
-    {
-      "apply": {
-        "model": "domum_ornamentum:block/slab/slab_top"
-      },
-      "when": {
-        "type": "top",
-        "facing": "down"
-      }
-    },
-    {
-      "apply": {
-        "model": "domum_ornamentum:block/slab/slab_bottom"
-      },
-      "when": {
-        "type": "bottom",
-        "facing": "down"
-      }
-    },
-    {
-      "apply": {
-        "model": "domum_ornamentum:block/slab/slab_double"
-      },
-      "when": {
-        "type": "double",
-        "facing": "down"
+        "type": "double"
       }
     }
   ]

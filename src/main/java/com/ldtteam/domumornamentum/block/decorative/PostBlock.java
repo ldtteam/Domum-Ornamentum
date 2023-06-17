@@ -33,9 +33,9 @@ import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -58,7 +58,7 @@ public class PostBlock extends AbstractPostBlock<PostBlock> implements IMaterial
 
     public PostBlock()
     {
-        super(Properties.of(Material.WOOD, MaterialColor.WOOD).strength(3.0F).requiresCorrectToolForDrops());
+        super(Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(3.0F).requiresCorrectToolForDrops());
         this.registerDefaultState(this.defaultBlockState().setValue(TYPE, PostType.PLAIN));
     }
 
@@ -147,7 +147,7 @@ public class PostBlock extends AbstractPostBlock<PostBlock> implements IMaterial
     }
 
     @Override
-    public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootContext.Builder builder)
+    public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootParams.Builder builder)
     {
         return BlockUtils.getMaterializedItemStack(builder, (s, e) -> {
             s.getOrCreateTag().putString("type", e.getBlockState().getValue(TYPE).toString().toUpperCase());
