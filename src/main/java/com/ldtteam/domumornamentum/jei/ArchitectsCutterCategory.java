@@ -22,6 +22,7 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
@@ -175,7 +176,7 @@ public class ArchitectsCutterCategory implements IRecipeCategory<ArchitectsCutte
     @Override
     public void draw(@NotNull final ArchitectsCutterRecipe recipe,
                      @NotNull final IRecipeSlotsView recipeSlotsView,
-                     @NotNull final PoseStack stack,
+                     @NotNull final GuiGraphics stack,
                      final double mouseX, final double mouseY)
     {
         final DisplayData displayData = cachedDisplayData.getUnchecked(recipe);
@@ -184,13 +185,14 @@ public class ArchitectsCutterCategory implements IRecipeCategory<ArchitectsCutte
         this.thumb.draw(stack, 116, 3);
 
         this.button.draw(stack, 75, 21);
-        stack.pushPose();
-        stack.translate(75, 22, 0);
+        final PoseStack pose = stack.pose();
+        pose.pushPose();
+        pose.translate(75, 22, 0);
         final ItemStack buttonStack = displayData.getOutput().copy();
         buttonStack.setCount(1);
         this.plugin.getIngredientManager().getIngredientRenderer(VanillaTypes.ITEM_STACK)
                         .render(stack, buttonStack);
-        stack.popPose();
+        pose.popPose();
     }
 
     private static class OutputRenderer implements IIngredientRenderer<ItemStack>
@@ -217,7 +219,7 @@ public class ArchitectsCutterCategory implements IRecipeCategory<ArchitectsCutte
         }
 
         @Override
-        public void render(@NotNull final PoseStack stack,
+        public void render(@NotNull final GuiGraphics stack,
                            @NotNull final ItemStack ingredient)
         {
             getRenderer().render(stack, displayData.getOutput());

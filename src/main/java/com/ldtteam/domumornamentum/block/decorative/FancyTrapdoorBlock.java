@@ -37,9 +37,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
-import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -65,7 +64,7 @@ public class FancyTrapdoorBlock extends AbstractBlockTrapdoor<FancyTrapdoorBlock
 
     public FancyTrapdoorBlock()
     {
-        super(Properties.of(Material.WOOD, MaterialColor.WOOD).requiresCorrectToolForDrops().strength(3.0F).sound(SoundType.WOOD).noOcclusion().isValidSpawn((state, blockGetter, pos, type) -> false));
+        super(Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).requiresCorrectToolForDrops().strength(3.0F).sound(SoundType.WOOD).noOcclusion().isValidSpawn((state, blockGetter, pos, type) -> false));
         this.registerDefaultState(this.defaultBlockState().setValue(TYPE, FancyTrapdoorType.FULL));
     }
 
@@ -154,7 +153,7 @@ public class FancyTrapdoorBlock extends AbstractBlockTrapdoor<FancyTrapdoorBlock
     }
 
     @Override
-    public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootContext.Builder builder)
+    public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootParams.Builder builder)
     {
         return BlockUtils.getMaterializedItemStack(builder, (s, e) -> {
             s.getOrCreateTag().putString("type", e.getBlockState().getValue(TYPE).toString().toUpperCase());

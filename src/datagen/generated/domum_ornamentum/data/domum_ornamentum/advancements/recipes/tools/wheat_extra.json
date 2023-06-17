@@ -30,5 +30,6 @@
     "recipes": [
       "domum_ornamentum:wheat_extra"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

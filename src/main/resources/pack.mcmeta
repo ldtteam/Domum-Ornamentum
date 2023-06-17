@@ -1,8 +1,8 @@
 {
-    "pack": {
-        "pack_format": 9,
-        "forge:resource_pack_format": 9,
-        "forge:data_pack_format": 10,
-        "description": "domum-ornamentum resources"
-    }
+  "pack": {
+    "description": {
+      "text": "Domum Ornamentum resources"
+    },
+    "pack_format": 15
+  }
 }

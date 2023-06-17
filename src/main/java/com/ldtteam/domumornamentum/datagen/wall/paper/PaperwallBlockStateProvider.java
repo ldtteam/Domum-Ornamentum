@@ -48,7 +48,7 @@ public class PaperwallBlockStateProvider extends BlockStateProvider {
                     .condition(Objects.requireNonNull(AbstractBlockPane.PROPERTIES.get(possibleValue)), true)
                     .end()
                     .part()
-                    .modelFile(models().withExistingParent("block/paperwall/blockpaperwall_side_off_" + possibleValue.name().toLowerCase(Locale.ROOT), modLoc("block/paperwall/blockpaperwall_side_" + possibleValue.name().toLowerCase(Locale.ROOT) + "_spec"))
+                    .modelFile(models().withExistingParent("block/paperwall/blockpaperwall_side_off_" + possibleValue.name().toLowerCase(Locale.ROOT), modLoc("block/paperwall/blockpaperwall_side_off_" + possibleValue.name().toLowerCase(Locale.ROOT) + "_spec"))
                             .customLoader(MateriallyTexturedModelBuilder::new)
                             .end())
                     .addModel()

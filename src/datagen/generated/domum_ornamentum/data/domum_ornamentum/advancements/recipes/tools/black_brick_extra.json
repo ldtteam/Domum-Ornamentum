@@ -43,5 +43,6 @@
     "recipes": [
       "domum_ornamentum:black_brick_extra"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

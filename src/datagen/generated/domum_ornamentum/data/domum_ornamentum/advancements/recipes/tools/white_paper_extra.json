@@ -43,5 +43,6 @@
     "recipes": [
       "domum_ornamentum:white_paper_extra"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

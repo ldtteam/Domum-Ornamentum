@@ -23,7 +23,6 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
@@ -36,15 +35,15 @@ import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Random;
 
 import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
 
@@ -59,7 +58,7 @@ public class StairBlock extends AbstractBlockStairs<StairBlock> implements IMate
 
     public StairBlock()
     {
-        super(OAK_PLANKS::defaultBlockState, Properties.of(Material.WOOD, OAK_PLANKS.defaultMaterialColor()).noOcclusion().strength(2.0F, 3.0F).requiresCorrectToolForDrops().sound(SoundType.WOOD));
+        super(OAK_PLANKS::defaultBlockState, Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).noOcclusion().strength(2.0F, 3.0F).requiresCorrectToolForDrops().sound(SoundType.WOOD));
     }
 
     @Override
@@ -206,7 +205,7 @@ public class StairBlock extends AbstractBlockStairs<StairBlock> implements IMate
     }
 
     @Override
-    public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootContext.Builder builder)
+    public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootParams.Builder builder)
     {
         return BlockUtils.getMaterializedItemStack(builder);
     }

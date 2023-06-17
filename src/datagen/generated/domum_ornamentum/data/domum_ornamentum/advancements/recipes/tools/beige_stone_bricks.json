@@ -43,5 +43,6 @@
     "recipes": [
       "domum_ornamentum:beige_stone_bricks"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

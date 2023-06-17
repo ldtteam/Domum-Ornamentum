@@ -30,5 +30,6 @@
     "recipes": [
       "domum_ornamentum:mossy_cobblestone_extra"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }
