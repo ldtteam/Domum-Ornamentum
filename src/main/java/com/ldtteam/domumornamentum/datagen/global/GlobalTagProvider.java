@@ -175,6 +175,7 @@ public class GlobalTagProvider extends BlockTagsProvider
             ModBlocks.getInstance().getFence(),
             ModBlocks.getInstance().getFenceGate(),
             ModBlocks.getInstance().getPanel(),
+            ModBlocks.getInstance().getPost(),
             ModBlocks.getInstance().getSlab(),
             ModBlocks.getInstance().getStair())
         .add(ModBlocks.getInstance().getTimberFrames().toArray(new Block[0]));

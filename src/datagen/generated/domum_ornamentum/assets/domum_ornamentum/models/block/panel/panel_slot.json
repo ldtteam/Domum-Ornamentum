@@ -1,0 +1,4 @@
+{
+  "parent": "domum_ornamentum:block/panel/panel_slot_spec",
+  "loader": "domum_ornamentum:materially_textured"
+}

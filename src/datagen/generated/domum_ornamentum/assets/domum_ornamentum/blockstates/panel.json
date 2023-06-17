@@ -2,6 +2,102 @@
   "multipart": [
     {
       "apply": {
+        "model": "domum_ornamentum:block/panel/panel_boss",
+        "x": -90,
+        "y": 180
+      },
+      "when": {
+        "type": "boss",
+        "facing": "north",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_boss",
+        "x": 180
+      },
+      "when": {
+        "type": "boss",
+        "facing": "north",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_boss",
+        "x": 90
+      },
+      "when": {
+        "type": "boss",
+        "facing": "north",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_boss"
+      },
+      "when": {
+        "type": "boss",
+        "facing": "north",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_coffer",
+        "x": -90,
+        "y": 180
+      },
+      "when": {
+        "type": "coffer",
+        "facing": "north",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_coffer",
+        "x": 180
+      },
+      "when": {
+        "type": "coffer",
+        "facing": "north",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_coffer",
+        "x": 90
+      },
+      "when": {
+        "type": "coffer",
+        "facing": "north",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_coffer"
+      },
+      "when": {
+        "type": "coffer",
+        "facing": "north",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
         "model": "domum_ornamentum:block/panel/panel_full",
         "x": -90,
         "y": 180
@@ -43,6 +139,54 @@
       },
       "when": {
         "type": "full",
+        "facing": "north",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_horizontal_bars",
+        "x": -90,
+        "y": 180
+      },
+      "when": {
+        "type": "horizontal_bars",
+        "facing": "north",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_horizontal_bars",
+        "x": 180
+      },
+      "when": {
+        "type": "horizontal_bars",
+        "facing": "north",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_horizontal_bars",
+        "x": 90
+      },
+      "when": {
+        "type": "horizontal_bars",
+        "facing": "north",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_horizontal_bars"
+      },
+      "when": {
+        "type": "horizontal_bars",
         "facing": "north",
         "half": "bottom",
         "open": "false"
@@ -146,6 +290,54 @@
     },
     {
       "apply": {
+        "model": "domum_ornamentum:block/panel/panel_moulding",
+        "x": -90,
+        "y": 180
+      },
+      "when": {
+        "type": "moulding",
+        "facing": "north",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_moulding",
+        "x": 180
+      },
+      "when": {
+        "type": "moulding",
+        "facing": "north",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_moulding",
+        "x": 90
+      },
+      "when": {
+        "type": "moulding",
+        "facing": "north",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_moulding"
+      },
+      "when": {
+        "type": "moulding",
+        "facing": "north",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
         "model": "domum_ornamentum:block/panel/panel_port_manteau",
         "x": -90,
         "y": 180
@@ -187,6 +379,198 @@
       },
       "when": {
         "type": "port_manteau",
+        "facing": "north",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_porthole",
+        "x": -90,
+        "y": 180
+      },
+      "when": {
+        "type": "porthole",
+        "facing": "north",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_porthole",
+        "x": 180
+      },
+      "when": {
+        "type": "porthole",
+        "facing": "north",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_porthole",
+        "x": 90
+      },
+      "when": {
+        "type": "porthole",
+        "facing": "north",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_porthole"
+      },
+      "when": {
+        "type": "porthole",
+        "facing": "north",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_roundel",
+        "x": -90,
+        "y": 180
+      },
+      "when": {
+        "type": "roundel",
+        "facing": "north",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_roundel",
+        "x": 180
+      },
+      "when": {
+        "type": "roundel",
+        "facing": "north",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_roundel",
+        "x": 90
+      },
+      "when": {
+        "type": "roundel",
+        "facing": "north",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_roundel"
+      },
+      "when": {
+        "type": "roundel",
+        "facing": "north",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_slot",
+        "x": -90,
+        "y": 180
+      },
+      "when": {
+        "type": "slot",
+        "facing": "north",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_slot",
+        "x": 180
+      },
+      "when": {
+        "type": "slot",
+        "facing": "north",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_slot",
+        "x": 90
+      },
+      "when": {
+        "type": "slot",
+        "facing": "north",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_slot"
+      },
+      "when": {
+        "type": "slot",
+        "facing": "north",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_vertical_bars",
+        "x": -90,
+        "y": 180
+      },
+      "when": {
+        "type": "vertical_bars",
+        "facing": "north",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_vertical_bars",
+        "x": 180
+      },
+      "when": {
+        "type": "vertical_bars",
+        "facing": "north",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_vertical_bars",
+        "x": 90
+      },
+      "when": {
+        "type": "vertical_bars",
+        "facing": "north",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_vertical_bars"
+      },
+      "when": {
+        "type": "vertical_bars",
         "facing": "north",
         "half": "bottom",
         "open": "false"
@@ -338,6 +722,108 @@
     },
     {
       "apply": {
+        "model": "domum_ornamentum:block/panel/panel_boss",
+        "x": -90,
+        "y": 360
+      },
+      "when": {
+        "type": "boss",
+        "facing": "south",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_boss",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "type": "boss",
+        "facing": "south",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_boss",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "type": "boss",
+        "facing": "south",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_boss",
+        "y": 180
+      },
+      "when": {
+        "type": "boss",
+        "facing": "south",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_coffer",
+        "x": -90,
+        "y": 360
+      },
+      "when": {
+        "type": "coffer",
+        "facing": "south",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_coffer",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "type": "coffer",
+        "facing": "south",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_coffer",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "type": "coffer",
+        "facing": "south",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_coffer",
+        "y": 180
+      },
+      "when": {
+        "type": "coffer",
+        "facing": "south",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
         "model": "domum_ornamentum:block/panel/panel_full",
         "x": -90,
         "y": 360
@@ -382,6 +868,57 @@
       },
       "when": {
         "type": "full",
+        "facing": "south",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_horizontal_bars",
+        "x": -90,
+        "y": 360
+      },
+      "when": {
+        "type": "horizontal_bars",
+        "facing": "south",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_horizontal_bars",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "type": "horizontal_bars",
+        "facing": "south",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_horizontal_bars",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "type": "horizontal_bars",
+        "facing": "south",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_horizontal_bars",
+        "y": 180
+      },
+      "when": {
+        "type": "horizontal_bars",
         "facing": "south",
         "half": "bottom",
         "open": "false"
@@ -491,6 +1028,57 @@
     },
     {
       "apply": {
+        "model": "domum_ornamentum:block/panel/panel_moulding",
+        "x": -90,
+        "y": 360
+      },
+      "when": {
+        "type": "moulding",
+        "facing": "south",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_moulding",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "type": "moulding",
+        "facing": "south",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_moulding",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "type": "moulding",
+        "facing": "south",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_moulding",
+        "y": 180
+      },
+      "when": {
+        "type": "moulding",
+        "facing": "south",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
         "model": "domum_ornamentum:block/panel/panel_port_manteau",
         "x": -90,
         "y": 360
@@ -535,6 +1123,210 @@
       },
       "when": {
         "type": "port_manteau",
+        "facing": "south",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_porthole",
+        "x": -90,
+        "y": 360
+      },
+      "when": {
+        "type": "porthole",
+        "facing": "south",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_porthole",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "type": "porthole",
+        "facing": "south",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_porthole",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "type": "porthole",
+        "facing": "south",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_porthole",
+        "y": 180
+      },
+      "when": {
+        "type": "porthole",
+        "facing": "south",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_roundel",
+        "x": -90,
+        "y": 360
+      },
+      "when": {
+        "type": "roundel",
+        "facing": "south",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_roundel",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "type": "roundel",
+        "facing": "south",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_roundel",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "type": "roundel",
+        "facing": "south",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_roundel",
+        "y": 180
+      },
+      "when": {
+        "type": "roundel",
+        "facing": "south",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_slot",
+        "x": -90,
+        "y": 360
+      },
+      "when": {
+        "type": "slot",
+        "facing": "south",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_slot",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "type": "slot",
+        "facing": "south",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_slot",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "type": "slot",
+        "facing": "south",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_slot",
+        "y": 180
+      },
+      "when": {
+        "type": "slot",
+        "facing": "south",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_vertical_bars",
+        "x": -90,
+        "y": 360
+      },
+      "when": {
+        "type": "vertical_bars",
+        "facing": "south",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_vertical_bars",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "type": "vertical_bars",
+        "facing": "south",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_vertical_bars",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "type": "vertical_bars",
+        "facing": "south",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_vertical_bars",
+        "y": 180
+      },
+      "when": {
+        "type": "vertical_bars",
         "facing": "south",
         "half": "bottom",
         "open": "false"
@@ -689,6 +1481,108 @@
       "when": {
         "type": "waffle",
         "facing": "south",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_boss",
+        "x": -90,
+        "y": 450
+      },
+      "when": {
+        "type": "boss",
+        "facing": "west",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_boss",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "type": "boss",
+        "facing": "west",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_boss",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "type": "boss",
+        "facing": "west",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_boss",
+        "y": 270
+      },
+      "when": {
+        "type": "boss",
+        "facing": "west",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_coffer",
+        "x": -90,
+        "y": 450
+      },
+      "when": {
+        "type": "coffer",
+        "facing": "west",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_coffer",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "type": "coffer",
+        "facing": "west",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_coffer",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "type": "coffer",
+        "facing": "west",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_coffer",
+        "y": 270
+      },
+      "when": {
+        "type": "coffer",
+        "facing": "west",
         "half": "bottom",
         "open": "false"
       }
@@ -746,6 +1640,57 @@
     },
     {
       "apply": {
+        "model": "domum_ornamentum:block/panel/panel_horizontal_bars",
+        "x": -90,
+        "y": 450
+      },
+      "when": {
+        "type": "horizontal_bars",
+        "facing": "west",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_horizontal_bars",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "type": "horizontal_bars",
+        "facing": "west",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_horizontal_bars",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "type": "horizontal_bars",
+        "facing": "west",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_horizontal_bars",
+        "y": 270
+      },
+      "when": {
+        "type": "horizontal_bars",
+        "facing": "west",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
         "model": "domum_ornamentum:block/panel/panel_horizontally_squiggly_striped",
         "x": -90,
         "y": 450
@@ -848,6 +1793,57 @@
     },
     {
       "apply": {
+        "model": "domum_ornamentum:block/panel/panel_moulding",
+        "x": -90,
+        "y": 450
+      },
+      "when": {
+        "type": "moulding",
+        "facing": "west",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_moulding",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "type": "moulding",
+        "facing": "west",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_moulding",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "type": "moulding",
+        "facing": "west",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_moulding",
+        "y": 270
+      },
+      "when": {
+        "type": "moulding",
+        "facing": "west",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
         "model": "domum_ornamentum:block/panel/panel_port_manteau",
         "x": -90,
         "y": 450
@@ -892,6 +1888,210 @@
       },
       "when": {
         "type": "port_manteau",
+        "facing": "west",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_porthole",
+        "x": -90,
+        "y": 450
+      },
+      "when": {
+        "type": "porthole",
+        "facing": "west",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_porthole",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "type": "porthole",
+        "facing": "west",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_porthole",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "type": "porthole",
+        "facing": "west",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_porthole",
+        "y": 270
+      },
+      "when": {
+        "type": "porthole",
+        "facing": "west",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_roundel",
+        "x": -90,
+        "y": 450
+      },
+      "when": {
+        "type": "roundel",
+        "facing": "west",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_roundel",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "type": "roundel",
+        "facing": "west",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_roundel",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "type": "roundel",
+        "facing": "west",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_roundel",
+        "y": 270
+      },
+      "when": {
+        "type": "roundel",
+        "facing": "west",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_slot",
+        "x": -90,
+        "y": 450
+      },
+      "when": {
+        "type": "slot",
+        "facing": "west",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_slot",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "type": "slot",
+        "facing": "west",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_slot",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "type": "slot",
+        "facing": "west",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_slot",
+        "y": 270
+      },
+      "when": {
+        "type": "slot",
+        "facing": "west",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_vertical_bars",
+        "x": -90,
+        "y": 450
+      },
+      "when": {
+        "type": "vertical_bars",
+        "facing": "west",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_vertical_bars",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "type": "vertical_bars",
+        "facing": "west",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_vertical_bars",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "type": "vertical_bars",
+        "facing": "west",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_vertical_bars",
+        "y": 270
+      },
+      "when": {
+        "type": "vertical_bars",
         "facing": "west",
         "half": "bottom",
         "open": "false"
@@ -1052,6 +2252,108 @@
     },
     {
       "apply": {
+        "model": "domum_ornamentum:block/panel/panel_boss",
+        "x": -90,
+        "y": 270
+      },
+      "when": {
+        "type": "boss",
+        "facing": "east",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_boss",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "type": "boss",
+        "facing": "east",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_boss",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "type": "boss",
+        "facing": "east",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_boss",
+        "y": 90
+      },
+      "when": {
+        "type": "boss",
+        "facing": "east",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_coffer",
+        "x": -90,
+        "y": 270
+      },
+      "when": {
+        "type": "coffer",
+        "facing": "east",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_coffer",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "type": "coffer",
+        "facing": "east",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_coffer",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "type": "coffer",
+        "facing": "east",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_coffer",
+        "y": 90
+      },
+      "when": {
+        "type": "coffer",
+        "facing": "east",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
         "model": "domum_ornamentum:block/panel/panel_full",
         "x": -90,
         "y": 270
@@ -1096,6 +2398,57 @@
       },
       "when": {
         "type": "full",
+        "facing": "east",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_horizontal_bars",
+        "x": -90,
+        "y": 270
+      },
+      "when": {
+        "type": "horizontal_bars",
+        "facing": "east",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_horizontal_bars",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "type": "horizontal_bars",
+        "facing": "east",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_horizontal_bars",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "type": "horizontal_bars",
+        "facing": "east",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_horizontal_bars",
+        "y": 90
+      },
+      "when": {
+        "type": "horizontal_bars",
         "facing": "east",
         "half": "bottom",
         "open": "false"
@@ -1205,6 +2558,57 @@
     },
     {
       "apply": {
+        "model": "domum_ornamentum:block/panel/panel_moulding",
+        "x": -90,
+        "y": 270
+      },
+      "when": {
+        "type": "moulding",
+        "facing": "east",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_moulding",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "type": "moulding",
+        "facing": "east",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_moulding",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "type": "moulding",
+        "facing": "east",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_moulding",
+        "y": 90
+      },
+      "when": {
+        "type": "moulding",
+        "facing": "east",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
         "model": "domum_ornamentum:block/panel/panel_port_manteau",
         "x": -90,
         "y": 270
@@ -1249,6 +2653,210 @@
       },
       "when": {
         "type": "port_manteau",
+        "facing": "east",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_porthole",
+        "x": -90,
+        "y": 270
+      },
+      "when": {
+        "type": "porthole",
+        "facing": "east",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_porthole",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "type": "porthole",
+        "facing": "east",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_porthole",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "type": "porthole",
+        "facing": "east",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_porthole",
+        "y": 90
+      },
+      "when": {
+        "type": "porthole",
+        "facing": "east",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_roundel",
+        "x": -90,
+        "y": 270
+      },
+      "when": {
+        "type": "roundel",
+        "facing": "east",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_roundel",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "type": "roundel",
+        "facing": "east",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_roundel",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "type": "roundel",
+        "facing": "east",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_roundel",
+        "y": 90
+      },
+      "when": {
+        "type": "roundel",
+        "facing": "east",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_slot",
+        "x": -90,
+        "y": 270
+      },
+      "when": {
+        "type": "slot",
+        "facing": "east",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_slot",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "type": "slot",
+        "facing": "east",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_slot",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "type": "slot",
+        "facing": "east",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_slot",
+        "y": 90
+      },
+      "when": {
+        "type": "slot",
+        "facing": "east",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_vertical_bars",
+        "x": -90,
+        "y": 270
+      },
+      "when": {
+        "type": "vertical_bars",
+        "facing": "east",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_vertical_bars",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "type": "vertical_bars",
+        "facing": "east",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_vertical_bars",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "type": "vertical_bars",
+        "facing": "east",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/panel/panel_vertical_bars",
+        "y": 90
+      },
+      "when": {
+        "type": "vertical_bars",
         "facing": "east",
         "half": "bottom",
         "open": "false"
