@@ -24,8 +24,10 @@ public final class ModCreativeTabs {
 
     public static final DeferredRegister<CreativeModeTab> TAB_REG = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MOD_ID);
 
-    public static final RegistryObject<CreativeModeTab> GENERAL = TAB_REG.register("general", () -> new CreativeModeTab.Builder(CreativeModeTab.Row.TOP, 1).withTabsBefore(
-      CreativeModeTabs.SEARCH).icon(() -> new ItemStack(ModBlocks.getInstance().getArchitectsCutter())).title(Component.translatable("itemGroup." + MOD_ID + ".general")).displayItems(new OutputAwareGenerator((config, output) -> {
+    public static final RegistryObject<CreativeModeTab> GENERAL = TAB_REG.register("general", () -> CreativeModeTab.builder()
+            .icon(() -> new ItemStack(ModBlocks.getInstance().getArchitectsCutter()))
+            .title(Component.translatable("itemGroup." + MOD_ID + ".general"))
+            .displayItems(new OutputAwareGenerator((config, output) -> {
         output.accept(ModBlocks.getInstance().getArchitectsCutter());
         ModBlocks.getInstance().getTimberFrames().forEach(output::accept);
         output.accept(ModBlocks.getInstance().getShingle());
@@ -46,16 +48,22 @@ public final class ModCreativeTabs {
         output.accept(ModBlocks.getInstance().getFancyTrapdoor());
     })).build());
 
-    public static final RegistryObject<CreativeModeTab> EXTRA_BLOCKS = TAB_REG.register("extra_blocks", () -> new CreativeModeTab.Builder(CreativeModeTab.Row.TOP, 1).withTabsBefore(
-      CreativeModeTabs.SEARCH).icon(() -> new ItemStack(ModBlocks.getInstance().getExtraTopBlocks().get(0))).title(Component.translatable("itemGroup." + MOD_ID + ".extra-blocks")).displayItems(new OutputAwareGenerator((config, output) -> {
+    public static final RegistryObject<CreativeModeTab> EXTRA_BLOCKS = TAB_REG.register("extra_blocks", () -> CreativeModeTab.builder()
+            .withTabsBefore(GENERAL.getId())
+            .icon(() -> new ItemStack(ModBlocks.getInstance().getExtraTopBlocks().get(0)))
+            .title(Component.translatable("itemGroup." + MOD_ID + ".extra-blocks"))
+            .displayItems(new OutputAwareGenerator((config, output) -> {
         ModBlocks.getInstance().getExtraTopBlocks().forEach(output::accept);
         ModBlocks.getInstance().getBricks().forEach(output::accept);
         output.accept(ModBlocks.getInstance().getStandingBarrel());
         output.accept(ModBlocks.getInstance().getLayingBarrel());
     })).build());
 
-    public static final RegistryObject<CreativeModeTab> FLOATING_CARPETS = TAB_REG.register("floating_carpets", () -> new CreativeModeTab.Builder(CreativeModeTab.Row.TOP, 1).withTabsBefore(
-      CreativeModeTabs.SEARCH).icon(() -> new ItemStack(ModBlocks.getInstance().getFloatingCarpets().get(0))).title(Component.translatable("itemGroup." + MOD_ID + ".floating-carpets")).displayItems(new OutputAwareGenerator((config, output) -> {
+    public static final RegistryObject<CreativeModeTab> FLOATING_CARPETS = TAB_REG.register("floating_carpets", () -> CreativeModeTab.builder()
+            .withTabsBefore(EXTRA_BLOCKS.getId())
+            .icon(() -> new ItemStack(ModBlocks.getInstance().getFloatingCarpets().get(0)))
+            .title(Component.translatable("itemGroup." + MOD_ID + ".floating-carpets"))
+            .displayItems(new OutputAwareGenerator((config, output) -> {
         ModBlocks.getInstance().getFloatingCarpets().forEach(output::accept);
     })).build());
 
