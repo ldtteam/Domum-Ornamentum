@@ -25,11 +25,22 @@ public class FloatingCarpetLangEntryProvider implements DataProvider
     @Override
     public void run(@NotNull CachedOutput cache) throws IOException
     {
-        for (final FloatingCarpetBlock floatingCarpet : ModBlocks.getInstance().getFloatingCarpets())
-        {
-            backingLangJson.put(floatingCarpet.getDescriptionId(), floatingCarpet.getColor().getName().substring(0, 1).toUpperCase() +
-                                 floatingCarpet.getColor().getName().substring(1) + " Floating carpet");
-        }
+        backingLangJson.put("block." + Constants.MOD_ID + ".black_floating_carpet", "Black Floating Carpet");
+        backingLangJson.put("block." + Constants.MOD_ID + ".blue_floating_carpet", "Blue Floating Carpet");
+        backingLangJson.put("block." + Constants.MOD_ID + ".brown_floating_carpet", "Brown Floating Carpet");
+        backingLangJson.put("block." + Constants.MOD_ID + ".cyan_floating_carpet", "Cyan Floating Carpet");
+        backingLangJson.put("block." + Constants.MOD_ID + ".gray_floating_carpet", "Gray Floating Carpet");
+        backingLangJson.put("block." + Constants.MOD_ID + ".green_floating_carpet", "Green Floating Carpet");
+        backingLangJson.put("block." + Constants.MOD_ID + ".light_blue_floating_carpet", "Light Blue Floating Carpet");
+        backingLangJson.put("block." + Constants.MOD_ID + ".light_gray_floating_carpet", "Light Gray Floating Carpet");
+        backingLangJson.put("block." + Constants.MOD_ID + ".lime_floating_carpet", "Lime Floating Carpet");
+        backingLangJson.put("block." + Constants.MOD_ID + ".magenta_floating_carpet", "Magenta Floating Carpet");
+        backingLangJson.put("block." + Constants.MOD_ID + ".orange_floating_carpet", "Orange Floating Carpet");
+        backingLangJson.put("block." + Constants.MOD_ID + ".pink_floating_carpet", "Pink Floating Carpet");
+        backingLangJson.put("block." + Constants.MOD_ID + ".purple_floating_carpet", "Purple Floating Carpet");
+        backingLangJson.put("block." + Constants.MOD_ID + ".red_floating_carpet", "Red Floating Carpet");
+        backingLangJson.put("block." + Constants.MOD_ID + ".white_floating_carpet", "White Floating Carpet");
+        backingLangJson.put("block." + Constants.MOD_ID + ".yellow_floating_carpet", "Yellow Floating Carpet");
     }
 
     @Override

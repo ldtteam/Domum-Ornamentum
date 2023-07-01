@@ -23,7 +23,7 @@ public class PaperwallLangEntryProvider implements DataProvider
     @Override
     public void run(@NotNull CachedOutput cache) throws IOException
     {
-        backingLangJson.put(Constants.MOD_ID + ".paperwall.name.format", "%s framed thin wall");
+        backingLangJson.put(Constants.MOD_ID + ".paperwall.name.format", "%s Framed Thin Wall");
         backingLangJson.put(Constants.MOD_ID + ".paperwall.header", "Materials:");
         backingLangJson.put(Constants.MOD_ID + ".paperwall.frame.format", "  - Frame:     %s");
         backingLangJson.put(Constants.MOD_ID + ".paperwall.center.format", "  - Center:    %s");
