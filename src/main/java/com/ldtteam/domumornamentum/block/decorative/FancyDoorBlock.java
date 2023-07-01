@@ -171,10 +171,6 @@ public class FancyDoorBlock extends AbstractBlockDoor<FancyDoorBlock> implements
     @Override
     public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootParams.Builder builder)
     {
-        if (state.getValue(HALF) == DoubleBlockHalf.LOWER)
-        {
-            return Collections.emptyList();
-        }
         return BlockUtils.getMaterializedItemStack(builder, (s, e) -> {
             s.getOrCreateTag().putString("type", e.getBlockState().getValue(TYPE).toString().toUpperCase());
             return s;

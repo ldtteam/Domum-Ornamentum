@@ -94,7 +94,7 @@ public class MateriallyTexturedBakedModel implements BakedModel {
     @Override
     public @NotNull List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull RandomSource rand, @NotNull ModelData data, @Nullable RenderType renderType) {
 
-        final BakedModel remappedModel = getBakedInnerModelFor(data, state, renderType);
+        final BakedModel remappedModel = getBakedInnerModelFor(data, state, renderType == null ? RenderType.solid() : renderType);
         return remappedModel.getQuads(state, side, rand, data, renderType);
     }
 
