@@ -22,6 +22,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
@@ -50,7 +51,7 @@ public class FenceBlock extends AbstractBlockFence<FenceBlock> implements IMater
 
     public FenceBlock()
     {
-        super(BlockBehaviour.Properties.of(Material.WOOD, OAK_PLANKS.defaultMaterialColor()).strength(2.0F, 3.0F).sound(SoundType.WOOD));
+        super(BlockBehaviour.Properties.of(Material.WOOD, OAK_PLANKS.defaultMaterialColor()).strength(2.0F, 3.0F).requiresCorrectToolForDrops().sound(SoundType.WOOD));
     }
 
     @Override
@@ -122,6 +123,26 @@ public class FenceBlock extends AbstractBlockFence<FenceBlock> implements IMater
     public Block getBlock()
     {
         return this;
+    }
+
+    @Override
+    public float getExplosionResistance(BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be instanceof MateriallyTexturedBlockEntity mtbe) {
+            Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(0).getId());
+            return block.getExplosionResistance(state, level, pos, explosion);
+        }
+        return super.getExplosionResistance(state, level, pos, explosion);
+    }
+
+    @Override
+    public float getDestroyProgress(BlockState state, Player player, BlockGetter level, BlockPos pos) {
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be instanceof MateriallyTexturedBlockEntity mtbe) {
+            Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(0).getId());
+            return super.getDestroyProgress(block.defaultBlockState(), player, level, pos);
+        }
+        return super.getDestroyProgress(state, player, level, pos);
     }
 
     @Override
