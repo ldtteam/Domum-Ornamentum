@@ -23,7 +23,23 @@ public class ExtraLangEntryProvider implements DataProvider
     @Override
     public void run(@NotNull CachedOutput cache) throws IOException
     {
-        backingLangJson.put(Constants.MOD_ID + ".extra.name.format", "%s %s Extra");
+        backingLangJson.put(Constants.MOD_ID + ".extra.name.format", "%s Extra");
+        backingLangJson.put(Constants.MOD_ID + ".extra.name.format.black", "Black %s Extra");
+        backingLangJson.put(Constants.MOD_ID + ".extra.name.format.blue", "Blue %s Extra");
+        backingLangJson.put(Constants.MOD_ID + ".extra.name.format.brown", "Brown %s Extra");
+        backingLangJson.put(Constants.MOD_ID + ".extra.name.format.cyan", "Cyan %s Extra");
+        backingLangJson.put(Constants.MOD_ID + ".extra.name.format.gray", "Gray %s Extra");
+        backingLangJson.put(Constants.MOD_ID + ".extra.name.format.green", "Green %s Extra");
+        backingLangJson.put(Constants.MOD_ID + ".extra.name.format.light_blue", "Light Blue %s Extra");
+        backingLangJson.put(Constants.MOD_ID + ".extra.name.format.light_gray", "Light Gray %s Extra");
+        backingLangJson.put(Constants.MOD_ID + ".extra.name.format.lime", "Lime %s Extra");
+        backingLangJson.put(Constants.MOD_ID + ".extra.name.format.magenta", "Magenta %s Extra");
+        backingLangJson.put(Constants.MOD_ID + ".extra.name.format.orange", "Orange %s Extra");
+        backingLangJson.put(Constants.MOD_ID + ".extra.name.format.pink", "Pink %s Extra");
+        backingLangJson.put(Constants.MOD_ID + ".extra.name.format.purple", "Purple %s Extra");
+        backingLangJson.put(Constants.MOD_ID + ".extra.name.format.red", "Red %s Extra");
+        backingLangJson.put(Constants.MOD_ID + ".extra.name.format.white", "White %s Extra");
+        backingLangJson.put(Constants.MOD_ID + ".extra.name.format.yellow", "Yellow %s Extra");
     }
 
     @Override

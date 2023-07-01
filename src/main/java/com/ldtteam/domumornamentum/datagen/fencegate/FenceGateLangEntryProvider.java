@@ -23,7 +23,7 @@ public class FenceGateLangEntryProvider implements DataProvider
     @Override
     public void run(@NotNull CachedOutput cache) throws IOException
     {
-        backingLangJson.put(Constants.MOD_ID + ".fence-gate.name.format", "%s Fence gate");
+        backingLangJson.put(Constants.MOD_ID + ".fence-gate.name.format", "%s Fence Gate");
     }
 
     @Override
