@@ -75,7 +75,7 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
                 int j1 = i + i1 % 4 * 16;
                 int k1 = j + i1 / 4 * 18 + 2;
                 if (x >= j1 && x < j1 + 16 && y >= k1 && y < k1 + 18) {
-                    graphics.renderTooltip(this.font, list.get(l).getResultItem(this.minecraft.level.registryAccess()), x, y);
+                    graphics.renderTooltip(this.font, list.get(l).assemble(this.menu.inputInventory, this.minecraft.level.registryAccess()), x, y);
 
                 }
             }
