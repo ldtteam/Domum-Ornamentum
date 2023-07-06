@@ -9,12 +9,11 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
@@ -28,13 +27,12 @@ import org.jetbrains.annotations.NotNull;
  * The abstract class for structurize-added posts.
  * Singular fence-like block, one material channel, custom collision, placing alignment with getclickedface() direction
  */
-public abstract class AbstractPostBlock<B extends AbstractPostBlock<B>> extends HorizontalDirectionalBlock implements IDOBlock<B> {
+public abstract class AbstractPostBlock<B extends AbstractPostBlock<B>> extends DirectionalBlock implements IDOBlock<B> {
     /** Facing state
      * Upright flag for y AND x rotation
      * Collision objects for side facing slabs
      */
     public static final EnumProperty<PostType> TYPE = EnumProperty.create("type", PostType.class);
-    public static final DirectionProperty FACING = BlockStateProperties.FACING;
     public static final BooleanProperty    UPRIGHT = BlockStateProperties.CONDITIONAL;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
