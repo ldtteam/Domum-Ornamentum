@@ -66,7 +66,7 @@ object Beta : Project({
     name = "Beta"
     description = "Beta version builds of domum ornamentum"
 
-    buildType(Alpha_Release)
+    buildType(Beta_Release)
 
     params {
         param("Default.Branch", "version/%Current Minecraft Version%")
@@ -76,10 +76,10 @@ object Beta : Project({
     }
 })
 
-object Alpha_Release : BuildType({
+object Beta_Release : BuildType({
     templates(AbsoluteId("LetSDevTogether_BuildWithRelease"))
     name = "Release"
-    description = "Releases the mod as Alpha to CurseForge"
+    description = "Releases the mod as Beta to CurseForge"
 
     params {
         param("Project.Type", "mods")
@@ -233,7 +233,7 @@ object Release : Project({
 object Release_Release : BuildType({
     templates(AbsoluteId("LetSDevTogether_BuildWithRelease"))
     name = "Release"
-    description = "Releases the mod as Alpha to CurseForge"
+    description = "Releases the mod as Release to CurseForge"
 
     params {
         param("Project.Type", "mods")
