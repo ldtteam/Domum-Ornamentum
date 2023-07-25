@@ -190,7 +190,10 @@ public class ShingleBlock extends AbstractBlockStairs<ShingleBlock> implements I
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof MateriallyTexturedBlockEntity mtbe) {
             Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(1).getId());
-            return block.getSoundType(state, level, pos, entity);
+            if (block != null)
+            {
+                return block.getSoundType(state, level, pos, entity);
+            }
         }
         return super.getSoundType(state, level, pos, entity);
     }
