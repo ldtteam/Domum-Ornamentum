@@ -1,6 +1,7 @@
 package com.ldtteam.domumornamentum.datagen.global;
 
 import com.ldtteam.domumornamentum.block.ModBlocks;
+import com.ldtteam.domumornamentum.shingles.ShingleHeightType;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.data.DataGenerator;
@@ -167,7 +168,9 @@ public class GlobalTagProvider extends BlockTagsProvider
           .add(ModBlocks.getInstance().getArchitectsCutter(),
             ModBlocks.getInstance().getLayingBarrel(),
             ModBlocks.getInstance().getStandingBarrel(),
-            ModBlocks.getInstance().getShingle(),
+            ModBlocks.getInstance().getShingle(ShingleHeightType.DEFAULT),
+            ModBlocks.getInstance().getShingle(ShingleHeightType.FLAT),
+            ModBlocks.getInstance().getShingle(ShingleHeightType.FLAT_LOWER),
             ModBlocks.getInstance().getShingleSlab(),
             ModBlocks.getInstance().getDoor(),
             ModBlocks.getInstance().getFancyDoor(),

@@ -9,6 +9,7 @@ import com.ldtteam.domumornamentum.block.types.TimberFrameType;
 import com.ldtteam.domumornamentum.block.vanilla.*;
 import com.ldtteam.domumornamentum.item.decoration.*;
 import com.ldtteam.domumornamentum.item.vanilla.*;
+import com.ldtteam.domumornamentum.shingles.ShingleHeightType;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
@@ -52,6 +53,9 @@ public final class ModBlocks implements IModBlocks {
      */
     private static RegistryObject<ArchitectsCutterBlock> ARCHITECTS_CUTTER;
     private static RegistryObject<ShingleBlock> SHINGLE;
+    private static RegistryObject<ShingleBlock> SHINGLE_FLAT;
+    private static RegistryObject<ShingleBlock> SHINGLE_FLAT_LOWER;
+
     private static RegistryObject<ShingleSlabBlock> SHINGLE_SLAB;
     private static RegistryObject<PaperWallBlock> PAPER_WALL;
     private static RegistryObject<BarrelBlock> STANDING_BARREL;
@@ -75,6 +79,10 @@ public final class ModBlocks implements IModBlocks {
         }
 
         SHINGLE = register("shingle", ShingleBlock::new, b -> new ShingleBlockItem(b, new Item.Properties().tab(ModCreativeTabs.GENERAL)));
+        SHINGLE_FLAT = register("shingle_flat", ShingleBlock::new, b -> new ShingleBlockItem(b, new Item.Properties().tab(ModCreativeTabs.GENERAL)));
+        SHINGLE_FLAT_LOWER = register("shingle_flat_lower", ShingleBlock::new, b -> new ShingleBlockItem(b, new Item.Properties().tab(ModCreativeTabs.GENERAL)));
+
+
         SHINGLE_SLAB = register("shingle_slab", ShingleSlabBlock::new, b -> new ShingleSlabBlockItem(b, new Item.Properties().tab(ModCreativeTabs.GENERAL)));
         PAPER_WALL = register("blockpaperwall", PaperWallBlock::new, b -> new PaperwallBlockItem(b, new Item.Properties().tab(ModCreativeTabs.GENERAL)));
 
@@ -146,8 +154,13 @@ public final class ModBlocks implements IModBlocks {
     }
 
     @Override
-    public ShingleBlock getShingle() {
-        return ModBlocks.SHINGLE.get();
+    public ShingleBlock getShingle(final ShingleHeightType heightType) {
+        return switch (heightType)
+        {
+            case DEFAULT -> ModBlocks.SHINGLE.get();
+            case FLAT -> ModBlocks.SHINGLE_FLAT.get();
+            case FLAT_LOWER -> ModBlocks.SHINGLE_FLAT_LOWER.get();
+        };
     }
 
     @Override
