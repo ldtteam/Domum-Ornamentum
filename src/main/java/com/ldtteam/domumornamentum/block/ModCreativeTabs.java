@@ -1,5 +1,6 @@
 package com.ldtteam.domumornamentum.block;
 
+import com.ldtteam.domumornamentum.shingles.ShingleHeightType;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -30,7 +31,11 @@ public final class ModCreativeTabs {
             .displayItems(new OutputAwareGenerator((config, output) -> {
         output.accept(ModBlocks.getInstance().getArchitectsCutter());
         ModBlocks.getInstance().getTimberFrames().forEach(output::accept);
-        output.accept(ModBlocks.getInstance().getShingle());
+        for (ShingleHeightType heightType : ShingleHeightType.values())
+        {
+            output.accept(ModBlocks.getInstance().getShingle(heightType));
+        }
+
         output.accept(ModBlocks.getInstance().getShingleSlab());
         output.accept(ModBlocks.getInstance().getPaperWall());
         ModBlocks.getInstance().getPillars().forEach(output::accept);

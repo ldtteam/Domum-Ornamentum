@@ -1,0 +1,464 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_straight",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "facing": "north",
+        "half": "top",
+        "shape": "straight"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_straight",
+        "y": 270
+      },
+      "when": {
+        "facing": "north",
+        "half": "bottom",
+        "shape": "straight"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_inner_left",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "facing": "north",
+        "half": "top",
+        "shape": "inner_left"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_inner_left",
+        "y": 180
+      },
+      "when": {
+        "facing": "north",
+        "half": "bottom",
+        "shape": "inner_left"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_inner_right",
+        "x": 180,
+        "y": 360
+      },
+      "when": {
+        "facing": "north",
+        "half": "top",
+        "shape": "inner_right"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_inner_right",
+        "y": 270
+      },
+      "when": {
+        "facing": "north",
+        "half": "bottom",
+        "shape": "inner_right"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_outer_left",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "facing": "north",
+        "half": "top",
+        "shape": "outer_left"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_outer_left",
+        "y": 180
+      },
+      "when": {
+        "facing": "north",
+        "half": "bottom",
+        "shape": "outer_left"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_outer_right",
+        "x": 180,
+        "y": 360
+      },
+      "when": {
+        "facing": "north",
+        "half": "top",
+        "shape": "outer_right"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_outer_right",
+        "y": 270
+      },
+      "when": {
+        "facing": "north",
+        "half": "bottom",
+        "shape": "outer_right"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_straight",
+        "x": 180,
+        "y": 450
+      },
+      "when": {
+        "facing": "south",
+        "half": "top",
+        "shape": "straight"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_straight",
+        "y": 450
+      },
+      "when": {
+        "facing": "south",
+        "half": "bottom",
+        "shape": "straight"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_inner_left",
+        "x": 180,
+        "y": 450
+      },
+      "when": {
+        "facing": "south",
+        "half": "top",
+        "shape": "inner_left"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_inner_left",
+        "y": 360
+      },
+      "when": {
+        "facing": "south",
+        "half": "bottom",
+        "shape": "inner_left"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_inner_right",
+        "x": 180,
+        "y": 540
+      },
+      "when": {
+        "facing": "south",
+        "half": "top",
+        "shape": "inner_right"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_inner_right",
+        "y": 450
+      },
+      "when": {
+        "facing": "south",
+        "half": "bottom",
+        "shape": "inner_right"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_outer_left",
+        "x": 180,
+        "y": 450
+      },
+      "when": {
+        "facing": "south",
+        "half": "top",
+        "shape": "outer_left"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_outer_left",
+        "y": 360
+      },
+      "when": {
+        "facing": "south",
+        "half": "bottom",
+        "shape": "outer_left"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_outer_right",
+        "x": 180,
+        "y": 540
+      },
+      "when": {
+        "facing": "south",
+        "half": "top",
+        "shape": "outer_right"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_outer_right",
+        "y": 450
+      },
+      "when": {
+        "facing": "south",
+        "half": "bottom",
+        "shape": "outer_right"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_straight",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "facing": "west",
+        "half": "top",
+        "shape": "straight"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_straight",
+        "y": 180
+      },
+      "when": {
+        "facing": "west",
+        "half": "bottom",
+        "shape": "straight"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_inner_left",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "facing": "west",
+        "half": "top",
+        "shape": "inner_left"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_inner_left",
+        "y": 90
+      },
+      "when": {
+        "facing": "west",
+        "half": "bottom",
+        "shape": "inner_left"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_inner_right",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "half": "top",
+        "shape": "inner_right"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_inner_right",
+        "y": 180
+      },
+      "when": {
+        "facing": "west",
+        "half": "bottom",
+        "shape": "inner_right"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_outer_left",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "facing": "west",
+        "half": "top",
+        "shape": "outer_left"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_outer_left",
+        "y": 90
+      },
+      "when": {
+        "facing": "west",
+        "half": "bottom",
+        "shape": "outer_left"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_outer_right",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "half": "top",
+        "shape": "outer_right"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_outer_right",
+        "y": 180
+      },
+      "when": {
+        "facing": "west",
+        "half": "bottom",
+        "shape": "outer_right"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_straight",
+        "x": 180,
+        "y": 360
+      },
+      "when": {
+        "facing": "east",
+        "half": "top",
+        "shape": "straight"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_straight",
+        "y": 360
+      },
+      "when": {
+        "facing": "east",
+        "half": "bottom",
+        "shape": "straight"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_inner_left",
+        "x": 180,
+        "y": 360
+      },
+      "when": {
+        "facing": "east",
+        "half": "top",
+        "shape": "inner_left"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_inner_left",
+        "y": 270
+      },
+      "when": {
+        "facing": "east",
+        "half": "bottom",
+        "shape": "inner_left"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_inner_right",
+        "x": 180,
+        "y": 450
+      },
+      "when": {
+        "facing": "east",
+        "half": "top",
+        "shape": "inner_right"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_inner_right",
+        "y": 360
+      },
+      "when": {
+        "facing": "east",
+        "half": "bottom",
+        "shape": "inner_right"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_outer_left",
+        "x": 180,
+        "y": 360
+      },
+      "when": {
+        "facing": "east",
+        "half": "top",
+        "shape": "outer_left"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_outer_left",
+        "y": 270
+      },
+      "when": {
+        "facing": "east",
+        "half": "bottom",
+        "shape": "outer_left"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_outer_right",
+        "x": 180,
+        "y": 450
+      },
+      "when": {
+        "facing": "east",
+        "half": "top",
+        "shape": "outer_right"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/shingle/flat_outer_right",
+        "y": 360
+      },
+      "when": {
+        "facing": "east",
+        "half": "bottom",
+        "shape": "outer_right"
+      }
+    }
+  ]
+}

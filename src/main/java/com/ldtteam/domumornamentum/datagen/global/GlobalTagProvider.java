@@ -1,6 +1,7 @@
 package com.ldtteam.domumornamentum.datagen.global;
 
 import com.ldtteam.domumornamentum.block.ModBlocks;
+import com.ldtteam.domumornamentum.shingles.ShingleHeightType;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.HolderLookup;
@@ -127,7 +128,6 @@ public class GlobalTagProvider extends BlockTagsProvider
           Blocks.RED_NETHER_BRICKS,
           Blocks.TUFF,
           Blocks.NETHER_BRICKS,
-          Blocks.SMOOTH_STONE,
           Blocks.END_STONE_BRICKS,
           Blocks.PRISMARINE,
           Blocks.PRISMARINE_BRICKS,
@@ -141,7 +141,12 @@ public class GlobalTagProvider extends BlockTagsProvider
           Blocks.DEEPSLATE_TILES,
           Blocks.CRACKED_DEEPSLATE_TILES,
           Blocks.CALCITE,
-          Blocks.TUFF
+          Blocks.TUFF,
+          Blocks.BONE_BLOCK,
+          Blocks.AZALEA_LEAVES,
+          Blocks.FLOWERING_AZALEA_LEAVES,
+          Blocks.MUD_BRICKS,
+          Blocks.DRIED_KELP_BLOCK
         )
           .addTags(
             ModTags.EXTRA_BLOCKS,
@@ -166,7 +171,9 @@ public class GlobalTagProvider extends BlockTagsProvider
           .add(ModBlocks.getInstance().getArchitectsCutter(),
             ModBlocks.getInstance().getLayingBarrel(),
             ModBlocks.getInstance().getStandingBarrel(),
-            ModBlocks.getInstance().getShingle(),
+            ModBlocks.getInstance().getShingle(ShingleHeightType.DEFAULT),
+            ModBlocks.getInstance().getShingle(ShingleHeightType.FLAT),
+            ModBlocks.getInstance().getShingle(ShingleHeightType.FLAT_LOWER),
             ModBlocks.getInstance().getShingleSlab(),
             ModBlocks.getInstance().getDoor(),
             ModBlocks.getInstance().getFancyDoor(),

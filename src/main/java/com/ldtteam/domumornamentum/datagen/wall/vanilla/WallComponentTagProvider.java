@@ -56,7 +56,11 @@ public class WallComponentTagProvider extends BlockTagsProvider
           Blocks.QUARTZ_BLOCK,
           Blocks.QUARTZ_BRICKS,
           Blocks.QUARTZ_PILLAR,
-          Blocks.CHISELED_QUARTZ_BLOCK
+          Blocks.CHISELED_QUARTZ_BLOCK,
+          Blocks.CALCITE,
+          Blocks.BONE_BLOCK,
+          Blocks.AZALEA_LEAVES,
+          Blocks.FLOWERING_AZALEA_LEAVES
         )
           .addTags(
             ModTags.EXTRA_BLOCKS,

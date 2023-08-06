@@ -5,6 +5,7 @@ import com.ldtteam.domumornamentum.block.decorative.ShingleBlock;
 import com.ldtteam.domumornamentum.block.types.ShingleShapeType;
 import com.ldtteam.domumornamentum.datagen.MateriallyTexturedModelBuilder;
 import com.ldtteam.domumornamentum.datagen.utils.ModelBuilderUtils;
+import com.ldtteam.domumornamentum.shingles.ShingleHeightType;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
@@ -18,25 +19,28 @@ import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
 import java.util.EnumMap;
 import java.util.Map;
 
 public class ShinglesBlockStateProvider extends BlockStateProvider
 {
-
-
     public ShinglesBlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
         super(gen.getPackOutput(), Constants.MOD_ID, exFileHelper);
     }
 
     @Override
     protected void registerStatesAndModels() {
-        createBlockstateFile(ModBlocks.getInstance().getShingle());
+        createBlockstateFile(ModBlocks.getInstance().getShingle(ShingleHeightType.DEFAULT), ShingleHeightType.DEFAULT);
+        createBlockstateFile(ModBlocks.getInstance().getShingle(ShingleHeightType.FLAT), ShingleHeightType.FLAT);
+        createBlockstateFile(ModBlocks.getInstance().getShingle(ShingleHeightType.FLAT_LOWER), ShingleHeightType.FLAT_LOWER);
     }
 
-    private void createBlockstateFile(final ShingleBlock shingle) {
+    private void createBlockstateFile(final ShingleBlock shingle, final ShingleHeightType heightType)
+    {
         final MultiPartBlockStateBuilder builder = getMultipartBuilder(shingle);
+
+        if (shingle.getRegistryName() == null)
+            return;
 
         final Map<StairsShape, ModelFile> blockModels = new EnumMap<>(StairsShape.class);
         for (Direction facingValue : StairBlock.FACING.getPossibleValues())
@@ -47,7 +51,7 @@ public class ShinglesBlockStateProvider extends BlockStateProvider
                 {
                     final ShingleShapeType shingleShapeType = ShingleBlock.getTypeFromShape(shapeValue);
                     builder.part()
-                            .modelFile(blockModels.computeIfAbsent(shapeValue, shape -> models().withExistingParent("block/shingle/" + shapeValue.name().toLowerCase(), modLoc("block/shingle/" + shingleShapeType.name().toLowerCase() + "_spec"))
+                            .modelFile(blockModels.computeIfAbsent(shapeValue, shape -> models().withExistingParent("block/shingle/" + heightType.getId() + shapeValue.name().toLowerCase(), modLoc("block/shingle/" + heightType.getId() + shingleShapeType.name().toLowerCase() + "_spec"))
                                     .customLoader(MateriallyTexturedModelBuilder::new)
                                     .end()))
                             .rotationX(halfValue == Half.TOP ? 180 : 0)
