@@ -129,7 +129,6 @@ public class GlobalTagProvider extends BlockTagsProvider
           Blocks.RED_NETHER_BRICKS,
           Blocks.TUFF,
           Blocks.NETHER_BRICKS,
-          Blocks.SMOOTH_STONE,
           Blocks.END_STONE_BRICKS,
           Blocks.PRISMARINE,
           Blocks.PRISMARINE_BRICKS,
@@ -143,7 +142,12 @@ public class GlobalTagProvider extends BlockTagsProvider
           Blocks.DEEPSLATE_TILES,
           Blocks.CRACKED_DEEPSLATE_TILES,
           Blocks.CALCITE,
-          Blocks.TUFF
+          Blocks.TUFF,
+          Blocks.BONE_BLOCK,
+          Blocks.AZALEA_LEAVES,
+          Blocks.FLOWERING_AZALEA_LEAVES,
+          Blocks.MUD_BRICKS,
+          Blocks.DRIED_KELP_BLOCK
         )
           .addTags(
             ModTags.EXTRA_BLOCKS,

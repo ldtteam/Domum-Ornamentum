@@ -55,7 +55,10 @@ public class SlabComponentTagProvider extends BlockTagsProvider
             Blocks.SNOW_BLOCK,
             Blocks.CHISELED_STONE_BRICKS,
             Blocks.CRACKED_STONE_BRICKS,
-            Blocks.OBSIDIAN
+            Blocks.OBSIDIAN,
+            Blocks.CALCITE,
+            Blocks.BONE_BLOCK,
+            Blocks.DRIED_KELP_BLOCK
           )
           .addTags(
             ModTags.EXTRA_BLOCKS,
