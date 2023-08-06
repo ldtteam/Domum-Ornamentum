@@ -48,7 +48,7 @@ public final class ModCreativeTabs {
         output.accept(ModBlocks.getInstance().getTrapdoor());
         output.accept(ModBlocks.getInstance().getDoor());
         output.accept(ModBlocks.getInstance().getPanel());
-      output.accept(ModBlocks.getInstance().getPost());
+        output.accept(ModBlocks.getInstance().getPost());
         output.accept(ModBlocks.getInstance().getFancyDoor());
         output.accept(ModBlocks.getInstance().getFancyTrapdoor());
     })).build());
@@ -89,11 +89,15 @@ public final class ModCreativeTabs {
 
             @Override
             public void accept(@NotNull ItemLike itemLike) {
-                delegate.accept(itemLike);
+
                 if (itemLike instanceof ICachedItemGroupBlock cachedItemGroupBlock) {
                     final NonNullList<ItemStack> stacks = NonNullList.create();
                     cachedItemGroupBlock.fillItemCategory(stacks);
                     stacks.forEach(delegate::accept);
+                }
+                else
+                {
+                    delegate.accept(itemLike);
                 }
             }
         }
