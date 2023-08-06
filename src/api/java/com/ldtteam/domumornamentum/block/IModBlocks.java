@@ -1,6 +1,7 @@
 package com.ldtteam.domumornamentum.block;
 
 import com.ldtteam.domumornamentum.IDomumOrnamentumApi;
+import com.ldtteam.domumornamentum.shingles.ShingleHeightType;
 import net.minecraft.world.level.block.Block;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public interface IModBlocks
 
     Block getArchitectsCutter();
 
-    Block getShingle();
+    Block getShingle(final ShingleHeightType heightType);
 
     List<? extends Block> getTimberFrames();
 

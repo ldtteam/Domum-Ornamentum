@@ -6,7 +6,9 @@ import com.ldtteam.datagenerators.models.XYZDoubleListJson;
 import com.ldtteam.datagenerators.models.XYZIntListJson;
 import com.ldtteam.datagenerators.models.item.ItemModelJson;
 import com.ldtteam.domumornamentum.block.ModBlocks;
+import com.ldtteam.domumornamentum.block.decorative.ShingleBlock;
 import com.ldtteam.domumornamentum.block.types.ShingleShapeType;
+import com.ldtteam.domumornamentum.shingles.ShingleHeightType;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.data.DataGenerator;
@@ -31,18 +33,23 @@ public class ShinglesItemModelProvider implements DataProvider
     @Override
     public void run(@NotNull CachedOutput cache) throws IOException
     {
-        final ItemModelJson modelJson = new ItemModelJson();
-        modelJson.setDisplay(getDisplay());
+        for (final ShingleHeightType heightType : ShingleHeightType.values())
+        {
+            final ItemModelJson modelJson = new ItemModelJson();
+            modelJson.setDisplay(getDisplay());
 
-        final String modelLocation = Constants.MOD_ID + ":block/shingle/" + ShingleShapeType.STRAIGHT.name().toLowerCase(Locale.ROOT);
+            final String modelLocation = Constants.MOD_ID + ":block/shingle/" + heightType.getId() + ShingleShapeType.STRAIGHT.name().toLowerCase(Locale.ROOT);
 
-        modelJson.setParent(modelLocation);
+            modelJson.setParent(modelLocation);
 
-        if (ModBlocks.getInstance().getShingle().getRegistryName() == null)
-            return;
+            if (ModBlocks.getInstance().getShingle(heightType).getRegistryName() == null)
+                return;
 
-        final String name = ModBlocks.getInstance().getShingle().getRegistryName().getPath();
-        DataProvider.saveStable(cache, DataGeneratorConstants.serialize(modelJson), generator.getOutputFolder().resolve(DataGeneratorConstants.ITEM_MODEL_DIR).resolve(name + ".json"));
+            final String name = ModBlocks.getInstance().getShingle(heightType).getRegistryName().getPath();
+            DataProvider.saveStable(cache,
+              DataGeneratorConstants.serialize(modelJson),
+              generator.getOutputFolder().resolve(DataGeneratorConstants.ITEM_MODEL_DIR).resolve(name + ".json"));
+        }
     }
 
     private Map<ModelDisplayPositionsEnum, ModelDisplayPositionJson> getDisplay()

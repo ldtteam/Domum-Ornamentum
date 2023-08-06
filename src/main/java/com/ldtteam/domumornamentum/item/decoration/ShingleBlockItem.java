@@ -39,7 +39,7 @@ public class ShingleBlockItem extends BlockItem
         final Block centerBlock = textureData.getTexturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
         final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
 
-        return Component.translatable(Constants.MOD_ID + ".shingle.name.format", centerBlockName);
+        return Component.translatable(Constants.MOD_ID + ".shingle.name.format." + stack.getItem().getDescriptionId(), centerBlockName);
     }
 
     @Override

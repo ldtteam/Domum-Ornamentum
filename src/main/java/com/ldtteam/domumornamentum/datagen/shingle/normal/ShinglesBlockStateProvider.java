@@ -5,6 +5,7 @@ import com.ldtteam.datagenerators.blockstate.BlockstateModelJson;
 import com.ldtteam.datagenerators.blockstate.BlockstateVariantJson;
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.decorative.ShingleBlock;
+import com.ldtteam.domumornamentum.shingles.ShingleHeightType;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.core.Direction;
@@ -34,10 +35,12 @@ public class ShinglesBlockStateProvider implements DataProvider
     @Override
     public void run(@NotNull final CachedOutput cache) throws IOException
     {
-        createBlockstateFile(cache, ModBlocks.getInstance().getShingle());
+        createBlockstateFile(cache, ModBlocks.getInstance().getShingle(ShingleHeightType.DEFAULT), ShingleHeightType.DEFAULT);
+        createBlockstateFile(cache, ModBlocks.getInstance().getShingle(ShingleHeightType.FLAT), ShingleHeightType.FLAT);
+        createBlockstateFile(cache, ModBlocks.getInstance().getShingle(ShingleHeightType.FLAT_LOWER), ShingleHeightType.FLAT_LOWER);
     }
 
-    private void createBlockstateFile(final CachedOutput cache, final ShingleBlock shingle) throws IOException
+    private void createBlockstateFile(final CachedOutput cache, final ShingleBlock shingle, final ShingleHeightType heightType) throws IOException
     {
         if (shingle.getRegistryName() == null)
             return;
@@ -58,7 +61,7 @@ public class ShinglesBlockStateProvider implements DataProvider
 
                     int x = halfValue == Half.TOP ? 180 : 0;
 
-                    final String modelLocation = Constants.MOD_ID + ":block/shingle/" + ShingleBlock.getTypeFromShape(shapeValue).name().toLowerCase(Locale.ROOT);
+                    final String modelLocation = Constants.MOD_ID + ":block/shingle/" + heightType.getId() + ShingleBlock.getTypeFromShape(shapeValue).name().toLowerCase(Locale.ROOT);
 
                     final BlockstateModelJson model = new BlockstateModelJson(modelLocation, x, y);
                     final BlockstateVariantJson variant = new BlockstateVariantJson(model);

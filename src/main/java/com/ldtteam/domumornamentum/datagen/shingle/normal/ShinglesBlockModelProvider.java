@@ -1,7 +1,9 @@
 package com.ldtteam.domumornamentum.datagen.shingle.normal;
 
 import com.ldtteam.datagenerators.models.block.BlockModelJson;
+import com.ldtteam.domumornamentum.block.decorative.ShingleBlock;
 import com.ldtteam.domumornamentum.block.types.ShingleShapeType;
+import com.ldtteam.domumornamentum.shingles.ShingleHeightType;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataGeneratorConstants;
 import net.minecraft.data.DataGenerator;
@@ -26,17 +28,20 @@ public class ShinglesBlockModelProvider implements DataProvider
     @Override
     public void run(@NotNull CachedOutput cache) throws IOException
     {
-        for (final ShingleShapeType shapeType : ShingleShapeType.values())
+        for (final ShingleHeightType heightType : ShingleHeightType.values())
         {
-            final BlockModelJson modelJson = new BlockModelJson();
+            for (final ShingleShapeType shapeType : ShingleShapeType.values())
+            {
+                final BlockModelJson modelJson = new BlockModelJson();
 
-            modelJson.setLoader(Constants.MOD_ID + ":" + Constants.MATERIALLY_TEXTURED_MODEL_LOADER.toString());
-            modelJson.setParent(new ResourceLocation(Constants.MOD_ID, "block/shingles/" + shapeType.name().toLowerCase(Locale.ROOT) + "_spec").toString());
+                modelJson.setLoader(Constants.MOD_ID + ":" + Constants.MATERIALLY_TEXTURED_MODEL_LOADER.toString());
+                modelJson.setParent(new ResourceLocation(Constants.MOD_ID, "block/shingles/" + heightType.getId() + shapeType.name().toLowerCase(Locale.ROOT) + "_spec").toString());
 
-            final String name = shapeType.name().toLowerCase(Locale.ROOT) + ".json";
-            final Path saveFile = this.generator.getOutputFolder().resolve(DataGeneratorConstants.SHINGLES_BLOCK_MODELS_DIR).resolve(name);
+                final String name = heightType.getId() + shapeType.name().toLowerCase(Locale.ROOT) + ".json";
+                final Path saveFile = this.generator.getOutputFolder().resolve(DataGeneratorConstants.SHINGLES_BLOCK_MODELS_DIR).resolve(name);
 
-            DataProvider.saveStable(cache, DataGeneratorConstants.serialize(modelJson), saveFile);
+                DataProvider.saveStable(cache, DataGeneratorConstants.serialize(modelJson), saveFile);
+            }
         }
     }
 
