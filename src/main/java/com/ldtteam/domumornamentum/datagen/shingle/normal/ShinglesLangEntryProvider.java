@@ -24,16 +24,12 @@ public class ShinglesLangEntryProvider implements DataProvider
     public void run(@NotNull CachedOutput cache) throws IOException
     {
         backingLangJson.put(Constants.MOD_ID + ".shingle.name.format.block.domum_ornamentum.shingle_flat_lower", "%s Flat Lower Shingles");
-        backingLangJson.put(Constants.MOD_ID + ".shingle.support.format.block.domum_ornamentum.shingle_flat_lower", "Supported by: %s");
-        backingLangJson.put(Constants.MOD_ID + ".shingle.main.format.block.domum_ornamentum.shingle_flat_lower", "Main Material: %s");
+        backingLangJson.put(Constants.MOD_ID + ".shingle.support.format", "Supported by: %s");
+        backingLangJson.put(Constants.MOD_ID + ".shingle.main.format", "Main Material: %s");
 
         backingLangJson.put(Constants.MOD_ID + ".shingle.name.format.block.domum_ornamentum.shingle", "%s Shingles");
-        backingLangJson.put(Constants.MOD_ID + ".shingle.support.format.block.domum_ornamentum.shingle", "Supported by: %s");
-        backingLangJson.put(Constants.MOD_ID + ".shingle.main.format.block.domum_ornamentum.shingle", "Main Material: %s");
 
         backingLangJson.put(Constants.MOD_ID + ".shingle.name.format.block.domum_ornamentum.shingle_flat", "%s Flat Shingles");
-        backingLangJson.put(Constants.MOD_ID + ".shingle.support.format.block.domum_ornamentum.shingle_flat", "Supported by: %s");
-        backingLangJson.put(Constants.MOD_ID + ".shingle.main.format.block.domum_ornamentum.shingle_flat", "Main Material: %s");
     }
 
     @Override
