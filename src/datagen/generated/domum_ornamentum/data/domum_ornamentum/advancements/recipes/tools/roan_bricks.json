@@ -43,5 +43,6 @@
     "recipes": [
       "domum_ornamentum:roan_bricks"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

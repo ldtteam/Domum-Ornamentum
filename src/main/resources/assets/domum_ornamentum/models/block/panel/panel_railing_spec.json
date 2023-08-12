@@ -1,0 +1,31 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/thin_block",
+	"textures": {
+		"1": "block/oak_planks",
+		"particle": "block/oak_planks"
+	},
+	"elements": [
+		{
+			"name": "birch_trapdoor_0",
+			"from": [0, 0, 5],
+			"to": [16, 2, 11],
+			"faces": {
+				"north": {"uv": [0, 14, 16, 16], "texture": "#1"},
+				"east": {"uv": [5, 14, 11, 16], "texture": "#1"},
+				"south": {"uv": [0, 14, 16, 16], "texture": "#1"},
+				"west": {"uv": [5, 14, 11, 16], "texture": "#1"},
+				"up": {"uv": [0, 5, 16, 11], "texture": "#1"},
+				"down": {"uv": [0, 5, 16, 11], "texture": "#1"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "birch_trapdoor",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [0]
+		}
+	]
+}

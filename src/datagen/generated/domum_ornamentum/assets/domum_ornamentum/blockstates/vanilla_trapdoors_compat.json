@@ -194,6 +194,54 @@
     },
     {
       "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontal_pilaster",
+        "x": -90,
+        "y": 180
+      },
+      "when": {
+        "type": "horizontal_pilaster",
+        "facing": "north",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontal_pilaster",
+        "x": 180
+      },
+      "when": {
+        "type": "horizontal_pilaster",
+        "facing": "north",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontal_pilaster",
+        "x": 90
+      },
+      "when": {
+        "type": "horizontal_pilaster",
+        "facing": "north",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontal_pilaster"
+      },
+      "when": {
+        "type": "horizontal_pilaster",
+        "facing": "north",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontally_squiggly_striped",
         "x": -90,
         "y": 180
@@ -434,6 +482,54 @@
     },
     {
       "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_railing",
+        "x": -90,
+        "y": 180
+      },
+      "when": {
+        "type": "railing",
+        "facing": "north",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_railing",
+        "x": 180
+      },
+      "when": {
+        "type": "railing",
+        "facing": "north",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_railing",
+        "x": 90
+      },
+      "when": {
+        "type": "railing",
+        "facing": "north",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_railing"
+      },
+      "when": {
+        "type": "railing",
+        "facing": "north",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_roundel",
         "x": -90,
         "y": 180
@@ -571,6 +667,54 @@
       },
       "when": {
         "type": "vertical_bars",
+        "facing": "north",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_vertical_pilaster",
+        "x": -90,
+        "y": 180
+      },
+      "when": {
+        "type": "vertical_pilaster",
+        "facing": "north",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_vertical_pilaster",
+        "x": 180
+      },
+      "when": {
+        "type": "vertical_pilaster",
+        "facing": "north",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_vertical_pilaster",
+        "x": 90
+      },
+      "when": {
+        "type": "vertical_pilaster",
+        "facing": "north",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_vertical_pilaster"
+      },
+      "when": {
+        "type": "vertical_pilaster",
         "facing": "north",
         "half": "bottom",
         "open": "false"
@@ -926,6 +1070,57 @@
     },
     {
       "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontal_pilaster",
+        "x": -90,
+        "y": 360
+      },
+      "when": {
+        "type": "horizontal_pilaster",
+        "facing": "south",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontal_pilaster",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "type": "horizontal_pilaster",
+        "facing": "south",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontal_pilaster",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "type": "horizontal_pilaster",
+        "facing": "south",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontal_pilaster",
+        "y": 180
+      },
+      "when": {
+        "type": "horizontal_pilaster",
+        "facing": "south",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontally_squiggly_striped",
         "x": -90,
         "y": 360
@@ -1181,6 +1376,57 @@
     },
     {
       "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_railing",
+        "x": -90,
+        "y": 360
+      },
+      "when": {
+        "type": "railing",
+        "facing": "south",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_railing",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "type": "railing",
+        "facing": "south",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_railing",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "type": "railing",
+        "facing": "south",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_railing",
+        "y": 180
+      },
+      "when": {
+        "type": "railing",
+        "facing": "south",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_roundel",
         "x": -90,
         "y": 360
@@ -1327,6 +1573,57 @@
       },
       "when": {
         "type": "vertical_bars",
+        "facing": "south",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_vertical_pilaster",
+        "x": -90,
+        "y": 360
+      },
+      "when": {
+        "type": "vertical_pilaster",
+        "facing": "south",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_vertical_pilaster",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "type": "vertical_pilaster",
+        "facing": "south",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_vertical_pilaster",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "type": "vertical_pilaster",
+        "facing": "south",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_vertical_pilaster",
+        "y": 180
+      },
+      "when": {
+        "type": "vertical_pilaster",
         "facing": "south",
         "half": "bottom",
         "open": "false"
@@ -1691,6 +1988,57 @@
     },
     {
       "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontal_pilaster",
+        "x": -90,
+        "y": 450
+      },
+      "when": {
+        "type": "horizontal_pilaster",
+        "facing": "west",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontal_pilaster",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "type": "horizontal_pilaster",
+        "facing": "west",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontal_pilaster",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "type": "horizontal_pilaster",
+        "facing": "west",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontal_pilaster",
+        "y": 270
+      },
+      "when": {
+        "type": "horizontal_pilaster",
+        "facing": "west",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontally_squiggly_striped",
         "x": -90,
         "y": 450
@@ -1946,6 +2294,57 @@
     },
     {
       "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_railing",
+        "x": -90,
+        "y": 450
+      },
+      "when": {
+        "type": "railing",
+        "facing": "west",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_railing",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "type": "railing",
+        "facing": "west",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_railing",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "type": "railing",
+        "facing": "west",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_railing",
+        "y": 270
+      },
+      "when": {
+        "type": "railing",
+        "facing": "west",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_roundel",
         "x": -90,
         "y": 450
@@ -2092,6 +2491,57 @@
       },
       "when": {
         "type": "vertical_bars",
+        "facing": "west",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_vertical_pilaster",
+        "x": -90,
+        "y": 450
+      },
+      "when": {
+        "type": "vertical_pilaster",
+        "facing": "west",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_vertical_pilaster",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "type": "vertical_pilaster",
+        "facing": "west",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_vertical_pilaster",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "type": "vertical_pilaster",
+        "facing": "west",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_vertical_pilaster",
+        "y": 270
+      },
+      "when": {
+        "type": "vertical_pilaster",
         "facing": "west",
         "half": "bottom",
         "open": "false"
@@ -2456,6 +2906,57 @@
     },
     {
       "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontal_pilaster",
+        "x": -90,
+        "y": 270
+      },
+      "when": {
+        "type": "horizontal_pilaster",
+        "facing": "east",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontal_pilaster",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "type": "horizontal_pilaster",
+        "facing": "east",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontal_pilaster",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "type": "horizontal_pilaster",
+        "facing": "east",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontal_pilaster",
+        "y": 90
+      },
+      "when": {
+        "type": "horizontal_pilaster",
+        "facing": "east",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontally_squiggly_striped",
         "x": -90,
         "y": 270
@@ -2711,6 +3212,57 @@
     },
     {
       "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_railing",
+        "x": -90,
+        "y": 270
+      },
+      "when": {
+        "type": "railing",
+        "facing": "east",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_railing",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "type": "railing",
+        "facing": "east",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_railing",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "type": "railing",
+        "facing": "east",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_railing",
+        "y": 90
+      },
+      "when": {
+        "type": "railing",
+        "facing": "east",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_roundel",
         "x": -90,
         "y": 270
@@ -2857,6 +3409,57 @@
       },
       "when": {
         "type": "vertical_bars",
+        "facing": "east",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_vertical_pilaster",
+        "x": -90,
+        "y": 270
+      },
+      "when": {
+        "type": "vertical_pilaster",
+        "facing": "east",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_vertical_pilaster",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "type": "vertical_pilaster",
+        "facing": "east",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_vertical_pilaster",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "type": "vertical_pilaster",
+        "facing": "east",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_vertical_pilaster",
+        "y": 90
+      },
+      "when": {
+        "type": "vertical_pilaster",
         "facing": "east",
         "half": "bottom",
         "open": "false"
