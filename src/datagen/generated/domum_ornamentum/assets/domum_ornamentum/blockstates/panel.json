@@ -3,7 +3,7 @@
   "variants": {
     "facing=east,type=full,half=bottom,open=false": {
       "model": "domum_ornamentum:block/panels/panel_full",
-      "y": 90
+      "y": 270
     },
     "facing=east,type=full,half=bottom,open=true": {
       "model": "domum_ornamentum:block/panels/panel_full",
@@ -22,7 +22,7 @@
     },
     "facing=east,type=horizontally_squiggly_striped,half=bottom,open=false": {
       "model": "domum_ornamentum:block/panels/panel_horizontally_squiggly_striped",
-      "y": 90
+      "y": 270
     },
     "facing=east,type=horizontally_squiggly_striped,half=bottom,open=true": {
       "model": "domum_ornamentum:block/panels/panel_horizontally_squiggly_striped",
@@ -41,7 +41,7 @@
     },
     "facing=east,type=horizontally_striped,half=bottom,open=false": {
       "model": "domum_ornamentum:block/panels/panel_horizontally_striped",
-      "y": 90
+      "y": 270
     },
     "facing=east,type=horizontally_striped,half=bottom,open=true": {
       "model": "domum_ornamentum:block/panels/panel_horizontally_striped",
@@ -60,7 +60,7 @@
     },
     "facing=east,type=port_manteau,half=bottom,open=false": {
       "model": "domum_ornamentum:block/panels/panel_port_manteau",
-      "y": 90
+      "y": 270
     },
     "facing=east,type=port_manteau,half=bottom,open=true": {
       "model": "domum_ornamentum:block/panels/panel_port_manteau",
@@ -79,7 +79,7 @@
     },
     "facing=east,type=vertically_squiggly_striped,half=bottom,open=false": {
       "model": "domum_ornamentum:block/panels/panel_vertically_squiggly_striped",
-      "y": 90
+      "y": 270
     },
     "facing=east,type=vertically_squiggly_striped,half=bottom,open=true": {
       "model": "domum_ornamentum:block/panels/panel_vertically_squiggly_striped",
@@ -98,7 +98,7 @@
     },
     "facing=east,type=vertically_striped,half=bottom,open=false": {
       "model": "domum_ornamentum:block/panels/panel_vertically_striped",
-      "y": 90
+      "y": 270
     },
     "facing=east,type=vertically_striped,half=bottom,open=true": {
       "model": "domum_ornamentum:block/panels/panel_vertically_striped",
@@ -117,7 +117,7 @@
     },
     "facing=east,type=waffle,half=bottom,open=false": {
       "model": "domum_ornamentum:block/panels/panel_waffle",
-      "y": 90
+      "y": 270
     },
     "facing=east,type=waffle,half=bottom,open=true": {
       "model": "domum_ornamentum:block/panels/panel_waffle",
@@ -135,7 +135,8 @@
       "y": 270
     },
     "facing=north,type=full,half=bottom,open=false": {
-      "model": "domum_ornamentum:block/panels/panel_full"
+      "model": "domum_ornamentum:block/panels/panel_full",
+      "y": 180
     },
     "facing=north,type=full,half=bottom,open=true": {
       "model": "domum_ornamentum:block/panels/panel_full",
@@ -151,7 +152,8 @@
       "y": 180
     },
     "facing=north,type=horizontally_squiggly_striped,half=bottom,open=false": {
-      "model": "domum_ornamentum:block/panels/panel_horizontally_squiggly_striped"
+      "model": "domum_ornamentum:block/panels/panel_horizontally_squiggly_striped",
+      "y": 180
     },
     "facing=north,type=horizontally_squiggly_striped,half=bottom,open=true": {
       "model": "domum_ornamentum:block/panels/panel_horizontally_squiggly_striped",
@@ -167,7 +169,8 @@
       "y": 180
     },
     "facing=north,type=horizontally_striped,half=bottom,open=false": {
-      "model": "domum_ornamentum:block/panels/panel_horizontally_striped"
+      "model": "domum_ornamentum:block/panels/panel_horizontally_striped",
+      "y": 180
     },
     "facing=north,type=horizontally_striped,half=bottom,open=true": {
       "model": "domum_ornamentum:block/panels/panel_horizontally_striped",
@@ -183,7 +186,8 @@
       "y": 180
     },
     "facing=north,type=port_manteau,half=bottom,open=false": {
-      "model": "domum_ornamentum:block/panels/panel_port_manteau"
+      "model": "domum_ornamentum:block/panels/panel_port_manteau",
+      "y": 180
     },
     "facing=north,type=port_manteau,half=bottom,open=true": {
       "model": "domum_ornamentum:block/panels/panel_port_manteau",
@@ -199,7 +203,8 @@
       "y": 180
     },
     "facing=north,type=vertically_squiggly_striped,half=bottom,open=false": {
-      "model": "domum_ornamentum:block/panels/panel_vertically_squiggly_striped"
+      "model": "domum_ornamentum:block/panels/panel_vertically_squiggly_striped",
+      "y": 180
     },
     "facing=north,type=vertically_squiggly_striped,half=bottom,open=true": {
       "model": "domum_ornamentum:block/panels/panel_vertically_squiggly_striped",
@@ -215,7 +220,8 @@
       "y": 180
     },
     "facing=north,type=vertically_striped,half=bottom,open=false": {
-      "model": "domum_ornamentum:block/panels/panel_vertically_striped"
+      "model": "domum_ornamentum:block/panels/panel_vertically_striped",
+      "y": 180
     },
     "facing=north,type=vertically_striped,half=bottom,open=true": {
       "model": "domum_ornamentum:block/panels/panel_vertically_striped",
@@ -231,7 +237,8 @@
       "y": 180
     },
     "facing=north,type=waffle,half=bottom,open=false": {
-      "model": "domum_ornamentum:block/panels/panel_waffle"
+      "model": "domum_ornamentum:block/panels/panel_waffle",
+      "y": 180
     },
     "facing=north,type=waffle,half=bottom,open=true": {
       "model": "domum_ornamentum:block/panels/panel_waffle",
@@ -248,7 +255,7 @@
     },
     "facing=south,type=full,half=bottom,open=false": {
       "model": "domum_ornamentum:block/panels/panel_full",
-      "y": 180
+      "y": 360
     },
     "facing=south,type=full,half=bottom,open=true": {
       "model": "domum_ornamentum:block/panels/panel_full",
@@ -267,7 +274,7 @@
     },
     "facing=south,type=horizontally_squiggly_striped,half=bottom,open=false": {
       "model": "domum_ornamentum:block/panels/panel_horizontally_squiggly_striped",
-      "y": 180
+      "y": 360
     },
     "facing=south,type=horizontally_squiggly_striped,half=bottom,open=true": {
       "model": "domum_ornamentum:block/panels/panel_horizontally_squiggly_striped",
@@ -286,7 +293,7 @@
     },
     "facing=south,type=horizontally_striped,half=bottom,open=false": {
       "model": "domum_ornamentum:block/panels/panel_horizontally_striped",
-      "y": 180
+      "y": 360
     },
     "facing=south,type=horizontally_striped,half=bottom,open=true": {
       "model": "domum_ornamentum:block/panels/panel_horizontally_striped",
@@ -305,7 +312,7 @@
     },
     "facing=south,type=port_manteau,half=bottom,open=false": {
       "model": "domum_ornamentum:block/panels/panel_port_manteau",
-      "y": 180
+      "y": 360
     },
     "facing=south,type=port_manteau,half=bottom,open=true": {
       "model": "domum_ornamentum:block/panels/panel_port_manteau",
@@ -324,7 +331,7 @@
     },
     "facing=south,type=vertically_squiggly_striped,half=bottom,open=false": {
       "model": "domum_ornamentum:block/panels/panel_vertically_squiggly_striped",
-      "y": 180
+      "y": 360
     },
     "facing=south,type=vertically_squiggly_striped,half=bottom,open=true": {
       "model": "domum_ornamentum:block/panels/panel_vertically_squiggly_striped",
@@ -343,7 +350,7 @@
     },
     "facing=south,type=vertically_striped,half=bottom,open=false": {
       "model": "domum_ornamentum:block/panels/panel_vertically_striped",
-      "y": 180
+      "y": 360
     },
     "facing=south,type=vertically_striped,half=bottom,open=true": {
       "model": "domum_ornamentum:block/panels/panel_vertically_striped",
@@ -362,7 +369,7 @@
     },
     "facing=south,type=waffle,half=bottom,open=false": {
       "model": "domum_ornamentum:block/panels/panel_waffle",
-      "y": 180
+      "y": 360
     },
     "facing=south,type=waffle,half=bottom,open=true": {
       "model": "domum_ornamentum:block/panels/panel_waffle",
@@ -381,7 +388,7 @@
     },
     "facing=west,type=full,half=bottom,open=false": {
       "model": "domum_ornamentum:block/panels/panel_full",
-      "y": 270
+      "y": 450
     },
     "facing=west,type=full,half=bottom,open=true": {
       "model": "domum_ornamentum:block/panels/panel_full",
@@ -400,7 +407,7 @@
     },
     "facing=west,type=horizontally_squiggly_striped,half=bottom,open=false": {
       "model": "domum_ornamentum:block/panels/panel_horizontally_squiggly_striped",
-      "y": 270
+      "y": 450
     },
     "facing=west,type=horizontally_squiggly_striped,half=bottom,open=true": {
       "model": "domum_ornamentum:block/panels/panel_horizontally_squiggly_striped",
@@ -419,7 +426,7 @@
     },
     "facing=west,type=horizontally_striped,half=bottom,open=false": {
       "model": "domum_ornamentum:block/panels/panel_horizontally_striped",
-      "y": 270
+      "y": 450
     },
     "facing=west,type=horizontally_striped,half=bottom,open=true": {
       "model": "domum_ornamentum:block/panels/panel_horizontally_striped",
@@ -438,7 +445,7 @@
     },
     "facing=west,type=port_manteau,half=bottom,open=false": {
       "model": "domum_ornamentum:block/panels/panel_port_manteau",
-      "y": 270
+      "y": 450
     },
     "facing=west,type=port_manteau,half=bottom,open=true": {
       "model": "domum_ornamentum:block/panels/panel_port_manteau",
@@ -457,7 +464,7 @@
     },
     "facing=west,type=vertically_squiggly_striped,half=bottom,open=false": {
       "model": "domum_ornamentum:block/panels/panel_vertically_squiggly_striped",
-      "y": 270
+      "y": 450
     },
     "facing=west,type=vertically_squiggly_striped,half=bottom,open=true": {
       "model": "domum_ornamentum:block/panels/panel_vertically_squiggly_striped",
@@ -476,7 +483,7 @@
     },
     "facing=west,type=vertically_striped,half=bottom,open=false": {
       "model": "domum_ornamentum:block/panels/panel_vertically_striped",
-      "y": 270
+      "y": 450
     },
     "facing=west,type=vertically_striped,half=bottom,open=true": {
       "model": "domum_ornamentum:block/panels/panel_vertically_striped",
@@ -495,7 +502,7 @@
     },
     "facing=west,type=waffle,half=bottom,open=false": {
       "model": "domum_ornamentum:block/panels/panel_waffle",
-      "y": 270
+      "y": 450
     },
     "facing=west,type=waffle,half=bottom,open=true": {
       "model": "domum_ornamentum:block/panels/panel_waffle",

@@ -94,9 +94,12 @@ public class PanelBlockStateProvider implements DataProvider
                  };
     }
 
-    private int getYFromOpenAndHalf(final boolean open, final Half half)
-    {
-        return half == Half.TOP && open ? 180 : 0;
+    private int getYFromOpenAndHalf(final boolean open, final Half half) {
+        if (!open) {
+            return half == Half.TOP ? 0 : 180;
+        }
+
+        return half == Half.TOP ? 180 : 0;
     }
 
     private int getXFromOpenAndHalf(final boolean open, final Half half)
