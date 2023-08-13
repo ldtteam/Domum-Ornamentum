@@ -82,7 +82,11 @@ public class PanelBlockStateProvider extends BlockStateProvider {
     }
 
     private int getYFromOpenAndHalf(final boolean open, final Half half) {
-        return half == Half.TOP && open ? 180 : 0;
+        if (!open) {
+            return half == Half.TOP ? 0 : 180;
+        }
+
+        return half == Half.TOP ? 180 : 0;
     }
 
     private int getXFromOpenAndHalf(final boolean open, final Half half) {

@@ -39,7 +39,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full"
+        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full",
+        "y": 180
       },
       "when": {
         "type": "full",
@@ -87,7 +88,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper"
+        "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper",
+        "y": 180
       },
       "when": {
         "type": "creeper",
@@ -138,7 +140,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full",
-        "y": 180
+        "y": 360
       },
       "when": {
         "type": "full",
@@ -189,7 +191,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper",
-        "y": 180
+        "y": 360
       },
       "when": {
         "type": "creeper",
@@ -240,7 +242,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full",
-        "y": 270
+        "y": 450
       },
       "when": {
         "type": "full",
@@ -291,7 +293,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper",
-        "y": 270
+        "y": 450
       },
       "when": {
         "type": "creeper",
@@ -342,7 +344,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full",
-        "y": 90
+        "y": 270
       },
       "when": {
         "type": "full",
@@ -393,7 +395,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper",
-        "y": 90
+        "y": 270
       },
       "when": {
         "type": "creeper",

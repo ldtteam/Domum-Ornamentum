@@ -39,7 +39,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoor/trapdoor_boss"
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_boss",
+        "y": 180
       },
       "when": {
         "type": "boss",
@@ -87,7 +88,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoor/trapdoor_coffer"
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_coffer",
+        "y": 180
       },
       "when": {
         "type": "coffer",
@@ -135,7 +137,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoor/trapdoor_full"
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_full",
+        "y": 180
       },
       "when": {
         "type": "full",
@@ -183,7 +186,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontal_bars"
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontal_bars",
+        "y": 180
       },
       "when": {
         "type": "horizontal_bars",
@@ -231,7 +235,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontally_squiggly_striped"
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontally_squiggly_striped",
+        "y": 180
       },
       "when": {
         "type": "horizontally_squiggly_striped",
@@ -279,7 +284,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontally_striped"
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontally_striped",
+        "y": 180
       },
       "when": {
         "type": "horizontally_striped",
@@ -327,7 +333,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoor/trapdoor_moulding"
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_moulding",
+        "y": 180
       },
       "when": {
         "type": "moulding",
@@ -375,7 +382,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoor/trapdoor_port_manteau"
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_port_manteau",
+        "y": 180
       },
       "when": {
         "type": "port_manteau",
@@ -423,7 +431,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoor/trapdoor_porthole"
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_porthole",
+        "y": 180
       },
       "when": {
         "type": "porthole",
@@ -471,7 +480,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoor/trapdoor_roundel"
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_roundel",
+        "y": 180
       },
       "when": {
         "type": "roundel",
@@ -519,7 +529,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoor/trapdoor_slot"
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_slot",
+        "y": 180
       },
       "when": {
         "type": "slot",
@@ -567,7 +578,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoor/trapdoor_vertical_bars"
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_vertical_bars",
+        "y": 180
       },
       "when": {
         "type": "vertical_bars",
@@ -615,7 +627,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoor/trapdoor_vertically_squiggly_striped"
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_vertically_squiggly_striped",
+        "y": 180
       },
       "when": {
         "type": "vertically_squiggly_striped",
@@ -663,7 +676,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoor/trapdoor_vertically_striped"
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_vertically_striped",
+        "y": 180
       },
       "when": {
         "type": "vertically_striped",
@@ -711,7 +725,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/trapdoor/trapdoor_waffle"
+        "model": "domum_ornamentum:block/trapdoor/trapdoor_waffle",
+        "y": 180
       },
       "when": {
         "type": "waffle",
@@ -762,7 +777,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_boss",
-        "y": 180
+        "y": 360
       },
       "when": {
         "type": "boss",
@@ -813,7 +828,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_coffer",
-        "y": 180
+        "y": 360
       },
       "when": {
         "type": "coffer",
@@ -864,7 +879,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_full",
-        "y": 180
+        "y": 360
       },
       "when": {
         "type": "full",
@@ -915,7 +930,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontal_bars",
-        "y": 180
+        "y": 360
       },
       "when": {
         "type": "horizontal_bars",
@@ -966,7 +981,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontally_squiggly_striped",
-        "y": 180
+        "y": 360
       },
       "when": {
         "type": "horizontally_squiggly_striped",
@@ -1017,7 +1032,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontally_striped",
-        "y": 180
+        "y": 360
       },
       "when": {
         "type": "horizontally_striped",
@@ -1068,7 +1083,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_moulding",
-        "y": 180
+        "y": 360
       },
       "when": {
         "type": "moulding",
@@ -1119,7 +1134,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_port_manteau",
-        "y": 180
+        "y": 360
       },
       "when": {
         "type": "port_manteau",
@@ -1170,7 +1185,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_porthole",
-        "y": 180
+        "y": 360
       },
       "when": {
         "type": "porthole",
@@ -1221,7 +1236,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_roundel",
-        "y": 180
+        "y": 360
       },
       "when": {
         "type": "roundel",
@@ -1272,7 +1287,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_slot",
-        "y": 180
+        "y": 360
       },
       "when": {
         "type": "slot",
@@ -1323,7 +1338,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_vertical_bars",
-        "y": 180
+        "y": 360
       },
       "when": {
         "type": "vertical_bars",
@@ -1374,7 +1389,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_vertically_squiggly_striped",
-        "y": 180
+        "y": 360
       },
       "when": {
         "type": "vertically_squiggly_striped",
@@ -1425,7 +1440,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_vertically_striped",
-        "y": 180
+        "y": 360
       },
       "when": {
         "type": "vertically_striped",
@@ -1476,7 +1491,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_waffle",
-        "y": 180
+        "y": 360
       },
       "when": {
         "type": "waffle",
@@ -1527,7 +1542,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_boss",
-        "y": 270
+        "y": 450
       },
       "when": {
         "type": "boss",
@@ -1578,7 +1593,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_coffer",
-        "y": 270
+        "y": 450
       },
       "when": {
         "type": "coffer",
@@ -1629,7 +1644,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_full",
-        "y": 270
+        "y": 450
       },
       "when": {
         "type": "full",
@@ -1680,7 +1695,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontal_bars",
-        "y": 270
+        "y": 450
       },
       "when": {
         "type": "horizontal_bars",
@@ -1731,7 +1746,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontally_squiggly_striped",
-        "y": 270
+        "y": 450
       },
       "when": {
         "type": "horizontally_squiggly_striped",
@@ -1782,7 +1797,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontally_striped",
-        "y": 270
+        "y": 450
       },
       "when": {
         "type": "horizontally_striped",
@@ -1833,7 +1848,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_moulding",
-        "y": 270
+        "y": 450
       },
       "when": {
         "type": "moulding",
@@ -1884,7 +1899,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_port_manteau",
-        "y": 270
+        "y": 450
       },
       "when": {
         "type": "port_manteau",
@@ -1935,7 +1950,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_porthole",
-        "y": 270
+        "y": 450
       },
       "when": {
         "type": "porthole",
@@ -1986,7 +2001,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_roundel",
-        "y": 270
+        "y": 450
       },
       "when": {
         "type": "roundel",
@@ -2037,7 +2052,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_slot",
-        "y": 270
+        "y": 450
       },
       "when": {
         "type": "slot",
@@ -2088,7 +2103,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_vertical_bars",
-        "y": 270
+        "y": 450
       },
       "when": {
         "type": "vertical_bars",
@@ -2139,7 +2154,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_vertically_squiggly_striped",
-        "y": 270
+        "y": 450
       },
       "when": {
         "type": "vertically_squiggly_striped",
@@ -2190,7 +2205,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_vertically_striped",
-        "y": 270
+        "y": 450
       },
       "when": {
         "type": "vertically_striped",
@@ -2241,7 +2256,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_waffle",
-        "y": 270
+        "y": 450
       },
       "when": {
         "type": "waffle",
@@ -2292,7 +2307,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_boss",
-        "y": 90
+        "y": 270
       },
       "when": {
         "type": "boss",
@@ -2343,7 +2358,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_coffer",
-        "y": 90
+        "y": 270
       },
       "when": {
         "type": "coffer",
@@ -2394,7 +2409,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_full",
-        "y": 90
+        "y": 270
       },
       "when": {
         "type": "full",
@@ -2445,7 +2460,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontal_bars",
-        "y": 90
+        "y": 270
       },
       "when": {
         "type": "horizontal_bars",
@@ -2496,7 +2511,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontally_squiggly_striped",
-        "y": 90
+        "y": 270
       },
       "when": {
         "type": "horizontally_squiggly_striped",
@@ -2547,7 +2562,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontally_striped",
-        "y": 90
+        "y": 270
       },
       "when": {
         "type": "horizontally_striped",
@@ -2598,7 +2613,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_moulding",
-        "y": 90
+        "y": 270
       },
       "when": {
         "type": "moulding",
@@ -2649,7 +2664,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_port_manteau",
-        "y": 90
+        "y": 270
       },
       "when": {
         "type": "port_manteau",
@@ -2700,7 +2715,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_porthole",
-        "y": 90
+        "y": 270
       },
       "when": {
         "type": "porthole",
@@ -2751,7 +2766,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_roundel",
-        "y": 90
+        "y": 270
       },
       "when": {
         "type": "roundel",
@@ -2802,7 +2817,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_slot",
-        "y": 90
+        "y": 270
       },
       "when": {
         "type": "slot",
@@ -2853,7 +2868,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_vertical_bars",
-        "y": 90
+        "y": 270
       },
       "when": {
         "type": "vertical_bars",
@@ -2904,7 +2919,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_vertically_squiggly_striped",
-        "y": 90
+        "y": 270
       },
       "when": {
         "type": "vertically_squiggly_striped",
@@ -2955,7 +2970,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_vertically_striped",
-        "y": 90
+        "y": 270
       },
       "when": {
         "type": "vertically_striped",
@@ -3006,7 +3021,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/trapdoor_waffle",
-        "y": 90
+        "y": 270
       },
       "when": {
         "type": "waffle",

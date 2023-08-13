@@ -31,9 +31,9 @@ public class TrapdoorsBlockStateProvider extends BlockStateProvider
         createBlockstateFile(ModBlocks.getInstance().getTrapdoor());
     }
 
-    private void createBlockstateFile(final TrapdoorBlock shingle)
+    private void createBlockstateFile(final TrapdoorBlock trapdoor)
     {
-        final MultiPartBlockStateBuilder builder = getMultipartBuilder(shingle);
+        final MultiPartBlockStateBuilder builder = getMultipartBuilder(trapdoor);
         for (Direction facingValue : HORIZONTAL_FACING.getPossibleValues())
         {
             for (TrapdoorType typeValue : TrapdoorBlock.TYPE.getPossibleValues())
@@ -88,15 +88,16 @@ public class TrapdoorsBlockStateProvider extends BlockStateProvider
                  };
     }
 
-    private int getYFromOpenAndHalf(final boolean open, final Half half)
-    {
-        return half == Half.TOP && open ? 180 : 0;
+    private int getYFromOpenAndHalf(final boolean open, final Half half) {
+        if (!open) {
+            return half == Half.TOP ? 0 : 180;
+        }
+
+        return half == Half.TOP ? 180 : 0;
     }
 
-    private int getXFromOpenAndHalf(final boolean open, final Half half)
-    {
-        if (!open)
-        {
+    private int getXFromOpenAndHalf(final boolean open, final Half half) {
+        if (!open) {
             return half == Half.TOP ? 180 : 0;
         }
 
