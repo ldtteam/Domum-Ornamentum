@@ -3,6 +3,7 @@ package com.ldtteam.domumornamentum.block.vanilla;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
+import com.ldtteam.domumornamentum.DomumOrnamentum;
 import com.ldtteam.domumornamentum.block.AbstractBlockWall;
 import com.ldtteam.domumornamentum.block.ICachedItemGroupBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
@@ -33,7 +34,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.WallSide;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
@@ -76,9 +76,15 @@ public class WallBlock extends AbstractBlockWall<WallBlock> implements IMaterial
     @Override
     public float getDestroyProgress(BlockState state, Player player, BlockGetter level, BlockPos pos) {
         BlockEntity be = level.getBlockEntity(pos);
-        if (be instanceof MateriallyTexturedBlockEntity mtbe) {
+        if (be instanceof MateriallyTexturedBlockEntity mtbe)
+        {
             Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(0).getId());
-            return super.getDestroyProgress(block.defaultBlockState(), player, level, pos);
+            if (block != null)
+            {
+                return super.getDestroyProgress(block.defaultBlockState(), player, level, pos);
+            }
+
+            DomumOrnamentum.LOGGER.warn("Failed to find component for:" + COMPONENTS.get(0).getId() + " on wall destroy progress with data: " + mtbe.getTextureData());
         }
         return super.getDestroyProgress(state, player, level, pos);
     }
