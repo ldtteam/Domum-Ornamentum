@@ -10,10 +10,14 @@ import com.ldtteam.domumornamentum.recipe.ModRecipeTypes;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Mod(Constants.MOD_ID)
 public class DomumOrnamentum
 {
+    public static final Logger LOGGER = LogManager.getLogger(Constants.MOD_ID);
+
     public DomumOrnamentum()
     {
         IDomumOrnamentumApi.Holder.setInstance(DomumOrnamentumAPI.getInstance());
