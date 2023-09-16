@@ -11,10 +11,10 @@ import com.ldtteam.domumornamentum.block.components.SimpleRetexturableComponent;
 import com.ldtteam.domumornamentum.block.types.ShingleShapeType;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
-import com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes;
 import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.BlockUtils;
+import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -23,7 +23,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.BlockGetter;
@@ -36,10 +35,13 @@ import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.block.state.properties.StairsShape;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -82,17 +84,23 @@ public class ShingleBlock extends AbstractBlockStairs<ShingleBlock> implements I
      */
     public static ShingleShapeType getTypeFromShape(final StairsShape shape)
     {
-        switch (shape)
+        return switch (shape)
         {
-            case INNER_LEFT:
-            case INNER_RIGHT:
-                return ShingleShapeType.CONCAVE;
-            case OUTER_LEFT:
-            case OUTER_RIGHT:
-                return ShingleShapeType.CONVEX;
-            default:
-                return ShingleShapeType.STRAIGHT;
+            case INNER_LEFT, INNER_RIGHT -> ShingleShapeType.CONCAVE;
+            case OUTER_LEFT, OUTER_RIGHT -> ShingleShapeType.CONVEX;
+            default -> ShingleShapeType.STRAIGHT;
+        };
+    }
+
+    @Override
+    public VoxelShape getShape(final BlockState blockState, final BlockGetter blockGetter, final BlockPos blockPos, final CollisionContext collisionContext)
+    {
+        if (getRegistryName().equals(new ResourceLocation(Constants.MOD_ID, "shingle_flat_lower")))
+        {
+            return blockState.getValue(HALF).equals(Half.BOTTOM) ? BOTTOM_AABB : TOP_AABB;
         }
+
+        return super.getShape(blockState, blockGetter, blockPos, collisionContext);
     }
 
     @Override
@@ -159,6 +167,12 @@ public class ShingleBlock extends AbstractBlockStairs<ShingleBlock> implements I
     public BlockEntity newBlockEntity(final @NotNull BlockPos blockPos, final @NotNull BlockState blockState)
     {
         return new MateriallyTexturedBlockEntity(blockPos, blockState);
+    }
+
+    @Override
+    public boolean isStairs(final BlockState other)
+    {
+        return other.getBlock() instanceof ShingleBlock shingleBlock && shingleBlock.getRegistryName().equals(getRegistryName());
     }
 
     @Override
