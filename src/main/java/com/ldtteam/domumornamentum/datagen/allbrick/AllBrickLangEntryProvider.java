@@ -7,7 +7,9 @@ public class AllBrickLangEntryProvider implements LanguageProvider.SubProvider
 {
     @Override
     public void addTranslations(LanguageProvider.LanguageAcceptor acceptor) {
-        acceptor.add(Constants.MOD_ID + ".allbrick.name.format", "Round %s Pillar");
+        acceptor.add(Constants.MOD_ID + ".dark_brick.name.format", "Dark %s Brick");
+        acceptor.add(Constants.MOD_ID + ".light_brick.name.format", "Light %s Brick");
+
         acceptor.add(Constants.MOD_ID + ".allbrick.column.format", "Main Material: %s");
     }
 }
