@@ -1,5 +1,6 @@
 package com.ldtteam.domumornamentum.event.handlers;
 
+import com.ldtteam.domumornamentum.datagen.allbrick.AllBrickBlockStateProvider;
 import com.ldtteam.domumornamentum.datagen.bricks.BrickBlockStateProvider;
 import com.ldtteam.domumornamentum.datagen.bricks.BrickBlockTagProvider;
 import com.ldtteam.domumornamentum.datagen.bricks.BrickItemTagProvider;
@@ -166,6 +167,9 @@ public class ModBusEventHandler
         //Pillars
         event.getGenerator().addProvider(true, new PillarBlockStateProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(true, new PillarComponentTagProvider(event.getGenerator().getPackOutput(), event.getLookupProvider(), event.getExistingFileHelper()));
+
+        //AllBrick
+        event.getGenerator().addProvider(true, new AllBrickBlockStateProvider(event.getGenerator(), event.getExistingFileHelper()));
 
         //Global
         event.getGenerator().addProvider(true, new GlobalRecipeProvider(event.getGenerator().getPackOutput()));

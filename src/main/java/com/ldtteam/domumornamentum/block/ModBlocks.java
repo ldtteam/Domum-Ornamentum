@@ -47,6 +47,8 @@ public final class ModBlocks implements IModBlocks {
     private static final List<RegistryObject<ExtraBlock>> EXTRA_TOP_BLOCKS = Lists.newArrayList();
     private static final List<RegistryObject<BrickBlock>> BRICK = new ArrayList<>();
     private static final List<RegistryObject<PillarBlock>> PILLARS = new ArrayList<>();
+    private static final List<RegistryObject<AllBrickBlock>> ALL_BRICK = new ArrayList<>();
+
     private static final ModBlocks INSTANCE = new ModBlocks();
 
     private static final RegistryObject<ArchitectsCutterBlock> ARCHITECTS_CUTTER;
@@ -115,6 +117,9 @@ public final class ModBlocks implements IModBlocks {
         TRAPDOOR = register("vanilla_trapdoors_compat", TrapdoorBlock::new, b -> new TrapdoorBlockItem(b, new Item.Properties()));
         DOOR = register("vanilla_doors_compat", DoorBlock::new, b -> new DoorBlockItem(b, new Item.Properties()));
         PANEL = register("panel", PanelBlock::new, b -> new PanelBlockItem(b, new Item.Properties()));
+        ALL_BRICK.add(register("light_brick", AllBrickBlock::new, b -> new AllBrickBlockItem(b, new Item.Properties())));
+        ALL_BRICK.add(register("dark_brick", AllBrickBlock::new, b -> new AllBrickBlockItem(b, new Item.Properties())));
+
         POST = register("post", PostBlock::new, b -> new PostBlockItem(b, new Item.Properties()));
 
         FANCY_DOOR = register("fancy_door", FancyDoorBlock::new, b -> new FancyDoorBlockItem(b, new Item.Properties()));
@@ -266,5 +271,10 @@ public final class ModBlocks implements IModBlocks {
     @Override
     public FancyTrapdoorBlock getFancyTrapdoor() {
         return ModBlocks.FANCY_TRAPDOOR.get();
+    }
+
+    @Override
+    public List<AllBrickBlock> getAllBrickBlocks() {
+        return ModBlocks.ALL_BRICK.stream().map(RegistryObject::get).toList();
     }
 }

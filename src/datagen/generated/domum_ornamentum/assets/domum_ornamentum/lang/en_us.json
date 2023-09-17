@@ -28,6 +28,8 @@
   "block.domum_ornamentum.sand_stone_bricks": "Sand Stone Bricks",
   "block.domum_ornamentum.white_floating_carpet": "White Floating Carpet",
   "block.domum_ornamentum.yellow_floating_carpet": "Yellow Floating Carpet",
+  "domum_ornamentum.allbrick.column.format": "Main Material: %s",
+  "domum_ornamentum.allbrick.name.format": "Round %s Pillar",
   "domum_ornamentum.architectscutter": "Architect's Cutter",
   "domum_ornamentum.block.format": "Material: %s",
   "domum_ornamentum.blockpillar.name.format": "Round %s Pillar",

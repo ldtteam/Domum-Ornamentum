@@ -2,6 +2,7 @@ package com.ldtteam.domumornamentum.datagen.global;
 
 import com.ldtteam.data.LanguageProvider;
 import com.ldtteam.domumornamentum.block.ModBlocks;
+import com.ldtteam.domumornamentum.datagen.allbrick.AllBrickLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.bricks.BrickLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.door.DoorsLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.door.fancy.FancyDoorsLangEntryProvider;
@@ -54,7 +55,8 @@ public class GlobalLanguageProvider extends LanguageProvider
                 new TrapdoorsLangEntryProvider(),
                 new FancyTrapdoorsLangEntryProvider(),
                 new PaperwallLangEntryProvider(),
-                new WallLangEntryProvider()
+                new WallLangEntryProvider(),
+                new AllBrickLangEntryProvider()
         ));
     }
 
