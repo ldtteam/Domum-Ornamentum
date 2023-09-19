@@ -86,13 +86,13 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
 
         graphics.blit(getBackGroundTexture(), guiLeft, guiTop, 0, 0, this.imageWidth, this.imageHeight);
 
-        if (this.menu.getCurrentGroup() == null && groupIndexCache != 1)
+        if (this.menu.getCurrentGroup() == null && groupIndexCache != -1)
         {
             (this.menu).clickMenuButton(Objects.requireNonNull(Objects.requireNonNull(this.minecraft).player), groupIndexCache);
             Objects.requireNonNull(this.minecraft.gameMode).handleInventoryButtonClick(this.menu.containerId, groupIndexCache);
         }
 
-        if (this.menu.getCurrentGroup() != null && this.menu.getCurrentVariant() == null && variantIndexCache != 1)
+        if (this.menu.getCurrentGroup() != null && this.menu.getCurrentVariant() == null && variantIndexCache != -1)
         {
             (this.menu).clickMenuButton(Objects.requireNonNull(Objects.requireNonNull(this.minecraft).player), variantIndexCache);
             Objects.requireNonNull(this.minecraft.gameMode).handleInventoryButtonClick(this.menu.containerId, variantIndexCache);
