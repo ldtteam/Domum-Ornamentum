@@ -82,6 +82,31 @@ public class GlobalLanguageProvider extends LanguageProvider
             acceptor.add(Constants.MOD_ID + ".block.format", "Material: %s");
             acceptor.add(ModBlocks.getInstance().getStandingBarrel().getDescriptionId(), "Standing Barrel");
             acceptor.add(ModBlocks.getInstance().getLayingBarrel().getDescriptionId(), "Laying Barrel");
+
+            acceptor.add("cuttergroup." + Constants.MOD_ID + ".brick", "Bricks");
+            acceptor.add("cuttergroup." + Constants.MOD_ID + ".door", "Doors");
+            acceptor.add("cuttergroup." + Constants.MOD_ID + ".trapdoor", "Trapdoors");
+            acceptor.add("cuttergroup." + Constants.MOD_ID + ".light", "Lights");
+            acceptor.add("cuttergroup." + Constants.MOD_ID + ".panel", "Panels");
+            acceptor.add("cuttergroup." + Constants.MOD_ID + ".paperwall", "Paperwalls");
+            acceptor.add("cuttergroup." + Constants.MOD_ID + ".pillar", "Pillars");
+            acceptor.add("cuttergroup." + Constants.MOD_ID + ".post", "Posts");
+            acceptor.add("cuttergroup." + Constants.MOD_ID + ".shingle", "Shingles");
+            acceptor.add("cuttergroup." + Constants.MOD_ID + ".shingle_slab", "Shingleslabs");
+            acceptor.add("cuttergroup." + Constants.MOD_ID + ".timberframe", "Timberframes");
+            acceptor.add("cuttergroup." + Constants.MOD_ID + ".vanilla", "Vanilla Blocks");
+
+            acceptor.add(Constants.MOD_ID + ".group", "Group:");
+            acceptor.add(Constants.MOD_ID + ".variant", "Variant:");
+
+            acceptor.add(Constants.MOD_ID + ".desc.material", "Material: %s");
+            acceptor.add(Constants.MOD_ID + ".desc.main", "Main %s");
+            acceptor.add(Constants.MOD_ID + ".desc.support", "Support %s");
+            acceptor.add(Constants.MOD_ID + ".desc.center", "Center %s");
+            acceptor.add(Constants.MOD_ID + ".desc.frame", "Frame %s");
+            acceptor.add(Constants.MOD_ID + ".desc.shingle", "Shingle %s");
+            acceptor.add(Constants.MOD_ID + ".desc.onlyone", "%s");
+
         }
     }
 
