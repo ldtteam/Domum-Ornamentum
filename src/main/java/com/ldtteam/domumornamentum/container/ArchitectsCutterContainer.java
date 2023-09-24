@@ -200,6 +200,11 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
      * Handles the given Button-click on the server, currently only used by enchanting. Name is for legacy.
      */
     public boolean clickMenuButton(@NotNull Player playerIn, int id) {
+        //todo prevent invalid blocks from being added to the slots, if possible.
+        //todo, remember the equality thing on minecol side.
+        //Map<Item, validtaglist>
+        //ShingleSlab -> texture -> validtaglist#
+        //ignore shulkerbox handler
 
         if (id < ModBlocks.getInstance().getOrComputeItemGroups().size())
         {
