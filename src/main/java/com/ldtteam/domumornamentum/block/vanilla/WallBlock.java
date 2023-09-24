@@ -68,7 +68,10 @@ public class WallBlock extends AbstractBlockWall<WallBlock> implements IMaterial
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof MateriallyTexturedBlockEntity mtbe) {
             Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(0).getId());
-            return block.getExplosionResistance(state, level, pos, explosion);
+            if (block != null)
+            {
+                return block.getExplosionResistance(state, level, pos, explosion);
+            }
         }
         return super.getExplosionResistance(state, level, pos, explosion);
     }
@@ -81,7 +84,7 @@ public class WallBlock extends AbstractBlockWall<WallBlock> implements IMaterial
             Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(0).getId());
             if (block != null)
             {
-                return super.getDestroyProgress(block.defaultBlockState(), player, level, pos);
+                return block.getDestroyProgress(block.defaultBlockState(), player, level, pos);
             }
 
             DomumOrnamentum.LOGGER.warn("Failed to find component for:" + COMPONENTS.get(0).getId() + " on wall destroy progress with data: " + mtbe.getTextureData());
