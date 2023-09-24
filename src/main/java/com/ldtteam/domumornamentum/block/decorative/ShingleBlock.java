@@ -170,7 +170,10 @@ public class ShingleBlock extends AbstractBlockStairs<ShingleBlock> implements I
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof MateriallyTexturedBlockEntity mtbe) {
             Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(1).getId());
-            return block.getExplosionResistance(state, level, pos, explosion);
+            if (block != null)
+            {
+                return block.getExplosionResistance(state, level, pos, explosion);
+            }
         }
         return super.getExplosionResistance(state, level, pos, explosion);
     }
@@ -180,7 +183,10 @@ public class ShingleBlock extends AbstractBlockStairs<ShingleBlock> implements I
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof MateriallyTexturedBlockEntity mtbe) {
             Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(1).getId());
-            return super.getDestroyProgress(block.defaultBlockState(), player, level, pos);
+            if (block != null)
+            {
+               return block.getDestroyProgress(block.defaultBlockState(), player, level, pos);
+            }
         }
         return super.getDestroyProgress(state, player, level, pos);
     }
