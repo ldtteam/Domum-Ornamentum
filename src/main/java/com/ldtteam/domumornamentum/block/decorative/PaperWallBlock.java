@@ -68,7 +68,7 @@ public class PaperWallBlock extends AbstractBlockPane<PaperWallBlock> implements
 
     public PaperWallBlock()
     {
-        super(Properties.of().mapColor(MapColor.NONE).isRedstoneConductor((state, getter, pos) -> false).strength(BLOCK_HARDNESS, RESISTANCE).requiresCorrectToolForDrops());
+        super(Properties.of().mapColor(MapColor.NONE).isRedstoneConductor((state, getter, pos) -> false).strength(BLOCK_HARDNESS, RESISTANCE));
     }
 
     @Override

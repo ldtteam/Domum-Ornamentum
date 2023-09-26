@@ -1,13 +1,11 @@
 package com.ldtteam.domumornamentum.datagen.global;
 
 import com.ldtteam.domumornamentum.block.ModBlocks;
-import com.ldtteam.domumornamentum.shingles.ShingleHeightType;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
@@ -170,28 +168,10 @@ public class GlobalTagProvider extends BlockTagsProvider
         this.tag(BlockTags.MINEABLE_WITH_AXE)
           .add(ModBlocks.getInstance().getArchitectsCutter(),
             ModBlocks.getInstance().getLayingBarrel(),
-            ModBlocks.getInstance().getStandingBarrel(),
-            ModBlocks.getInstance().getShingle(ShingleHeightType.DEFAULT),
-            ModBlocks.getInstance().getShingle(ShingleHeightType.FLAT),
-            ModBlocks.getInstance().getShingle(ShingleHeightType.FLAT_LOWER),
-            ModBlocks.getInstance().getShingleSlab(),
-            ModBlocks.getInstance().getDoor(),
-            ModBlocks.getInstance().getFancyDoor(),
-            ModBlocks.getInstance().getTrapdoor(),
-            ModBlocks.getInstance().getFancyTrapdoor(),
-            ModBlocks.getInstance().getFence(),
-            ModBlocks.getInstance().getFenceGate(),
-            ModBlocks.getInstance().getPanel(),
-            ModBlocks.getInstance().getPost(),
-            ModBlocks.getInstance().getSlab(),
-            ModBlocks.getInstance().getStair())
-        .add(ModBlocks.getInstance().getTimberFrames().toArray(new Block[0]));
+            ModBlocks.getInstance().getStandingBarrel());
 
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
-          .add(ModBlocks.getInstance().getPillars().toArray(new Block[0]))
-          .addTags(ModTags.BRICKS,
-            ModTags.EXTRA_BLOCKS);
-
+          .addTags(ModTags.BRICKS, ModTags.EXTRA_BLOCKS);
     }
 
     @Override
