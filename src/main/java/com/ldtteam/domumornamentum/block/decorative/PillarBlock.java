@@ -23,10 +23,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Explosion;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
@@ -164,38 +161,29 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
 
     }
 
-    /**
-     * Called to correct the blockstates of surrounding blocks when blocks are destroyed.
-     * @param state The current blockstate.
-     * @param world The world the block is in.
-     * @param pos The location of the block in the world.
-     * @param player The destroying entity, may be null.
-     * @param willHarvest True if Block.harvestBlock will be called after this, if the return in true. Can be useful to delay the destruction of tile entities till after harvestBlock
-     * @param fluid The fluid to replace the block with if waterlogged == true.
-     * @return If true, the block will be destroyed
-     */
     @Override
-    public boolean onDestroyedByPlayer(BlockState state, Level world, BlockPos pos, Player player, boolean willHarvest, FluidState fluid)
+    public void destroy(final LevelAccessor world, final BlockPos pos, final BlockState state)
     {
+        super.destroy(world, pos, state);
         Comparable<PillarShapeType> column_property = state.getValue(COLUMN);
         if (column_property == PillarShapeType.PILLAR_COLUMN)
         {
             if (isMatchingPillar(world.getBlockState(pos.above())) && world.getBlockState(pos.above()).getValue(COLUMN)== PillarShapeType.PILLAR_COLUMN)
             {
-                world.setBlockAndUpdate(pos.above(),state.setValue(COLUMN,PillarShapeType.PILLAR_BASE));
+                world.setBlock(pos.above(),state.setValue(COLUMN,PillarShapeType.PILLAR_BASE), 3);
             }
             else if (isMatchingPillar(world.getBlockState(pos.above())))
             {
-                world.setBlockAndUpdate(pos.above(),state.setValue(COLUMN,PillarShapeType.FULL_PILLAR));
+                world.setBlock(pos.above(),state.setValue(COLUMN,PillarShapeType.FULL_PILLAR), 3);
             }
 
             if (isMatchingPillar(world.getBlockState(pos.below())) && world.getBlockState(pos.below()).getValue(COLUMN)== PillarShapeType.PILLAR_COLUMN)
             {
-                world.setBlockAndUpdate(pos.below(),state.setValue(COLUMN,PillarShapeType.PILLAR_CAPITAL));
+                world.setBlock(pos.below(),state.setValue(COLUMN,PillarShapeType.PILLAR_CAPITAL), 3);
             }
             else if (isMatchingPillar(world.getBlockState(pos.below())))
             {
-                world.setBlockAndUpdate(pos.below(),state.setValue(COLUMN,PillarShapeType.FULL_PILLAR));
+                world.setBlock(pos.below(),state.setValue(COLUMN,PillarShapeType.FULL_PILLAR), 3);
             }
         }
         if (isMatchingPillar(world.getBlockState(pos.above())))
@@ -204,10 +192,10 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
             {
                 if (world.getBlockState(pos.above()).getValue(COLUMN) == PillarShapeType.PILLAR_COLUMN)
                 {
-                    world.setBlockAndUpdate(pos.above(), state.setValue(COLUMN, PillarShapeType.PILLAR_BASE));
+                    world.setBlock(pos.above(), state.setValue(COLUMN, PillarShapeType.PILLAR_BASE), 3);
                 } else
                 {
-                    world.setBlockAndUpdate(pos.above(), state.setValue(COLUMN, PillarShapeType.FULL_PILLAR));
+                    world.setBlock(pos.above(), state.setValue(COLUMN, PillarShapeType.FULL_PILLAR), 3);
                 }
             }
         }
@@ -217,14 +205,13 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
             {
                 if (world.getBlockState(pos.below()).getValue(COLUMN) == PillarShapeType.PILLAR_COLUMN)
                 {
-                    world.setBlockAndUpdate(pos.below(), state.setValue(COLUMN, PillarShapeType.PILLAR_CAPITAL));
+                    world.setBlock(pos.below(), state.setValue(COLUMN, PillarShapeType.PILLAR_CAPITAL), 3);
                 } else
                 {
-                    world.setBlockAndUpdate(pos.below(), state.setValue(COLUMN, PillarShapeType.FULL_PILLAR));
+                    world.setBlock(pos.below(), state.setValue(COLUMN, PillarShapeType.FULL_PILLAR), 3);
                 }
             }
         }
-        return super.onDestroyedByPlayer(state, world, pos, player, willHarvest, fluid);
     }
 
     /**
