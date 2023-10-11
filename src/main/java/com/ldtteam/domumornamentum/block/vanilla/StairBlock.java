@@ -2,14 +2,13 @@ package com.ldtteam.domumornamentum.block.vanilla;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import com.ldtteam.domumornamentum.block.AbstractBlockStairs;
 import com.ldtteam.domumornamentum.block.ICachedItemGroupBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.components.SimpleRetexturableComponent;
+import com.ldtteam.domumornamentum.block.interfaces.IDOBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
-import com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import net.minecraft.core.BlockPos;
@@ -48,7 +47,7 @@ import java.util.Random;
 
 import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
 
-public class StairBlock extends AbstractBlockStairs<StairBlock> implements IMateriallyTexturedBlock, EntityBlock, ICachedItemGroupBlock
+public class StairBlock extends net.minecraft.world.level.block.StairBlock implements IMateriallyTexturedBlock, EntityBlock, ICachedItemGroupBlock, IDOBlock<StairBlock>
 {
     private static IMateriallyTexturedBlockComponent MATERIAL_COMPONENT = new SimpleRetexturableComponent(new ResourceLocation("minecraft:block/oak_planks"), ModTags.STAIRS_MATERIALS, OAK_PLANKS);
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
@@ -60,6 +59,12 @@ public class StairBlock extends AbstractBlockStairs<StairBlock> implements IMate
     public StairBlock()
     {
         super(OAK_PLANKS::defaultBlockState, Properties.of(Material.WOOD, OAK_PLANKS.defaultMaterialColor()).noOcclusion().strength(2.0F, 3.0F).requiresCorrectToolForDrops().sound(SoundType.WOOD));
+    }
+
+    @Override
+    public ResourceLocation getRegistryName()
+    {
+        return getRegistryName(this);
     }
 
     @Override
