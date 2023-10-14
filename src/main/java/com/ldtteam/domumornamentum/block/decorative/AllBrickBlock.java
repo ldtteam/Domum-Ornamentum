@@ -47,7 +47,7 @@ public class AllBrickBlock extends AbstractBlock<AllBrickBlock> implements IMate
 {
 
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
-        .add(new SimpleRetexturableComponent(new ResourceLocation("block/oak_planks"), ModTags.GLOBAL_DEFAULT, Blocks.OAK_PLANKS))
+        .add(new SimpleRetexturableComponent(new ResourceLocation("block/oak_planks"), ModTags.ALL_BRICK_MATERIALS, Blocks.OAK_PLANKS))
         .build();
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
