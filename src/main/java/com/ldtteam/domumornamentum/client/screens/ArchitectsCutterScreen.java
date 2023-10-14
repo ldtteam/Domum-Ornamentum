@@ -340,7 +340,6 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
             }
 
             leftOffset = this.leftPos + 220;
-            topOffset = this.topPos + 9 + 23;
             if (mouseX >= (double)leftOffset && mouseX < (double)(leftOffset + 12) && mouseY >= (double)topOffset && mouseY < (double)(topOffset + 18)) {
                 this.clickedOnRecipeScroll = true;
             }
@@ -360,12 +359,13 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
                     Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_STONECUTTER_SELECT_RECIPE, 1.0F));
                     Objects.requireNonNull(this.minecraft.gameMode).handleInventoryButtonClick(this.menu.containerId, index);
                     groupIndexCache = index;
+                    recipeIndexOffset = 0;
+                    recipeSliderProgress = 0;
                     return true;
                 }
             }
 
             leftOffset = this.leftPos + 220;
-            topOffset = this.topPos + 9;
             if (mouseX >= (double)leftOffset && mouseX < (double)(leftOffset + 12) && mouseY >= (double)topOffset && mouseY < (double)(topOffset + 18)) {
                 this.clickedOnTypeScroll = true;
             }
@@ -398,14 +398,25 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
 
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
-        if (this.canScrollRecipes()) {
+
+        boolean onlyTypes = false;
+        if (mouseX >= this.leftPos + 55 && mouseY >= this.topPos + 15 && mouseX < this.leftPos + 220 && mouseY < this.topPos + 35) {
+            onlyTypes = true;
+        }
+
+        boolean onlyRecipes = false;
+        if (mouseX >= this.leftPos + 55 && mouseY >= this.topPos + 40 && mouseX < this.leftPos + 220 && mouseY < this.topPos + 60) {
+            onlyRecipes = true;
+        }
+
+        if (this.canScrollRecipes() && !onlyTypes) {
             int i = this.getHiddenRecipeRows();
             this.recipeSliderProgress = (float)((double)this.recipeSliderProgress - delta / (double)i);
             this.recipeSliderProgress = Mth.clamp(this.recipeSliderProgress, 0.0F, 1.0F);
             this.recipeIndexOffset = (int)((double)(this.recipeSliderProgress * (float)i) + 0.5D) * 10;
         }
 
-        if (this.canScrollTypes()) {
+        if (this.canScrollTypes() && !onlyRecipes) {
             int i = this.getHiddenTypeRows();
             this.typeSliderProgress = (float)((double)this.typeSliderProgress - delta / (double)i);
             this.typeSliderProgress = Mth.clamp(this.typeSliderProgress, 0.0F, 1.0F);
