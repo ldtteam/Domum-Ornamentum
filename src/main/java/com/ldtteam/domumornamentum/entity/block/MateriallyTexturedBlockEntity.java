@@ -81,6 +81,12 @@ public class MateriallyTexturedBlockEntity extends BlockEntity implements IMater
         }
     }
 
+    @Override
+    public void onLoad()
+    {
+        // noop (dont call requestModelDataUpdate)
+    }
+
     @NotNull
     @Override
     public ModelData getModelData()
