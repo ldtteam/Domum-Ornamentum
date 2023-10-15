@@ -11,7 +11,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 
 import net.minecraft.world.level.Level;
@@ -32,8 +31,7 @@ public class TimberFrameBlockItem extends BlockItem
     @Override
     public Component getName(final ItemStack stack)
     {
-        final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
-        final MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
+        final MaterialTextureData textureData = MaterialTextureData.deserializeFromItemStack(stack);
 
         final IMateriallyTexturedBlockComponent centerComponent = timberFrameBlock.getComponents().get(1);
         final Block centerBlock = textureData.getTexturedComponents().getOrDefault(centerComponent.getId(), centerComponent.getDefault());
@@ -48,8 +46,7 @@ public class TimberFrameBlockItem extends BlockItem
     {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
 
-        final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
-        MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
+        MaterialTextureData textureData = MaterialTextureData.deserializeFromItemStack(stack);
         if (textureData.isEmpty()) {
             textureData = MaterialTextureDataUtil.generateRandomTextureDataFrom(stack);
         }

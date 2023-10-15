@@ -10,7 +10,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 
 import net.minecraft.world.level.Level;
@@ -32,8 +31,7 @@ public class ShingleSlabBlockItem extends BlockItem
     @Override
     public @NotNull Component getName(final ItemStack stack)
     {
-        final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
-        final MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
+        final MaterialTextureData textureData = MaterialTextureData.deserializeFromItemStack(stack);
 
         final IMateriallyTexturedBlockComponent coverComponent = shingleBlock.getComponents().get(0);
         final Block centerBlock = textureData.getTexturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
@@ -49,8 +47,7 @@ public class ShingleSlabBlockItem extends BlockItem
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
         tooltip.add(Component.translatable(Constants.MOD_ID + ".origin.tooltip"));
 
-        final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
-        MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
+        MaterialTextureData textureData = MaterialTextureData.deserializeFromItemStack(stack);
         if (textureData.isEmpty()) {
             textureData = MaterialTextureDataUtil.generateRandomTextureDataFrom(stack);
         }

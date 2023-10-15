@@ -34,7 +34,6 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootParams;
@@ -44,7 +43,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -155,16 +153,10 @@ public class FancyDoorBlock extends AbstractBlockDoor<FancyDoorBlock> implements
           Block.UPDATE_ALL
         );
 
-        final CompoundTag textureData = stack.getOrCreateTagElement("textureData");
-        final BlockEntity lowerBlockEntity = worldIn.getBlockEntity(pos);
-
-        if (lowerBlockEntity instanceof MateriallyTexturedBlockEntity)
-            ((MateriallyTexturedBlockEntity) lowerBlockEntity).updateTextureDataWith(MaterialTextureData.deserializeFromNBT(textureData));
-
         final BlockEntity upperBlockEntity = worldIn.getBlockEntity(pos.above());
 
-        if (upperBlockEntity instanceof MateriallyTexturedBlockEntity)
-            ((MateriallyTexturedBlockEntity) upperBlockEntity).updateTextureDataWith(MaterialTextureData.deserializeFromNBT(textureData));
+        if (upperBlockEntity instanceof final MateriallyTexturedBlockEntity materialBE)
+            materialBE.updateTextureDataWith(MaterialTextureData.deserializeFromItemStack(stack));
     }
 
     @Nullable
