@@ -47,22 +47,7 @@ public class PanelBlockItem extends BlockItemWithClientBePlacement implements ID
     {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
 
-        TrapdoorType trapdoorType;
-        try
-        {
-            if (stack.getOrCreateTag().contains("type"))
-            {
-                trapdoorType = TrapdoorType.valueOf(stack.getOrCreateTag().getString("type").toUpperCase());
-            }
-            else
-            {
-                trapdoorType = TrapdoorType.FULL;
-            }
-        }
-        catch (Exception ex)
-        {
-            trapdoorType = TrapdoorType.FULL;
-        }
+        final TrapdoorType trapdoorType = BlockUtils.getPropertyFromBlockStateTag(stack, PanelBlock.TYPE, TrapdoorType.FULL);
 
         tooltip.add(Component.translatable(Constants.MOD_ID + ".origin.tooltip"));
         tooltip.add(Component.literal(""));

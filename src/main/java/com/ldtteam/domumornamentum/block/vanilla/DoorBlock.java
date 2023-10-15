@@ -14,6 +14,7 @@ import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
 import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.BlockUtils;
+import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -48,7 +49,7 @@ import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
 @SuppressWarnings("deprecation")
 public class DoorBlock extends AbstractBlockDoor<DoorBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock
 {
-    public static final EnumProperty<DoorType> TYPE = EnumProperty.create("type", DoorType.class);
+    public static final EnumProperty<DoorType> TYPE = EnumProperty.create(Constants.TYPE_BLOCK_PROPERTY, DoorType.class);
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
                                                                                .add(new SimpleRetexturableComponent(new ResourceLocation("minecraft:block/oak_planks"), ModTags.DOORS_MATERIALS, OAK_PLANKS))
                                                                                .build();
@@ -109,10 +110,10 @@ public class DoorBlock extends AbstractBlockDoor<DoorBlock> implements IMaterial
         }
 
         try {
-            for (final DoorType DoorType : DoorType.values())
+            for (final DoorType doorType : DoorType.values())
             {
                 final ItemStack result = new ItemStack(this);
-                result.getOrCreateTag().putString("type", DoorType.toString().toUpperCase());
+                BlockUtils.putPropertyIntoBlockStateTag(result, TYPE, doorType);
 
                 fillItemGroupCache.add(result);
             }
@@ -130,20 +131,7 @@ public class DoorBlock extends AbstractBlockDoor<DoorBlock> implements IMaterial
     {
         super.setPlacedBy(worldIn, pos, state, Objects.requireNonNull(placer), stack);
 
-        final String type = stack.getOrCreateTag().getString("type");
-        worldIn.setBlock(
-          pos,
-          worldIn.getBlockState(pos).setValue(TYPE, DoorType.valueOf(type.toUpperCase())),
-          Block.UPDATE_ALL
-        );
-        worldIn.setBlock(
-          pos.above(),
-          worldIn.getBlockState(pos.above()).setValue(TYPE, DoorType.valueOf(type.toUpperCase())),
-          Block.UPDATE_ALL
-        );
-
         final BlockEntity upperBlockEntity = worldIn.getBlockEntity(pos.above());
-
         if (upperBlockEntity instanceof final MateriallyTexturedBlockEntity materialBE)
             materialBE.updateTextureDataWith(MaterialTextureData.deserializeFromItemStack(stack));
     }
@@ -158,19 +146,13 @@ public class DoorBlock extends AbstractBlockDoor<DoorBlock> implements IMaterial
     @Override
     public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootParams.Builder builder)
     {
-        return BlockUtils.getMaterializedItemStack(builder, (s, e) -> {
-            s.getOrCreateTag().putString("type", e.getBlockState().getValue(TYPE).toString().toUpperCase());
-            return s;
-        });
+        return BlockUtils.getMaterializedItemStack(builder, TYPE);
     }
 
 @Override
     public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final BlockGetter world, final BlockPos pos, final Player player)
     {
-        return BlockUtils.getMaterializedItemStack(player, world, pos, (s, e) -> {
-            s.getOrCreateTag().putString("type", e.getBlockState().getValue(TYPE).toString().toUpperCase());
-            return s;
-        });
+        return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos), TYPE);
     }
 
     @Override
@@ -211,7 +193,7 @@ public class DoorBlock extends AbstractBlockDoor<DoorBlock> implements IMaterial
                   public void serializeRecipeData(final @NotNull JsonObject jsonObject)
                   {
                       final CompoundTag tag = new CompoundTag();
-                      tag.putString("type", value.toString().toUpperCase());
+                      BlockUtils.putPropertyIntoBlockStateTag(tag, TYPE, value);
 
                       jsonObject.addProperty("block", Objects.requireNonNull(getRegistryName(getBlock())).toString());
                       jsonObject.addProperty("nbt", tag.toString());

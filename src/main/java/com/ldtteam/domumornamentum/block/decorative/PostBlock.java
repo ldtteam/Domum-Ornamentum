@@ -19,13 +19,11 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -108,7 +106,7 @@ public class PostBlock extends AbstractPostBlock<PostBlock> implements IMaterial
             for (final PostType postType : PostType.values())
             {
                 final ItemStack result = new ItemStack(this);
-                result.getOrCreateTag().putString("type", postType.name().toUpperCase());
+                BlockUtils.putPropertyIntoBlockStateTag(result, TYPE, postType);
 
                 fillItemGroupCache.add(result);
             }
@@ -118,23 +116,6 @@ public class PostBlock extends AbstractPostBlock<PostBlock> implements IMaterial
         }
 
         items.addAll(fillItemGroupCache);
-    }
-
-    @Override
-    public void setPlacedBy(final @NotNull Level worldIn, final @NotNull BlockPos pos, final @NotNull BlockState state, @Nullable final LivingEntity placer, final @NotNull ItemStack stack)
-    {
-        super.setPlacedBy(worldIn, pos, state, placer, stack);
-
-        String type = stack.getOrCreateTag().getString("type");
-        if (type == "") {
-            type = PostType.PLAIN.name();
-        }
-
-        worldIn.setBlock(
-          pos,
-          state.setValue(TYPE, PostType.valueOf(type.toUpperCase())),
-          Block.UPDATE_ALL
-        );
     }
 
     @Nullable
@@ -147,19 +128,13 @@ public class PostBlock extends AbstractPostBlock<PostBlock> implements IMaterial
     @Override
     public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootParams.Builder builder)
     {
-        return BlockUtils.getMaterializedItemStack(builder, (s, e) -> {
-            s.getOrCreateTag().putString("type", e.getBlockState().getValue(TYPE).toString().toUpperCase());
-            return s;
-        });
+        return BlockUtils.getMaterializedItemStack(builder, TYPE);
     }
 
     @Override
     public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final BlockGetter world, final BlockPos pos, final Player player)
     {
-        return BlockUtils.getMaterializedItemStack(player, world, pos, (s, e) -> {
-            s.getOrCreateTag().putString("type", e.getBlockState().getValue(TYPE).toString().toUpperCase());
-            return s;
-        });
+        return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos), TYPE);
     }
 
     @Override
@@ -200,7 +175,7 @@ public class PostBlock extends AbstractPostBlock<PostBlock> implements IMaterial
                   public void serializeRecipeData(final @NotNull JsonObject jsonObject)
                   {
                       final CompoundTag tag = new CompoundTag();
-                      tag.putString("type", value.toString().toUpperCase());
+                      BlockUtils.putPropertyIntoBlockStateTag(tag, TYPE, value);
 
                       jsonObject.addProperty("block", Objects.requireNonNull(getRegistryName(getBlock())).toString());
                       jsonObject.addProperty("nbt", tag.toString());

@@ -48,15 +48,7 @@ public class FancyTrapdoorBlockItem extends BlockItemWithClientBePlacement imple
     {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
 
-        FancyTrapdoorType trapdoorType;
-        try {
-            if (stack.getOrCreateTag().contains("type"))
-                trapdoorType = FancyTrapdoorType.valueOf(stack.getOrCreateTag().getString("type").toUpperCase());
-            else
-                trapdoorType = FancyTrapdoorType.FULL;
-        } catch (Exception ex) {
-            trapdoorType = FancyTrapdoorType.FULL;
-        }
+        final FancyTrapdoorType trapdoorType = BlockUtils.getPropertyFromBlockStateTag(stack, FancyTrapdoorBlock.TYPE, FancyTrapdoorType.FULL);
 
         tooltip.add(Component.translatable(Constants.MOD_ID + ".origin.tooltip"));
         tooltip.add(Component.literal(""));
