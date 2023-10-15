@@ -1,10 +1,15 @@
 package com.ldtteam.domumornamentum.client.model.data;
 
 import com.google.common.collect.Maps;
+import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -80,12 +85,45 @@ public class MaterialTextureData implements INBTSerializable<CompoundTag>
     }
 
     public static MaterialTextureData deserializeFromNBT(final CompoundTag nbt) {
-        if (nbt.getAllKeys().isEmpty())
+        if (nbt == null || nbt.getAllKeys().isEmpty())
             return EMPTY;
 
         final MaterialTextureData newData = new MaterialTextureData();
         newData.deserializeNBT(nbt);
         return newData;
+    }
+
+    public static MaterialTextureData deserializeFromItemStack(final ItemStack itemStack)
+    {
+        if (itemStack == null || !itemStack.hasTag() || !(itemStack.getItem() instanceof BlockItem))
+        {
+            return EMPTY;
+        }
+
+        final CompoundTag beTag = BlockItem.getBlockEntityData(itemStack);
+
+        if (beTag == null || beTag.isEmpty() || !beTag.contains("textureData", Tag.TAG_COMPOUND))
+        {
+            // try the old path instead
+            return deserializeFromNBT(itemStack.getTagElement("textureData"));
+        }
+
+        return deserializeFromNBT(beTag.getCompound("textureData"));
+    }
+
+    /**
+     * @see BlockEntity#saveToItem(ItemStack)
+     */
+    public void writeToItemStack(final ItemStack itemStack)
+    {
+        if (this != EMPTY && !itemStack.isEmpty() && itemStack.getItem() instanceof BlockItem)
+        {
+            final CompoundTag tag = new CompoundTag();
+            tag.put("textureData", serializeNBT());
+            BlockItem.setBlockEntityData(itemStack,
+                ForgeRegistries.BLOCK_ENTITY_TYPES.getValue(new ResourceLocation(Constants.MOD_ID, Constants.BlockEntityTypes.MATERIALLY_RETEXTURABLE)),
+                tag);
+        }
     }
 
     public boolean isEmpty()

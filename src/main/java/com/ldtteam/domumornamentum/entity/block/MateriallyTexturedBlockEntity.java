@@ -6,14 +6,12 @@ import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.data.ModelData;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Objects;
 
 import static com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes.MATERIALLY_TEXTURED;
 
@@ -41,19 +39,7 @@ public class MateriallyTexturedBlockEntity extends BlockEntity implements IMater
     @Override
     public @NotNull CompoundTag getUpdateTag()
     {
-        return this.saveWithId();
-    }
-
-    @Override
-    public void onDataPacket(final Connection net, final ClientboundBlockEntityDataPacket packet)
-    {
-        this.load(Objects.requireNonNull(packet.getTag()));
-    }
-
-    @Override
-    public void handleUpdateTag(final CompoundTag tag)
-    {
-        this.load(tag);
+        return this.saveWithoutMetadata();
     }
 
     @Override
@@ -81,6 +67,18 @@ public class MateriallyTexturedBlockEntity extends BlockEntity implements IMater
         }
 
         this.requestModelDataUpdate();
+    }
+
+    @Override
+    public void requestModelDataUpdate()
+    {
+        super.requestModelDataUpdate();
+
+        // manually ask level to recompile rendering
+        if (level != null && level.isClientSide)
+        {
+            level.setBlocksDirty(worldPosition, Blocks.AIR.defaultBlockState(), getBlockState());
+        }
     }
 
     @NotNull

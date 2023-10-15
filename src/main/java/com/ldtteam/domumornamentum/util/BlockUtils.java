@@ -1,18 +1,14 @@
 package com.ldtteam.domumornamentum.util;
 
 import com.google.common.collect.Lists;
-import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import org.jetbrains.annotations.NotNull;
@@ -65,12 +61,8 @@ public class BlockUtils
         if (!(blockEntity instanceof final MateriallyTexturedBlockEntity texturedBlockEntity))
             return ItemStack.EMPTY;
 
-        final MaterialTextureData materialTextureData = texturedBlockEntity.getTextureData();
-
-        final CompoundTag textureNbt = materialTextureData.serializeNBT();
-
         final ItemStack result = new ItemStack(blockEntity.getBlockState().getBlock());
-        result.getOrCreateTag().put("textureData", textureNbt);
+        texturedBlockEntity.saveToItem(result);
 
         return adapter.apply(result, (MateriallyTexturedBlockEntity) blockEntity);
     }
