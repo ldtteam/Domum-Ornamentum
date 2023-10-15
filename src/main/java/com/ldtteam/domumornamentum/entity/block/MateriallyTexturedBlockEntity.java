@@ -5,7 +5,6 @@ import com.ldtteam.domumornamentum.client.model.properties.ModProperties;
 import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -59,14 +58,7 @@ public class MateriallyTexturedBlockEntity extends BlockEntity implements IMater
     public void load(@NotNull final CompoundTag nbt)
     {
         super.load(nbt);
-
-        this.textureData = new MaterialTextureData();
-        if (nbt.contains("textureData", Tag.TAG_COMPOUND))
-        {
-            this.textureData.deserializeNBT(nbt.getCompound("textureData"));
-        }
-
-        this.requestModelDataUpdate();
+        updateTextureDataWith(MaterialTextureData.deserializeFromNBT(nbt.getCompound("textureData")));
     }
 
     @Override
