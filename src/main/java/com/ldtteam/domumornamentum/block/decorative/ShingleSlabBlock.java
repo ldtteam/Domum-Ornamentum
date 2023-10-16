@@ -65,7 +65,6 @@ public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock>
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
                                                                                .add(new SimpleRetexturableComponent(new ResourceLocation("block/oak_planks"), ModTags.SHINGLES_ROOF, Blocks.OAK_PLANKS))
                                                                                .add(new SimpleRetexturableComponent(new ResourceLocation("block/dark_oak_planks"), ModTags.SHINGLES_SUPPORT, Blocks.DARK_OAK_PLANKS))
-                                                                               .add(new SimpleRetexturableComponent(new ResourceLocation("block/acacia_planks"), ModTags.SHINGLES_COVER, Blocks.ACACIA_PLANKS))
                                                                                .build();
 
     /**

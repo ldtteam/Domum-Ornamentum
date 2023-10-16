@@ -1,16 +1,21 @@
 package com.ldtteam.domumornamentum.entity.block;
 
+import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.client.model.properties.ModProperties;
 import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.data.ModelData;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes.MATERIALLY_TEXTURED;
 import static com.ldtteam.domumornamentum.util.Constants.BLOCK_ENTITY_TEXTURE_DATA;
@@ -29,8 +34,16 @@ public class MateriallyTexturedBlockEntity extends BlockEntity implements IMater
     public void updateTextureDataWith(final MaterialTextureData materialTextureData)
     {
         this.textureData = materialTextureData;
-        if (this.textureData.isEmpty()) {
+
+        if (this.textureData.isEmpty())
+        {
             this.textureData = MaterialTextureDataUtil.generateRandomTextureDataFrom(this.getBlockState().getBlock());
+        }
+        else if (getBlockState().getBlock() instanceof final IMateriallyTexturedBlock materiallyTexturedBlock)
+        {
+            final List<ResourceLocation> keys = new ArrayList<>();
+            materiallyTexturedBlock.getComponents().forEach(c -> keys.add(c.getId()));
+            textureData.getTexturedComponents().keySet().retainAll(keys);
         }
 
         this.requestModelDataUpdate();

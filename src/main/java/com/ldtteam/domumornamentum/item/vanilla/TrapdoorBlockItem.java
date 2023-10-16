@@ -5,11 +5,13 @@ import com.ldtteam.domumornamentum.block.types.TrapdoorType;
 import com.ldtteam.domumornamentum.block.vanilla.TrapdoorBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.item.BlockItemWithClientBePlacement;
+import com.ldtteam.domumornamentum.item.interfaces.IDoItem;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
 import net.minecraft.network.chat.Component;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -18,7 +20,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class TrapdoorBlockItem extends BlockItemWithClientBePlacement
+public class TrapdoorBlockItem extends BlockItemWithClientBePlacement implements IDoItem
 {
     private final TrapdoorBlock trapdoorBlock;
 
@@ -76,7 +78,12 @@ public class TrapdoorBlockItem extends BlockItemWithClientBePlacement
 
         final IMateriallyTexturedBlockComponent trapDoorComponent = trapdoorBlock.getComponents().get(0);
         final Block trapDoorBlock = textureData.getTexturedComponents().getOrDefault(trapDoorComponent.getId(), trapDoorComponent.getDefault());
-        final Component trapDoorBlockName = BlockUtils.getHoverName(trapDoorBlock);
-        tooltip.add(Component.translatable(Constants.MOD_ID + ".trapdoor.block.format", trapDoorBlockName));
+        tooltip.add(Component.translatable(Constants.MOD_ID + ".desc.onlyone", Component.translatable(Constants.MOD_ID + ".desc.material", BlockUtils.getHoverName(trapDoorBlock))));
+    }
+
+    @Override
+    public ResourceLocation getGroup()
+    {
+        return new ResourceLocation(Constants.MOD_ID, "trapdoor");
     }
 }

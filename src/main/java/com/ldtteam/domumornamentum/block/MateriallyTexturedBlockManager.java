@@ -69,4 +69,28 @@ public final class MateriallyTexturedBlockManager implements IMateriallyTextured
                  .map(l -> l.get(slotIndex))
                  .anyMatch(c -> block.defaultBlockState().is(c.getValidSkins()));
     }
+
+    @Override
+    public boolean doesItemStackContainsMaterialForSlot(final int slotIndex, final ItemStack stack, final ItemStack type) {
+        if (stack.isEmpty())
+            return true;
+
+        if (!(stack.getItem() instanceof final BlockItem blockItem))
+            return false;
+
+        final Block block = blockItem.getBlock();
+
+        if (slotIndex >= getMaxTexturableComponentCount())
+            return false;
+
+        if (type.getItem() instanceof BlockItem item && item.getBlock() instanceof IMateriallyTexturedBlock texturedBlock)
+        {
+            if (texturedBlock.getComponents().size() > slotIndex)
+            {
+                return block.defaultBlockState().is(((IMateriallyTexturedBlockComponent) texturedBlock.getComponents().toArray()[slotIndex]).getValidSkins());
+            }
+        }
+
+        return false;
+    }
 }
