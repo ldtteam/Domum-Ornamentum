@@ -14,13 +14,10 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -270,8 +267,23 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
         if (!this.recipes.isEmpty() && this.currentVariant != null && this.currentVariant.getItem() instanceof BlockItem blockItem) {
             for (final ArchitectsCutterRecipe recipe : recipes)
             {
-                if (recipe.getBlockName().equals(ForgeRegistries.BLOCKS.getKey(blockItem.getBlock())))
+                final ItemStack resultItem = recipe.getResultItem(this.world.registryAccess());
+                if (resultItem.getItem() == currentVariant.getItem())
                 {
+                    if (resultItem.hasTag())
+                    {
+                        for (final String key: resultItem.getTag().getAllKeys())
+                        {
+                            if (currentVariant.hasTag() && currentVariant.getTag().contains(key) && resultItem.getTag().get(key).equals(currentVariant.getTag().get(key)))
+                            {
+                                this.inventory.setRecipeUsed(recipe);
+                                this.outputInventorySlot.set(recipe.assemble(this.inputInventory, this.world.registryAccess()));
+                                break;
+                            }
+                        }
+
+                        continue;
+                    }
                     this.inventory.setRecipeUsed(recipe);
                     this.outputInventorySlot.set(recipe.assemble(this.inputInventory, this.world.registryAccess()));
                     break;
