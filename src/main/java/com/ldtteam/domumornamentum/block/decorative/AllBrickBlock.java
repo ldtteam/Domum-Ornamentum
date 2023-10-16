@@ -140,7 +140,7 @@ public class AllBrickBlock extends AbstractBlock<AllBrickBlock> implements IMate
     @Override
     public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final BlockGetter world, final BlockPos pos, final Player player)
     {
-        return BlockUtils.getMaterializedItemStack(player, world, pos);
+        return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos));
     }
 
     @Override
