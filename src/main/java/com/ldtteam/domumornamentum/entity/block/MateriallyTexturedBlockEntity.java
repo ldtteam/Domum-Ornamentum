@@ -13,6 +13,7 @@ import net.minecraftforge.client.model.data.ModelData;
 import org.jetbrains.annotations.NotNull;
 
 import static com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes.MATERIALLY_TEXTURED;
+import static com.ldtteam.domumornamentum.util.Constants.BLOCK_ENTITY_TEXTURE_DATA;
 
 public class MateriallyTexturedBlockEntity extends BlockEntity implements IMateriallyTexturedBlockEntity
 {
@@ -51,14 +52,14 @@ public class MateriallyTexturedBlockEntity extends BlockEntity implements IMater
     public void saveAdditional(@NotNull final CompoundTag compound)
     {
         super.saveAdditional(compound);
-        compound.put("textureData", textureData.serializeNBT());
+        compound.put(BLOCK_ENTITY_TEXTURE_DATA, textureData.serializeNBT());
     }
 
     @Override
     public void load(@NotNull final CompoundTag nbt)
     {
         super.load(nbt);
-        updateTextureDataWith(MaterialTextureData.deserializeFromNBT(nbt.getCompound("textureData")));
+        updateTextureDataWith(MaterialTextureData.deserializeFromNBT(nbt.getCompound(BLOCK_ENTITY_TEXTURE_DATA)));
     }
 
     @Override

@@ -16,6 +16,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import java.util.Map;
 import java.util.Objects;
 
+import static com.ldtteam.domumornamentum.util.Constants.BLOCK_ENTITY_TEXTURE_DATA;
+
 public class MaterialTextureData implements INBTSerializable<CompoundTag>
 {
     public static final MaterialTextureData EMPTY = new MaterialTextureData();
@@ -102,13 +104,13 @@ public class MaterialTextureData implements INBTSerializable<CompoundTag>
 
         final CompoundTag beTag = BlockItem.getBlockEntityData(itemStack);
 
-        if (beTag == null || beTag.isEmpty() || !beTag.contains("textureData", Tag.TAG_COMPOUND))
+        if (beTag == null || beTag.isEmpty() || !beTag.contains(BLOCK_ENTITY_TEXTURE_DATA, Tag.TAG_COMPOUND))
         {
             // try the old path instead
-            return deserializeFromNBT(itemStack.getTagElement("textureData"));
+            return deserializeFromNBT(itemStack.getTagElement(BLOCK_ENTITY_TEXTURE_DATA));
         }
 
-        return deserializeFromNBT(beTag.getCompound("textureData"));
+        return deserializeFromNBT(beTag.getCompound(BLOCK_ENTITY_TEXTURE_DATA));
     }
 
     /**
@@ -119,7 +121,7 @@ public class MaterialTextureData implements INBTSerializable<CompoundTag>
         if (this != EMPTY && !itemStack.isEmpty() && itemStack.getItem() instanceof BlockItem)
         {
             final CompoundTag tag = new CompoundTag();
-            tag.put("textureData", serializeNBT());
+            tag.put(BLOCK_ENTITY_TEXTURE_DATA, serializeNBT());
             BlockItem.setBlockEntityData(itemStack,
                 ForgeRegistries.BLOCK_ENTITY_TYPES.getValue(new ResourceLocation(Constants.MOD_ID, Constants.BlockEntityTypes.MATERIALLY_RETEXTURABLE)),
                 tag);
