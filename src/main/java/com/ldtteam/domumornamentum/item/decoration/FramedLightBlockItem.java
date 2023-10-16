@@ -4,11 +4,11 @@ import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.decorative.FramedLightBlock;
 import com.ldtteam.domumornamentum.block.types.FramedLightType;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
+import com.ldtteam.domumornamentum.item.BlockItemWithClientBePlacement;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class FramedLightBlockItem extends BlockItem
+public class FramedLightBlockItem extends BlockItemWithClientBePlacement
 {
     private final FramedLightBlock framedLightBlock;
 

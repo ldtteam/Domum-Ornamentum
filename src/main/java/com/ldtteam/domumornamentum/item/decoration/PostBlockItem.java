@@ -3,11 +3,11 @@ import com.ldtteam.domumornamentum.block.types.PostType;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.decorative.PostBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
+import com.ldtteam.domumornamentum.item.BlockItemWithClientBePlacement;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -18,7 +18,7 @@ import java.util.List;
 /** Post block item
  * copied other types, renamed vars
  */
-public class PostBlockItem extends BlockItem
+public class PostBlockItem extends BlockItemWithClientBePlacement
 {
     private final PostBlock postBlock;
 

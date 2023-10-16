@@ -4,12 +4,12 @@ import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.types.DoorType;
 import com.ldtteam.domumornamentum.block.vanilla.DoorBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
+import com.ldtteam.domumornamentum.item.DoubleHighBlockItemWithClientBePlacement;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
 import net.minecraft.network.chat.Component;
 
-import net.minecraft.world.item.DoubleHighBlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class DoorBlockItem extends DoubleHighBlockItem
+public class DoorBlockItem extends DoubleHighBlockItemWithClientBePlacement
 {
     private final DoorBlock doorBlock;
 

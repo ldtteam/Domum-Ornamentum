@@ -8,7 +8,7 @@ import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
 import net.minecraft.network.chat.Component;
 
-import net.minecraft.world.item.BlockItem;
+import com.ldtteam.domumornamentum.item.BlockItemWithClientBePlacement;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class PillarBlockItem extends BlockItem
+public class PillarBlockItem extends BlockItemWithClientBePlacement
 {
     private PillarBlock pillarBlock;
     

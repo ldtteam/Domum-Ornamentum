@@ -3,12 +3,12 @@ package com.ldtteam.domumornamentum.item.decoration;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.decorative.PaperWallBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
+import com.ldtteam.domumornamentum.item.BlockItemWithClientBePlacement;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.network.chat.Component;
 
@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class PaperwallBlockItem extends BlockItem
+public class PaperwallBlockItem extends BlockItemWithClientBePlacement
 {
     private final PaperWallBlock paperWallBlock;
 
