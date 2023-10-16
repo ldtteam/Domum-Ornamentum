@@ -4,12 +4,14 @@ import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.types.DoorType;
 import com.ldtteam.domumornamentum.block.vanilla.DoorBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
+import com.ldtteam.domumornamentum.item.interfaces.IDoItem;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DoubleHighBlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -20,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class DoorBlockItem extends DoubleHighBlockItem
+public class DoorBlockItem extends DoubleHighBlockItem implements IDoItem
 {
     private final DoorBlock doorBlock;
 
@@ -83,7 +85,12 @@ public class DoorBlockItem extends DoubleHighBlockItem
 
         final IMateriallyTexturedBlockComponent doorComponent = doorBlock.getComponents().get(0);
         final Block doorBlock = textureData.getTexturedComponents().getOrDefault(doorComponent.getId(), doorComponent.getDefault());
-        final Component doorBlockName = BlockUtils.getHoverName(doorBlock);
-        tooltip.add(Component.translatable(Constants.MOD_ID + ".door.block.format", doorBlockName));
+        tooltip.add(Component.translatable(Constants.MOD_ID + ".desc.onlyone", Component.translatable(Constants.MOD_ID + ".desc.material", BlockUtils.getHoverName(doorBlock))));
+    }
+
+    @Override
+    public ResourceLocation getGroup()
+    {
+        return new ResourceLocation(Constants.MOD_ID, "door");
     }
 }

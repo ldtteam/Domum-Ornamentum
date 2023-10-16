@@ -12,4 +12,6 @@ public interface IMateriallyTexturedBlockManager
     int getMaxTexturableComponentCount();
 
     boolean doesItemStackContainsMaterialForSlot(int slotIndex, ItemStack stack);
+
+    boolean doesItemStackContainsMaterialForSlot(int slotIndex, ItemStack stack, ItemStack type);
 }

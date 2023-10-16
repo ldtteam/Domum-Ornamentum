@@ -1,14 +1,17 @@
 package com.ldtteam.domumornamentum.item.decoration;
 
+import com.google.common.collect.ImmutableList;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.decorative.FramedLightBlock;
 import com.ldtteam.domumornamentum.block.types.FramedLightType;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
+import com.ldtteam.domumornamentum.item.interfaces.IDoItem;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -19,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class FramedLightBlockItem extends BlockItem
+public class FramedLightBlockItem extends BlockItem implements IDoItem
 {
     private final FramedLightBlock framedLightBlock;
 
@@ -62,13 +65,23 @@ public class FramedLightBlockItem extends BlockItem
         final IMateriallyTexturedBlockComponent frameComponent = framedLightBlock.getComponents().get(0);
         final Block frameBlock = textureData.getTexturedComponents().getOrDefault(frameComponent.getId(), frameComponent.getDefault());
         final Component frameBlockName = BlockUtils.getHoverName(frameBlock);
-        tooltip.add(Component.translatable(Constants.MOD_ID + ".light.frame.block.format", frameBlockName));
+        tooltip.add(Component.translatable(Constants.MOD_ID + ".desc.frame", Component.translatable(Constants.MOD_ID + ".desc.material", frameBlockName)));
 
-        tooltip.add(Component.literal(""));
-        tooltip.add(Component.translatable(Constants.MOD_ID + ".light.center.header"));
         final IMateriallyTexturedBlockComponent centerComponent = framedLightBlock.getComponents().get(1);
         final Block centerBlock = textureData.getTexturedComponents().getOrDefault(centerComponent.getId(), centerComponent.getDefault());
         final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
-        tooltip.add(Component.translatable(Constants.MOD_ID + ".light.center.block.format", centerBlockName));
+        tooltip.add(Component.translatable(Constants.MOD_ID + ".desc.center", Component.translatable(Constants.MOD_ID + ".desc.material", centerBlockName)));
+    }
+
+    @Override
+    public List<ResourceLocation> getInputIds()
+    {
+        return ImmutableList.of(new ResourceLocation(Constants.MOD_ID, "frame"), new ResourceLocation(Constants.MOD_ID, "center"));
+    }
+
+    @Override
+    public ResourceLocation getGroup()
+    {
+        return new ResourceLocation(Constants.MOD_ID, "light");
     }
 }
