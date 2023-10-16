@@ -84,7 +84,7 @@ public class ModBusEventHandler
         final CompoundTag tag = itemStack.getTagElement(BlockItem.BLOCK_STATE_TAG);
         if (tag == null || !tag.contains(Constants.TYPE_BLOCK_PROPERTY, Tag.TAG_STRING))
         {
-            return 0f;
+            return defaultValue.ordinal();
         }
 
         try
