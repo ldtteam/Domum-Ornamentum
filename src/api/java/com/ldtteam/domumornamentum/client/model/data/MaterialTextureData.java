@@ -106,8 +106,7 @@ public class MaterialTextureData implements INBTSerializable<CompoundTag>
 
         if (beTag == null || beTag.isEmpty() || !beTag.contains(BLOCK_ENTITY_TEXTURE_DATA, Tag.TAG_COMPOUND))
         {
-            // try the old path instead
-            return deserializeFromNBT(itemStack.getTagElement(BLOCK_ENTITY_TEXTURE_DATA));
+            return EMPTY;
         }
 
         return deserializeFromNBT(beTag.getCompound(BLOCK_ENTITY_TEXTURE_DATA));
