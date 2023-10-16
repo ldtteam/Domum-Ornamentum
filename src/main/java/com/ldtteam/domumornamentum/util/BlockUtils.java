@@ -35,8 +35,17 @@ public class BlockUtils
     }
 
     /**
+     * @deprecated see {@link #getMaterializedDrops(LootParams.Builder, Property...)}
+     */
+    @Deprecated(forRemoval = true, since = "1.20.1")
+    public static List<ItemStack> getMaterializedItemStack(final @NotNull LootParams.Builder builder) {
+        return getMaterializedDrops(builder, new Property[0]);
+    }
+
+    /**
      * @deprecated see {@link #getMaterializedItemStack(BlockEntity, Property...)}
      */
+    @Deprecated(forRemoval = true, since = "1.20.1")
     public static ItemStack getMaterializedItemStack(final Entity entity, final BlockGetter blockGetter, final BlockPos blockPos) {
         return getMaterializedItemStack(entity, blockGetter.getBlockEntity(blockPos), (s, e) -> s);
     }
@@ -50,7 +59,7 @@ public class BlockUtils
     }
 
     /**
-     * @deprecated see {@link #getMaterializedItemStack(LootParams.Builder, Property...)}
+     * @deprecated see {@link #getMaterializedDrops(LootParams.Builder, Property...)}
      */
     @Deprecated(forRemoval = true, since = "1.20.1")
     public static List<ItemStack> getMaterializedItemStack(final @NotNull LootParams.Builder builder, final BiFunction<ItemStack, MateriallyTexturedBlockEntity, ItemStack> adapter) {
@@ -64,6 +73,7 @@ public class BlockUtils
     /**
      * @deprecated see {@link #getMaterializedItemStack(BlockEntity, Property...)}
      */
+    @Deprecated(forRemoval = true, since = "1.20.1")
     public static ItemStack getMaterializedItemStack(final Entity entity, final BlockGetter blockGetter, final BlockPos blockPos, final BiFunction<ItemStack, MateriallyTexturedBlockEntity, ItemStack> adapter) {
         return getMaterializedItemStack(entity, blockGetter.getBlockEntity(blockPos), adapter);
     }
@@ -71,6 +81,7 @@ public class BlockUtils
     /**
      * @deprecated see {@link #getMaterializedItemStack(BlockEntity, Property...)}
      */
+    @Deprecated(forRemoval = true, since = "1.20.1")
     public static ItemStack getMaterializedItemStack(final Entity entity, final BlockEntity blockEntity, final BiFunction<ItemStack, MateriallyTexturedBlockEntity, ItemStack> adapter) {
         if (!(blockEntity instanceof final MateriallyTexturedBlockEntity texturedBlockEntity))
             return ItemStack.EMPTY;
@@ -81,7 +92,7 @@ public class BlockUtils
         return adapter.apply(result, (MateriallyTexturedBlockEntity) blockEntity);
     }
 
-    public static List<ItemStack> getMaterializedItemStack(final LootParams.Builder builder, final Property<?>... blockStateProperties)
+    public static List<ItemStack> getMaterializedDrops(final LootParams.Builder builder, final Property<?>... blockStateProperties)
     {
         final ItemStack stack = getMaterializedItemStack(builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY), blockStateProperties);
         if (!stack.isEmpty())

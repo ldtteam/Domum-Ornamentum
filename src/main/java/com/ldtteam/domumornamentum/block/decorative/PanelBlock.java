@@ -132,7 +132,7 @@ public class PanelBlock extends AbstractPanelBlockTrapdoor<PanelBlock> implement
     @Override
     public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootParams.Builder builder)
     {
-        return BlockUtils.getMaterializedItemStack(builder, TYPE);
+        return BlockUtils.getMaterializedDrops(builder, TYPE);
     }
 
     @Override

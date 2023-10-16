@@ -134,7 +134,7 @@ public class AllBrickBlock extends AbstractBlock<AllBrickBlock> implements IMate
     @Override
     public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootParams.Builder builder)
     {
-        return BlockUtils.getMaterializedItemStack(builder);
+        return BlockUtils.getMaterializedDrops(builder);
     }
 
     @Override

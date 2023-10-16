@@ -136,7 +136,7 @@ public class TrapdoorBlock extends AbstractBlockTrapdoor<TrapdoorBlock> implemen
     @Override
     public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootParams.Builder builder)
     {
-        return BlockUtils.getMaterializedItemStack(builder, TYPE);
+        return BlockUtils.getMaterializedDrops(builder, TYPE);
     }
 
     @Override
