@@ -39,7 +39,11 @@ public class BlockUtils
      */
     @Deprecated(forRemoval = true, since = "1.20.1")
     public static List<ItemStack> getMaterializedItemStack(final @NotNull LootParams.Builder builder) {
-        return getMaterializedDrops(builder, new Property[0]);
+        final ItemStack stack = getMaterializedItemStack(builder.getOptionalParameter(LootContextParams.THIS_ENTITY), builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY), (s, e) -> s);
+        if (!stack.isEmpty())
+            return Lists.newArrayList(stack);
+
+        return Collections.emptyList();
     }
 
     /**
