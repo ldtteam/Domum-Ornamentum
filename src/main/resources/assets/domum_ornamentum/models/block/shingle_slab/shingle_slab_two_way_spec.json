@@ -3,7 +3,6 @@
   "textures": {
     "1": "block/oak_planks",
     "2": "block/dark_oak_planks",
-    "3": "block/acacia_planks",
     "particle": "block/oak_planks"
   },
   "elements": [
@@ -36,7 +35,7 @@
             15,
             15
           ],
-          "texture": "#3"
+          "texture": "#1"
         },
         "up": {
           "uv": [
@@ -46,7 +45,7 @@
             16
           ],
           "rotation": 270,
-          "texture": "#3"
+          "texture": "#1"
         }
       }
     },
@@ -79,7 +78,7 @@
             7,
             15
           ],
-          "texture": "#3"
+          "texture": "#1"
         },
         "up": {
           "uv": [
@@ -89,7 +88,7 @@
             16
           ],
           "rotation": 90,
-          "texture": "#3"
+          "texture": "#1"
         }
       }
     },

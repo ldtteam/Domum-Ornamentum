@@ -1,6 +1,9 @@
 package com.ldtteam.domumornamentum.event.handlers;
 
 import com.ldtteam.datagenerators.lang.LangJson;
+import com.ldtteam.domumornamentum.datagen.allbrick.AllBrickBlockStateProvider;
+import com.ldtteam.domumornamentum.datagen.allbrick.AllBrickBlockTagProvider;
+import com.ldtteam.domumornamentum.datagen.allbrick.AllBrickLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.bricks.BrickBlockStateProvider;
 import com.ldtteam.domumornamentum.datagen.bricks.BrickBlockTagProvider;
 import com.ldtteam.domumornamentum.datagen.bricks.BrickItemTagProvider;
@@ -46,7 +49,6 @@ import com.ldtteam.domumornamentum.datagen.frames.timber.TimberFramesItemModelPr
 import com.ldtteam.domumornamentum.datagen.frames.timber.TimberFramesLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.global.GlobalLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.global.GlobalLootTableProvider;
-import com.ldtteam.domumornamentum.datagen.global.GlobalRecipeProvider;
 import com.ldtteam.domumornamentum.datagen.global.GlobalTagProvider;
 import com.ldtteam.domumornamentum.datagen.global.MateriallyTexturedBlockRecipeProvider;
 import com.ldtteam.domumornamentum.datagen.panel.PanelBlockModelProvider;
@@ -265,8 +267,10 @@ public class ModBusEventHandler
         event.getGenerator().addProvider(true, new PillarItemModelProvider(event.getGenerator()));
         event.getGenerator().addProvider(true, new PillarLangEntryProvider(event.getGenerator(), langJson));
 
-
-        event.getGenerator().addProvider(true, new GlobalRecipeProvider(event.getGenerator()));
+        //AllBrick
+        event.getGenerator().addProvider(true, new AllBrickBlockStateProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new AllBrickBlockTagProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new AllBrickLangEntryProvider(event.getGenerator(), langJson));
 
         //Global
         //IMPORTANT: Needs to be last since this writes the lang data actually to disk!!!!!

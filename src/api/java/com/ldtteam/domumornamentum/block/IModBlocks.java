@@ -55,4 +55,6 @@ public interface IModBlocks
     Block getFancyTrapdoor();
 
     List<? extends Block> getPillars();
+
+    List<? extends Block> getAllBrickBlocks();
 }

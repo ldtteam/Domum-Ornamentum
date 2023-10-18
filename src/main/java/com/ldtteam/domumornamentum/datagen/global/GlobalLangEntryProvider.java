@@ -44,6 +44,32 @@ public class GlobalLangEntryProvider implements DataProvider
         backingLangJson.put(ModBlocks.getInstance().getStandingBarrel().getDescriptionId(), "Standing Barrel");
         backingLangJson.put(ModBlocks.getInstance().getLayingBarrel().getDescriptionId(), "Laying Barrel");
 
+
+        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".brick", "Bricks");
+        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".door", "Doors");
+        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".trapdoor", "Trapdoors");
+        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".light", "Lights");
+        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".panel", "Panels");
+        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".paperwall", "Paperwalls");
+        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".pillar", "Pillars");
+        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".post", "Posts");
+        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".shingle", "Shingles");
+        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".shingle_slab", "Shingleslabs");
+        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".timberframe", "Timberframes");
+        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".vanilla", "Vanilla Blocks");
+
+        backingLangJson.put(Constants.MOD_ID + ".group", "Group:");
+        backingLangJson.put(Constants.MOD_ID + ".variant", "Variant:");
+
+        backingLangJson.put(Constants.MOD_ID + ".desc.material", "Material: %s");
+        backingLangJson.put(Constants.MOD_ID + ".desc.main", "Main %s");
+        backingLangJson.put(Constants.MOD_ID + ".desc.support", "Support %s");
+        backingLangJson.put(Constants.MOD_ID + ".desc.center", "Center %s");
+        backingLangJson.put(Constants.MOD_ID + ".desc.frame", "Frame %s");
+        backingLangJson.put(Constants.MOD_ID + ".desc.shingle", "Shingle %s");
+        backingLangJson.put(Constants.MOD_ID + ".desc.onlyone", "%s");
+        
+        
         DataProvider.saveStable(cache, backingLangJson.serialize(), dataGenerator.getOutputFolder().resolve(DataGeneratorConstants.EN_US_LANG));
     }
 
