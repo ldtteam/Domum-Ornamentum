@@ -266,7 +266,7 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
         if (!this.recipes.isEmpty() && this.currentVariant != null && this.currentVariant.getItem() instanceof BlockItem blockItem) {
             for (final ArchitectsCutterRecipe recipe : recipes)
             {
-                final ItemStack resultItem = recipe.getResultItem(this.world.registryAccess());
+                final ItemStack resultItem = recipe.getResultItem();
                 if (resultItem.getItem() == currentVariant.getItem())
                 {
                     if (resultItem.hasTag())
@@ -276,7 +276,7 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
                             if (currentVariant.hasTag() && currentVariant.getTag().contains(key) && resultItem.getTag().get(key).equals(currentVariant.getTag().get(key)))
                             {
                                 this.inventory.setRecipeUsed(recipe);
-                                this.outputInventorySlot.set(recipe.assemble(this.inputInventory, this.world.registryAccess()));
+                                this.outputInventorySlot.set(recipe.assemble(this.inputInventory));
                                 break;
                             }
                         }
