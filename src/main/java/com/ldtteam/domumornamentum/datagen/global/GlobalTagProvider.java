@@ -185,7 +185,8 @@ public class GlobalTagProvider extends BlockTagsProvider
             ModBlocks.getInstance().getPanel(),
             ModBlocks.getInstance().getSlab(),
             ModBlocks.getInstance().getStair())
-        .add(ModBlocks.getInstance().getTimberFrames().toArray(new Block[0]));
+          .add(ModBlocks.getInstance().getFramedLights().toArray(new Block[0]))
+          .add(ModBlocks.getInstance().getTimberFrames().toArray(new Block[0]));
 
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
           .add(ModBlocks.getInstance().getAllBrickBlocks().toArray(new Block[0]))
