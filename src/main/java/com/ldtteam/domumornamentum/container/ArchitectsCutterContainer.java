@@ -23,6 +23,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.ldtteam.domumornamentum.util.GuiConstants.*;
+
 public class ArchitectsCutterContainer extends AbstractContainerMenu
 {
     /**
@@ -103,8 +105,8 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
         this.world = playerInventoryIn.player.level();
         for (int i = 0; i < MateriallyTexturedBlockManager.getInstance().getMaxTexturableComponentCount(); i++)
         {
-            int x = 96;
-            int y = 66 + i * 20;;
+            int x = CUTTER_INPUT_X;
+            int y = CUTTER_INPUT_Y + i * CUTTER_INPUT_SPACING;
             this.inputInventorySlots.add(
               this.addSlot(new Slot(this.inputInventory, i, x, y) {
                   @Override
@@ -123,7 +125,7 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
             );
         }
 
-        this.outputInventorySlot = this.addSlot(new Slot(this.inventory, 1, 183, 77) {
+        this.outputInventorySlot = this.addSlot(new Slot(this.inventory, 1, CUTTER_OUTPUT_X, CUTTER_OUTPUT_Y) {
             public boolean mayPlace(@NotNull ItemStack stack) {
                 return false;
             }
