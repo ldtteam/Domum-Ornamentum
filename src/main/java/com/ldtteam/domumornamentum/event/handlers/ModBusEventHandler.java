@@ -1,5 +1,6 @@
 package com.ldtteam.domumornamentum.event.handlers;
 
+import com.ldtteam.domumornamentum.Network;
 import com.ldtteam.domumornamentum.datagen.allbrick.AllBrickBlockStateProvider;
 import com.ldtteam.domumornamentum.datagen.allbrick.AllBrickBlockTagProvider;
 import com.ldtteam.domumornamentum.datagen.bricks.BrickBlockStateProvider;
@@ -64,10 +65,21 @@ import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 @Mod.EventBusSubscriber(modid = Constants.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModBusEventHandler
 {
+    /**
+     * Called when mod is being initialized.
+     *
+     * @param event event
+     */
+    @SubscribeEvent
+    public static void onModInit(final FMLCommonSetupEvent event)
+    {
+        Network.getNetwork().registerMessages();
+    }
 
     @SubscribeEvent
     public static void dataGeneratorSetup(final GatherDataEvent event)
