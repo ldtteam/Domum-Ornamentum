@@ -1,5 +1,6 @@
 package com.ldtteam.domumornamentum.network;
 
+import com.ldtteam.domumornamentum.network.messages.CreativeSetArchitectCutterSlotMessage;
 import com.ldtteam.domumornamentum.network.messages.IMessage;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -43,6 +44,7 @@ public class NetworkChannel
     {
         int idx = 0;
 
+        registerMessage(++idx, CreativeSetArchitectCutterSlotMessage.class, CreativeSetArchitectCutterSlotMessage::new);
     }
 
     /**
