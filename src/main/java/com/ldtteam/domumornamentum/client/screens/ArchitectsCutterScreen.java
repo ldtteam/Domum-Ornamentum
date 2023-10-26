@@ -62,7 +62,7 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
     /**
      * Group index cache.
      */
-    private static int groupIndexCache = -1;
+    private static int groupIndexCache = 0;
 
     /**
      * Variant index cache.
@@ -90,14 +90,18 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
 
         graphics.blit(getBackGroundTexture(), guiLeft, guiTop, 0, 0, this.imageWidth, this.imageHeight);
 
-        if (this.menu.getCurrentGroup() == null && groupIndexCache != -1)
+        if (this.menu.getCurrentGroup() == null)
         {
             (this.menu).clickMenuButton(Objects.requireNonNull(Objects.requireNonNull(this.minecraft).player), groupIndexCache);
             Objects.requireNonNull(this.minecraft.gameMode).handleInventoryButtonClick(this.menu.containerId, groupIndexCache);
         }
 
-        if (this.menu.getCurrentGroup() != null && this.menu.getCurrentVariant() == null && variantIndexCache != -1)
+        if (this.menu.getCurrentGroup() != null && this.menu.getCurrentVariant() == null)
         {
+            if (variantIndexCache == -1)
+            {
+                variantIndexCache = ModBlocks.getInstance().itemGroups.size();
+            }
             (this.menu).clickMenuButton(Objects.requireNonNull(Objects.requireNonNull(this.minecraft).player), variantIndexCache);
             Objects.requireNonNull(this.minecraft.gameMode).handleInventoryButtonClick(this.menu.containerId, variantIndexCache);
         }

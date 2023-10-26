@@ -25,8 +25,6 @@ public enum TrapdoorType implements StringRepresentable
     VERTICALLY_STRIPED("vertically_striped"),
     WAFFLE("waffle");
 
-
-
     private final String serializationName;
 
     TrapdoorType(final String serializationName) {this.serializationName = serializationName;}

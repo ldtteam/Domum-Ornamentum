@@ -68,6 +68,6 @@ public class PillarBlockItem extends BlockItem implements IDoItem
     @Override
     public ResourceLocation getGroup()
     {
-        return new ResourceLocation(Constants.MOD_ID, "pillar");
+        return new ResourceLocation(Constants.MOD_ID, "gpillar");
     }
 }

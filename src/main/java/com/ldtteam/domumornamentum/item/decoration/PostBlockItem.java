@@ -88,7 +88,7 @@ public class PostBlockItem extends BlockItem implements IDoItem
     @Override
     public ResourceLocation getGroup()
     {
-        return new ResourceLocation(Constants.MOD_ID, "post");
+        return new ResourceLocation(Constants.MOD_ID, "kpost");
     }
 }
 

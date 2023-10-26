@@ -81,6 +81,6 @@ public class PaperwallBlockItem extends BlockItem implements IDoItem
     @Override
     public ResourceLocation getGroup()
     {
-        return new ResourceLocation(Constants.MOD_ID, "paperwall");
+        return new ResourceLocation(Constants.MOD_ID, "hpaperwall");
     }
 }
