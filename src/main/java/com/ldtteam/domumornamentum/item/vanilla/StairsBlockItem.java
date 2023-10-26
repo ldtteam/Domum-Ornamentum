@@ -64,7 +64,7 @@ public class StairsBlockItem extends BlockItem implements IDoItem
     @Override
     public ResourceLocation getGroup()
     {
-        return new ResourceLocation(Constants.MOD_ID, "vanilla");
+        return new ResourceLocation(Constants.MOD_ID, "avanilla");
     }
 }
 

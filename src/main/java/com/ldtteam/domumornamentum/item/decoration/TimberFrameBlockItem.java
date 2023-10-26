@@ -83,6 +83,6 @@ public class TimberFrameBlockItem extends BlockItem implements IDoItem
     @Override
     public ResourceLocation getGroup()
     {
-        return new ResourceLocation(Constants.MOD_ID, "timberframe");
+        return new ResourceLocation(Constants.MOD_ID, "btimberframe");
     }
 }

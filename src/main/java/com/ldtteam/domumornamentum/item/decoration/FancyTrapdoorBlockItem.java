@@ -95,7 +95,7 @@ public class FancyTrapdoorBlockItem extends BlockItem implements IDoItem
     @Override
     public ResourceLocation getGroup()
     {
-        return new ResourceLocation(Constants.MOD_ID, "trapdoor");
+        return new ResourceLocation(Constants.MOD_ID, "etrapdoor");
     }
 }
 

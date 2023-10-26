@@ -45,18 +45,17 @@ public class GlobalLangEntryProvider implements DataProvider
         backingLangJson.put(ModBlocks.getInstance().getLayingBarrel().getDescriptionId(), "Laying Barrel");
 
 
-        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".brick", "Bricks");
-        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".door", "Doors");
-        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".trapdoor", "Trapdoors");
-        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".light", "Lights");
-        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".panel", "Panels");
-        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".paperwall", "Paperwalls");
-        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".pillar", "Pillars");
-        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".post", "Posts");
-        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".shingle", "Shingles");
-        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".shingle_slab", "Shingleslabs");
-        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".timberframe", "Timberframes");
-        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".vanilla", "Vanilla Blocks");
+        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".jbrick", "Bricks");
+        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".ddoor", "Doors");
+        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".etrapdoor", "Trapdoors");
+        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".ilight", "Lights");
+        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".fpanel", "Panels");
+        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".hpaperwall", "Paperwalls");
+        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".gpillar", "Pillars");
+        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".kpost", "Posts");
+        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".cshingle", "Shingles");
+        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".btimberframe", "Timberframes");
+        backingLangJson.put("cuttergroup." + Constants.MOD_ID + ".avanilla", "Vanilla Blocks");
 
         backingLangJson.put(Constants.MOD_ID + ".group", "Group:");
         backingLangJson.put(Constants.MOD_ID + ".variant", "Variant:");

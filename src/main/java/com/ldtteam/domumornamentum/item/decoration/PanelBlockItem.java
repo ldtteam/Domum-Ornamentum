@@ -88,7 +88,7 @@ public class PanelBlockItem extends BlockItem implements IDoItem
     @Override
     public ResourceLocation getGroup()
     {
-        return new ResourceLocation(Constants.MOD_ID, "panel");
+        return new ResourceLocation(Constants.MOD_ID, "fpanel");
     }
 }
 
