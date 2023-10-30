@@ -300,10 +300,12 @@ public final class ModBlocks implements IModBlocks {
         if (itemGroups.isEmpty())
         {
             ForgeRegistries.ITEMS.forEach(item -> {
-                if (item instanceof IDoItem)
+                if (item instanceof IDoItem doItem)
                 {
-                    final List<ItemStack> itemList = itemGroups.getOrDefault(((IDoItem) item).getGroup(), new ArrayList<>());
-                    if (item instanceof BlockItem blockitem && blockitem.getBlock() instanceof IMateriallyTexturedBlock texturedBlock) {
+                    final List<ItemStack> itemList = itemGroups.getOrDefault(doItem.getGroup(), new ArrayList<>());
+
+                    if (item instanceof BlockItem blockitem && blockitem.getBlock() instanceof IMateriallyTexturedBlock texturedBlock)
+                    {
                         if (blockitem.getBlock() instanceof ICachedItemGroupBlock cachedItemGroupBlock)
                         {
                             final NonNullList<ItemStack> stacks = NonNullList.create();
@@ -319,7 +321,11 @@ public final class ModBlocks implements IModBlocks {
                             itemList.add(process(new ItemStack(item), texturedBlock));
                         }
                     }
-                    itemGroups.put(((IDoItem) item).getGroup(), itemList);
+
+                    if (!itemList.isEmpty())
+                    {
+                        itemGroups.put(doItem.getGroup(), itemList);
+                    }
                 }
             });
         }
