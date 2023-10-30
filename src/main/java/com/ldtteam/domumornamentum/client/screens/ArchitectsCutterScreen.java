@@ -1,5 +1,6 @@
 package com.ldtteam.domumornamentum.client.screens;
 
+import com.ldtteam.domumornamentum.DomumOrnamentum;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.ModBlocks;
@@ -262,6 +263,13 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
             int k = left + j % 10 * CUTTER_RECIPE_W;
             int l = j / 10;
             int i1 = top + l * CUTTER_RECIPE_H + 2;
+
+            final ResourceLocation type = typeList.get(i);
+            if (ModBlocks.getInstance().getOrComputeItemGroups().get(type).isEmpty())
+            {
+                DomumOrnamentum.LOGGER.error("Empty Item Category: " + type);
+                continue;
+            }
 
             graphics.renderItem(ModBlocks.getInstance().getOrComputeItemGroups().get(typeList.get(i)).get(0), k, i1);
         }
