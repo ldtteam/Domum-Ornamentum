@@ -163,15 +163,14 @@ public class GlobalTagProvider extends BlockTagsProvider
             Tags.Blocks.OBSIDIAN,
             BlockTags.STONE_BRICKS,
             BlockTags.BASE_STONE_NETHER
-            );
+          );
 
         this.tag(BlockTags.MINEABLE_WITH_AXE)
           .add(ModBlocks.getInstance().getArchitectsCutter(),
             ModBlocks.getInstance().getLayingBarrel(),
             ModBlocks.getInstance().getStandingBarrel());
 
-        this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
-          .addTags(ModTags.BRICKS, ModTags.EXTRA_BLOCKS);
+        ModBlocks.getInstance().getExtraTopBlocks().forEach(extraBlock -> this.tag(extraBlock.getType().getCategory().getMineableTag()).add(extraBlock));
     }
 
     @Override
