@@ -2,6 +2,7 @@ package com.ldtteam.domumornamentum.datagen.global;
 
 import com.ldtteam.data.LanguageProvider;
 import com.ldtteam.domumornamentum.block.ModBlocks;
+import com.ldtteam.domumornamentum.datagen.allbrick.AllBrickLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.bricks.BrickLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.door.DoorsLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.door.fancy.FancyDoorsLangEntryProvider;
@@ -54,7 +55,8 @@ public class GlobalLanguageProvider extends LanguageProvider
                 new TrapdoorsLangEntryProvider(),
                 new FancyTrapdoorsLangEntryProvider(),
                 new PaperwallLangEntryProvider(),
-                new WallLangEntryProvider()
+                new WallLangEntryProvider(),
+                new AllBrickLangEntryProvider()
         ));
     }
 
@@ -80,6 +82,30 @@ public class GlobalLanguageProvider extends LanguageProvider
             acceptor.add(Constants.MOD_ID + ".block.format", "Material: %s");
             acceptor.add(ModBlocks.getInstance().getStandingBarrel().getDescriptionId(), "Standing Barrel");
             acceptor.add(ModBlocks.getInstance().getLayingBarrel().getDescriptionId(), "Laying Barrel");
+
+            acceptor.add("cuttergroup." + Constants.MOD_ID + ".jbrick", "Bricks");
+            acceptor.add("cuttergroup." + Constants.MOD_ID + ".ddoor", "Doors");
+            acceptor.add("cuttergroup." + Constants.MOD_ID + ".etrapdoor", "Trapdoors");
+            acceptor.add("cuttergroup." + Constants.MOD_ID + ".ilight", "Lights");
+            acceptor.add("cuttergroup." + Constants.MOD_ID + ".fpanel", "Panels");
+            acceptor.add("cuttergroup." + Constants.MOD_ID + ".hpaperwall", "Paperwalls");
+            acceptor.add("cuttergroup." + Constants.MOD_ID + ".gpillar", "Pillars");
+            acceptor.add("cuttergroup." + Constants.MOD_ID + ".kpost", "Posts");
+            acceptor.add("cuttergroup." + Constants.MOD_ID + ".cshingle", "Shingles");
+            acceptor.add("cuttergroup." + Constants.MOD_ID + ".btimberframe", "Timberframes");
+            acceptor.add("cuttergroup." + Constants.MOD_ID + ".avanilla", "Vanilla Blocks");
+
+            acceptor.add(Constants.MOD_ID + ".group", "Group:");
+            acceptor.add(Constants.MOD_ID + ".variant", "Variant:");
+
+            acceptor.add(Constants.MOD_ID + ".desc.material", "Material: %s");
+            acceptor.add(Constants.MOD_ID + ".desc.main", "Main %s");
+            acceptor.add(Constants.MOD_ID + ".desc.support", "Support %s");
+            acceptor.add(Constants.MOD_ID + ".desc.center", "Center %s");
+            acceptor.add(Constants.MOD_ID + ".desc.frame", "Frame %s");
+            acceptor.add(Constants.MOD_ID + ".desc.shingle", "Shingle %s");
+            acceptor.add(Constants.MOD_ID + ".desc.onlyone", "%s");
+
         }
     }
 

@@ -4,12 +4,9 @@ import com.ldtteam.domumornamentum.shingles.ShingleHeightType;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
@@ -38,8 +35,11 @@ public final class ModCreativeTabs {
 
         output.accept(ModBlocks.getInstance().getShingleSlab());
         output.accept(ModBlocks.getInstance().getPaperWall());
+
         ModBlocks.getInstance().getPillars().forEach(output::accept);
         ModBlocks.getInstance().getFramedLights().forEach(output::accept);
+        ModBlocks.getInstance().getAllBrickBlocks().forEach(output::accept);
+
         output.accept(ModBlocks.getInstance().getFence());
         output.accept(ModBlocks.getInstance().getFenceGate());
         output.accept(ModBlocks.getInstance().getSlab());

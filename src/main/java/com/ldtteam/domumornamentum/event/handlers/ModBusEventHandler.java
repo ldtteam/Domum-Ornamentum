@@ -1,5 +1,8 @@
 package com.ldtteam.domumornamentum.event.handlers;
 
+import com.ldtteam.domumornamentum.Network;
+import com.ldtteam.domumornamentum.datagen.allbrick.AllBrickBlockStateProvider;
+import com.ldtteam.domumornamentum.datagen.allbrick.AllBrickBlockTagProvider;
 import com.ldtteam.domumornamentum.datagen.bricks.BrickBlockStateProvider;
 import com.ldtteam.domumornamentum.datagen.bricks.BrickBlockTagProvider;
 import com.ldtteam.domumornamentum.datagen.bricks.BrickItemTagProvider;
@@ -62,10 +65,21 @@ import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 @Mod.EventBusSubscriber(modid = Constants.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModBusEventHandler
 {
+    /**
+     * Called when mod is being initialized.
+     *
+     * @param event event
+     */
+    @SubscribeEvent
+    public static void onModInit(final FMLCommonSetupEvent event)
+    {
+        Network.getNetwork().registerMessages();
+    }
 
     @SubscribeEvent
     public static void dataGeneratorSetup(final GatherDataEvent event)
@@ -166,6 +180,10 @@ public class ModBusEventHandler
         //Pillars
         event.getGenerator().addProvider(true, new PillarBlockStateProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(true, new PillarComponentTagProvider(event.getGenerator().getPackOutput(), event.getLookupProvider(), event.getExistingFileHelper()));
+
+        //AllBrick
+        event.getGenerator().addProvider(true, new AllBrickBlockStateProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new AllBrickBlockTagProvider(event.getGenerator().getPackOutput(), event.getLookupProvider(), event.getExistingFileHelper()));
 
         //Global
         event.getGenerator().addProvider(true, new GlobalRecipeProvider(event.getGenerator().getPackOutput()));

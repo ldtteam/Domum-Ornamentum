@@ -1,5 +1,6 @@
 package com.ldtteam.domumornamentum.entity.block;
 
+import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.client.model.properties.ModProperties;
 import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
@@ -8,12 +9,14 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.data.ModelData;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
+import java.util.*;
 
 import static com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes.MATERIALLY_TEXTURED;
 
@@ -78,6 +81,20 @@ public class MateriallyTexturedBlockEntity extends BlockEntity implements IMater
         if (nbt.contains("textureData", Tag.TAG_COMPOUND))
         {
             this.textureData.deserializeNBT(nbt.getCompound("textureData"));
+            if (getBlockState().getBlock() instanceof IMateriallyTexturedBlock materiallyTexturedBlock)
+            {
+                final List<ResourceLocation> validKeys = new ArrayList<>();
+                materiallyTexturedBlock.getComponents().forEach(key -> validKeys.add(key.getId()));
+                final Map<ResourceLocation, Block> textureMap = new HashMap<>();
+                for (Map.Entry<ResourceLocation, Block> entry : this.textureData.getTexturedComponents().entrySet())
+                {
+                    if (validKeys.contains(entry.getKey()))
+                    {
+                        textureMap.put(entry.getKey(), entry.getValue());
+                    }
+                }
+                this.textureData = new MaterialTextureData(textureMap);
+            }
         }
 
         this.requestModelDataUpdate();

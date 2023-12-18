@@ -1,28 +1,36 @@
 package com.ldtteam.domumornamentum.block;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.ldtteam.domumornamentum.block.decorative.*;
 import com.ldtteam.domumornamentum.block.types.BrickType;
 import com.ldtteam.domumornamentum.block.types.ExtraBlockType;
 import com.ldtteam.domumornamentum.block.types.FramedLightType;
 import com.ldtteam.domumornamentum.block.types.TimberFrameType;
 import com.ldtteam.domumornamentum.block.vanilla.*;
+import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.item.decoration.*;
+import com.ldtteam.domumornamentum.item.interfaces.IDoItem;
 import com.ldtteam.domumornamentum.item.vanilla.*;
 import com.ldtteam.domumornamentum.shingles.ShingleHeightType;
 import com.ldtteam.domumornamentum.util.Constants;
+import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -47,6 +55,8 @@ public final class ModBlocks implements IModBlocks {
     private static final List<RegistryObject<ExtraBlock>> EXTRA_TOP_BLOCKS = Lists.newArrayList();
     private static final List<RegistryObject<BrickBlock>> BRICK = new ArrayList<>();
     private static final List<RegistryObject<PillarBlock>> PILLARS = new ArrayList<>();
+    private static final List<RegistryObject<AllBrickBlock>> ALL_BRICK = new ArrayList<>();
+
     private static final ModBlocks INSTANCE = new ModBlocks();
 
     private static final RegistryObject<ArchitectsCutterBlock> ARCHITECTS_CUTTER;
@@ -115,11 +125,19 @@ public final class ModBlocks implements IModBlocks {
         TRAPDOOR = register("vanilla_trapdoors_compat", TrapdoorBlock::new, b -> new TrapdoorBlockItem(b, new Item.Properties()));
         DOOR = register("vanilla_doors_compat", DoorBlock::new, b -> new DoorBlockItem(b, new Item.Properties()));
         PANEL = register("panel", PanelBlock::new, b -> new PanelBlockItem(b, new Item.Properties()));
+        ALL_BRICK.add(register("light_brick", AllBrickBlock::new, b -> new AllBrickBlockItem(b, new Item.Properties())));
+        ALL_BRICK.add(register("dark_brick", AllBrickBlock::new, b -> new AllBrickBlockItem(b, new Item.Properties())));
+
         POST = register("post", PostBlock::new, b -> new PostBlockItem(b, new Item.Properties()));
 
         FANCY_DOOR = register("fancy_door", FancyDoorBlock::new, b -> new FancyDoorBlockItem(b, new Item.Properties()));
         FANCY_TRAPDOOR = register("fancy_trapdoors", FancyTrapdoorBlock::new, b -> new FancyTrapdoorBlockItem(b, new Item.Properties()));
     }
+
+    /**
+     * Specific item groups.
+     */
+    public Map<ResourceLocation, List<ItemStack>> itemGroups = new TreeMap<>();
 
     /**
      * Private constructor to hide the implicit public one.
@@ -266,5 +284,64 @@ public final class ModBlocks implements IModBlocks {
     @Override
     public FancyTrapdoorBlock getFancyTrapdoor() {
         return ModBlocks.FANCY_TRAPDOOR.get();
+    }
+
+    @Override
+    public List<AllBrickBlock> getAllBrickBlocks() {
+        return ModBlocks.ALL_BRICK.stream().map(RegistryObject::get).toList();
+    }
+
+    /**
+     * Get or compute the item group specifics.
+     * @return the item group.
+     */
+    public Map<ResourceLocation, List<ItemStack>> getOrComputeItemGroups()
+    {
+        if (itemGroups.isEmpty())
+        {
+            ForgeRegistries.ITEMS.forEach(item -> {
+                if (item instanceof IDoItem)
+                {
+                    final List<ItemStack> itemList = itemGroups.getOrDefault(((IDoItem) item).getGroup(), new ArrayList<>());
+                    if (item instanceof BlockItem blockitem && blockitem.getBlock() instanceof IMateriallyTexturedBlock texturedBlock) {
+                        if (blockitem.getBlock() instanceof ICachedItemGroupBlock cachedItemGroupBlock)
+                        {
+                            final NonNullList<ItemStack> stacks = NonNullList.create();
+                            cachedItemGroupBlock.fillItemCategory(stacks);
+
+                            for (final ItemStack stack : stacks)
+                            {
+                                itemList.add(process(stack.copy(), texturedBlock));
+                            }
+                        }
+                        else
+                        {
+                            itemList.add(process(new ItemStack(item), texturedBlock));
+                        }
+                    }
+                    itemGroups.put(((IDoItem) item).getGroup(), itemList);
+                }
+            });
+        }
+        return itemGroups;
+    }
+
+    private ItemStack process(final ItemStack stack, final IMateriallyTexturedBlock block)
+    {
+        final @NotNull List<IMateriallyTexturedBlockComponent> components = new ArrayList<>(block.getComponents());
+        final Map<ResourceLocation, Block> textureData = Maps.newHashMap();
+
+        for (final IMateriallyTexturedBlockComponent component : components)
+        {
+            textureData.put(component.getId(), component.getDefault());
+        }
+
+        final MaterialTextureData materialTextureData = new MaterialTextureData(textureData);
+
+        final CompoundTag textureNbt = materialTextureData.serializeNBT();
+
+        stack.getOrCreateTag().put("textureData", textureNbt);
+
+        return stack;
     }
 }
