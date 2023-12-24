@@ -1,11 +1,9 @@
 {
   "values": [
-    "domum_ornamentum:light_brick",
-    "domum_ornamentum:dark_brick",
-    "domum_ornamentum:blockpillar",
-    "domum_ornamentum:blockypillar",
-    "domum_ornamentum:squarepillar",
-    "#domum_ornamentum:bricks",
-    "#domum_ornamentum:extra_block"
+    "domum_ornamentum:blue_cobblestone_extra",
+    "domum_ornamentum:green_cobblestone_extra",
+    "domum_ornamentum:mossy_cobblestone_extra",
+    "domum_ornamentum:purple_cobblestone_extra",
+    "domum_ornamentum:cobblestone_extra"
   ]
 }
