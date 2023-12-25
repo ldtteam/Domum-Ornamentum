@@ -171,6 +171,14 @@ public class GlobalTagProvider extends BlockTagsProvider
             ModBlocks.getInstance().getStandingBarrel());
 
         ModBlocks.getInstance().getExtraTopBlocks().forEach(extraBlock -> this.tag(extraBlock.getType().getCategory().getMineableTag()).add(extraBlock));
+
+        this.tag(BlockTags.DOORS)
+          .add(ModBlocks.getInstance().getDoor())
+          .add(ModBlocks.getInstance().getFancyDoor());
+
+        this.tag(BlockTags.WOODEN_DOORS)
+          .add(ModBlocks.getInstance().getDoor())
+          .add(ModBlocks.getInstance().getFancyDoor());
     }
 
     @Override
