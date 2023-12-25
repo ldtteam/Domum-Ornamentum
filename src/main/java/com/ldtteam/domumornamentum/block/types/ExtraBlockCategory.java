@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.Block;
  */
 public enum ExtraBlockCategory
 {
-    CLAY(BlockTags.MINEABLE_WITH_SHOVEL),
+    BRICK(BlockTags.MINEABLE_WITH_PICKAXE),
     SLATE(BlockTags.MINEABLE_WITH_PICKAXE),
     THATCHED(BlockTags.MINEABLE_WITH_HOE),
     PAPER(BlockTags.MINEABLE_WITH_AXE),

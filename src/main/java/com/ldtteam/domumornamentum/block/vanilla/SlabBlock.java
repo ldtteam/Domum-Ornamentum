@@ -11,6 +11,7 @@ import com.ldtteam.domumornamentum.block.components.SimpleRetexturableComponent;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
 import com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes;
+import com.ldtteam.domumornamentum.item.interfaces.IDoItem;
 import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.BlockUtils;
@@ -24,6 +25,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
@@ -35,6 +37,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootParams;
@@ -61,6 +64,26 @@ public class SlabBlock extends AbstractBlockSlab<SlabBlock> implements IMaterial
         super(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).noOcclusion().strength(2.0F, 3.0F));
     }
 
+    @Override
+    public boolean canBeReplaced(final @NotNull BlockState state, final @NotNull BlockPlaceContext lootContext)
+    {
+        if (!super.canBeReplaced(state, lootContext))
+        {
+            return false;
+        }
+
+        final BlockEntity be = lootContext.getLevel().getBlockEntity(lootContext.getClickedPos());
+        if (be instanceof MateriallyTexturedBlockEntity mtbe)
+        {
+            final CompoundTag incomingTextureDataNbt = lootContext.getItemInHand().getOrCreateTagElement("textureData");
+            final MaterialTextureData incomingTextureData = MaterialTextureData.deserializeFromNBT(incomingTextureDataNbt);
+
+            final MaterialTextureData existingTextureData = mtbe.getTextureData();
+
+            return incomingTextureData.equals(existingTextureData);
+        }
+        return false;
+    }
 
     @Override
     public float getExplosionResistance(BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {
@@ -140,12 +163,11 @@ public class SlabBlock extends AbstractBlockSlab<SlabBlock> implements IMaterial
         fillItemGroupCache.clear();
     }
 
-
-
     @Override
     public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootParams.Builder builder)
     {
-        return BlockUtils.getMaterializedItemStack(builder);
+        final int amount = state.getValue(TYPE).equals(SlabType.DOUBLE) ? 2 : 1;
+        return BlockUtils.getMaterializedItemStack(builder, (s, e) -> s.copyWithCount(amount));
     }
 
     @Override
