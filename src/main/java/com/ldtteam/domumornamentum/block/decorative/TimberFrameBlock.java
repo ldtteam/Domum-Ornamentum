@@ -192,13 +192,13 @@ public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements
     @Override
     public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootParams.Builder builder)
     {
-        return BlockUtils.getMaterializedItemStack(builder);
+        return BlockUtils.getMaterializedDrops(builder);
     }
 
     @Override
     public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final BlockGetter world, final BlockPos pos, final Player player)
     {
-        return BlockUtils.getMaterializedItemStack(player, world, pos);
+        return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos));
     }
 
     @Override

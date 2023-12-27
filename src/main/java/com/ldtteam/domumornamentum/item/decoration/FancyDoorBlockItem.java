@@ -50,22 +50,7 @@ public class FancyDoorBlockItem extends DoubleHighBlockItemWithClientBePlacement
     {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
 
-        FancyDoorType doorType;
-        try
-        {
-            if (stack.getOrCreateTag().contains("type"))
-            {
-                doorType = FancyDoorType.valueOf(stack.getOrCreateTag().getString("type").toUpperCase());
-            }
-            else
-            {
-                doorType = FancyDoorType.FULL;
-            }
-        }
-        catch (Exception ex)
-        {
-            doorType = FancyDoorType.FULL;
-        }
+        final FancyDoorType doorType = BlockUtils.getPropertyFromBlockStateTag(stack, FancyDoorBlock.TYPE, FancyDoorType.FULL);
 
         tooltip.add(Component.translatable(Constants.MOD_ID + ".origin.tooltip"));
         tooltip.add(Component.literal(""));

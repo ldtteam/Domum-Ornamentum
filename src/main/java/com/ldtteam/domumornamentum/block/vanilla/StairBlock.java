@@ -202,13 +202,13 @@ public class StairBlock extends net.minecraft.world.level.block.StairBlock imple
     @Override
     public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootParams.Builder builder)
     {
-        return BlockUtils.getMaterializedItemStack(builder);
+        return BlockUtils.getMaterializedDrops(builder);
     }
 
     @Override
     public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final BlockGetter world, final BlockPos pos, final Player player)
     {
-        return BlockUtils.getMaterializedItemStack(player, world, pos);
+        return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos));
     }
 
     private BlockState getBlockState(final BlockGetter blockGetter, final BlockPos blockPos) {

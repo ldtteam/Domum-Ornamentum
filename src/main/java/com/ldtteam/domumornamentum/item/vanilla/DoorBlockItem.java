@@ -49,22 +49,7 @@ public class DoorBlockItem extends DoubleHighBlockItemWithClientBePlacement impl
     {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
 
-        DoorType doorType;
-        try
-        {
-            if (stack.getOrCreateTag().contains("type"))
-            {
-                doorType = DoorType.valueOf(stack.getOrCreateTag().getString("type").toUpperCase());
-            }
-            else
-            {
-                doorType = DoorType.FULL;
-            }
-        }
-        catch (Exception ex)
-        {
-            doorType = DoorType.FULL;
-        }
+        final DoorType doorType = BlockUtils.getPropertyFromBlockStateTag(stack, DoorBlock.TYPE, DoorType.FULL);
 
         tooltip.add(Component.translatable(Constants.MOD_ID + ".origin.tooltip"));
         tooltip.add(Component.literal(""));
