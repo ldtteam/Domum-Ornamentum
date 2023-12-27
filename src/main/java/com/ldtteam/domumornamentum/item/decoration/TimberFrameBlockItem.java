@@ -80,6 +80,6 @@ public class TimberFrameBlockItem extends BlockItemWithClientBePlacement impleme
     @Override
     public ResourceLocation getGroup()
     {
-        return new ResourceLocation(Constants.MOD_ID, "timberframe");
+        return new ResourceLocation(Constants.MOD_ID, "btimberframe");
     }
 }

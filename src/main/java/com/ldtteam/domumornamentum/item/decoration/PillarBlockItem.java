@@ -65,6 +65,6 @@ public class PillarBlockItem extends BlockItemWithClientBePlacement implements I
     @Override
     public ResourceLocation getGroup()
     {
-        return new ResourceLocation(Constants.MOD_ID, "pillar");
+        return new ResourceLocation(Constants.MOD_ID, "gpillar");
     }
 }

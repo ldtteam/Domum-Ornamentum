@@ -74,6 +74,6 @@ public class ShingleBlockItem extends BlockItemWithClientBePlacement implements 
     @Override
     public ResourceLocation getGroup()
     {
-        return new ResourceLocation(Constants.MOD_ID, "shingle");
+        return new ResourceLocation(Constants.MOD_ID, "cshingle");
     }
 }

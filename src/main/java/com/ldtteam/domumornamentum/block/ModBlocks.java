@@ -319,8 +319,6 @@ public final class ModBlocks implements IModBlocks {
                             itemList.add(process(new ItemStack(item), texturedBlock));
                         }
                     }
-
-
                     itemGroups.put(((IDoItem) item).getGroup(), itemList);
                 }
             });

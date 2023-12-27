@@ -85,7 +85,7 @@ public class PanelBlockItem extends BlockItemWithClientBePlacement implements ID
     @Override
     public ResourceLocation getGroup()
     {
-        return new ResourceLocation(Constants.MOD_ID, "panel");
+        return new ResourceLocation(Constants.MOD_ID, "fpanel");
     }
 }
 

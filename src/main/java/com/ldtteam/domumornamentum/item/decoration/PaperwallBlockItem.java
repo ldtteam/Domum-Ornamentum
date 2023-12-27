@@ -78,6 +78,6 @@ public class PaperwallBlockItem extends BlockItemWithClientBePlacement implement
     @Override
     public ResourceLocation getGroup()
     {
-        return new ResourceLocation(Constants.MOD_ID, "paperwall");
+        return new ResourceLocation(Constants.MOD_ID, "hpaperwall");
     }
 }

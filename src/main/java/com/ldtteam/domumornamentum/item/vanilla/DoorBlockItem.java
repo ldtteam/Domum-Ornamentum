@@ -88,6 +88,6 @@ public class DoorBlockItem extends DoubleHighBlockItemWithClientBePlacement impl
     @Override
     public ResourceLocation getGroup()
     {
-        return new ResourceLocation(Constants.MOD_ID, "door");
+        return new ResourceLocation(Constants.MOD_ID, "ddoor");
     }
 }

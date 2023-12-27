@@ -61,7 +61,7 @@ public class StairsBlockItem extends BlockItemWithClientBePlacement implements I
     @Override
     public ResourceLocation getGroup()
     {
-        return new ResourceLocation(Constants.MOD_ID, "vanilla");
+        return new ResourceLocation(Constants.MOD_ID, "avanilla");
     }
 }
 

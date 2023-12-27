@@ -79,6 +79,6 @@ public class FramedLightBlockItem extends BlockItemWithClientBePlacement impleme
     @Override
     public ResourceLocation getGroup()
     {
-        return new ResourceLocation(Constants.MOD_ID, "light");
+        return new ResourceLocation(Constants.MOD_ID, "ilight");
     }
 }
