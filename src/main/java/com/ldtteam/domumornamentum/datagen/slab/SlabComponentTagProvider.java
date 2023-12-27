@@ -56,7 +56,8 @@ public class SlabComponentTagProvider extends BlockTagsProvider {
                         Blocks.OBSIDIAN,
                         Blocks.CALCITE,
                         Blocks.BONE_BLOCK,
-                        Blocks.DRIED_KELP_BLOCK
+                        Blocks.DRIED_KELP_BLOCK,
+                        Blocks.DIRT_PATH
                 )
                 .addTags(
                         ModTags.GLOBAL_DEFAULT,
@@ -64,7 +65,7 @@ public class SlabComponentTagProvider extends BlockTagsProvider {
                         ModTags.EXTRA_BLOCKS,
                         ModTags.BRICKS,
                         ModTags.CONCRETE,
-                        ModTags.TERRACOTTA,
+                        BlockTags.TERRACOTTA,
                         BlockTags.DIRT,
                         BlockTags.WOOL,
                         BlockTags.LEAVES,

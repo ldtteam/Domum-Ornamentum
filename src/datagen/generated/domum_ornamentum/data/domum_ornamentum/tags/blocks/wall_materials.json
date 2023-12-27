@@ -39,7 +39,7 @@
     "#domum_ornamentum:extra_block",
     "#domum_ornamentum:bricks",
     "#domum_ornamentum:concrete",
-    "#domum_ornamentum:terracotta",
+    "#minecraft:terracotta",
     "#domum_ornamentum:copper",
     "#minecraft:wool",
     "#forge:storage_blocks",
