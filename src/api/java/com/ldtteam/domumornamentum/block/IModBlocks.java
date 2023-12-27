@@ -59,4 +59,7 @@ public interface IModBlocks
     List<? extends Block> getPillars();
 
     List<? extends Block> getAllBrickBlocks();
+
+    List<? extends Block> getAllBrickStairBlocks();
+
 }

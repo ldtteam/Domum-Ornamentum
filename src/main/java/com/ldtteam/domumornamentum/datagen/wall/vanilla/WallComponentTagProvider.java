@@ -66,7 +66,7 @@ public class WallComponentTagProvider extends BlockTagsProvider
             ModTags.EXTRA_BLOCKS,
             ModTags.BRICKS,
             ModTags.CONCRETE,
-            ModTags.TERRACOTTA,
+            BlockTags.TERRACOTTA,
             ModTags.COPPER,
             BlockTags.WOOL,
             Tags.Blocks.STORAGE_BLOCKS,
