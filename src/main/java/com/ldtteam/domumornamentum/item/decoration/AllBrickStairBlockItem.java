@@ -32,9 +32,8 @@ public class AllBrickStairBlockItem extends BlockItemWithClientBePlacement imple
     }
     @NotNull
     @Override
-    public Component getName(final ItemStack stack)
+    public Component getName(final @NotNull ItemStack stack)
     {
-        final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
         final MaterialTextureData textureData = MaterialTextureData.deserializeFromItemStack(stack);
 
         final IMateriallyTexturedBlockComponent columnComponent = allBrickStairBlock.getComponents().get(0);
@@ -49,7 +48,6 @@ public class AllBrickStairBlockItem extends BlockItemWithClientBePlacement imple
     {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
 
-        final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
         MaterialTextureData textureData = MaterialTextureData.deserializeFromItemStack(stack);
         if (textureData.isEmpty())
         {
