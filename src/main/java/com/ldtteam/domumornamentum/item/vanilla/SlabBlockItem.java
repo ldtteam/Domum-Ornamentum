@@ -61,7 +61,7 @@ public class SlabBlockItem extends BlockItemWithClientBePlacement implements IDo
     @Override
     public ResourceLocation getGroup()
     {
-        return new ResourceLocation(Constants.MOD_ID, "vanilla");
+        return new ResourceLocation(Constants.MOD_ID, "avanilla");
     }
 }
 

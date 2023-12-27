@@ -1,6 +1,7 @@
 package com.ldtteam.domumornamentum.jei;
 import com.ldtteam.domumornamentum.IDomumOrnamentumApi;
 import com.ldtteam.domumornamentum.block.IModBlocks;
+import com.ldtteam.domumornamentum.client.screens.ArchitectsCutterScreen;
 import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
 import com.ldtteam.domumornamentum.recipe.ModRecipeTypes;
 import mezz.jei.api.IModPlugin;
@@ -70,6 +71,12 @@ public class JEIPlugin implements IModPlugin
         registration.addRecipeCatalyst(VanillaTypes.ITEM_STACK,
                 new ItemStack(IDomumOrnamentumApi.getInstance().getBlocks().getArchitectsCutter()),
                 ArchitectsCutterCategory.TYPE);
+    }
+
+    @Override
+    public void registerGuiHandlers(@NotNull final IGuiHandlerRegistration registration)
+    {
+        registration.addGhostIngredientHandler(ArchitectsCutterScreen.class, new ArchitectsCutterGuiHandler());
     }
 
     @Override

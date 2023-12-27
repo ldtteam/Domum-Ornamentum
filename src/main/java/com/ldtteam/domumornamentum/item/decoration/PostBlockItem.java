@@ -70,7 +70,7 @@ public class PostBlockItem extends BlockItemWithClientBePlacement implements IDo
     @Override
     public ResourceLocation getGroup()
     {
-        return new ResourceLocation(Constants.MOD_ID, "post");
+        return new ResourceLocation(Constants.MOD_ID, "kpost");
     }
 }
 

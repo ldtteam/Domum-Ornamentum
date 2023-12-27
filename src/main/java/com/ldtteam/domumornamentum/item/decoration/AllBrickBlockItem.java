@@ -1,6 +1,7 @@
 package com.ldtteam.domumornamentum.item.decoration;
 
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
+import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.decorative.AllBrickBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.item.BlockItemWithClientBePlacement;
@@ -62,6 +63,6 @@ public class AllBrickBlockItem extends BlockItemWithClientBePlacement implements
     @Override
     public ResourceLocation getGroup()
     {
-        return new ResourceLocation(Constants.MOD_ID, "brick");
+        return new ResourceLocation(Constants.MOD_ID, "jbrick");
     }
 }

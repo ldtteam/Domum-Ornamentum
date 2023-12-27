@@ -84,7 +84,7 @@ public class FancyTrapdoorBlockItem extends BlockItemWithClientBePlacement imple
     @Override
     public ResourceLocation getGroup()
     {
-        return new ResourceLocation(Constants.MOD_ID, "trapdoor");
+        return new ResourceLocation(Constants.MOD_ID, "etrapdoor");
     }
 }
 
