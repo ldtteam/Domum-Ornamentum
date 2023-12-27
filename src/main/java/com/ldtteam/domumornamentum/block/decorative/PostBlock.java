@@ -9,7 +9,6 @@ import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.components.SimpleRetexturableComponent;
 import com.ldtteam.domumornamentum.block.types.PostType;
-import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
 import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
 import com.ldtteam.domumornamentum.tag.ModTags;
@@ -34,7 +33,6 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
@@ -137,12 +135,6 @@ public class PostBlock extends AbstractPostBlock<PostBlock> implements IMaterial
           state.setValue(TYPE, PostType.valueOf(type.toUpperCase())),
           Block.UPDATE_ALL
         );
-
-        final CompoundTag textureData = stack.getOrCreateTagElement("textureData");
-        final BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-
-        if (tileEntity instanceof MateriallyTexturedBlockEntity)
-            ((MateriallyTexturedBlockEntity) tileEntity).updateTextureDataWith(MaterialTextureData.deserializeFromNBT(textureData));
     }
 
     @Nullable

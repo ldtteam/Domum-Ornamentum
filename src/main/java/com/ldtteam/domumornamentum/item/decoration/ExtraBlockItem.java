@@ -1,14 +1,14 @@
 package com.ldtteam.domumornamentum.item.decoration;
 
 import com.ldtteam.domumornamentum.block.decorative.ExtraBlock;
+import com.ldtteam.domumornamentum.item.BlockItemWithClientBePlacement;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-public class ExtraBlockItem extends BlockItem
+public class ExtraBlockItem extends BlockItemWithClientBePlacement
 {
     private final ExtraBlock extraBlock;
 

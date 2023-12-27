@@ -5,7 +5,6 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.Lists;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.client.model.properties.ModProperties;
-import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
@@ -22,7 +21,6 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.ChunkRenderTypeSet;
-import net.minecraftforge.client.RenderTypeGroup;
 import net.minecraftforge.client.model.data.ModelData;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -157,7 +155,7 @@ public class MateriallyTexturedBakedModel implements BakedModel {
             return Collections.emptyList();
         }
 
-        MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(itemStack.getOrCreateTagElement("textureData"));
+        MaterialTextureData textureData = MaterialTextureData.deserializeFromItemStack(itemStack);
         if (textureData.isEmpty()) {
             return Collections.emptyList();
         }
@@ -180,7 +178,7 @@ public class MateriallyTexturedBakedModel implements BakedModel {
             return Collections.emptyList();
         }
 
-        MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(itemStack.getOrCreateTagElement("textureData"));
+        MaterialTextureData textureData = MaterialTextureData.deserializeFromItemStack(itemStack);
         if (textureData.isEmpty()) {
             textureData = generateRandomTextureDataFrom(itemStack);
         }

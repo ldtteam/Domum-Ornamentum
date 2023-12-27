@@ -4,11 +4,11 @@ import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.decorative.AllBrickBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
+import com.ldtteam.domumornamentum.item.BlockItemWithClientBePlacement;
 import com.ldtteam.domumornamentum.item.interfaces.IDoItem;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class AllBrickBlockItem extends BlockItem implements IDoItem
+public class AllBrickBlockItem extends BlockItemWithClientBePlacement implements IDoItem
 {
     private AllBrickBlock allBrickBlock;
 
@@ -35,8 +35,7 @@ public class AllBrickBlockItem extends BlockItem implements IDoItem
     @Override
     public Component getName(final ItemStack stack)
     {
-        final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
-        final MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
+        final MaterialTextureData textureData = MaterialTextureData.deserializeFromItemStack(stack);
 
         final IMateriallyTexturedBlockComponent columnComponent = allBrickBlock.getComponents().get(0);
         final Block columnBlock = textureData.getTexturedComponents().getOrDefault(columnComponent.getId(), columnComponent.getDefault());
@@ -50,8 +49,7 @@ public class AllBrickBlockItem extends BlockItem implements IDoItem
     {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
 
-        final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
-        MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
+        MaterialTextureData textureData = MaterialTextureData.deserializeFromItemStack(stack);
         if (textureData.isEmpty())
         {
             textureData = MaterialTextureDataUtil.generateRandomTextureDataFrom(stack);
