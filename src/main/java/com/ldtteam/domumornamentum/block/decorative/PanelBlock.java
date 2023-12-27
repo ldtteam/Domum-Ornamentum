@@ -10,19 +10,18 @@ import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
 import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.BlockUtils;
+import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -47,7 +46,7 @@ import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
 @SuppressWarnings("deprecation")
 public class PanelBlock extends AbstractPanelBlockTrapdoor<PanelBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock
 {
-    public static final EnumProperty<TrapdoorType>              TYPE       = EnumProperty.create("type", TrapdoorType.class);
+    public static final EnumProperty<TrapdoorType>              TYPE       = EnumProperty.create(Constants.TYPE_BLOCK_PROPERTY, TrapdoorType.class);
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
                                                                                .add(new SimpleRetexturableComponent(new ResourceLocation("minecraft:block/oak_planks"), ModTags.TRAPDOORS_MATERIALS, OAK_PLANKS))
                                                                                .build();
@@ -111,7 +110,7 @@ public class PanelBlock extends AbstractPanelBlockTrapdoor<PanelBlock> implement
             for (final TrapdoorType trapdoorType : TrapdoorType.values())
             {
                 final ItemStack result = new ItemStack(this);
-                result.getOrCreateTag().putString("type", trapdoorType.name().toUpperCase());
+                BlockUtils.putPropertyIntoBlockStateTag(result, TYPE, trapdoorType);
 
                 fillItemGroupCache.add(result);
             }
@@ -121,23 +120,6 @@ public class PanelBlock extends AbstractPanelBlockTrapdoor<PanelBlock> implement
         }
 
         items.addAll(fillItemGroupCache);
-    }
-
-    @Override
-    public void setPlacedBy(final @NotNull Level worldIn, final @NotNull BlockPos pos, final @NotNull BlockState state, @Nullable final LivingEntity placer, final @NotNull ItemStack stack)
-    {
-        super.setPlacedBy(worldIn, pos, state, placer, stack);
-
-        String type = stack.getOrCreateTag().getString("type");
-        if (type == "") {
-            type = TrapdoorType.FULL.name();
-        }
-
-        worldIn.setBlock(
-          pos,
-          state.setValue(TYPE, TrapdoorType.valueOf(type.toUpperCase())),
-          Block.UPDATE_ALL
-        );
     }
 
     @Nullable
@@ -150,19 +132,13 @@ public class PanelBlock extends AbstractPanelBlockTrapdoor<PanelBlock> implement
     @Override
     public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootParams.Builder builder)
     {
-        return BlockUtils.getMaterializedItemStack(builder, (s, e) -> {
-            s.getOrCreateTag().putString("type", e.getBlockState().getValue(TYPE).toString().toUpperCase());
-            return s;
-        });
+        return BlockUtils.getMaterializedDrops(builder, TYPE);
     }
 
     @Override
     public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final BlockGetter world, final BlockPos pos, final Player player)
     {
-        return BlockUtils.getMaterializedItemStack(player, world, pos, (s, e) -> {
-            s.getOrCreateTag().putString("type", e.getBlockState().getValue(TYPE).toString().toUpperCase());
-            return s;
-        });
+        return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos), TYPE);
     }
 
     @Override
@@ -203,7 +179,7 @@ public class PanelBlock extends AbstractPanelBlockTrapdoor<PanelBlock> implement
                   public void serializeRecipeData(final @NotNull JsonObject jsonObject)
                   {
                       final CompoundTag tag = new CompoundTag();
-                      tag.putString("type", value.toString().toUpperCase());
+                      BlockUtils.putPropertyIntoBlockStateTag(tag, TYPE, value);
 
                       jsonObject.addProperty("block", Objects.requireNonNull(getRegistryName(getBlock())).toString());
                       jsonObject.addProperty("nbt", tag.toString());

@@ -47,22 +47,7 @@ public class PostBlockItem extends BlockItemWithClientBePlacement implements IDo
     {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
 
-        PostType postType;
-        try
-        {
-            if (stack.getOrCreateTag().contains("type"))
-            {
-                postType = PostType.valueOf(stack.getOrCreateTag().getString("type").toUpperCase());
-            }
-            else
-            {
-                postType = PostType.PLAIN;
-            }
-        }
-        catch (Exception ex)
-        {
-            postType = PostType.PLAIN;
-        }
+        final PostType postType = BlockUtils.getPropertyFromBlockStateTag(stack, PostBlock.TYPE, PostType.PLAIN);
 
         tooltip.add(Component.translatable(Constants.MOD_ID + ".origin.tooltip"));
         tooltip.add(Component.literal(""));
