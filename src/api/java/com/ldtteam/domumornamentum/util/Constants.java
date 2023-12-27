@@ -14,6 +14,7 @@ public class Constants
     public static final String DOOR_MODEL_OVERRIDE = MOD_ID + ":door_type";
     public static final String POST_MODEL_OVERRIDE = MOD_ID + ":post_type";
     public static final String DEFAULT_LANG = "en_us";
+    public static final String BLOCK_ENTITY_TEXTURE_DATA = "textureData";
 
     public static class BlockEntityTypes
     {
