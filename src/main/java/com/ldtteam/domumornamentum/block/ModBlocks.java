@@ -344,11 +344,7 @@ public final class ModBlocks implements IModBlocks {
             textureData.put(component.getId(), component.getDefault());
         }
 
-        final MaterialTextureData materialTextureData = new MaterialTextureData(textureData);
-
-        final CompoundTag textureNbt = materialTextureData.serializeNBT();
-
-        stack.getOrCreateTag().put("textureData", textureNbt);
+        new MaterialTextureData(textureData).writeToItemStack(stack);
 
         return stack;
     }

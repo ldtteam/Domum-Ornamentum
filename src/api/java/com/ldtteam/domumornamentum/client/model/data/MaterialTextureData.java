@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 import java.util.Objects;
@@ -97,19 +98,25 @@ public class MaterialTextureData implements INBTSerializable<CompoundTag>
 
     public static MaterialTextureData deserializeFromItemStack(final ItemStack itemStack)
     {
+        return deserializeFromNBT(extractNbtFromItemStack(itemStack));
+    }
+
+    @Nullable
+    public static CompoundTag extractNbtFromItemStack(final ItemStack itemStack)
+    {
         if (itemStack == null || !itemStack.hasTag() || !(itemStack.getItem() instanceof BlockItem))
         {
-            return EMPTY;
+            return null;
         }
 
         final CompoundTag beTag = BlockItem.getBlockEntityData(itemStack);
 
         if (beTag == null || beTag.isEmpty() || !beTag.contains(BLOCK_ENTITY_TEXTURE_DATA, Tag.TAG_COMPOUND))
         {
-            return EMPTY;
+            return null;
         }
 
-        return deserializeFromNBT(beTag.getCompound(BLOCK_ENTITY_TEXTURE_DATA));
+        return beTag.getCompound(BLOCK_ENTITY_TEXTURE_DATA);
     }
 
     /**
