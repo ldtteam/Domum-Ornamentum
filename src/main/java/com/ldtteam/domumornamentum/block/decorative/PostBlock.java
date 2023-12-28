@@ -58,10 +58,6 @@ public class PostBlock extends AbstractPostBlock<PostBlock> implements IMaterial
         this.registerDefaultState(this.defaultBlockState().setValue(TYPE, PostType.PLAIN));
     }
 
-
-
-
-
     @Override
     public float getExplosionResistance(BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {
         BlockEntity be = level.getBlockEntity(pos);
