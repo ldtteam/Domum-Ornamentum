@@ -14,6 +14,7 @@ import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
 import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.BlockUtils;
+import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -34,7 +35,6 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootParams;
@@ -44,7 +44,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -54,7 +53,7 @@ import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
 @SuppressWarnings("deprecation")
 public class FancyDoorBlock extends AbstractBlockDoor<FancyDoorBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock
 {
-    public static final EnumProperty<FancyDoorType>             TYPE       = EnumProperty.create("type", FancyDoorType.class);
+    public static final EnumProperty<FancyDoorType>             TYPE       = EnumProperty.create(Constants.TYPE_BLOCK_PROPERTY, FancyDoorType.class);
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
                                                                                .add(new SimpleRetexturableComponent(new ResourceLocation("minecraft:block/oak_planks"), ModTags.FANCY_DOORS_MATERIALS, OAK_PLANKS))
                                                                                .add(new SimpleRetexturableComponent(new ResourceLocation("minecraft:block/acacia_planks"), ModTags.FANCY_DOORS_MATERIALS, ACACIA_PLANKS, true))
@@ -125,7 +124,7 @@ public class FancyDoorBlock extends AbstractBlockDoor<FancyDoorBlock> implements
             for (final FancyDoorType fancyDoorType : FancyDoorType.values())
             {
                 final ItemStack result = new ItemStack(this);
-                result.getOrCreateTag().putString("type", fancyDoorType.toString().toUpperCase());
+                BlockUtils.putPropertyIntoBlockStateTag(result, TYPE, fancyDoorType);
 
                 fillItemGroupCache.add(result);
             }
@@ -143,28 +142,9 @@ public class FancyDoorBlock extends AbstractBlockDoor<FancyDoorBlock> implements
     {
         super.setPlacedBy(worldIn, pos, state, Objects.requireNonNull(placer), stack);
 
-        final String type = stack.getOrCreateTag().getString("type");
-        worldIn.setBlock(
-          pos,
-          worldIn.getBlockState(pos).setValue(TYPE, FancyDoorType.valueOf(type.toUpperCase())),
-          Block.UPDATE_ALL
-        );
-        worldIn.setBlock(
-          pos.above(),
-          worldIn.getBlockState(pos.above()).setValue(TYPE, FancyDoorType.valueOf(type.toUpperCase())),
-          Block.UPDATE_ALL
-        );
-
-        final CompoundTag textureData = stack.getOrCreateTagElement("textureData");
-        final BlockEntity lowerBlockEntity = worldIn.getBlockEntity(pos);
-
-        if (lowerBlockEntity instanceof MateriallyTexturedBlockEntity)
-            ((MateriallyTexturedBlockEntity) lowerBlockEntity).updateTextureDataWith(MaterialTextureData.deserializeFromNBT(textureData));
-
         final BlockEntity upperBlockEntity = worldIn.getBlockEntity(pos.above());
-
-        if (upperBlockEntity instanceof MateriallyTexturedBlockEntity)
-            ((MateriallyTexturedBlockEntity) upperBlockEntity).updateTextureDataWith(MaterialTextureData.deserializeFromNBT(textureData));
+        if (upperBlockEntity instanceof final MateriallyTexturedBlockEntity materialBE)
+            materialBE.updateTextureDataWith(MaterialTextureData.deserializeFromItemStack(stack));
     }
 
     @Nullable
@@ -177,19 +157,13 @@ public class FancyDoorBlock extends AbstractBlockDoor<FancyDoorBlock> implements
     @Override
     public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootParams.Builder builder)
     {
-        return BlockUtils.getMaterializedItemStack(builder, (s, e) -> {
-            s.getOrCreateTag().putString("type", e.getBlockState().getValue(TYPE).toString().toUpperCase());
-            return s;
-        });
+        return BlockUtils.getMaterializedDrops(builder, TYPE);
     }
 
 @Override
     public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final BlockGetter world, final BlockPos pos, final Player player)
     {
-        return BlockUtils.getMaterializedItemStack(player, world, pos, (s, e) -> {
-            s.getOrCreateTag().putString("type", e.getBlockState().getValue(TYPE).toString().toUpperCase());
-            return s;
-        });
+        return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos), TYPE);
     }
 
     @Override
@@ -224,7 +198,7 @@ public class FancyDoorBlock extends AbstractBlockDoor<FancyDoorBlock> implements
                   public void serializeRecipeData(final @NotNull JsonObject jsonObject)
                   {
                       final CompoundTag tag = new CompoundTag();
-                      tag.putString("type", value.toString().toUpperCase());
+                      BlockUtils.putPropertyIntoBlockStateTag(tag, TYPE, value);
 
                       jsonObject.addProperty("block", Objects.requireNonNull(getRegistryName(getBlock())).toString());
                       jsonObject.addProperty("nbt", tag.toString());
