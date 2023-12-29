@@ -43,24 +43,24 @@ public class GlobalTagProvider extends BlockTagsProvider
             Blocks.WHITE_CONCRETE,
             Blocks.YELLOW_CONCRETE);
 
-        this.tag(ModTags.TERRACOTTA).add(
-          Blocks.TERRACOTTA,
-          Blocks.WHITE_TERRACOTTA,
-          Blocks.ORANGE_TERRACOTTA,
-          Blocks.MAGENTA_TERRACOTTA,
-          Blocks.LIGHT_BLUE_TERRACOTTA,
-          Blocks.YELLOW_TERRACOTTA,
-          Blocks.LIME_TERRACOTTA,
-          Blocks.PINK_TERRACOTTA,
-          Blocks.GRAY_TERRACOTTA,
-          Blocks.LIGHT_GRAY_TERRACOTTA,
-          Blocks.CYAN_TERRACOTTA,
-          Blocks.PURPLE_TERRACOTTA,
-          Blocks.BLUE_TERRACOTTA,
-          Blocks.BROWN_TERRACOTTA,
-          Blocks.GREEN_TERRACOTTA,
-          Blocks.RED_TERRACOTTA,
-          Blocks.BLACK_TERRACOTTA);
+        this.tag(ModTags.GLACED_TERRACOTTA)
+          .add(
+            Blocks.WHITE_GLAZED_TERRACOTTA,
+            Blocks.ORANGE_GLAZED_TERRACOTTA,
+            Blocks.MAGENTA_GLAZED_TERRACOTTA,
+            Blocks.LIGHT_BLUE_GLAZED_TERRACOTTA,
+            Blocks.YELLOW_GLAZED_TERRACOTTA,
+            Blocks.LIME_GLAZED_TERRACOTTA,
+            Blocks.PINK_GLAZED_TERRACOTTA,
+            Blocks.GRAY_GLAZED_TERRACOTTA,
+            Blocks.LIGHT_GRAY_GLAZED_TERRACOTTA,
+            Blocks.CYAN_GLAZED_TERRACOTTA,
+            Blocks.PURPLE_GLAZED_TERRACOTTA,
+            Blocks.BLUE_GLAZED_TERRACOTTA,
+            Blocks.BROWN_GLAZED_TERRACOTTA,
+            Blocks.GREEN_GLAZED_TERRACOTTA,
+            Blocks.RED_GLAZED_TERRACOTTA,
+            Blocks.BLACK_GLAZED_TERRACOTTA);
 
         this.tag(ModTags.COPPER).add(
           Blocks.COPPER_BLOCK,
@@ -144,15 +144,20 @@ public class GlobalTagProvider extends BlockTagsProvider
           Blocks.AZALEA_LEAVES,
           Blocks.FLOWERING_AZALEA_LEAVES,
           Blocks.MUD_BRICKS,
-          Blocks.DRIED_KELP_BLOCK
+          Blocks.DRIED_KELP_BLOCK,
+          Blocks.BAMBOO_BLOCK,
+          Blocks.BAMBOO_MOSAIC,
+          Blocks.BAMBOO_PLANKS,
+          Blocks.STRIPPED_BAMBOO_BLOCK,
+          Blocks.SCULK
         )
           .addTags(
             ModTags.EXTRA_BLOCKS,
             Tags.Blocks.END_STONES,
             ModTags.BRICKS,
             ModTags.CONCRETE,
-            ModTags.TERRACOTTA,
             ModTags.COPPER,
+            BlockTags.TERRACOTTA,
             BlockTags.WOOL,
             Tags.Blocks.STORAGE_BLOCKS,
             Tags.Blocks.GLASS,

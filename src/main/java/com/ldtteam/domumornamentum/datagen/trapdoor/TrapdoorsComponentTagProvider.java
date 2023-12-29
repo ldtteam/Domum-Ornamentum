@@ -25,7 +25,8 @@ public class TrapdoorsComponentTagProvider extends BlockTagsProvider
         this.tag(ModTags.TRAPDOORS_MATERIALS)
           .addTags(
             ModTags.GLOBAL_DEFAULT,
-            BlockTags.PLANKS
+            BlockTags.PLANKS,
+            ModTags.GLACED_TERRACOTTA
           );
     }
 

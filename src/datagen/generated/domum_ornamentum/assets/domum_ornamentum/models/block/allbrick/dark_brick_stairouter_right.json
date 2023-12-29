@@ -1,0 +1,4 @@
+{
+  "parent": "domum_ornamentum:block/allbrick/dark_brick_stair_outer_spec",
+  "loader": "domum_ornamentum:materially_textured"
+}

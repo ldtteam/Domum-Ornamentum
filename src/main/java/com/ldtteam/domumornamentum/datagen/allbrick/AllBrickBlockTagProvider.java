@@ -94,7 +94,7 @@ public class AllBrickBlockTagProvider extends BlockTagsProvider
             Tags.Blocks.END_STONES,
             ModTags.BRICKS,
             ModTags.CONCRETE,
-            ModTags.TERRACOTTA,
+            BlockTags.TERRACOTTA,
             ModTags.COPPER,
             BlockTags.WOOL,
             Tags.Blocks.STORAGE_BLOCKS,

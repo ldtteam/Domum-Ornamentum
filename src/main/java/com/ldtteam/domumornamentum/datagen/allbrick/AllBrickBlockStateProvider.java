@@ -2,7 +2,6 @@ package com.ldtteam.domumornamentum.datagen.allbrick;
 
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.decorative.AllBrickBlock;
-import com.ldtteam.domumornamentum.block.decorative.FramedLightBlock;
 import com.ldtteam.domumornamentum.datagen.MateriallyTexturedModelBuilder;
 import com.ldtteam.domumornamentum.datagen.utils.ModelBuilderUtils;
 import com.ldtteam.domumornamentum.util.Constants;
