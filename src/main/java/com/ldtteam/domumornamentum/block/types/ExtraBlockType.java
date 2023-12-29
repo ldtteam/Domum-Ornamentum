@@ -38,8 +38,8 @@ public enum ExtraBlockType implements StringRepresentable
     WHITE_BRICK(DyeColor.WHITE, Items.BRICK, SoundType.STONE, ExtraBlockCategory.BRICK),
     YELLOW_BRICK(DyeColor.YELLOW, Items.BRICK, SoundType.STONE, ExtraBlockCategory.BRICK),
     BASE_PAPER(null, Items.PAPER, SoundType.WOOL, ExtraBlockCategory.PAPER),
-    BASE_CACTUS(null, Items.CACTUS, SoundType.WOOL, ExtraBlockCategory.CACTUS),
-    GREEN_CACTUS(DyeColor.GREEN, Items.CACTUS, SoundType.WOOL, ExtraBlockCategory.CACTUS),
+    BASE_CACTUS(null, Items.CACTUS, SoundType.WOOD, ExtraBlockCategory.CACTUS),
+    GREEN_CACTUS(DyeColor.GREEN, Items.CACTUS, SoundType.WOOD, ExtraBlockCategory.CACTUS),
     LIGHT_PAPER(DyeColor.WHITE, Items.PAPER, SoundType.WOOL, ExtraBlockCategory.PAPER);
 
     private final DyeColor color;
