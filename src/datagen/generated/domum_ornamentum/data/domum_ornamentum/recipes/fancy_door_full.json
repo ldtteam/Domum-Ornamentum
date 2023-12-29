@@ -1,5 +1,5 @@
 {
   "type": "domum_ornamentum:architects_cutter",
   "block": "domum_ornamentum:fancy_door",
-  "nbt": "{BlockStateTag:{type:\"full\"}}"
+  "nbt": "{type:\"FULL\"}"
 }

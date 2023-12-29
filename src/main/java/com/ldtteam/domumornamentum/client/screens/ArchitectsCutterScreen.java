@@ -4,7 +4,6 @@ import com.ldtteam.domumornamentum.DomumOrnamentum;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.ModBlocks;
-import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.container.ArchitectsCutterContainer;
 import com.ldtteam.domumornamentum.item.interfaces.IDoItem;
 import com.ldtteam.domumornamentum.util.Constants;
@@ -20,7 +19,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -168,7 +166,12 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
                     if (this.menu.outputInventorySlot.hasItem())
                     {
                         final ItemStack input = list.get(l).copy();
-                        texturizeVariantUsingCurrentInput(input);
+                        final ItemStack output = this.menu.outputInventorySlot.getItem().copy();
+                        if (input.hasTag() && output.hasTag() && input.getTag().contains("textureData") && output.getTag().contains("textureData"))
+                        {
+                            input.getTag().put("textureData", computeCompound(input, this.menu.outputInventorySlot.getItem()));
+                        }
+                        graphics.renderItem(input, k, i1);
                         stack = input;
                     }
                     else
@@ -284,7 +287,11 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
                 if (this.menu.outputInventorySlot.hasItem())
                 {
                     final ItemStack input = list.get(i).copy();
-                    texturizeVariantUsingCurrentInput(input);
+                    final ItemStack output = this.menu.outputInventorySlot.getItem().copy();
+                    if (input.hasTag() && output.hasTag() && input.getTag().contains("textureData") && output.getTag().contains("textureData"))
+                    {
+                        input.getTag().put("textureData", computeCompound(input, this.menu.outputInventorySlot.getItem()));
+                    }
                     graphics.renderItem(input, k, i1);
                 }
                 else
@@ -295,24 +302,31 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
         }
     }
 
-    private void texturizeVariantUsingCurrentInput(final ItemStack variantItemStack)
+    private static CompoundTag computeCompound(final ItemStack input, final ItemStack output)
     {
-        final CompoundTag textureData = MaterialTextureData.extractNbtFromItemStack(variantItemStack);
-
-        if (textureData == null || !(variantItemStack.getItem() instanceof final BlockItem bi && bi.getBlock() instanceof final IMateriallyTexturedBlock block))
+        if (input.getItem() instanceof BlockItem inputBlockItem && inputBlockItem.getBlock() instanceof IMateriallyTexturedBlock inputTextureBlock
+              && output.getItem() instanceof BlockItem outputBlockItem && outputBlockItem.getBlock() instanceof IMateriallyTexturedBlock outputTextureBlock)
         {
-            return;
-        }
-
-        int i = 0;
-        for (final IMateriallyTexturedBlockComponent component : block.getComponents())
-        {
-            if (this.menu.inputInventory.getItem(i).getItem() instanceof final BlockItem blockItem)
+            final CompoundTag outputCompound = output.getTag().getCompound("textureData");
+            final List<String> inputs = new ArrayList<>();
+            for (final IMateriallyTexturedBlockComponent key : outputTextureBlock.getComponents())
             {
-                textureData.putString(component.getId().toString(), ForgeRegistries.BLOCKS.getKey(blockItem.getBlock()).toString());
+                inputs.add(outputCompound.getString(key.getId().toString()));
             }
-            i++;
+
+            int index = 0;
+            final CompoundTag inputCompound = input.getTag().getCompound("textureData");
+            for (final IMateriallyTexturedBlockComponent key : inputTextureBlock.getComponents())
+            {
+                if (index < inputs.size())
+                {
+                    inputCompound.putString(key.getId().toString(), inputs.get(index));
+                    index++;
+                }
+            }
+            return inputCompound;
         }
+       return input.getTag().getCompound("textureData");
     }
 
     @Override

@@ -3,14 +3,15 @@ package com.ldtteam.domumornamentum.item.vanilla;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.vanilla.StairBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
-import com.ldtteam.domumornamentum.item.BlockItemWithClientBePlacement;
 import com.ldtteam.domumornamentum.item.interfaces.IDoItem;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -20,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class StairsBlockItem extends BlockItemWithClientBePlacement implements IDoItem
+public class StairsBlockItem extends BlockItem implements IDoItem
 {
     private final StairBlock stairBlock;
 
@@ -33,7 +34,8 @@ public class StairsBlockItem extends BlockItemWithClientBePlacement implements I
     @Override
     public Component getName(final ItemStack stack)
     {
-        final MaterialTextureData textureData = MaterialTextureData.deserializeFromItemStack(stack);
+        final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
+        final MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
 
         final IMateriallyTexturedBlockComponent coverComponent = stairBlock.getComponents().get(0);
         final Block centerBlock = textureData.getTexturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
@@ -48,7 +50,8 @@ public class StairsBlockItem extends BlockItemWithClientBePlacement implements I
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
         tooltip.add(Component.translatable(Constants.MOD_ID + ".origin.tooltip"));
 
-        MaterialTextureData textureData = MaterialTextureData.deserializeFromItemStack(stack);
+        final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
+        MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
         if (textureData.isEmpty()) {
             textureData = MaterialTextureDataUtil.generateRandomTextureDataFrom(stack);
         }

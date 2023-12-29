@@ -122,8 +122,10 @@ public class ArchitectsCutterRecipe implements Recipe<Container>
 
         final MaterialTextureData materialTextureData = new MaterialTextureData(textureData);
 
+        final CompoundTag textureNbt = materialTextureData.serializeNBT();
+
         final ItemStack result = new ItemStack(generatedBlock);
-        materialTextureData.writeToItemStack(result);
+        result.getOrCreateTag().put("textureData", textureNbt);
         result.setCount(Math.max(components.size(), count));
 
         additionalTag.getAllKeys().forEach(key -> result.getOrCreateTag().put(key, Objects.requireNonNull(additionalTag.get(key)).copy()));

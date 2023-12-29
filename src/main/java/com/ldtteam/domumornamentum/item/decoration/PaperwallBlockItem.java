@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableList;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.decorative.PaperWallBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
-import com.ldtteam.domumornamentum.item.BlockItemWithClientBePlacement;
 import com.ldtteam.domumornamentum.item.interfaces.IDoItem;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.Constants;
@@ -12,7 +11,9 @@ import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 
 import net.minecraft.world.level.Level;
@@ -21,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class PaperwallBlockItem extends BlockItemWithClientBePlacement implements IDoItem
+public class PaperwallBlockItem extends BlockItem implements IDoItem
 {
     private final PaperWallBlock paperWallBlock;
 
@@ -35,7 +36,8 @@ public class PaperwallBlockItem extends BlockItemWithClientBePlacement implement
     @Override
     public Component getName(final ItemStack stack)
     {
-        final MaterialTextureData textureData = MaterialTextureData.deserializeFromItemStack(stack);
+        final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
+        final MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
 
         final IMateriallyTexturedBlockComponent centerComponent = paperWallBlock.getComponents().get(1);
         final Block centerBlock = textureData.getTexturedComponents().getOrDefault(centerComponent.getId(), centerComponent.getDefault());
@@ -49,7 +51,8 @@ public class PaperwallBlockItem extends BlockItemWithClientBePlacement implement
     {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
 
-        MaterialTextureData textureData = MaterialTextureData.deserializeFromItemStack(stack);
+        final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
+        MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
         if (textureData.isEmpty()) {
             textureData = MaterialTextureDataUtil.generateRandomTextureDataFrom(stack);
         }

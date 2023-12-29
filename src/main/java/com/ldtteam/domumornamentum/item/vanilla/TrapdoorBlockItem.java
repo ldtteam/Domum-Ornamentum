@@ -4,14 +4,15 @@ import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.types.TrapdoorType;
 import com.ldtteam.domumornamentum.block.vanilla.TrapdoorBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
-import com.ldtteam.domumornamentum.item.BlockItemWithClientBePlacement;
 import com.ldtteam.domumornamentum.item.interfaces.IDoItem;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -20,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class TrapdoorBlockItem extends BlockItemWithClientBePlacement implements IDoItem
+public class TrapdoorBlockItem extends BlockItem implements IDoItem
 {
     private final TrapdoorBlock trapdoorBlock;
 
@@ -33,7 +34,8 @@ public class TrapdoorBlockItem extends BlockItemWithClientBePlacement implements
     @Override
     public Component getName(final ItemStack stack)
     {
-        final MaterialTextureData textureData = MaterialTextureData.deserializeFromItemStack(stack);
+        final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
+        final MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
 
         final IMateriallyTexturedBlockComponent coverComponent = trapdoorBlock.getComponents().get(0);
         final Block centerBlock = textureData.getTexturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
@@ -47,7 +49,22 @@ public class TrapdoorBlockItem extends BlockItemWithClientBePlacement implements
     {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
 
-        final TrapdoorType trapdoorType = BlockUtils.getPropertyFromBlockStateTag(stack, TrapdoorBlock.TYPE, TrapdoorType.FULL);
+        TrapdoorType trapdoorType;
+        try
+        {
+            if (stack.getOrCreateTag().contains("type"))
+            {
+                trapdoorType = TrapdoorType.valueOf(stack.getOrCreateTag().getString("type").toUpperCase());
+            }
+            else
+            {
+                trapdoorType = TrapdoorType.FULL;
+            }
+        }
+        catch (Exception ex)
+        {
+            trapdoorType = TrapdoorType.FULL;
+        }
 
         tooltip.add(Component.translatable(Constants.MOD_ID + ".origin.tooltip"));
         tooltip.add(Component.literal(""));
@@ -56,7 +73,8 @@ public class TrapdoorBlockItem extends BlockItemWithClientBePlacement implements
           Component.translatable(Constants.MOD_ID + ".trapdoor.type.name." + trapdoorType.getTranslationKeySuffix())
         ));
 
-        MaterialTextureData textureData = MaterialTextureData.deserializeFromItemStack(stack);
+        final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
+        MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
         if (textureData.isEmpty()) {
             textureData = MaterialTextureDataUtil.generateRandomTextureDataFrom(stack);
         }
