@@ -47,13 +47,15 @@ public class ModTags
 
     public static final TagKey<Block> CONCRETE = tag("concrete");
     public static final TagKey<Block> COPPER = tag("copper");
-    public static final TagKey<Block> TERRACOTTA = tag("terracotta");
 
     public static final TagKey<Block> GLOBAL_DEFAULT = tag("default");
     public static final TagKey<Block> PILLAR_MATERIALS = tag("pillar_materials");
     public static final TagKey<Block> ALL_BRICK_MATERIALS = tag("all_brick_materials");
     public static final TagKey<Item> EXTRA_BLOCK_ITEMS = itemTag("extra_block_items");
     public static final TagKey<Item> BRICK_ITEMS       = itemTag("brick_items");
+
+    public static final TagKey<Block> GLACED_TERRACOTTA = tag("glaced_terracotta");
+
 
 
     private static TagKey<Block> tag(String name)

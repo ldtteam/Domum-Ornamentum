@@ -56,6 +56,7 @@ public final class ModBlocks implements IModBlocks {
     private static final List<RegistryObject<BrickBlock>> BRICK = new ArrayList<>();
     private static final List<RegistryObject<PillarBlock>> PILLARS = new ArrayList<>();
     private static final List<RegistryObject<AllBrickBlock>> ALL_BRICK = new ArrayList<>();
+    private static final List<RegistryObject<AllBrickStairBlock>> ALL_BRICK_STAIR = new ArrayList<>();
 
     private static final ModBlocks INSTANCE = new ModBlocks();
 
@@ -127,6 +128,8 @@ public final class ModBlocks implements IModBlocks {
         PANEL = register("panel", PanelBlock::new, b -> new PanelBlockItem(b, new Item.Properties()));
         ALL_BRICK.add(register("light_brick", AllBrickBlock::new, b -> new AllBrickBlockItem(b, new Item.Properties())));
         ALL_BRICK.add(register("dark_brick", AllBrickBlock::new, b -> new AllBrickBlockItem(b, new Item.Properties())));
+        ALL_BRICK_STAIR.add(register("light_brick_stair", AllBrickStairBlock::new, b -> new AllBrickStairBlockItem(b, new Item.Properties())));
+        ALL_BRICK_STAIR.add(register("dark_brick_stair", AllBrickStairBlock::new, b -> new AllBrickStairBlockItem(b, new Item.Properties())));
 
         POST = register("post", PostBlock::new, b -> new PostBlockItem(b, new Item.Properties()));
 
@@ -289,6 +292,11 @@ public final class ModBlocks implements IModBlocks {
     @Override
     public List<AllBrickBlock> getAllBrickBlocks() {
         return ModBlocks.ALL_BRICK.stream().map(RegistryObject::get).toList();
+    }
+
+    @Override
+    public List<AllBrickStairBlock> getAllBrickStairBlocks() {
+        return ModBlocks.ALL_BRICK_STAIR.stream().map(RegistryObject::get).toList();
     }
 
     /**

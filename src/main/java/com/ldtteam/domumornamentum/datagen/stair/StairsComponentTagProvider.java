@@ -57,13 +57,14 @@ public class StairsComponentTagProvider extends BlockTagsProvider
             Blocks.SMOOTH_STONE,
             Blocks.CALCITE,
             Blocks.BONE_BLOCK,
-            Blocks.DRIED_KELP_BLOCK
+            Blocks.DRIED_KELP_BLOCK,
+            Blocks.DIRT_PATH
           )
           .addTags(
             ModTags.EXTRA_BLOCKS,
             ModTags.BRICKS,
             ModTags.CONCRETE,
-            ModTags.TERRACOTTA,
+            BlockTags.TERRACOTTA,
             BlockTags.DIRT,
             BlockTags.WOOL,
             BlockTags.LEAVES,

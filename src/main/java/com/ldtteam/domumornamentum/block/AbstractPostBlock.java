@@ -10,6 +10,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DirectionalBlock;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -192,6 +193,13 @@ public abstract class AbstractPostBlock<B extends AbstractPostBlock<B>> extends 
                 .setValue(FACING, direction)
                 .setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER);
 
+    }
+
+    @SuppressWarnings("deprecation")
+    @NotNull
+    @Override
+    public BlockState rotate(BlockState state, Rotation rot) {
+        return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
     }
 
     @Override
