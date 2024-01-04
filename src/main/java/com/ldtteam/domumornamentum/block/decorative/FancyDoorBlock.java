@@ -42,11 +42,7 @@ import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import static net.minecraft.world.level.block.Blocks.ACACIA_PLANKS;
 import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
@@ -64,7 +60,7 @@ public class FancyDoorBlock extends AbstractBlockDoor<FancyDoorBlock> implements
 
     public FancyDoorBlock()
     {
-        super(Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(3.0F).requiresCorrectToolForDrops().sound(SoundType.WOOD).noOcclusion().isValidSpawn((state, blockGetter, pos, type) -> false));
+        super(Properties.of().mapColor(MapColor.WOOD).strength(3.0F).noOcclusion().isValidSpawn((state, blockGetter, pos, type) -> false));
         this.registerDefaultState(this.defaultBlockState().setValue(TYPE, FancyDoorType.FULL));
     }
 
@@ -177,6 +173,11 @@ public class FancyDoorBlock extends AbstractBlockDoor<FancyDoorBlock> implements
     @Override
     public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootParams.Builder builder)
     {
+        // According to BlockLootSubProvider "door" loot tables should only drop items for the lower half of the door.
+        if (!state.getValue(HALF).equals(DoubleBlockHalf.LOWER))
+        {
+            return Collections.emptyList();
+        }
         return BlockUtils.getMaterializedItemStack(builder, (s, e) -> {
             s.getOrCreateTag().putString("type", e.getBlockState().getValue(TYPE).toString().toUpperCase());
             return s;

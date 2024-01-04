@@ -67,7 +67,7 @@ public class AllBrickBlock extends AbstractBlock<AllBrickBlock> implements IMate
      */
     public AllBrickBlock()
     {
-        super(Properties.of().mapColor(MapColor.STONE).sound(SoundType.STONE).strength(BLOCK_HARDNESS, RESISTANCE).requiresCorrectToolForDrops());
+        super(Properties.of().mapColor(MapColor.STONE).strength(BLOCK_HARDNESS, RESISTANCE));
     }
 
     @Override

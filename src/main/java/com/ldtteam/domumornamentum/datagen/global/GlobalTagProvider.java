@@ -1,13 +1,11 @@
 package com.ldtteam.domumornamentum.datagen.global;
 
 import com.ldtteam.domumornamentum.block.ModBlocks;
-import com.ldtteam.domumornamentum.shingles.ShingleHeightType;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
@@ -170,35 +168,22 @@ public class GlobalTagProvider extends BlockTagsProvider
             Tags.Blocks.OBSIDIAN,
             BlockTags.STONE_BRICKS,
             BlockTags.BASE_STONE_NETHER
-            );
+          );
 
         this.tag(BlockTags.MINEABLE_WITH_AXE)
           .add(ModBlocks.getInstance().getArchitectsCutter(),
             ModBlocks.getInstance().getLayingBarrel(),
-            ModBlocks.getInstance().getStandingBarrel(),
-            ModBlocks.getInstance().getShingle(ShingleHeightType.DEFAULT),
-            ModBlocks.getInstance().getShingle(ShingleHeightType.FLAT),
-            ModBlocks.getInstance().getShingle(ShingleHeightType.FLAT_LOWER),
-            ModBlocks.getInstance().getShingleSlab(),
-            ModBlocks.getInstance().getDoor(),
-            ModBlocks.getInstance().getFancyDoor(),
-            ModBlocks.getInstance().getTrapdoor(),
-            ModBlocks.getInstance().getFancyTrapdoor(),
-            ModBlocks.getInstance().getFence(),
-            ModBlocks.getInstance().getFenceGate(),
-            ModBlocks.getInstance().getPanel(),
-            ModBlocks.getInstance().getPost(),
-            ModBlocks.getInstance().getSlab(),
-            ModBlocks.getInstance().getStair())
-          .add(ModBlocks.getInstance().getFramedLights().toArray(new Block[0]))
-          .add(ModBlocks.getInstance().getTimberFrames().toArray(new Block[0]));
+            ModBlocks.getInstance().getStandingBarrel());
 
-        this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
-          .add(ModBlocks.getInstance().getAllBrickBlocks().toArray(new Block[0]))
-          .add(ModBlocks.getInstance().getPillars().toArray(new Block[0]))
-          .addTags(ModTags.BRICKS,
-            ModTags.EXTRA_BLOCKS);
+        ModBlocks.getInstance().getExtraTopBlocks().forEach(extraBlock -> this.tag(extraBlock.getType().getCategory().getMineableTag()).add(extraBlock));
 
+        this.tag(BlockTags.DOORS)
+          .add(ModBlocks.getInstance().getDoor())
+          .add(ModBlocks.getInstance().getFancyDoor());
+
+        this.tag(BlockTags.WOODEN_DOORS)
+          .add(ModBlocks.getInstance().getDoor())
+          .add(ModBlocks.getInstance().getFancyDoor());
     }
 
     @Override

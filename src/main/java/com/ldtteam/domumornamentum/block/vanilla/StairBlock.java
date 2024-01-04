@@ -56,7 +56,7 @@ public class StairBlock extends net.minecraft.world.level.block.StairBlock imple
 
     public StairBlock()
     {
-        super(OAK_PLANKS::defaultBlockState, Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).noOcclusion().strength(2.0F, 3.0F).requiresCorrectToolForDrops().sound(SoundType.WOOD));
+        super(OAK_PLANKS::defaultBlockState, Properties.of().mapColor(MapColor.WOOD).noOcclusion().strength(2.0F, 3.0F));
     }
 
     @Override
