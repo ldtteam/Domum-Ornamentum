@@ -1,5 +1,6 @@
 package com.ldtteam.domumornamentum.block.types;
 
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
@@ -40,19 +41,31 @@ public enum ExtraBlockType implements StringRepresentable
     BASE_PAPER(null, Items.PAPER, SoundType.WOOL, ExtraBlockCategory.PAPER),
     BASE_CACTUS(null, Items.CACTUS, SoundType.WOOD, ExtraBlockCategory.CACTUS),
     GREEN_CACTUS(DyeColor.GREEN, Items.CACTUS, SoundType.WOOD, ExtraBlockCategory.CACTUS),
-    LIGHT_PAPER(DyeColor.WHITE, Items.PAPER, SoundType.WOOL, ExtraBlockCategory.PAPER);
+    LIGHT_PAPER(DyeColor.WHITE, Items.PAPER, SoundType.WOOL, ExtraBlockCategory.PAPER, RenderType.translucent());
 
     private final DyeColor color;
     private final Item material;
     private final SoundType soundType;
     private final ExtraBlockCategory category;
 
-    ExtraBlockType(final DyeColor color, final Item material, final SoundType soundType, ExtraBlockCategory category)
+    private final RenderType renderType;
+
+    ExtraBlockType(final DyeColor color, final Item material, final SoundType soundType, final ExtraBlockCategory category, final RenderType renderType)
     {
         this.color = color;
         this.material = material;
         this.soundType = soundType;
         this.category = category;
+        this.renderType = renderType;
+    }
+
+    ExtraBlockType(final DyeColor color, final Item material, final SoundType soundType, final ExtraBlockCategory category)
+    {
+        this.color = color;
+        this.material = material;
+        this.soundType = soundType;
+        this.category = category;
+        this.renderType = RenderType.solid();
     }
 
     @NotNull
@@ -79,5 +92,14 @@ public enum ExtraBlockType implements StringRepresentable
 
     public ExtraBlockCategory getCategory() {
         return category;
+    }
+
+    /**
+     * Get the render type of the block.
+     * @return the render type.
+     */
+    public RenderType getRenderType()
+    {
+        return this.renderType;
     }
 }
