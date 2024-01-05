@@ -6,6 +6,7 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -43,9 +44,9 @@ public enum ExtraBlockType implements StringRepresentable
     GREEN_CACTUS(DyeColor.GREEN, Items.CACTUS, SoundType.WOOD, ExtraBlockCategory.CACTUS),
     LIGHT_PAPER(DyeColor.WHITE, Items.PAPER, SoundType.WOOL, ExtraBlockCategory.PAPER, RenderType.translucent());
 
-    private final DyeColor color;
-    private final Item material;
-    private final SoundType soundType;
+    private final DyeColor           color;
+    private final Item               material;
+    private final SoundType          soundType;
     private final ExtraBlockCategory category;
 
     private final RenderType renderType;
@@ -86,20 +87,37 @@ public enum ExtraBlockType implements StringRepresentable
         return this.material;
     }
 
-    public SoundType getSoundType() {
+    public SoundType getSoundType()
+    {
         return this.soundType;
     }
 
-    public ExtraBlockCategory getCategory() {
+    public ExtraBlockCategory getCategory()
+    {
         return category;
     }
 
     /**
      * Get the render type of the block.
+     *
      * @return the render type.
      */
     public RenderType getRenderType()
     {
         return this.renderType;
+    }
+
+    /**
+     * Adjust block properties depending on the type.
+     * @param properties the current base properties.
+     * @return the adjusted properties if necessary.
+     */
+    public BlockBehaviour.Properties adjustProperties(final BlockBehaviour.Properties properties)
+    {
+        if (this.renderType == RenderType.translucent())
+        {
+            properties.noCollission();
+        }
+        return properties;
     }
 }
