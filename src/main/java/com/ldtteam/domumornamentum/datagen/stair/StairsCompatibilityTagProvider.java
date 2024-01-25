@@ -21,11 +21,6 @@ public class StairsCompatibilityTagProvider extends BlockTagsProvider
     @SuppressWarnings("unchecked")
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
-        this.tag(BlockTags.STAIRS)
-          .add(
-            ModBlocks.getInstance().getStair()
-          );
-
         this.tag(BlockTags.WOODEN_STAIRS)
           .add(
             ModBlocks.getInstance().getStair()

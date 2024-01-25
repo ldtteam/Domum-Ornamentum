@@ -6,6 +6,7 @@ import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
@@ -184,6 +185,10 @@ public class GlobalTagProvider extends BlockTagsProvider
         this.tag(BlockTags.WOODEN_DOORS)
           .add(ModBlocks.getInstance().getDoor())
           .add(ModBlocks.getInstance().getFancyDoor());
+
+        this.tag(BlockTags.STAIRS)
+          .add(ModBlocks.getInstance().getStair())
+          .add(ModBlocks.getInstance().getAllBrickStairBlocks().toArray(new Block[0]));
     }
 
     @Override
