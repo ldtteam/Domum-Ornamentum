@@ -33,8 +33,7 @@ public class AllBrickStairBlockItem extends BlockItem implements IDoItem
     @Override
     public Component getName(final ItemStack stack)
     {
-        final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
-        final MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
+        final MaterialTextureData textureData = MaterialTextureData.deserializeFromItemStack(stack);
 
         final IMateriallyTexturedBlockComponent columnComponent = allBrickStairBlock.getComponents().get(0);
         final Block columnBlock = textureData.getTexturedComponents().getOrDefault(columnComponent.getId(), columnComponent.getDefault());
@@ -48,8 +47,7 @@ public class AllBrickStairBlockItem extends BlockItem implements IDoItem
     {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
 
-        final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
-        MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
+        MaterialTextureData textureData = MaterialTextureData.deserializeFromItemStack(stack);
         if (textureData.isEmpty())
         {
             textureData = MaterialTextureDataUtil.generateRandomTextureDataFrom(stack);

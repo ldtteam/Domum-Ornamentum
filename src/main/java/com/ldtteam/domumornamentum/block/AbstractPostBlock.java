@@ -2,6 +2,7 @@ package com.ldtteam.domumornamentum.block;
 
 import com.ldtteam.domumornamentum.block.interfaces.IDOBlock;
 import com.ldtteam.domumornamentum.block.types.PostType;
+import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -33,7 +34,7 @@ public abstract class AbstractPostBlock<B extends AbstractPostBlock<B>> extends 
      * Upright flag for y AND x rotation
      * Collision objects for side facing slabs
      */
-    public static final EnumProperty<PostType> TYPE = EnumProperty.create("type", PostType.class);
+    public static final EnumProperty<PostType> TYPE = EnumProperty.create(Constants.TYPE_BLOCK_PROPERTY, PostType.class);
     public static final BooleanProperty    UPRIGHT = BlockStateProperties.CONDITIONAL;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
