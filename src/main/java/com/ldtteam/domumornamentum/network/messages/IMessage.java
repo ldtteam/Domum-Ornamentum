@@ -2,8 +2,8 @@ package com.ldtteam.domumornamentum.network.messages;
 
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraftforge.fml.LogicalSide;
-import net.minecraftforge.network.NetworkEvent;
+import net.neoforged.fml.LogicalSide;
+import net.neoforged.neoforge.network.NetworkEvent;
 import org.jetbrains.annotations.Nullable;
 
 /**
