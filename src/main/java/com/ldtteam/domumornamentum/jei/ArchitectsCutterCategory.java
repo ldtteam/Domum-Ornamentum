@@ -26,6 +26,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.Rect2i;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
@@ -35,7 +37,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -130,14 +131,15 @@ public class ArchitectsCutterCategory implements IRecipeCategory<ArchitectsCutte
                           @NotNull final ArchitectsCutterRecipe recipe,
                           @NotNull final IFocusGroup focuses)
     {
-        final Block generatedBlock = ForgeRegistries.BLOCKS.getValue(recipe.getBlockName());
+        final Block generatedBlock = BuiltInRegistries.BLOCK.get(recipe.getBlockName());
 
         if (!(generatedBlock instanceof final IMateriallyTexturedBlock materiallyTexturedBlock))
             return;
 
         final Collection<IMateriallyTexturedBlockComponent> components = materiallyTexturedBlock.getComponents();
         final List<List<ItemStack>> inputs = components.stream()
-                .map(component -> ForgeRegistries.BLOCKS.tags().getTag(component.getValidSkins()).stream()
+                .map(component -> BuiltInRegistries.BLOCK.getTag(component.getValidSkins()).orElseThrow().stream()
+                        .map(Holder::value)
                         .map(ItemStack::new)
                         .collect(Collectors.collectingAndThen(
                                 Collectors.toCollection(ArrayList::new),

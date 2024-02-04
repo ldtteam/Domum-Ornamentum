@@ -8,8 +8,8 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import net.neoforged.neoforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 
 import static com.ldtteam.domumornamentum.util.Constants.MOD_ID;
@@ -22,7 +22,7 @@ public final class ModCreativeTabs {
 
     public static final DeferredRegister<CreativeModeTab> TAB_REG = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MOD_ID);
 
-    public static final RegistryObject<CreativeModeTab> GENERAL = TAB_REG.register("general", () -> CreativeModeTab.builder()
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> GENERAL = TAB_REG.register("general", () -> CreativeModeTab.builder()
             .icon(() -> new ItemStack(ModBlocks.getInstance().getArchitectsCutter()))
             .title(Component.translatable("itemGroup." + MOD_ID + ".general"))
             .displayItems(new OutputAwareGenerator((config, output) -> {
@@ -53,7 +53,7 @@ public final class ModCreativeTabs {
         output.accept(ModBlocks.getInstance().getFancyTrapdoor());
     })).build());
 
-    public static final RegistryObject<CreativeModeTab> EXTRA_BLOCKS = TAB_REG.register("extra_blocks", () -> CreativeModeTab.builder()
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXTRA_BLOCKS = TAB_REG.register("extra_blocks", () -> CreativeModeTab.builder()
             .withTabsBefore(GENERAL.getId())
             .icon(() -> new ItemStack(ModBlocks.getInstance().getExtraTopBlocks().get(0)))
             .title(Component.translatable("itemGroup." + MOD_ID + ".extra-blocks"))
@@ -64,7 +64,7 @@ public final class ModCreativeTabs {
         output.accept(ModBlocks.getInstance().getLayingBarrel());
     })).build());
 
-    public static final RegistryObject<CreativeModeTab> FLOATING_CARPETS = TAB_REG.register("floating_carpets", () -> CreativeModeTab.builder()
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> FLOATING_CARPETS = TAB_REG.register("floating_carpets", () -> CreativeModeTab.builder()
             .withTabsBefore(EXTRA_BLOCKS.getId())
             .icon(() -> new ItemStack(ModBlocks.getInstance().getFloatingCarpets().get(0)))
             .title(Component.translatable("itemGroup." + MOD_ID + ".floating-carpets"))

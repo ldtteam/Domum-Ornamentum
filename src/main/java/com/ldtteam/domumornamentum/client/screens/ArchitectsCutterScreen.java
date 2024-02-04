@@ -12,6 +12,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -20,7 +21,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -309,7 +309,7 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
         {
             if (this.menu.inputInventory.getItem(i).getItem() instanceof final BlockItem blockItem)
             {
-                textureData.putString(component.getId().toString(), ForgeRegistries.BLOCKS.getKey(blockItem.getBlock()).toString());
+                textureData.putString(component.getId().toString(), BuiltInRegistries.BLOCK.getKey(blockItem.getBlock()).toString());
             }
             i++;
         }

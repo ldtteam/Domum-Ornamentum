@@ -11,7 +11,6 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -43,7 +42,7 @@ public interface IMateriallyTexturedBlock
               @Override
               public @NotNull ResourceLocation getId()
               {
-                  return Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(getBlock()));
+                  return Objects.requireNonNull(BuiltInRegistries.BLOCK.getKey(getBlock()));
               }
 
               @Override
