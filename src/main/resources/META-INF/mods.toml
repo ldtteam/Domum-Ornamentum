@@ -1,6 +1,6 @@
 modLoader="javafml" #mandatory
 license="LGPLv3"
-loaderVersion="[28,)" #mandatory (26 is current forge version)
+loaderVersion="[1,)" #mandatory (26 is current forge version)
 [[mods]] #mandatory
 modId="domum_ornamentum" #mandatory
 version="${file.jarVersion}" #mandatory
