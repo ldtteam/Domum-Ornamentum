@@ -28,12 +28,10 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static com.ldtteam.domumornamentum.util.MaterialTextureDataUtil.generateRandomTextureDataFrom;
 
-@SuppressWarnings("resource")
 public class MateriallyTexturedBakedModel implements BakedModel {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final RandomSource RANDOM = RandomSource.create();
@@ -252,15 +250,6 @@ public class MateriallyTexturedBakedModel implements BakedModel {
             LOGGER.error(String.format("Failed to build baked materially textured model for: %s for item: %s", textureData, stack), exception);
             return Minecraft.getInstance().getModelManager().getMissingModel();
         }
-    }
-
-
-    private ChunkRenderTypeSet createAdaptedSetForEntity(ChunkRenderTypeSet renderTypes, boolean fabulous) {
-        return ChunkRenderTypeSet.of(
-                renderTypes.asList().stream()
-                        .map(renderType -> getRenderType(renderType, fabulous))
-                        .collect(Collectors.toSet())
-        );
     }
 
     public static RenderType getRenderType(RenderType renderType, boolean fabulous) {

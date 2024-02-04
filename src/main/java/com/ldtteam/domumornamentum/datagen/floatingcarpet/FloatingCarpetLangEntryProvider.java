@@ -1,8 +1,6 @@
 package com.ldtteam.domumornamentum.datagen.floatingcarpet;
 
 import com.ldtteam.data.LanguageProvider;
-import com.ldtteam.domumornamentum.block.ModBlocks;
-import com.ldtteam.domumornamentum.block.decorative.FloatingCarpetBlock;
 import com.ldtteam.domumornamentum.util.Constants;
 
 public class FloatingCarpetLangEntryProvider implements LanguageProvider.SubProvider {

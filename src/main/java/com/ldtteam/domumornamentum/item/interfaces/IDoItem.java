@@ -3,7 +3,6 @@ package com.ldtteam.domumornamentum.item.interfaces;
 import com.google.common.collect.ImmutableList;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 
 import java.util.List;
 

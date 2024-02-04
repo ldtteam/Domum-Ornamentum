@@ -224,10 +224,6 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
         return true;
     }
 
-    private boolean isValidRecipeIndex(int p_241818_1_) {
-        return p_241818_1_ >= 0 && p_241818_1_ < this.recipes.size();
-    }
-
     /**
      * Callback for when the crafting matrix is changed.
      */

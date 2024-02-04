@@ -12,7 +12,6 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.javafmlmod.FMLModContainer;
-import net.neoforged.neoforge.common.NeoForge;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,7 +23,6 @@ public class DomumOrnamentum
     public DomumOrnamentum(final FMLModContainer modContainer, final Dist dist)
     {
         final IEventBus modBus = modContainer.getEventBus();
-        final IEventBus forgeBus = NeoForge.EVENT_BUS;
 
         IDomumOrnamentumApi.Holder.setInstance(DomumOrnamentumAPI.getInstance());
         ModBlocks.BLOCKS.register(modBus);

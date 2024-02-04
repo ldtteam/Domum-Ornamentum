@@ -1,16 +1,8 @@
 package com.ldtteam.domumornamentum.datagen.frames.light;
 
 import com.ldtteam.data.LanguageProvider;
-import com.ldtteam.datagenerators.lang.LangJson;
 import com.ldtteam.domumornamentum.block.types.FramedLightType;
-import com.ldtteam.domumornamentum.block.types.TimberFrameType;
 import com.ldtteam.domumornamentum.util.Constants;
-import net.minecraft.data.CachedOutput;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DataProvider;
-import org.jetbrains.annotations.NotNull;
-
-import java.io.IOException;
 
 public class FramedLightLangEntryProvider implements LanguageProvider.SubProvider
 {

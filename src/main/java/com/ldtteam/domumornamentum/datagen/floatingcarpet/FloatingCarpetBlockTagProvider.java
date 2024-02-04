@@ -19,7 +19,6 @@ public class FloatingCarpetBlockTagProvider extends BlockTagsProvider
         super(output, lookupProvider, Constants.MOD_ID, existingFileHelper);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
         for (final Block block : ModBlocks.getInstance().getFloatingCarpets())

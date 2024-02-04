@@ -2,7 +2,6 @@ package com.ldtteam.domumornamentum.datagen.shingle.slab;
 
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.decorative.ShingleSlabBlock;
-import com.ldtteam.domumornamentum.block.types.ShingleShapeType;
 import com.ldtteam.domumornamentum.block.types.ShingleSlabShapeType;
 import com.ldtteam.domumornamentum.datagen.MateriallyTexturedModelBuilder;
 import com.ldtteam.domumornamentum.datagen.utils.ModelBuilderUtils;

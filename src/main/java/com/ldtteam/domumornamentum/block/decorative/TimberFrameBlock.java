@@ -103,7 +103,6 @@ public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements
         builder.add(FACING);
     }
 
-    @SuppressWarnings("deprecation")
     @NotNull
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {

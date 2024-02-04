@@ -196,7 +196,6 @@ public abstract class AbstractPostBlock<B extends AbstractPostBlock<B>> extends 
 
     }
 
-    @SuppressWarnings("deprecation")
     @NotNull
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {

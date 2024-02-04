@@ -3,7 +3,6 @@ package com.ldtteam.domumornamentum.datagen.allbrick;
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.decorative.AllBrickStairBlock;
 import com.ldtteam.domumornamentum.block.decorative.ShingleBlock;
-import com.ldtteam.domumornamentum.block.types.ShingleShapeType;
 import com.ldtteam.domumornamentum.datagen.MateriallyTexturedModelBuilder;
 import com.ldtteam.domumornamentum.datagen.utils.ModelBuilderUtils;
 import com.ldtteam.domumornamentum.util.Constants;

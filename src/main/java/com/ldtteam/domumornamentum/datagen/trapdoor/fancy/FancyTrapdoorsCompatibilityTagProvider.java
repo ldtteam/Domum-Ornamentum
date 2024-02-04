@@ -18,7 +18,6 @@ public class FancyTrapdoorsCompatibilityTagProvider extends BlockTagsProvider
         super(output, lookupProvider, Constants.MOD_ID, existingFileHelper);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
         this.tag(BlockTags.TRAPDOORS)

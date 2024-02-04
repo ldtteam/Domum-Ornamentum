@@ -11,6 +11,6 @@ public class MateriallyTexturedModelBuilder<T extends ModelBuilder<T>> extends C
     public MateriallyTexturedModelBuilder(final T parent,
                                           final ExistingFileHelper existingFileHelper)
     {
-        super(new ResourceLocation(Constants.MOD_ID, Constants.MATERIALLY_TEXTURED_MODEL_LOADER), parent, existingFileHelper);
+        super(new ResourceLocation(Constants.MOD_ID, Constants.MATERIALLY_TEXTURED_MODEL_LOADER), parent, existingFileHelper, false);
     }
 }

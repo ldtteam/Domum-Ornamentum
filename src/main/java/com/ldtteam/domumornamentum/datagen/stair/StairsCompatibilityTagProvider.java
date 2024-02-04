@@ -18,7 +18,6 @@ public class StairsCompatibilityTagProvider extends BlockTagsProvider
         super(output, lookupProvider, Constants.MOD_ID, existingFileHelper);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
         this.tag(BlockTags.WOODEN_STAIRS)
