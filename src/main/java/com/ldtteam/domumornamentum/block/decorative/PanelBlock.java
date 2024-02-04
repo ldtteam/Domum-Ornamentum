@@ -11,6 +11,7 @@ import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.Constants;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -46,6 +47,7 @@ import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
 @SuppressWarnings("deprecation")
 public class PanelBlock extends AbstractPanelBlockTrapdoor<PanelBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock
 {
+    public static final MapCodec<PanelBlock> CODEC = simpleCodec(PanelBlock::new);
     public static final EnumProperty<TrapdoorType>              TYPE       = EnumProperty.create(Constants.TYPE_BLOCK_PROPERTY, TrapdoorType.class);
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
                                                                                .add(new SimpleRetexturableComponent(new ResourceLocation("minecraft:block/oak_planks"), ModTags.TRAPDOORS_MATERIALS, OAK_PLANKS))
@@ -55,8 +57,19 @@ public class PanelBlock extends AbstractPanelBlockTrapdoor<PanelBlock> implement
 
     public PanelBlock()
     {
-        super(Properties.of().mapColor(MapColor.WOOD).strength(3.0F).noOcclusion().isValidSpawn((state, blockGetter, pos, type) -> false));
+        this(Properties.of().mapColor(MapColor.WOOD).strength(3.0F).noOcclusion().isValidSpawn((state, blockGetter, pos, type) -> false));
+    }
+
+    public PanelBlock(final Properties props)
+    {
+        super(props);
         this.registerDefaultState(this.defaultBlockState().setValue(TYPE, TrapdoorType.FULL));
+    }
+
+    @Override
+    protected MapCodec<PanelBlock> codec()
+    {
+        return CODEC;
     }
 
     @Override

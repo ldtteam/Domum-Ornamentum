@@ -13,6 +13,7 @@ import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
 import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.BlockUtils;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -45,7 +46,7 @@ import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
 @SuppressWarnings("deprecation")
 public class PostBlock extends AbstractPostBlock<PostBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock
 {
-
+    public static final MapCodec<PostBlock> CODEC = simpleCodec(PostBlock::new);
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
                                                                                .add(new SimpleRetexturableComponent(new ResourceLocation("minecraft:block/oak_planks"), ModTags.POST_MATERIALS, OAK_PLANKS))
                                                                                .build();
@@ -54,8 +55,19 @@ public class PostBlock extends AbstractPostBlock<PostBlock> implements IMaterial
 
     public PostBlock()
     {
-        super(Properties.of().mapColor(MapColor.WOOD).strength(3.0F));
+        this(Properties.of().mapColor(MapColor.WOOD).strength(3.0F));
+    }
+
+    public PostBlock(final Properties props)
+    {
+        super(props);
         this.registerDefaultState(this.defaultBlockState().setValue(TYPE, PostType.PLAIN));
+    }
+
+    @Override
+    protected MapCodec<PostBlock> codec()
+    {
+        return CODEC;
     }
 
     @Override

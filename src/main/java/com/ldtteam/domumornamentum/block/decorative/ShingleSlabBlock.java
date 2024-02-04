@@ -13,6 +13,7 @@ import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
 import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.BlockUtils;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -62,6 +63,7 @@ import static net.minecraft.core.Direction.*;
  */
 public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock> implements SimpleWaterloggedBlock, IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock
 {
+    public static final MapCodec<ShingleSlabBlock> CODEC = simpleCodec(ShingleSlabBlock::new);
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
                                                                                .add(new SimpleRetexturableComponent(new ResourceLocation("block/oak_planks"), ModTags.SHINGLES_ROOF, Blocks.OAK_PLANKS))
                                                                                .add(new SimpleRetexturableComponent(new ResourceLocation("block/dark_oak_planks"), ModTags.SHINGLES_SUPPORT, Blocks.DARK_OAK_PLANKS))
@@ -102,8 +104,19 @@ public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock>
      */
     public ShingleSlabBlock()
     {
-        super(Properties.of().mapColor(MapColor.WOOD).strength(BLOCK_HARDNESS, RESISTANCE));
+        this(Properties.of().mapColor(MapColor.WOOD).strength(BLOCK_HARDNESS, RESISTANCE));
+    }
+
+    public ShingleSlabBlock(final Properties props)
+    {
+        super(props);
         registerDefaultState(defaultBlockState().setValue(WATERLOGGED, false));
+    }
+
+    @Override
+    protected MapCodec<ShingleSlabBlock> codec()
+    {
+        return CODEC;
     }
 
     // Deprecated here just means that you should not use this method when referencing a block, and instead it's blockstate <- Forge's Discord
