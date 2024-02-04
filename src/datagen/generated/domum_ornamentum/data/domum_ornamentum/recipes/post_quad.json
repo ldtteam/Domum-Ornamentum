@@ -2,5 +2,9 @@
   "type": "domum_ornamentum:architects_cutter",
   "block": "domum_ornamentum:post",
   "count": 4,
-  "nbt": "{BlockStateTag:{type:\"quad\"}}"
+  "nbt": {
+    "BlockStateTag": {
+      "type": "quad"
+    }
+  }
 }

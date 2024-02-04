@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_item1_domum_ornamentum_roan_bricks",
-      "has_item2_domum_ornamentum_roan_bricks",
-      "has_the_recipe"
+      "has_item2_domum_ornamentum_roan_bricks"
     ]
   ],
   "rewards": {
     "recipes": [
       "domum_ornamentum:roan_bricks"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -1,5 +1,9 @@
 {
   "type": "domum_ornamentum:architects_cutter",
   "block": "domum_ornamentum:fancy_trapdoors",
-  "nbt": "{BlockStateTag:{type:\"full\"}}"
+  "nbt": {
+    "BlockStateTag": {
+      "type": "full"
+    }
+  }
 }

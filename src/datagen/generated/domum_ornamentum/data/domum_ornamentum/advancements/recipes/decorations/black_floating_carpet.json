@@ -32,15 +32,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_string",
-      "has_carpet",
-      "has_the_recipe"
+      "has_carpet"
     ]
   ],
   "rewards": {
     "recipes": [
       "domum_ornamentum:black_floating_carpet"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }
