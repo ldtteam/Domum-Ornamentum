@@ -1,6 +1,5 @@
 package com.ldtteam.domumornamentum.event.handlers;
 
-import com.ldtteam.domumornamentum.Network;
 import com.ldtteam.domumornamentum.datagen.allbrick.AllBrickBlockStateProvider;
 import com.ldtteam.domumornamentum.datagen.allbrick.AllBrickBlockTagProvider;
 import com.ldtteam.domumornamentum.datagen.allbrick.AllBrickStairBlockStateProvider;
@@ -9,10 +8,8 @@ import com.ldtteam.domumornamentum.datagen.bricks.BrickBlockTagProvider;
 import com.ldtteam.domumornamentum.datagen.bricks.BrickItemTagProvider;
 import com.ldtteam.domumornamentum.datagen.bricks.BrickRecipeProvider;
 import com.ldtteam.domumornamentum.datagen.door.DoorsBlockStateProvider;
-import com.ldtteam.domumornamentum.datagen.door.DoorsCompatibilityTagProvider;
 import com.ldtteam.domumornamentum.datagen.door.DoorsComponentTagProvider;
 import com.ldtteam.domumornamentum.datagen.door.fancy.FancyDoorsBlockStateProvider;
-import com.ldtteam.domumornamentum.datagen.door.fancy.FancyDoorsCompatibilityTagProvider;
 import com.ldtteam.domumornamentum.datagen.door.fancy.FancyDoorsComponentTagProvider;
 import com.ldtteam.domumornamentum.datagen.extra.ExtraBlockStateProvider;
 import com.ldtteam.domumornamentum.datagen.extra.ExtraBlockTagProvider;
@@ -62,11 +59,14 @@ import com.ldtteam.domumornamentum.datagen.wall.paper.PaperwallComponentTagProvi
 import com.ldtteam.domumornamentum.datagen.wall.vanilla.WallBlockStateProvider;
 import com.ldtteam.domumornamentum.datagen.wall.vanilla.WallCompatibilityTagProvider;
 import com.ldtteam.domumornamentum.datagen.wall.vanilla.WallComponentTagProvider;
+import com.ldtteam.domumornamentum.network.messages.CreativeSetArchitectCutterSlotMessage;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlerEvent;
+import net.neoforged.neoforge.network.registration.IPayloadRegistrar;
 
 @Mod.EventBusSubscriber(modid = Constants.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModBusEventHandler
@@ -77,9 +77,12 @@ public class ModBusEventHandler
      * @param event event
      */
     @SubscribeEvent
-    public static void onModInit(final FMLCommonSetupEvent event)
+    public static void onNetworkRegistry(final RegisterPayloadHandlerEvent event)
     {
-        Network.getNetwork().registerMessages();
+        final String modVersion = ModList.get().getModContainerById(Constants.MOD_ID).get().getModInfo().getVersion().toString();
+        final IPayloadRegistrar registry = event.registrar(Constants.MOD_ID).versioned(modVersion);
+
+        registry.play(CreativeSetArchitectCutterSlotMessage.ID, CreativeSetArchitectCutterSlotMessage::new, h -> h.server(CreativeSetArchitectCutterSlotMessage::onExecute));
     }
 
     @SubscribeEvent

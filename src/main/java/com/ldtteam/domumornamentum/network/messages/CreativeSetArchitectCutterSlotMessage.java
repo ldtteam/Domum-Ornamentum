@@ -2,33 +2,22 @@ package com.ldtteam.domumornamentum.network.messages;
 
 import com.ldtteam.domumornamentum.client.screens.ArchitectsCutterScreen;
 import com.ldtteam.domumornamentum.container.ArchitectsCutterContainer;
+import com.ldtteam.domumornamentum.network.IServerboundDistributor;
+import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.fml.LogicalSide;
-import net.neoforged.neoforge.network.NetworkEvent;
+import net.neoforged.neoforge.network.handling.PlayPayloadContext;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Sets the item in the {@link ArchitectsCutterScreen} for creative mode.
  */
-public class CreativeSetArchitectCutterSlotMessage implements IMessage
+public record CreativeSetArchitectCutterSlotMessage(int slot, ItemStack stack) implements IServerboundDistributor
 {
-    private final int slot;
-    private final ItemStack stack;
-
-    /**
-     * Construct message.
-     * @param slot  the slot index to set.
-     * @param stack the item stack to set.
-     */
-    public CreativeSetArchitectCutterSlotMessage(final int slot, @NotNull final ItemStack stack)
-    {
-        this.slot = slot;
-        this.stack = stack;
-    }
+    public static final ResourceLocation ID = new ResourceLocation(Constants.MOD_ID, "creative_set_archicutter_slot");
 
     /**
      * Construct from network.
@@ -36,28 +25,25 @@ public class CreativeSetArchitectCutterSlotMessage implements IMessage
      */
     public CreativeSetArchitectCutterSlotMessage(@NotNull final FriendlyByteBuf buf)
     {
-        this.slot = buf.readVarInt();
-        this.stack = buf.readItem();
+        this(buf.readVarInt(), buf.readItem());
     }
 
     @Override
-    public void toBytes(@NotNull final FriendlyByteBuf buf)
+    public void write(@NotNull final FriendlyByteBuf buf)
     {
         buf.writeVarInt(this.slot);
         buf.writeItem(this.stack);
     }
 
-    @Nullable
     @Override
-    public LogicalSide getExecutionSide()
+    public ResourceLocation id()
     {
-        return LogicalSide.SERVER;
+        return ID;
     }
 
-    @Override
-    public void onExecute(@NotNull final NetworkEvent.Context ctxIn, final boolean isLogicalServer)
+    public void onExecute(@NotNull final PlayPayloadContext ctxIn)
     {
-        final ServerPlayer player = ctxIn.getSender();
+        final Player player = ctxIn.player().orElse(null);
 
         if (player != null && player.isCreative() && player.containerMenu instanceof ArchitectsCutterContainer menu)
         {
