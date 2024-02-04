@@ -2,7 +2,7 @@ package com.ldtteam.domumornamentum.client.model.utils;
 
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraftforge.client.model.IQuadTransformer;
+import net.neoforged.neoforge.client.model.IQuadTransformer;
 
 public class ModelSpriteQuadTransformer implements IQuadTransformer
 {
