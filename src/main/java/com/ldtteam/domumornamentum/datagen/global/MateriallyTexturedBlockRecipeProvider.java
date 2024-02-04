@@ -1,35 +1,31 @@
 package com.ldtteam.domumornamentum.datagen.global;
 
-import com.google.gson.JsonObject;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
-import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
 import com.ldtteam.domumornamentum.util.Constants;
+import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 
 public class MateriallyTexturedBlockRecipeProvider extends RecipeProvider
 {
 
-    public MateriallyTexturedBlockRecipeProvider(PackOutput packOutput) {
-        super(packOutput);
+    public MateriallyTexturedBlockRecipeProvider(PackOutput packOutput, CompletableFuture<Provider> lookupProvider) {
+        super(packOutput, lookupProvider);
     }
 
     @Override
-    protected void buildRecipes(@NotNull Consumer<FinishedRecipe> finishedRecipe) {
+    protected void buildRecipes(final RecipeOutput recipeOutput)
+    {
         BuiltInRegistries.BLOCK.forEach(
                 block -> {
                     if (Objects.requireNonNull(BuiltInRegistries.BLOCK.getKey(block)).getNamespace().equals(Constants.MOD_ID) && block instanceof IMateriallyTexturedBlock materiallyTexturedBlock) {
-                        materiallyTexturedBlock.getValidCutterRecipes().forEach(finishedRecipe);
+                        materiallyTexturedBlock.buildRecipes(recipeOutput);
                     }
                 }
         );

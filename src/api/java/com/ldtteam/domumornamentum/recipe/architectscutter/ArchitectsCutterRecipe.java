@@ -8,9 +8,14 @@ import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockManager;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
 import com.ldtteam.domumornamentum.recipe.ModRecipeTypes;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -18,36 +23,37 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 public class ArchitectsCutterRecipe implements Recipe<Container>
 {
-    private final ResourceLocation recipeId;
+    public static final Codec<ArchitectsCutterRecipe> CODEC = RecordCodecBuilder.create(builder -> builder
+        .group(BuiltInRegistries.BLOCK.holderByNameCodec().fieldOf("block").forGetter(rec -> rec.getBlock().builtInRegistryHolder()),
+            ExtraCodecs.strictOptionalField(ExtraCodecs.POSITIVE_INT, "count", 1).forGetter(ArchitectsCutterRecipe::getCount),
+            ExtraCodecs.strictOptionalField(CompoundTag.CODEC, "nbt").forGetter(ArchitectsCutterRecipe::getAdditionalTag))
+        .apply(builder, ArchitectsCutterRecipe::new));
+
     private final ResourceLocation blockName;
     private final int count;
-    private final CompoundTag additionalTag;
+    private final Optional<CompoundTag> additionalTag;
 
-    public ArchitectsCutterRecipe(final ResourceLocation blockName, final int count)
+    public ArchitectsCutterRecipe(final ResourceLocation blockName, final int count, final Optional<CompoundTag> additionalTag)
     {
-        this.recipeId = blockName;
-        this.blockName = blockName;
-        this.count = count;
-        this.additionalTag = new CompoundTag();
-    }
-
-    public ArchitectsCutterRecipe(final ResourceLocation recipeId, final ResourceLocation blockName, final int count, final CompoundTag additionalTag)
-    {
-        this.recipeId = recipeId;
         this.blockName = blockName;
         this.count = count;
         this.additionalTag = additionalTag;
+    }
+
+    public ArchitectsCutterRecipe(final Holder<Block> block, final int count, final Optional<CompoundTag> additionalTag)
+    {
+        this(block.unwrapKey().orElseThrow().location(), count, additionalTag);
     }
 
     public ResourceLocation getBlockName()
@@ -55,13 +61,15 @@ public class ArchitectsCutterRecipe implements Recipe<Container>
         return blockName;
     }
 
+    public Block getBlock()
+    {
+        return BuiltInRegistries.BLOCK.get(blockName);
+    }
+
     @Override
     public boolean matches(final @NotNull Container inv, final @NotNull Level worldIn)
     {
-        if (!BuiltInRegistries.BLOCK.containsKey(getBlockName()))
-            return false;
-
-        final Block generatedBlock = BuiltInRegistries.BLOCK.get(getBlockName());
+        final Block generatedBlock = getBlock();
 
         if (!(generatedBlock instanceof final IMateriallyTexturedBlock materiallyTexturedBlock))
             return false;
@@ -88,10 +96,7 @@ public class ArchitectsCutterRecipe implements Recipe<Container>
     @Override
     public @NotNull ItemStack assemble(final @NotNull Container inv, final RegistryAccess registryAccess)
     {
-        if (!BuiltInRegistries.BLOCK.containsKey(getBlockName()))
-            return ItemStack.EMPTY;
-
-        final Block generatedBlock = BuiltInRegistries.BLOCK.get(getBlockName());
+        final Block generatedBlock = getBlock();
 
         if (!(generatedBlock instanceof final IMateriallyTexturedBlock materiallyTexturedBlock))
             return ItemStack.EMPTY;
@@ -126,7 +131,7 @@ public class ArchitectsCutterRecipe implements Recipe<Container>
         materialTextureData.writeToItemStack(result);
         result.setCount(Math.max(components.size(), count));
 
-        additionalTag.getAllKeys().forEach(key -> result.getOrCreateTag().put(key, Objects.requireNonNull(additionalTag.get(key)).copy()));
+        additionalTag.ifPresent(tag -> tag.getAllKeys().forEach(key -> result.getOrCreateTag().put(key, Objects.requireNonNull(tag.get(key)).copy())));
 
         return result;
     }
@@ -140,24 +145,15 @@ public class ArchitectsCutterRecipe implements Recipe<Container>
     @Override
     public @NotNull ItemStack getResultItem(final RegistryAccess registryAccess)
     {
-        if (!BuiltInRegistries.BLOCK.containsKey(getBlockName()))
-            return ItemStack.EMPTY;
-
-        final Block generatedBlock = BuiltInRegistries.BLOCK.get(getBlockName());
+        final Block generatedBlock = getBlock();
 
         if (!(generatedBlock instanceof IMateriallyTexturedBlock))
             return ItemStack.EMPTY;
 
         final ItemStack result = new ItemStack(generatedBlock);
-        additionalTag.getAllKeys().forEach(key -> result.getOrCreateTag().put(key, Objects.requireNonNull(additionalTag.get(key)).copy()));
+        additionalTag.ifPresent(tag -> tag.getAllKeys().forEach(key -> result.getOrCreateTag().put(key, Objects.requireNonNull(tag.get(key)).copy())));
 
         return result;
-    }
-
-    @Override
-    public @NotNull ResourceLocation getId()
-    {
-        return recipeId;
     }
 
     @Override
@@ -172,7 +168,7 @@ public class ArchitectsCutterRecipe implements Recipe<Container>
         return ModRecipeTypes.ARCHITECTS_CUTTER.get();
     }
 
-    public @NotNull CompoundTag getAdditionalTag()
+    public @NotNull Optional<CompoundTag> getAdditionalTag()
     {
         return additionalTag;
     }

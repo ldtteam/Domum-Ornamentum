@@ -9,10 +9,13 @@ import com.ldtteam.domumornamentum.block.components.SimpleRetexturableComponent;
 import com.ldtteam.domumornamentum.block.interfaces.IDOBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
+import com.ldtteam.domumornamentum.recipe.architectscutter.ArchitectsCutterRecipeBuilder;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -226,12 +229,6 @@ public class StairBlock extends net.minecraft.world.level.block.StairBlock imple
     }
 
     @Override
-    public @NotNull Block getBlock()
-    {
-        return this;
-    }
-
-    @Override
     public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof MateriallyTexturedBlockEntity mtbe) {
@@ -242,5 +239,11 @@ public class StairBlock extends net.minecraft.world.level.block.StairBlock imple
             }
         }
         return super.getSoundType(state, level, pos, entity);
+    }
+
+    @Override
+    public void buildRecipes(final RecipeOutput recipeOutput)
+    {
+        new ArchitectsCutterRecipeBuilder(this, RecipeCategory.BUILDING_BLOCKS).save(recipeOutput);
     }
 }

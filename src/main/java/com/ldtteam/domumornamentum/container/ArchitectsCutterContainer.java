@@ -15,6 +15,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -40,7 +41,7 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
     /**
      * All possible recipes.
      */
-    private List<ArchitectsCutterRecipe> recipes = Lists.newArrayList();
+    private List<RecipeHolder<ArchitectsCutterRecipe>> recipes = Lists.newArrayList();
 
     /**
      * Input type stacks.
@@ -181,7 +182,7 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
     }
 
     @OnlyIn(Dist.CLIENT)
-    public List<ArchitectsCutterRecipe> getRecipeList() {
+    public List<RecipeHolder<ArchitectsCutterRecipe>> getRecipeList() {
         return this.recipes;
     }
 
@@ -260,15 +261,16 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
         this.outputInventorySlot.set(ItemStack.EMPTY);
         if (!stacks.stream().allMatch(ItemStack::isEmpty)) {
             this.recipes = this.world.getRecipeManager().getRecipesFor(ModRecipeTypes.ARCHITECTS_CUTTER.get(), inventoryIn, this.world);
-            this.recipes.sort(Comparator.comparing(ArchitectsCutterRecipe::getBlockName).thenComparing(ArchitectsCutterRecipe::getId));
+            this.recipes.sort(Comparator.<RecipeHolder<ArchitectsCutterRecipe>, ResourceLocation>comparing(h -> h.value().getBlockName()).thenComparing(RecipeHolder::id));
         }
         updateRecipeResultSlot();
     }
 
     private void updateRecipeResultSlot() {
-        if (!this.recipes.isEmpty() && this.currentVariant != null && this.currentVariant.getItem() instanceof BlockItem blockItem) {
-            for (final ArchitectsCutterRecipe recipe : recipes)
+        if (!this.recipes.isEmpty() && this.currentVariant != null && this.currentVariant.getItem() instanceof BlockItem) {
+            for (final RecipeHolder<ArchitectsCutterRecipe> recipeHolder : recipes)
             {
+                final ArchitectsCutterRecipe recipe = recipeHolder.value();
                 final ItemStack resultItem = recipe.getResultItem(this.world.registryAccess());
                 if (resultItem.getItem() == currentVariant.getItem())
                 {
@@ -278,7 +280,7 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
                         {
                             if (currentVariant.hasTag() && currentVariant.getTag().contains(key) && resultItem.getTag().get(key).equals(currentVariant.getTag().get(key)))
                             {
-                                this.inventory.setRecipeUsed(recipe);
+                                this.inventory.setRecipeUsed(recipeHolder);
                                 this.outputInventorySlot.set(recipe.assemble(this.inputInventory, this.world.registryAccess()));
                                 break;
                             }
@@ -286,7 +288,7 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
 
                         continue;
                     }
-                    this.inventory.setRecipeUsed(recipe);
+                    this.inventory.setRecipeUsed(recipeHolder);
                     this.outputInventorySlot.set(recipe.assemble(this.inputInventory, this.world.registryAccess()));
                     break;
                 }

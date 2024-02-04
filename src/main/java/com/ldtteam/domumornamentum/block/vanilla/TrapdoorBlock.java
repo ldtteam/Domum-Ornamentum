@@ -2,7 +2,6 @@ package com.ldtteam.domumornamentum.block.vanilla;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import com.google.gson.JsonObject;
 import com.ldtteam.domumornamentum.block.AbstractBlockTrapdoor;
 import com.ldtteam.domumornamentum.block.ICachedItemGroupBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
@@ -10,19 +9,18 @@ import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.components.SimpleRetexturableComponent;
 import com.ldtteam.domumornamentum.block.types.TrapdoorType;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
-import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
+import com.ldtteam.domumornamentum.recipe.architectscutter.ArchitectsCutterRecipeBuilder;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.LevelReader;
@@ -39,10 +37,7 @@ import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 
 import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
 
@@ -151,14 +146,6 @@ public class TrapdoorBlock extends AbstractBlockTrapdoor<TrapdoorBlock> implemen
         fillItemGroupCache.clear();
     }
 
-
-
-    @Override
-    public @NotNull Block getBlock()
-    {
-        return this;
-    }
-
     @Override
     public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
         BlockEntity be = level.getBlockEntity(pos);
@@ -173,54 +160,12 @@ public class TrapdoorBlock extends AbstractBlockTrapdoor<TrapdoorBlock> implemen
     }
 
     @Override
-    public @NotNull Collection<FinishedRecipe> getValidCutterRecipes()
+    public void buildRecipes(final RecipeOutput recipeOutput)
     {
-        final List<FinishedRecipe> recipes = new ArrayList<>();
-
         for (final TrapdoorType value : TrapdoorType.values())
         {
-            recipes.add(
-              new FinishedRecipe()
-              {
-                  @Override
-                  public void serializeRecipeData(final @NotNull JsonObject jsonObject)
-                  {
-                      final CompoundTag tag = new CompoundTag();
-                      BlockUtils.putPropertyIntoBlockStateTag(tag, TYPE, value);
-
-                      jsonObject.addProperty("block", Objects.requireNonNull(getRegistryName(getBlock())).toString());
-                      jsonObject.addProperty("nbt", tag.toString());
-                  }
-
-                  @Override
-                  public @NotNull ResourceLocation getId()
-                  {
-                      return new ResourceLocation(Objects.requireNonNull(getRegistryName(getBlock())) + "_" + value.getSerializedName());
-                  }
-
-                  @Override
-                  public @NotNull RecipeSerializer<?> getType()
-                  {
-                      return ModRecipeSerializers.ARCHITECTS_CUTTER.get();
-                  }
-
-                  @Nullable
-                  @Override
-                  public JsonObject serializeAdvancement()
-                  {
-                      return null;
-                  }
-
-                  @Nullable
-                  @Override
-                  public ResourceLocation getAdvancementId()
-                  {
-                      return null;
-                  }
-              }
-            );
+            new ArchitectsCutterRecipeBuilder(this, RecipeCategory.REDSTONE).resultProperty(TYPE, value)
+                .saveSuffix(recipeOutput, value.getSerializedName());
         }
-
-        return recipes;
     }
 }

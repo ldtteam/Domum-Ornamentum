@@ -90,14 +90,14 @@ public class ModBusEventHandler
     {
         //Extra blocks
         event.getGenerator().addProvider(true, new ExtraBlockStateProvider(event.getGenerator(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(true, new ExtraRecipeProvider(event.getGenerator().getPackOutput()));
+        event.getGenerator().addProvider(true, new ExtraRecipeProvider(event.getGenerator().getPackOutput(), event.getLookupProvider()));
         final ExtraBlockTagProvider extraBlockTagProvider = new ExtraBlockTagProvider(event.getGenerator().getPackOutput(), event.getLookupProvider(), event.getExistingFileHelper());
         event.getGenerator().addProvider(true, extraBlockTagProvider);
         event.getGenerator().addProvider(true, new ExtraItemTagProvider(event.getGenerator().getPackOutput(), event.getLookupProvider(), extraBlockTagProvider.contentsGetter(), event.getExistingFileHelper()));
 
         //Brick blocks
         event.getGenerator().addProvider(true, new BrickBlockStateProvider(event.getGenerator(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(true, new BrickRecipeProvider(event.getGenerator().getPackOutput()));
+        event.getGenerator().addProvider(true, new BrickRecipeProvider(event.getGenerator().getPackOutput(), event.getLookupProvider()));
         final BrickBlockTagProvider brickBlockTagProvider = new BrickBlockTagProvider(event.getGenerator().getPackOutput(), event.getLookupProvider(), event.getExistingFileHelper());
         event.getGenerator().addProvider(true, brickBlockTagProvider);
         event.getGenerator().addProvider(true, new BrickItemTagProvider(event.getGenerator().getPackOutput(), event.getLookupProvider(), brickBlockTagProvider.contentsGetter(), event.getExistingFileHelper()));
@@ -180,7 +180,7 @@ public class ModBusEventHandler
         //Floating carpets
         event.getGenerator().addProvider(true, new FloatingCarpetBlockStateProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(true, new FloatingCarpetBlockTagProvider(event.getGenerator().getPackOutput(), event.getLookupProvider(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(true, new FloatingCarpetRecipeProvider(event.getGenerator().getPackOutput()));
+        event.getGenerator().addProvider(true, new FloatingCarpetRecipeProvider(event.getGenerator().getPackOutput(), event.getLookupProvider()));
 
         //Pillars
         event.getGenerator().addProvider(true, new PillarBlockStateProvider(event.getGenerator(), event.getExistingFileHelper()));
@@ -193,9 +193,9 @@ public class ModBusEventHandler
         event.getGenerator().addProvider(true, new AllBrickBlockTagProvider(event.getGenerator().getPackOutput(), event.getLookupProvider(), event.getExistingFileHelper()));
 
         //Global
-        event.getGenerator().addProvider(true, new GlobalRecipeProvider(event.getGenerator().getPackOutput()));
+        event.getGenerator().addProvider(true, new GlobalRecipeProvider(event.getGenerator().getPackOutput(), event.getLookupProvider()));
         event.getGenerator().addProvider(true, new GlobalLanguageProvider(event.getGenerator()));
         event.getGenerator().addProvider(true, new GlobalLootTableProvider(event.getGenerator().getPackOutput()));
-        event.getGenerator().addProvider(true, new MateriallyTexturedBlockRecipeProvider(event.getGenerator().getPackOutput()));
+        event.getGenerator().addProvider(true, new MateriallyTexturedBlockRecipeProvider(event.getGenerator().getPackOutput(), event.getLookupProvider()));
     }
 }

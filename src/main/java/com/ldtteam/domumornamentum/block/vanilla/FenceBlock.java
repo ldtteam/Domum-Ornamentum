@@ -8,10 +8,13 @@ import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.components.SimpleRetexturableComponent;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
+import com.ldtteam.domumornamentum.recipe.architectscutter.ArchitectsCutterRecipeBuilder;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -125,13 +128,6 @@ public class FenceBlock extends AbstractBlockFence<FenceBlock> implements IMater
         return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos));
     }
 
-    @NotNull
-    @Override
-    public Block getBlock()
-    {
-        return this;
-    }
-
     @Override
     public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
         BlockEntity be = level.getBlockEntity(pos);
@@ -143,5 +139,11 @@ public class FenceBlock extends AbstractBlockFence<FenceBlock> implements IMater
             }
         }
         return super.getSoundType(state, level, pos, entity);
+    }
+
+    @Override
+    public void buildRecipes(final RecipeOutput recipeOutput)
+    {
+        new ArchitectsCutterRecipeBuilder(this, RecipeCategory.DECORATIONS).save(recipeOutput);
     }
 }
