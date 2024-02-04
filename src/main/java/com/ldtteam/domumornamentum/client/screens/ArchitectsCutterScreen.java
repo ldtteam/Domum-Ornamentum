@@ -87,7 +87,6 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
 
     @Override
     protected void renderBg(@NotNull GuiGraphics graphics, float partialTicks, int x, int y) {
-        this.renderBackground(graphics);
         int guiLeft = this.leftPos;
         int guiTop = this.topPos;
 
@@ -395,7 +394,7 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
     }
 
     @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
+    public boolean mouseScrolled(double mouseX, double mouseY, double deltaX, double deltaY) {
 
         boolean onlyTypes = false;
         if (mouseX >= this.leftPos + 55 && mouseY >= this.topPos + 15 && mouseX < this.leftPos + CUTTER_SLIDER_X && mouseY < this.topPos + 35) {
@@ -409,14 +408,14 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
 
         if (this.canScrollRecipes() && !onlyTypes) {
             int i = this.getHiddenRecipeRows();
-            this.recipeSliderProgress = (float)((double)this.recipeSliderProgress - delta / (double)i);
+            this.recipeSliderProgress = (float)((double)this.recipeSliderProgress - deltaY / (double)i);
             this.recipeSliderProgress = Mth.clamp(this.recipeSliderProgress, 0.0F, 1.0F);
             this.recipeIndexOffset = (int)((double)(this.recipeSliderProgress * (float)i) + 0.5D) * 10;
         }
 
         if (this.canScrollTypes() && !onlyRecipes) {
             int i = this.getHiddenTypeRows();
-            this.typeSliderProgress = (float)((double)this.typeSliderProgress - delta / (double)i);
+            this.typeSliderProgress = (float)((double)this.typeSliderProgress - deltaY / (double)i);
             this.typeSliderProgress = Mth.clamp(this.typeSliderProgress, 0.0F, 1.0F);
             this.typeIndexOffset = (int)((double)(this.typeSliderProgress * (float)i) + 0.5D) * 10;
         }

@@ -11,7 +11,6 @@ import com.ldtteam.domumornamentum.client.screens.ArchitectsCutterScreen;
 import com.ldtteam.domumornamentum.container.ModContainerTypes;
 import com.ldtteam.domumornamentum.shingles.ShingleHeightType;
 import com.ldtteam.domumornamentum.util.Constants;
-import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -24,10 +23,16 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 
 @Mod.EventBusSubscriber(modid = Constants.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ModBusEventHandler
 {
+    @SubscribeEvent
+    public static void onMenuScreensRegistry(final RegisterMenuScreensEvent event)
+    {
+        event.register(ModContainerTypes.ARCHITECTS_CUTTER.get(), ArchitectsCutterScreen::new);
+    }
 
     @SubscribeEvent
     public static void onFMLClientSetup(final FMLClientSetupEvent event)
@@ -44,10 +49,6 @@ public class ModBusEventHandler
           (itemStack, clientLevel, livingEntity, i) -> getTypeOrdinal(itemStack, TrapdoorType.class, TrapdoorType.FULL)));
         event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getPost().asItem(), new ResourceLocation(Constants.POST_MODEL_OVERRIDE),
           (itemStack, clientLevel, livingEntity, i) -> getTypeOrdinal(itemStack, PostType.class, PostType.PLAIN)));
-        event.enqueueWork(() -> MenuScreens.register(
-          ModContainerTypes.ARCHITECTS_CUTTER.get(),
-          ArchitectsCutterScreen::new
-        ));
 
         event.enqueueWork(() -> {
             ItemBlockRenderTypes.setRenderLayer(IModBlocks.getInstance().getArchitectsCutter(), RenderType.cutout());

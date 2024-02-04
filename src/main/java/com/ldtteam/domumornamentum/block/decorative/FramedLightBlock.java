@@ -165,7 +165,7 @@ public class FramedLightBlock extends AbstractBlock<FramedLightBlock> implements
     }
 
     @Override
-    public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final BlockGetter world, final BlockPos pos, final Player player)
+    public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final LevelReader world, final BlockPos pos, final Player player)
     {
         return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos));
     }

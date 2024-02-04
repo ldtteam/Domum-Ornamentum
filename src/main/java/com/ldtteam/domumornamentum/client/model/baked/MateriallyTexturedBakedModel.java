@@ -233,7 +233,7 @@ public class MateriallyTexturedBakedModel implements BakedModel {
                                              final BlockState blockState,
                                              final RenderType renderType) {
         try {
-            final ItemModelCacheKey key = new ItemModelCacheKey(textureData, renderType, stack.serializeNBT());
+            final ItemModelCacheKey key = new ItemModelCacheKey(textureData, renderType, stack.save(new CompoundTag()));
             return itemCache.get(
                     key
                     , () -> {

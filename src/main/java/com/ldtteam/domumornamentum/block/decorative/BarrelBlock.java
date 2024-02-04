@@ -37,7 +37,7 @@ public class BarrelBlock extends AbstractBlock<BarrelBlock> implements SimpleWat
 
     public BarrelBlock()
     {
-        super(AbstractBlock.Properties.copy(Blocks.OAK_PLANKS).strength(3f, 1f));
+        super(AbstractBlock.Properties.ofLegacyCopy(Blocks.OAK_PLANKS).strength(3f, 1f));
         this.registerDefaultState(this.getStateDefinition().any().setValue(WATERLOGGED, false));
     }
 
