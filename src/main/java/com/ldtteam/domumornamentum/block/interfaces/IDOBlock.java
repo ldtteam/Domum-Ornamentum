@@ -2,7 +2,7 @@ package com.ldtteam.domumornamentum.block.interfaces;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public interface IDOBlock<B extends IDOBlock<B>>
 {

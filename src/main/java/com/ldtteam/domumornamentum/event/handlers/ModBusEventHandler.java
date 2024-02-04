@@ -63,10 +63,10 @@ import com.ldtteam.domumornamentum.datagen.wall.vanilla.WallBlockStateProvider;
 import com.ldtteam.domumornamentum.datagen.wall.vanilla.WallCompatibilityTagProvider;
 import com.ldtteam.domumornamentum.datagen.wall.vanilla.WallComponentTagProvider;
 import com.ldtteam.domumornamentum.util.Constants;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.minecraftforge.data.event.GatherDataEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 @Mod.EventBusSubscriber(modid = Constants.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModBusEventHandler
