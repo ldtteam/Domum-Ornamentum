@@ -34,7 +34,7 @@ import static com.ldtteam.domumornamentum.util.MaterialTextureDataUtil.generateR
 
 public class MateriallyTexturedBakedModel implements BakedModel {
     private static final Logger LOGGER = LogManager.getLogger();
-    private static final RandomSource RANDOM = RandomSource.create();
+    private static final RandomSource RANDOM = RandomSource.createThreadSafe();
     private static final ChunkRenderTypeSet SOLID_ONLY = ChunkRenderTypeSet.of(RenderType.solid());
 
     private record BlockModelCacheKey (MaterialTextureData data, RenderType renderType) { }

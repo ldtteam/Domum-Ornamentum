@@ -26,7 +26,7 @@ import java.util.Optional;
 public class RetexturedBakedModelBuilder
 {
 
-    private static final RandomSource RANDOM = RandomSource.create();
+    private static final RandomSource RANDOM = RandomSource.createThreadSafe();
 
     public static RetexturedBakedModelBuilder createFor(BlockState sourceState, RenderType renderType, boolean itemStackMode, final BakedModel target)
     {
