@@ -36,7 +36,7 @@ public interface IClientboundDistributor extends CustomPacketPayload
         PacketDistributor.DIMENSION.with(dimensionKey).send(this);
     }
 
-    public default void sendToSpherePoint(final TargetPoint point)
+    public default void sendToTargetPoint(final TargetPoint point)
     {
         PacketDistributor.NEAR.with(point).send(this);
     }

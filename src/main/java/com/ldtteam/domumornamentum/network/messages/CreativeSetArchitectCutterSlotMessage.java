@@ -44,7 +44,11 @@ public record CreativeSetArchitectCutterSlotMessage(int slot, ItemStack stack) i
     public void onExecute(@NotNull final PlayPayloadContext ctxIn)
     {
         final Player player = ctxIn.player().orElse(null);
+        ctxIn.workHandler().execute(() -> onExecuteMainThread(player));
+    }
 
+    private void onExecuteMainThread(final Player player)
+    {
         if (player != null && player.isCreative() && player.containerMenu instanceof ArchitectsCutterContainer menu)
         {
             if (this.slot >= 0 && this.slot < menu.slots.size())
