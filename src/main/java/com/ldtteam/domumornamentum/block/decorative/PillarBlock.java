@@ -3,7 +3,10 @@ package com.ldtteam.domumornamentum.block.decorative;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.gson.JsonObject;
-import com.ldtteam.domumornamentum.block.*;
+import com.ldtteam.domumornamentum.block.AbstractBlock;
+import com.ldtteam.domumornamentum.block.ICachedItemGroupBlock;
+import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
+import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.components.SimpleRetexturableComponent;
 import com.ldtteam.domumornamentum.block.types.PillarShapeType;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
@@ -19,7 +22,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -33,14 +35,15 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -98,7 +101,23 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
     }
 
     /**
+     * Full block collisions
+     *
+     * @param p_60572_
+     * @param p_60573_
+     * @param p_60574_
+     * @param p_60575_
+     * @return
+     */
+    @Override
+    public VoxelShape getCollisionShape(BlockState p_60572_, BlockGetter p_60573_, BlockPos p_60574_, CollisionContext p_60575_)
+    {
+        return Shapes.block();
+    }
+
+    /**
      * Adds the BlockState property "column", used to determine the correct shape to render.
+     *
      * @param builder the state builder used to create the BlockStateDefinition
      */
     @Override
