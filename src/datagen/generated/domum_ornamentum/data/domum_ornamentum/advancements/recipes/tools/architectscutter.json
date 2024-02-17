@@ -44,16 +44,15 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_iron_ingot",
       "has_stone_slab",
-      "has_log",
-      "has_the_recipe"
+      "has_log"
     ]
   ],
   "rewards": {
     "recipes": [
       "domum_ornamentum:architectscutter"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

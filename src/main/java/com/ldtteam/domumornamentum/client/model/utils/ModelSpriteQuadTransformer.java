@@ -2,7 +2,7 @@ package com.ldtteam.domumornamentum.client.model.utils;
 
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraftforge.client.model.IQuadTransformer;
+import net.neoforged.neoforge.client.model.IQuadTransformer;
 
 public class ModelSpriteQuadTransformer implements IQuadTransformer
 {
@@ -41,8 +41,8 @@ public class ModelSpriteQuadTransformer implements IQuadTransformer
             final float u = ( uv[0] - minU ) / uDelta;
             final float v = ( uv[1] - minV ) / vDelta;
 
-            final float newU = this.target.getU(u * 16);
-            final float newV = this.target.getV(v * 16);
+            final float newU = this.target.getU(u);
+            final float newV = this.target.getV(v);
 
             quad.getVertices()[offset] = Float.floatToRawIntBits(newU);
             quad.getVertices()[offset + 1] = Float.floatToRawIntBits(newV);

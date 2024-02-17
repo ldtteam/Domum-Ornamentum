@@ -9,18 +9,19 @@ import com.ldtteam.domumornamentum.block.components.SimpleRetexturableComponent;
 import com.ldtteam.domumornamentum.block.interfaces.IDOBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
+import com.ldtteam.domumornamentum.recipe.architectscutter.ArchitectsCutterRecipeBuilder;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -117,19 +118,6 @@ public class StairBlock extends net.minecraft.world.level.block.StairBlock imple
         items.addAll(fillItemGroupCache);
     }
 
-    @Override
-    public void setPlacedBy(
-      final @NotNull Level worldIn, final @NotNull BlockPos pos, final @NotNull BlockState state, @Nullable final LivingEntity placer, final @NotNull ItemStack stack)
-    {
-        super.setPlacedBy(worldIn, pos, state, placer, stack);
-
-        final CompoundTag textureData = stack.getOrCreateTagElement("textureData");
-        final BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-
-        if (tileEntity instanceof MateriallyTexturedBlockEntity)
-            ((MateriallyTexturedBlockEntity) tileEntity).updateTextureDataWith(MaterialTextureData.deserializeFromNBT(textureData));
-    }
-
     @Nullable
     @Override
     public BlockEntity newBlockEntity(final @NotNull BlockPos blockPos, final @NotNull BlockState blockState)
@@ -217,13 +205,13 @@ public class StairBlock extends net.minecraft.world.level.block.StairBlock imple
     @Override
     public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootParams.Builder builder)
     {
-        return BlockUtils.getMaterializedItemStack(builder);
+        return BlockUtils.getMaterializedDrops(builder);
     }
 
     @Override
-    public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final BlockGetter world, final BlockPos pos, final Player player)
+    public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final LevelReader world, final BlockPos pos, final Player player)
     {
-        return BlockUtils.getMaterializedItemStack(player, world, pos);
+        return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos));
     }
 
     private BlockState getBlockState(final BlockGetter blockGetter, final BlockPos blockPos) {
@@ -241,12 +229,6 @@ public class StairBlock extends net.minecraft.world.level.block.StairBlock imple
     }
 
     @Override
-    public @NotNull Block getBlock()
-    {
-        return this;
-    }
-
-    @Override
     public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof MateriallyTexturedBlockEntity mtbe) {
@@ -257,5 +239,11 @@ public class StairBlock extends net.minecraft.world.level.block.StairBlock imple
             }
         }
         return super.getSoundType(state, level, pos, entity);
+    }
+
+    @Override
+    public void buildRecipes(final RecipeOutput recipeOutput)
+    {
+        new ArchitectsCutterRecipeBuilder(this, RecipeCategory.BUILDING_BLOCKS).save(recipeOutput);
     }
 }

@@ -11,53 +11,44 @@ import com.ldtteam.domumornamentum.client.screens.ArchitectsCutterScreen;
 import com.ldtteam.domumornamentum.container.ModContainerTypes;
 import com.ldtteam.domumornamentum.shingles.ShingleHeightType;
 import com.ldtteam.domumornamentum.util.Constants;
-import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 
 @Mod.EventBusSubscriber(modid = Constants.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ModBusEventHandler
 {
+    @SubscribeEvent
+    public static void onMenuScreensRegistry(final RegisterMenuScreensEvent event)
+    {
+        event.register(ModContainerTypes.ARCHITECTS_CUTTER.get(), ArchitectsCutterScreen::new);
+    }
 
     @SubscribeEvent
     public static void onFMLClientSetup(final FMLClientSetupEvent event)
     {
         event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getTrapdoor().asItem(), new ResourceLocation(Constants.TRAPDOOR_MODEL_OVERRIDE),
-          (itemStack, clientLevel, livingEntity, i) -> {
-            if (!itemStack.getOrCreateTag().contains("type"))
-                return 0f;
-
-              TrapdoorType trapdoorType;
-              try {
-                  trapdoorType = TrapdoorType.valueOf(itemStack.getOrCreateTag().getString("type").toUpperCase());
-              } catch (Exception ex) {
-                  trapdoorType = TrapdoorType.FULL;
-              }
-
-              return trapdoorType.ordinal();
-          }));
+          (itemStack, clientLevel, livingEntity, i) -> getTypeOrdinal(itemStack, TrapdoorType.class, TrapdoorType.FULL)));
         event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getDoor().asItem(), new ResourceLocation(Constants.DOOR_MODEL_OVERRIDE),
-          (itemStack, clientLevel, livingEntity, i) -> handleDoorTypeOverride(itemStack)));
+          (itemStack, clientLevel, livingEntity, i) -> getTypeOrdinal(itemStack, DoorType.class, DoorType.FULL)));
         event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getFancyDoor().asItem(), new ResourceLocation(Constants.DOOR_MODEL_OVERRIDE),
-          (itemStack, clientLevel, livingEntity, i) -> handleFancyDoorTypeOverride(itemStack)));
+          (itemStack, clientLevel, livingEntity, i) -> getTypeOrdinal(itemStack, FancyDoorType.class, FancyDoorType.FULL)));
         event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getFancyTrapdoor().asItem(), new ResourceLocation(Constants.TRAPDOOR_MODEL_OVERRIDE),
-          (itemStack, clientLevel, livingEntity, i) -> handleFancyTrapdoorTypeOverride(itemStack)));
+          (itemStack, clientLevel, livingEntity, i) -> getTypeOrdinal(itemStack, FancyTrapdoorType.class, FancyTrapdoorType.FULL)));
         event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getPanel().asItem(), new ResourceLocation(Constants.TRAPDOOR_MODEL_OVERRIDE),
-          (itemStack, clientLevel, livingEntity, i) -> handleStaticTrapdoorTypeOverride(itemStack)));
+          (itemStack, clientLevel, livingEntity, i) -> getTypeOrdinal(itemStack, TrapdoorType.class, TrapdoorType.FULL)));
         event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getPost().asItem(), new ResourceLocation(Constants.POST_MODEL_OVERRIDE),
-                (itemStack, clientLevel, livingEntity, i) -> handlePostTypeOverride(itemStack)));
-
-        event.enqueueWork(() -> MenuScreens.register(
-          ModContainerTypes.ARCHITECTS_CUTTER.get(),
-          ArchitectsCutterScreen::new
-        ));
+          (itemStack, clientLevel, livingEntity, i) -> getTypeOrdinal(itemStack, PostType.class, PostType.PLAIN)));
 
         event.enqueueWork(() -> {
             ItemBlockRenderTypes.setRenderLayer(IModBlocks.getInstance().getArchitectsCutter(), RenderType.cutout());
@@ -90,102 +81,21 @@ public class ModBusEventHandler
         });
     }
 
-    private static float handleDoorTypeOverride(ItemStack itemStack)
+    private static <T extends Enum<T>> float getTypeOrdinal(final ItemStack itemStack, final Class<T> enumClass, final T defaultValue)
     {
-        if (!itemStack.getOrCreateTag().contains("type"))
+        final CompoundTag tag = itemStack.getTagElement(BlockItem.BLOCK_STATE_TAG);
+        if (tag == null || !tag.contains(Constants.TYPE_BLOCK_PROPERTY, Tag.TAG_STRING))
         {
-            return 0f;
+            return defaultValue.ordinal();
         }
 
-        DoorType doorType;
         try
         {
-            doorType = DoorType.valueOf(itemStack.getOrCreateTag().getString("type").toUpperCase());
+            return Enum.valueOf(enumClass, tag.getString(Constants.TYPE_BLOCK_PROPERTY).toUpperCase()).ordinal();
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-            doorType = DoorType.FULL;
+            return defaultValue.ordinal();
         }
-
-        return doorType.ordinal();
-    }
-
-    private static float handleFancyDoorTypeOverride(ItemStack itemStack)
-    {
-        if (!itemStack.getOrCreateTag().contains("type"))
-        {
-            return 0f;
-        }
-
-        FancyDoorType doorType;
-        try
-        {
-            doorType = FancyDoorType.valueOf(itemStack.getOrCreateTag().getString("type").toUpperCase());
-        }
-        catch (Exception ex)
-        {
-            doorType = FancyDoorType.FULL;
-        }
-
-        return doorType.ordinal();
-    }
-
-    private static float handleFancyTrapdoorTypeOverride(ItemStack itemStack)
-    {
-        if (!itemStack.getOrCreateTag().contains("type"))
-        {
-            return 0f;
-        }
-
-        FancyTrapdoorType doorType;
-        try
-        {
-            doorType = FancyTrapdoorType.valueOf(itemStack.getOrCreateTag().getString("type").toUpperCase());
-        }
-        catch (Exception ex)
-        {
-            doorType = FancyTrapdoorType.FULL;
-        }
-
-        return doorType.ordinal();
-    }
-
-    private static float handleStaticTrapdoorTypeOverride(ItemStack itemStack)
-    {
-        if (!itemStack.getOrCreateTag().contains("type"))
-        {
-            return 0f;
-        }
-
-        TrapdoorType doorType;
-        try
-        {
-            doorType = TrapdoorType.valueOf(itemStack.getOrCreateTag().getString("type").toUpperCase());
-        }
-        catch (Exception ex)
-        {
-            doorType = TrapdoorType.FULL;
-        }
-
-        return doorType.ordinal();
-    }
-    private static float handlePostTypeOverride(ItemStack itemStack)
-    {
-        if (!itemStack.getOrCreateTag().contains("type"))
-        {
-            return 0f;
-        }
-
-        PostType postType;
-        try
-        {
-            postType = PostType.valueOf(itemStack.getOrCreateTag().getString("type").toUpperCase());
-        }
-        catch (Exception ex)
-        {
-            postType = PostType.PLAIN;
-        }
-
-        return postType.ordinal();
     }
 }

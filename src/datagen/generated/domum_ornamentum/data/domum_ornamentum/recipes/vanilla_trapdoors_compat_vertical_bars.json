@@ -1,5 +1,9 @@
 {
   "type": "domum_ornamentum:architects_cutter",
   "block": "domum_ornamentum:vanilla_trapdoors_compat",
-  "nbt": "{type:\"VERTICAL_BARS\"}"
+  "nbt": {
+    "BlockStateTag": {
+      "type": "vertical_bars"
+    }
+  }
 }

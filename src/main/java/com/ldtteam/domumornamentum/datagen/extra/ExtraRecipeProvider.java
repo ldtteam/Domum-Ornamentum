@@ -3,29 +3,30 @@ package com.ldtteam.domumornamentum.datagen.extra;
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.decorative.ExtraBlock;
 import com.ldtteam.domumornamentum.block.types.ExtraBlockType;
+import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.world.item.DyeItem;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 
 public class ExtraRecipeProvider extends RecipeProvider
 {
-    public ExtraRecipeProvider(PackOutput packOutput)
+    public ExtraRecipeProvider(PackOutput packOutput, CompletableFuture<Provider> lookupProvider)
     {
-        super(packOutput);
+        super(packOutput, lookupProvider);
     }
 
     @Override
-    protected void buildRecipes(@NotNull Consumer<FinishedRecipe> writer) {
+    protected void buildRecipes(@NotNull RecipeOutput writer) {
         ModBlocks.getInstance().getExtraTopBlocks().forEach(extraBlock -> extraBlockRecipe(writer, extraBlock));
     }
 
-    private void extraBlockRecipe(Consumer<FinishedRecipe> writer, ExtraBlock extraBlock) {
+    private void extraBlockRecipe(RecipeOutput writer, ExtraBlock extraBlock) {
         final ExtraBlockType type = extraBlock.getType();
         final ShapedRecipeBuilder builder = ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, extraBlock, 4);
         builder.pattern("X X");

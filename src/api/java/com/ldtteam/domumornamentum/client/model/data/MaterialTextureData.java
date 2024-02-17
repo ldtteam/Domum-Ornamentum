@@ -1,15 +1,23 @@
 package com.ldtteam.domumornamentum.client.model.data;
 
 import com.google.common.collect.Maps;
+import com.ldtteam.domumornamentum.util.Constants;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.util.INBTSerializable;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.neoforged.neoforge.common.util.INBTSerializable;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 import java.util.Objects;
+
+import static com.ldtteam.domumornamentum.util.Constants.BLOCK_ENTITY_TEXTURE_DATA;
 
 public class MaterialTextureData implements INBTSerializable<CompoundTag>
 {
@@ -59,7 +67,7 @@ public class MaterialTextureData implements INBTSerializable<CompoundTag>
         if (this == EMPTY)
             return nbt;
 
-        this.getTexturedComponents().forEach((key, value) -> nbt.putString(key.toString(), Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(value)).toString()));
+        this.getTexturedComponents().forEach((key, value) -> nbt.putString(key.toString(), Objects.requireNonNull(BuiltInRegistries.BLOCK.getKey(value)).toString()));
 
         return nbt;
     }
@@ -72,20 +80,58 @@ public class MaterialTextureData implements INBTSerializable<CompoundTag>
         nbt.getAllKeys().forEach(key -> {
             final ResourceLocation name = new ResourceLocation(nbt.getString(key));
 
-            if (ForgeRegistries.BLOCKS.getValue(name) != Blocks.AIR)
+            if (BuiltInRegistries.BLOCK.get(name) != Blocks.AIR)
             {
-                this.texturedComponents.put(new ResourceLocation(key), ForgeRegistries.BLOCKS.getValue(name));
+                this.texturedComponents.put(new ResourceLocation(key), BuiltInRegistries.BLOCK.get(name));
             }
         });
     }
 
     public static MaterialTextureData deserializeFromNBT(final CompoundTag nbt) {
-        if (nbt.getAllKeys().isEmpty())
+        if (nbt == null || nbt.getAllKeys().isEmpty())
             return EMPTY;
 
         final MaterialTextureData newData = new MaterialTextureData();
         newData.deserializeNBT(nbt);
         return newData;
+    }
+
+    public static MaterialTextureData deserializeFromItemStack(final ItemStack itemStack)
+    {
+        return deserializeFromNBT(extractNbtFromItemStack(itemStack));
+    }
+
+    @Nullable
+    public static CompoundTag extractNbtFromItemStack(final ItemStack itemStack)
+    {
+        if (itemStack == null || !itemStack.hasTag() || !(itemStack.getItem() instanceof BlockItem))
+        {
+            return null;
+        }
+
+        final CompoundTag beTag = BlockItem.getBlockEntityData(itemStack);
+
+        if (beTag == null || beTag.isEmpty() || !beTag.contains(BLOCK_ENTITY_TEXTURE_DATA, Tag.TAG_COMPOUND))
+        {
+            return null;
+        }
+
+        return beTag.getCompound(BLOCK_ENTITY_TEXTURE_DATA);
+    }
+
+    /**
+     * @see BlockEntity#saveToItem(ItemStack)
+     */
+    public void writeToItemStack(final ItemStack itemStack)
+    {
+        if (this != EMPTY && !itemStack.isEmpty() && itemStack.getItem() instanceof BlockItem)
+        {
+            final CompoundTag tag = new CompoundTag();
+            tag.put(BLOCK_ENTITY_TEXTURE_DATA, serializeNBT());
+            BlockItem.setBlockEntityData(itemStack,
+                BuiltInRegistries.BLOCK_ENTITY_TYPE.get(new ResourceLocation(Constants.MOD_ID, Constants.BlockEntityTypes.MATERIALLY_RETEXTURABLE)),
+                tag);
+        }
     }
 
     public boolean isEmpty()

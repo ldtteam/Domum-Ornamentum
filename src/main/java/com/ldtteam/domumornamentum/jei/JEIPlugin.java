@@ -2,7 +2,6 @@ package com.ldtteam.domumornamentum.jei;
 import com.ldtteam.domumornamentum.IDomumOrnamentumApi;
 import com.ldtteam.domumornamentum.block.IModBlocks;
 import com.ldtteam.domumornamentum.client.screens.ArchitectsCutterScreen;
-import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
 import com.ldtteam.domumornamentum.recipe.ModRecipeTypes;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;

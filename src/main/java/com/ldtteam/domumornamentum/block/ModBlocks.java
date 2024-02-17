@@ -1,8 +1,5 @@
 package com.ldtteam.domumornamentum.block;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.ldtteam.domumornamentum.block.decorative.*;
 import com.ldtteam.domumornamentum.block.types.BrickType;
 import com.ldtteam.domumornamentum.block.types.ExtraBlockType;
@@ -16,18 +13,15 @@ import com.ldtteam.domumornamentum.item.vanilla.*;
 import com.ldtteam.domumornamentum.shingles.ShingleHeightType;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.NonNullList;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredBlock;
+import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -42,99 +36,99 @@ import java.util.stream.Collectors;
  * We disabled the following finals since we are neither able to mark the items as final, nor do we want to provide public accessors.
  */
 @SuppressWarnings({"squid:ClassVariableVisibilityCheck", "squid:S2444", "squid:S1444", "squid:S1820",})
-@Mod.EventBusSubscriber(modid = Constants.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class ModBlocks implements IModBlocks {
     /**
      * The deferred registry.
      */
-    public final static DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Constants.MOD_ID);
-    public final static DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Constants.MOD_ID);
-    private static final List<RegistryObject<TimberFrameBlock>> TIMBER_FRAMES = Lists.newArrayList();
-    private static final List<RegistryObject<FramedLightBlock>> FRAMED_LIGHT = Lists.newArrayList();
-    private static final List<RegistryObject<FloatingCarpetBlock>> FLOATING_CARPETS = Lists.newArrayList();
-    private static final List<RegistryObject<ExtraBlock>> EXTRA_TOP_BLOCKS = Lists.newArrayList();
-    private static final List<RegistryObject<BrickBlock>> BRICK = new ArrayList<>();
-    private static final List<RegistryObject<PillarBlock>> PILLARS = new ArrayList<>();
-    private static final List<RegistryObject<AllBrickBlock>> ALL_BRICK = new ArrayList<>();
-    private static final List<RegistryObject<AllBrickStairBlock>> ALL_BRICK_STAIR = new ArrayList<>();
+    public final static DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Constants.MOD_ID);
+    public final static DeferredRegister.Items ITEMS = DeferredRegister.createItems(Constants.MOD_ID);
+
+    private static final List<Supplier<TimberFrameBlock>> TIMBER_FRAMES = new ArrayList<>();
+    private static final List<Supplier<FramedLightBlock>> FRAMED_LIGHT = new ArrayList<>();
+    private static final List<Supplier<FloatingCarpetBlock>> FLOATING_CARPETS = new ArrayList<>();
+    private static final List<Supplier<ExtraBlock>> EXTRA_TOP_BLOCKS = new ArrayList<>();
+    private static final List<Supplier<BrickBlock>> BRICK = new ArrayList<>();
+    private static final List<Supplier<PillarBlock>> PILLARS = new ArrayList<>();
+    private static final List<Supplier<AllBrickBlock>> ALL_BRICK = new ArrayList<>();
+    private static final List<Supplier<AllBrickStairBlock>> ALL_BRICK_STAIR = new ArrayList<>();
 
     private static final ModBlocks INSTANCE = new ModBlocks();
 
-    private static final RegistryObject<ArchitectsCutterBlock> ARCHITECTS_CUTTER;
-    private static final RegistryObject<ShingleBlock> SHINGLE;
-    private static final RegistryObject<ShingleBlock> SHINGLE_FLAT;
-    private static final RegistryObject<ShingleBlock> SHINGLE_FLAT_LOWER;
-    private static final RegistryObject<ShingleSlabBlock> SHINGLE_SLAB;
-    private static final RegistryObject<PaperWallBlock> PAPER_WALL;
-    private static final RegistryObject<BarrelBlock> STANDING_BARREL;
-    private static final RegistryObject<BarrelBlock> LAYING_BARREL;
-    private static final RegistryObject<FenceBlock> FENCE;
-    private static final RegistryObject<FenceGateBlock> FENCE_GATE;
-    private static final RegistryObject<SlabBlock> SLAB;
-    private static final RegistryObject<WallBlock> WALL;
-    private static final RegistryObject<StairBlock> STAIR;
-    private static final RegistryObject<TrapdoorBlock> TRAPDOOR;
-    private static final RegistryObject<DoorBlock> DOOR;
-    private static final RegistryObject<PostBlock> POST;
-    private static final RegistryObject<PanelBlock> PANEL;
-    private static final RegistryObject<FancyDoorBlock> FANCY_DOOR;
-    private static final RegistryObject<FancyTrapdoorBlock> FANCY_TRAPDOOR;
+    private static final DeferredBlock<ArchitectsCutterBlock> ARCHITECTS_CUTTER;
+    private static final DeferredBlock<ShingleBlock> SHINGLE;
+    private static final DeferredBlock<ShingleBlock> SHINGLE_FLAT;
+    private static final DeferredBlock<ShingleBlock> SHINGLE_FLAT_LOWER;
+    private static final DeferredBlock<ShingleSlabBlock> SHINGLE_SLAB;
+    private static final DeferredBlock<PaperWallBlock> PAPER_WALL;
+    private static final DeferredBlock<BarrelBlock> STANDING_BARREL;
+    private static final DeferredBlock<BarrelBlock> LAYING_BARREL;
+    private static final DeferredBlock<FenceBlock> FENCE;
+    private static final DeferredBlock<FenceGateBlock> FENCE_GATE;
+    private static final DeferredBlock<SlabBlock> SLAB;
+    private static final DeferredBlock<WallBlock> WALL;
+    private static final DeferredBlock<StairBlock> STAIR;
+    private static final DeferredBlock<TrapdoorBlock> TRAPDOOR;
+    private static final DeferredBlock<DoorBlock> DOOR;
+    private static final DeferredBlock<PostBlock> POST;
+    private static final DeferredBlock<PanelBlock> PANEL;
+    private static final DeferredBlock<FancyDoorBlock> FANCY_DOOR;
+    private static final DeferredBlock<FancyTrapdoorBlock> FANCY_TRAPDOOR;
 
     static {
-        ARCHITECTS_CUTTER = register("architectscutter", ArchitectsCutterBlock::new, b -> new BlockItem(b, new Item.Properties()));
+        ARCHITECTS_CUTTER = registerSimpleBlockItem("architectscutter", ArchitectsCutterBlock::new);
 
         for (final TimberFrameType blockType : TimberFrameType.values()) {
-            TIMBER_FRAMES.add(register(blockType.getName(), () -> new TimberFrameBlock(blockType), b -> new TimberFrameBlockItem(b, new Item.Properties())));
+            TIMBER_FRAMES.add(registerCustomBlockItem(blockType.getName(), () -> new TimberFrameBlock(blockType), b -> new TimberFrameBlockItem(b, new Item.Properties())));
         }
 
-        SHINGLE = register("shingle", ShingleBlock::new, b -> new ShingleBlockItem(b, new Item.Properties()));
-        SHINGLE_FLAT = register("shingle_flat", ShingleBlock::new, b -> new ShingleBlockItem(b, new Item.Properties()));
-        SHINGLE_FLAT_LOWER = register("shingle_flat_lower", ShingleBlock::new, b -> new ShingleBlockItem(b, new Item.Properties()));
+        SHINGLE = registerCustomBlockItem("shingle", ShingleBlock::new, b -> new ShingleBlockItem(b, new Item.Properties()));
+        SHINGLE_FLAT = registerCustomBlockItem("shingle_flat", ShingleBlock::new, b -> new ShingleBlockItem(b, new Item.Properties()));
+        SHINGLE_FLAT_LOWER = registerCustomBlockItem("shingle_flat_lower", ShingleBlock::new, b -> new ShingleBlockItem(b, new Item.Properties()));
 
-        SHINGLE_SLAB = register("shingle_slab", ShingleSlabBlock::new, b -> new ShingleSlabBlockItem(b, new Item.Properties()));
-        PAPER_WALL = register("blockpaperwall", PaperWallBlock::new, b -> new PaperwallBlockItem(b, new Item.Properties()));
+        SHINGLE_SLAB = registerCustomBlockItem("shingle_slab", ShingleSlabBlock::new, b -> new ShingleSlabBlockItem(b, new Item.Properties()));
+        PAPER_WALL = registerCustomBlockItem("blockpaperwall", PaperWallBlock::new, b -> new PaperwallBlockItem(b, new Item.Properties()));
 
-        PILLARS.add(register("blockpillar", PillarBlock::new, b -> new PillarBlockItem(b, new Item.Properties())));
-        PILLARS.add(register("blockypillar", PillarBlock::new, b -> new PillarBlockItem(b, new Item.Properties())));
-        PILLARS.add(register("squarepillar", PillarBlock::new, b -> new PillarBlockItem(b, new Item.Properties())));
+        PILLARS.add(registerCustomBlockItem("blockpillar", PillarBlock::new, b -> new PillarBlockItem(b, new Item.Properties())));
+        PILLARS.add(registerCustomBlockItem("blockypillar", PillarBlock::new, b -> new PillarBlockItem(b, new Item.Properties())));
+        PILLARS.add(registerCustomBlockItem("squarepillar", PillarBlock::new, b -> new PillarBlockItem(b, new Item.Properties())));
 
         for (final ExtraBlockType blockType : ExtraBlockType.values()) {
-            EXTRA_TOP_BLOCKS.add(register(blockType.getSerializedName(), () -> new ExtraBlock(blockType), b -> new ExtraBlockItem(b, new Item.Properties())));
+            EXTRA_TOP_BLOCKS.add(registerCustomBlockItem(blockType.getSerializedName(), () -> new ExtraBlock(blockType), b -> new ExtraBlockItem(b, new Item.Properties())));
         }
 
         for (final FramedLightType blockType : FramedLightType.values())
         {
-            FRAMED_LIGHT.add(register(blockType.getName(), () -> new FramedLightBlock(blockType), b -> new FramedLightBlockItem(b, new Item.Properties())));
+            FRAMED_LIGHT.add(registerCustomBlockItem(blockType.getName(), () -> new FramedLightBlock(blockType), b -> new FramedLightBlockItem(b, new Item.Properties())));
         }
 
         for (final DyeColor color : DyeColor.values()) {
-            FLOATING_CARPETS.add(register(color.getName().toLowerCase(Locale.ROOT) + "_floating_carpet", () -> new FloatingCarpetBlock(color), b -> new BlockItem(b, new Item.Properties())));
+            FLOATING_CARPETS.add(registerSimpleBlockItem(color.getName().toLowerCase(Locale.ROOT) + "_floating_carpet", () -> new FloatingCarpetBlock(color)));
         }
 
         for (final BrickType type : BrickType.values()) {
-            BRICK.add(register(type.getSerializedName(), () -> new BrickBlock(type), b -> new BlockItem(b, new Item.Properties())));
+            BRICK.add(registerSimpleBlockItem(type.getSerializedName(), () -> new BrickBlock(type)));
         }
 
-        STANDING_BARREL = register("blockbarreldeco_standing", BarrelBlock::new, b -> new BlockItem(b, new Item.Properties()));
-        LAYING_BARREL = register("blockbarreldeco_onside", BarrelBlock::new, b -> new BlockItem(b, new Item.Properties()));
+        STANDING_BARREL = registerSimpleBlockItem("blockbarreldeco_standing", BarrelBlock::new);
+        LAYING_BARREL = registerSimpleBlockItem("blockbarreldeco_onside", BarrelBlock::new);
 
-        FENCE = register("vanilla_fence_compat", FenceBlock::new, b -> new FenceBlockItem(b, new Item.Properties()));
-        FENCE_GATE = register("vanilla_fence_gate_compat", FenceGateBlock::new, b -> new FenceGateBlockItem(b, new Item.Properties()));
-        SLAB = register("vanilla_slab_compat", SlabBlock::new, b -> new SlabBlockItem(b, new Item.Properties()));
-        WALL = register("vanilla_wall_compat", WallBlock::new, b -> new WallBlockItem(b, new Item.Properties()));
-        STAIR = register("vanilla_stairs_compat", StairBlock::new, b -> new StairsBlockItem(b, new Item.Properties()));
-        TRAPDOOR = register("vanilla_trapdoors_compat", TrapdoorBlock::new, b -> new TrapdoorBlockItem(b, new Item.Properties()));
-        DOOR = register("vanilla_doors_compat", DoorBlock::new, b -> new DoorBlockItem(b, new Item.Properties()));
-        PANEL = register("panel", PanelBlock::new, b -> new PanelBlockItem(b, new Item.Properties()));
-        ALL_BRICK.add(register("light_brick", AllBrickBlock::new, b -> new AllBrickBlockItem(b, new Item.Properties())));
-        ALL_BRICK.add(register("dark_brick", AllBrickBlock::new, b -> new AllBrickBlockItem(b, new Item.Properties())));
-        ALL_BRICK_STAIR.add(register("light_brick_stair", AllBrickStairBlock::new, b -> new AllBrickStairBlockItem(b, new Item.Properties())));
-        ALL_BRICK_STAIR.add(register("dark_brick_stair", AllBrickStairBlock::new, b -> new AllBrickStairBlockItem(b, new Item.Properties())));
+        FENCE = registerCustomBlockItem("vanilla_fence_compat", FenceBlock::new, b -> new FenceBlockItem(b, new Item.Properties()));
+        FENCE_GATE = registerCustomBlockItem("vanilla_fence_gate_compat", FenceGateBlock::new, b -> new FenceGateBlockItem(b, new Item.Properties()));
+        SLAB = registerCustomBlockItem("vanilla_slab_compat", SlabBlock::new, b -> new SlabBlockItem(b, new Item.Properties()));
+        WALL = registerCustomBlockItem("vanilla_wall_compat", WallBlock::new, b -> new WallBlockItem(b, new Item.Properties()));
+        STAIR = registerCustomBlockItem("vanilla_stairs_compat", StairBlock::new, b -> new StairsBlockItem(b, new Item.Properties()));
+        TRAPDOOR = registerCustomBlockItem("vanilla_trapdoors_compat", TrapdoorBlock::new, b -> new TrapdoorBlockItem(b, new Item.Properties()));
+        DOOR = registerCustomBlockItem("vanilla_doors_compat", DoorBlock::new, b -> new DoorBlockItem(b, new Item.Properties()));
+        PANEL = registerCustomBlockItem("panel", PanelBlock::new, b -> new PanelBlockItem(b, new Item.Properties()));
+        ALL_BRICK.add(registerCustomBlockItem("light_brick", AllBrickBlock::new, b -> new AllBrickBlockItem(b, new Item.Properties())));
+        ALL_BRICK.add(registerCustomBlockItem("dark_brick", AllBrickBlock::new, b -> new AllBrickBlockItem(b, new Item.Properties())));
+        ALL_BRICK_STAIR.add(registerCustomBlockItem("light_brick_stair", AllBrickStairBlock::new, b -> new AllBrickStairBlockItem(b, new Item.Properties())));
+        ALL_BRICK_STAIR.add(registerCustomBlockItem("dark_brick_stair", AllBrickStairBlock::new, b -> new AllBrickStairBlockItem(b, new Item.Properties())));
 
-        POST = register("post", PostBlock::new, b -> new PostBlockItem(b, new Item.Properties()));
+        POST = registerCustomBlockItem("post", PostBlock::new, b -> new PostBlockItem(b, new Item.Properties()));
 
-        FANCY_DOOR = register("fancy_door", FancyDoorBlock::new, b -> new FancyDoorBlockItem(b, new Item.Properties()));
-        FANCY_TRAPDOOR = register("fancy_trapdoors", FancyTrapdoorBlock::new, b -> new FancyTrapdoorBlockItem(b, new Item.Properties()));
+        FANCY_DOOR = registerCustomBlockItem("fancy_door", FancyDoorBlock::new, b -> new FancyDoorBlockItem(b, new Item.Properties()));
+        FANCY_TRAPDOOR = registerCustomBlockItem("fancy_trapdoors", FancyTrapdoorBlock::new, b -> new FancyTrapdoorBlockItem(b, new Item.Properties()));
     }
 
     /**
@@ -161,9 +155,20 @@ public final class ModBlocks implements IModBlocks {
      * @param <B>   the block subclass for the factory response
      * @return the block entry saved to the registry
      */
-    public static <B extends Block, I extends Item> RegistryObject<B> register(String name, Supplier<B> block, Function<B, I> item) {
-        RegistryObject<B> registered = BLOCKS.register(name.toLowerCase(), block);
-        ITEMS.register(name.toLowerCase(), () -> item.apply(registered.get()));
+    public static <B extends Block> DeferredBlock<B> registerSimpleBlockItem(String name, Supplier<B> block)
+    {
+        final DeferredBlock<B> registered = BLOCKS.register(name, block);
+        ITEMS.registerSimpleBlockItem(registered);
+        return registered;
+    }
+
+    public static <B extends Block> DeferredBlock<B> registerCustomBlockItem(String name, Supplier<B> block, Function<B, ? extends BlockItem> item)
+    {
+        final DeferredBlock<B> registered = BLOCKS.register(name, block);
+
+        // inline of ITEMS.registerSimpleBlockItem(registered);
+        ITEMS.register(registered.unwrapKey().orElseThrow().location().getPath(), key -> item.apply(registered.value()));
+
         return registered;
     }
 
@@ -184,19 +189,19 @@ public final class ModBlocks implements IModBlocks {
 
     @Override
     public List<TimberFrameBlock> getTimberFrames() {
-        return ModBlocks.TIMBER_FRAMES.stream().map(RegistryObject::get).collect(Collectors.toList());
+        return ModBlocks.TIMBER_FRAMES.stream().map(Supplier::get).collect(Collectors.toList());
     }
 
     @Override
     public List<FramedLightBlock> getFramedLights()
     {
-        return ModBlocks.FRAMED_LIGHT.stream().map(RegistryObject::get).collect(Collectors.toList());
+        return ModBlocks.FRAMED_LIGHT.stream().map(Supplier::get).collect(Collectors.toList());
     }
 
     @Override
     public List<PillarBlock> getPillars()
     {
-        return ModBlocks.PILLARS.stream().map(RegistryObject::get).collect(Collectors.toList());
+        return ModBlocks.PILLARS.stream().map(Supplier::get).collect(Collectors.toList());
     }
 
     @Override
@@ -211,12 +216,12 @@ public final class ModBlocks implements IModBlocks {
 
     @Override
     public List<ExtraBlock> getExtraTopBlocks() {
-        return ModBlocks.EXTRA_TOP_BLOCKS.stream().map(RegistryObject::get).toList();
+        return ModBlocks.EXTRA_TOP_BLOCKS.stream().map(Supplier::get).toList();
     }
 
     @Override
     public List<FloatingCarpetBlock> getFloatingCarpets() {
-        return ModBlocks.FLOATING_CARPETS.stream().map(RegistryObject::get).toList();
+        return ModBlocks.FLOATING_CARPETS.stream().map(Supplier::get).toList();
     }
 
     @Override
@@ -246,7 +251,7 @@ public final class ModBlocks implements IModBlocks {
 
     @Override
     public List<BrickBlock> getBricks() {
-        return ModBlocks.BRICK.stream().map(RegistryObject::get).toList();
+        return ModBlocks.BRICK.stream().map(Supplier::get).toList();
     }
 
     @Override
@@ -291,12 +296,12 @@ public final class ModBlocks implements IModBlocks {
 
     @Override
     public List<AllBrickBlock> getAllBrickBlocks() {
-        return ModBlocks.ALL_BRICK.stream().map(RegistryObject::get).toList();
+        return ModBlocks.ALL_BRICK.stream().map(Supplier::get).toList();
     }
 
     @Override
     public List<AllBrickStairBlock> getAllBrickStairBlocks() {
-        return ModBlocks.ALL_BRICK_STAIR.stream().map(RegistryObject::get).toList();
+        return ModBlocks.ALL_BRICK_STAIR.stream().map(Supplier::get).toList();
     }
 
     /**
@@ -307,7 +312,7 @@ public final class ModBlocks implements IModBlocks {
     {
         if (itemGroups.isEmpty())
         {
-            ForgeRegistries.ITEMS.forEach(item -> {
+            BuiltInRegistries.ITEM.forEach(item -> {
                 if (item instanceof IDoItem)
                 {
                     final List<ItemStack> itemList = itemGroups.getOrDefault(((IDoItem) item).getGroup(), new ArrayList<>());
@@ -337,18 +342,14 @@ public final class ModBlocks implements IModBlocks {
     private ItemStack process(final ItemStack stack, final IMateriallyTexturedBlock block)
     {
         final @NotNull List<IMateriallyTexturedBlockComponent> components = new ArrayList<>(block.getComponents());
-        final Map<ResourceLocation, Block> textureData = Maps.newHashMap();
+        final Map<ResourceLocation, Block> textureData = new HashMap<>();
 
         for (final IMateriallyTexturedBlockComponent component : components)
         {
             textureData.put(component.getId(), component.getDefault());
         }
 
-        final MaterialTextureData materialTextureData = new MaterialTextureData(textureData);
-
-        final CompoundTag textureNbt = materialTextureData.serializeNBT();
-
-        stack.getOrCreateTag().put("textureData", textureNbt);
+        new MaterialTextureData(textureData).writeToItemStack(stack);
 
         return stack;
     }

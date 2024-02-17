@@ -1,5 +1,9 @@
 {
   "type": "domum_ornamentum:architects_cutter",
   "block": "domum_ornamentum:fancy_door",
-  "nbt": "{type:\"CREEPER\"}"
+  "nbt": {
+    "BlockStateTag": {
+      "type": "creeper"
+    }
+  }
 }

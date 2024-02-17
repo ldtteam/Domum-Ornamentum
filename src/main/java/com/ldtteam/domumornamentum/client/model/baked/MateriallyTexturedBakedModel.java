@@ -5,7 +5,6 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.Lists;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.client.model.properties.ModProperties;
-import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
@@ -21,25 +20,21 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.client.ChunkRenderTypeSet;
-import net.minecraftforge.client.RenderTypeGroup;
-import net.minecraftforge.client.model.data.ModelData;
+import net.neoforged.neoforge.client.ChunkRenderTypeSet;
+import net.neoforged.neoforge.client.model.data.ModelData;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import java.util.*;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static com.ldtteam.domumornamentum.util.MaterialTextureDataUtil.generateRandomTextureDataFrom;
 
-@SuppressWarnings("resource")
 public class MateriallyTexturedBakedModel implements BakedModel {
     private static final Logger LOGGER = LogManager.getLogger();
-    private static final RandomSource RANDOM = RandomSource.create();
+    private static final RandomSource RANDOM = RandomSource.createThreadSafe();
     private static final ChunkRenderTypeSet SOLID_ONLY = ChunkRenderTypeSet.of(RenderType.solid());
 
     private record BlockModelCacheKey (MaterialTextureData data, RenderType renderType) { }
@@ -157,7 +152,7 @@ public class MateriallyTexturedBakedModel implements BakedModel {
             return Collections.emptyList();
         }
 
-        MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(itemStack.getOrCreateTagElement("textureData"));
+        MaterialTextureData textureData = MaterialTextureData.deserializeFromItemStack(itemStack);
         if (textureData.isEmpty()) {
             return Collections.emptyList();
         }
@@ -180,7 +175,7 @@ public class MateriallyTexturedBakedModel implements BakedModel {
             return Collections.emptyList();
         }
 
-        MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(itemStack.getOrCreateTagElement("textureData"));
+        MaterialTextureData textureData = MaterialTextureData.deserializeFromItemStack(itemStack);
         if (textureData.isEmpty()) {
             textureData = generateRandomTextureDataFrom(itemStack);
         }
@@ -236,7 +231,7 @@ public class MateriallyTexturedBakedModel implements BakedModel {
                                              final BlockState blockState,
                                              final RenderType renderType) {
         try {
-            final ItemModelCacheKey key = new ItemModelCacheKey(textureData, renderType, stack.serializeNBT());
+            final ItemModelCacheKey key = new ItemModelCacheKey(textureData, renderType, stack.save(new CompoundTag()));
             return itemCache.get(
                     key
                     , () -> {
@@ -255,15 +250,6 @@ public class MateriallyTexturedBakedModel implements BakedModel {
             LOGGER.error(String.format("Failed to build baked materially textured model for: %s for item: %s", textureData, stack), exception);
             return Minecraft.getInstance().getModelManager().getMissingModel();
         }
-    }
-
-
-    private ChunkRenderTypeSet createAdaptedSetForEntity(ChunkRenderTypeSet renderTypes, boolean fabulous) {
-        return ChunkRenderTypeSet.of(
-                renderTypes.asList().stream()
-                        .map(renderType -> getRenderType(renderType, fabulous))
-                        .collect(Collectors.toSet())
-        );
     }
 
     public static RenderType getRenderType(RenderType renderType, boolean fabulous) {

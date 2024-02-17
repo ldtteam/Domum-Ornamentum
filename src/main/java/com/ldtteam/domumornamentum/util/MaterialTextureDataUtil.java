@@ -5,14 +5,11 @@ import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.client.event.handlers.ClientTickEventHandler;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.ForgeRegistry;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -45,7 +42,7 @@ public class MaterialTextureDataUtil
         try {
             final MaterialTextureData newData = new MaterialTextureData();
 
-            int localOffset = ((ForgeRegistry<Block>) ForgeRegistries.BLOCKS).getID(block);
+            int localOffset = BuiltInRegistries.BLOCK.getId(block);
             int offsetIndex = 0;
             for (IMateriallyTexturedBlockComponent component : materiallyTexturedBlock.getComponents())
             {

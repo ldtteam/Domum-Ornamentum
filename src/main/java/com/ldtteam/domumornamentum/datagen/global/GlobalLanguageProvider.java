@@ -24,12 +24,10 @@ import com.ldtteam.domumornamentum.datagen.trapdoor.fancy.FancyTrapdoorsLangEntr
 import com.ldtteam.domumornamentum.datagen.wall.paper.PaperwallLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.wall.vanilla.WallLangEntryProvider;
 import com.ldtteam.domumornamentum.util.Constants;
-import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 public class GlobalLanguageProvider extends LanguageProvider
 {

@@ -2,30 +2,30 @@ package com.ldtteam.domumornamentum.datagen.floatingcarpet;
 
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.decorative.FloatingCarpetBlock;
+import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.WoolCarpetBlock;
-import net.minecraftforge.common.Tags;
+import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 
 public class FloatingCarpetRecipeProvider extends RecipeProvider
 {
-    public FloatingCarpetRecipeProvider(PackOutput packOutput) {
-        super(packOutput);
+    public FloatingCarpetRecipeProvider(PackOutput packOutput, CompletableFuture<Provider> lookupProvider) {
+        super(packOutput, lookupProvider);
     }
 
     @Override
-    protected void buildRecipes(Consumer<FinishedRecipe> builder) {
+    protected void buildRecipes(RecipeOutput builder) {
         final Map<DyeColor, WoolCarpetBlock> carpets = new HashMap<>();
         carpets.put(((WoolCarpetBlock) Blocks.WHITE_CARPET).getColor(), (WoolCarpetBlock) Blocks.WHITE_CARPET);
         carpets.put(((WoolCarpetBlock) Blocks.LIGHT_GRAY_CARPET).getColor(), (WoolCarpetBlock) Blocks.LIGHT_GRAY_CARPET);

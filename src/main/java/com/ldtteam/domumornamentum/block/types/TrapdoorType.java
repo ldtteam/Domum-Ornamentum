@@ -1,7 +1,6 @@
 package com.ldtteam.domumornamentum.block.types;
 
 import net.minecraft.util.StringRepresentable;
-import net.minecraft.util.StringUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;

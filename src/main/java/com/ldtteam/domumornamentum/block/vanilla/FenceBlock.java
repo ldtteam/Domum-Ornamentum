@@ -7,21 +7,20 @@ import com.ldtteam.domumornamentum.block.ICachedItemGroupBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.components.SimpleRetexturableComponent;
-import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
+import com.ldtteam.domumornamentum.recipe.architectscutter.ArchitectsCutterRecipeBuilder;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -30,7 +29,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
@@ -105,19 +103,6 @@ public class FenceBlock extends AbstractBlockFence<FenceBlock> implements IMater
         items.addAll(fillItemGroupCache);
     }
 
-    @Override
-    public void setPlacedBy(
-      final @NotNull Level worldIn, final @NotNull BlockPos pos, final @NotNull BlockState state, @Nullable final LivingEntity placer, final @NotNull ItemStack stack)
-    {
-        super.setPlacedBy(worldIn, pos, state, placer, stack);
-
-        final CompoundTag textureData = stack.getOrCreateTagElement("textureData");
-        final BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-
-        if (tileEntity instanceof MateriallyTexturedBlockEntity)
-            ((MateriallyTexturedBlockEntity) tileEntity).updateTextureDataWith(MaterialTextureData.deserializeFromNBT(textureData));
-    }
-
     @Nullable
     @Override
     public BlockEntity newBlockEntity(final @NotNull BlockPos blockPos, final @NotNull BlockState blockState)
@@ -134,20 +119,13 @@ public class FenceBlock extends AbstractBlockFence<FenceBlock> implements IMater
     @Override
     public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootParams.Builder builder)
     {
-        return BlockUtils.getMaterializedItemStack(builder);
+        return BlockUtils.getMaterializedDrops(builder);
     }
 
     @Override
-    public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final BlockGetter world, final BlockPos pos, final Player player)
+    public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final LevelReader world, final BlockPos pos, final Player player)
     {
-        return BlockUtils.getMaterializedItemStack(player, world, pos);
-    }
-
-    @NotNull
-    @Override
-    public Block getBlock()
-    {
-        return this;
+        return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos));
     }
 
     @Override
@@ -161,5 +139,11 @@ public class FenceBlock extends AbstractBlockFence<FenceBlock> implements IMater
             }
         }
         return super.getSoundType(state, level, pos, entity);
+    }
+
+    @Override
+    public void buildRecipes(final RecipeOutput recipeOutput)
+    {
+        new ArchitectsCutterRecipeBuilder(this, RecipeCategory.DECORATIONS).save(recipeOutput);
     }
 }

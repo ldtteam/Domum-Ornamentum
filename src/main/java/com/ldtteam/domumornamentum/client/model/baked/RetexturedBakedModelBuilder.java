@@ -4,7 +4,6 @@ import com.google.common.collect.Maps;
 import com.ldtteam.domumornamentum.client.model.utils.ModelSpriteQuadTransformer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
@@ -15,9 +14,8 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.client.RenderTypeGroup;
-import net.minecraftforge.client.model.IQuadTransformer;
-import net.minecraftforge.client.model.data.ModelData;
+import net.neoforged.neoforge.client.model.IQuadTransformer;
+import net.neoforged.neoforge.client.model.data.ModelData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -25,11 +23,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-@SuppressWarnings("resource")
 public class RetexturedBakedModelBuilder
 {
 
-    private static final RandomSource RANDOM = RandomSource.create();
+    private static final RandomSource RANDOM = RandomSource.createThreadSafe();
 
     public static RetexturedBakedModelBuilder createFor(BlockState sourceState, RenderType renderType, boolean itemStackMode, final BakedModel target)
     {

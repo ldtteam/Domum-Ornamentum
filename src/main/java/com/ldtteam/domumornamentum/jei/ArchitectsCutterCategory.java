@@ -9,6 +9,7 @@ import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockManager;
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.item.interfaces.IDoItem;
+import com.ldtteam.domumornamentum.recipe.ModRecipeTypes;
 import com.ldtteam.domumornamentum.recipe.architectscutter.ArchitectsCutterRecipe;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.constants.VanillaTypes;
@@ -26,18 +27,19 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.Rect2i;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -46,10 +48,9 @@ import static com.ldtteam.domumornamentum.util.Constants.MOD_ID;
 import static com.ldtteam.domumornamentum.util.GuiConstants.*;
 
 @OnlyIn(Dist.CLIENT)
-public class ArchitectsCutterCategory implements IRecipeCategory<ArchitectsCutterRecipe>
+public class ArchitectsCutterCategory implements IRecipeCategory<RecipeHolder<ArchitectsCutterRecipe>>
 {
-    public static final RecipeType<ArchitectsCutterRecipe> TYPE
-            = RecipeType.create(MOD_ID, "architects_cutter", ArchitectsCutterRecipe.class);
+    public static final RecipeType<RecipeHolder<ArchitectsCutterRecipe>> TYPE = RecipeType.createFromVanilla(ModRecipeTypes.ARCHITECTS_CUTTER.get());
 
     /**
      * Horizontal offset between the real cutter display and the JEI display, since we only show a portion.
@@ -92,7 +93,7 @@ public class ArchitectsCutterCategory implements IRecipeCategory<ArchitectsCutte
 
     @NotNull
     @Override
-    public RecipeType<ArchitectsCutterRecipe> getRecipeType()
+    public RecipeType<RecipeHolder<ArchitectsCutterRecipe>> getRecipeType()
     {
         return TYPE;
     }
@@ -118,26 +119,21 @@ public class ArchitectsCutterCategory implements IRecipeCategory<ArchitectsCutte
         return this.icon;
     }
 
-    @Nullable
-    @Override
-    public ResourceLocation getRegistryName(@NotNull final ArchitectsCutterRecipe recipe)
-    {
-        return recipe.getId();
-    }
-
     @Override
     public void setRecipe(@NotNull final IRecipeLayoutBuilder builder,
-                          @NotNull final ArchitectsCutterRecipe recipe,
+                          @NotNull final RecipeHolder<ArchitectsCutterRecipe> holder,
                           @NotNull final IFocusGroup focuses)
     {
-        final Block generatedBlock = ForgeRegistries.BLOCKS.getValue(recipe.getBlockName());
+        final ArchitectsCutterRecipe recipe = holder.value();
+        final Block generatedBlock = recipe.getBlock();
 
         if (!(generatedBlock instanceof final IMateriallyTexturedBlock materiallyTexturedBlock))
             return;
 
         final Collection<IMateriallyTexturedBlockComponent> components = materiallyTexturedBlock.getComponents();
         final List<List<ItemStack>> inputs = components.stream()
-                .map(component -> ForgeRegistries.BLOCKS.tags().getTag(component.getValidSkins()).stream()
+                .map(component -> BuiltInRegistries.BLOCK.getTag(component.getValidSkins()).orElseThrow().stream()
+                        .map(Holder::value)
                         .map(ItemStack::new)
                         .collect(Collectors.collectingAndThen(
                                 Collectors.toCollection(ArrayList::new),
@@ -188,10 +184,11 @@ public class ArchitectsCutterCategory implements IRecipeCategory<ArchitectsCutte
 
     @NotNull
     @Override
-    public List<Component> getTooltipStrings(@NotNull final ArchitectsCutterRecipe recipe,
+    public List<Component> getTooltipStrings(@NotNull final RecipeHolder<ArchitectsCutterRecipe> holder,
                                              @NotNull final IRecipeSlotsView recipeSlotsView,
                                              final double mouseX, final double mouseY)
     {
+        final ArchitectsCutterRecipe recipe = holder.value();
         final List<Component> tooltips = new ArrayList<>();
 
         final Rect2i groupButton = new Rect2i(CUTTER_RECIPE_X - JEI_OFFSET_X, CUTTER_RECIPE_Y + 1 - JEI_OFFSET_Y, this.button.getWidth(), this.button.getHeight());
@@ -213,11 +210,12 @@ public class ArchitectsCutterCategory implements IRecipeCategory<ArchitectsCutte
     }
 
     @Override
-    public void draw(@NotNull final ArchitectsCutterRecipe recipe,
+    public void draw(@NotNull final RecipeHolder<ArchitectsCutterRecipe> holder,
                      @NotNull final IRecipeSlotsView recipeSlotsView,
                      @NotNull final GuiGraphics stack,
                      final double mouseX, final double mouseY)
     {
+        final ArchitectsCutterRecipe recipe = holder.value();
         final DisplayData displayData = cachedDisplayData.getUnchecked(recipe);
         displayData.reassembleIfNeeded(recipeSlotsView.getSlotViews(RecipeIngredientRole.INPUT));
 

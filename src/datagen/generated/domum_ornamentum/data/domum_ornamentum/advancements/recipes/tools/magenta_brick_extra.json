@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_material",
-      "has_dye",
-      "has_the_recipe"
+      "has_dye"
     ]
   ],
   "rewards": {
     "recipes": [
       "domum_ornamentum:magenta_brick_extra"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

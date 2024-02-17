@@ -4,6 +4,7 @@ import com.ldtteam.domumornamentum.DomumOrnamentum;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.ModBlocks;
+import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.container.ArchitectsCutterContainer;
 import com.ldtteam.domumornamentum.item.interfaces.IDoItem;
 import com.ldtteam.domumornamentum.util.Constants;
@@ -11,6 +12,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -85,7 +87,6 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
 
     @Override
     protected void renderBg(@NotNull GuiGraphics graphics, float partialTicks, int x, int y) {
-        this.renderBackground(graphics);
         int guiLeft = this.leftPos;
         int guiTop = this.topPos;
 
@@ -166,12 +167,7 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
                     if (this.menu.outputInventorySlot.hasItem())
                     {
                         final ItemStack input = list.get(l).copy();
-                        final ItemStack output = this.menu.outputInventorySlot.getItem().copy();
-                        if (input.hasTag() && output.hasTag() && input.getTag().contains("textureData") && output.getTag().contains("textureData"))
-                        {
-                            input.getTag().put("textureData", computeCompound(input, this.menu.outputInventorySlot.getItem()));
-                        }
-                        graphics.renderItem(input, k, i1);
+                        texturizeVariantUsingCurrentInput(input);
                         stack = input;
                     }
                     else
@@ -287,11 +283,7 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
                 if (this.menu.outputInventorySlot.hasItem())
                 {
                     final ItemStack input = list.get(i).copy();
-                    final ItemStack output = this.menu.outputInventorySlot.getItem().copy();
-                    if (input.hasTag() && output.hasTag() && input.getTag().contains("textureData") && output.getTag().contains("textureData"))
-                    {
-                        input.getTag().put("textureData", computeCompound(input, this.menu.outputInventorySlot.getItem()));
-                    }
+                    texturizeVariantUsingCurrentInput(input);
                     graphics.renderItem(input, k, i1);
                 }
                 else
@@ -302,31 +294,24 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
         }
     }
 
-    private static CompoundTag computeCompound(final ItemStack input, final ItemStack output)
+    private void texturizeVariantUsingCurrentInput(final ItemStack variantItemStack)
     {
-        if (input.getItem() instanceof BlockItem inputBlockItem && inputBlockItem.getBlock() instanceof IMateriallyTexturedBlock inputTextureBlock
-              && output.getItem() instanceof BlockItem outputBlockItem && outputBlockItem.getBlock() instanceof IMateriallyTexturedBlock outputTextureBlock)
-        {
-            final CompoundTag outputCompound = output.getTag().getCompound("textureData");
-            final List<String> inputs = new ArrayList<>();
-            for (final IMateriallyTexturedBlockComponent key : outputTextureBlock.getComponents())
-            {
-                inputs.add(outputCompound.getString(key.getId().toString()));
-            }
+        final CompoundTag textureData = MaterialTextureData.extractNbtFromItemStack(variantItemStack);
 
-            int index = 0;
-            final CompoundTag inputCompound = input.getTag().getCompound("textureData");
-            for (final IMateriallyTexturedBlockComponent key : inputTextureBlock.getComponents())
-            {
-                if (index < inputs.size())
-                {
-                    inputCompound.putString(key.getId().toString(), inputs.get(index));
-                    index++;
-                }
-            }
-            return inputCompound;
+        if (textureData == null || !(variantItemStack.getItem() instanceof final BlockItem bi && bi.getBlock() instanceof final IMateriallyTexturedBlock block))
+        {
+            return;
         }
-       return input.getTag().getCompound("textureData");
+
+        int i = 0;
+        for (final IMateriallyTexturedBlockComponent component : block.getComponents())
+        {
+            if (this.menu.inputInventory.getItem(i).getItem() instanceof final BlockItem blockItem)
+            {
+                textureData.putString(component.getId().toString(), BuiltInRegistries.BLOCK.getKey(blockItem.getBlock()).toString());
+            }
+            i++;
+        }
     }
 
     @Override
@@ -409,7 +394,7 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
     }
 
     @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
+    public boolean mouseScrolled(double mouseX, double mouseY, double deltaX, double deltaY) {
 
         boolean onlyTypes = false;
         if (mouseX >= this.leftPos + 55 && mouseY >= this.topPos + 15 && mouseX < this.leftPos + CUTTER_SLIDER_X && mouseY < this.topPos + 35) {
@@ -423,14 +408,14 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
 
         if (this.canScrollRecipes() && !onlyTypes) {
             int i = this.getHiddenRecipeRows();
-            this.recipeSliderProgress = (float)((double)this.recipeSliderProgress - delta / (double)i);
+            this.recipeSliderProgress = (float)((double)this.recipeSliderProgress - deltaY / (double)i);
             this.recipeSliderProgress = Mth.clamp(this.recipeSliderProgress, 0.0F, 1.0F);
             this.recipeIndexOffset = (int)((double)(this.recipeSliderProgress * (float)i) + 0.5D) * 10;
         }
 
         if (this.canScrollTypes() && !onlyRecipes) {
             int i = this.getHiddenTypeRows();
-            this.typeSliderProgress = (float)((double)this.typeSliderProgress - delta / (double)i);
+            this.typeSliderProgress = (float)((double)this.typeSliderProgress - deltaY / (double)i);
             this.typeSliderProgress = Mth.clamp(this.typeSliderProgress, 0.0F, 1.0F);
             this.typeIndexOffset = (int)((double)(this.typeSliderProgress * (float)i) + 0.5D) * 10;
         }

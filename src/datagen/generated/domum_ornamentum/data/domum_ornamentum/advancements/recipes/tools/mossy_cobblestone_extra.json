@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_material",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_material"
     ]
   ],
   "rewards": {
     "recipes": [
       "domum_ornamentum:mossy_cobblestone_extra"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

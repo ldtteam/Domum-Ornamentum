@@ -7,7 +7,6 @@ import com.ldtteam.domumornamentum.item.interfaces.IDoItem;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
@@ -33,8 +32,7 @@ public class AllBrickStairBlockItem extends BlockItem implements IDoItem
     @Override
     public Component getName(final ItemStack stack)
     {
-        final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
-        final MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
+        final MaterialTextureData textureData = MaterialTextureData.deserializeFromItemStack(stack);
 
         final IMateriallyTexturedBlockComponent columnComponent = allBrickStairBlock.getComponents().get(0);
         final Block columnBlock = textureData.getTexturedComponents().getOrDefault(columnComponent.getId(), columnComponent.getDefault());
@@ -48,8 +46,7 @@ public class AllBrickStairBlockItem extends BlockItem implements IDoItem
     {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
 
-        final CompoundTag dataNbt = stack.getOrCreateTagElement("textureData");
-        MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(dataNbt);
+        MaterialTextureData textureData = MaterialTextureData.deserializeFromItemStack(stack);
         if (textureData.isEmpty())
         {
             textureData = MaterialTextureDataUtil.generateRandomTextureDataFrom(stack);

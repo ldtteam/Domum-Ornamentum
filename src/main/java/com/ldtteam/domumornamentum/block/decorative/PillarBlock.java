@@ -2,28 +2,30 @@ package com.ldtteam.domumornamentum.block.decorative;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import com.google.gson.JsonObject;
-import com.ldtteam.domumornamentum.block.*;
+import com.ldtteam.domumornamentum.block.AbstractBlock;
+import com.ldtteam.domumornamentum.block.ICachedItemGroupBlock;
+import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
+import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.components.SimpleRetexturableComponent;
 import com.ldtteam.domumornamentum.block.types.PillarShapeType;
-import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
-import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
+import com.ldtteam.domumornamentum.recipe.architectscutter.ArchitectsCutterRecipeBuilder;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.level.*;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
@@ -33,7 +35,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.HitResult;
@@ -41,9 +42,8 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import java.util.Collection;
+
 import java.util.List;
-import java.util.Objects;
 
 public class PillarBlock extends AbstractBlock<PillarBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock
 {
@@ -315,19 +315,6 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
         items.addAll(fillItemGroupCache);
     }
 
-    @Override
-    public void setPlacedBy(
-            final @NotNull Level worldIn, final @NotNull BlockPos pos, final @NotNull BlockState state, @Nullable final LivingEntity placer, final @NotNull ItemStack stack)
-    {
-        super.setPlacedBy(worldIn, pos, state, placer, stack);
-
-        final CompoundTag textureData = stack.getOrCreateTagElement("textureData");
-        final BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-
-        if (tileEntity instanceof MateriallyTexturedBlockEntity)
-            ((MateriallyTexturedBlockEntity) tileEntity).updateTextureDataWith(MaterialTextureData.deserializeFromNBT(textureData));
-    }
-
     @Nullable
     @Override
     public BlockEntity newBlockEntity(final @NotNull BlockPos blockPos, final @NotNull BlockState blockState)
@@ -344,17 +331,14 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
     @Override
     public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootParams.Builder builder)
     {
-        return BlockUtils.getMaterializedItemStack(builder);
+        return BlockUtils.getMaterializedDrops(builder);
     }
 
     @Override
-    public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final BlockGetter world, final BlockPos pos, final Player player)
+    public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final LevelReader world, final BlockPos pos, final Player player)
     {
-        return BlockUtils.getMaterializedItemStack(player, world, pos);
+        return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos));
     }
-
-    @Override
-    public @NotNull Block getBlock() { return this; }
 
     @Override
     public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
@@ -369,44 +353,9 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
         return super.getSoundType(state, level, pos, entity);
     }
 
-    @NotNull
-    public Collection<FinishedRecipe> getValidCutterRecipes()
+    @Override
+    public void buildRecipes(final RecipeOutput recipeOutput)
     {
-        return Lists.newArrayList(
-                new FinishedRecipe()
-                {
-                    @Override
-                    public void serializeRecipeData(final @NotNull JsonObject json)
-                    {
-                        json.addProperty("count", COMPONENTS.size() * 3);
-                    }
-
-                    @Override
-                    public @NotNull ResourceLocation getId()
-                    {
-                        return Objects.requireNonNull(getRegistryName(getBlock()));
-                    }
-
-                    @Override
-                    public @NotNull RecipeSerializer<?> getType()
-                    {
-                        return ModRecipeSerializers.ARCHITECTS_CUTTER.get();
-                    }
-
-                    @Nullable
-                    @Override
-                    public JsonObject serializeAdvancement()
-                    {
-                        return null;
-                    }
-
-                    @Nullable
-                    @Override
-                    public ResourceLocation getAdvancementId()
-                    {
-                        return null;
-                    }
-                }
-        );
+        new ArchitectsCutterRecipeBuilder(this, RecipeCategory.DECORATIONS).count(COMPONENTS.size() * 3).save(recipeOutput);        
     }
 }

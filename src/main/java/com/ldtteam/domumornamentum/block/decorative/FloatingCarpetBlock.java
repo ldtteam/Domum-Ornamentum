@@ -35,7 +35,6 @@ public class FloatingCarpetBlock extends AbstractBlock<FloatingCarpetBlock>
         return color;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public @NotNull VoxelShape getShape(
       final @NotNull BlockState state, final @NotNull BlockGetter blockGetter, final @NotNull BlockPos pos, final @NotNull CollisionContext context)

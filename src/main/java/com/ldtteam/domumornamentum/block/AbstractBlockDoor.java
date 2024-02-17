@@ -2,7 +2,6 @@ package com.ldtteam.domumornamentum.block;
 
 import com.ldtteam.domumornamentum.block.interfaces.IDOBlock;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 
@@ -18,7 +17,7 @@ public abstract class AbstractBlockDoor<B extends AbstractBlockDoor<B>> extends 
      */
     public AbstractBlockDoor(final Properties properties)
     {
-        super(properties, BlockSetType.OAK);
+        super(BlockSetType.OAK, properties);
     }
 
     @Override

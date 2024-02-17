@@ -1,12 +1,12 @@
 package com.ldtteam.domumornamentum.block.types;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -72,7 +72,7 @@ public enum ExtraBlockType implements StringRepresentable
     @Override
     public String getSerializedName()
     {
-        return (this.color == null ? "" : this.color.getSerializedName() + "_") + ForgeRegistries.ITEMS.getKey(this.material).getPath() + "_extra";
+        return (this.color == null ? "" : this.color.getSerializedName() + "_") + BuiltInRegistries.ITEM.getKey(this.material).getPath() + "_extra";
     }
 
     @Nullable

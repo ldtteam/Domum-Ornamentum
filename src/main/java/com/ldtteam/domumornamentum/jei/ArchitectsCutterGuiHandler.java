@@ -1,6 +1,5 @@
 package com.ldtteam.domumornamentum.jei;
 
-import com.ldtteam.domumornamentum.Network;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import com.ldtteam.domumornamentum.client.screens.ArchitectsCutterScreen;
 import com.ldtteam.domumornamentum.network.messages.CreativeSetArchitectCutterSlotMessage;
@@ -55,7 +54,7 @@ public class ArchitectsCutterGuiHandler implements IGhostIngredientHandler<Archi
                                 @Override
                                 public void accept(@NotNull final I ingredient)
                                 {
-                                    Network.getNetwork().sendToServer(new CreativeSetArchitectCutterSlotMessage(slot.index, (ItemStack) ingredient));
+                                    new CreativeSetArchitectCutterSlotMessage(slot.index, (ItemStack) ingredient).sendToServer();
                                 }
                             });
                         }

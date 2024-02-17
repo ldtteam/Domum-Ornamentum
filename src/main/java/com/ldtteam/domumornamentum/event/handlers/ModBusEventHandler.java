@@ -1,6 +1,5 @@
 package com.ldtteam.domumornamentum.event.handlers;
 
-import com.ldtteam.domumornamentum.Network;
 import com.ldtteam.domumornamentum.datagen.allbrick.AllBrickBlockStateProvider;
 import com.ldtteam.domumornamentum.datagen.allbrick.AllBrickBlockTagProvider;
 import com.ldtteam.domumornamentum.datagen.allbrick.AllBrickStairBlockStateProvider;
@@ -9,10 +8,8 @@ import com.ldtteam.domumornamentum.datagen.bricks.BrickBlockTagProvider;
 import com.ldtteam.domumornamentum.datagen.bricks.BrickItemTagProvider;
 import com.ldtteam.domumornamentum.datagen.bricks.BrickRecipeProvider;
 import com.ldtteam.domumornamentum.datagen.door.DoorsBlockStateProvider;
-import com.ldtteam.domumornamentum.datagen.door.DoorsCompatibilityTagProvider;
 import com.ldtteam.domumornamentum.datagen.door.DoorsComponentTagProvider;
 import com.ldtteam.domumornamentum.datagen.door.fancy.FancyDoorsBlockStateProvider;
-import com.ldtteam.domumornamentum.datagen.door.fancy.FancyDoorsCompatibilityTagProvider;
 import com.ldtteam.domumornamentum.datagen.door.fancy.FancyDoorsComponentTagProvider;
 import com.ldtteam.domumornamentum.datagen.extra.ExtraBlockStateProvider;
 import com.ldtteam.domumornamentum.datagen.extra.ExtraBlockTagProvider;
@@ -62,11 +59,14 @@ import com.ldtteam.domumornamentum.datagen.wall.paper.PaperwallComponentTagProvi
 import com.ldtteam.domumornamentum.datagen.wall.vanilla.WallBlockStateProvider;
 import com.ldtteam.domumornamentum.datagen.wall.vanilla.WallCompatibilityTagProvider;
 import com.ldtteam.domumornamentum.datagen.wall.vanilla.WallComponentTagProvider;
+import com.ldtteam.domumornamentum.network.messages.CreativeSetArchitectCutterSlotMessage;
 import com.ldtteam.domumornamentum.util.Constants;
-import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlerEvent;
+import net.neoforged.neoforge.network.registration.IPayloadRegistrar;
 
 @Mod.EventBusSubscriber(modid = Constants.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModBusEventHandler
@@ -77,9 +77,12 @@ public class ModBusEventHandler
      * @param event event
      */
     @SubscribeEvent
-    public static void onModInit(final FMLCommonSetupEvent event)
+    public static void onNetworkRegistry(final RegisterPayloadHandlerEvent event)
     {
-        Network.getNetwork().registerMessages();
+        final String modVersion = ModList.get().getModContainerById(Constants.MOD_ID).get().getModInfo().getVersion().toString();
+        final IPayloadRegistrar registry = event.registrar(Constants.MOD_ID).versioned(modVersion);
+
+        registry.play(CreativeSetArchitectCutterSlotMessage.ID, CreativeSetArchitectCutterSlotMessage::new, h -> h.server(CreativeSetArchitectCutterSlotMessage::onExecute));
     }
 
     @SubscribeEvent
@@ -87,14 +90,14 @@ public class ModBusEventHandler
     {
         //Extra blocks
         event.getGenerator().addProvider(true, new ExtraBlockStateProvider(event.getGenerator(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(true, new ExtraRecipeProvider(event.getGenerator().getPackOutput()));
+        event.getGenerator().addProvider(true, new ExtraRecipeProvider(event.getGenerator().getPackOutput(), event.getLookupProvider()));
         final ExtraBlockTagProvider extraBlockTagProvider = new ExtraBlockTagProvider(event.getGenerator().getPackOutput(), event.getLookupProvider(), event.getExistingFileHelper());
         event.getGenerator().addProvider(true, extraBlockTagProvider);
         event.getGenerator().addProvider(true, new ExtraItemTagProvider(event.getGenerator().getPackOutput(), event.getLookupProvider(), extraBlockTagProvider.contentsGetter(), event.getExistingFileHelper()));
 
         //Brick blocks
         event.getGenerator().addProvider(true, new BrickBlockStateProvider(event.getGenerator(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(true, new BrickRecipeProvider(event.getGenerator().getPackOutput()));
+        event.getGenerator().addProvider(true, new BrickRecipeProvider(event.getGenerator().getPackOutput(), event.getLookupProvider()));
         final BrickBlockTagProvider brickBlockTagProvider = new BrickBlockTagProvider(event.getGenerator().getPackOutput(), event.getLookupProvider(), event.getExistingFileHelper());
         event.getGenerator().addProvider(true, brickBlockTagProvider);
         event.getGenerator().addProvider(true, new BrickItemTagProvider(event.getGenerator().getPackOutput(), event.getLookupProvider(), brickBlockTagProvider.contentsGetter(), event.getExistingFileHelper()));
@@ -177,7 +180,7 @@ public class ModBusEventHandler
         //Floating carpets
         event.getGenerator().addProvider(true, new FloatingCarpetBlockStateProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(true, new FloatingCarpetBlockTagProvider(event.getGenerator().getPackOutput(), event.getLookupProvider(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(true, new FloatingCarpetRecipeProvider(event.getGenerator().getPackOutput()));
+        event.getGenerator().addProvider(true, new FloatingCarpetRecipeProvider(event.getGenerator().getPackOutput(), event.getLookupProvider()));
 
         //Pillars
         event.getGenerator().addProvider(true, new PillarBlockStateProvider(event.getGenerator(), event.getExistingFileHelper()));
@@ -190,9 +193,9 @@ public class ModBusEventHandler
         event.getGenerator().addProvider(true, new AllBrickBlockTagProvider(event.getGenerator().getPackOutput(), event.getLookupProvider(), event.getExistingFileHelper()));
 
         //Global
-        event.getGenerator().addProvider(true, new GlobalRecipeProvider(event.getGenerator().getPackOutput()));
+        event.getGenerator().addProvider(true, new GlobalRecipeProvider(event.getGenerator().getPackOutput(), event.getLookupProvider()));
         event.getGenerator().addProvider(true, new GlobalLanguageProvider(event.getGenerator()));
         event.getGenerator().addProvider(true, new GlobalLootTableProvider(event.getGenerator().getPackOutput()));
-        event.getGenerator().addProvider(true, new MateriallyTexturedBlockRecipeProvider(event.getGenerator().getPackOutput()));
+        event.getGenerator().addProvider(true, new MateriallyTexturedBlockRecipeProvider(event.getGenerator().getPackOutput(), event.getLookupProvider()));
     }
 }
