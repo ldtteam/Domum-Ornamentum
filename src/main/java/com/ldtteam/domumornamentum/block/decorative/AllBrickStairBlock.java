@@ -3,7 +3,10 @@ package com.ldtteam.domumornamentum.block.decorative;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.gson.JsonObject;
-import com.ldtteam.domumornamentum.block.*;
+import com.ldtteam.domumornamentum.block.AbstractBlockStairs;
+import com.ldtteam.domumornamentum.block.ICachedItemGroupBlock;
+import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
+import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.components.SimpleRetexturableComponent;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
@@ -182,7 +185,7 @@ public class AllBrickStairBlock extends AbstractBlockStairs<AllBrickStairBlock> 
                     @Override
                     public void serializeRecipeData(final @NotNull JsonObject json)
                     {
-                        json.addProperty("count", COMPONENTS.size() * 3);
+                        json.addProperty("count", COMPONENTS.size());
                     }
 
                     @Override

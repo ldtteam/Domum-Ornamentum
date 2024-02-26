@@ -185,7 +185,7 @@ public class AllBrickBlock extends AbstractBlock<AllBrickBlock> implements IMate
                     @Override
                     public void serializeRecipeData(final @NotNull JsonObject json)
                     {
-                        json.addProperty("count", COMPONENTS.size() * 3);
+                        json.addProperty("count", COMPONENTS.size());
                     }
 
                     @Override
