@@ -39,6 +39,7 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -98,7 +99,23 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
     }
 
     /**
+     * Full block collisions
+     *
+     * @param p_60572_
+     * @param p_60573_
+     * @param p_60574_
+     * @param p_60575_
+     * @return
+     */
+    @Override
+    public VoxelShape getCollisionShape(BlockState p_60572_, BlockGetter p_60573_, BlockPos p_60574_, CollisionContext p_60575_)
+    {
+        return Shapes.block();
+    }
+
+    /**
      * Adds the BlockState property "column", used to determine the correct shape to render.
+     *
      * @param builder the state builder used to create the BlockStateDefinition
      */
     @Override
