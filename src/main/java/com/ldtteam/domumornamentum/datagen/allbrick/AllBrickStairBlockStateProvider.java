@@ -8,7 +8,6 @@ import com.ldtteam.domumornamentum.datagen.utils.ModelBuilderUtils;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.block.state.properties.StairsShape;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
@@ -18,8 +17,7 @@ import net.neoforged.neoforge.client.model.generators.MultiPartBlockStateBuilder
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.EnumMap;
-import java.util.Map;
+import static net.minecraft.world.level.block.StairBlock.*;
 
 public class AllBrickStairBlockStateProvider extends BlockStateProvider
 {
@@ -36,34 +34,30 @@ public class AllBrickStairBlockStateProvider extends BlockStateProvider
     private void registerStatesAndModelsFor(final AllBrickStairBlock allBrickStairBlock)
     {
         final MultiPartBlockStateBuilder builder = getMultipartBuilder(allBrickStairBlock);
-
-        if (allBrickStairBlock.getRegistryName() == null)
-            return;
-
-        final Map<StairsShape, ModelFile> blockModels = new EnumMap<>(StairsShape.class);
         for (Direction facingValue : net.minecraft.world.level.block.StairBlock.FACING.getPossibleValues())
         {
             for (StairsShape shapeValue : ShingleBlock.SHAPE.getPossibleValues())
             {
                 for (Half halfValue : net.minecraft.world.level.block.StairBlock.HALF.getPossibleValues())
                 {
-                    final String shapeType = getTypeFromShape(shapeValue);
                     builder.part()
-                      .modelFile(blockModels.computeIfAbsent(shapeValue, shape -> models().withExistingParent("block/allbrick/" + allBrickStairBlock.getRegistryName().getPath() + shapeValue.name().toLowerCase(), modLoc("block/allbrick/" + allBrickStairBlock.getRegistryName().getPath() + shapeType + "_spec"))
-                                                                                    .customLoader(MateriallyTexturedModelBuilder::new)
-                                                                                    .end()))
+                      .modelFile(models().withExistingParent("block/allbrick/" + allBrickStairBlock.getRegistryName().getPath() + getTypeFromShape(shapeValue), modLoc("block/allbrick/" + allBrickStairBlock.getRegistryName().getPath() + getTypeFromShape(shapeValue) + "_spec"))
+                                   .customLoader(MateriallyTexturedModelBuilder::new)
+                                   .end())
                       .rotationX(halfValue == Half.TOP ? 180 : 0)
                       .rotationY(getYFromFacing(facingValue) + getYFromShape(shapeValue) + getYFromHalf(halfValue, shapeValue))
                       .addModel()
-                      .condition(net.minecraft.world.level.block.StairBlock.FACING, facingValue)
-                      .condition(net.minecraft.world.level.block.StairBlock.SHAPE, shapeValue)
-                      .condition(StairBlock.HALF, halfValue)
+                      .condition(FACING, facingValue)
+                      .condition(SHAPE, shapeValue)
+                      .condition(HALF, halfValue)
                       .end();
                 }
             }
         }
 
-        final ItemModelBuilder itemModelBuilder = itemModels().getBuilder(allBrickStairBlock.getRegistryName().getPath()).parent(blockModels.get(StairsShape.STRAIGHT));
+        final ItemModelBuilder itemModelBuilder = itemModels().withExistingParent(allBrickStairBlock.getRegistryName().getPath(), modLoc("block/allbrick/" + allBrickStairBlock.getRegistryName().getPath()))
+                                                    .customLoader(MateriallyTexturedModelBuilder::new)
+                                                    .end();
         ModelBuilderUtils.applyDefaultItemTransforms(itemModelBuilder);
     }
     @NotNull
@@ -79,14 +73,11 @@ public class AllBrickStairBlockStateProvider extends BlockStateProvider
         {
             if (shape == StairsShape.STRAIGHT)
             {
-                return 180;
+                return 0;
             }
-            return 270;
+            return 90;
         }
-        else
-        {
-            return 180;
-        }
+        return 0;
     }
 
     private int getYFromShape(final StairsShape shape)
@@ -102,12 +93,13 @@ public class AllBrickStairBlockStateProvider extends BlockStateProvider
     {
         return switch (facing)
                  {
-                     default -> 180;
-                     case SOUTH -> 270;
-                     case WEST -> 0;
-                     case NORTH -> 90;
+                     default -> 90;
+                     case WEST -> 180;
+                     case NORTH -> 270;
+                     case EAST -> 0;
                  };
     }
+
 
     /**
      * Get the model type from a StairsShape object

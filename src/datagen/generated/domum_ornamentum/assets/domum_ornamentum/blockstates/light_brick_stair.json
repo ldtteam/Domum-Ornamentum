@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairstraight",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair",
         "x": 180,
         "y": 270
       },
@@ -14,7 +14,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairstraight",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair",
         "y": 270
       },
       "when": {
@@ -25,7 +25,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairinner_left",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner",
         "x": 180,
         "y": 270
       },
@@ -37,7 +37,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairinner_left",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner",
         "y": 180
       },
       "when": {
@@ -48,7 +48,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairinner_right",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner",
         "x": 180,
         "y": 360
       },
@@ -60,7 +60,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairinner_right",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner",
         "y": 270
       },
       "when": {
@@ -71,7 +71,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairouter_left",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer",
         "x": 180,
         "y": 270
       },
@@ -83,7 +83,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairouter_left",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer",
         "y": 180
       },
       "when": {
@@ -94,7 +94,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairouter_right",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer",
         "x": 180,
         "y": 360
       },
@@ -106,7 +106,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairouter_right",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer",
         "y": 270
       },
       "when": {
@@ -117,9 +117,9 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairstraight",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair",
         "x": 180,
-        "y": 450
+        "y": 90
       },
       "when": {
         "facing": "south",
@@ -129,8 +129,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairstraight",
-        "y": 450
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair",
+        "y": 90
       },
       "when": {
         "facing": "south",
@@ -140,9 +140,9 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairinner_left",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner",
         "x": 180,
-        "y": 450
+        "y": 90
       },
       "when": {
         "facing": "south",
@@ -152,8 +152,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairinner_left",
-        "y": 360
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner"
       },
       "when": {
         "facing": "south",
@@ -163,9 +162,9 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairinner_right",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner",
         "x": 180,
-        "y": 540
+        "y": 180
       },
       "when": {
         "facing": "south",
@@ -175,8 +174,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairinner_right",
-        "y": 450
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner",
+        "y": 90
       },
       "when": {
         "facing": "south",
@@ -186,9 +185,9 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairouter_left",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer",
         "x": 180,
-        "y": 450
+        "y": 90
       },
       "when": {
         "facing": "south",
@@ -198,8 +197,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairouter_left",
-        "y": 360
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer"
       },
       "when": {
         "facing": "south",
@@ -209,9 +207,9 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairouter_right",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer",
         "x": 180,
-        "y": 540
+        "y": 180
       },
       "when": {
         "facing": "south",
@@ -221,8 +219,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairouter_right",
-        "y": 450
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer",
+        "y": 90
       },
       "when": {
         "facing": "south",
@@ -232,7 +230,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairstraight",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair",
         "x": 180,
         "y": 180
       },
@@ -244,7 +242,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairstraight",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair",
         "y": 180
       },
       "when": {
@@ -255,7 +253,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairinner_left",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner",
         "x": 180,
         "y": 180
       },
@@ -267,7 +265,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairinner_left",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner",
         "y": 90
       },
       "when": {
@@ -278,7 +276,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairinner_right",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner",
         "x": 180,
         "y": 270
       },
@@ -290,7 +288,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairinner_right",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner",
         "y": 180
       },
       "when": {
@@ -301,7 +299,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairouter_left",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer",
         "x": 180,
         "y": 180
       },
@@ -313,7 +311,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairouter_left",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer",
         "y": 90
       },
       "when": {
@@ -324,7 +322,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairouter_right",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer",
         "x": 180,
         "y": 270
       },
@@ -336,7 +334,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairouter_right",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer",
         "y": 180
       },
       "when": {
@@ -347,9 +345,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairstraight",
-        "x": 180,
-        "y": 360
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair",
+        "x": 180
       },
       "when": {
         "facing": "east",
@@ -359,8 +356,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairstraight",
-        "y": 360
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair"
       },
       "when": {
         "facing": "east",
@@ -370,9 +366,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairinner_left",
-        "x": 180,
-        "y": 360
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner",
+        "x": 180
       },
       "when": {
         "facing": "east",
@@ -382,8 +377,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairinner_left",
-        "y": 270
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner",
+        "y": -90
       },
       "when": {
         "facing": "east",
@@ -393,9 +388,9 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairinner_right",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner",
         "x": 180,
-        "y": 450
+        "y": 90
       },
       "when": {
         "facing": "east",
@@ -405,8 +400,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairinner_right",
-        "y": 360
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner"
       },
       "when": {
         "facing": "east",
@@ -416,9 +410,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairouter_left",
-        "x": 180,
-        "y": 360
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer",
+        "x": 180
       },
       "when": {
         "facing": "east",
@@ -428,8 +421,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairouter_left",
-        "y": 270
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer",
+        "y": -90
       },
       "when": {
         "facing": "east",
@@ -439,9 +432,9 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairouter_right",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer",
         "x": 180,
-        "y": 450
+        "y": 90
       },
       "when": {
         "facing": "east",
@@ -451,8 +444,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stairouter_right",
-        "y": 360
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer"
       },
       "when": {
         "facing": "east",
