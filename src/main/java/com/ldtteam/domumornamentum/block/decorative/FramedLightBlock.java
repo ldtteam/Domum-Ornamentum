@@ -173,7 +173,7 @@ public class FramedLightBlock extends AbstractBlock<FramedLightBlock> implements
     @Override
     public void buildRecipes(final RecipeOutput recipeOutput)
     {
-        new ArchitectsCutterRecipeBuilder(this, RecipeCategory.BUILDING_BLOCKS).count(COMPONENTS.size() * 2).save(recipeOutput);        
+        new ArchitectsCutterRecipeBuilder(this, RecipeCategory.BUILDING_BLOCKS).count(COMPONENTS.size()).save(recipeOutput);
     }
 
     @Override

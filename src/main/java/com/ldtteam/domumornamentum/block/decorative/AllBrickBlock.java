@@ -156,6 +156,6 @@ public class AllBrickBlock extends AbstractBlock<AllBrickBlock> implements IMate
     @Override
     public void buildRecipes(final RecipeOutput recipeOutput)
     {
-        new ArchitectsCutterRecipeBuilder(this, RecipeCategory.BUILDING_BLOCKS).count(COMPONENTS.size() * 3).save(recipeOutput);        
+        new ArchitectsCutterRecipeBuilder(this, RecipeCategory.BUILDING_BLOCKS).count(COMPONENTS.size()).save(recipeOutput);
     }
 }

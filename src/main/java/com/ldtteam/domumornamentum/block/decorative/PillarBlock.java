@@ -373,6 +373,6 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
     @Override
     public void buildRecipes(final RecipeOutput recipeOutput)
     {
-        new ArchitectsCutterRecipeBuilder(this, RecipeCategory.DECORATIONS).count(COMPONENTS.size() * 3).save(recipeOutput);        
+        new ArchitectsCutterRecipeBuilder(this, RecipeCategory.DECORATIONS).count(COMPONENTS.size()).save(recipeOutput);
     }
 }

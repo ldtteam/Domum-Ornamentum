@@ -390,6 +390,6 @@ public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock>
     @Override
     public void buildRecipes(final RecipeOutput recipeOutput)
     {
-        new ArchitectsCutterRecipeBuilder(this, RecipeCategory.BUILDING_BLOCKS).count(COMPONENTS.size() * 3).save(recipeOutput);        
+        new ArchitectsCutterRecipeBuilder(this, RecipeCategory.BUILDING_BLOCKS).count(COMPONENTS.size() * 2).save(recipeOutput);
     }
 }

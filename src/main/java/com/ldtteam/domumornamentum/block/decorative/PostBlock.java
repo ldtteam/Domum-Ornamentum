@@ -166,7 +166,7 @@ public class PostBlock extends AbstractPostBlock<PostBlock> implements IMaterial
         for (final PostType value : PostType.values())
         {
             new ArchitectsCutterRecipeBuilder(this, RecipeCategory.DECORATIONS).resultProperty(TYPE, value)
-                .count(COMPONENTS.size() * 4)
+                .count(COMPONENTS.size())
                 .saveSuffix(recipeOutput, value.getSerializedName());
         }
     }

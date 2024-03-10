@@ -1,5 +1,4 @@
 {
   "type": "domum_ornamentum:architects_cutter",
-  "block": "domum_ornamentum:squarepillar",
-  "count": 3
+  "block": "domum_ornamentum:squarepillar"
 }
