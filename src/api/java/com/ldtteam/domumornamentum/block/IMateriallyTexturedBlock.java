@@ -2,11 +2,17 @@ package com.ldtteam.domumornamentum.block;
 
 import com.google.common.collect.Maps;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
+import com.ldtteam.domumornamentum.entity.block.IMateriallyTexturedBlockEntity;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -39,5 +45,26 @@ public interface IMateriallyTexturedBlock
             textureData.put(component.getId(), texture);
         }
         return new MaterialTextureData(textureData);
+    }
+
+    /**
+     * Method to tell mods like minecolonies if a tool is the right tool.
+     * @param state the state to mine.
+     * @param stack the stack trying to mine it.
+     * @param level the level the block is in.
+     * @param pos the position the block is at.
+     * @return true if correct tool.
+     */
+    default boolean isCorrectToolForDrops(BlockState state, final ItemStack stack, BlockGetter level, BlockPos pos)
+    {
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be instanceof IMateriallyTexturedBlockEntity mtbe) {
+            Block block = mtbe.getTextureData().getTexturedComponents().get(getComponents().iterator().next().getId());
+            if (block != null)
+            {
+                return stack.isCorrectToolForDrops(block.defaultBlockState());
+            }
+        }
+        return stack.isCorrectToolForDrops(state);
     }
 }

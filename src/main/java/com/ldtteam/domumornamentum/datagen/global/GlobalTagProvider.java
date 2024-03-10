@@ -177,8 +177,6 @@ public class GlobalTagProvider extends BlockTagsProvider
             ModBlocks.getInstance().getStandingBarrel());
 
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
-          .add(ModBlocks.getInstance().getAllBrickBlocks().toArray(new Block[0]))
-          .add(ModBlocks.getInstance().getAllBrickStairBlocks().toArray(new Block[0]))
           .add(ModBlocks.getInstance().getBricks().toArray(new Block[0]));
 
         ModBlocks.getInstance().getExtraTopBlocks().forEach(extraBlock -> this.tag(extraBlock.getType().getCategory().getMineableTag()).add(extraBlock));
