@@ -34,11 +34,11 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -208,7 +208,7 @@ public class PostBlock extends AbstractPostBlock<PostBlock> implements IMaterial
 
                       jsonObject.addProperty("block", Objects.requireNonNull(getRegistryName(getBlock())).toString());
                       jsonObject.addProperty("nbt", tag.toString());
-                      jsonObject.addProperty("count", COMPONENTS.size() * 4);
+                      jsonObject.addProperty("count", COMPONENTS.size());
                   }
 
                   @Override

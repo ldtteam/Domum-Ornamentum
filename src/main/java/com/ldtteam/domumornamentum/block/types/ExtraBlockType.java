@@ -5,6 +5,7 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -40,19 +41,31 @@ public enum ExtraBlockType implements StringRepresentable
     BASE_PAPER(null, Items.PAPER, SoundType.WOOL, ExtraBlockCategory.PAPER),
     BASE_CACTUS(null, Items.CACTUS, SoundType.WOOD, ExtraBlockCategory.CACTUS),
     GREEN_CACTUS(DyeColor.GREEN, Items.CACTUS, SoundType.WOOD, ExtraBlockCategory.CACTUS),
-    LIGHT_PAPER(DyeColor.WHITE, Items.PAPER, SoundType.WOOL, ExtraBlockCategory.PAPER);
+    LIGHT_PAPER(DyeColor.WHITE, Items.PAPER, SoundType.WOOL, ExtraBlockCategory.PAPER, true);
 
-    private final DyeColor color;
-    private final Item material;
-    private final SoundType soundType;
+    private final DyeColor           color;
+    private final Item               material;
+    private final SoundType          soundType;
     private final ExtraBlockCategory category;
 
-    ExtraBlockType(final DyeColor color, final Item material, final SoundType soundType, ExtraBlockCategory category)
+    private final boolean isTranslucent;
+
+    ExtraBlockType(final DyeColor color, final Item material, final SoundType soundType, final ExtraBlockCategory category, final boolean isTranslucent)
     {
         this.color = color;
         this.material = material;
         this.soundType = soundType;
         this.category = category;
+        this.isTranslucent = isTranslucent;
+    }
+
+    ExtraBlockType(final DyeColor color, final Item material, final SoundType soundType, final ExtraBlockCategory category)
+    {
+        this.color = color;
+        this.material = material;
+        this.soundType = soundType;
+        this.category = category;
+        this.isTranslucent = false;
     }
 
     @NotNull
@@ -73,11 +86,37 @@ public enum ExtraBlockType implements StringRepresentable
         return this.material;
     }
 
-    public SoundType getSoundType() {
+    public SoundType getSoundType()
+    {
         return this.soundType;
     }
 
-    public ExtraBlockCategory getCategory() {
+    public ExtraBlockCategory getCategory()
+    {
         return category;
+    }
+
+    /**
+     * Check if of translucent rendertype.
+     *
+     * @return the render type.
+     */
+    public boolean isTranslucent()
+    {
+        return this.isTranslucent;
+    }
+
+    /**
+     * Adjust block properties depending on the type.
+     * @param properties the current base properties.
+     * @return the adjusted properties if necessary.
+     */
+    public BlockBehaviour.Properties adjustProperties(final BlockBehaviour.Properties properties)
+    {
+        if (this.isTranslucent)
+        {
+            properties.noCollission();
+        }
+        return properties;
     }
 }

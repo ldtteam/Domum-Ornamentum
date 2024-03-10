@@ -1,5 +1,7 @@
 {
   "values": [
-    "domum_ornamentum:vanilla_stairs_compat"
+    "domum_ornamentum:vanilla_stairs_compat",
+    "domum_ornamentum:light_brick_stair",
+    "domum_ornamentum:dark_brick_stair"
   ]
 }

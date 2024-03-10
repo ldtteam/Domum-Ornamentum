@@ -175,6 +175,9 @@ public class GlobalTagProvider extends BlockTagsProvider
             ModBlocks.getInstance().getLayingBarrel(),
             ModBlocks.getInstance().getStandingBarrel());
 
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
+          .add(ModBlocks.getInstance().getBricks().toArray(new Block[0]));
+
         ModBlocks.getInstance().getExtraTopBlocks().forEach(extraBlock -> this.tag(extraBlock.getType().getCategory().getMineableTag()).add(extraBlock));
 
         this.tag(BlockTags.DOORS)
@@ -184,6 +187,10 @@ public class GlobalTagProvider extends BlockTagsProvider
         this.tag(BlockTags.WOODEN_DOORS)
           .add(ModBlocks.getInstance().getDoor())
           .add(ModBlocks.getInstance().getFancyDoor());
+
+        this.tag(BlockTags.STAIRS)
+          .add(ModBlocks.getInstance().getStair())
+          .add(ModBlocks.getInstance().getAllBrickStairBlocks().toArray(new Block[0]));
     }
 
     @Override

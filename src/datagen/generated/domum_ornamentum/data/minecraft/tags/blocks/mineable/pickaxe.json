@@ -1,5 +1,15 @@
 {
   "values": [
+    "domum_ornamentum:brown_bricks",
+    "domum_ornamentum:beige_bricks",
+    "domum_ornamentum:cream_bricks",
+    "domum_ornamentum:roan_bricks",
+    "domum_ornamentum:sand_bricks",
+    "domum_ornamentum:brown_stone_bricks",
+    "domum_ornamentum:beige_stone_bricks",
+    "domum_ornamentum:cream_stone_bricks",
+    "domum_ornamentum:sand_stone_bricks",
+    "domum_ornamentum:roan_stone_bricks",
     "domum_ornamentum:black_brick_extra",
     "domum_ornamentum:blue_brick_extra",
     "domum_ornamentum:blue_cobblestone_extra",
