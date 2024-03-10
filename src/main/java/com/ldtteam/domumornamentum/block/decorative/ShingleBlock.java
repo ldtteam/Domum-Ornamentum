@@ -100,7 +100,7 @@ public class ShingleBlock extends AbstractBlockStairs<ShingleBlock> implements I
     public float getExplosionResistance(BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof MateriallyTexturedBlockEntity mtbe) {
-            Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(1).getId());
+            Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(0).getId());
             if (block != null)
             {
                 return block.getExplosionResistance(state, level, pos, explosion);
@@ -113,7 +113,7 @@ public class ShingleBlock extends AbstractBlockStairs<ShingleBlock> implements I
     public float getDestroyProgress(BlockState state, Player player, BlockGetter level, BlockPos pos) {
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof MateriallyTexturedBlockEntity mtbe) {
-            Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(1).getId());
+            Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(0).getId());
             if (block != null)
             {
                 return block.getDestroyProgress(block.defaultBlockState(), player, level, pos);
@@ -183,7 +183,7 @@ public class ShingleBlock extends AbstractBlockStairs<ShingleBlock> implements I
     public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof MateriallyTexturedBlockEntity mtbe) {
-            Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(1).getId());
+            Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(0).getId());
             if (block != null)
             {
                 return block.getSoundType(state, level, pos, entity);
