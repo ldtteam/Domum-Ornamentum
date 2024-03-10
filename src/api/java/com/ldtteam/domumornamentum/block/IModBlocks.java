@@ -26,6 +26,8 @@ public interface IModBlocks
 
     List<? extends Block> getExtraTopBlocks();
 
+    List<? extends Block> getExtraTopDyedBlocks();
+
     List<? extends Block> getFloatingCarpets();
 
     Block getStandingBarrel();

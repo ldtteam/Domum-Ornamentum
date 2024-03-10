@@ -27,7 +27,8 @@ public class ModTags
     public static final TagKey<Block> PAPERWALL_FRAME = tag("paper_wall_frame");
     public static final TagKey<Block> PAPERWALL_CENTER = tag("paper_wall_center");
 
-    public static final TagKey<Block> EXTRA_BLOCKS    = tag("extra_block");
+    public static final TagKey<Block> EXTRA_BLOCKS = tag("extra_block");
+    public static final TagKey<Block> EXTRA_DYED_BLOCKS = tag("extra_dyed_block");
 
     public static final TagKey<Block> FLOATING_CARPETS = tag("floating_carpet");
 
@@ -52,6 +53,7 @@ public class ModTags
     public static final TagKey<Block> PILLAR_MATERIALS = tag("pillar_materials");
     public static final TagKey<Block> ALL_BRICK_MATERIALS = tag("all_brick_materials");
     public static final TagKey<Item> EXTRA_BLOCK_ITEMS = itemTag("extra_block_items");
+    public static final TagKey<Item> EXTRA_DYED_BLOCK_ITEMS = itemTag("extra_dyed_block_items");
     public static final TagKey<Item> BRICK_ITEMS       = itemTag("brick_items");
 
     public static final TagKey<Block> GLACED_TERRACOTTA = tag("glaced_terracotta");

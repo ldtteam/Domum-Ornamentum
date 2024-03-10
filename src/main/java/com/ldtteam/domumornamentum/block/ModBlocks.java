@@ -53,6 +53,7 @@ public final class ModBlocks implements IModBlocks {
     private static final List<RegistryObject<FramedLightBlock>> FRAMED_LIGHT = Lists.newArrayList();
     private static final List<RegistryObject<FloatingCarpetBlock>> FLOATING_CARPETS = Lists.newArrayList();
     private static final List<RegistryObject<ExtraBlock>> EXTRA_TOP_BLOCKS = Lists.newArrayList();
+    private static final List<RegistryObject<ExtraBlock>> EXTRA_TOP_DYED_BLOCKS = Lists.newArrayList();
     private static final List<RegistryObject<BrickBlock>> BRICK = new ArrayList<>();
     private static final List<RegistryObject<PillarBlock>> PILLARS = new ArrayList<>();
     private static final List<RegistryObject<AllBrickBlock>> ALL_BRICK = new ArrayList<>();
@@ -98,8 +99,14 @@ public final class ModBlocks implements IModBlocks {
         PILLARS.add(register("blockypillar", PillarBlock::new, b -> new PillarBlockItem(b, new Item.Properties())));
         PILLARS.add(register("squarepillar", PillarBlock::new, b -> new PillarBlockItem(b, new Item.Properties())));
 
-        for (final ExtraBlockType blockType : ExtraBlockType.values()) {
-            EXTRA_TOP_BLOCKS.add(register(blockType.getSerializedName(), () -> new ExtraBlock(blockType), b -> new ExtraBlockItem(b, new Item.Properties())));
+        for (final ExtraBlockType blockType : ExtraBlockType.values())
+        {
+            final RegistryObject<ExtraBlock> extraBlock = register(blockType.getSerializedName(), () -> new ExtraBlock(blockType), b -> new ExtraBlockItem(b, new Item.Properties()));
+            EXTRA_TOP_BLOCKS.add(extraBlock);
+            if (blockType.getColor() != null)
+            {
+                EXTRA_TOP_DYED_BLOCKS.add(extraBlock);
+            }
         }
 
         for (final FramedLightType blockType : FramedLightType.values())
@@ -210,8 +217,15 @@ public final class ModBlocks implements IModBlocks {
     }
 
     @Override
-    public List<ExtraBlock> getExtraTopBlocks() {
+    public List<ExtraBlock> getExtraTopBlocks()
+    {
         return ModBlocks.EXTRA_TOP_BLOCKS.stream().map(RegistryObject::get).toList();
+    }
+
+    @Override
+    public List<ExtraBlock> getExtraTopDyedBlocks()
+    {
+        return ModBlocks.EXTRA_TOP_DYED_BLOCKS.stream().map(RegistryObject::get).toList();
     }
 
     @Override

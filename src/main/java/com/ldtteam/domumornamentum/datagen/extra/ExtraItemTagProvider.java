@@ -30,5 +30,6 @@ public class ExtraItemTagProvider extends ItemTagsProvider
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
         copy(ModTags.EXTRA_BLOCKS, ModTags.EXTRA_BLOCK_ITEMS);
+        copy(ModTags.EXTRA_DYED_BLOCKS, ModTags.EXTRA_DYED_BLOCK_ITEMS);
     }
 }

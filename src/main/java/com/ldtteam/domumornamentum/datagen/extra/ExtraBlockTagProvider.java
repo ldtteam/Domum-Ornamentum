@@ -25,6 +25,10 @@ public class ExtraBlockTagProvider extends BlockTagsProvider
         {
             this.tag(ModTags.EXTRA_BLOCKS).add(block);
         }
+        for (final Block block : ModBlocks.getInstance().getExtraTopBlocks())
+        {
+            this.tag(ModTags.EXTRA_DYED_BLOCKS).add(block);
+        }
     }
 
     @Override
