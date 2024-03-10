@@ -4,13 +4,19 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.gson.JsonObject;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
+import com.ldtteam.domumornamentum.entity.block.IMateriallyTexturedBlockEntity;
 import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -67,6 +73,27 @@ public interface IMateriallyTexturedBlock
               }
           }
         );
+    }
+
+    /**
+     * Method to tell mods like minecolonies if a tool is the right tool.
+     * @param state the state to mine.
+     * @param stack the stack trying to mine it.
+     * @param level the level the block is in.
+     * @param pos the position the block is at.
+     * @return true if correct tool.
+     */
+    default boolean isCorrectToolForDrops(BlockState state, final ItemStack stack, BlockGetter level, BlockPos pos)
+    {
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be instanceof IMateriallyTexturedBlockEntity mtbe) {
+            Block block = mtbe.getTextureData().getTexturedComponents().get(getComponents().iterator().next().getId());
+            if (block != null)
+            {
+                return stack.isCorrectToolForDrops(block.defaultBlockState());
+            }
+        }
+        return stack.isCorrectToolForDrops(state);
     }
 
     @NotNull
