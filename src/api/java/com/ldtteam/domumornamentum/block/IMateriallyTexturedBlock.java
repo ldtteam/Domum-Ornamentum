@@ -67,4 +67,13 @@ public interface IMateriallyTexturedBlock
         }
         return stack.isCorrectToolForDrops(state);
     }
+
+    /**
+     * Method to tell if the block tinting is world specific.
+     *
+     * @return true if world specific tinting.
+     */
+    default boolean usesWorldSpecificTinting() {
+        return true;
+    }
 }
