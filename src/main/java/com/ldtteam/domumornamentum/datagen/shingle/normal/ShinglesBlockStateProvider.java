@@ -54,6 +54,7 @@ public class ShinglesBlockStateProvider extends BlockStateProvider
                             .modelFile(blockModels.computeIfAbsent(shapeValue, shape -> models().withExistingParent("block/shingle/" + heightType.getId() + shapeValue.name().toLowerCase(), modLoc("block/shingle/" + heightType.getId() + shingleShapeType.name().toLowerCase() + "_spec"))
                                     .customLoader(MateriallyTexturedModelBuilder::new)
                                     .end()))
+                            .uvLock(true)
                             .rotationX(halfValue == Half.TOP ? 180 : 0)
                             .rotationY(getYFromFacing(facingValue) + getYFromShape(shapeValue) + getYFromHalf(halfValue, shapeValue))
                             .addModel()

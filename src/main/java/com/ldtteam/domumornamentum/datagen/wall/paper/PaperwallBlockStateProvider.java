@@ -36,6 +36,7 @@ public class PaperwallBlockStateProvider extends BlockStateProvider {
                 .modelFile(models().withExistingParent("block/paperwall/blockpaperwall_post", modLoc("block/paperwall/blockpaperwall_post_spec"))
                         .customLoader(MateriallyTexturedModelBuilder::new)
                         .end())
+                .uvLock(true)
                 .addModel()
                 .end();
 
@@ -44,6 +45,7 @@ public class PaperwallBlockStateProvider extends BlockStateProvider {
                     .modelFile(models().withExistingParent("block/paperwall/blockpaperwall_side_" + possibleValue.name().toLowerCase(Locale.ROOT), modLoc("block/paperwall/blockpaperwall_side_" + possibleValue.name().toLowerCase(Locale.ROOT) + "_spec"))
                             .customLoader(MateriallyTexturedModelBuilder::new)
                             .end())
+                    .uvLock(true)
                     .addModel()
                     .condition(Objects.requireNonNull(AbstractBlockPane.PROPERTIES.get(possibleValue)), true)
                     .end()
@@ -51,6 +53,7 @@ public class PaperwallBlockStateProvider extends BlockStateProvider {
                     .modelFile(models().withExistingParent("block/paperwall/blockpaperwall_side_off_" + possibleValue.name().toLowerCase(Locale.ROOT), modLoc("block/paperwall/blockpaperwall_side_off_" + possibleValue.name().toLowerCase(Locale.ROOT) + "_spec"))
                             .customLoader(MateriallyTexturedModelBuilder::new)
                             .end())
+                    .uvLock(true)
                     .addModel()
                     .condition(Objects.requireNonNull(AbstractBlockPane.PROPERTIES.get(possibleValue)), false)
                     .end();

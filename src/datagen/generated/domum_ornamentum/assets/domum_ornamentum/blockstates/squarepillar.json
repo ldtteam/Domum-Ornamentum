@@ -2,7 +2,8 @@
   "multipart": [
     {
       "apply": {
-        "model": "domum_ornamentum:block/pillar/squarepillar_pillar_column"
+        "model": "domum_ornamentum:block/pillar/squarepillar_pillar_column",
+        "uvlock": true
       },
       "when": {
         "column": "pillar_column"
@@ -10,7 +11,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/pillar/squarepillar_pillar_base"
+        "model": "domum_ornamentum:block/pillar/squarepillar_pillar_base",
+        "uvlock": true
       },
       "when": {
         "column": "pillar_base"
@@ -18,7 +20,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/pillar/squarepillar_pillar_capital"
+        "model": "domum_ornamentum:block/pillar/squarepillar_pillar_capital",
+        "uvlock": true
       },
       "when": {
         "column": "pillar_capital"
@@ -26,7 +29,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/pillar/squarepillar_full_pillar"
+        "model": "domum_ornamentum:block/pillar/squarepillar_full_pillar",
+        "uvlock": true
       },
       "when": {
         "column": "full_pillar"

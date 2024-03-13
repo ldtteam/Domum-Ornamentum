@@ -3,6 +3,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs",
+        "uvlock": true,
         "x": 180,
         "y": 270
       },
@@ -15,6 +16,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs",
+        "uvlock": true,
         "y": 270
       },
       "when": {
@@ -26,6 +28,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs_inner",
+        "uvlock": true,
         "x": 180,
         "y": 270
       },
@@ -38,6 +41,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs_inner",
+        "uvlock": true,
         "y": 180
       },
       "when": {
@@ -49,6 +53,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs_inner",
+        "uvlock": true,
         "x": 180,
         "y": 360
       },
@@ -61,6 +66,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs_inner",
+        "uvlock": true,
         "y": 270
       },
       "when": {
@@ -72,6 +78,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs_outer",
+        "uvlock": true,
         "x": 180,
         "y": 270
       },
@@ -84,6 +91,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs_outer",
+        "uvlock": true,
         "y": 180
       },
       "when": {
@@ -95,6 +103,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs_outer",
+        "uvlock": true,
         "x": 180,
         "y": 360
       },
@@ -107,6 +116,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs_outer",
+        "uvlock": true,
         "y": 270
       },
       "when": {
@@ -118,6 +128,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs",
+        "uvlock": true,
         "x": 180,
         "y": 90
       },
@@ -130,6 +141,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs",
+        "uvlock": true,
         "y": 90
       },
       "when": {
@@ -141,6 +153,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs_inner",
+        "uvlock": true,
         "x": 180,
         "y": 90
       },
@@ -152,7 +165,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stair/stairs_inner"
+        "model": "domum_ornamentum:block/stair/stairs_inner",
+        "uvlock": true
       },
       "when": {
         "facing": "south",
@@ -163,6 +177,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs_inner",
+        "uvlock": true,
         "x": 180,
         "y": 180
       },
@@ -175,6 +190,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs_inner",
+        "uvlock": true,
         "y": 90
       },
       "when": {
@@ -186,6 +202,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs_outer",
+        "uvlock": true,
         "x": 180,
         "y": 90
       },
@@ -197,7 +214,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stair/stairs_outer"
+        "model": "domum_ornamentum:block/stair/stairs_outer",
+        "uvlock": true
       },
       "when": {
         "facing": "south",
@@ -208,6 +226,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs_outer",
+        "uvlock": true,
         "x": 180,
         "y": 180
       },
@@ -220,6 +239,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs_outer",
+        "uvlock": true,
         "y": 90
       },
       "when": {
@@ -231,6 +251,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs",
+        "uvlock": true,
         "x": 180,
         "y": 180
       },
@@ -243,6 +264,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs",
+        "uvlock": true,
         "y": 180
       },
       "when": {
@@ -254,6 +276,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs_inner",
+        "uvlock": true,
         "x": 180,
         "y": 180
       },
@@ -266,6 +289,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs_inner",
+        "uvlock": true,
         "y": 90
       },
       "when": {
@@ -277,6 +301,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs_inner",
+        "uvlock": true,
         "x": 180,
         "y": 270
       },
@@ -289,6 +314,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs_inner",
+        "uvlock": true,
         "y": 180
       },
       "when": {
@@ -300,6 +326,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs_outer",
+        "uvlock": true,
         "x": 180,
         "y": 180
       },
@@ -312,6 +339,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs_outer",
+        "uvlock": true,
         "y": 90
       },
       "when": {
@@ -323,6 +351,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs_outer",
+        "uvlock": true,
         "x": 180,
         "y": 270
       },
@@ -335,6 +364,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs_outer",
+        "uvlock": true,
         "y": 180
       },
       "when": {
@@ -346,6 +376,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs",
+        "uvlock": true,
         "x": 180
       },
       "when": {
@@ -356,7 +387,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stair/stairs"
+        "model": "domum_ornamentum:block/stair/stairs",
+        "uvlock": true
       },
       "when": {
         "facing": "east",
@@ -367,6 +399,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs_inner",
+        "uvlock": true,
         "x": 180
       },
       "when": {
@@ -378,6 +411,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs_inner",
+        "uvlock": true,
         "y": -90
       },
       "when": {
@@ -389,6 +423,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs_inner",
+        "uvlock": true,
         "x": 180,
         "y": 90
       },
@@ -400,7 +435,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stair/stairs_inner"
+        "model": "domum_ornamentum:block/stair/stairs_inner",
+        "uvlock": true
       },
       "when": {
         "facing": "east",
@@ -411,6 +447,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs_outer",
+        "uvlock": true,
         "x": 180
       },
       "when": {
@@ -422,6 +459,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs_outer",
+        "uvlock": true,
         "y": -90
       },
       "when": {
@@ -433,6 +471,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs_outer",
+        "uvlock": true,
         "x": 180,
         "y": 90
       },
@@ -444,7 +483,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/stair/stairs_outer"
+        "model": "domum_ornamentum:block/stair/stairs_outer",
+        "uvlock": true
       },
       "when": {
         "facing": "east",

@@ -36,6 +36,7 @@ public class WallBlockStateProvider extends BlockStateProvider {
                 .modelFile(models().withExistingParent("block/wall/wall_post", modLoc("block/wall/wall_post_spec"))
                         .customLoader(MateriallyTexturedModelBuilder::new)
                         .end())
+                .uvLock(true)
                 .addModel()
                 .condition(UP, true)
                 .end();
@@ -49,6 +50,7 @@ public class WallBlockStateProvider extends BlockStateProvider {
                         .modelFile(models().withExistingParent("block/wall/wall_side" + (value == WallSide.TALL ? "_tall" : ""), modLoc("block/wall/wall_side" + (value == WallSide.TALL ? "_tall" : "") + "_spec"))
                                 .customLoader(MateriallyTexturedModelBuilder::new)
                                 .end())
+                        .uvLock(true)
                         .rotationY(getYFromFacing(possibleValue))
                         .addModel()
                         .condition(Objects.requireNonNull(WallBlock.PROPERTIES.get(possibleValue)), value)

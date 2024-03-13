@@ -2,7 +2,8 @@
   "multipart": [
     {
       "apply": {
-        "model": "domum_ornamentum:block/wall/wall_post"
+        "model": "domum_ornamentum:block/wall/wall_post",
+        "uvlock": true
       },
       "when": {
         "up": "true"
@@ -10,7 +11,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/wall/wall_side"
+        "model": "domum_ornamentum:block/wall/wall_side",
+        "uvlock": true
       },
       "when": {
         "north": "low"
@@ -18,7 +20,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/wall/wall_side_tall"
+        "model": "domum_ornamentum:block/wall/wall_side_tall",
+        "uvlock": true
       },
       "when": {
         "north": "tall"
@@ -27,6 +30,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/wall/wall_side",
+        "uvlock": true,
         "y": 180
       },
       "when": {
@@ -36,6 +40,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/wall/wall_side_tall",
+        "uvlock": true,
         "y": 180
       },
       "when": {
@@ -45,6 +50,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/wall/wall_side",
+        "uvlock": true,
         "y": 270
       },
       "when": {
@@ -54,6 +60,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/wall/wall_side_tall",
+        "uvlock": true,
         "y": 270
       },
       "when": {
@@ -63,6 +70,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/wall/wall_side",
+        "uvlock": true,
         "y": 90
       },
       "when": {
@@ -72,6 +80,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/wall/wall_side_tall",
+        "uvlock": true,
         "y": 90
       },
       "when": {
