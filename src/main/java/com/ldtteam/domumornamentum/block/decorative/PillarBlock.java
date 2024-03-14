@@ -18,6 +18,7 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -100,15 +101,9 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
 
     /**
      * Full block collisions
-     *
-     * @param p_60572_
-     * @param p_60573_
-     * @param p_60574_
-     * @param p_60575_
-     * @return
      */
     @Override
-    public VoxelShape getCollisionShape(BlockState p_60572_, BlockGetter p_60573_, BlockPos p_60574_, CollisionContext p_60575_)
+    public @NotNull VoxelShape getCollisionShape(@NotNull BlockState p_60572_, @NotNull BlockGetter p_60573_, @NotNull BlockPos p_60574_, @NotNull CollisionContext p_60575_)
     {
         return Shapes.block();
     }
@@ -125,7 +120,7 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
     }
 
     @Override
-    public float getExplosionResistance(BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {
+    public float getExplosionResistance(@NotNull BlockState state, BlockGetter level, @NotNull BlockPos pos, @NotNull Explosion explosion) {
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof MateriallyTexturedBlockEntity mtbe) {
             Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(0).getId());
@@ -138,7 +133,7 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
     }
 
     @Override
-    public float getDestroyProgress(BlockState state, Player player, BlockGetter level, BlockPos pos) {
+    public float getDestroyProgress(@NotNull BlockState state, @NotNull Player player, BlockGetter level, @NotNull BlockPos pos) {
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof MateriallyTexturedBlockEntity mtbe) {
             Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(0).getId());
@@ -168,18 +163,11 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
 
         Boolean base = this.isMatchingPillar(stateBelow);
         Boolean capital = this.isMatchingPillar(stateAbove);
-        if (base){
-            updateBelow(level, blockBelow,stateBelow);
-        }
-        if (capital){
-            updateAbove(level,blockAbove, stateAbove);
-        }
         return updateShape(this.defaultBlockState(), base, capital);
-
     }
 
     @Override
-    public void destroy(final LevelAccessor world, final BlockPos pos, final BlockState state)
+    public void destroy(final @NotNull LevelAccessor world, final @NotNull BlockPos pos, final @NotNull BlockState state)
     {
         super.destroy(world, pos, state);
         Comparable<PillarShapeType> column_property = state.getValue(COLUMN);
@@ -352,13 +340,13 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
     }
 
     @Override
-    public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final LevelReader world, final BlockPos pos, final Player player)
+    public @NotNull ItemStack getCloneItemStack(final @NotNull BlockState state, final @NotNull HitResult target, final LevelReader world, final @NotNull BlockPos pos, final @NotNull Player player)
     {
         return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos));
     }
 
     @Override
-    public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
+    public @NotNull SoundType getSoundType(@NotNull BlockState state, LevelReader level, @NotNull BlockPos pos, @Nullable Entity entity) {
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof MateriallyTexturedBlockEntity mtbe) {
             Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(0).getId());
@@ -375,4 +363,24 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
     {
         new ArchitectsCutterRecipeBuilder(this, RecipeCategory.DECORATIONS).count(COMPONENTS.size()).save(recipeOutput);
     }
+
+    @Override
+    public void setPlacedBy(@NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull BlockState pState, @Nullable LivingEntity pPlacer, @NotNull ItemStack pStack) {
+        super.setPlacedBy(pLevel, pPos, pState, pPlacer, pStack);
+
+        BlockPos blockAbove = pPos.above();
+        BlockPos blockBelow = pPos.below();
+        BlockState stateAbove = pLevel.getBlockState(blockAbove);
+        BlockState stateBelow = pLevel.getBlockState(blockBelow);
+
+        boolean base = this.isMatchingPillar(stateBelow);
+        boolean capital = this.isMatchingPillar(stateAbove);
+        if (base){
+            updateBelow(pLevel, blockBelow,stateBelow);
+        }
+        if (capital){
+            updateAbove(pLevel,blockAbove, stateAbove);
+        }
+    }
+
 }
