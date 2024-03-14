@@ -112,7 +112,7 @@ public class RetexturedBakedModelBuilder {
                 if (needsRetexturing(this.retexturingMaps, quad.getSprite())) {
                     retexture(quad, value).ifPresent(newQuad -> builder.addCulledFace(value, newQuad));
                 } else if (!needsErasure(this.retexturingMaps, quad.getSprite())) {
-                    builder.addUnculledFace(quad);
+                    builder.addCulledFace(value, quad);
                 }
             });
         }
