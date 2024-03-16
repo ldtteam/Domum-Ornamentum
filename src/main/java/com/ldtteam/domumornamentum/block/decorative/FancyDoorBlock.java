@@ -11,6 +11,7 @@ import com.ldtteam.domumornamentum.block.components.SimpleRetexturableComponent;
 import com.ldtteam.domumornamentum.block.types.FancyDoorType;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
+import com.ldtteam.domumornamentum.recipe.FinishedDORecipe;
 import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.BlockUtils;
@@ -78,32 +79,6 @@ public class FancyDoorBlock extends AbstractBlockDoor<FancyDoorBlock> implements
     }
 
     @Override
-    public float getExplosionResistance(BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {
-        BlockEntity be = level.getBlockEntity(pos);
-        if (be instanceof MateriallyTexturedBlockEntity mtbe) {
-            Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(0).getId());
-            if (block != null)
-            {
-                return block.getExplosionResistance(state, level, pos, explosion);
-            }
-        }
-        return super.getExplosionResistance(state, level, pos, explosion);
-    }
-
-    @Override
-    public float getDestroyProgress(BlockState state, Player player, BlockGetter level, BlockPos pos) {
-        BlockEntity be = level.getBlockEntity(pos);
-        if (be instanceof MateriallyTexturedBlockEntity mtbe) {
-            Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(0).getId());
-            if (block != null)
-            {
-                return block.getDestroyProgress(block.defaultBlockState(), player, level, pos);
-            }
-        }
-        return super.getDestroyProgress(state, player, level, pos);
-    }
-
-    @Override
     public @NotNull List<IMateriallyTexturedBlockComponent> getComponents()
     {
         return COMPONENTS;
@@ -118,15 +93,14 @@ public class FancyDoorBlock extends AbstractBlockDoor<FancyDoorBlock> implements
         }
 
         try {
-            for (final FancyDoorType fancyDoorType : FancyDoorType.values())
-            {
+            for (final FancyDoorType fancyDoorType : FancyDoorType.values()) {
                 final ItemStack result = new ItemStack(this);
                 result.getOrCreateTag().putString("type", fancyDoorType.toString().toUpperCase());
 
                 fillItemGroupCache.add(result);
             }
-        } catch (IllegalStateException exception)
-        {
+        }
+        catch (IllegalStateException exception) {
             //Ignored. Thrown during start up.
         }
 
@@ -184,7 +158,7 @@ public class FancyDoorBlock extends AbstractBlockDoor<FancyDoorBlock> implements
         });
     }
 
-@Override
+    @Override
     public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final BlockGetter world, final BlockPos pos, final Player player)
     {
         return BlockUtils.getMaterializedItemStack(player, world, pos, (s, e) -> {
@@ -200,19 +174,6 @@ public class FancyDoorBlock extends AbstractBlockDoor<FancyDoorBlock> implements
     }
 
     @Override
-    public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
-        BlockEntity be = level.getBlockEntity(pos);
-        if (be instanceof MateriallyTexturedBlockEntity mtbe) {
-            Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(0).getId());
-            if (block != null)
-            {
-                return block.getSoundType(state, level, pos, entity);
-            }
-        }
-        return super.getSoundType(state, level, pos, entity);
-    }
-
-    @Override
     public @NotNull Collection<FinishedRecipe> getValidCutterRecipes()
     {
         final List<FinishedRecipe> recipes = new ArrayList<>();
@@ -220,7 +181,7 @@ public class FancyDoorBlock extends AbstractBlockDoor<FancyDoorBlock> implements
         for (final FancyDoorType value : FancyDoorType.values())
         {
             recipes.add(
-              new FinishedRecipe() {
+              new FinishedDORecipe() {
                   @Override
                   public void serializeRecipeData(final @NotNull JsonObject jsonObject)
                   {
@@ -236,30 +197,30 @@ public class FancyDoorBlock extends AbstractBlockDoor<FancyDoorBlock> implements
                   {
                       return new ResourceLocation(Objects.requireNonNull(getRegistryName(getBlock())) + "_" + value.getSerializedName());
                   }
-
-                  @Override
-                  public @NotNull RecipeSerializer<?> getType()
-                  {
-                      return ModRecipeSerializers.ARCHITECTS_CUTTER.get();
-                  }
-
-                  @Nullable
-                  @Override
-                  public JsonObject serializeAdvancement()
-                  {
-                      return null;
-                  }
-
-                  @Nullable
-                  @Override
-                  public ResourceLocation getAdvancementId()
-                  {
-                      return null;
-                  }
               }
             );
         }
 
         return recipes;
+    }
+
+    @Override
+    public float getExplosionResistance(BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {
+        return getDOExplosionResistance(this, state, level, pos, explosion);
+    }
+
+    @Override
+    public float getDestroyProgress(@NotNull BlockState state, @NotNull Player player, @NotNull BlockGetter level, @NotNull BlockPos pos) {
+        return getDODestroyProgress(this, state, player, level, pos);
+    }
+
+    @Override
+    public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
+        return getDOSoundType(this, state, level, pos, entity);
+    }
+
+    @Override
+    public IMateriallyTexturedBlockComponent getMainComponent() {
+        return COMPONENTS.get(0);
     }
 }

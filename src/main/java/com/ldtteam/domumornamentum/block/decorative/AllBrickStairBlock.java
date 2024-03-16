@@ -10,6 +10,7 @@ import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.components.SimpleRetexturableComponent;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
+import com.ldtteam.domumornamentum.recipe.FinishedDORecipe;
 import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.BlockUtils;
@@ -72,28 +73,27 @@ public class AllBrickStairBlock extends AbstractBlockStairs<AllBrickStairBlock> 
 
     @Override
     public float getExplosionResistance(BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {
-        BlockEntity be = level.getBlockEntity(pos);
-        if (be instanceof MateriallyTexturedBlockEntity mtbe) {
-            Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(0).getId());
-            if (block != null)
-            {
-                return block.getExplosionResistance(state, level, pos, explosion);
-            }
-        }
-        return super.getExplosionResistance(state, level, pos, explosion);
+        return getDOExplosionResistance(this, state, level, pos, explosion);
     }
 
     @Override
-    public float getDestroyProgress(BlockState state, Player player, BlockGetter level, BlockPos pos) {
-        BlockEntity be = level.getBlockEntity(pos);
-        if (be instanceof MateriallyTexturedBlockEntity mtbe) {
-            Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(0).getId());
-            if (block != null)
-            {
-                return block.getDestroyProgress(block.defaultBlockState(), player, level, pos);
-            }
-        }
-        return super.getDestroyProgress(state, player, level, pos);
+    public float getDestroyProgress(@NotNull BlockState state, @NotNull Player player, @NotNull BlockGetter level, @NotNull BlockPos pos) {
+        return getDODestroyProgress(this, state, player, level, pos);
+    }
+
+    @Override
+    public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
+        return getDOSoundType(this, state, level, pos, entity);
+    }
+
+    @Override
+    public IMateriallyTexturedBlockComponent getMainComponent() {
+        return COMPONENTS.get(0);
+    }
+
+    @Override
+    public void fillItemCategory(final @NotNull NonNullList<ItemStack> items) {
+        fillDOItemCategory(this, items, fillItemGroupCache);
     }
 
     @Override
@@ -103,28 +103,8 @@ public class AllBrickStairBlock extends AbstractBlockStairs<AllBrickStairBlock> 
     }
 
     @Override
-    public void fillItemCategory(final @NotNull NonNullList<ItemStack> items)
-    {
-        if (!fillItemGroupCache.isEmpty()) {
-            items.addAll(fillItemGroupCache);
-            return;
-        }
-
-        try {
-            final ItemStack result = new ItemStack(this);
-
-            fillItemGroupCache.add(result);
-        } catch (IllegalStateException exception)
-        {
-            //Ignored. Thrown during start up.
-        }
-
-        items.addAll(fillItemGroupCache);
-    }
-
-    @Override
     public void setPlacedBy(
-            final @NotNull Level worldIn, final @NotNull BlockPos pos, final @NotNull BlockState state, @Nullable final LivingEntity placer, final @NotNull ItemStack stack)
+      final @NotNull Level worldIn, final @NotNull BlockPos pos, final @NotNull BlockState state, @Nullable final LivingEntity placer, final @NotNull ItemStack stack)
     {
         super.setPlacedBy(worldIn, pos, state, placer, stack);
 
@@ -163,24 +143,12 @@ public class AllBrickStairBlock extends AbstractBlockStairs<AllBrickStairBlock> 
     @Override
     public @NotNull Block getBlock() { return this; }
 
-    @Override
-    public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
-        BlockEntity be = level.getBlockEntity(pos);
-        if (be instanceof MateriallyTexturedBlockEntity mtbe) {
-            Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(0).getId());
-            if (block != null)
-            {
-                return block.getSoundType(state, level, pos, entity);
-            }
-        }
-        return super.getSoundType(state, level, pos, entity);
-    }
 
     @NotNull
     public Collection<FinishedRecipe> getValidCutterRecipes()
     {
         return Lists.newArrayList(
-                new FinishedRecipe()
+                new FinishedDORecipe()
                 {
                     @Override
                     public void serializeRecipeData(final @NotNull JsonObject json)
@@ -192,26 +160,6 @@ public class AllBrickStairBlock extends AbstractBlockStairs<AllBrickStairBlock> 
                     public @NotNull ResourceLocation getId()
                     {
                         return Objects.requireNonNull(getRegistryName(getBlock()));
-                    }
-
-                    @Override
-                    public @NotNull RecipeSerializer<?> getType()
-                    {
-                        return ModRecipeSerializers.ARCHITECTS_CUTTER.get();
-                    }
-
-                    @Nullable
-                    @Override
-                    public JsonObject serializeAdvancement()
-                    {
-                        return null;
-                    }
-
-                    @Nullable
-                    @Override
-                    public ResourceLocation getAdvancementId()
-                    {
-                        return null;
                     }
                 }
         );
