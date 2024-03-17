@@ -353,4 +353,19 @@ public final class ModBlocks implements IModBlocks {
 
         return stack;
     }
+
+    public static Block[] getMateriallyTexturableBlocks() {
+        return BLOCKS.getRegistry()
+                .get()
+                .stream()
+                .filter(IMateriallyTexturedBlock.class::isInstance)
+                .toArray(Block[]::new);
+    }
+
+    public static Item[] getMateriallyTexturableItems() {
+        return Arrays.stream(getMateriallyTexturableBlocks())
+                .map(block -> BLOCKS.getRegistry().get().getKey(block))
+                .map(name -> ITEMS.getRegistry().get().get(name))
+                .toArray(Item[]::new);
+    }
 }

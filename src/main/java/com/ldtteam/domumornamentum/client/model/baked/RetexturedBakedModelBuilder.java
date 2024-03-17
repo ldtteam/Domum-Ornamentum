@@ -2,6 +2,7 @@ package com.ldtteam.domumornamentum.client.model.baked;
 
 import com.google.common.collect.Maps;
 import com.ldtteam.domumornamentum.client.model.utils.ModelSpriteQuadTransformer;
+import com.ldtteam.domumornamentum.client.model.utils.ModelSpriteQuadTransformerData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -23,18 +24,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class RetexturedBakedModelBuilder
-{
+public class RetexturedBakedModelBuilder {
 
     private static final RandomSource RANDOM = RandomSource.createThreadSafe();
 
-    public static RetexturedBakedModelBuilder createFor(BlockState sourceState, RenderType renderType, boolean itemStackMode, final BakedModel target)
-    {
+    public static RetexturedBakedModelBuilder createFor(BlockState sourceState, RenderType renderType, boolean itemStackMode, final BakedModel target) {
         return new RetexturedBakedModelBuilder(target, sourceState, renderType, itemStackMode, target);
     }
 
-    public static RetexturedBakedModelBuilder createFor(BlockState sourceState, RenderType renderType, boolean itemStackMode, final BakedModel sourceModel, final BakedModel target)
-    {
+    public static RetexturedBakedModelBuilder createFor(BlockState sourceState, RenderType renderType, boolean itemStackMode, final BakedModel sourceModel, final BakedModel target) {
         return new RetexturedBakedModelBuilder(sourceModel, sourceState, renderType, itemStackMode, target);
     }
 
@@ -43,7 +41,7 @@ public class RetexturedBakedModelBuilder
     private final RenderType renderType;
     private final BlockState sourceState;
     private final boolean itemStackMode;
-    private final Map<ResourceLocation, BakedModel> retexturingMaps = Maps.newHashMap();
+    private final Map<ResourceLocation, ReplacementModelData> retexturingMaps = Maps.newHashMap();
 
     private RetexturedBakedModelBuilder(final BakedModel sourceModel, BlockState sourceState, RenderType renderType, boolean itemStackMode, final BakedModel target) {
         this.sourceModel = sourceModel;
@@ -54,35 +52,34 @@ public class RetexturedBakedModelBuilder
     }
 
     public RetexturedBakedModelBuilder with(
-      final ResourceLocation source,
-      @Nullable final BakedModel target
-    ) {
-        this.retexturingMaps.putIfAbsent(source, target);
+            final ResourceLocation source,
+            final BakedModel target,
+            final BlockState state
+            ) {
+        this.retexturingMaps.putIfAbsent(source, new ReplacementModelData(target, state));
         return this;
     }
 
     public RetexturedBakedModelBuilder with(
             final ResourceLocation source,
             final Block target
-            ) {
+    ) {
         final BlockState defaultState = target.defaultBlockState();
         final BakedModel bakedModel = Minecraft.getInstance().getBlockRenderer().getBlockModel(defaultState);
 
-       if (!itemStackMode) {
-           if (bakedModel.getRenderTypes(target.defaultBlockState(), RANDOM, ModelData.EMPTY).contains(this.renderType)) {
-               return this.with(source, bakedModel);
-           }
-           else {
-               return this.withOut(source);
-           }
-       } else {
-           if (bakedModel.getRenderTypes(new ItemStack(target), Minecraft.useShaderTransparency()).contains(this.renderType)) {
-               return this.with(source, bakedModel);
-           }
-           else {
-               return this.withOut(source);
-           }
-       }
+        if (!itemStackMode) {
+            if (bakedModel.getRenderTypes(target.defaultBlockState(), RANDOM, ModelData.EMPTY).contains(this.renderType)) {
+                return this.with(source, bakedModel, defaultState);
+            } else {
+                return this.withOut(source);
+            }
+        } else {
+            if (bakedModel.getRenderTypes(new ItemStack(target), Minecraft.useShaderTransparency()).contains(this.renderType)) {
+                return this.with(source, bakedModel, defaultState);
+            } else {
+                return this.withOut(source);
+            }
+        }
 
     }
 
@@ -103,35 +100,26 @@ public class RetexturedBakedModelBuilder
         );
 
         this.target.getQuads(null, null, RANDOM, ModelData.EMPTY, this.renderType).forEach(quad -> {
-            if (needsRetexturing(this.retexturingMaps, quad.getSprite()))
-            {
+            if (needsRetexturing(this.retexturingMaps, quad.getSprite())) {
                 retexture(quad, null).ifPresent(builder::addUnculledFace);
-            }
-            else if (!needsErasure(this.retexturingMaps, quad.getSprite()))
-            {
+            } else if (!needsErasure(this.retexturingMaps, quad.getSprite())) {
                 builder.addUnculledFace(quad);
             }
         });
 
-        for (final Direction value : Direction.values())
-        {
+        for (final Direction value : Direction.values()) {
             this.target.getQuads(null, value, RANDOM, ModelData.EMPTY, this.renderType).forEach(quad -> {
-                if (needsRetexturing(this.retexturingMaps, quad.getSprite()))
-                {
+                if (needsRetexturing(this.retexturingMaps, quad.getSprite())) {
                     retexture(quad, value).ifPresent(newQuad -> builder.addCulledFace(value, newQuad));
-                }
-
-                else if (!needsErasure(this.retexturingMaps, quad.getSprite()))
-                {
-                    builder.addUnculledFace(quad);
+                } else if (!needsErasure(this.retexturingMaps, quad.getSprite())) {
+                    builder.addCulledFace(value, quad);
                 }
             });
         }
 
         TextureAtlasSprite particleTexture = this.target.getParticleIcon(ModelData.EMPTY);
-        if (needsRetexturing(this.retexturingMaps, particleTexture))
-        {
-            final BakedModel particleOverrideTextureModel = this.retexturingMaps.get(particleTexture.contents().name());
+        if (needsRetexturing(this.retexturingMaps, particleTexture)) {
+            final BakedModel particleOverrideTextureModel = this.retexturingMaps.get(particleTexture.contents().name()).model();
             particleTexture = particleOverrideTextureModel.getParticleIcon(ModelData.EMPTY);
         }
         builder.particle(particleTexture);
@@ -139,63 +127,69 @@ public class RetexturedBakedModelBuilder
         return builder.build();
     }
 
-    private boolean needsRetexturing(Map<ResourceLocation, BakedModel> retexturingMaps, TextureAtlasSprite quad) {
+    private boolean needsRetexturing(Map<ResourceLocation, ?> retexturingMaps, TextureAtlasSprite quad) {
         return retexturingMaps.containsKey(quad.contents().name()) && retexturingMaps.get(quad.contents().name()) != null;
     }
 
-    private boolean needsErasure(Map<ResourceLocation, BakedModel> retexturingMaps, TextureAtlasSprite quad) {
+    private boolean needsErasure(Map<ResourceLocation, ?> retexturingMaps, TextureAtlasSprite quad) {
         return retexturingMaps.containsKey(quad.contents().name()) && retexturingMaps.get(quad.contents().name()) == null;
     }
 
-    private Optional<BakedQuad> retexture(@NotNull BakedQuad quad, @Nullable Direction direction)
-    {
+    private Optional<BakedQuad> retexture(@NotNull BakedQuad quad, @Nullable Direction direction) {
         if (!needsRetexturing(this.retexturingMaps, quad.getSprite()))
             return Optional.empty();
 
         if (needsErasure(this.retexturingMaps, quad.getSprite()))
             return Optional.empty();
 
-        final Optional<TextureAtlasSprite> retexturingSprite = this.getTexture(quad, direction);
+        final Optional<ModelSpriteQuadTransformerData> retexturingQuad = this.getRetexturingQuad(quad, direction);
 
-        return retexturingSprite.map(sprite -> {
+        return retexturingQuad.map(sprite -> {
             final IQuadTransformer quadTransformer = ModelSpriteQuadTransformer.create(sprite);
             return quadTransformer.process(quad);
         });
     }
 
-    private Optional<TextureAtlasSprite> getTexture(@NotNull BakedQuad quad, @Nullable Direction direction)
-    {
-        if (!needsRetexturing(retexturingMaps, quad.getSprite())) {
+    private Optional<ModelSpriteQuadTransformerData> getRetexturingQuad(@NotNull BakedQuad source, @Nullable Direction direction) {
+        if (!needsRetexturing(retexturingMaps, source.getSprite())) {
             return Optional.empty();
         }
 
-        if (needsErasure(retexturingMaps, quad.getSprite())) {
+        if (needsErasure(retexturingMaps, source.getSprite())) {
             return Optional.empty();
         }
 
-        final BakedModel targetModel = this.retexturingMaps.get(quad.getSprite().contents().name());
-        List<BakedQuad> targetQuads = targetModel.getQuads(
-          null,
-          direction,
-          RANDOM,
-          ModelData.EMPTY,
-          this.renderType
+        final ReplacementModelData modelData = this.retexturingMaps.get(source.getSprite().contents().name());
+        List<BakedQuad> targetQuads = modelData.model().getQuads(
+                null,
+                direction,
+                RANDOM,
+                ModelData.EMPTY,
+                this.renderType
         );
 
         //If we did not find anything, that might be because the target model specifies culling while our source did not.
         //Lets try with the targeting direction (the normal) of the quad itself.
         if (targetQuads.isEmpty())
-            targetQuads = targetModel.getQuads(
-              null,
-              quad.getDirection(),
-              RANDOM,
-              ModelData.EMPTY,
-              this.renderType
+            targetQuads = modelData.model().getQuads(
+                    null,
+                    source.getDirection(),
+                    RANDOM,
+                    ModelData.EMPTY,
+                    this.renderType
             );
 
-        if(targetQuads.isEmpty())
+        if (targetQuads.isEmpty())
             return Optional.empty();
 
-        return Optional.of(targetQuads.get(0).getSprite());
+        final ModelSpriteQuadTransformerData data = new ModelSpriteQuadTransformerData(
+                targetQuads.get(0),
+                modelData.state()
+            );
+
+        return Optional.of(data);
     }
+
+    record ReplacementModelData(BakedModel model, BlockState state) {}
+
 }

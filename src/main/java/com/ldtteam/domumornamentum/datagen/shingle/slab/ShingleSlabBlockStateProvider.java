@@ -43,6 +43,7 @@ public class ShingleSlabBlockStateProvider extends BlockStateProvider
                         .modelFile(models.computeIfAbsent(shapeValue, shape -> models().withExistingParent("block/shingle_slab/" + shapeValue.name().toLowerCase(), modLoc("block/shingle_slab/shingle_slab_" + shapeValue.name().toLowerCase() + "_spec"))
                                 .customLoader(MateriallyTexturedModelBuilder::new)
                                 .end()))
+                        .uvLock(true)
                         .rotationY(getYFromFacing(facingValue))
                         .addModel()
                         .condition(StairBlock.FACING, facingValue)

@@ -40,6 +40,7 @@ public class PanelBlockStateProvider extends BlockStateProvider {
                                         .withExistingParent("block/panel/panel_" + typeValue.getSerializedName(), modLoc("block/panel/panel_%s_spec".formatted(typeValue.getSerializedName())))
                                         .customLoader(MateriallyTexturedModelBuilder::new)
                                         .end())
+                                .uvLock(true)
                                 .rotationY(getYFromFacing(facingValue) + getYFromOpenAndHalf(openValue, halfValue))
                                 .rotationX(getXFromOpenAndHalf(openValue, halfValue))
                                 .addModel()
