@@ -76,8 +76,7 @@ public class AllBrickBlock extends AbstractBlock<AllBrickBlock> implements IMate
     }
 
     @Override
-    public void setPlacedBy(
-            final @NotNull Level worldIn, final @NotNull BlockPos pos, final @NotNull BlockState state, @Nullable final LivingEntity placer, final @NotNull ItemStack stack)
+    public void setPlacedBy(final @NotNull Level worldIn, final @NotNull BlockPos pos, final @NotNull BlockState state, @Nullable final LivingEntity placer, final @NotNull ItemStack stack)
     {
         super.setPlacedBy(worldIn, pos, state, placer, stack);
 

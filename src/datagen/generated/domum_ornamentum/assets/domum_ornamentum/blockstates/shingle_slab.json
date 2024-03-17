@@ -2,7 +2,8 @@
   "multipart": [
     {
       "apply": {
-        "model": "domum_ornamentum:block/shingle_slab/top"
+        "model": "domum_ornamentum:block/shingle_slab/top",
+        "uvlock": true
       },
       "when": {
         "facing": "north",
@@ -11,7 +12,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/shingle_slab/one_way"
+        "model": "domum_ornamentum:block/shingle_slab/one_way",
+        "uvlock": true
       },
       "when": {
         "facing": "north",
@@ -20,7 +22,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/shingle_slab/two_way"
+        "model": "domum_ornamentum:block/shingle_slab/two_way",
+        "uvlock": true
       },
       "when": {
         "facing": "north",
@@ -29,7 +32,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/shingle_slab/three_way"
+        "model": "domum_ornamentum:block/shingle_slab/three_way",
+        "uvlock": true
       },
       "when": {
         "facing": "north",
@@ -38,7 +42,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/shingle_slab/four_way"
+        "model": "domum_ornamentum:block/shingle_slab/four_way",
+        "uvlock": true
       },
       "when": {
         "facing": "north",
@@ -47,7 +52,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/shingle_slab/curved"
+        "model": "domum_ornamentum:block/shingle_slab/curved",
+        "uvlock": true
       },
       "when": {
         "facing": "north",
@@ -57,6 +63,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle_slab/top",
+        "uvlock": true,
         "y": 180
       },
       "when": {
@@ -67,6 +74,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle_slab/one_way",
+        "uvlock": true,
         "y": 180
       },
       "when": {
@@ -77,6 +85,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle_slab/two_way",
+        "uvlock": true,
         "y": 180
       },
       "when": {
@@ -87,6 +96,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle_slab/three_way",
+        "uvlock": true,
         "y": 180
       },
       "when": {
@@ -97,6 +107,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle_slab/four_way",
+        "uvlock": true,
         "y": 180
       },
       "when": {
@@ -107,6 +118,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle_slab/curved",
+        "uvlock": true,
         "y": 180
       },
       "when": {
@@ -117,6 +129,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle_slab/top",
+        "uvlock": true,
         "y": 270
       },
       "when": {
@@ -127,6 +140,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle_slab/one_way",
+        "uvlock": true,
         "y": 270
       },
       "when": {
@@ -137,6 +151,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle_slab/two_way",
+        "uvlock": true,
         "y": 270
       },
       "when": {
@@ -147,6 +162,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle_slab/three_way",
+        "uvlock": true,
         "y": 270
       },
       "when": {
@@ -157,6 +173,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle_slab/four_way",
+        "uvlock": true,
         "y": 270
       },
       "when": {
@@ -167,6 +184,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle_slab/curved",
+        "uvlock": true,
         "y": 270
       },
       "when": {
@@ -177,6 +195,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle_slab/top",
+        "uvlock": true,
         "y": 90
       },
       "when": {
@@ -187,6 +206,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle_slab/one_way",
+        "uvlock": true,
         "y": 90
       },
       "when": {
@@ -197,6 +217,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle_slab/two_way",
+        "uvlock": true,
         "y": 90
       },
       "when": {
@@ -207,6 +228,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle_slab/three_way",
+        "uvlock": true,
         "y": 90
       },
       "when": {
@@ -217,6 +239,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle_slab/four_way",
+        "uvlock": true,
         "y": 90
       },
       "when": {
@@ -227,6 +250,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle_slab/curved",
+        "uvlock": true,
         "y": 90
       },
       "when": {

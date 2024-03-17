@@ -47,6 +47,7 @@ public class FancyTrapdoorsBlockStateProvider extends BlockStateProvider
                                 .modelFile(models().withExistingParent("block/trapdoor/fancy/trapdoor_" + typeValue.getSerializedName(), modLoc("block/trapdoor/fancy/trapdoor_" + typeValue.getSerializedName() + "_spec"))
                                         .customLoader(MateriallyTexturedModelBuilder::new)
                                         .end())
+                                .uvLock(true)
                                 .rotationX(getXFromOpenAndHalf(openValue, halfValue))
                                 .rotationY(getYFromFacing(facingValue) + getYFromOpenAndHalf(openValue, halfValue))
                                 .addModel()

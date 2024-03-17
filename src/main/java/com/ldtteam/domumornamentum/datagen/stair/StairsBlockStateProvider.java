@@ -43,6 +43,7 @@ public class StairsBlockStateProvider extends BlockStateProvider
                             .modelFile(models().withExistingParent("block/stair/" + getTypeFromShape(shapeValue), modLoc("block/stair/" + getTypeFromShape(shapeValue) + "_spec"))
                                     .customLoader(MateriallyTexturedModelBuilder::new)
                                     .end())
+                            .uvLock(true)
                             .rotationY(getYFromFacing(facingValue) + getYFromShape(shapeValue) + getYFromHalf(halfValue, shapeValue))
                             .rotationX(halfValue == Half.TOP ? 180 : 0)
                             .addModel()

@@ -151,18 +151,11 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
 
         Boolean base = this.isMatchingPillar(stateBelow);
         Boolean capital = this.isMatchingPillar(stateAbove);
-        if (base){
-            updateBelow(level, blockBelow,stateBelow);
-        }
-        if (capital){
-            updateAbove(level,blockAbove, stateAbove);
-        }
         return updateShape(this.defaultBlockState(), base, capital);
-
     }
 
     @Override
-    public void destroy(final LevelAccessor world, final BlockPos pos, final BlockState state)
+    public void destroy(final @NotNull LevelAccessor world, final @NotNull BlockPos pos, final @NotNull BlockState state)
     {
         super.destroy(world, pos, state);
         Comparable<PillarShapeType> column_property = state.getValue(COLUMN);
@@ -295,19 +288,6 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
         return COMPONENTS;
     }
 
-    @Override
-    public void setPlacedBy(
-            final @NotNull Level worldIn, final @NotNull BlockPos pos, final @NotNull BlockState state, @Nullable final LivingEntity placer, final @NotNull ItemStack stack)
-    {
-        super.setPlacedBy(worldIn, pos, state, placer, stack);
-
-        final CompoundTag textureData = stack.getOrCreateTagElement("textureData");
-        final BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-
-        if (tileEntity instanceof MateriallyTexturedBlockEntity)
-            ((MateriallyTexturedBlockEntity) tileEntity).updateTextureDataWith(MaterialTextureData.deserializeFromNBT(textureData));
-    }
-
     @Nullable
     @Override
     public BlockEntity newBlockEntity(final @NotNull BlockPos blockPos, final @NotNull BlockState blockState)
@@ -355,5 +335,25 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
                     }
                 }
         );
+    }
+
+    @Override
+    public void setPlacedBy(final @NotNull Level pLevel, final @NotNull BlockPos pPos, final @NotNull BlockState pState, @Nullable final LivingEntity pPlacer, final @NotNull ItemStack pStack)
+    {
+        super.setPlacedBy(pLevel, pPos, pState, pPlacer, pStack);
+
+        BlockPos blockAbove = pPos.above();
+        BlockPos blockBelow = pPos.below();
+        BlockState stateAbove = pLevel.getBlockState(blockAbove);
+        BlockState stateBelow = pLevel.getBlockState(blockBelow);
+
+        boolean base = this.isMatchingPillar(stateBelow);
+        boolean capital = this.isMatchingPillar(stateAbove);
+        if (base){
+            updateBelow(pLevel, blockBelow,stateBelow);
+        }
+        if (capital){
+            updateAbove(pLevel,blockAbove, stateAbove);
+        }
     }
 }
