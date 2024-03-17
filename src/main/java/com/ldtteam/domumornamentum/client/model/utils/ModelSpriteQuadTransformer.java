@@ -63,8 +63,8 @@ public class ModelSpriteQuadTransformer implements IQuadTransformer
             final float u = ( uv[0] - minU ) / uDelta;
             final float v = ( uv[1] - minV ) / vDelta;
 
-            final float newU = this.target.quad().sprite.getU(u);
-            final float newV = this.target.quad().sprite.getV(v);
+            final float newU = this.target.quad().sprite.getU(u * 16);
+            final float newV = this.target.quad().sprite.getV(v * 16);
 
             quad.getVertices()[offset] = Float.floatToRawIntBits(newU);
             quad.getVertices()[offset + 1] = Float.floatToRawIntBits(newV);
