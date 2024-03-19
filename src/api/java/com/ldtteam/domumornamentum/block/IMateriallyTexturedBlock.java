@@ -93,6 +93,10 @@ public interface IMateriallyTexturedBlock
     {
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof IMateriallyTexturedBlockEntity mtbe) {
+            if (getMainComponent() == null)
+            {
+                return stack.isCorrectToolForDrops(state);
+            }
             Block block = mtbe.getTextureData().getTexturedComponents().get(getMainComponent().getId());
             if (block != null)
             {
@@ -105,6 +109,10 @@ public interface IMateriallyTexturedBlock
     default float getDOExplosionResistance(final Block inputBlock, BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof IMateriallyTexturedBlockEntity mtbe) {
+            if (getMainComponent() == null)
+            {
+                return inputBlock.getExplosionResistance(state, level, pos, explosion);
+            }
             Block block = mtbe.getTextureData().getTexturedComponents().get(getMainComponent().getId());
             if (block != null)
             {
@@ -117,6 +125,10 @@ public interface IMateriallyTexturedBlock
     default float getDODestroyProgress(final Block inputBlock, BlockState state, Player player, BlockGetter level, BlockPos pos) {
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof IMateriallyTexturedBlockEntity mtbe) {
+            if (getMainComponent() == null)
+            {
+                return inputBlock.getDestroyProgress(state, player, level, pos);
+            }
             Block block = mtbe.getTextureData().getTexturedComponents().get(getMainComponent().getId());
             if (block != null)
             {
@@ -129,6 +141,10 @@ public interface IMateriallyTexturedBlock
     default SoundType getDOSoundType(final Block inputBlock, BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof IMateriallyTexturedBlockEntity mtbe) {
+            if (getMainComponent() == null)
+            {
+                return inputBlock.getSoundType(state, level, pos, entity);
+            }
             Block block = mtbe.getTextureData().getTexturedComponents().get(getMainComponent().getId());
             if (block != null)
             {
@@ -159,7 +175,10 @@ public interface IMateriallyTexturedBlock
      * Get the main component of the block.
      * @return the main component.
      */
-    IMateriallyTexturedBlockComponent getMainComponent();
+    default IMateriallyTexturedBlockComponent getMainComponent()
+    {
+        return null;
+    }
 
     @NotNull
     default MaterialTextureData getRandomMaterials()
