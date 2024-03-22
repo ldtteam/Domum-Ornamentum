@@ -23,6 +23,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
@@ -106,22 +107,17 @@ public class PanelBlock extends AbstractPanelBlockTrapdoor<PanelBlock> implement
     {
         super.setPlacedBy(worldIn, pos, state, placer, stack);
 
-        String type = stack.getOrCreateTag().getString("type");
-        if (type == "") {
-            type = TrapdoorType.FULL.name();
-        }
-
-        worldIn.setBlock(
-          pos,
-          state.setValue(TYPE, TrapdoorType.valueOf(type.toUpperCase())),
-          Block.UPDATE_ALL
-        );
-
         final CompoundTag textureData = stack.getOrCreateTagElement("textureData");
         final BlockEntity tileEntity = worldIn.getBlockEntity(pos);
 
         if (tileEntity instanceof MateriallyTexturedBlockEntity)
             ((MateriallyTexturedBlockEntity) tileEntity).updateTextureDataWith(MaterialTextureData.deserializeFromNBT(textureData));
+    }
+
+    @Override
+    public BlockState getStateForPlacement(final @NotNull BlockPlaceContext context)
+    {
+        return super.getStateForPlacement(context).setValue(TYPE, TrapdoorType.valueOf(context.getItemInHand().getOrCreateTag().getString("type")));
     }
 
     @Nullable

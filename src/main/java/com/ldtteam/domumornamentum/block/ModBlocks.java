@@ -16,6 +16,8 @@ import com.ldtteam.domumornamentum.item.vanilla.*;
 import com.ldtteam.domumornamentum.shingles.ShingleHeightType;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
@@ -351,5 +353,21 @@ public final class ModBlocks implements IModBlocks {
         stack.getOrCreateTag().put("textureData", textureNbt);
 
         return stack;
+    }
+
+    public static Block[] getMateriallyTexturableBlocks() {
+        return BLOCKS.getEntries()
+                 .stream()
+                 .map(RegistryObject::get)
+                 .filter(IMateriallyTexturedBlock.class::isInstance)
+                 .toArray(Block[]::new);
+    }
+
+    public static Item[] getMateriallyTexturableItems() {
+        return Arrays.stream(getMateriallyTexturableBlocks())
+                 .map(BuiltInRegistries.BLOCK::getKey)
+                 .map(BuiltInRegistries.ITEM::get)
+                 .filter(Objects::nonNull)
+                 .toArray(Item[]::new);
     }
 }
