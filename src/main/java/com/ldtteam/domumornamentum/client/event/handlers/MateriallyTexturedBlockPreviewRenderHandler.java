@@ -20,7 +20,7 @@ public class MateriallyTexturedBlockPreviewRenderHandler {
 
     @SubscribeEvent
     public static void onRenderLevelStage(RenderLevelStageEvent event) {
-        if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_LEVEL) {
+        if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_PARTICLES) {
             final PoseStack poseStack = event.getPoseStack();
             renderMateriallyTexturedBlockPreview(poseStack);
         }

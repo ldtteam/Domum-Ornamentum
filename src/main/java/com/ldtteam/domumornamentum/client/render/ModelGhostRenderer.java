@@ -86,12 +86,16 @@ public class ModelGhostRenderer {
                     blockHitResult
             );
             placementState = blockItem.getBlock().getStateForPlacement(context);
+            if (placementState == null) {
+                poseStack.popPose();
+                return;
+            }
             final BakedModel model = Minecraft.getInstance().getBlockRenderer().getBlockModelShaper().getBlockModel(placementState);
 
             if (blockItem.getBlock() instanceof EntityBlock entityBlock) {
                 final BlockEntity blockEntity = entityBlock.newBlockEntity(context.getClickedPos(), placementState);
                 if (blockEntity != null) {
-                    CompoundTag beingPlacedTag = blockItem.getBlockEntityData(renderStack);
+                    CompoundTag beingPlacedTag = renderStack.getTag();
                     if (beingPlacedTag == null)
                         beingPlacedTag = new CompoundTag();
 
