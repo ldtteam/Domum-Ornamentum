@@ -10,6 +10,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.data.models.blockstates.PropertyDispatch;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
@@ -33,6 +34,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.BiFunction;
 import java.util.stream.StreamSupport;
 
 public interface IMateriallyTexturedBlock
@@ -106,12 +108,12 @@ public interface IMateriallyTexturedBlock
         return stack.isCorrectToolForDrops(state);
     }
 
-    default float getDOExplosionResistance(final Block inputBlock, BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {
+    default float getDOExplosionResistance(final PropertyDispatch.QuadFunction<BlockState, BlockGetter, BlockPos, Explosion, Float> inputFunction, BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof IMateriallyTexturedBlockEntity mtbe) {
             if (getMainComponent() == null)
             {
-                return inputBlock.getExplosionResistance(state, level, pos, explosion);
+                return inputFunction.apply(state, level, pos, explosion);
             }
             Block block = mtbe.getTextureData().getTexturedComponents().get(getMainComponent().getId());
             if (block != null)
@@ -119,15 +121,15 @@ public interface IMateriallyTexturedBlock
                 return block.getExplosionResistance(state, level, pos, explosion);
             }
         }
-        return inputBlock.getExplosionResistance(state, level, pos, explosion);
+        return inputFunction.apply(state, level, pos, explosion);
     }
 
-    default float getDODestroyProgress(final Block inputBlock, BlockState state, Player player, BlockGetter level, BlockPos pos) {
+    default float getDODestroyProgress(final PropertyDispatch.QuadFunction<BlockState, Player, BlockGetter, BlockPos, Float> inputFunction, BlockState state, Player player, BlockGetter level, BlockPos pos) {
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof IMateriallyTexturedBlockEntity mtbe) {
             if (getMainComponent() == null)
             {
-                return inputBlock.getDestroyProgress(state, player, level, pos);
+                return inputFunction.apply(state, player, level, pos);
             }
             Block block = mtbe.getTextureData().getTexturedComponents().get(getMainComponent().getId());
             if (block != null)
@@ -135,15 +137,15 @@ public interface IMateriallyTexturedBlock
                 return block.getDestroyProgress(block.defaultBlockState(), player, level, pos);
             }
         }
-        return inputBlock.getDestroyProgress(state, player, level, pos);
+        return inputFunction.apply(state, player, level, pos);
     }
 
-    default SoundType getDOSoundType(final Block inputBlock, BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
+    default SoundType getDOSoundType(final PropertyDispatch.QuadFunction<BlockState, LevelReader, BlockPos, Entity, SoundType> inputFunction, BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof IMateriallyTexturedBlockEntity mtbe) {
             if (getMainComponent() == null)
             {
-                return inputBlock.getSoundType(state, level, pos, entity);
+                return inputFunction.apply(state, level, pos, entity);
             }
             Block block = mtbe.getTextureData().getTexturedComponents().get(getMainComponent().getId());
             if (block != null)
@@ -151,7 +153,8 @@ public interface IMateriallyTexturedBlock
                 return block.getSoundType(state, level, pos, entity);
             }
         }
-        return inputBlock.getSoundType(state, level, pos, entity);
+
+        return inputFunction.apply(state, level, pos, entity);
     }
 
     default void fillDOItemCategory(final Block inputBlock, final @NotNull NonNullList<ItemStack> items, List<ItemStack> fillItemGroupCache) {

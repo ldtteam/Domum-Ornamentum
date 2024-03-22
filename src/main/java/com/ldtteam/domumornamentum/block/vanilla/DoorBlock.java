@@ -210,17 +210,17 @@ public class DoorBlock extends AbstractBlockDoor<DoorBlock> implements IMaterial
 
     @Override
     public float getExplosionResistance(BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {
-        return getDOExplosionResistance(this, state, level, pos, explosion);
+        return getDOExplosionResistance(super::getExplosionResistance, state, level, pos, explosion);
     }
 
     @Override
     public float getDestroyProgress(@NotNull BlockState state, @NotNull Player player, @NotNull BlockGetter level, @NotNull BlockPos pos) {
-        return getDODestroyProgress(this, state, player, level, pos);
+        return getDODestroyProgress(super::getDestroyProgress, state, player, level, pos);
     }
 
     @Override
     public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
-        return getDOSoundType(this, state, level, pos, entity);
+        return getDOSoundType(super::getSoundType, state, level, pos, entity);
     }
 
     @Override
