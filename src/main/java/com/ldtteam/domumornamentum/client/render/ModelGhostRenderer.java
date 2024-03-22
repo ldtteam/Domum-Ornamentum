@@ -15,14 +15,18 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.client.ChunkRenderTypeSet;
@@ -76,7 +80,7 @@ public class ModelGhostRenderer {
 
         final List<ModelToRender> models;
         ModelData modelData = null;
-        final BlockState placementState;
+        BlockState placementState;
         final boolean renderItemMode;
         if (renderStack.getItem() instanceof BlockItem blockItem) {
             final BlockPlaceContext context = new BlockPlaceContext(
@@ -86,12 +90,34 @@ public class ModelGhostRenderer {
                     blockHitResult
             );
             placementState = blockItem.getBlock().getStateForPlacement(context);
+
+            if (placementState == null) {
+                poseStack.popPose();
+                return;
+            }
+
+            if (renderStack.hasTag() && renderStack.getTag() != null && renderStack.getTag().contains(BlockItem.BLOCK_STATE_TAG)) {
+                final CompoundTag blockStateTag = renderStack.getTag().getCompound(BlockItem.BLOCK_STATE_TAG);
+                final StateDefinition<Block, BlockState> stateDefinition = placementState.getBlock().getStateDefinition();
+
+                for (final String key : blockStateTag.getAllKeys()) {
+                    final Property<?> property = stateDefinition.getProperty(key);
+                    if (property != null) {
+                        final Tag tag = blockStateTag.get(key);
+                        if (tag != null) {
+                            final String value = tag.getAsString();
+                            placementState = updateState(placementState, property, value);
+                        }
+                    }
+                }
+            }
+
             final BakedModel model = Minecraft.getInstance().getBlockRenderer().getBlockModelShaper().getBlockModel(placementState);
 
             if (blockItem.getBlock() instanceof EntityBlock entityBlock) {
                 final BlockEntity blockEntity = entityBlock.newBlockEntity(context.getClickedPos(), placementState);
                 if (blockEntity != null) {
-                    CompoundTag beingPlacedTag = blockItem.getBlockEntityData(renderStack);
+                    CompoundTag beingPlacedTag = BlockItem.getBlockEntityData(renderStack);
                     if (beingPlacedTag == null)
                         beingPlacedTag = new CompoundTag();
 
@@ -104,7 +130,7 @@ public class ModelGhostRenderer {
                     }
 
                     modelData = blockEntity.getModelData();
-                    modelData = model.getModelData(Minecraft.getInstance().level, context.getClickedPos(), placementState, modelData);
+                    modelData = model.getModelData(Objects.requireNonNull(Minecraft.getInstance().level), context.getClickedPos(), placementState, modelData);
                 }
             }
 
@@ -145,6 +171,7 @@ public class ModelGhostRenderer {
         poseStack.popPose();
     }
 
+    @SuppressWarnings("SameParameterValue")
     private void renderGhost(
             final BlockState state,
             final BlockPos pos,
@@ -365,6 +392,10 @@ public class ModelGhostRenderer {
             super.vertex(x, y, z, red, green, blue, alpha * alphaPercentage, texU, texV, overlayUV, lightmapUV, normalX, normalY, normalZ);
         }
 
+    }
+
+    private static <T extends Comparable<T>> BlockState updateState(BlockState pState, Property<T> pProperty, String pValueIdentifier) {
+        return pProperty.getValue(pValueIdentifier).map(value -> pState.setValue(pProperty, value)).orElse(pState);
     }
 
     private record ModelToRender(BakedModel model, RenderType renderType) {}
