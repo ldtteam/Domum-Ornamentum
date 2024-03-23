@@ -119,32 +119,6 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
         builder.add(COLUMN);
     }
 
-    @Override
-    public float getExplosionResistance(@NotNull BlockState state, BlockGetter level, @NotNull BlockPos pos, @NotNull Explosion explosion) {
-        BlockEntity be = level.getBlockEntity(pos);
-        if (be instanceof MateriallyTexturedBlockEntity mtbe) {
-            Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(0).getId());
-            if (block != null)
-            {
-                return block.getExplosionResistance(state, level, pos, explosion);
-            }
-        }
-        return super.getExplosionResistance(state, level, pos, explosion);
-    }
-
-    @Override
-    public float getDestroyProgress(@NotNull BlockState state, @NotNull Player player, BlockGetter level, @NotNull BlockPos pos) {
-        BlockEntity be = level.getBlockEntity(pos);
-        if (be instanceof MateriallyTexturedBlockEntity mtbe) {
-            Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(0).getId());
-            if (block != null)
-            {
-                return block.getDestroyProgress(block.defaultBlockState(), player, level, pos);
-            }
-        }
-        return super.getDestroyProgress(state, player, level, pos);
-    }
-
     /**
      * Finds the correct blockstate on placement by checking the blocks above and below the clicked position from the context. Then calls updateAbove and upDateBelow
      * to correct their blockstates based on their upper/lower neighbor and this block.
@@ -300,26 +274,6 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
         return COMPONENTS;
     }
 
-    @Override
-    public void fillItemCategory(final @NotNull NonNullList<ItemStack> items)
-    {
-        if (!fillItemGroupCache.isEmpty()) {
-            items.addAll(fillItemGroupCache);
-            return;
-        }
-
-        try {
-            final ItemStack result = new ItemStack(this);
-
-            fillItemGroupCache.add(result);
-        } catch (IllegalStateException exception)
-        {
-            //Ignored. Thrown during start up.
-        }
-
-        items.addAll(fillItemGroupCache);
-    }
-
     @Nullable
     @Override
     public BlockEntity newBlockEntity(final @NotNull BlockPos blockPos, final @NotNull BlockState blockState)
@@ -343,19 +297,6 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
     public @NotNull ItemStack getCloneItemStack(final @NotNull BlockState state, final @NotNull HitResult target, final LevelReader world, final @NotNull BlockPos pos, final @NotNull Player player)
     {
         return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos));
-    }
-
-    @Override
-    public @NotNull SoundType getSoundType(@NotNull BlockState state, LevelReader level, @NotNull BlockPos pos, @Nullable Entity entity) {
-        BlockEntity be = level.getBlockEntity(pos);
-        if (be instanceof MateriallyTexturedBlockEntity mtbe) {
-            Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(0).getId());
-            if (block != null)
-            {
-                return block.getSoundType(state, level, pos, entity);
-            }
-        }
-        return super.getSoundType(state, level, pos, entity);
     }
 
     @Override
@@ -383,4 +324,28 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
         }
     }
 
+    @Override
+    public float getExplosionResistance(BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {
+        return getDOExplosionResistance(super::getExplosionResistance, state, level, pos, explosion);
+    }
+
+    @Override
+    public float getDestroyProgress(@NotNull BlockState state, @NotNull Player player, @NotNull BlockGetter level, @NotNull BlockPos pos) {
+        return getDODestroyProgress(super::getDestroyProgress, state, player, level, pos);
+    }
+
+    @Override
+    public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
+        return getDOSoundType(super::getSoundType, state, level, pos, entity);
+    }
+
+    @Override
+    public IMateriallyTexturedBlockComponent getMainComponent() {
+        return COMPONENTS.get(0);
+    }
+
+    @Override
+    public void fillItemCategory(final @NotNull NonNullList<ItemStack> items) {
+        fillDOItemCategory(this, items, fillItemGroupCache);
+    }
 }

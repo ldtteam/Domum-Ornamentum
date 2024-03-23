@@ -67,32 +67,6 @@ public class PostBlock extends AbstractPostBlock<PostBlock> implements IMaterial
     }
 
     @Override
-    public float getExplosionResistance(BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {
-        BlockEntity be = level.getBlockEntity(pos);
-        if (be instanceof MateriallyTexturedBlockEntity mtbe) {
-            Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(0).getId());
-            if (block != null)
-            {
-                return block.getExplosionResistance(state, level, pos, explosion);
-            }
-        }
-        return super.getExplosionResistance(state, level, pos, explosion);
-    }
-
-    @Override
-    public float getDestroyProgress(BlockState state, Player player, BlockGetter level, BlockPos pos) {
-        BlockEntity be = level.getBlockEntity(pos);
-        if (be instanceof MateriallyTexturedBlockEntity mtbe) {
-            Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(0).getId());
-            if (block != null)
-            {
-                return block.getDestroyProgress(block.defaultBlockState(), player, level, pos);
-            }
-        }
-        return super.getDestroyProgress(state, player, level, pos);
-    }
-
-    @Override
     public @NotNull List<IMateriallyTexturedBlockComponent> getComponents()
     {
         return COMPONENTS;
@@ -148,19 +122,6 @@ public class PostBlock extends AbstractPostBlock<PostBlock> implements IMaterial
     }
 
     @Override
-    public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
-        BlockEntity be = level.getBlockEntity(pos);
-        if (be instanceof MateriallyTexturedBlockEntity mtbe) {
-            Block block = mtbe.getTextureData().getTexturedComponents().get(COMPONENTS.get(0).getId());
-            if (block != null)
-            {
-                return block.getSoundType(state, level, pos, entity);
-            }
-        }
-        return super.getSoundType(state, level, pos, entity);
-    }
-
-    @Override
     public void buildRecipes(final RecipeOutput recipeOutput)
     {
         for (final PostType value : PostType.values())
@@ -169,5 +130,25 @@ public class PostBlock extends AbstractPostBlock<PostBlock> implements IMaterial
                 .count(COMPONENTS.size())
                 .saveSuffix(recipeOutput, value.getSerializedName());
         }
+    }
+
+    @Override
+    public float getExplosionResistance(BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {
+        return getDOExplosionResistance(super::getExplosionResistance, state, level, pos, explosion);
+    }
+
+    @Override
+    public float getDestroyProgress(@NotNull BlockState state, @NotNull Player player, @NotNull BlockGetter level, @NotNull BlockPos pos) {
+        return getDODestroyProgress(super::getDestroyProgress, state, player, level, pos);
+    }
+
+    @Override
+    public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
+        return getDOSoundType(super::getSoundType, state, level, pos, entity);
+    }
+
+    @Override
+    public IMateriallyTexturedBlockComponent getMainComponent() {
+        return COMPONENTS.get(0);
     }
 }
