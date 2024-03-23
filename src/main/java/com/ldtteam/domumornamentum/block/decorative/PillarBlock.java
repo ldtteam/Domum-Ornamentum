@@ -355,5 +355,11 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
         if (capital){
             updateAbove(pLevel,blockAbove, stateAbove);
         }
+
+        final CompoundTag textureData = stack.getOrCreateTagElement("textureData");
+        final BlockEntity tileEntity = worldIn.getBlockEntity(pos);
+
+        if (tileEntity instanceof MateriallyTexturedBlockEntity)
+            ((MateriallyTexturedBlockEntity) tileEntity).updateTextureDataWith(MaterialTextureData.deserializeFromNBT(textureData));
     }
 }
