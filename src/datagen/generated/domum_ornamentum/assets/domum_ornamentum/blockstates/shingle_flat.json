@@ -3,7 +3,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_straight",
-        "uvlock": true,
         "x": 180,
         "y": 270
       },
@@ -16,7 +15,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_straight",
-        "uvlock": true,
         "y": 270
       },
       "when": {
@@ -28,7 +26,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_inner_left",
-        "uvlock": true,
         "x": 180,
         "y": 270
       },
@@ -41,7 +38,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_inner_left",
-        "uvlock": true,
         "y": 180
       },
       "when": {
@@ -53,7 +49,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_inner_right",
-        "uvlock": true,
         "x": 180,
         "y": 360
       },
@@ -66,7 +61,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_inner_right",
-        "uvlock": true,
         "y": 270
       },
       "when": {
@@ -78,7 +72,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_outer_left",
-        "uvlock": true,
         "x": 180,
         "y": 270
       },
@@ -91,7 +84,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_outer_left",
-        "uvlock": true,
         "y": 180
       },
       "when": {
@@ -103,7 +95,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_outer_right",
-        "uvlock": true,
         "x": 180,
         "y": 360
       },
@@ -116,7 +107,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_outer_right",
-        "uvlock": true,
         "y": 270
       },
       "when": {
@@ -128,7 +118,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_straight",
-        "uvlock": true,
         "x": 180,
         "y": 450
       },
@@ -141,7 +130,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_straight",
-        "uvlock": true,
         "y": 450
       },
       "when": {
@@ -153,7 +141,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_inner_left",
-        "uvlock": true,
         "x": 180,
         "y": 450
       },
@@ -166,7 +153,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_inner_left",
-        "uvlock": true,
         "y": 360
       },
       "when": {
@@ -178,7 +164,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_inner_right",
-        "uvlock": true,
         "x": 180,
         "y": 540
       },
@@ -191,7 +176,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_inner_right",
-        "uvlock": true,
         "y": 450
       },
       "when": {
@@ -203,7 +187,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_outer_left",
-        "uvlock": true,
         "x": 180,
         "y": 450
       },
@@ -216,7 +199,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_outer_left",
-        "uvlock": true,
         "y": 360
       },
       "when": {
@@ -228,7 +210,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_outer_right",
-        "uvlock": true,
         "x": 180,
         "y": 540
       },
@@ -241,7 +222,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_outer_right",
-        "uvlock": true,
         "y": 450
       },
       "when": {
@@ -253,7 +233,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_straight",
-        "uvlock": true,
         "x": 180,
         "y": 180
       },
@@ -266,7 +245,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_straight",
-        "uvlock": true,
         "y": 180
       },
       "when": {
@@ -278,7 +256,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_inner_left",
-        "uvlock": true,
         "x": 180,
         "y": 180
       },
@@ -291,7 +268,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_inner_left",
-        "uvlock": true,
         "y": 90
       },
       "when": {
@@ -303,7 +279,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_inner_right",
-        "uvlock": true,
         "x": 180,
         "y": 270
       },
@@ -316,7 +291,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_inner_right",
-        "uvlock": true,
         "y": 180
       },
       "when": {
@@ -328,7 +302,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_outer_left",
-        "uvlock": true,
         "x": 180,
         "y": 180
       },
@@ -341,7 +314,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_outer_left",
-        "uvlock": true,
         "y": 90
       },
       "when": {
@@ -353,7 +325,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_outer_right",
-        "uvlock": true,
         "x": 180,
         "y": 270
       },
@@ -366,7 +337,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_outer_right",
-        "uvlock": true,
         "y": 180
       },
       "when": {
@@ -378,7 +348,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_straight",
-        "uvlock": true,
         "x": 180,
         "y": 360
       },
@@ -391,7 +360,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_straight",
-        "uvlock": true,
         "y": 360
       },
       "when": {
@@ -403,7 +371,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_inner_left",
-        "uvlock": true,
         "x": 180,
         "y": 360
       },
@@ -416,7 +383,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_inner_left",
-        "uvlock": true,
         "y": 270
       },
       "when": {
@@ -428,7 +394,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_inner_right",
-        "uvlock": true,
         "x": 180,
         "y": 450
       },
@@ -441,7 +406,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_inner_right",
-        "uvlock": true,
         "y": 360
       },
       "when": {
@@ -453,7 +417,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_outer_left",
-        "uvlock": true,
         "x": 180,
         "y": 360
       },
@@ -466,7 +429,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_outer_left",
-        "uvlock": true,
         "y": 270
       },
       "when": {
@@ -478,7 +440,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_outer_right",
-        "uvlock": true,
         "x": 180,
         "y": 450
       },
@@ -491,7 +452,6 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_outer_right",
-        "uvlock": true,
         "y": 360
       },
       "when": {
