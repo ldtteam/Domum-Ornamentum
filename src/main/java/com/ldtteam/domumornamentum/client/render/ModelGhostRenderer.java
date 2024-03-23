@@ -95,7 +95,7 @@ public class ModelGhostRenderer {
             if (blockItem.getBlock() instanceof EntityBlock entityBlock) {
                 final BlockEntity blockEntity = entityBlock.newBlockEntity(context.getClickedPos(), placementState);
                 if (blockEntity != null) {
-                    CompoundTag beingPlacedTag = blockItem.getBlockEntityData(renderStack);
+                    CompoundTag beingPlacedTag = renderStack.getTag();
                     if (beingPlacedTag == null)
                         beingPlacedTag = new CompoundTag();
 
