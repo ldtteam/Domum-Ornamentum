@@ -14,6 +14,7 @@ import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.nbt.CompoundTag;
@@ -36,11 +37,14 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jline.utils.Log;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -117,7 +121,64 @@ public class PanelBlock extends AbstractPanelBlockTrapdoor<PanelBlock> implement
     @Override
     public BlockState getStateForPlacement(final @NotNull BlockPlaceContext context)
     {
-        return super.getStateForPlacement(context).setValue(TYPE, TrapdoorType.valueOf(context.getItemInHand().getOrCreateTag().getString("type")));
+        final BlockState state = super.getStateForPlacement(context).setValue(TYPE, TrapdoorType.valueOf(context.getItemInHand().getOrCreateTag().getString("type")));
+        final Vec3 offsetPos = context.getClickLocation().subtract(Vec3.atLowerCornerOf(context.getClickedPos()));
+        if (context.getClickedFace().getAxis().isHorizontal())
+        {
+            if (offsetPos.y > 0.80)
+            {
+                return state.setValue(OPEN, false);
+            }
+            else if (offsetPos.y < 0.20)
+            {
+                return state.setValue(OPEN, false).setValue(HALF, Half.BOTTOM);
+            }
+
+            if (context.getClickedFace().getAxis() == Direction.Axis.X)
+            {
+                if (offsetPos.z > 0.80)
+                {
+                    return state.setValue(FACING, Direction.NORTH);
+                }
+                else if (offsetPos.z < 0.20)
+                {
+                    return state.setValue(FACING, Direction.SOUTH);
+                }
+            }
+            else
+            {
+                if (offsetPos.x > 0.80)
+                {
+                    return state.setValue(FACING, Direction.WEST);
+                }
+                else if (offsetPos.x < 0.20)
+                {
+                    return state.setValue(FACING, Direction.EAST);
+                }
+            }
+        }
+        else
+        {
+            if (offsetPos.z > 0.80)
+            {
+                return state.setValue(OPEN, true).setValue(FACING, Direction.NORTH);
+            }
+            else if (offsetPos.z < 0.20)
+            {
+                return state.setValue(OPEN, true).setValue(FACING, Direction.SOUTH);
+            }
+
+            if (offsetPos.x > 0.80)
+            {
+                return state.setValue(OPEN, true).setValue(FACING, Direction.WEST);
+            }
+            else if (offsetPos.x < 0.20)
+            {
+                return state.setValue(OPEN, true).setValue(FACING, Direction.EAST);
+            }
+        }
+
+        return state;
     }
 
     @Nullable
