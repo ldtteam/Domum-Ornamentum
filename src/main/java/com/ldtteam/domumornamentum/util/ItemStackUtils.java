@@ -1,6 +1,7 @@
 package com.ldtteam.domumornamentum.util;
 
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
+import com.ldtteam.domumornamentum.item.interfaces.IDoItem;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -16,6 +17,11 @@ public class ItemStackUtils {
     public static ItemStack getMateriallyTexturedItemStackFromPlayer(Player playerEntity) {
         final ItemStack mainHandStack = playerEntity.getMainHandItem();
         final ItemStack offHandStack = playerEntity.getOffhandItem();
+
+        if ((!(mainHandStack.getItem() instanceof IDoItem mainHandDoItem) || !mainHandDoItem.renderPreview()) && (!(offHandStack.getItem() instanceof IDoItem offHandDoItem) || !offHandDoItem.renderPreview()))
+        {
+            return ItemStack.EMPTY;
+        }
 
         final Registry<Block> blockRegistry = BuiltInRegistries.BLOCK;
         final Registry<Item> itemRegistry = BuiltInRegistries.ITEM;

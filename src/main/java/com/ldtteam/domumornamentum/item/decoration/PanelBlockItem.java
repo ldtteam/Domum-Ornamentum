@@ -90,5 +90,11 @@ public class PanelBlockItem extends BlockItem implements IDoItem
     {
         return new ResourceLocation(Constants.MOD_ID, "fpanel");
     }
+
+    @Override
+    public boolean renderPreview()
+    {
+        return true;
+    }
 }
 

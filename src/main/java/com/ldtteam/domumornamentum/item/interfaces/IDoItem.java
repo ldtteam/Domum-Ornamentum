@@ -26,4 +26,13 @@ public interface IDoItem
     {
         return ImmutableList.of(new ResourceLocation(Constants.MOD_ID, "onlyone"));
     }
+
+    /**
+     * If previews should be rendered.
+     * @return true if so.
+     */
+    default boolean renderPreview()
+    {
+        return false;
+    }
 }
