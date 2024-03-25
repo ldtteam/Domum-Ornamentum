@@ -72,5 +72,11 @@ public class PostBlockItem extends BlockItemWithClientBePlacement implements IDo
     {
         return new ResourceLocation(Constants.MOD_ID, "kpost");
     }
+
+    @Override
+    public boolean renderPreview()
+    {
+        return true;
+    }
 }
 

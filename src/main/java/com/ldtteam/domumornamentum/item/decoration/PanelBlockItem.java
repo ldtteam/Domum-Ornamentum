@@ -72,5 +72,11 @@ public class PanelBlockItem extends BlockItemWithClientBePlacement implements ID
     {
         return new ResourceLocation(Constants.MOD_ID, "fpanel");
     }
+
+    @Override
+    public boolean renderPreview()
+    {
+        return true;
+    }
 }
 
