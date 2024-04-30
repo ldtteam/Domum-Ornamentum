@@ -40,17 +40,27 @@ public enum ExtraBlockType implements StringRepresentable
     BASE_PAPER(null, Items.PAPER, SoundType.WOOL),
     BASE_CACTUS(null, Items.CACTUS, SoundType.WOOD),
     GREEN_CACTUS(DyeColor.GREEN, Items.CACTUS, SoundType.WOOD),
-    LIGHT_PAPER(DyeColor.WHITE, Items.PAPER, SoundType.WOOL);
+    LIGHT_PAPER(DyeColor.WHITE, Items.PAPER, SoundType.WOOL, true);
 
     private final DyeColor color;
     private final Item material;
     private final SoundType soundType;
+    private final boolean isTranslucent;
 
+     ExtraBlockType(final DyeColor color, final Item material, final SoundType soundType, final boolean isTranslucent)
+    {
+        this.color = color;
+        this.material = material;
+        this.soundType = soundType;
+        this.isTranslucent = isTranslucent;
+    }
+    
     ExtraBlockType(final DyeColor color, final Item material, final SoundType soundType)
     {
         this.color = color;
         this.material = material;
         this.soundType = soundType;
+        this.isTranslucent = false;
     }
 
     @NotNull
@@ -73,5 +83,18 @@ public enum ExtraBlockType implements StringRepresentable
 
     public SoundType getSoundType() {
         return soundType;
+    }
+    
+    public boolean isTranslucent() {
+        return this.isTranslucent;
+    }
+
+    public BlockBehaviour.Properties adjustProperties(final BlockBehaviour.Properties properties)
+    {
+        if (this.isTranslucent)
+        {
+            properties.noCollission();
+        }
+        return properties;
     }
 }

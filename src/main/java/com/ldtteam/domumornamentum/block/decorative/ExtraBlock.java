@@ -3,6 +3,11 @@ package com.ldtteam.domumornamentum.block.decorative;
 import com.ldtteam.domumornamentum.block.AbstractBlock;
 import com.ldtteam.domumornamentum.block.types.ExtraBlockType;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 public class ExtraBlock extends AbstractBlock<ExtraBlock>
 {
@@ -26,12 +31,18 @@ public class ExtraBlock extends AbstractBlock<ExtraBlock>
      */
     public ExtraBlock(final ExtraBlockType type)
     {
-        super(Properties.of(Material.WOOD).strength(BLOCK_HARDNESS, RESISTANCE).requiresCorrectToolForDrops().sound(type.getSoundType()));
+        super(type.adjustProperties(Properties.of(Material.WOOD).sound(type.getSoundType()).strength(BLOCK_HARDNESS, RESISTANCE).requiresCorrectToolForDrops()));
         this.type = type;
     }
 
     public ExtraBlockType getType()
     {
         return type;
+    }
+
+    @Override
+    public @NotNull VoxelShape getCollisionShape(BlockState state, @NotNull BlockGetter blockGetter, @NotNull BlockPos pos, @NotNull CollisionContext collisionContext)
+    {
+        return state.getShape(blockGetter, pos);
     }
 }

@@ -83,7 +83,7 @@ public class ModBusEventHandler
             IModBlocks.getInstance().getExtraTopBlocks().stream()
                     .filter(ExtraBlock.class::isInstance)
                     .map(ExtraBlock.class::cast)
-                    .forEach(b -> ItemBlockRenderTypes.setRenderLayer(b, RenderType.translucent()));
+                    .forEach(b -> ItemBlockRenderTypes.setRenderLayer(b, ((ExtraBlock) b).getType().isTranslucent() ?  RenderType.translucent() : RenderType.solid()));
         });
     }
 
