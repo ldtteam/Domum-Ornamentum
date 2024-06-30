@@ -34,68 +34,6 @@ public class BlockUtils
         return new ItemStack(block).getHoverName();
     }
 
-    /**
-     * @deprecated see {@link #getMaterializedDrops(LootParams.Builder, Property...)}
-     */
-    @Deprecated(forRemoval = true, since = "1.20.1")
-    public static List<ItemStack> getMaterializedItemStack(final @NotNull LootParams.Builder builder) {
-        final ItemStack stack = getMaterializedItemStack(builder.getOptionalParameter(LootContextParams.THIS_ENTITY), builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY), (s, e) -> s);
-        if (!stack.isEmpty())
-            return Lists.newArrayList(stack);
-
-        return Collections.emptyList();
-    }
-
-    /**
-     * @deprecated see {@link #getMaterializedItemStack(BlockEntity, Property...)}
-     */
-    @Deprecated(forRemoval = true, since = "1.20.1")
-    public static ItemStack getMaterializedItemStack(final Entity entity, final BlockGetter blockGetter, final BlockPos blockPos) {
-        return getMaterializedItemStack(entity, blockGetter.getBlockEntity(blockPos), (s, e) -> s);
-    }
-
-    /**
-     * @deprecated see {@link #getMaterializedItemStack(BlockEntity, Property...)}
-     */
-    @Deprecated(forRemoval = true, since = "1.20.1")
-    public static ItemStack getMaterializedItemStack(final Entity entity, final BlockEntity blockEntity) {
-        return getMaterializedItemStack(entity, blockEntity, (s, e) -> s);
-    }
-
-    /**
-     * @deprecated see {@link #getMaterializedDrops(LootParams.Builder, Property...)}
-     */
-    @Deprecated(forRemoval = true, since = "1.20.1")
-    public static List<ItemStack> getMaterializedItemStack(final @NotNull LootParams.Builder builder, final BiFunction<ItemStack, MateriallyTexturedBlockEntity, ItemStack> adapter) {
-        final ItemStack stack = getMaterializedItemStack(builder.getOptionalParameter(LootContextParams.THIS_ENTITY), builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY), adapter);
-        if (!stack.isEmpty())
-            return Lists.newArrayList(stack);
-
-        return Collections.emptyList();
-    }
-
-    /**
-     * @deprecated see {@link #getMaterializedItemStack(BlockEntity, Property...)}
-     */
-    @Deprecated(forRemoval = true, since = "1.20.1")
-    public static ItemStack getMaterializedItemStack(final Entity entity, final BlockGetter blockGetter, final BlockPos blockPos, final BiFunction<ItemStack, MateriallyTexturedBlockEntity, ItemStack> adapter) {
-        return getMaterializedItemStack(entity, blockGetter.getBlockEntity(blockPos), adapter);
-    }
-
-    /**
-     * @deprecated see {@link #getMaterializedItemStack(BlockEntity, Property...)}
-     */
-    @Deprecated(forRemoval = true, since = "1.20.1")
-    public static ItemStack getMaterializedItemStack(final Entity entity, final BlockEntity blockEntity, final BiFunction<ItemStack, MateriallyTexturedBlockEntity, ItemStack> adapter) {
-        if (!(blockEntity instanceof final MateriallyTexturedBlockEntity texturedBlockEntity))
-            return ItemStack.EMPTY;
-
-        final ItemStack result = new ItemStack(blockEntity.getBlockState().getBlock());
-        texturedBlockEntity.saveToItem(result);
-
-        return adapter.apply(result, (MateriallyTexturedBlockEntity) blockEntity);
-    }
-
     public static List<ItemStack> getMaterializedDrops(final LootParams.Builder builder, final Property<?>... blockStateProperties)
     {
         final ItemStack stack = getMaterializedItemStack(builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY), blockStateProperties);
