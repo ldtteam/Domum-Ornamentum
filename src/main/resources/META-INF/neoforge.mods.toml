@@ -1,6 +1,7 @@
 modLoader="javafml" #mandatory
 license="LGPLv3"
-loaderVersion="[1,)" #mandatory (26 is current forge version)
+loaderVersion="[4,)" #mandatory (26 is current forge version)
+issueTrackerURL="https://github.com/ldtteam/Domum-Ornamentum/issues/new/choose"
 [[mods]] #mandatory
 modId="domum_ornamentum" #mandatory
 version="${file.jarVersion}" #mandatory
