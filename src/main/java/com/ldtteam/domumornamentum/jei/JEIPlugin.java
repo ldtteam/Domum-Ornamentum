@@ -3,6 +3,7 @@ import com.ldtteam.domumornamentum.IDomumOrnamentumApi;
 import com.ldtteam.domumornamentum.block.IModBlocks;
 import com.ldtteam.domumornamentum.client.screens.ArchitectsCutterScreen;
 import com.ldtteam.domumornamentum.recipe.ModRecipeTypes;
+import com.ldtteam.domumornamentum.util.Constants;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaTypes;
@@ -15,8 +16,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import static com.ldtteam.domumornamentum.util.Constants.MOD_ID;
 
 @JeiPlugin
 public class JEIPlugin implements IModPlugin
@@ -33,7 +32,7 @@ public class JEIPlugin implements IModPlugin
     @Override
     public ResourceLocation getPluginUid()
     {
-        return new ResourceLocation(MOD_ID);
+        return Constants.resLocDO(Constants.MOD_ID);
     }
 
     @Override

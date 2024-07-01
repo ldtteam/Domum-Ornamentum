@@ -42,13 +42,12 @@ import java.util.List;
 import static net.minecraft.world.level.block.Blocks.ACACIA_PLANKS;
 import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
 
-@SuppressWarnings("deprecation")
 public class FancyTrapdoorBlock extends AbstractBlockTrapdoor<FancyTrapdoorBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock
 {
     public static final EnumProperty<FancyTrapdoorType> TYPE = EnumProperty.create(Constants.TYPE_BLOCK_PROPERTY, FancyTrapdoorType.class);
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
-                                                                               .add(new SimpleRetexturableComponent(new ResourceLocation("minecraft:block/oak_planks"), ModTags.FANCY_TRAPDOORS_MATERIALS, OAK_PLANKS))
-                                                                               .add(new SimpleRetexturableComponent(new ResourceLocation("minecraft:block/acacia_planks"), ModTags.FANCY_TRAPDOORS_MATERIALS, ACACIA_PLANKS))
+                                                                               .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/oak_planks"), ModTags.FANCY_TRAPDOORS_MATERIALS, OAK_PLANKS))
+                                                                               .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/acacia_planks"), ModTags.FANCY_TRAPDOORS_MATERIALS, ACACIA_PLANKS))
                                                                                .build();
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
@@ -112,7 +111,7 @@ public class FancyTrapdoorBlock extends AbstractBlockTrapdoor<FancyTrapdoorBlock
     @Override
     public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final LevelReader world, final BlockPos pos, final Player player)
     {
-        return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos), TYPE);
+        return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos), world.registryAccess(), TYPE);
     }
 
     @Override

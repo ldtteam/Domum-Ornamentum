@@ -3,7 +3,6 @@ package com.ldtteam.domumornamentum.client.model.utils;
 import com.ldtteam.domumornamentum.util.SingleBlockLevelReader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -18,15 +17,12 @@ import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.client.model.IQuadTransformer;
 import net.neoforged.neoforge.client.model.QuadTransformers;
 import net.neoforged.neoforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Optional;
 
 public class ModelSpriteQuadTransformer implements IQuadTransformer
 {
@@ -111,9 +107,9 @@ public class ModelSpriteQuadTransformer implements IQuadTransformer
     }
     
     private static ItemStack getItemStackFromBlockState(BlockState state) {
-        if (state.getBlock() instanceof LiquidBlock liquidBlock)
+        if (state.getBlock() instanceof LiquidBlock)
         {
-            return new ItemStack(liquidBlock.getFluidState(state).getType().getBucket());
+            return new ItemStack(state.getFluidState().getType().getBucket());
         }
 
         final Item item = getItem(state);

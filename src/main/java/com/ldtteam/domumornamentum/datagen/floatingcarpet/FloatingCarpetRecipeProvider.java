@@ -49,9 +49,9 @@ public class FloatingCarpetRecipeProvider extends RecipeProvider
             final DyeColor color = block.getColor();
             ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, block)
                     .requires(carpets.get(color))
-                    .requires(Tags.Items.STRING)
+                    .requires(Tags.Items.STRINGS)
                     .group("floating_carpets")
-                    .unlockedBy("has_string", has(Tags.Items.STRING))
+                    .unlockedBy("has_string", has(Tags.Items.STRINGS))
                     .unlockedBy("has_carpet", has(carpets.get(color)))
                     .save(builder);
         }

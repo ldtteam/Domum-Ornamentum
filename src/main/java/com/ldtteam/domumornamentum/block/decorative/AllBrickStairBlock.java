@@ -22,7 +22,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -40,7 +39,7 @@ public class AllBrickStairBlock extends AbstractBlockStairs<AllBrickStairBlock> 
 {
 
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
-        .add(new SimpleRetexturableComponent(new ResourceLocation("block/oak_planks"), ModTags.ALL_BRICK_MATERIALS, Blocks.OAK_PLANKS))
+        .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/oak_planks"), ModTags.ALL_BRICK_MATERIALS, Blocks.OAK_PLANKS))
         .build();
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
@@ -91,7 +90,7 @@ public class AllBrickStairBlock extends AbstractBlockStairs<AllBrickStairBlock> 
     @Override
     public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final LevelReader world, final BlockPos pos, final Player player)
     {
-        return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos));
+        return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos), world.registryAccess());
     }
 
     @Override

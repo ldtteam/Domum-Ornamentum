@@ -1,12 +1,16 @@
 package com.ldtteam.domumornamentum.client.render;
 
 import com.ldtteam.domumornamentum.util.ItemStackUtils;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.ByteBufferBuilder;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.MeshData;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.blaze3d.vertex.VertexFormat.Mode;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -14,19 +18,17 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.BlockItemStateProperties;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.client.ChunkRenderTypeSet;
@@ -48,7 +50,8 @@ public class ModelGhostRenderer {
 
     private static final ModelGhostRenderer INSTANCE = new ModelGhostRenderer();
 
-    private static final BufferBuilderTransparent BUFFER = new BufferBuilderTransparent();
+    private static final ByteBufferBuilder BUFFER_BUILDER = new ByteBufferBuilder(2097152);
+    private static BufferBuilderTransparent BUFFER = null;
 
     public static ModelGhostRenderer getInstance() {
         return INSTANCE;
@@ -62,6 +65,7 @@ public class ModelGhostRenderer {
             final ItemStack renderStack,
             final Vec3 targetedRenderPos,
             final BlockHitResult blockHitResult,
+            final ClientLevel level,
             final boolean ignoreDepth) {
         poseStack.pushPose();
 
@@ -75,8 +79,6 @@ public class ModelGhostRenderer {
         poseStack.scale(1.001F, 1.001F, 1.001F);
 
         final Vector4f color = new Vector4f(0, 0, 1, 0.5f);
-
-        BUFFER.setAlphaPercentage(color.w());
 
         final List<ModelToRender> models;
         ModelData modelData = null;
@@ -96,38 +98,14 @@ public class ModelGhostRenderer {
                 return;
             }
 
-            if (renderStack.hasTag() && renderStack.getTag() != null && renderStack.getTag().contains(BlockItem.BLOCK_STATE_TAG)) {
-                final CompoundTag blockStateTag = renderStack.getTag().getCompound(BlockItem.BLOCK_STATE_TAG);
-                final StateDefinition<Block, BlockState> stateDefinition = placementState.getBlock().getStateDefinition();
-
-                for (final String key : blockStateTag.getAllKeys()) {
-                    final Property<?> property = stateDefinition.getProperty(key);
-                    if (property != null) {
-                        final Tag tag = blockStateTag.get(key);
-                        if (tag != null) {
-                            final String value = tag.getAsString();
-                            placementState = updateState(placementState, property, value);
-                        }
-                    }
-                }
-            }
+            placementState = renderStack.getOrDefault(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY).apply(placementState);
 
             final BakedModel model = Minecraft.getInstance().getBlockRenderer().getBlockModelShaper().getBlockModel(placementState);
 
             if (blockItem.getBlock() instanceof EntityBlock entityBlock) {
                 final BlockEntity blockEntity = entityBlock.newBlockEntity(context.getClickedPos(), placementState);
                 if (blockEntity != null) {
-                    CompoundTag beingPlacedTag = BlockItem.getBlockEntityData(renderStack);
-                    if (beingPlacedTag == null)
-                        beingPlacedTag = new CompoundTag();
-
-                    final CompoundTag currentTag = blockEntity.saveWithoutMetadata();
-                    final CompoundTag currentTagCopy = currentTag.copy();
-                    currentTag.merge(beingPlacedTag);
-                    if (!currentTag.equals(currentTagCopy)) {
-                        blockEntity.load(currentTag);
-                        blockEntity.setChanged();
-                    }
+                    renderStack.getOrDefault(DataComponents.BLOCK_ENTITY_DATA, CustomData.EMPTY).loadInto(blockEntity, level.registryAccess());
 
                     modelData = blockEntity.getModelData();
                     modelData = model.getModelData(Objects.requireNonNull(Minecraft.getInstance().level), context.getClickedPos(), placementState, modelData);
@@ -190,7 +168,8 @@ public class ModelGhostRenderer {
         {
             renderType = ModRenderTypes.GHOST_BLOCK_PREVIEW.get();
         }
-        BUFFER.begin(renderType.mode(), renderType.format());
+        BUFFER = new BufferBuilderTransparent(BUFFER_BUILDER, renderType.mode(), renderType.format());
+        BUFFER.setAlphaPercentage(color.w());
         if (renderColoredGhost)
         {
             for (ModelToRender model : models) {
@@ -216,7 +195,10 @@ public class ModelGhostRenderer {
                 );
             }
         }
-        renderType.end(BUFFER, RenderSystem.getVertexSorting());
+        final MeshData meshData = BUFFER.buildOrThrow();
+        // TODO: meshData.sortQuads(null, RenderSystem.getVertexSorting()); move to event bufferSource?
+        renderType.draw(meshData);
+        BUFFER = null;
     }
 
     private static final float[] DIRECTIONAL_BRIGHTNESS = { 0.5f, 1f, 0.7f, 0.7f, 0.6f, 0.6f };
@@ -342,7 +324,7 @@ public class ModelGhostRenderer {
             final Vector4f pos) {
         // Get vertex data
         final int[] vertices = bakedQuad.getVertices();
-        final int vertexCount = vertices.length / DefaultVertexFormat.BLOCK.getIntegerSize();
+        final int vertexCount = vertices.length / (DefaultVertexFormat.BLOCK.getVertexSize() / 4);
 
         try (final MemoryStack memorystack = MemoryStack.stackPush()) {
             // Setup buffers
@@ -361,10 +343,9 @@ public class ModelGhostRenderer {
                         1f);
                 pos.mul(pose);
 
-                ((VertexConsumer) ModelGhostRenderer.BUFFER).vertex(pos.x(), pos.y(), pos.z())
-                        .color(color.x(), color.y(), color.z(), 1f)
-                        .normal(normal.x(), normal.y(), normal.z())
-                        .endVertex();
+                ModelGhostRenderer.BUFFER.addVertex(pos.x(), pos.y(), pos.z())
+                        .setColor(color.x(), color.y(), color.z(), 1f)
+                        .setNormal(normal.x(), normal.y(), normal.z());
             }
         }
     }
@@ -373,8 +354,9 @@ public class ModelGhostRenderer {
 
         private float alphaPercentage;
 
-        public BufferBuilderTransparent() {
-            super(2097152);
+        public BufferBuilderTransparent(ByteBufferBuilder memory, Mode mode, VertexFormat format)
+        {
+            super(memory, mode, format);
         }
 
         public void setAlphaPercentage(final float alphaPercentage) {
@@ -382,20 +364,24 @@ public class ModelGhostRenderer {
         }
 
         @Override
-        public @NotNull VertexConsumer color(int red, int green, int blue, int alpha) {
-            return super.color(red, green, blue, (int) (alpha * alphaPercentage));
+        public @NotNull VertexConsumer setColor(int red, int green, int blue, int alpha) {
+            return super.setColor(red, green, blue, (int) (alpha * alphaPercentage));
         }
 
         @Override
-        public void vertex(float x, float y, float z, float red, float green, float blue, float alpha, float texU,
-                float texV, int overlayUV, int lightmapUV, float normalX, float normalY, float normalZ) {
-            super.vertex(x, y, z, red, green, blue, alpha * alphaPercentage, texU, texV, overlayUV, lightmapUV, normalX, normalY, normalZ);
+        public VertexConsumer setColor(int argb)
+        {
+            final int newAlpha = (int) ((argb >> 24) * alphaPercentage);
+            return super.setColor((newAlpha << 24) | (argb & 0x00ffffff));
         }
 
-    }
+        @Override
+        public void addVertex(float x, float y, float z, int argb, float texU,
+                float texV, int overlayUV, int lightmapUV, float normalX, float normalY, float normalZ) {
+            final int newAlpha = (int) ((argb >> 24) * alphaPercentage);
+            super.addVertex(x, y, z, (newAlpha << 24) | (argb & 0x00ffffff), texU, texV, overlayUV, lightmapUV, normalX, normalY, normalZ);
+        }
 
-    private static <T extends Comparable<T>> BlockState updateState(BlockState pState, Property<T> pProperty, String pValueIdentifier) {
-        return pProperty.getValue(pValueIdentifier).map(value -> pState.setValue(pProperty, value)).orElse(pState);
     }
 
     private record ModelToRender(BakedModel model, RenderType renderType) {}

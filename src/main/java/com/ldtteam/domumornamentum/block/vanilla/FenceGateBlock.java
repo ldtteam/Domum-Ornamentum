@@ -22,7 +22,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -40,7 +39,7 @@ import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
 public class FenceGateBlock extends AbstractBlockFenceGate<FenceGateBlock> implements IMateriallyTexturedBlock, EntityBlock, ICachedItemGroupBlock
 {
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
-                                                                               .add(new SimpleRetexturableComponent(new ResourceLocation("minecraft:block/oak_planks"), ModTags.FENCE_GATE_MATERIALS, OAK_PLANKS))
+                                                                               .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/oak_planks"), ModTags.FENCE_GATE_MATERIALS, OAK_PLANKS))
                                                                                .build();
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
@@ -79,7 +78,7 @@ public class FenceGateBlock extends AbstractBlockFenceGate<FenceGateBlock> imple
     @Override
     public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final LevelReader world, final BlockPos pos, final Player player)
     {
-        return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos));
+        return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos), world.registryAccess());
     }
 
     @Override

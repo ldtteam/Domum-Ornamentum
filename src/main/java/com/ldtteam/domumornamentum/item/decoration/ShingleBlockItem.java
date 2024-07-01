@@ -15,9 +15,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.network.chat.Component;
 
-import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -44,9 +42,9 @@ public class ShingleBlockItem extends BlockItemWithClientBePlacement implements 
     }
 
     @Override
-    public void appendHoverText(final @NotNull ItemStack stack, @Nullable final Level worldIn, final @NotNull List<Component> tooltip, final @NotNull TooltipFlag flagIn)
+    public void appendHoverText(final ItemStack stack, final TooltipContext tooltipContext, final List<Component> tooltip, final TooltipFlag flagIn)
     {
-        super.appendHoverText(stack, worldIn, tooltip, flagIn);
+        super.appendHoverText(stack, tooltipContext, tooltip, flagIn);
         tooltip.add(Component.translatable(Constants.MOD_ID + ".origin.tooltip"));
 
         MaterialTextureData textureData = MaterialTextureData.deserializeFromItemStack(stack);
@@ -68,12 +66,12 @@ public class ShingleBlockItem extends BlockItemWithClientBePlacement implements 
     @Override
     public List<ResourceLocation> getInputIds()
     {
-        return ImmutableList.of(new ResourceLocation(Constants.MOD_ID, "shingle"), new ResourceLocation(Constants.MOD_ID, "support"));
+        return ImmutableList.of(Constants.resLocDO("shingle"), Constants.resLocDO("support"));
     }
 
     @Override
     public ResourceLocation getGroup()
     {
-        return new ResourceLocation(Constants.MOD_ID, "cshingle");
+        return Constants.resLocDO("cshingle");
     }
 }

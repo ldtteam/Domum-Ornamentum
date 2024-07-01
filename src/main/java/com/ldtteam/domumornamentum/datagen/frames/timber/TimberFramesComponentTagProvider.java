@@ -35,8 +35,8 @@ public class TimberFramesComponentTagProvider extends BlockTagsProvider
           .addTags(
             ModTags.GLOBAL_DEFAULT,
             BlockTags.PLANKS,
-            Tags.Blocks.OBSIDIAN,
-            Tags.Blocks.STONE
+            Tags.Blocks.OBSIDIANS,
+            Tags.Blocks.STONES
           );
 
         this.tag(ModTags.TIMBERFRAMES_CENTER)
@@ -51,12 +51,12 @@ public class TimberFramesComponentTagProvider extends BlockTagsProvider
           .addTags(
             ModTags.GLOBAL_DEFAULT,
             BlockTags.PLANKS,
-            Tags.Blocks.COBBLESTONE,
-            Tags.Blocks.STONE,
+            Tags.Blocks.COBBLESTONES,
+            Tags.Blocks.STONES,
             Tags.Blocks.END_STONES,
-            Tags.Blocks.NETHERRACK,
-            Tags.Blocks.OBSIDIAN,
-            Tags.Blocks.SANDSTONE,
+            Tags.Blocks.NETHERRACKS,
+            Tags.Blocks.OBSIDIANS,
+            Tags.Blocks.SANDSTONE_BLOCKS,
             BlockTags.DIRT
           );
 

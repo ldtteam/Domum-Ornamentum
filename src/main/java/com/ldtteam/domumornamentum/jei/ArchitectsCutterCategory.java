@@ -11,6 +11,8 @@ import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.item.interfaces.IDoItem;
 import com.ldtteam.domumornamentum.recipe.ModRecipeTypes;
 import com.ldtteam.domumornamentum.recipe.architectscutter.ArchitectsCutterRecipe;
+import com.ldtteam.domumornamentum.recipe.architectscutter.ArchitectsCutterRecipeInput;
+import com.ldtteam.domumornamentum.util.Constants;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -72,7 +74,7 @@ public class ArchitectsCutterCategory implements IRecipeCategory<RecipeHolder<Ar
     public ArchitectsCutterCategory(@NotNull final IGuiHelper guiHelper, @NotNull final JEIPlugin plugin)
     {
         this.plugin = plugin;
-        final ResourceLocation texture = new ResourceLocation(MOD_ID, "textures/gui/container/architectscutter2.png");
+        final ResourceLocation texture = Constants.resLocDO("textures/gui/container/architectscutter2.png");
         this.background = guiHelper.createDrawable(texture, JEI_OFFSET_X, JEI_OFFSET_Y, CUTTER_BG_W - JEI_OFFSET_X - 9, 88);
         this.thumb = guiHelper.createDrawable(texture, CUTTER_SLIDER_U_DISABLED, CUTTER_SLIDER_V, CUTTER_SLIDER_W, CUTTER_SLIDER_H);
         this.slot = guiHelper.createDrawable(texture, CUTTER_SLOT_U, CUTTER_SLOT_V, CUTTER_SLOT_W, CUTTER_SLOT_H);
@@ -156,7 +158,7 @@ public class ArchitectsCutterCategory implements IRecipeCategory<RecipeHolder<Ar
             container.setItem(i, defaultInputs.get(i));
         }
 
-        ItemStack output = recipe.assemble(container, null);
+        ItemStack output = recipe.assemble(new ArchitectsCutterRecipeInput(container), null);
         if (output.isEmpty())   // wat?
         {
             output = recipe.getResultItem(null);
@@ -301,7 +303,7 @@ public class ArchitectsCutterCategory implements IRecipeCategory<RecipeHolder<Ar
     {
         private final ArchitectsCutterRecipe recipe;
 
-        private ResourceLocation groupId = new ResourceLocation("");
+        private ResourceLocation groupId = ResourceLocation.withDefaultNamespace("");
         private ItemStack group = ItemStack.EMPTY;
         private ItemStack output = ItemStack.EMPTY;
 
@@ -348,7 +350,7 @@ public class ArchitectsCutterCategory implements IRecipeCategory<RecipeHolder<Ar
             }
             else
             {
-                this.groupId = new ResourceLocation("");
+                this.groupId = ResourceLocation.withDefaultNamespace("");
                 this.group = ItemStack.EMPTY;
             }
 
@@ -365,7 +367,7 @@ public class ArchitectsCutterCategory implements IRecipeCategory<RecipeHolder<Ar
 
                 if (currentItem.isPresent())
                 {
-                    if (!ItemStack.isSameItemSameTags(currentItem.get(), this.ingredientContainer.getItem(i)))
+                    if (!ItemStack.isSameItemSameComponents(currentItem.get(), this.ingredientContainer.getItem(i)))
                     {
                         same = false;
                         this.ingredientContainer.setItem(i, currentItem.get());
@@ -375,7 +377,7 @@ public class ArchitectsCutterCategory implements IRecipeCategory<RecipeHolder<Ar
 
             if (!same)
             {
-                this.output = recipe.assemble(this.ingredientContainer, null);
+                this.output = recipe.assemble(new ArchitectsCutterRecipeInput(this.ingredientContainer), null);
             }
         }
     }

@@ -4,7 +4,6 @@ import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.decorative.BrickBlock;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -24,7 +23,7 @@ public class BrickBlockStateProvider extends BlockStateProvider
     }
 
     private void registerStatesAndModelsFor(final BrickBlock brickBlock) {
-        final ModelFile blockModel = models().cubeAll("block/brick/" + brickBlock.getType().getSerializedName() + "_brick", new ResourceLocation(Constants.MOD_ID, "block/brick/" + brickBlock.getType().getSerializedName()));
+        final ModelFile blockModel = models().cubeAll("block/brick/" + brickBlock.getType().getSerializedName() + "_brick", Constants.resLocDO("block/brick/" + brickBlock.getType().getSerializedName()));
         simpleBlock(brickBlock, blockModel);
         simpleBlockItem(brickBlock, blockModel);
     }

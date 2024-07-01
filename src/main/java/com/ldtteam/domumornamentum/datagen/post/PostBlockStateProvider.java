@@ -8,7 +8,6 @@ import com.ldtteam.domumornamentum.datagen.utils.ModelBuilderUtils;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.MultiPartBlockStateBuilder;
@@ -62,7 +61,7 @@ public class PostBlockStateProvider extends BlockStateProvider {
         for (int i = 0; i < values.length; i++) {
             PostType value = values[i];
             final ItemModelBuilder.OverrideBuilder overrideBuilder = itemSpecModelBuilder.override();
-            overrideBuilder.predicate(new ResourceLocation(Constants.POST_MODEL_OVERRIDE), i);
+            overrideBuilder.predicate(Constants.POST_MODEL_OVERRIDE, i);
             overrideBuilder.model(itemModels().getExistingFile(modLoc("block/post/post_%s_spec".formatted(value.getSerializedName()))));
             overrideBuilder.end();
         }

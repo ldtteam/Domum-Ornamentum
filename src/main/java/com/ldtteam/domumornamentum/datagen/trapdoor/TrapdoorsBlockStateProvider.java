@@ -8,7 +8,6 @@ import com.ldtteam.domumornamentum.datagen.utils.ModelBuilderUtils;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.properties.Half;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
@@ -67,7 +66,7 @@ public class TrapdoorsBlockStateProvider extends BlockStateProvider
             final TrapdoorType type = TrapdoorType.values()[i];
             itemModelBuilderSpec.override()
                     .model(itemModels().getExistingFile(modLoc("block/trapdoor/trapdoor_" + type.getSerializedName() + "_spec")))
-                    .predicate(new ResourceLocation(Constants.TRAPDOOR_MODEL_OVERRIDE), i)
+                    .predicate(Constants.TRAPDOOR_MODEL_OVERRIDE, i)
                     .end();
         }
 

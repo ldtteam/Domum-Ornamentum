@@ -8,7 +8,6 @@ import com.ldtteam.domumornamentum.datagen.utils.ModelBuilderUtils;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.properties.Half;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
@@ -60,7 +59,7 @@ public class PanelBlockStateProvider extends BlockStateProvider {
         for (int i = 0; i < values.length; i++) {
             TrapdoorType value = values[i];
             final ItemModelBuilder.OverrideBuilder overrideBuilder = itemSpecModelBuilder.override();
-            overrideBuilder.predicate(new ResourceLocation(Constants.TRAPDOOR_MODEL_OVERRIDE), i);
+            overrideBuilder.predicate(Constants.TRAPDOOR_MODEL_OVERRIDE, i);
             overrideBuilder.model(itemModels().getExistingFile(modLoc("block/panel/panel_%s_spec".formatted(value.getSerializedName()))));
             overrideBuilder.end();
         }

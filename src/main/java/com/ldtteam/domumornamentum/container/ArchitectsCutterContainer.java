@@ -4,7 +4,9 @@ import com.google.common.collect.Lists;
 import com.ldtteam.domumornamentum.block.*;
 import com.ldtteam.domumornamentum.recipe.ModRecipeTypes;
 import com.ldtteam.domumornamentum.recipe.architectscutter.ArchitectsCutterRecipe;
+import com.ldtteam.domumornamentum.recipe.architectscutter.ArchitectsCutterRecipeInput;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -15,10 +17,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.BlockItemStateProperties;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -181,24 +182,10 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
-    public List<RecipeHolder<ArchitectsCutterRecipe>> getRecipeList() {
-        return this.recipes;
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public int getRecipeListSize() {
-        return this.recipes.size();
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public boolean hasItemsInInputSlots() {
-        return this.inputInventorySlots.stream().anyMatch(Slot::hasItem) && !this.recipes.isEmpty();
-    }
-
     /**
      * Determines whether supplied player can use this container
      */
+    @Override
     public boolean stillValid(@NotNull Player playerIn) {
         return stillValid(this.worldPosCallable, playerIn, IModBlocks.getInstance().getArchitectsCutter());
     }
@@ -206,10 +193,13 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
     /**
      * Handles the given Button-click on the server, currently only used by enchanting. Name is for legacy.
      */
+    @Override
     public boolean clickMenuButton(@NotNull Player playerIn, int id) {
         if (id < ModBlocks.getInstance().getOrComputeItemGroups().size())
         {
             this.selectGroup(new ArrayList<>(ModBlocks.getInstance().getOrComputeItemGroups().keySet()).get(id));
+            this.outputInventorySlot.set(ItemStack.EMPTY); // clear output
+            broadcastChanges();
             return true;
         }
 
@@ -227,6 +217,7 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
     /**
      * Callback for when the crafting matrix is changed.
      */
+    @Override
     public void slotsChanged(@NotNull Container inventoryIn) {
         boolean anyChanged = false;
         List<Slot> slots = this.inputInventorySlots;
@@ -256,7 +247,7 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
         this.recipes.clear();
         this.outputInventorySlot.set(ItemStack.EMPTY);
         if (!stacks.stream().allMatch(ItemStack::isEmpty)) {
-            this.recipes = this.world.getRecipeManager().getRecipesFor(ModRecipeTypes.ARCHITECTS_CUTTER.get(), inventoryIn, this.world);
+            this.recipes = this.world.getRecipeManager().getRecipesFor(ModRecipeTypes.ARCHITECTS_CUTTER.get(), new ArchitectsCutterRecipeInput(inventoryIn), this.world);
             this.recipes.sort(Comparator.<RecipeHolder<ArchitectsCutterRecipe>, ResourceLocation>comparing(h -> h.value().getBlockName()).thenComparing(RecipeHolder::id));
         }
         updateRecipeResultSlot();
@@ -270,23 +261,14 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
                 final ItemStack resultItem = recipe.getResultItem(this.world.registryAccess());
                 if (resultItem.getItem() == currentVariant.getItem())
                 {
-                    if (resultItem.hasTag())
+                    final BlockItemStateProperties resultBlockState = resultItem.getOrDefault(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY);
+                    final BlockItemStateProperties currentBlockState = currentVariant.getOrDefault(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY);
+                    if ((resultBlockState.isEmpty() && currentBlockState.isEmpty()) || currentBlockState.equals(currentBlockState))
                     {
-                        for (final String key: resultItem.getTag().getAllKeys())
-                        {
-                            if (currentVariant.hasTag() && currentVariant.getTag().contains(key) && resultItem.getTag().get(key).equals(currentVariant.getTag().get(key)))
-                            {
-                                this.inventory.setRecipeUsed(recipeHolder);
-                                this.outputInventorySlot.set(recipe.assemble(this.inputInventory, this.world.registryAccess()));
-                                break;
-                            }
-                        }
-
-                        continue;
+                        this.inventory.setRecipeUsed(recipeHolder);
+                        this.outputInventorySlot.set(recipe.assemble(new ArchitectsCutterRecipeInput(this.inputInventory), this.world.registryAccess()));
+                        break;
                     }
-                    this.inventory.setRecipeUsed(recipeHolder);
-                    this.outputInventorySlot.set(recipe.assemble(this.inputInventory, this.world.registryAccess()));
-                    break;
                 }
             }
 
@@ -298,19 +280,16 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
     }
 
     @NotNull
+    @Override
     public MenuType<?> getType() {
         return ModContainerTypes.ARCHITECTS_CUTTER.get();
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public void setInventoryUpdateListener(Runnable listenerIn) {
-        this.inventoryUpdateListener = listenerIn;
     }
 
     /**
      * Called to determine if the current slot is valid for the stack merging (double-click) code. The stack passed in is
      * null for the initial slot that was double-clicked.
      */
+    @Override
     public boolean canTakeItemForPickAll(@NotNull ItemStack stack, Slot slotIn) {
         return slotIn.container != this.inventory && super.canTakeItemForPickAll(stack, slotIn);
     }
@@ -320,6 +299,7 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
      * inventory and the other inventory(s).
      */
     @NotNull
+    @Override
     public ItemStack quickMoveStack(@NotNull Player player, int clickedSlot) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(clickedSlot);
@@ -368,6 +348,7 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
     /**
      * Called when the container is closed.
      */
+    @Override
     public void removed(@NotNull Player playerIn) {
         super.removed(playerIn);
         this.inventory.removeItemNoUpdate(1);

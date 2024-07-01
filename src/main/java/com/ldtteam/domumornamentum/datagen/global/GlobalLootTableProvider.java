@@ -5,6 +5,7 @@ import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.decorative.BrickBlock;
 import com.ldtteam.domumornamentum.block.decorative.ExtraBlock;
 import com.ldtteam.domumornamentum.block.decorative.FloatingCarpetBlock;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.LootTableProvider;
@@ -15,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * This class generates the default loot_table for blocks (if a block is destroyed, it drops its item).
@@ -22,14 +24,14 @@ import java.util.Set;
 public class GlobalLootTableProvider extends LootTableProvider
 {
 
-    public GlobalLootTableProvider(PackOutput packOutput) {
-        super(packOutput, Set.of(), List.of(new SubProviderEntry(GlobalLootTableEntries::new, LootContextParamSets.BLOCK)));
+    public GlobalLootTableProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> provider) {
+        super(packOutput, Set.of(), List.of(new SubProviderEntry(GlobalLootTableEntries::new, LootContextParamSets.BLOCK)), provider);
     }
 
     private static final class GlobalLootTableEntries extends BlockLootSubProvider {
 
-        private GlobalLootTableEntries() {
-            super(Set.of(), FeatureFlags.REGISTRY.allFlags());
+        private GlobalLootTableEntries(HolderLookup.Provider provider) {
+            super(Set.of(), FeatureFlags.REGISTRY.allFlags(), provider);
         }
 
         @Override

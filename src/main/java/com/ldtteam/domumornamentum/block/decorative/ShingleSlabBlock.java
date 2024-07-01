@@ -71,8 +71,8 @@ public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock>
 {
     public static final MapCodec<ShingleSlabBlock> CODEC = simpleCodec(ShingleSlabBlock::new);
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
-                                                                               .add(new SimpleRetexturableComponent(new ResourceLocation("block/oak_planks"), ModTags.SHINGLES_ROOF, Blocks.OAK_PLANKS))
-                                                                               .add(new SimpleRetexturableComponent(new ResourceLocation("block/dark_oak_planks"), ModTags.SHINGLES_SUPPORT, Blocks.DARK_OAK_PLANKS))
+                                                                               .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/oak_planks"), ModTags.SHINGLES_ROOF, Blocks.OAK_PLANKS))
+                                                                               .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/dark_oak_planks"), ModTags.SHINGLES_SUPPORT, Blocks.DARK_OAK_PLANKS))
                                                                                .build();
 
     /**
@@ -159,7 +159,6 @@ public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock>
      */
     @NotNull
     @Override
-    @SuppressWarnings("deprecation")
     public FluidState getFluidState(final BlockState state)
     {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
@@ -286,9 +285,9 @@ public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock>
     }
 
     @Override
-    public boolean isPathfindable(@NotNull final BlockState state, @NotNull final BlockGetter worldIn, @NotNull final BlockPos pos, @NotNull final PathComputationType type)
+    public boolean isPathfindable(@NotNull final BlockState state, @NotNull final PathComputationType type)
     {
-        return type == PathComputationType.WATER && worldIn.getFluidState(pos).is(FluidTags.WATER);
+        return type == PathComputationType.WATER && state.getFluidState().is(FluidTags.WATER);
     }
 
     @Override
@@ -325,7 +324,7 @@ public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock>
     @Override
     public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final LevelReader world, final BlockPos pos, final Player player)
     {
-        return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos));
+        return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos), world.registryAccess());
     }
 
     @Override

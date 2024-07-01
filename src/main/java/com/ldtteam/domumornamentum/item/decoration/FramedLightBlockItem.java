@@ -14,10 +14,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -44,9 +42,9 @@ public class FramedLightBlockItem extends BlockItemWithClientBePlacement impleme
     }
 
     @Override
-    public void appendHoverText(@NotNull final ItemStack stack, @Nullable final Level worldIn, @NotNull final List<Component> tooltip, @NotNull final TooltipFlag flagIn)
+    public void appendHoverText(@NotNull final ItemStack stack, final TooltipContext tooltipContext, @NotNull final List<Component> tooltip, @NotNull final TooltipFlag flagIn)
     {
-        super.appendHoverText(stack, worldIn, tooltip, flagIn);
+        super.appendHoverText(stack, tooltipContext, tooltip, flagIn);
 
         MaterialTextureData textureData = MaterialTextureData.deserializeFromItemStack(stack);
         if (textureData.isEmpty()) {
@@ -73,12 +71,12 @@ public class FramedLightBlockItem extends BlockItemWithClientBePlacement impleme
     @Override
     public List<ResourceLocation> getInputIds()
     {
-        return ImmutableList.of(new ResourceLocation(Constants.MOD_ID, "frame"), new ResourceLocation(Constants.MOD_ID, "center"));
+        return ImmutableList.of(Constants.resLocDO("frame"), Constants.resLocDO("center"));
     }
 
     @Override
     public ResourceLocation getGroup()
     {
-        return new ResourceLocation(Constants.MOD_ID, "ilight");
+        return Constants.resLocDO("ilight");
     }
 }

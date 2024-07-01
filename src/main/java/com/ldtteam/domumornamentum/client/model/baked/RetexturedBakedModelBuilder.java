@@ -92,7 +92,7 @@ public class RetexturedBakedModelBuilder {
 
     public BakedModel build() {
         final SimpleBakedModel.Builder builder = new SimpleBakedModel.Builder(
-                sourceModel.useAmbientOcclusion(this.sourceState, this.renderType),
+                sourceModel.useAmbientOcclusion(),
                 sourceModel.usesBlockLight(),
                 sourceModel.isGui3d(),
                 sourceModel.getTransforms(),

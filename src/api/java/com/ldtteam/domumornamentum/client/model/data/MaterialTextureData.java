@@ -1,33 +1,36 @@
 package com.ldtteam.domumornamentum.client.model.data;
 
-import com.google.common.collect.Maps;
+import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import com.ldtteam.domumornamentum.util.Constants;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.common.util.INBTSerializable;
-import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
 
 import static com.ldtteam.domumornamentum.util.Constants.BLOCK_ENTITY_TEXTURE_DATA;
 
 public class MaterialTextureData implements INBTSerializable<CompoundTag>
 {
-    public static final MaterialTextureData EMPTY = new MaterialTextureData();
+    public static final MaterialTextureData EMPTY = new MaterialTextureData(Map.of());
 
     private final Map<ResourceLocation, Block> texturedComponents;
 
     public MaterialTextureData()
     {
-        this.texturedComponents = Maps.newHashMap();
+        this(new HashMap<>());
     }
 
     public MaterialTextureData(final Map<ResourceLocation, Block> texturedComponents) {
@@ -37,6 +40,13 @@ public class MaterialTextureData implements INBTSerializable<CompoundTag>
     public Map<ResourceLocation, Block> getTexturedComponents()
     {
         return texturedComponents;
+    }
+
+    public MaterialTextureData setComponent(final ResourceLocation key, final Block value)
+    {
+        final MaterialTextureData textureData = this == EMPTY ? new MaterialTextureData() : this;
+        textureData.texturedComponents.put(key, value);
+        return this;
     }
 
     @Override
@@ -60,11 +70,16 @@ public class MaterialTextureData implements INBTSerializable<CompoundTag>
     }
 
     @Override
+    public CompoundTag serializeNBT(final HolderLookup.Provider provider)
+    {
+        return serializeNBT();
+    }
+
     public CompoundTag serializeNBT()
     {
         final CompoundTag nbt = new CompoundTag();
 
-        if (this == EMPTY)
+        if (isEmpty())
             return nbt;
 
         this.getTexturedComponents().forEach((key, value) -> nbt.putString(key.toString(), Objects.requireNonNull(BuiltInRegistries.BLOCK.getKey(value)).toString()));
@@ -73,50 +88,51 @@ public class MaterialTextureData implements INBTSerializable<CompoundTag>
     }
 
     @Override
-    public void deserializeNBT(final CompoundTag nbt)
+    public void deserializeNBT(final HolderLookup.Provider provider, final CompoundTag nbt)
     {
         this.texturedComponents.clear();
 
         nbt.getAllKeys().forEach(key -> {
-            final ResourceLocation name = new ResourceLocation(nbt.getString(key));
+            final ResourceLocation name = ResourceLocation.parse(nbt.getString(key));
 
             if (BuiltInRegistries.BLOCK.get(name) != Blocks.AIR)
             {
-                this.texturedComponents.put(new ResourceLocation(key), BuiltInRegistries.BLOCK.get(name));
+                this.texturedComponents.put(ResourceLocation.parse(key), BuiltInRegistries.BLOCK.get(name));
             }
         });
     }
 
     public static MaterialTextureData deserializeFromNBT(final CompoundTag nbt) {
-        if (nbt == null || nbt.getAllKeys().isEmpty())
+        if (nbt == null || nbt.isEmpty())
             return EMPTY;
 
         final MaterialTextureData newData = new MaterialTextureData();
-        newData.deserializeNBT(nbt);
+        newData.deserializeNBT(null, nbt);
         return newData;
     }
 
+    @SuppressWarnings("deprecation")
     public static MaterialTextureData deserializeFromItemStack(final ItemStack itemStack)
     {
-        return deserializeFromNBT(extractNbtFromItemStack(itemStack));
+        return deserializeFromNBT(itemStack.getOrDefault(DataComponents.BLOCK_ENTITY_DATA, CustomData.EMPTY).getUnsafe().getCompound(BLOCK_ENTITY_TEXTURE_DATA));
     }
 
-    @Nullable
-    public static CompoundTag extractNbtFromItemStack(final ItemStack itemStack)
+    public static void updateItemStack(final ItemStack itemStack, final Function<MaterialTextureData, MaterialTextureData> updater)
     {
-        if (itemStack == null || !itemStack.hasTag() || !(itemStack.getItem() instanceof BlockItem))
+        if (itemStack.getItem() instanceof final BlockItem bi && bi.getBlock() instanceof IMateriallyTexturedBlock)
         {
-            return null;
+            final MaterialTextureData textureData = updater.apply(deserializeFromItemStack(itemStack));
+            final CompoundTag tag = new CompoundTag();
+
+            if (!textureData.isEmpty())
+            {
+                tag.put(BLOCK_ENTITY_TEXTURE_DATA, textureData.serializeNBT());
+            }
+
+            BlockItem.setBlockEntityData(itemStack,
+                BuiltInRegistries.BLOCK_ENTITY_TYPE.get(Constants.BlockEntityTypes.MATERIALLY_RETEXTURABLE),
+                tag);
         }
-
-        final CompoundTag beTag = BlockItem.getBlockEntityData(itemStack);
-
-        if (beTag == null || beTag.isEmpty() || !beTag.contains(BLOCK_ENTITY_TEXTURE_DATA, Tag.TAG_COMPOUND))
-        {
-            return null;
-        }
-
-        return beTag.getCompound(BLOCK_ENTITY_TEXTURE_DATA);
     }
 
     /**
@@ -124,14 +140,7 @@ public class MaterialTextureData implements INBTSerializable<CompoundTag>
      */
     public void writeToItemStack(final ItemStack itemStack)
     {
-        if (this != EMPTY && !itemStack.isEmpty() && itemStack.getItem() instanceof BlockItem)
-        {
-            final CompoundTag tag = new CompoundTag();
-            tag.put(BLOCK_ENTITY_TEXTURE_DATA, serializeNBT());
-            BlockItem.setBlockEntityData(itemStack,
-                BuiltInRegistries.BLOCK_ENTITY_TYPE.get(new ResourceLocation(Constants.MOD_ID, Constants.BlockEntityTypes.MATERIALLY_RETEXTURABLE)),
-                tag);
-        }
+        updateItemStack(itemStack, old -> this);
     }
 
     public boolean isEmpty()

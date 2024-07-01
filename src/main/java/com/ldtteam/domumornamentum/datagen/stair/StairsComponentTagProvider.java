@@ -68,7 +68,7 @@ public class StairsComponentTagProvider extends BlockTagsProvider
             BlockTags.WOOL,
             BlockTags.LEAVES,
             Tags.Blocks.STORAGE_BLOCKS,
-            Tags.Blocks.GLASS,
+            Tags.Blocks.GLASS_BLOCKS,
             BlockTags.LOGS,
             BlockTags.CORAL_BLOCKS,
             BlockTags.WART_BLOCKS

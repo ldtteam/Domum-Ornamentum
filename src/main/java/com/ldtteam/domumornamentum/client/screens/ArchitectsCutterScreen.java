@@ -12,8 +12,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
@@ -31,8 +29,8 @@ import static com.ldtteam.domumornamentum.util.GuiConstants.*;
 
 public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCutterContainer>
 {
-    private static final ResourceLocation BACKGROUND_TEXTURE1 = new ResourceLocation(Constants.MOD_ID, "textures/gui/container/architectscutter.png");
-    private static final ResourceLocation BACKGROUND_TEXTURE2 = new ResourceLocation(Constants.MOD_ID, "textures/gui/container/architectscutter2.png");
+    private static final ResourceLocation BACKGROUND_TEXTURE1 = Constants.resLocDO("textures/gui/container/architectscutter.png");
+    private static final ResourceLocation BACKGROUND_TEXTURE2 = Constants.resLocDO("textures/gui/container/architectscutter2.png");
 
     private float recipeSliderProgress;
 
@@ -296,22 +294,24 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
 
     private void texturizeVariantUsingCurrentInput(final ItemStack variantItemStack)
     {
-        final CompoundTag textureData = MaterialTextureData.extractNbtFromItemStack(variantItemStack);
-
-        if (textureData == null || !(variantItemStack.getItem() instanceof final BlockItem bi && bi.getBlock() instanceof final IMateriallyTexturedBlock block))
+        if (!(variantItemStack.getItem() instanceof final BlockItem bi && bi.getBlock() instanceof final IMateriallyTexturedBlock block))
         {
             return;
         }
 
-        int i = 0;
-        for (final IMateriallyTexturedBlockComponent component : block.getComponents())
-        {
-            if (this.menu.inputInventory.getItem(i).getItem() instanceof final BlockItem blockItem)
+        MaterialTextureData.updateItemStack(variantItemStack, oldTextureData -> {
+            final MaterialTextureData textureData = oldTextureData.isEmpty() ? new MaterialTextureData() : oldTextureData;
+            int i = 0;
+            for (final IMateriallyTexturedBlockComponent component : block.getComponents())
             {
-                textureData.putString(component.getId().toString(), BuiltInRegistries.BLOCK.getKey(blockItem.getBlock()).toString());
+                if (this.menu.inputInventory.getItem(i).getItem() instanceof final BlockItem blockItem)
+                {
+                    textureData.setComponent(component.getId(), blockItem.getBlock());
+                }
+                i++;
             }
-            i++;
-        }
+            return textureData;
+        });
     }
 
     @Override

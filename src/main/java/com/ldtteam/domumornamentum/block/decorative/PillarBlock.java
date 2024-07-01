@@ -51,7 +51,7 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
 {
 
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
-        .add(new SimpleRetexturableComponent(new ResourceLocation("block/oak_planks"), ModTags.PILLAR_MATERIALS, Blocks.OAK_PLANKS))
+        .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/oak_planks"), ModTags.PILLAR_MATERIALS, Blocks.OAK_PLANKS))
         .build();
 
     /**
@@ -296,7 +296,7 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
     @Override
     public @NotNull ItemStack getCloneItemStack(final @NotNull BlockState state, final @NotNull HitResult target, final LevelReader world, final @NotNull BlockPos pos, final @NotNull Player player)
     {
-        return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos));
+        return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos), world.registryAccess());
     }
 
     @Override

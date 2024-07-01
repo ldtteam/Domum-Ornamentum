@@ -19,7 +19,6 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -48,7 +47,7 @@ import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
 
 public class StairBlock extends net.minecraft.world.level.block.StairBlock implements IMateriallyTexturedBlock, EntityBlock, ICachedItemGroupBlock, IDOBlock<StairBlock>
 {
-    private static IMateriallyTexturedBlockComponent MATERIAL_COMPONENT = new SimpleRetexturableComponent(new ResourceLocation("minecraft:block/oak_planks"), ModTags.STAIRS_MATERIALS, OAK_PLANKS);
+    private static IMateriallyTexturedBlockComponent MATERIAL_COMPONENT = new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/oak_planks"), ModTags.STAIRS_MATERIALS, OAK_PLANKS);
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
                                                                                .add(MATERIAL_COMPONENT)
                                                                                .build();
@@ -57,7 +56,7 @@ public class StairBlock extends net.minecraft.world.level.block.StairBlock imple
 
     public StairBlock()
     {
-        super(OAK_PLANKS::defaultBlockState, Properties.of().mapColor(MapColor.WOOD).noOcclusion().strength(2.0F, 3.0F));
+        super(OAK_PLANKS.defaultBlockState(), Properties.of().mapColor(MapColor.WOOD).noOcclusion().strength(2.0F, 3.0F));
     }
 
     @Override
@@ -142,11 +141,10 @@ public class StairBlock extends net.minecraft.world.level.block.StairBlock imple
     }
 
     @Override
-    public @NotNull InteractionResult use(
-      final @NotNull BlockState p_56901_, final @NotNull Level p_56902_, final @NotNull BlockPos p_56903_, final @NotNull Player p_56904_, final @NotNull InteractionHand p_56905_, final @NotNull BlockHitResult p_56906_)
+    protected InteractionResult useWithoutItem(BlockState p_60503_, Level p_60504_, BlockPos p_60505_, Player p_60506_, BlockHitResult p_60508_)
     {
-        final BlockState state = getBlockState(p_56902_, p_56903_);
-        return state.use(p_56902_, p_56904_, p_56905_, p_56906_);
+        final BlockState state = getBlockState(p_60504_, p_60505_);
+        return state.useWithoutItem(p_60504_, p_60506_, p_60508_);
     }
 
     @Override
@@ -165,7 +163,7 @@ public class StairBlock extends net.minecraft.world.level.block.StairBlock imple
     @Override
     public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final LevelReader world, final BlockPos pos, final Player player)
     {
-        return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos));
+        return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos), world.registryAccess());
     }
 
     private BlockState getBlockState(final BlockGetter blockGetter, final BlockPos blockPos) {

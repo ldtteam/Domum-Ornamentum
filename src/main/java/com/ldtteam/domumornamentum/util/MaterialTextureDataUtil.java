@@ -57,7 +57,7 @@ public class MaterialTextureDataUtil
 
                 final int index = (int) ((ClientTickEventHandler.getInstance().getNonePausedTicks() / 20 + (offsetIndex += localOffset)) % candidates.size());
                 final Block texture = candidates.get(index);
-                newData.getTexturedComponents().put(component.getId(), texture);
+                newData.setComponent(component.getId(), texture);
             }
 
             return newData;

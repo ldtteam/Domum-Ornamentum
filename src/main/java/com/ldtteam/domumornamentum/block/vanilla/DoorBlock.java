@@ -47,12 +47,11 @@ import java.util.Objects;
 
 import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
 
-@SuppressWarnings("deprecation")
 public class DoorBlock extends AbstractBlockDoor<DoorBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock
 {
     public static final EnumProperty<DoorType> TYPE = EnumProperty.create(Constants.TYPE_BLOCK_PROPERTY, DoorType.class);
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
-                                                                               .add(new SimpleRetexturableComponent(new ResourceLocation("minecraft:block/oak_planks"), ModTags.DOORS_MATERIALS, OAK_PLANKS))
+                                                                               .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/oak_planks"), ModTags.DOORS_MATERIALS, OAK_PLANKS))
                                                                                .build();
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
@@ -132,7 +131,7 @@ public class DoorBlock extends AbstractBlockDoor<DoorBlock> implements IMaterial
     @Override
     public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final LevelReader world, final BlockPos pos, final Player player)
     {
-        return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos), TYPE);
+        return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos), world.registryAccess(), TYPE);
     }
 
     @Override

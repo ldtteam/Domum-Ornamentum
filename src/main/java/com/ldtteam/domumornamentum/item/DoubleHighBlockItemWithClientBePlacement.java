@@ -1,9 +1,10 @@
 package com.ldtteam.domumornamentum.item;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -33,20 +34,12 @@ public class DoubleHighBlockItemWithClientBePlacement extends SelfUpgradingDoubl
         }
 
         // INLINE: super call without side checks
-        final CompoundTag beingPlacedTag = getBlockEntityData(itemStack);
+        final CustomData beingPlacedTag = itemStack.getOrDefault(DataComponents.BLOCK_ENTITY_DATA, CustomData.EMPTY);
         final BlockEntity blockentity = level.getBlockEntity(pos);
 
-        if (beingPlacedTag != null && blockentity != null)
+        if (!beingPlacedTag.isEmpty() && blockentity != null)
         {
-            final CompoundTag currentTag = blockentity.saveWithoutMetadata();
-            final CompoundTag currentTagCopy = currentTag.copy();
-            currentTag.merge(beingPlacedTag);
-            if (!currentTag.equals(currentTagCopy))
-            {
-                blockentity.load(currentTag);
-                blockentity.setChanged();
-                return true;
-            }
+            return beingPlacedTag.loadInto(blockentity, level.registryAccess());
         }
 
         return false;

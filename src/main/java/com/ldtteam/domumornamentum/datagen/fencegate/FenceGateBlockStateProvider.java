@@ -69,7 +69,7 @@ public class FenceGateBlockStateProvider extends BlockStateProvider {
                 + (wallState ? "wall_" : "")
                 + (open ? "open" : "");
 
-        final ResourceLocation specLocation = new ResourceLocation(Constants.MOD_ID, "block/fence_gate/fence_gate_"
+        final ResourceLocation specLocation = Constants.resLocDO("block/fence_gate/fence_gate_"
                 + (wallState ? "wall_" : "")
                 + (open ? "open_" : "") + "spec");
 

@@ -7,7 +7,6 @@ import com.ldtteam.domumornamentum.datagen.MateriallyTexturedModelBuilder;
 import com.ldtteam.domumornamentum.datagen.utils.ModelBuilderUtils;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.properties.DoorHingeSide;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
@@ -48,7 +47,7 @@ public class DoorsBlockStateProvider extends BlockStateProvider
     private Function<DoorType, ModelFile> createModel(Function<DoorType, String> baseName, String stateDescription)
     {
         return type -> models()
-                               .withExistingParent("block/door/door_" + baseName.apply(type) + "_" + stateDescription, new ResourceLocation(Constants.MOD_ID, "block/door/door_" + baseName.apply(type) + "_" + stateDescription + "_spec"))
+                               .withExistingParent("block/door/door_" + baseName.apply(type) + "_" + stateDescription, Constants.resLocDO("block/door/door_" + baseName.apply(type) + "_" + stateDescription + "_spec"))
                                .customLoader(MateriallyTexturedModelBuilder::new)
                                .end();
     }
@@ -116,8 +115,8 @@ public class DoorsBlockStateProvider extends BlockStateProvider
         {
             final DoorType value = values[i];
             overarchingSpecBuilder.override()
-                                  .predicate(new ResourceLocation(Constants.DOOR_MODEL_OVERRIDE), i)
-                                  .model(models().getExistingFile(new ResourceLocation(Constants.MOD_ID + ":item/door/door_" + value.getSerializedName() + "_spec")))
+                                  .predicate(Constants.DOOR_MODEL_OVERRIDE, i)
+                                  .model(models().getExistingFile(Constants.resLocDO("item/door/door_" + value.getSerializedName() + "_spec")))
                                   .end();
         }
 

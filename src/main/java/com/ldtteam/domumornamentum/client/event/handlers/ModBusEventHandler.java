@@ -14,18 +14,16 @@ import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.BlockItem;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.BlockItemStateProperties;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 
-@Mod.EventBusSubscriber(modid = Constants.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = Constants.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ModBusEventHandler
 {
     @SubscribeEvent
@@ -37,17 +35,17 @@ public class ModBusEventHandler
     @SubscribeEvent
     public static void onFMLClientSetup(final FMLClientSetupEvent event)
     {
-        event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getTrapdoor().asItem(), new ResourceLocation(Constants.TRAPDOOR_MODEL_OVERRIDE),
+        event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getTrapdoor().asItem(), Constants.TRAPDOOR_MODEL_OVERRIDE,
           (itemStack, clientLevel, livingEntity, i) -> getTypeOrdinal(itemStack, TrapdoorType.class, TrapdoorType.FULL)));
-        event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getDoor().asItem(), new ResourceLocation(Constants.DOOR_MODEL_OVERRIDE),
+        event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getDoor().asItem(), Constants.DOOR_MODEL_OVERRIDE,
           (itemStack, clientLevel, livingEntity, i) -> getTypeOrdinal(itemStack, DoorType.class, DoorType.FULL)));
-        event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getFancyDoor().asItem(), new ResourceLocation(Constants.DOOR_MODEL_OVERRIDE),
+        event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getFancyDoor().asItem(), Constants.DOOR_MODEL_OVERRIDE,
           (itemStack, clientLevel, livingEntity, i) -> getTypeOrdinal(itemStack, FancyDoorType.class, FancyDoorType.FULL)));
-        event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getFancyTrapdoor().asItem(), new ResourceLocation(Constants.TRAPDOOR_MODEL_OVERRIDE),
+        event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getFancyTrapdoor().asItem(), Constants.TRAPDOOR_MODEL_OVERRIDE,
           (itemStack, clientLevel, livingEntity, i) -> getTypeOrdinal(itemStack, FancyTrapdoorType.class, FancyTrapdoorType.FULL)));
-        event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getPanel().asItem(), new ResourceLocation(Constants.TRAPDOOR_MODEL_OVERRIDE),
+        event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getPanel().asItem(), Constants.TRAPDOOR_MODEL_OVERRIDE,
           (itemStack, clientLevel, livingEntity, i) -> getTypeOrdinal(itemStack, TrapdoorType.class, TrapdoorType.FULL)));
-        event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getPost().asItem(), new ResourceLocation(Constants.POST_MODEL_OVERRIDE),
+        event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getPost().asItem(), Constants.POST_MODEL_OVERRIDE,
           (itemStack, clientLevel, livingEntity, i) -> getTypeOrdinal(itemStack, PostType.class, PostType.PLAIN)));
 
         event.enqueueWork(() -> {
@@ -83,15 +81,15 @@ public class ModBusEventHandler
 
     private static <T extends Enum<T>> float getTypeOrdinal(final ItemStack itemStack, final Class<T> enumClass, final T defaultValue)
     {
-        final CompoundTag tag = itemStack.getTagElement(BlockItem.BLOCK_STATE_TAG);
-        if (tag == null || !tag.contains(Constants.TYPE_BLOCK_PROPERTY, Tag.TAG_STRING))
+        final String type = itemStack.getOrDefault(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY).properties().get(Constants.TYPE_BLOCK_PROPERTY);
+        if (type == null)
         {
             return defaultValue.ordinal();
         }
 
         try
         {
-            return Enum.valueOf(enumClass, tag.getString(Constants.TYPE_BLOCK_PROPERTY).toUpperCase()).ordinal();
+            return Enum.valueOf(enumClass, type.toUpperCase()).ordinal();
         }
         catch (Exception e)
         {

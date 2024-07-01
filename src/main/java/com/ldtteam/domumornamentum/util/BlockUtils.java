@@ -1,26 +1,22 @@
 package com.ldtteam.domumornamentum.util;
 
-import com.google.common.collect.Lists;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.item.component.BlockItemStateProperties;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
-import org.jetbrains.annotations.NotNull;
+import net.neoforged.fml.loading.FMLEnvironment;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.function.BiFunction;
 
 public class BlockUtils
 {
@@ -36,68 +32,56 @@ public class BlockUtils
 
     public static List<ItemStack> getMaterializedDrops(final LootParams.Builder builder, final Property<?>... blockStateProperties)
     {
-        final ItemStack stack = getMaterializedItemStack(builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY), blockStateProperties);
+        final ItemStack stack = getMaterializedItemStack(builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY), builder.getLevel().registryAccess(), blockStateProperties);
         if (!stack.isEmpty())
             return List.of(stack);
 
         return Collections.emptyList();
     }
 
-    public static ItemStack getMaterializedItemStack(final BlockEntity blockEntity, final Property<?>... blockStateProperties)
+    public static ItemStack getMaterializedItemStack(final BlockEntity blockEntity,
+        final HolderLookup.Provider provider,
+        final Property<?>... blockStateProperties)
     {
         if (!(blockEntity instanceof final MateriallyTexturedBlockEntity texturedBlockEntity))
         {
             return ItemStack.EMPTY;
         }
 
-        final BlockState blockState = texturedBlockEntity.getBlockState();
         final ItemStack result = new ItemStack(blockEntity.getBlockState().getBlock());
-        texturedBlockEntity.saveToItem(result);
+        texturedBlockEntity.saveToItem(result, provider);
 
         if (blockStateProperties.length > 0)
         {
-            final CompoundTag tag = result.getOrCreateTagElement(BlockItem.BLOCK_STATE_TAG);
-            for (final Property<?> property : blockStateProperties) 
-            {
-                if (property != null)
+            final BlockState blockState = texturedBlockEntity.getBlockState();
+            result.update(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY, props -> {
+                for (final Property<?> property : blockStateProperties)
                 {
-                    tag.putString(property.getName(), getValueAsString(blockState, property));
+                    props = props.with(property, blockState);
                 }
-            }
+                return props;
+            });
         }
 
         return result;
     }
 
-    public static <T extends Comparable<T>> void putPropertyIntoBlockStateTag(final ItemStack itemStack, final Property<T> property, final T value)
+    public static <T extends Comparable<T>> void putPropertyIntoBlockStateTag(final ItemStack itemStack,
+        final Property<T> property,
+        final T value)
     {
-        itemStack.getOrCreateTagElement(BlockItem.BLOCK_STATE_TAG).putString(property.getName(), property.getName(value));
-    }
-
-    public static <T extends Comparable<T>> void putPropertyIntoBlockStateTag(final CompoundTag tag, final Property<T> property, final T value)
-    {
-        CompoundTag blockStateTag = tag.getCompound(BlockItem.BLOCK_STATE_TAG);
-
-        if (!tag.contains(BlockItem.BLOCK_STATE_TAG, Tag.TAG_COMPOUND))
+        if (!FMLEnvironment.production && !(itemStack.getItem() instanceof BlockItem))
         {
-            tag.put(BlockItem.BLOCK_STATE_TAG, blockStateTag);
+            throw new IllegalArgumentException("item not BlockItem: " + itemStack.getItem());
         }
-        
-        blockStateTag.putString(property.getName(), property.getName(value));
+        itemStack.update(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY, props -> props.with(property, value));
     }
 
-    public static <T extends Comparable<T>> T getPropertyFromBlockStateTag(final ItemStack itemStack, final Property<T> property, final T defaultValue)
+    public static <T extends Comparable<T>> T getPropertyFromBlockStateTag(final ItemStack itemStack,
+        final Property<T> property,
+        final T defaultValue)
     {
-        final CompoundTag tag = itemStack.getTagElement(BlockItem.BLOCK_STATE_TAG);
-        if (tag == null || !tag.contains(property.getName(), Tag.TAG_STRING))
-        {
-            return defaultValue;
-        }
-        return property.getValue(tag.getString(property.getName())).orElse(defaultValue);
-    }
-
-    public static <T extends Comparable<T>> String getValueAsString(final BlockState blockState, final Property<T> property)
-    {
-        return property.getName(blockState.getValue(property));
+        final T blockValue = itemStack.getOrDefault(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY).get(property);
+        return blockValue == null ? defaultValue : blockValue;
     }
 }

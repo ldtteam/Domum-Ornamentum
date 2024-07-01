@@ -12,9 +12,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 /** Post block item
@@ -43,9 +41,9 @@ public class PostBlockItem extends BlockItemWithClientBePlacement implements IDo
     }
 
     @Override
-    public void appendHoverText(final ItemStack stack, @Nullable final Level worldIn, final List<Component> tooltip, final TooltipFlag flagIn)
+    public void appendHoverText(final ItemStack stack, final TooltipContext tooltipContext, final List<Component> tooltip, final TooltipFlag flagIn)
     {
-        super.appendHoverText(stack, worldIn, tooltip, flagIn);
+        super.appendHoverText(stack, tooltipContext, tooltip, flagIn);
 
         final PostType postType = BlockUtils.getPropertyFromBlockStateTag(stack, PostBlock.TYPE, PostType.PLAIN);
 
@@ -70,7 +68,7 @@ public class PostBlockItem extends BlockItemWithClientBePlacement implements IDo
     @Override
     public ResourceLocation getGroup()
     {
-        return new ResourceLocation(Constants.MOD_ID, "kpost");
+        return Constants.resLocDO("kpost");
     }
 
     @Override

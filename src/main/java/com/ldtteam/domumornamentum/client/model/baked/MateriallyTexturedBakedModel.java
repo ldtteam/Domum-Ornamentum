@@ -14,11 +14,14 @@ import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.BlockItemStateProperties;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.ChunkRenderTypeSet;
 import net.neoforged.neoforge.client.model.data.ModelData;
@@ -39,7 +42,7 @@ public class MateriallyTexturedBakedModel implements BakedModel {
 
     private record BlockModelCacheKey (MaterialTextureData data, RenderType renderType) { }
 
-    private record ItemModelCacheKey (MaterialTextureData data, RenderType renderType, CompoundTag tag) { }
+    private record ItemModelCacheKey (MaterialTextureData data, RenderType renderType, BlockItemStateProperties blockStateProperties, CompoundTag blockEntityTag) { }
 
     private final Cache<BlockModelCacheKey, BakedModel> cache = CacheBuilder.newBuilder()
             .expireAfterAccess(2, TimeUnit.MINUTES)
@@ -231,7 +234,10 @@ public class MateriallyTexturedBakedModel implements BakedModel {
                                              final BlockState blockState,
                                              final RenderType renderType) {
         try {
-            final ItemModelCacheKey key = new ItemModelCacheKey(textureData, renderType, stack.save(new CompoundTag()));
+            final ItemModelCacheKey key = new ItemModelCacheKey(textureData,
+                renderType,
+                stack.getOrDefault(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY),
+                stack.getOrDefault(DataComponents.BLOCK_ENTITY_DATA, CustomData.EMPTY).copyTag());
             return itemCache.get(
                     key
                     , () -> {

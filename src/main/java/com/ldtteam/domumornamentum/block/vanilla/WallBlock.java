@@ -3,7 +3,6 @@ package com.ldtteam.domumornamentum.block.vanilla;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
-import com.ldtteam.domumornamentum.DomumOrnamentum;
 import com.ldtteam.domumornamentum.block.AbstractBlockWall;
 import com.ldtteam.domumornamentum.block.ICachedItemGroupBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
@@ -25,7 +24,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -45,7 +43,7 @@ import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
 public class WallBlock extends AbstractBlockWall<WallBlock> implements IMateriallyTexturedBlock, EntityBlock, ICachedItemGroupBlock
 {
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
-                                                                               .add(new SimpleRetexturableComponent(new ResourceLocation("minecraft:block/oak_planks"), ModTags.WALL_MATERIALS, OAK_PLANKS))
+                                                                               .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/oak_planks"), ModTags.WALL_MATERIALS, OAK_PLANKS))
                                                                                .build();
 
     public static ImmutableMap<Direction, EnumProperty<WallSide>> PROPERTIES = ImmutableMap.of(
@@ -88,7 +86,7 @@ public class WallBlock extends AbstractBlockWall<WallBlock> implements IMaterial
     @Override
     public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final LevelReader world, final BlockPos pos, final Player player)
     {
-        return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos));
+        return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos), world.registryAccess());
     }
 
     @Override

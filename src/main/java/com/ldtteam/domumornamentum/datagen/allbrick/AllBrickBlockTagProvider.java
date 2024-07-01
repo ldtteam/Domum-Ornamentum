@@ -98,9 +98,9 @@ public class AllBrickBlockTagProvider extends BlockTagsProvider
             Tags.Blocks.STORAGE_BLOCKS,
             BlockTags.LOGS,
             BlockTags.WART_BLOCKS,
-            Tags.Blocks.STONE,
-            Tags.Blocks.COBBLESTONE,
-            Tags.Blocks.OBSIDIAN,
+            Tags.Blocks.STONES,
+            Tags.Blocks.COBBLESTONES,
+            Tags.Blocks.OBSIDIANS,
             BlockTags.STONE_BRICKS,
             BlockTags.BASE_STONE_NETHER
           );

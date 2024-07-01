@@ -3,27 +3,28 @@ package com.ldtteam.domumornamentum.recipe.architectscutter;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.util.Constants;
+import com.ldtteam.domumornamentum.util.DataComponentPatchBuilder;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.packs.VanillaRecipeProvider;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.component.BlockItemStateProperties;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.properties.Property;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Optional;
 
 /**
  * Inspired by {@link RecipeBuilder}
@@ -35,7 +36,7 @@ public class ArchitectsCutterRecipeBuilder
 
     private final Block result;
     private int count = 1;
-    private final CompoundTag tag = new CompoundTag();
+    private final DataComponentPatchBuilder components = new DataComponentPatchBuilder();
 
     /**
      * @param result main result block of recipe
@@ -49,15 +50,7 @@ public class ArchitectsCutterRecipeBuilder
 
     public <T extends Comparable<T>> ArchitectsCutterRecipeBuilder resultProperty(final Property<T> property, final T value)
     {
-        final CompoundTag blockStateTag = tag.getCompound(BlockItem.BLOCK_STATE_TAG);
-
-        if (!tag.contains(BlockItem.BLOCK_STATE_TAG, Tag.TAG_COMPOUND))
-        {
-            tag.put(BlockItem.BLOCK_STATE_TAG, blockStateTag);
-        }
-
-        blockStateTag.putString(property.getName(), property.getName(value));
-
+        components.update(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY, props -> props.with(property, value));
         return this;
     }
 
@@ -73,9 +66,9 @@ public class ArchitectsCutterRecipeBuilder
 
         BlockEntity.addEntityType(serialized,
             BuiltInRegistries.BLOCK_ENTITY_TYPE
-                .get(new ResourceLocation(Constants.MOD_ID, Constants.BlockEntityTypes.MATERIALLY_RETEXTURABLE)));
+                .get(Constants.BlockEntityTypes.MATERIALLY_RETEXTURABLE));
 
-        tag.put(BlockItem.BLOCK_ENTITY_TAG, serialized);
+        components.set(DataComponents.BLOCK_ENTITY_DATA, CustomData.of(serialized));
 
         return this;
     }
@@ -96,7 +89,7 @@ public class ArchitectsCutterRecipeBuilder
     {
         final ArchitectsCutterRecipe recipe = new ArchitectsCutterRecipe(BuiltInRegistries.BLOCK.getKey(result),
             count,
-            tag.isEmpty() ? Optional.empty() : Optional.of(tag));
+            components.build());
 
         if (criteria.isEmpty())
         {

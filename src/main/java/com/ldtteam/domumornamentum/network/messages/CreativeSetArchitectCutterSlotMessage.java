@@ -4,12 +4,13 @@ import com.ldtteam.domumornamentum.client.screens.ArchitectsCutterScreen;
 import com.ldtteam.domumornamentum.container.ArchitectsCutterContainer;
 import com.ldtteam.domumornamentum.network.IServerboundDistributor;
 import com.ldtteam.domumornamentum.util.Constants;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.network.handling.PlayPayloadContext;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -17,34 +18,23 @@ import org.jetbrains.annotations.NotNull;
  */
 public record CreativeSetArchitectCutterSlotMessage(int slot, ItemStack stack) implements IServerboundDistributor
 {
-    public static final ResourceLocation ID = new ResourceLocation(Constants.MOD_ID, "creative_set_archicutter_slot");
-
-    /**
-     * Construct from network.
-     * @param buf the buffer.
-     */
-    public CreativeSetArchitectCutterSlotMessage(@NotNull final FriendlyByteBuf buf)
-    {
-        this(buf.readVarInt(), buf.readItem());
-    }
+    public static final Type<CreativeSetArchitectCutterSlotMessage> ID = new Type<>(Constants.resLocDO("creative_set_archicutter_slot"));
+    public static final StreamCodec<RegistryFriendlyByteBuf, CreativeSetArchitectCutterSlotMessage> CODEC = StreamCodec.composite(ByteBufCodecs.VAR_INT,
+        CreativeSetArchitectCutterSlotMessage::slot,
+        ItemStack.STREAM_CODEC,
+        CreativeSetArchitectCutterSlotMessage::stack,
+        CreativeSetArchitectCutterSlotMessage::new);
 
     @Override
-    public void write(@NotNull final FriendlyByteBuf buf)
-    {
-        buf.writeVarInt(this.slot);
-        buf.writeItem(this.stack);
-    }
-
-    @Override
-    public ResourceLocation id()
+    public Type<CreativeSetArchitectCutterSlotMessage> type()
     {
         return ID;
     }
 
-    public void onExecute(@NotNull final PlayPayloadContext ctxIn)
+    public void onExecute(@NotNull final IPayloadContext ctxIn)
     {
-        final Player player = ctxIn.player().orElse(null);
-        ctxIn.workHandler().execute(() -> onExecuteMainThread(player));
+        final Player player = ctxIn.player();
+        ctxIn.enqueueWork(() -> onExecuteMainThread(player));
     }
 
     private void onExecuteMainThread(final Player player)

@@ -2,7 +2,6 @@ package com.ldtteam.domumornamentum.tag;
 
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -59,12 +58,12 @@ public class ModTags
 
     private static TagKey<Block> tag(String name)
     {
-        return TagKey.create(Registries.BLOCK, new ResourceLocation(Constants.MOD_ID, name));
+        return TagKey.create(Registries.BLOCK, Constants.resLocDO(name));
     }
 
     private static TagKey<Item> itemTag(String name)
     {
-        return TagKey.create(Registries.ITEM, new ResourceLocation(Constants.MOD_ID, name));
+        return TagKey.create(Registries.ITEM, Constants.resLocDO(name));
     }
 
 }

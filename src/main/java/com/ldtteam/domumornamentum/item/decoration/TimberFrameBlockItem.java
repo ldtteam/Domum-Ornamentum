@@ -16,9 +16,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.network.chat.Component;
 
-import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.List;
 
 public class TimberFrameBlockItem extends BlockItemWithClientBePlacement implements IDoItem
@@ -44,10 +41,9 @@ public class TimberFrameBlockItem extends BlockItemWithClientBePlacement impleme
     }
 
     @Override
-    public void appendHoverText(
-      final ItemStack stack, @Nullable final Level worldIn, final List<Component> tooltip, final TooltipFlag flagIn)
+    public void appendHoverText(final ItemStack stack, final TooltipContext tooltipContext, final List<Component> tooltip, final TooltipFlag flagIn)
     {
-        super.appendHoverText(stack, worldIn, tooltip, flagIn);
+        super.appendHoverText(stack, tooltipContext, tooltip, flagIn);
 
         MaterialTextureData textureData = MaterialTextureData.deserializeFromItemStack(stack);
         if (textureData.isEmpty()) {
@@ -74,12 +70,12 @@ public class TimberFrameBlockItem extends BlockItemWithClientBePlacement impleme
     @Override
     public List<ResourceLocation> getInputIds()
     {
-        return ImmutableList.of(new ResourceLocation(Constants.MOD_ID, "frame"), new ResourceLocation(Constants.MOD_ID, "center"));
+        return ImmutableList.of(Constants.resLocDO("frame"), Constants.resLocDO("center"));
     }
 
     @Override
     public ResourceLocation getGroup()
     {
-        return new ResourceLocation(Constants.MOD_ID, "btimberframe");
+        return Constants.resLocDO("btimberframe");
     }
 }

@@ -25,7 +25,7 @@ public class MateriallyTexturedGeometry implements IUnbakedGeometry<MateriallyTe
     }
 
     @Override
-    public BakedModel bake(IGeometryBakingContext context, ModelBaker baker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides overrides, ResourceLocation modelLocation) {
+    public BakedModel bake(IGeometryBakingContext context, ModelBaker baker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides overrides) {
         final UnbakedModel innerModel = baker.getModel(this.innerModelLocation);
 
         if (!(innerModel instanceof BlockModel)) {
@@ -33,7 +33,7 @@ public class MateriallyTexturedGeometry implements IUnbakedGeometry<MateriallyTe
         }
 
         final BakedModel innerBakedModel = innerModel.bake(
-                baker, spriteGetter, modelState, modelLocation
+                baker, spriteGetter, modelState
         );
 
         return new MateriallyTexturedBakedModel(innerBakedModel);

@@ -23,7 +23,7 @@ public interface IDoItem
      */
     default List<ResourceLocation> getInputIds()
     {
-        return ImmutableList.of(new ResourceLocation(Constants.MOD_ID, "onlyone"));
+        return ImmutableList.of(Constants.resLocDO("onlyone"));
     }
 
     /**

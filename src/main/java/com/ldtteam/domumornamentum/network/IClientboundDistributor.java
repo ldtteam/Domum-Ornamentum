@@ -1,13 +1,14 @@
 package com.ldtteam.domumornamentum.network;
 
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.chunk.LevelChunk;
+import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.network.PacketDistributor.TargetPoint;
+import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 
 /**
@@ -28,36 +29,61 @@ public interface IClientboundDistributor extends CustomPacketPayload
 
     public default void sendToPlayer(final ServerPlayer player)
     {
-        PacketDistributor.PLAYER.with(player).send(this);
+        PacketDistributor.sendToPlayer(player, this);
     }
 
-    public default void sendToDimension(final ResourceKey<Level> dimensionKey)
+    public default void sendToDimension(final ServerLevel serverLevel)
     {
-        PacketDistributor.DIMENSION.with(dimensionKey).send(this);
+        PacketDistributor.sendToPlayersInDimension(serverLevel, this);
     }
 
-    public default void sendToTargetPoint(final TargetPoint point)
+    public default void sendToTargetPoint(final ServerLevel level,
+        @Nullable final ServerPlayer excluded,
+        final double x,
+        final double y,
+        final double z,
+        final double radius)
     {
-        PacketDistributor.NEAR.with(point).send(this);
+        PacketDistributor.sendToPlayersNear(level, excluded, x, y, z, radius, this);
     }
 
     public default void sendToAllClients()
     {
-        PacketDistributor.ALL.noArg().send(this);
+        PacketDistributor.sendToAllPlayers(this);
     }
 
     public default void sendToTrackingEntity(final Entity entity)
     {
-        PacketDistributor.TRACKING_ENTITY.with(entity).send(this);
+        PacketDistributor.sendToPlayersTrackingEntity(entity, this);
     }
 
     public default void sendToTrackingEntityAndSelf(final Entity entity)
     {
-        PacketDistributor.TRACKING_ENTITY_AND_SELF.with(entity).send(this);
+        PacketDistributor.sendToPlayersTrackingEntityAndSelf(entity, this);
     }
 
     public default void sendToPlayersTrackingChunk(final LevelChunk chunk)
     {
-        PacketDistributor.TRACKING_CHUNK.with(chunk).send(this);
+        if (chunk.getLevel() instanceof final ServerLevel level)
+        {
+            PacketDistributor.sendToPlayersTrackingChunk(level, chunk.getPos(), this);
+            return;
+        }
+
+        final String crash =
+            "Got client chunk for server network message: " + this.getClass().getName() + " - " + chunk.getClass().getName();
+        if (FMLEnvironment.production)
+        {
+            new IllegalArgumentException(crash).printStackTrace();
+        }
+        else
+        {
+            throw new IllegalArgumentException(crash);
+        }
+    }
+
+    public default void sendToPlayersTrackingChunk(final ServerLevel serverLevel, final ChunkPos chunkPos)
+    {
+        PacketDistributor.sendToPlayersTrackingChunk(serverLevel, chunkPos, this);
     }
 }

@@ -10,6 +10,6 @@ public interface IServerboundDistributor extends CustomPacketPayload
 {
     public default void sendToServer()
     {
-        PacketDistributor.SERVER.noArg().send(this);
+        PacketDistributor.sendToServer(this);
     }
 }

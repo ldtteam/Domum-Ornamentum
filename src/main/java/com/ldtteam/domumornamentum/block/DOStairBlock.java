@@ -4,7 +4,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -129,7 +128,7 @@ public class DOStairBlock extends Block implements SimpleWaterloggedBlock
     @Override
     public boolean isRandomlyTicking(BlockState p_56947_)
     {
-        return this.base.isRandomlyTicking(p_56947_);
+        return this.baseState.isRandomlyTicking();
     }
 
     @Override
@@ -255,7 +254,7 @@ public class DOStairBlock extends Block implements SimpleWaterloggedBlock
     }
 
     @Override
-    public boolean isPathfindable(BlockState p_56891_, BlockGetter p_56892_, BlockPos p_56893_, PathComputationType p_56894_)
+    public boolean isPathfindable(BlockState p_56891_, PathComputationType p_56894_)
     {
         return false;
     }
@@ -279,7 +278,7 @@ public class DOStairBlock extends Block implements SimpleWaterloggedBlock
         if (!p_56961_.is(p_56961_.getBlock()))
         {
             p_56962_.neighborChanged(this.baseState, p_56963_, Blocks.AIR, p_56963_, false);
-            this.base.onPlace(this.baseState, p_56962_, p_56963_, p_56964_, false);
+            this.baseState.onPlace(p_56962_, p_56963_, p_56964_, false);
         }
     }
 
@@ -293,9 +292,9 @@ public class DOStairBlock extends Block implements SimpleWaterloggedBlock
     }
 
     @Override
-    public InteractionResult use(BlockState p_56901_, Level p_56902_, BlockPos p_56903_, Player p_56904_, InteractionHand p_56905_, BlockHitResult p_56906_)
+    protected InteractionResult useWithoutItem(BlockState p_60503_, Level p_60504_, BlockPos p_60505_, Player p_60506_, BlockHitResult p_60508_)
     {
-        return this.baseState.use(p_56902_, p_56904_, p_56905_, p_56906_);
+        return this.baseState.useWithoutItem(p_60504_, p_60506_, p_60508_);
     }
 
     @Override
@@ -383,13 +382,13 @@ public class DOStairBlock extends Block implements SimpleWaterloggedBlock
     @Override
     public void randomTick(BlockState p_222523_, ServerLevel p_222524_, BlockPos p_222525_, RandomSource p_222526_)
     {
-        this.base.randomTick(p_222523_, p_222524_, p_222525_, p_222526_);
+        this.baseState.randomTick(p_222524_, p_222525_, p_222526_);
     }
 
     @Override
     public void tick(BlockState p_222513_, ServerLevel p_222514_, BlockPos p_222515_, RandomSource p_222516_)
     {
-        this.base.tick(p_222513_, p_222514_, p_222515_, p_222516_);
+        this.baseState.tick(p_222514_, p_222515_, p_222516_);
     }
 
     @Override

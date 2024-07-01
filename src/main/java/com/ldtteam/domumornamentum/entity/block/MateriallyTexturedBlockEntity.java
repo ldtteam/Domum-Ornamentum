@@ -5,6 +5,7 @@ import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.client.model.properties.ModProperties;
 import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
@@ -50,9 +51,9 @@ public class MateriallyTexturedBlockEntity extends BlockEntity implements IMater
     }
 
     @Override
-    public @NotNull CompoundTag getUpdateTag()
+    public @NotNull CompoundTag getUpdateTag(final HolderLookup.Provider provider)
     {
-        return this.saveWithoutMetadata();
+        return this.saveWithoutMetadata(provider);
     }
 
     @Override
@@ -62,16 +63,16 @@ public class MateriallyTexturedBlockEntity extends BlockEntity implements IMater
     }
 
     @Override
-    public void saveAdditional(@NotNull final CompoundTag compound)
+    public void saveAdditional(@NotNull final CompoundTag compound, final HolderLookup.Provider provider)
     {
-        super.saveAdditional(compound);
+        super.saveAdditional(compound, provider);
         compound.put(BLOCK_ENTITY_TEXTURE_DATA, textureData.serializeNBT());
     }
 
     @Override
-    public void load(@NotNull final CompoundTag nbt)
+    public void loadAdditional(@NotNull final CompoundTag nbt, final HolderLookup.Provider provider)
     {
-        super.load(nbt);
+        super.loadAdditional(nbt, provider);
         updateTextureDataWith(MaterialTextureData.deserializeFromNBT(nbt.getCompound(BLOCK_ENTITY_TEXTURE_DATA)));
     }
 

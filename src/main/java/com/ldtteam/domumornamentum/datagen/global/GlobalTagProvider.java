@@ -161,12 +161,12 @@ public class GlobalTagProvider extends BlockTagsProvider
             BlockTags.TERRACOTTA,
             BlockTags.WOOL,
             Tags.Blocks.STORAGE_BLOCKS,
-            Tags.Blocks.GLASS,
+            Tags.Blocks.GLASS_BLOCKS,
             BlockTags.LOGS,
             BlockTags.WART_BLOCKS,
-            Tags.Blocks.STONE,
-            Tags.Blocks.COBBLESTONE,
-            Tags.Blocks.OBSIDIAN,
+            Tags.Blocks.STONES,
+            Tags.Blocks.COBBLESTONES,
+            Tags.Blocks.OBSIDIANS,
             BlockTags.STONE_BRICKS,
             BlockTags.BASE_STONE_NETHER
           );

@@ -22,7 +22,7 @@ public class FloatingCarpetBlockStateProvider extends BlockStateProvider
     }
 
     private void registerStatesAndModelsFor(FloatingCarpetBlock floatingCarpetBlock) {
-        final ModelFile minecraftCarpetModel = models().getExistingFile(new ResourceLocation("block/" + floatingCarpetBlock.getColor().getName() + "_carpet"));
+        final ModelFile minecraftCarpetModel = models().getExistingFile(ResourceLocation.withDefaultNamespace("block/" + floatingCarpetBlock.getColor().getName() + "_carpet"));
         simpleBlock(floatingCarpetBlock, minecraftCarpetModel);
         simpleBlockItem(floatingCarpetBlock, minecraftCarpetModel);
     }

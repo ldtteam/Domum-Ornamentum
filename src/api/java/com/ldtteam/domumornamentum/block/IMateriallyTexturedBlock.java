@@ -1,6 +1,5 @@
 package com.ldtteam.domumornamentum.block;
 
-import com.google.common.collect.Maps;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.entity.block.IMateriallyTexturedBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -9,7 +8,6 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.models.blockstates.PropertyDispatch;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -26,7 +24,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.StreamSupport;
 
@@ -40,7 +37,7 @@ public interface IMateriallyTexturedBlock
     @NotNull
     default MaterialTextureData getRandomMaterials()
     {
-        final Map<ResourceLocation, Block> textureData = Maps.newHashMap();
+        final MaterialTextureData textureData = new MaterialTextureData();
         for (final IMateriallyTexturedBlockComponent component : getComponents())
         {
             final List<Block> candidates = new ArrayList<>(
@@ -50,9 +47,9 @@ public interface IMateriallyTexturedBlock
             if (candidates.isEmpty()) continue;
 
             final Block texture = candidates.get(ThreadLocalRandom.current().nextInt(candidates.size()));
-            textureData.put(component.getId(), texture);
+            textureData.setComponent(component.getId(), texture);
         }
-        return new MaterialTextureData(textureData);
+        return textureData;
     }
 
 
@@ -107,7 +104,7 @@ public interface IMateriallyTexturedBlock
             Block block = mtbe.getTextureData().getTexturedComponents().get(getMainComponent().getId());
             if (block != null)
             {
-                return block.getDestroyProgress(block.defaultBlockState(), player, level, pos);
+                return block.defaultBlockState().getDestroyProgress(player, level, pos);
             }
         }
         return inputFunction.apply(state, player, level, pos);

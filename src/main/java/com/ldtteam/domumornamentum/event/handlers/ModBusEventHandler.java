@@ -63,12 +63,12 @@ import com.ldtteam.domumornamentum.network.messages.CreativeSetArchitectCutterSl
 import com.ldtteam.domumornamentum.util.Constants;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
-import net.neoforged.neoforge.network.event.RegisterPayloadHandlerEvent;
-import net.neoforged.neoforge.network.registration.IPayloadRegistrar;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
-@Mod.EventBusSubscriber(modid = Constants.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = Constants.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class ModBusEventHandler
 {
     /**
@@ -77,12 +77,12 @@ public class ModBusEventHandler
      * @param event event
      */
     @SubscribeEvent
-    public static void onNetworkRegistry(final RegisterPayloadHandlerEvent event)
+    public static void onNetworkRegistry(final RegisterPayloadHandlersEvent event)
     {
         final String modVersion = ModList.get().getModContainerById(Constants.MOD_ID).get().getModInfo().getVersion().toString();
-        final IPayloadRegistrar registry = event.registrar(Constants.MOD_ID).versioned(modVersion);
+        final PayloadRegistrar registry = event.registrar(Constants.MOD_ID).versioned(modVersion);
 
-        registry.play(CreativeSetArchitectCutterSlotMessage.ID, CreativeSetArchitectCutterSlotMessage::new, h -> h.server(CreativeSetArchitectCutterSlotMessage::onExecute));
+        registry.playToServer(CreativeSetArchitectCutterSlotMessage.ID, CreativeSetArchitectCutterSlotMessage.CODEC, CreativeSetArchitectCutterSlotMessage::onExecute);
     }
 
     @SubscribeEvent
@@ -195,7 +195,7 @@ public class ModBusEventHandler
         //Global
         event.getGenerator().addProvider(true, new GlobalRecipeProvider(event.getGenerator().getPackOutput(), event.getLookupProvider()));
         event.getGenerator().addProvider(true, new GlobalLanguageProvider(event.getGenerator()));
-        event.getGenerator().addProvider(true, new GlobalLootTableProvider(event.getGenerator().getPackOutput()));
+        event.getGenerator().addProvider(true, new GlobalLootTableProvider(event.getGenerator().getPackOutput(), event.getLookupProvider()));
         event.getGenerator().addProvider(true, new MateriallyTexturedBlockRecipeProvider(event.getGenerator().getPackOutput(), event.getLookupProvider()));
     }
 }
