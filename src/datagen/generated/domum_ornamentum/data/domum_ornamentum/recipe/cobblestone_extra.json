@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "X": {
+      "item": "minecraft:cobblestone"
+    },
+    "Z": {
+      "item": "minecraft:cobblestone"
+    }
+  },
+  "pattern": [
+    "X X",
+    " Z ",
+    "X X"
+  ],
+  "result": {
+    "count": 4,
+    "id": "domum_ornamentum:cobblestone_extra"
+  }
+}

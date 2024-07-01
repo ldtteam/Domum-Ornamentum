@@ -1,0 +1,10 @@
+{
+  "type": "domum_ornamentum:architects_cutter",
+  "block": "domum_ornamentum:panel",
+  "components": {
+    "minecraft:block_state": {
+      "type": "horizontally_striped"
+    }
+  },
+  "count": 4
+}

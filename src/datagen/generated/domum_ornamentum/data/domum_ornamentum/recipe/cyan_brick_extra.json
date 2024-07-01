@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "X": {
+      "item": "minecraft:brick"
+    },
+    "Z": {
+      "item": "minecraft:cyan_dye"
+    }
+  },
+  "pattern": [
+    "X X",
+    " Z ",
+    "X X"
+  ],
+  "result": {
+    "count": 4,
+    "id": "domum_ornamentum:cyan_brick_extra"
+  }
+}

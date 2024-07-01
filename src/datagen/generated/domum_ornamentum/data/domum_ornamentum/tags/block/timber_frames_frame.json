@@ -1,0 +1,14 @@
+{
+  "values": [
+    "minecraft:bricks",
+    "minecraft:deepslate",
+    "minecraft:deepslate_bricks",
+    "minecraft:cobbled_deepslate",
+    "minecraft:polished_deepslate",
+    "minecraft:polished_blackstone",
+    "#domum_ornamentum:default",
+    "#minecraft:planks",
+    "#c:obsidians",
+    "#c:stones"
+  ]
+}

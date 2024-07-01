@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "SWS",
+    "SWS",
+    "SWS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "domum_ornamentum:blockbarreldeco_standing"
+  }
+}

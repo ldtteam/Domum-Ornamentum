@@ -1,0 +1,9 @@
+{
+  "type": "domum_ornamentum:architects_cutter",
+  "block": "domum_ornamentum:fancy_trapdoors",
+  "components": {
+    "minecraft:block_state": {
+      "type": "creeper"
+    }
+  }
+}

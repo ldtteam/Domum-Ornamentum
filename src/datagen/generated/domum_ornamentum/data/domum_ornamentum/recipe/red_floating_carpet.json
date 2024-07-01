@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "floating_carpets",
+  "ingredients": [
+    {
+      "item": "minecraft:red_carpet"
+    },
+    {
+      "tag": "c:strings"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "domum_ornamentum:red_floating_carpet"
+  }
+}

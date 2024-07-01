@@ -1,0 +1,9 @@
+{
+  "type": "domum_ornamentum:architects_cutter",
+  "block": "domum_ornamentum:vanilla_doors_compat",
+  "components": {
+    "minecraft:block_state": {
+      "type": "vertically_striped"
+    }
+  }
+}

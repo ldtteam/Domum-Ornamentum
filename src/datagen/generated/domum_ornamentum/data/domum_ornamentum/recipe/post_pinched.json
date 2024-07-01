@@ -1,0 +1,9 @@
+{
+  "type": "domum_ornamentum:architects_cutter",
+  "block": "domum_ornamentum:post",
+  "components": {
+    "minecraft:block_state": {
+      "type": "pinched"
+    }
+  }
+}

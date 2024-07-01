@@ -1,9 +1,0 @@
-{
-  "type": "domum_ornamentum:architects_cutter",
-  "block": "domum_ornamentum:post",
-  "nbt": {
-    "BlockStateTag": {
-      "type": "turned"
-    }
-  }
-}
