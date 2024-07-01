@@ -15,6 +15,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -49,6 +50,13 @@ public class MaterialTextureData
     public Map<ResourceLocation, Block> getTexturedComponents()
     {
         return this.texturedComponents;
+    }
+
+    public MaterialTextureData setComponent(final ResourceLocation key, final Block value)
+    {
+        final MaterialTextureData textureData = this == EMPTY ? new MaterialTextureData() : this;
+        textureData.texturedComponents.put(key, value);
+        return this;
     }
 
     @Override
