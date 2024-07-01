@@ -299,19 +299,17 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
             return;
         }
 
-        MaterialTextureData.updateItemStack(variantItemStack, oldTextureData -> {
-            final MaterialTextureData textureData = oldTextureData.isEmpty() ? new MaterialTextureData() : oldTextureData;
-            int i = 0;
-            for (final IMateriallyTexturedBlockComponent component : block.getComponents())
+        final MaterialTextureData.Builder textureData = MaterialTextureData.builder();
+        int i = 0;
+        for (final IMateriallyTexturedBlockComponent component : block.getComponents())
+        {
+            if (this.menu.inputInventory.getItem(i).getItem() instanceof final BlockItem blockItem)
             {
-                if (this.menu.inputInventory.getItem(i).getItem() instanceof final BlockItem blockItem)
-                {
-                    textureData.setComponent(component.getId(), blockItem.getBlock());
-                }
-                i++;
+                textureData.setComponent(component.getId(), blockItem.getBlock());
             }
-            return textureData;
-        });
+            i++;
+        }
+        textureData.putIntoItemStack(variantItemStack);
     }
 
     @Override

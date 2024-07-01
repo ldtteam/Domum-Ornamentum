@@ -1,8 +1,8 @@
 package com.ldtteam.domumornamentum.recipe.architectscutter;
 
+import com.ldtteam.domumornamentum.IDomumOrnamentumApi;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
-import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.DataComponentPatchBuilder;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRequirements;
@@ -15,12 +15,9 @@ import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.packs.VanillaRecipeProvider;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.component.BlockItemStateProperties;
-import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.properties.Property;
 
 import java.util.LinkedHashMap;
@@ -61,14 +58,7 @@ public class ArchitectsCutterRecipeBuilder
             return this;
         }
 
-        final CompoundTag serialized = new CompoundTag();
-        serialized.put(Constants.BLOCK_ENTITY_TEXTURE_DATA, textureData.serializeNBT());
-
-        BlockEntity.addEntityType(serialized,
-            BuiltInRegistries.BLOCK_ENTITY_TYPE
-                .get(Constants.BlockEntityTypes.MATERIALLY_RETEXTURABLE));
-
-        components.set(DataComponents.BLOCK_ENTITY_DATA, CustomData.of(serialized));
+        components.set(IDomumOrnamentumApi.getInstance().getMaterialTextureComponentType(), textureData);
 
         return this;
     }

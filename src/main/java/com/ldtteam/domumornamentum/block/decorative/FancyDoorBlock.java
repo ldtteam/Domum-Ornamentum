@@ -8,7 +8,6 @@ import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.components.SimpleRetexturableComponent;
 import com.ldtteam.domumornamentum.block.types.FancyDoorType;
-import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
 import com.ldtteam.domumornamentum.recipe.architectscutter.ArchitectsCutterRecipeBuilder;
 import com.ldtteam.domumornamentum.tag.ModTags;
@@ -107,9 +106,7 @@ public class FancyDoorBlock extends AbstractBlockDoor<FancyDoorBlock> implements
     {
         super.setPlacedBy(worldIn, pos, state, Objects.requireNonNull(placer), stack);
 
-        final BlockEntity upperBlockEntity = worldIn.getBlockEntity(pos.above());
-        if (upperBlockEntity instanceof final MateriallyTexturedBlockEntity materialBE)
-            materialBE.updateTextureDataWith(MaterialTextureData.deserializeFromItemStack(stack));
+        worldIn.getBlockEntity(pos.above()).applyComponentsFromItemStack(stack);
     }
 
     @Nullable

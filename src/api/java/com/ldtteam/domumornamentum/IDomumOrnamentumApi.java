@@ -2,6 +2,10 @@ package com.ldtteam.domumornamentum;
 
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockManager;
 import com.ldtteam.domumornamentum.block.IModBlocks;
+import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
+import net.minecraft.core.component.DataComponentType;
+
+import java.util.function.Supplier;
 
 /**
  * The central DO api.
@@ -27,6 +31,8 @@ public interface IDomumOrnamentumApi
      * @return The manager
      */
     IMateriallyTexturedBlockManager getMateriallyTexturedBlockManager();
+
+    Supplier<DataComponentType<MaterialTextureData>> getMaterialTextureComponentType();
 
     class Holder {
         private static IDomumOrnamentumApi apiInstance;

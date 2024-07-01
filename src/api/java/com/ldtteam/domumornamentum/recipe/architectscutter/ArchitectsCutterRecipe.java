@@ -108,7 +108,7 @@ public class ArchitectsCutterRecipe implements Recipe<ArchitectsCutterRecipeInpu
 
         final List<IMateriallyTexturedBlockComponent> components = Lists.newArrayList(materiallyTexturedBlock.getComponents());
 
-        final MaterialTextureData textureData = new MaterialTextureData();
+        final MaterialTextureData.Builder textureData = MaterialTextureData.builder();
 
         for (int componentsIndex = 0; componentsIndex < components.size(); componentsIndex++)
         {
@@ -131,7 +131,7 @@ public class ArchitectsCutterRecipe implements Recipe<ArchitectsCutterRecipeInpu
         }
 
         final ItemStack result = new ItemStack(generatedBlock);
-        textureData.writeToItemStack(result);
+        textureData.putIntoItemStack(result);
         result.setCount(Math.max(components.size(), count));
 
         result.applyComponents(componentMap);

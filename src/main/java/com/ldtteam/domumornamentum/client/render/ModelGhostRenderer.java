@@ -105,7 +105,7 @@ public class ModelGhostRenderer {
             if (blockItem.getBlock() instanceof EntityBlock entityBlock) {
                 final BlockEntity blockEntity = entityBlock.newBlockEntity(context.getClickedPos(), placementState);
                 if (blockEntity != null) {
-                    renderStack.getOrDefault(DataComponents.BLOCK_ENTITY_DATA, CustomData.EMPTY).loadInto(blockEntity, level.registryAccess());
+                    blockEntity.applyComponentsFromItemStack(renderStack);
 
                     modelData = blockEntity.getModelData();
                     modelData = model.getModelData(Objects.requireNonNull(Minecraft.getInstance().level), context.getClickedPos(), placementState, modelData);

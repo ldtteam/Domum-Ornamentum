@@ -40,7 +40,7 @@ public class MaterialTextureDataUtil
             return MaterialTextureData.EMPTY;
 
         try {
-            final MaterialTextureData newData = new MaterialTextureData();
+            final MaterialTextureData.Builder newData = MaterialTextureData.builder();
 
             int localOffset = BuiltInRegistries.BLOCK.getId(block);
             int offsetIndex = 0;
@@ -60,7 +60,7 @@ public class MaterialTextureDataUtil
                 newData.setComponent(component.getId(), texture);
             }
 
-            return newData;
+            return newData.build();
         }
         catch (Exception e)
         {

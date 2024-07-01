@@ -1,80 +1,92 @@
 package com.ldtteam.domumornamentum.client.model.data;
 
+import com.google.common.collect.ImmutableMap;
+import com.ldtteam.domumornamentum.IDomumOrnamentumApi;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
+import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.util.Constants;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.component.DataComponents;
+import com.mojang.serialization.Codec;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.neoforged.neoforge.common.util.INBTSerializable;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
+import java.util.function.IntFunction;
 
 import static com.ldtteam.domumornamentum.util.Constants.BLOCK_ENTITY_TEXTURE_DATA;
 
-public class MaterialTextureData implements INBTSerializable<CompoundTag>
+public record MaterialTextureData(Map<ResourceLocation, Block> texturedComponents)
 {
     public static final MaterialTextureData EMPTY = new MaterialTextureData(Map.of());
 
-    private final Map<ResourceLocation, Block> texturedComponents;
+    public static final Codec<MaterialTextureData> CODEC =
+        Codec.unboundedMap(ResourceLocation.CODEC, BuiltInRegistries.BLOCK.byNameCodec())
+            .xmap(MaterialTextureData::fromCodec, MaterialTextureData::texturedComponents);
 
-    public MaterialTextureData()
+    public static final StreamCodec<RegistryFriendlyByteBuf, MaterialTextureData> STREAM_CODEC = ByteBufCodecs
+        .map((IntFunction<Map<ResourceLocation, Block>>) HashMap::new, ResourceLocation.STREAM_CODEC, ByteBufCodecs.registry(Registries.BLOCK))
+        .map(MaterialTextureData::fromCodec, MaterialTextureData::texturedComponents);
+
+    /**
+     * Ensures emptiness and mutability
+     */
+    private static MaterialTextureData fromCodec(final Map<ResourceLocation, Block> texturedComponents)
     {
-        this(new HashMap<>());
+        return texturedComponents.isEmpty() ? EMPTY : new MaterialTextureData(texturedComponents);
     }
 
-    public MaterialTextureData(final Map<ResourceLocation, Block> texturedComponents) {
-        this.texturedComponents = texturedComponents;
+    public static Builder builder()
+    {
+        return new Builder();
     }
 
+    @Deprecated(forRemoval = true, since = "1.21")
     public Map<ResourceLocation, Block> getTexturedComponents()
     {
         return texturedComponents;
     }
 
-    public MaterialTextureData setComponent(final ResourceLocation key, final Block value)
+    /**
+     * @return new instance if old instance contained components not present on given block
+     */
+    public MaterialTextureData retainComponentsFromBlock(final IMateriallyTexturedBlock block)
     {
-        final MaterialTextureData textureData = this == EMPTY ? new MaterialTextureData() : this;
-        textureData.texturedComponents.put(key, value);
-        return this;
-    }
-
-    @Override
-    public boolean equals(final Object o)
-    {
-        if (this == o)
+        // assume that in majority events all components match
+        int localComponentsPresent = 0;
+        for (final IMateriallyTexturedBlockComponent component : block.getComponents())
         {
-            return true;
+            if (texturedComponents.containsKey(component.getId()))
+            {
+                localComponentsPresent++;
+            }
         }
-        if (!(o instanceof final MaterialTextureData that))
+
+        if (localComponentsPresent == texturedComponents.size())
         {
-            return false;
+            return this;
         }
-        return Objects.equals(getTexturedComponents(), that.getTexturedComponents());
+
+        final Builder newData = new Builder();
+        block.getComponents().forEach(comp -> newData.setComponent(comp.getId(), texturedComponents.get(comp.getId())));
+        return newData.build();
     }
 
-    @Override
-    public int hashCode()
-    {
-        return Objects.hash(getTexturedComponents());
-    }
-
-    @Override
-    public CompoundTag serializeNBT(final HolderLookup.Provider provider)
-    {
-        return serializeNBT();
-    }
-
+    /**
+     * @deprecated use datacomponent, remove at 1.22
+     */
+    @Deprecated(forRemoval = true, since = "1.21")
     public CompoundTag serializeNBT()
     {
         final CompoundTag nbt = new CompoundTag();
@@ -87,36 +99,39 @@ public class MaterialTextureData implements INBTSerializable<CompoundTag>
         return nbt;
     }
 
-    @Override
-    public void deserializeNBT(final HolderLookup.Provider provider, final CompoundTag nbt)
-    {
-        this.texturedComponents.clear();
+    /**
+     * @deprecated use datacomponent, remove at 1.22
+     */
+    @Deprecated(forRemoval = true, since = "1.21")
+    public static MaterialTextureData deserializeFromNBT(final CompoundTag nbt) {
+        if (nbt == null || nbt.isEmpty())
+            return EMPTY;
 
+        final Builder newData = new Builder();
         nbt.getAllKeys().forEach(key -> {
             final ResourceLocation name = ResourceLocation.parse(nbt.getString(key));
 
             if (BuiltInRegistries.BLOCK.get(name) != Blocks.AIR)
             {
-                this.texturedComponents.put(ResourceLocation.parse(key), BuiltInRegistries.BLOCK.get(name));
+                newData.setComponent(ResourceLocation.parse(key), BuiltInRegistries.BLOCK.get(name));
             }
         });
+        return newData.build();
     }
 
-    public static MaterialTextureData deserializeFromNBT(final CompoundTag nbt) {
-        if (nbt == null || nbt.isEmpty())
-            return EMPTY;
-
-        final MaterialTextureData newData = new MaterialTextureData();
-        newData.deserializeNBT(null, nbt);
-        return newData;
-    }
-
-    @SuppressWarnings("deprecation")
+    /**
+     * @deprecated use datacomponent, remove at 1.22
+     */
+    @Deprecated(forRemoval = true, since = "1.21")
     public static MaterialTextureData deserializeFromItemStack(final ItemStack itemStack)
     {
-        return deserializeFromNBT(itemStack.getOrDefault(DataComponents.BLOCK_ENTITY_DATA, CustomData.EMPTY).getUnsafe().getCompound(BLOCK_ENTITY_TEXTURE_DATA));
+        return itemStack.getOrDefault(IDomumOrnamentumApi.getInstance().getMaterialTextureComponentType(), MaterialTextureData.EMPTY);
     }
 
+    /**
+     * @deprecated use datacomponent, remove at 1.22
+     */
+    @Deprecated(forRemoval = true, since = "1.21")
     public static void updateItemStack(final ItemStack itemStack, final Function<MaterialTextureData, MaterialTextureData> updater)
     {
         if (itemStack.getItem() instanceof final BlockItem bi && bi.getBlock() instanceof IMateriallyTexturedBlock)
@@ -137,7 +152,9 @@ public class MaterialTextureData implements INBTSerializable<CompoundTag>
 
     /**
      * @see BlockEntity#saveToItem(ItemStack, net.minecraft.core.HolderLookup.Provider)
+     * @deprecated use datacomponent, remove at 1.22
      */
+    @Deprecated(forRemoval = true, since = "1.21")
     public void writeToItemStack(final ItemStack itemStack)
     {
         updateItemStack(itemStack, old -> this);
@@ -154,5 +171,26 @@ public class MaterialTextureData implements INBTSerializable<CompoundTag>
         return "MaterialTextureData{" +
                  "texturedComponents=" + texturedComponents +
                  '}';
+    }
+
+    public static class Builder
+    {
+        private final ImmutableMap.Builder<ResourceLocation, Block> texturedComponents = ImmutableMap.builder();
+
+        public Builder setComponent(final ResourceLocation key, final Block value)
+        {
+            texturedComponents.put(key, value);
+            return this;
+        }
+
+        public MaterialTextureData build()
+        {
+            return new MaterialTextureData(texturedComponents.build());
+        }
+
+        public void putIntoItemStack(final ItemStack itemStack)
+        {
+            itemStack.set(IDomumOrnamentumApi.getInstance().getMaterialTextureComponentType(), build());
+        }
     }
 }

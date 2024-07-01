@@ -1,7 +1,10 @@
 package com.ldtteam.domumornamentum.item;
 
+import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
+import com.ldtteam.domumornamentum.component.ModDataComponents;
 import net.minecraft.Util;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
@@ -42,11 +45,17 @@ public class SelfUpgradingBlockItem extends BlockItem
             // move TextureData from root to BlockEntityTag
             if (oldData.contains(BLOCK_ENTITY_TEXTURE_DATA, Tag.TAG_COMPOUND))
             {
-                CustomData.update(DataComponents.BLOCK_ENTITY_DATA, itemStack, beData -> beData.put(BLOCK_ENTITY_TEXTURE_DATA, oldData.getCompound(BLOCK_ENTITY_TEXTURE_DATA)));
+                itemStack.set(ModDataComponents.TEXTURE_DATA, MaterialTextureData.deserializeFromNBT(oldData.getCompound(BLOCK_ENTITY_TEXTURE_DATA)));
     
                 oldData.remove(BLOCK_ENTITY_TEXTURE_DATA);
             }
         });
+
+        final CompoundTag tag = itemStack.getOrDefault(DataComponents.BLOCK_ENTITY_DATA, CustomData.EMPTY).getUnsafe().getCompound(BLOCK_ENTITY_TEXTURE_DATA);
+        if (!tag.isEmpty())
+        {
+            itemStack.set(ModDataComponents.TEXTURE_DATA, MaterialTextureData.deserializeFromNBT(tag));
+        }
     }
 
     private static BlockItemStateProperties with(BlockItemStateProperties properties, String key, String value)

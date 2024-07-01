@@ -37,7 +37,7 @@ public interface IMateriallyTexturedBlock
     @NotNull
     default MaterialTextureData getRandomMaterials()
     {
-        final MaterialTextureData textureData = new MaterialTextureData();
+        final MaterialTextureData.Builder textureData = MaterialTextureData.builder();
         for (final IMateriallyTexturedBlockComponent component : getComponents())
         {
             final List<Block> candidates = new ArrayList<>(
@@ -49,7 +49,7 @@ public interface IMateriallyTexturedBlock
             final Block texture = candidates.get(ThreadLocalRandom.current().nextInt(candidates.size()));
             textureData.setComponent(component.getId(), texture);
         }
-        return textureData;
+        return textureData.build();
     }
 
 

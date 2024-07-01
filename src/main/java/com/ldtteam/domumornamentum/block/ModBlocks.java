@@ -342,14 +342,14 @@ public final class ModBlocks implements IModBlocks {
     private ItemStack process(final ItemStack stack, final IMateriallyTexturedBlock block)
     {
         final @NotNull List<IMateriallyTexturedBlockComponent> components = new ArrayList<>(block.getComponents());
-        final MaterialTextureData textureData = new MaterialTextureData();
+        final MaterialTextureData.Builder textureData = MaterialTextureData.builder();
 
         for (final IMateriallyTexturedBlockComponent component : components)
         {
             textureData.setComponent(component.getId(), component.getDefault());
         }
 
-        textureData.writeToItemStack(stack);
+        textureData.putIntoItemStack(stack);
 
         return stack;
     }
