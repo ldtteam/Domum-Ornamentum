@@ -15,7 +15,6 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -40,35 +39,47 @@ public class MaterialTextureData
 
     public static final MaterialTextureData EMPTY = new MaterialTextureData(Map.of());
 
-    private final Map<ResourceLocation, Block> texturedComponents;
-
     public MaterialTextureData(final Map<ResourceLocation, Block> texturedComponents)
     {
         this.texturedComponents = texturedComponents;
     }
 
+    /**
+     * Ensures emptiness and mutability
+     */
+    private static MaterialTextureData fromCodec(final Map<ResourceLocation, Block> texturedComponents)
+    {
+        return texturedComponents.isEmpty() ? EMPTY : new MaterialTextureData(texturedComponents);
+    }
+
+    public static Builder builder()
+    {
+        return new Builder();
+    }
+
+    @Deprecated(forRemoval = true, since = "1.21")
     public Map<ResourceLocation, Block> getTexturedComponents()
     {
         return this.texturedComponents;
     }
 
-    public MaterialTextureData setComponent(final ResourceLocation key, final Block value)
+    /**
+     * @return new instance if old instance contained components not present on given block
+     */
+    public MaterialTextureData retainComponentsFromBlock(final IMateriallyTexturedBlock block)
     {
-        final MaterialTextureData textureData = this == EMPTY ? new MaterialTextureData() : this;
-        textureData.texturedComponents.put(key, value);
-        return this;
-    }
-
-    @Override
-    public boolean equals(final Object o)
-    {
-        if (this == o)
+        // assume that in majority events all components match
+        int localComponentsPresent = 0;
+        for (final IMateriallyTexturedBlockComponent component : block.getComponents())
         {
-            return true;
+            if (texturedComponents.containsKey(component.getId()))
+            {
+                localComponentsPresent++;
+            }
         }
         if (o == null || getClass() != o.getClass())
         {
-            return false;
+            return this;
         }
         final MaterialTextureData that = (MaterialTextureData) o;
         return Objects.equals(texturedComponents, that.texturedComponents);
