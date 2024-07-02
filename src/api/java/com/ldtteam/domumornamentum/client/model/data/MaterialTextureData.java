@@ -136,7 +136,7 @@ public class MaterialTextureData implements INBTSerializable<CompoundTag>
     }
 
     /**
-     * @see BlockEntity#saveToItem(ItemStack)
+     * @see BlockEntity#saveToItem(ItemStack, net.minecraft.core.HolderLookup.Provider)
      */
     public void writeToItemStack(final ItemStack itemStack)
     {
