@@ -30,9 +30,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -90,14 +88,6 @@ public class SlabBlock extends AbstractBlockSlab<SlabBlock> implements IMaterial
     public void resetCache()
     {
         fillItemGroupCache.clear();
-    }
-
-    @Override
-    public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootParams.Builder builder)
-    {
-        final List<ItemStack> drops = BlockUtils.getMaterializedDrops(builder);
-        drops.forEach(stack -> stack.setCount(state.getValue(TYPE).equals(SlabType.DOUBLE) ? 2 : 1));
-        return drops;
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.decorative.BrickBlock;
 import com.ldtteam.domumornamentum.block.decorative.ExtraBlock;
 import com.ldtteam.domumornamentum.block.decorative.FloatingCarpetBlock;
+import com.ldtteam.domumornamentum.datagen.loot.MaterialLootTableProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -25,7 +26,11 @@ public class GlobalLootTableProvider extends LootTableProvider
 {
 
     public GlobalLootTableProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> provider) {
-        super(packOutput, Set.of(), List.of(new SubProviderEntry(GlobalLootTableEntries::new, LootContextParamSets.BLOCK)), provider);
+        super(packOutput,
+            Set.of(),
+            List.of(new SubProviderEntry(GlobalLootTableEntries::new, LootContextParamSets.BLOCK),
+                new SubProviderEntry(MaterialLootTableProvider::new, LootContextParamSets.BLOCK)),
+            provider);
     }
 
     private static final class GlobalLootTableEntries extends BlockLootSubProvider {

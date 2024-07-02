@@ -35,7 +35,6 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
@@ -152,12 +151,6 @@ public class StairBlock extends net.minecraft.world.level.block.StairBlock imple
     {
         final BlockState state = getBlockState(p_56878_, p_56879_);
         state.getBlock().wasExploded(p_56878_, p_56879_, p_56880_);
-    }
-
-    @Override
-    public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootParams.Builder builder)
-    {
-        return BlockUtils.getMaterializedDrops(builder);
     }
 
     @Override

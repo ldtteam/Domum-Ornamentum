@@ -32,15 +32,12 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -114,17 +111,6 @@ public class FancyDoorBlock extends AbstractBlockDoor<FancyDoorBlock> implements
     public BlockEntity newBlockEntity(final @NotNull BlockPos blockPos, final @NotNull BlockState blockState)
     {
         return new MateriallyTexturedBlockEntity(blockPos, blockState);
-    }
-
-    @Override
-    public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootParams.Builder builder)
-    {
-        // According to BlockLootSubProvider "door" loot tables should only drop items for the lower half of the door.
-        if (!state.getValue(HALF).equals(DoubleBlockHalf.LOWER))
-        {
-            return Collections.emptyList();
-        }
-        return BlockUtils.getMaterializedDrops(builder, TYPE);
     }
 
     @Override

@@ -29,7 +29,6 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -99,12 +98,6 @@ public class PostBlock extends AbstractPostBlock<PostBlock> implements IMaterial
     public BlockEntity newBlockEntity(final @NotNull BlockPos blockPos, final @NotNull BlockState blockState)
     {
         return new MateriallyTexturedBlockEntity(blockPos, blockState);
-    }
-
-    @Override
-    public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootParams.Builder builder)
-    {
-        return BlockUtils.getMaterializedDrops(builder, TYPE);
     }
 
     @Override

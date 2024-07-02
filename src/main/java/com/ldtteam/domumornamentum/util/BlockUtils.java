@@ -30,6 +30,7 @@ public class BlockUtils
         return new ItemStack(block).getHoverName();
     }
 
+    @Deprecated(forRemoval = true, since = "1.21")
     public static List<ItemStack> getMaterializedDrops(final LootParams.Builder builder, final Property<?>... blockStateProperties)
     {
         final ItemStack stack = getMaterializedItemStack(builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY), builder.getLevel().registryAccess(), blockStateProperties);

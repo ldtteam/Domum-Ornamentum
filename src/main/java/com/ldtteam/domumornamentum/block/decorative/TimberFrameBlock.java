@@ -39,7 +39,6 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
-import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -142,12 +141,6 @@ public class TimberFrameBlock extends AbstractBlock<TimberFrameBlock> implements
     public void resetCache()
     {
         fillItemGroupCache.clear();
-    }
-
-    @Override
-    public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootParams.Builder builder)
-    {
-        return BlockUtils.getMaterializedDrops(builder);
     }
 
     @Override

@@ -43,7 +43,6 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.pathfinder.PathComputationType;
-import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -313,12 +312,6 @@ public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock>
     public void resetCache()
     {
         fillItemGroupCache.clear();
-    }
-
-    @Override
-    public @NotNull List<ItemStack> getDrops(final @NotNull BlockState state, final @NotNull LootParams.Builder builder)
-    {
-        return BlockUtils.getMaterializedDrops(builder);
     }
 
     @Override
