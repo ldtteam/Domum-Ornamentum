@@ -1,0 +1,41 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "domum_ornamentum:vanilla_doors_compat",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "half": "lower"
+              }
+            }
+          ],
+          "functions": [
+            {
+              "function": "minecraft:copy_components",
+              "include": [
+                "domum_ornamentum:texture_data"
+              ],
+              "source": "block_entity"
+            },
+            {
+              "block": "domum_ornamentum:vanilla_doors_compat",
+              "function": "minecraft:copy_state",
+              "properties": [
+                "type"
+              ]
+            }
+          ],
+          "name": "domum_ornamentum:vanilla_doors_compat"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "domum_ornamentum:blocks/vanilla_doors_compat"
+}

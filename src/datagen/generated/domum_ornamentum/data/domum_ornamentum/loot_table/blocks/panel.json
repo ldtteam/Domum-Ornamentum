@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:copy_components",
+              "include": [
+                "domum_ornamentum:texture_data"
+              ],
+              "source": "block_entity"
+            },
+            {
+              "block": "domum_ornamentum:panel",
+              "function": "minecraft:copy_state",
+              "properties": [
+                "type"
+              ]
+            }
+          ],
+          "name": "domum_ornamentum:panel"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "domum_ornamentum:blocks/panel"
+}
