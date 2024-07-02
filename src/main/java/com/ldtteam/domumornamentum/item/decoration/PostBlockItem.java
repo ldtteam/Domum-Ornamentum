@@ -3,6 +3,7 @@ import com.ldtteam.domumornamentum.block.types.PostType;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.decorative.PostBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
+import com.ldtteam.domumornamentum.component.ModDataComponents;
 import com.ldtteam.domumornamentum.item.BlockItemWithClientBePlacement;
 import com.ldtteam.domumornamentum.item.interfaces.IDoItem;
 import com.ldtteam.domumornamentum.util.BlockUtils;
@@ -31,10 +32,10 @@ public class PostBlockItem extends BlockItemWithClientBePlacement implements IDo
     @Override
     public Component getName(final ItemStack stack)
     {
-        final MaterialTextureData textureData = MaterialTextureData.deserializeFromItemStack(stack);
+        final MaterialTextureData textureData = stack.getOrDefault(ModDataComponents.TEXTURE_DATA, MaterialTextureData.EMPTY);
 
         final IMateriallyTexturedBlockComponent coverComponent = postBlock.getComponents().get(0);
-        final Block centerBlock = textureData.getTexturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
+        final Block centerBlock = textureData.texturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
         final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
 
         return Component.translatable(Constants.MOD_ID + ".post.name.format", centerBlockName);
@@ -54,13 +55,13 @@ public class PostBlockItem extends BlockItemWithClientBePlacement implements IDo
           Component.translatable(Constants.MOD_ID + ".post.type.name." + postType.getTranslationKeySuffix())
         ));
 
-        MaterialTextureData textureData = MaterialTextureData.deserializeFromItemStack(stack);
+        MaterialTextureData textureData = stack.getOrDefault(ModDataComponents.TEXTURE_DATA, MaterialTextureData.EMPTY);
         if (textureData.isEmpty()) {
             textureData = MaterialTextureDataUtil.generateRandomTextureDataFrom(stack);
         }
 
         final IMateriallyTexturedBlockComponent postComponent = postBlock.getComponents().get(0);
-        final Block postBlock = textureData.getTexturedComponents().getOrDefault(postComponent.getId(), postComponent.getDefault());
+        final Block postBlock = textureData.texturedComponents().getOrDefault(postComponent.getId(), postComponent.getDefault());
         final Component postBlockName = BlockUtils.getHoverName(postBlock);
         tooltip.add(Component.translatable(Constants.MOD_ID + ".desc.onlyone", Component.translatable(Constants.MOD_ID + ".desc.material", postBlockName)));
     }

@@ -5,6 +5,7 @@ import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.decorative.TimberFrameBlock;
 import com.ldtteam.domumornamentum.block.types.TimberFrameType;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
+import com.ldtteam.domumornamentum.component.ModDataComponents;
 import com.ldtteam.domumornamentum.item.BlockItemWithClientBePlacement;
 import com.ldtteam.domumornamentum.item.interfaces.IDoItem;
 import com.ldtteam.domumornamentum.util.BlockUtils;
@@ -31,10 +32,10 @@ public class TimberFrameBlockItem extends BlockItemWithClientBePlacement impleme
     @Override
     public Component getName(final ItemStack stack)
     {
-        final MaterialTextureData textureData = MaterialTextureData.deserializeFromItemStack(stack);
+        final MaterialTextureData textureData = stack.getOrDefault(ModDataComponents.TEXTURE_DATA, MaterialTextureData.EMPTY);
 
         final IMateriallyTexturedBlockComponent centerComponent = timberFrameBlock.getComponents().get(1);
-        final Block centerBlock = textureData.getTexturedComponents().getOrDefault(centerComponent.getId(), centerComponent.getDefault());
+        final Block centerBlock = textureData.texturedComponents().getOrDefault(centerComponent.getId(), centerComponent.getDefault());
         final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
 
         return Component.translatable(Constants.MOD_ID + ".timber.frame.name.format", centerBlockName);
@@ -45,7 +46,7 @@ public class TimberFrameBlockItem extends BlockItemWithClientBePlacement impleme
     {
         super.appendHoverText(stack, tooltipContext, tooltip, flagIn);
 
-        MaterialTextureData textureData = MaterialTextureData.deserializeFromItemStack(stack);
+        MaterialTextureData textureData = stack.getOrDefault(ModDataComponents.TEXTURE_DATA, MaterialTextureData.EMPTY);
         if (textureData.isEmpty()) {
             textureData = MaterialTextureDataUtil.generateRandomTextureDataFrom(stack);
         }
@@ -57,12 +58,12 @@ public class TimberFrameBlockItem extends BlockItemWithClientBePlacement impleme
         tooltip.add(Component.translatable(Constants.MOD_ID + ".timber.frame.type.format", Component.translatable(Constants.MOD_ID + ".timber.frame.type." + type.getName())));
 
         final IMateriallyTexturedBlockComponent frameComponent = timberFrameBlock.getComponents().get(0);
-        final Block frameBlock = textureData.getTexturedComponents().getOrDefault(frameComponent.getId(), frameComponent.getDefault());
+        final Block frameBlock = textureData.texturedComponents().getOrDefault(frameComponent.getId(), frameComponent.getDefault());
         final Component frameBlockName = BlockUtils.getHoverName(frameBlock);
         tooltip.add(Component.translatable(Constants.MOD_ID + ".desc.frame", Component.translatable(Constants.MOD_ID + ".desc.material", frameBlockName)));
 
         final IMateriallyTexturedBlockComponent centerComponent = timberFrameBlock.getComponents().get(1);
-        final Block centerBlock = textureData.getTexturedComponents().getOrDefault(centerComponent.getId(), centerComponent.getDefault());
+        final Block centerBlock = textureData.texturedComponents().getOrDefault(centerComponent.getId(), centerComponent.getDefault());
         final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
         tooltip.add(Component.translatable(Constants.MOD_ID + ".desc.center", Component.translatable(Constants.MOD_ID + ".desc.material", centerBlockName)));
     }

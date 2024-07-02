@@ -4,6 +4,7 @@ import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.types.DoorType;
 import com.ldtteam.domumornamentum.block.vanilla.DoorBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
+import com.ldtteam.domumornamentum.component.ModDataComponents;
 import com.ldtteam.domumornamentum.item.DoubleHighBlockItemWithClientBePlacement;
 import com.ldtteam.domumornamentum.item.interfaces.IDoItem;
 import com.ldtteam.domumornamentum.util.BlockUtils;
@@ -32,10 +33,10 @@ public class DoorBlockItem extends DoubleHighBlockItemWithClientBePlacement impl
     @Override
     public @NotNull Component getName(final ItemStack stack)
     {
-        final MaterialTextureData textureData = MaterialTextureData.deserializeFromItemStack(stack);
+        final MaterialTextureData textureData = stack.getOrDefault(ModDataComponents.TEXTURE_DATA, MaterialTextureData.EMPTY);
 
         final IMateriallyTexturedBlockComponent coverComponent = doorBlock.getComponents().get(0);
-        final Block centerBlock = textureData.getTexturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
+        final Block centerBlock = textureData.texturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
         final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
 
         return Component.translatable(Constants.MOD_ID + ".door.name.format", centerBlockName);
@@ -57,13 +58,13 @@ public class DoorBlockItem extends DoubleHighBlockItemWithClientBePlacement impl
           )
         ));
 
-        MaterialTextureData textureData = MaterialTextureData.deserializeFromItemStack(stack);
+        MaterialTextureData textureData = stack.getOrDefault(ModDataComponents.TEXTURE_DATA, MaterialTextureData.EMPTY);
         if (textureData.isEmpty()) {
             textureData = MaterialTextureDataUtil.generateRandomTextureDataFrom(stack);
         }
 
         final IMateriallyTexturedBlockComponent doorComponent = doorBlock.getComponents().get(0);
-        final Block doorBlock = textureData.getTexturedComponents().getOrDefault(doorComponent.getId(), doorComponent.getDefault());
+        final Block doorBlock = textureData.texturedComponents().getOrDefault(doorComponent.getId(), doorComponent.getDefault());
         tooltip.add(Component.translatable(Constants.MOD_ID + ".desc.onlyone", Component.translatable(Constants.MOD_ID + ".desc.material", BlockUtils.getHoverName(doorBlock))));
     }
 

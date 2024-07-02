@@ -8,6 +8,7 @@ import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.components.SimpleRetexturableComponent;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
+import com.ldtteam.domumornamentum.component.ModDataComponents;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
 import com.ldtteam.domumornamentum.recipe.architectscutter.ArchitectsCutterRecipeBuilder;
 import com.ldtteam.domumornamentum.tag.ModTags;
@@ -64,7 +65,7 @@ public class SlabBlock extends AbstractBlockSlab<SlabBlock> implements IMaterial
         final BlockEntity be = lootContext.getLevel().getBlockEntity(lootContext.getClickedPos());
         if (be instanceof MateriallyTexturedBlockEntity mtbe)
         {
-            final MaterialTextureData incomingTextureData = MaterialTextureData.deserializeFromItemStack(lootContext.getItemInHand());
+            final MaterialTextureData incomingTextureData = lootContext.getItemInHand().getOrDefault(ModDataComponents.TEXTURE_DATA, MaterialTextureData.EMPTY);
             final MaterialTextureData existingTextureData = mtbe.getTextureData();
 
             return incomingTextureData.equals(existingTextureData);

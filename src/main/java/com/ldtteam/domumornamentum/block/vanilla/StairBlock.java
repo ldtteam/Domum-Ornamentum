@@ -171,7 +171,7 @@ public class StairBlock extends net.minecraft.world.level.block.StairBlock imple
 
         if (blockEntity instanceof MateriallyTexturedBlockEntity) {
             final MaterialTextureData data = ((MateriallyTexturedBlockEntity) blockEntity).getTextureData();
-            final Block block = data.getTexturedComponents().get(MATERIAL_COMPONENT.getId());
+            final Block block = data.texturedComponents().get(MATERIAL_COMPONENT.getId());
             if (block != null) {
                 return block.defaultBlockState();
             }

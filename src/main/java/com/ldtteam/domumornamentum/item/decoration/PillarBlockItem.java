@@ -3,6 +3,7 @@ package com.ldtteam.domumornamentum.item.decoration;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.decorative.PillarBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
+import com.ldtteam.domumornamentum.component.ModDataComponents;
 import com.ldtteam.domumornamentum.item.BlockItemWithClientBePlacement;
 import com.ldtteam.domumornamentum.item.interfaces.IDoItem;
 import com.ldtteam.domumornamentum.util.BlockUtils;
@@ -31,10 +32,10 @@ public class PillarBlockItem extends BlockItemWithClientBePlacement implements I
     @Override
     public Component getName(final ItemStack stack)
     {
-        final MaterialTextureData textureData = MaterialTextureData.deserializeFromItemStack(stack);
+        final MaterialTextureData textureData = stack.getOrDefault(ModDataComponents.TEXTURE_DATA, MaterialTextureData.EMPTY);
 
         final IMateriallyTexturedBlockComponent columnComponent = pillarBlock.getComponents().get(0);
-        final Block columnBlock = textureData.getTexturedComponents().getOrDefault(columnComponent.getId(), columnComponent.getDefault());
+        final Block columnBlock = textureData.texturedComponents().getOrDefault(columnComponent.getId(), columnComponent.getDefault());
         final Component columnBlockName = BlockUtils.getHoverName(columnBlock);
 
         return Component.translatable(Constants.MOD_ID + "." + ((PillarBlock) getBlock()).getRegistryName().getPath() + ".name.format", columnBlockName);
@@ -45,7 +46,7 @@ public class PillarBlockItem extends BlockItemWithClientBePlacement implements I
     {
         super.appendHoverText(stack, tooltipContext, tooltip, flagIn);
 
-        MaterialTextureData textureData = MaterialTextureData.deserializeFromItemStack(stack);
+        MaterialTextureData textureData = stack.getOrDefault(ModDataComponents.TEXTURE_DATA, MaterialTextureData.EMPTY);
         if (textureData.isEmpty()) {
             textureData = MaterialTextureDataUtil.generateRandomTextureDataFrom(stack);
         }
@@ -55,7 +56,7 @@ public class PillarBlockItem extends BlockItemWithClientBePlacement implements I
         tooltip.add(Component.translatable(Constants.MOD_ID + ".pillar.header"));
 
         final IMateriallyTexturedBlockComponent frameComponent = pillarBlock.getComponents().get(0);
-        final Block frameBlock = textureData.getTexturedComponents().getOrDefault(frameComponent.getId(), frameComponent.getDefault());
+        final Block frameBlock = textureData.texturedComponents().getOrDefault(frameComponent.getId(), frameComponent.getDefault());
         final Component frameBlockName = BlockUtils.getHoverName(frameBlock);
         tooltip.add(Component.translatable(Constants.MOD_ID + ".desc.onlyone", Component.translatable(Constants.MOD_ID + ".desc.material", frameBlockName)));
     }
