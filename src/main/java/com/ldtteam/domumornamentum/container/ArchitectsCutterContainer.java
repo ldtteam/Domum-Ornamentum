@@ -263,7 +263,7 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
                 {
                     final BlockItemStateProperties resultBlockState = resultItem.getOrDefault(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY);
                     final BlockItemStateProperties currentBlockState = currentVariant.getOrDefault(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY);
-                    if ((resultBlockState.isEmpty() && currentBlockState.isEmpty()) || currentBlockState.equals(currentBlockState))
+                    if ((resultBlockState.isEmpty() && currentBlockState.isEmpty()) || resultBlockState.equals(currentBlockState))
                     {
                         this.inventory.setRecipeUsed(recipeHolder);
                         this.outputInventorySlot.set(recipe.assemble(new ArchitectsCutterRecipeInput(this.inputInventory), this.world.registryAccess()));
