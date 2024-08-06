@@ -2,6 +2,8 @@
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"textures": {
+		"1": "block/clay",
+		"plank": "block/oak_planks",
 		"1_plank": "block/oak_planks",
 		"particle": "block/clay",
 		"2_1": "block/clay"

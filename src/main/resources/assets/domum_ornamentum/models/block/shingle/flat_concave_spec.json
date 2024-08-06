@@ -3,6 +3,7 @@
 	"ambientocclusion": false,
 	"textures": {
 		"1": "block/clay",
+		"plank": "block/oak_planks",
 		"particle": "block/clay",
 		"1_plank": "block/oak_planks"
 	},
