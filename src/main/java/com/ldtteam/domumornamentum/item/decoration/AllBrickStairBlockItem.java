@@ -3,7 +3,6 @@ package com.ldtteam.domumornamentum.item.decoration;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.decorative.AllBrickStairBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
-import com.ldtteam.domumornamentum.component.ModDataComponents;
 import com.ldtteam.domumornamentum.item.interfaces.IDoItem;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.Constants;
@@ -31,7 +30,7 @@ public class AllBrickStairBlockItem extends BlockItem implements IDoItem
     @Override
     public Component getName(final ItemStack stack)
     {
-        final MaterialTextureData textureData = stack.getOrDefault(ModDataComponents.TEXTURE_DATA, MaterialTextureData.EMPTY);
+        final MaterialTextureData textureData = MaterialTextureData.readFromItemStack(stack);
 
         final IMateriallyTexturedBlockComponent columnComponent = allBrickStairBlock.getComponents().get(0);
         final Block columnBlock = textureData.getTexturedComponents().getOrDefault(columnComponent.getId(), columnComponent.getDefault());
@@ -45,7 +44,7 @@ public class AllBrickStairBlockItem extends BlockItem implements IDoItem
     {
         super.appendHoverText(stack, tooltipContext, tooltip, flagIn);
 
-        MaterialTextureData textureData = stack.getOrDefault(ModDataComponents.TEXTURE_DATA, MaterialTextureData.EMPTY);
+        MaterialTextureData textureData = MaterialTextureData.readFromItemStack(stack);
         if (textureData.isEmpty())
         {
             textureData = MaterialTextureDataUtil.generateRandomTextureDataFrom(stack);

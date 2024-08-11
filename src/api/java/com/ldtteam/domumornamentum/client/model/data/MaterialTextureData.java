@@ -98,7 +98,8 @@ public record MaterialTextureData(Map<ResourceLocation, Block> getTexturedCompon
     @Deprecated(forRemoval = true, since = "1.21")
     public static MaterialTextureData deserializeFromNBT(final CompoundTag nbt)
     {
-        if (nbt == null || nbt.isEmpty()) return EMPTY;
+        if (nbt == null || nbt.isEmpty())
+            return EMPTY;
 
         final Builder newData = new Builder();
         nbt.getAllKeys().forEach(key -> {
@@ -132,7 +133,7 @@ public record MaterialTextureData(Map<ResourceLocation, Block> getTexturedCompon
 
     public boolean isEmpty()
     {
-        return this.equals(EMPTY);
+        return this == EMPTY || this.equals(EMPTY);
     }
 
     public static class Builder

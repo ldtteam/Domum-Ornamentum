@@ -5,7 +5,6 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.Lists;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.client.model.properties.ModProperties;
-import com.ldtteam.domumornamentum.component.ModDataComponents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
@@ -154,7 +153,7 @@ public class MateriallyTexturedBakedModel implements BakedModel {
             return Collections.emptyList();
         }
 
-        MaterialTextureData textureData = itemStack.getOrDefault(ModDataComponents.TEXTURE_DATA, MaterialTextureData.EMPTY);
+        MaterialTextureData textureData = MaterialTextureData.readFromItemStack(itemStack);
         if (textureData.isEmpty()) {
             return Collections.emptyList();
         }
@@ -177,7 +176,7 @@ public class MateriallyTexturedBakedModel implements BakedModel {
             return Collections.emptyList();
         }
 
-        MaterialTextureData textureData = itemStack.getOrDefault(ModDataComponents.TEXTURE_DATA, MaterialTextureData.EMPTY);
+        MaterialTextureData textureData = MaterialTextureData.readFromItemStack(itemStack);
         if (textureData.isEmpty()) {
             textureData = generateRandomTextureDataFrom(itemStack);
         }

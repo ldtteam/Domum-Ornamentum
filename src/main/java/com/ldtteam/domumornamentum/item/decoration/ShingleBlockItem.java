@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableList;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.decorative.ShingleBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
-import com.ldtteam.domumornamentum.component.ModDataComponents;
 import com.ldtteam.domumornamentum.item.BlockItemWithClientBePlacement;
 import com.ldtteam.domumornamentum.item.interfaces.IDoItem;
 import com.ldtteam.domumornamentum.util.BlockUtils;
@@ -33,7 +32,7 @@ public class ShingleBlockItem extends BlockItemWithClientBePlacement implements 
     @Override
     public @NotNull Component getName(final ItemStack stack)
     {
-        final MaterialTextureData textureData = stack.getOrDefault(ModDataComponents.TEXTURE_DATA, MaterialTextureData.EMPTY);
+        final MaterialTextureData textureData = MaterialTextureData.readFromItemStack(stack);
 
         final IMateriallyTexturedBlockComponent coverComponent = shingleBlock.getComponents().get(0);
         final Block centerBlock = textureData.getTexturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
@@ -48,7 +47,7 @@ public class ShingleBlockItem extends BlockItemWithClientBePlacement implements 
         super.appendHoverText(stack, tooltipContext, tooltip, flagIn);
         tooltip.add(Component.translatable(Constants.MOD_ID + ".origin.tooltip"));
 
-        MaterialTextureData textureData = stack.getOrDefault(ModDataComponents.TEXTURE_DATA, MaterialTextureData.EMPTY);
+        MaterialTextureData textureData = MaterialTextureData.readFromItemStack(stack);
         if (textureData.isEmpty()) {
             textureData = MaterialTextureDataUtil.generateRandomTextureDataFrom(stack);
         }

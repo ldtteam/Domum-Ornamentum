@@ -16,6 +16,7 @@ import com.ldtteam.domumornamentum.util.Constants;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotView;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
@@ -272,10 +273,17 @@ public class ArchitectsCutterCategory implements IRecipeCategory<RecipeHolder<Ar
 
         @NotNull
         @Override
+        @SuppressWarnings("removal")
         public List<Component> getTooltip(@NotNull final ItemStack ingredient,
                                           @NotNull final TooltipFlag tooltipFlag)
         {
             return getRenderer().getTooltip(displayData.getOutput(), tooltipFlag);
+        }
+
+        @Override
+        public void getTooltip(final ITooltipBuilder tooltip, final ItemStack ingredient, final TooltipFlag tooltipFlag)
+        {
+            getRenderer().getTooltip(tooltip, ingredient, tooltipFlag);
         }
 
         @NotNull

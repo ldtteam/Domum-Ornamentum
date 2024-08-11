@@ -1,14 +1,18 @@
 package com.ldtteam.domumornamentum.entity.block;
 
+import com.ldtteam.domumornamentum.DomumOrnamentum;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.client.model.properties.ModProperties;
 import com.ldtteam.domumornamentum.component.ModDataComponents;
 import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
+import com.mojang.serialization.DynamicOps;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtOps;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -62,16 +66,23 @@ public class MateriallyTexturedBlockEntity extends BlockEntity implements IMater
     public void saveAdditional(@NotNull final CompoundTag compound, final HolderLookup.Provider provider)
     {
         super.saveAdditional(compound, provider);
+        final DynamicOps<Tag> dynamicops = provider.createSerializationContext(NbtOps.INSTANCE);
+
         // this is still needed even with data components as of 1.21
-        compound.put(BLOCK_ENTITY_TEXTURE_DATA, textureData.serializeNBT());
+        compound.put(BLOCK_ENTITY_TEXTURE_DATA, MaterialTextureData.CODEC.encodeStart(dynamicops, textureData).getOrThrow());
     }
 
     @Override
     public void loadAdditional(@NotNull final CompoundTag nbt, final HolderLookup.Provider provider)
     {
         super.loadAdditional(nbt, provider);
+        final DynamicOps<Tag> dynamicops = provider.createSerializationContext(NbtOps.INSTANCE);
+
         // keep this as DFU
-        updateTextureDataWith(MaterialTextureData.deserializeFromNBT(nbt.getCompound(BLOCK_ENTITY_TEXTURE_DATA)));
+        if (nbt.contains(BLOCK_ENTITY_TEXTURE_DATA))
+        {
+            MaterialTextureData.CODEC.parse(dynamicops, nbt.get(BLOCK_ENTITY_TEXTURE_DATA)).resultOrPartial(DomumOrnamentum.LOGGER::error).ifPresent(this::updateTextureDataWith);
+        }
     }
 
     @Override

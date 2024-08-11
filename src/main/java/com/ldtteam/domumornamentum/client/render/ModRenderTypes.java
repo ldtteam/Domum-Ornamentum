@@ -7,7 +7,7 @@ import com.mojang.blaze3d.vertex.VertexFormat;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
-import net.minecraft.client.renderer.texture.TextureAtlas;
+import net.minecraft.world.inventory.InventoryMenu;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.opengl.GL11;
 
@@ -221,7 +221,7 @@ public enum ModRenderTypes
             .setDepthTestState(NO_DEPTH_TEST)
             .createCompositeState(false));
 
-        private static final TextureStateShard BLOCK_TEXTURE = new TextureStateShard(TextureAtlas.LOCATION_BLOCKS, false, false);
+        private static final TextureStateShard BLOCK_TEXTURE = new TextureStateShard(InventoryMenu.BLOCK_ATLAS, false, false);
         private static final DepthTestStateShard GREATER_DEPTH_TEST = new DepthTestStateShard(">", GL11.GL_GREATER);
 
         private static final RenderType GHOST_BLOCK_PREVIEW = buildGhostType(false);

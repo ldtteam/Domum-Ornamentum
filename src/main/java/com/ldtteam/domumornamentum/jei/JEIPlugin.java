@@ -46,6 +46,7 @@ public class JEIPlugin implements IModPlugin
         registration.registerSubtypeInterpreter(blocks.getFancyDoor().asItem(), interpreter);
         registration.registerSubtypeInterpreter(blocks.getFancyTrapdoor().asItem(), interpreter);
         registration.registerSubtypeInterpreter(blocks.getPost().asItem(), interpreter);
+        registration.registerSubtypeInterpreter(blocks.getPanel().asItem(), interpreter);
     }
 
     @Override
