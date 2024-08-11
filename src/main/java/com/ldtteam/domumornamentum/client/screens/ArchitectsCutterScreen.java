@@ -309,7 +309,7 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
             }
             i++;
         }
-        textureData.putIntoItemStack(variantItemStack);
+        textureData.writeToItemStack(variantItemStack);
     }
 
     @Override

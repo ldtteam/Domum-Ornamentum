@@ -114,6 +114,8 @@ public record MaterialTextureData(Map<ResourceLocation, Block> getTexturedCompon
     }
 
     /**
+     * Writes this textureData into given itemStack.
+     * 
      * @see BlockEntity#saveToItem(ItemStack, net.minecraft.core.HolderLookup.Provider)
      */
     public void writeToItemStack(final ItemStack itemStack)
@@ -121,11 +123,17 @@ public record MaterialTextureData(Map<ResourceLocation, Block> getTexturedCompon
         itemStack.set(IDomumOrnamentumApi.getInstance().getMaterialTextureComponentType(), this.isEmpty() ? EMPTY : this);
     }
 
+    /**
+     * @return textureData stored in given itemStack (or empty instance)
+     */
     public static MaterialTextureData readFromItemStack(final ItemStack itemStack)
     {
         return itemStack.getOrDefault(IDomumOrnamentumApi.getInstance().getMaterialTextureComponentType(), MaterialTextureData.EMPTY);
     }
 
+    /**
+     * Performs updating of textureData in given itemStack
+     */
     public static void updateItemStack(final ItemStack itemStack, final Function<MaterialTextureData, MaterialTextureData> updater)
     {
         updater.apply(readFromItemStack(itemStack)).writeToItemStack(itemStack);
@@ -136,6 +144,9 @@ public record MaterialTextureData(Map<ResourceLocation, Block> getTexturedCompon
         return this == EMPTY || this.equals(EMPTY);
     }
 
+    /**
+     * Simple immutable textureData builder
+     */
     public static class Builder
     {
         private final ImmutableMap.Builder<ResourceLocation, Block> texturedComponents = ImmutableMap.builder();
@@ -151,7 +162,7 @@ public record MaterialTextureData(Map<ResourceLocation, Block> getTexturedCompon
             return new MaterialTextureData(texturedComponents.build());
         }
 
-        public void putIntoItemStack(final ItemStack itemStack)
+        public void writeToItemStack(final ItemStack itemStack)
         {
             itemStack.set(IDomumOrnamentumApi.getInstance().getMaterialTextureComponentType(), build());
         }

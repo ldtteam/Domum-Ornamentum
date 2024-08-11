@@ -349,7 +349,7 @@ public final class ModBlocks implements IModBlocks {
             textureData.setComponent(component.getId(), component.getDefault());
         }
 
-        textureData.putIntoItemStack(stack);
+        textureData.writeToItemStack(stack);
 
         return stack;
     }

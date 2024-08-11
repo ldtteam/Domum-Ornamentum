@@ -77,6 +77,9 @@ public class MaterialLootTableProvider extends BlockLootSubProvider
         return BuiltInRegistries.BLOCK.stream().filter(IMateriallyTexturedBlock.class::isInstance).toList();
     }
 
+    /**
+     * Helper method to create default textureData lootTable
+     */
     protected void dropSelfMaterially(final Block block,
         final Function<LootPoolSingletonContainer.Builder<?>, LootPoolSingletonContainer.Builder<?>> itemPoolBuilder)
     {
@@ -89,16 +92,25 @@ public class MaterialLootTableProvider extends BlockLootSubProvider
                             .include(ModDataComponents.TEXTURE_DATA.get()))))));
     }
 
+    /**
+     * Drops block: textureData
+     */
     protected void dropSelfMaterially(final Block block)
     {
         dropSelfMaterially(block, Function.identity());
     }
 
+    /**
+     * Drops block: textureData + given blockState property
+     */
     protected void dropSelfMateriallyWithProp(final Block block, final Property<?> property)
     {
         dropSelfMaterially(block, item -> item.apply(CopyBlockState.copyState(block).copy(property)));
     }
 
+    /**
+     * Drops door block: textureData + given blockState property
+     */
     protected void dropDoorMateriallyWithProp(final net.minecraft.world.level.block.DoorBlock block, final Property<?> property)
     {
         dropSelfMaterially(block,
@@ -107,6 +119,9 @@ public class MaterialLootTableProvider extends BlockLootSubProvider
                     .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoorBlock.HALF, DoubleBlockHalf.LOWER))));
     }
 
+    /**
+     * Drops slab block: textureData
+     */
     protected void dropSlabMaterially(final SlabBlock block)
     {
         dropSelfMaterially(block,

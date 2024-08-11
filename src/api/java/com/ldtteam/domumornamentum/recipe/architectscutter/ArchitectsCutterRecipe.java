@@ -131,7 +131,7 @@ public class ArchitectsCutterRecipe implements Recipe<ArchitectsCutterRecipeInpu
         }
 
         final ItemStack result = new ItemStack(generatedBlock);
-        textureData.putIntoItemStack(result);
+        textureData.writeToItemStack(result);
         result.setCount(Math.max(components.size(), count));
 
         result.applyComponents(componentMap);
