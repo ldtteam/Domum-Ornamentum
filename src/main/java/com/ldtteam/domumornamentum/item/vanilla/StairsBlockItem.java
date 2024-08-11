@@ -35,7 +35,7 @@ public class StairsBlockItem extends BlockItemWithClientBePlacement implements I
         final MaterialTextureData textureData = stack.getOrDefault(ModDataComponents.TEXTURE_DATA, MaterialTextureData.EMPTY);
 
         final IMateriallyTexturedBlockComponent coverComponent = stairBlock.getComponents().get(0);
-        final Block centerBlock = textureData.texturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
+        final Block centerBlock = textureData.getTexturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
         final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
 
         return Component.translatable(Constants.MOD_ID + ".stair.name.format", centerBlockName);
@@ -53,7 +53,7 @@ public class StairsBlockItem extends BlockItemWithClientBePlacement implements I
         }
 
         final IMateriallyTexturedBlockComponent component = stairBlock.getComponents().get(0);
-        final Block block = textureData.texturedComponents().getOrDefault(component.getId(), component.getDefault());
+        final Block block = textureData.getTexturedComponents().getOrDefault(component.getId(), component.getDefault());
         tooltip.add(Component.translatable(Constants.MOD_ID + ".desc.onlyone", Component.translatable(Constants.MOD_ID + ".desc.material", BlockUtils.getHoverName(block))));
     }
 

@@ -69,7 +69,7 @@ public interface IMateriallyTexturedBlock
             {
                 return stack.isCorrectToolForDrops(state);
             }
-            Block block = mtbe.getTextureData().texturedComponents().get(getMainComponent().getId());
+            Block block = mtbe.getTextureData().getTexturedComponents().get(getMainComponent().getId());
             if (block != null)
             {
                 return stack.isCorrectToolForDrops(block.defaultBlockState());
@@ -85,7 +85,7 @@ public interface IMateriallyTexturedBlock
             {
                 return inputFunction.apply(state, level, pos, explosion);
             }
-            Block block = mtbe.getTextureData().texturedComponents().get(getMainComponent().getId());
+            Block block = mtbe.getTextureData().getTexturedComponents().get(getMainComponent().getId());
             if (block != null)
             {
                 return block.getExplosionResistance(state, level, pos, explosion);
@@ -101,7 +101,7 @@ public interface IMateriallyTexturedBlock
             {
                 return inputFunction.apply(state, player, level, pos);
             }
-            Block block = mtbe.getTextureData().texturedComponents().get(getMainComponent().getId());
+            Block block = mtbe.getTextureData().getTexturedComponents().get(getMainComponent().getId());
             if (block != null)
             {
                 return block.defaultBlockState().getDestroyProgress(player, level, pos);
@@ -117,7 +117,7 @@ public interface IMateriallyTexturedBlock
             {
                 return inputFunction.apply(state, level, pos, entity);
             }
-            Block block = mtbe.getTextureData().texturedComponents().get(getMainComponent().getId());
+            Block block = mtbe.getTextureData().getTexturedComponents().get(getMainComponent().getId());
             if (block != null)
             {
                 return block.getSoundType(state, level, pos, entity);

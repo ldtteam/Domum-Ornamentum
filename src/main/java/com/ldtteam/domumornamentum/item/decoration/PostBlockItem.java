@@ -35,7 +35,7 @@ public class PostBlockItem extends BlockItemWithClientBePlacement implements IDo
         final MaterialTextureData textureData = stack.getOrDefault(ModDataComponents.TEXTURE_DATA, MaterialTextureData.EMPTY);
 
         final IMateriallyTexturedBlockComponent coverComponent = postBlock.getComponents().get(0);
-        final Block centerBlock = textureData.texturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
+        final Block centerBlock = textureData.getTexturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
         final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
 
         return Component.translatable(Constants.MOD_ID + ".post.name.format", centerBlockName);
@@ -61,7 +61,7 @@ public class PostBlockItem extends BlockItemWithClientBePlacement implements IDo
         }
 
         final IMateriallyTexturedBlockComponent postComponent = postBlock.getComponents().get(0);
-        final Block postBlock = textureData.texturedComponents().getOrDefault(postComponent.getId(), postComponent.getDefault());
+        final Block postBlock = textureData.getTexturedComponents().getOrDefault(postComponent.getId(), postComponent.getDefault());
         final Component postBlockName = BlockUtils.getHoverName(postBlock);
         tooltip.add(Component.translatable(Constants.MOD_ID + ".desc.onlyone", Component.translatable(Constants.MOD_ID + ".desc.material", postBlockName)));
     }

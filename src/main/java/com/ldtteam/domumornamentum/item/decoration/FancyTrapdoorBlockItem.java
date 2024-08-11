@@ -36,7 +36,7 @@ public class FancyTrapdoorBlockItem extends BlockItemWithClientBePlacement imple
         final MaterialTextureData textureData = stack.getOrDefault(ModDataComponents.TEXTURE_DATA, MaterialTextureData.EMPTY);
 
         final IMateriallyTexturedBlockComponent coverComponent = trapdoorBlock.getComponents().get(0);
-        final Block centerBlock = textureData.texturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
+        final Block centerBlock = textureData.getTexturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
         final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
 
         return Component.translatable(Constants.MOD_ID + ".fancytrapdoor.name.format", centerBlockName);
@@ -63,13 +63,13 @@ public class FancyTrapdoorBlockItem extends BlockItemWithClientBePlacement imple
         }
 
         final IMateriallyTexturedBlockComponent trapDoorComponent = trapdoorBlock.getComponents().get(0);
-        final Block trapDoorBlock = textureData.texturedComponents().getOrDefault(trapDoorComponent.getId(), trapDoorComponent.getDefault());
+        final Block trapDoorBlock = textureData.getTexturedComponents().getOrDefault(trapDoorComponent.getId(), trapDoorComponent.getDefault());
         final Component trapDoorBlockName = BlockUtils.getHoverName(trapDoorBlock);
         tooltip.add(Component.translatable(Constants.MOD_ID + ".desc.frame", Component.translatable(Constants.MOD_ID + ".desc.material", trapDoorBlockName)));
 
         tooltip.add(Component.literal(""));
         final IMateriallyTexturedBlockComponent trapDoorFrameComponent = trapdoorBlock.getComponents().get(1);
-        final Block trapDoorFrameBlock = textureData.texturedComponents().getOrDefault(trapDoorFrameComponent.getId(), trapDoorFrameComponent.getDefault());
+        final Block trapDoorFrameBlock = textureData.getTexturedComponents().getOrDefault(trapDoorFrameComponent.getId(), trapDoorFrameComponent.getDefault());
         final Component trapDoorFrameBlockName = BlockUtils.getHoverName(trapDoorFrameBlock);
         tooltip.add(Component.translatable(Constants.MOD_ID + ".desc.center", Component.translatable(Constants.MOD_ID + ".desc.material", trapDoorFrameBlockName)));
     }

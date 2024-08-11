@@ -37,7 +37,7 @@ public class PaperwallBlockItem extends BlockItemWithClientBePlacement implement
         final MaterialTextureData textureData = stack.getOrDefault(ModDataComponents.TEXTURE_DATA, MaterialTextureData.EMPTY);
 
         final IMateriallyTexturedBlockComponent centerComponent = paperWallBlock.getComponents().get(1);
-        final Block centerBlock = textureData.texturedComponents().getOrDefault(centerComponent.getId(), centerComponent.getDefault());
+        final Block centerBlock = textureData.getTexturedComponents().getOrDefault(centerComponent.getId(), centerComponent.getDefault());
         final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
 
         return Component.translatable(Constants.MOD_ID + ".paperwall.name.format", centerBlockName);
@@ -58,12 +58,12 @@ public class PaperwallBlockItem extends BlockItemWithClientBePlacement implement
         tooltip.add(Component.translatable(Constants.MOD_ID + ".paperwall.header"));
 
         final IMateriallyTexturedBlockComponent frameComponent = paperWallBlock.getComponents().get(0);
-        final Block frameBlock = textureData.texturedComponents().getOrDefault(frameComponent.getId(), frameComponent.getDefault());
+        final Block frameBlock = textureData.getTexturedComponents().getOrDefault(frameComponent.getId(), frameComponent.getDefault());
         final Component frameBlockName = BlockUtils.getHoverName(frameBlock);
         tooltip.add(Component.translatable(Constants.MOD_ID + ".desc.frame", Component.translatable(Constants.MOD_ID + ".desc.material", frameBlockName)));
 
         final IMateriallyTexturedBlockComponent centerComponent = paperWallBlock.getComponents().get(1);
-        final Block centerBlock = textureData.texturedComponents().getOrDefault(centerComponent.getId(), centerComponent.getDefault());
+        final Block centerBlock = textureData.getTexturedComponents().getOrDefault(centerComponent.getId(), centerComponent.getDefault());
         final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
         tooltip.add(Component.translatable(Constants.MOD_ID + ".desc.center", Component.translatable(Constants.MOD_ID + ".desc.material", centerBlockName)));
     }

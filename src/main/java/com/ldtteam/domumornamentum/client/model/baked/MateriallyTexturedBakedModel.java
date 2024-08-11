@@ -80,7 +80,7 @@ public class MateriallyTexturedBakedModel implements BakedModel {
 
         return ChunkRenderTypeSet.union(
                 Stream.concat(
-                        textureData.texturedComponents().values().stream()
+                        textureData.getTexturedComponents().values().stream()
                                 .map(block -> Minecraft.getInstance().getBlockRenderer().getBlockModel(block.defaultBlockState())
                                         .getRenderTypes(block.defaultBlockState(), rand, ModelData.EMPTY)),
                         Stream.of(SOLID_ONLY))
@@ -131,10 +131,10 @@ public class MateriallyTexturedBakedModel implements BakedModel {
             return getParticleIcon();
 
         final ResourceLocation particleTextureName = getParticleIcon().contents().name();
-        if (!textureData.texturedComponents().containsKey(particleTextureName))
+        if (!textureData.getTexturedComponents().containsKey(particleTextureName))
             return getParticleIcon();
 
-        return Minecraft.getInstance().getBlockRenderer().getBlockModel(textureData.texturedComponents().get(particleTextureName).defaultBlockState())
+        return Minecraft.getInstance().getBlockRenderer().getBlockModel(textureData.getTexturedComponents().get(particleTextureName).defaultBlockState())
                 .getParticleIcon(modelData);
     }
 
@@ -218,7 +218,7 @@ public class MateriallyTexturedBakedModel implements BakedModel {
                         this.innerModel
                 );
 
-                modelData.texturedComponents().forEach(builder::with);
+                modelData.getTexturedComponents().forEach(builder::with);
 
                 return builder.build();
             });
@@ -246,7 +246,7 @@ public class MateriallyTexturedBakedModel implements BakedModel {
                                 this.innerModel.getOverrides().resolve(this.innerModel, stack, null, null, 0)
                         );
 
-                        textureData.texturedComponents().forEach(builder::with);
+                        textureData.getTexturedComponents().forEach(builder::with);
 
                         return builder.build();
                     });

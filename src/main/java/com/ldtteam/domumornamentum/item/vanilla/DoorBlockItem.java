@@ -36,7 +36,7 @@ public class DoorBlockItem extends DoubleHighBlockItemWithClientBePlacement impl
         final MaterialTextureData textureData = stack.getOrDefault(ModDataComponents.TEXTURE_DATA, MaterialTextureData.EMPTY);
 
         final IMateriallyTexturedBlockComponent coverComponent = doorBlock.getComponents().get(0);
-        final Block centerBlock = textureData.texturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
+        final Block centerBlock = textureData.getTexturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
         final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
 
         return Component.translatable(Constants.MOD_ID + ".door.name.format", centerBlockName);
@@ -64,7 +64,7 @@ public class DoorBlockItem extends DoubleHighBlockItemWithClientBePlacement impl
         }
 
         final IMateriallyTexturedBlockComponent doorComponent = doorBlock.getComponents().get(0);
-        final Block doorBlock = textureData.texturedComponents().getOrDefault(doorComponent.getId(), doorComponent.getDefault());
+        final Block doorBlock = textureData.getTexturedComponents().getOrDefault(doorComponent.getId(), doorComponent.getDefault());
         tooltip.add(Component.translatable(Constants.MOD_ID + ".desc.onlyone", Component.translatable(Constants.MOD_ID + ".desc.material", BlockUtils.getHoverName(doorBlock))));
     }
 

@@ -36,7 +36,7 @@ public class ShingleSlabBlockItem extends BlockItemWithClientBePlacement impleme
         final MaterialTextureData textureData = stack.getOrDefault(ModDataComponents.TEXTURE_DATA, MaterialTextureData.EMPTY);
 
         final IMateriallyTexturedBlockComponent coverComponent = shingleBlock.getComponents().get(0);
-        final Block centerBlock = textureData.texturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
+        final Block centerBlock = textureData.getTexturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
         final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
 
         return Component.translatable(Constants.MOD_ID + ".shingle_slab.name.format", centerBlockName);
@@ -54,7 +54,7 @@ public class ShingleSlabBlockItem extends BlockItemWithClientBePlacement impleme
         }
 
         final IMateriallyTexturedBlockComponent mainComponent = shingleBlock.getComponents().get(0);
-        final Block mainBlock = textureData.texturedComponents().getOrDefault(mainComponent.getId(), mainComponent.getDefault());
+        final Block mainBlock = textureData.getTexturedComponents().getOrDefault(mainComponent.getId(), mainComponent.getDefault());
         final Component mainBlockName = BlockUtils.getHoverName(mainBlock);
         tooltip.add(Component.translatable(Constants.MOD_ID + ".desc.shingle", Component.translatable(Constants.MOD_ID + ".desc.material", mainBlockName)));
         
