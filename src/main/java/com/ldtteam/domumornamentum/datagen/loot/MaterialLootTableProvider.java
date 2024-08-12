@@ -30,7 +30,7 @@ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import java.util.Set;
-import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 /**
  * LootTables for {@link IMateriallyTexturedBlock}s
@@ -80,8 +80,7 @@ public class MaterialLootTableProvider extends BlockLootSubProvider
     /**
      * Helper method to create default textureData lootTable
      */
-    protected void dropSelfMaterially(final Block block,
-        final Function<LootPoolSingletonContainer.Builder<?>, LootPoolSingletonContainer.Builder<?>> itemPoolBuilder)
+    protected void dropSelfMaterially(final Block block, final UnaryOperator<LootPoolSingletonContainer.Builder<?>> itemPoolBuilder)
     {
         add(block,
             LootTable.lootTable()
@@ -97,7 +96,7 @@ public class MaterialLootTableProvider extends BlockLootSubProvider
      */
     protected void dropSelfMaterially(final Block block)
     {
-        dropSelfMaterially(block, Function.identity());
+        dropSelfMaterially(block, UnaryOperator.identity());
     }
 
     /**

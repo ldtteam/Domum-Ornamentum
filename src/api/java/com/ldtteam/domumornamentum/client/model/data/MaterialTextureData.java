@@ -20,8 +20,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.function.Function;
 import java.util.function.IntFunction;
+import java.util.function.UnaryOperator;
 
 public record MaterialTextureData(Map<ResourceLocation, Block> getTexturedComponents)
 {
@@ -134,7 +134,7 @@ public record MaterialTextureData(Map<ResourceLocation, Block> getTexturedCompon
     /**
      * Performs updating of textureData in given itemStack
      */
-    public static void updateItemStack(final ItemStack itemStack, final Function<MaterialTextureData, MaterialTextureData> updater)
+    public static void updateItemStack(final ItemStack itemStack, final UnaryOperator<MaterialTextureData> updater)
     {
         updater.apply(readFromItemStack(itemStack)).writeToItemStack(itemStack);
     }
