@@ -2,16 +2,8 @@ package com.ldtteam.domumornamentum.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Explosion;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -20,8 +12,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.pathfinder.PathComputationType;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -51,8 +41,6 @@ public class DOStairBlock extends Block implements SimpleWaterloggedBlock
     protected static final VoxelShape[]              TOP_SHAPES     = makeShapes(TOP_AABB, OCTET_NNN, OCTET_PNN, OCTET_NNP, OCTET_PNP);
     protected static final VoxelShape[]              BOTTOM_SHAPES  = makeShapes(BOTTOM_AABB, OCTET_NPN, OCTET_PPN, OCTET_NPP, OCTET_PPP);
     private static final   int[]                     SHAPE_BY_STATE = new int[] {12, 5, 3, 10, 14, 13, 7, 11, 13, 7, 11, 14, 8, 4, 1, 2, 4, 1, 2, 8};
-    private final          Block                     base;
-    private final          BlockState                baseState;
 
     // Forge Start
     private final java.util.function.Supplier<BlockState> stateSupplier;
@@ -65,8 +53,6 @@ public class DOStairBlock extends Block implements SimpleWaterloggedBlock
                                     .setValue(HALF, Half.BOTTOM)
                                     .setValue(SHAPE, StairsShape.STRAIGHT)
                                     .setValue(WATERLOGGED, Boolean.valueOf(false)));
-        this.base = Blocks.AIR; // These are unused, fields are redirected
-        this.baseState = Blocks.AIR.defaultBlockState();
         this.stateSupplier = state;
     }
 
@@ -124,42 +110,6 @@ public class DOStairBlock extends Block implements SimpleWaterloggedBlock
         }
 
         return voxelshape;
-    }
-
-    @Override
-    public boolean isRandomlyTicking(BlockState p_56947_)
-    {
-        return this.base.isRandomlyTicking(p_56947_);
-    }
-
-    @Override
-    public void animateTick(BlockState p_222518_, Level p_222519_, BlockPos p_222520_, RandomSource p_222521_)
-    {
-        this.base.animateTick(p_222518_, p_222519_, p_222520_, p_222521_);
-    }
-
-    @Override
-    public void destroy(LevelAccessor p_56882_, BlockPos p_56883_, BlockState p_56884_)
-    {
-        this.base.destroy(p_56882_, p_56883_, p_56884_);
-    }
-
-    @Override
-    public float getExplosionResistance()
-    {
-        return this.base.getExplosionResistance();
-    }
-
-    @Override
-    public void wasExploded(Level p_56878_, BlockPos p_56879_, Explosion p_56880_)
-    {
-        this.base.wasExploded(p_56878_, p_56879_, p_56880_);
-    }
-
-    @Override
-    public void stepOn(Level p_154720_, BlockPos p_154721_, BlockState p_154722_, Entity p_154723_)
-    {
-        this.base.stepOn(p_154720_, p_154721_, p_154722_, p_154723_);
     }
 
     @Override
@@ -255,12 +205,6 @@ public class DOStairBlock extends Block implements SimpleWaterloggedBlock
     }
 
     @Override
-    public boolean isPathfindable(BlockState p_56891_, BlockGetter p_56892_, BlockPos p_56893_, PathComputationType p_56894_)
-    {
-        return false;
-    }
-
-    @Override
     public BlockState updateShape(BlockState p_56925_, Direction p_56926_, BlockState p_56927_, LevelAccessor p_56928_, BlockPos p_56929_, BlockPos p_56930_)
     {
         if (p_56925_.getValue(WATERLOGGED))
@@ -271,31 +215,6 @@ public class DOStairBlock extends Block implements SimpleWaterloggedBlock
         return p_56926_.getAxis().isHorizontal()
                  ? p_56925_.setValue(SHAPE, getStairsShape(p_56925_, p_56928_, p_56929_))
                  : super.updateShape(p_56925_, p_56926_, p_56927_, p_56928_, p_56929_, p_56930_);
-    }
-
-    @Override
-    public void onPlace(BlockState p_56961_, Level p_56962_, BlockPos p_56963_, BlockState p_56964_, boolean p_56965_)
-    {
-        if (!p_56961_.is(p_56961_.getBlock()))
-        {
-            p_56962_.neighborChanged(this.baseState, p_56963_, Blocks.AIR, p_56963_, false);
-            this.base.onPlace(this.baseState, p_56962_, p_56963_, p_56964_, false);
-        }
-    }
-
-    @Override
-    public void onRemove(BlockState p_56908_, Level p_56909_, BlockPos p_56910_, BlockState p_56911_, boolean p_56912_)
-    {
-        if (!p_56908_.is(p_56911_.getBlock()))
-        {
-            this.baseState.onRemove(p_56909_, p_56910_, p_56911_, p_56912_);
-        }
-    }
-
-    @Override
-    public InteractionResult use(BlockState p_56901_, Level p_56902_, BlockPos p_56903_, Player p_56904_, InteractionHand p_56905_, BlockHitResult p_56906_)
-    {
-        return this.baseState.use(p_56902_, p_56904_, p_56905_, p_56906_);
     }
 
     @Override
@@ -378,23 +297,5 @@ public class DOStairBlock extends Block implements SimpleWaterloggedBlock
     private int getShapeIndex(BlockState p_56983_)
     {
         return p_56983_.getValue(SHAPE).ordinal() * 4 + p_56983_.getValue(FACING).get2DDataValue();
-    }
-
-    @Override
-    public void randomTick(BlockState p_222523_, ServerLevel p_222524_, BlockPos p_222525_, RandomSource p_222526_)
-    {
-        this.base.randomTick(p_222523_, p_222524_, p_222525_, p_222526_);
-    }
-
-    @Override
-    public void tick(BlockState p_222513_, ServerLevel p_222514_, BlockPos p_222515_, RandomSource p_222516_)
-    {
-        this.base.tick(p_222513_, p_222514_, p_222515_, p_222516_);
-    }
-
-    @Override
-    public void attack(BlockState p_56896_, Level p_56897_, BlockPos p_56898_, Player p_56899_)
-    {
-        this.baseState.attack(p_56897_, p_56898_, p_56899_);
     }
 }
