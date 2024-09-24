@@ -93,7 +93,7 @@
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, 1.5, 8]},
 			"faces": {
 				"north": {"uv": [4, 13, 6, 16], "texture": "#0"},
-				"west": {"uv": [12, 13, 13, 16], "texture": "#missing"},
+				"west": {"uv": [12, 13, 13, 16], "texture": "#0"},
 				"up": {"uv": [10, 12, 12, 13], "texture": "#0"},
 				"down": {"uv": [10, 3, 12, 4], "texture": "#0"}
 			}
