@@ -1,14 +1,20 @@
 pluginManagement {
     repositories {
+        mavenLocal()
         gradlePluginPortal()
         maven {
-            name = 'MinecraftForge'
-            url = 'https://maven.minecraftforge.net/'
+            url = uri('https://ldtteam.jfrog.io/artifactory/tableau/')
+            name = 'Tableau'
         }
     }
+
+    //includeBuild('../Tableau')
 }
 
 plugins {
-    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.5.0'
+    //id 'com.ldtteam.tableau' version '1.0.0-SNAPSHOT'
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
 }
+
 rootProject.name = 'domum-ornamentum'
+

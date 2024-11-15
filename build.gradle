@@ -1,1 +1,64 @@
-apply from: 'https://raw.githubusercontent.com/ldtteam/OperaPublicaCreator/ng7/gradle/mod.gradle'
+/*tableau {
+    mod {
+        modId = "domum_ornamentum"
+        minecraftVersion = "1.21.1"
+        publisher = "LDTTeam"
+        url = "https://github.com/ldtteam/domum-ornamentum"
+    }
+
+    sourceSets {
+        testing {
+            neo
+        }
+    }
+}*/
+
+import org.gradle.api.provider.Property
+import org.gradle.api.NamedDomainObjectContainer
+
+abstract class InnerExtension implements ExtensionAware {
+    abstract Property<String> getInnerProperty();
+}
+
+abstract class NDOCElement implements ExtensionAware, Named {
+
+    private final String name;
+
+    @Inject
+    NDOCElement(String name) {
+        this.name = name
+    }
+
+    abstract Property<String> getNDOCProperty();
+
+    String getName() {
+        return name
+    }
+}
+
+abstract class ProjectLevelExtension implements ExtensionAware {
+
+    abstract Property<String> getOuterProperty();
+
+    abstract NamedDomainObjectContainer<NDOCElement> getElements();
+}
+
+project.extensions.create("projectExtension", ProjectLevelExtension) as ProjectLevelExtension
+project.projectExtension.extensions.create("inner", InnerExtension) as InnerExtension
+
+projectExtension.getElements().configureEach {element -> element.extensions.create("innerElement", InnerExtension)}
+
+projectExtension {
+    elements {
+        someElement {
+            NDOCProperty = "Something"
+        }
+    }
+
+    outerProperty = "Something"
+
+    inner {
+        innerProperty = "detected"
+    }
+}
+
