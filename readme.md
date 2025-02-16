@@ -116,10 +116,20 @@ repositories {
 3) Add the Domum Ornamentum API-jar as a Compile-time and the Domum Ornamentum Main-jar as a Run-time dependency:
 ```groovy
 dependencies {
-    compileOnly fg.deobf("com.ldtteam:domum-ornamentum:${project.exactMinecraftVersion}-${project.DomumOrnamentumVersion}:api")
-    runtimeOnly fg.deobf("com.ldtteam:domum-ornamentum:${project.exactMinecraftVersion}-${project.DomumOrnamentumVersion}:universal")
+    compileOnly fg.deobf("com.ldtteam:domum_ornamentum:${project.exactMinecraftVersion}-${project.DomumOrnamentumVersion}:api")
+    runtimeOnly fg.deobf("com.ldtteam:domum_ornamentum:${project.exactMinecraftVersion}-${project.DomumOrnamentumVersion}:universal")
 }
 ```
+
+If you're planning on using data generation, you'll also need to include another dependency:
+
+```groovy
+    implementation fg.deobf("com.ldtteam:datagenerators:1.19.3-${project.DataGeneratorsVersion}:universal") {
+        transitive = false
+    }
+```
+
+You can check the latest version of `datagenerators` [here](https://ldtteam.jfrog.io/ui/native/modding/com/ldtteam/datagenerators/).
 
 #### <a name="SupportedBy"></a>Proudly supported by:
 <h1 align="center">

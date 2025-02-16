@@ -187,7 +187,7 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
     }
 
     /**
-     * Handles the given Button-click on the server, currently only used by enchanting. Name is for legacy.
+     * Handles the given Button-click on the server.
      */
     @Override
     public boolean clickMenuButton(@NotNull Player playerIn, int id) {
@@ -195,6 +195,10 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
         {
             this.selectGroup(new ArrayList<>(ModBlocks.getInstance().getOrComputeItemGroups().keySet()).get(id));
             return true;
+        }
+        else if (this.getCurrentGroup() == null)
+        {
+            this.selectGroup(new ArrayList<>(ModBlocks.getInstance().getOrComputeItemGroups().keySet()).get(ModBlocks.getInstance().getOrComputeItemGroups().size() - 1));
         }
 
         int dif = id - ModBlocks.getInstance().getOrComputeItemGroups().size();

@@ -86,7 +86,7 @@ public abstract class AbstractPanelBlockTrapdoor<B extends AbstractPanelBlockTra
         }
         else
         {
-            blockstate = blockstate.setValue(FACING, context.getPlayer().getDirection()).setValue(HALF, direction == Direction.DOWN ? Half.TOP : Half.BOTTOM).setValue(OPEN, false);
+            blockstate = blockstate.setValue(FACING, context.getHorizontalDirection()).setValue(HALF, direction == Direction.DOWN ? Half.TOP : Half.BOTTOM).setValue(OPEN, false);
         }
 
         return blockstate.setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER);
