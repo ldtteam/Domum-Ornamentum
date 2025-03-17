@@ -7,10 +7,14 @@
       "item": "minecraft:brown_wool"
     },
     {
+      "item": "minecraft:brown_wool"
+    },
+    {
       "tag": "forge:string"
     }
   ],
   "result": {
+    "count": 3,
     "item": "domum_ornamentum:brown_floating_carpet"
   }
 }

@@ -7,10 +7,14 @@
       "item": "minecraft:light_gray_wool"
     },
     {
+      "item": "minecraft:light_gray_wool"
+    },
+    {
       "tag": "forge:string"
     }
   ],
   "result": {
+    "count": 3,
     "item": "domum_ornamentum:light_gray_floating_carpet"
   }
 }

@@ -7,10 +7,14 @@
       "item": "minecraft:cyan_wool"
     },
     {
+      "item": "minecraft:cyan_wool"
+    },
+    {
       "tag": "forge:string"
     }
   ],
   "result": {
+    "count": 3,
     "item": "domum_ornamentum:cyan_floating_carpet"
   }
 }

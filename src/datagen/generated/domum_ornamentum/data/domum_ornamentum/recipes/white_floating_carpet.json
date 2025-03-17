@@ -7,10 +7,14 @@
       "item": "minecraft:white_wool"
     },
     {
+      "item": "minecraft:white_wool"
+    },
+    {
       "tag": "forge:string"
     }
   ],
   "result": {
+    "count": 3,
     "item": "domum_ornamentum:white_floating_carpet"
   }
 }

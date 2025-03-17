@@ -7,10 +7,14 @@
       "item": "minecraft:green_wool"
     },
     {
+      "item": "minecraft:green_wool"
+    },
+    {
       "tag": "forge:string"
     }
   ],
   "result": {
+    "count": 3,
     "item": "domum_ornamentum:green_floating_carpet"
   }
 }
