@@ -4,7 +4,7 @@
   "group": "floating_carpets",
   "ingredients": [
     {
-      "item": "minecraft:yellow_carpet"
+      "item": "minecraft:yellow_wool"
     },
     {
       "tag": "c:strings"
