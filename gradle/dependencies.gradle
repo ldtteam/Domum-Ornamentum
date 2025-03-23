@@ -1,11 +1,5 @@
-/*
 repositories {
     mavenLocal()
-}
-
-configurations {
-    library
-    implementation.extendsFrom library
 }
 
 dependencies {
@@ -17,4 +11,4 @@ dependencies {
         transitive = false
     }
 }
-*/
+

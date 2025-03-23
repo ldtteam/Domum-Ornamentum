@@ -7,12 +7,11 @@ pluginManagement {
             name = 'Tableau'
         }
     }
-
-    //includeBuild('../Tableau')
 }
 
 plugins {
-    //id 'com.ldtteam.tableau' version '1.0.0-SNAPSHOT'
+    //TODO: Remove the .all
+    id 'com.ldtteam.tableau' version '0.0.70'
     id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
 }
 
