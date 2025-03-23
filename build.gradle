@@ -20,7 +20,7 @@ tableau {
     }
 
     maven {
-        publishToLDTTeamMaven()
+        publishAsLDTTeamMod()
         publishLocally()
         pom({
             usingGnu3License()
