@@ -3,11 +3,6 @@ tableau {
         group = "com.ldtteam"
         publisher = "LDTTeam"
         modId = "domum_ornamentum"
-        versioning {
-            version = environmentVariable("VERSION")
-                    .orElse(property("local.version"))
-            suffix = ""
-        }
     }
 
     sourceSets {
@@ -22,5 +17,14 @@ tableau {
                 implementation sourceSets.named('api')
             }
         }
+    }
+
+    maven {
+        publishAsLDTTeamMod()
+        publishLocally()
+        pom({
+            usingGnu3License()
+            usingGit()
+        })
     }
 }
