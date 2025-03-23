@@ -4,14 +4,17 @@
   "group": "floating_carpets",
   "ingredients": [
     {
-      "item": "minecraft:orange_carpet"
+      "item": "minecraft:orange_wool"
+    },
+    {
+      "item": "minecraft:orange_wool"
     },
     {
       "tag": "c:strings"
     }
   ],
   "result": {
-    "count": 1,
+    "count": 3,
     "id": "domum_ornamentum:orange_floating_carpet"
   }
 }
