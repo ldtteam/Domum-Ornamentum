@@ -7,11 +7,14 @@
       "item": "minecraft:yellow_wool"
     },
     {
+      "item": "minecraft:yellow_wool"
+    },
+    {
       "tag": "c:strings"
     }
   ],
   "result": {
-    "count": 1,
+    "count": 3,
     "id": "domum_ornamentum:yellow_floating_carpet"
   }
 }

@@ -7,11 +7,14 @@
       "item": "minecraft:lime_wool"
     },
     {
+      "item": "minecraft:lime_wool"
+    },
+    {
       "tag": "c:strings"
     }
   ],
   "result": {
-    "count": 1,
+    "count": 3,
     "id": "domum_ornamentum:lime_floating_carpet"
   }
 }

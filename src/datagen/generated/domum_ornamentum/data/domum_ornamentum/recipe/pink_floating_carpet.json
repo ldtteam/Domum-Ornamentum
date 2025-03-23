@@ -7,11 +7,14 @@
       "item": "minecraft:pink_wool"
     },
     {
+      "item": "minecraft:pink_wool"
+    },
+    {
       "tag": "c:strings"
     }
   ],
   "result": {
-    "count": 1,
+    "count": 3,
     "id": "domum_ornamentum:pink_floating_carpet"
   }
 }
