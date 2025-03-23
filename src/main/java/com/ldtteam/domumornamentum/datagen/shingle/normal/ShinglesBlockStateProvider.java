@@ -30,13 +30,14 @@ public class ShinglesBlockStateProvider extends BlockStateProvider
 
     @Override
     protected void registerStatesAndModels() {
-        createBlockstateFile(ModBlocks.getInstance().getShingle(ShingleHeightType.DEFAULT), ShingleHeightType.DEFAULT);
-        createBlockstateFile(ModBlocks.getInstance().getShingle(ShingleHeightType.FLAT), ShingleHeightType.FLAT);
-        createBlockstateFile(ModBlocks.getInstance().getShingle(ShingleHeightType.FLAT_LOWER), ShingleHeightType.FLAT_LOWER);
+        createBlockstateFile(ShingleHeightType.DEFAULT);
+        createBlockstateFile(ShingleHeightType.FLAT);
+        createBlockstateFile(ShingleHeightType.FLAT_LOWER);
     }
 
-    private void createBlockstateFile(final ShingleBlock shingle, final ShingleHeightType heightType)
+    private void createBlockstateFile(final ShingleHeightType heightType)
     {
+        final ShingleBlock shingle = ModBlocks.getInstance().getShingle(heightType);
         final MultiPartBlockStateBuilder builder = getMultipartBuilder(shingle);
 
         if (shingle.getRegistryName() == null)
@@ -66,7 +67,14 @@ public class ShinglesBlockStateProvider extends BlockStateProvider
             }
         }
 
-        final ItemModelBuilder itemModelBuilder = itemModels().getBuilder(shingle.getRegistryName().getPath()).parent(blockModels.get(StairsShape.STRAIGHT));
+        final ItemModelBuilder itemSpecModelBuilder = itemModels().withExistingParent(heightType.getId() + "shingle_spec", mcLoc("block/oak_stairs"));
+        itemSpecModelBuilder.override().model(itemModels().getExistingFile(modLoc("block/shingle/" + heightType.getId() + "straight")));
+
+        final ItemModelBuilder itemModelBuilder = itemModels()
+                                                    .getBuilder(shingle.getRegistryName().getPath())
+                                                    .parent(itemSpecModelBuilder)
+                                                    .customLoader(MateriallyTexturedModelBuilder::new)
+                                                    .end();
         ModelBuilderUtils.applyDefaultItemTransforms(itemModelBuilder);
     }
 

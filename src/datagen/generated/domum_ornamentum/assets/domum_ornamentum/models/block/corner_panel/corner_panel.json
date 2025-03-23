@@ -1,0 +1,4 @@
+{
+  "parent": "domum_ornamentum:block/corner_panel/corner_panel_spec",
+  "loader": "domum_ornamentum:materially_textured"
+}

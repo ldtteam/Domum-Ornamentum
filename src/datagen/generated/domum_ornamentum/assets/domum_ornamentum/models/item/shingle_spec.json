@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/oak_stairs",
+  "overrides": [
+    {
+      "model": "domum_ornamentum:block/shingle/straight",
+      "predicate": {}
+    }
+  ]
+}

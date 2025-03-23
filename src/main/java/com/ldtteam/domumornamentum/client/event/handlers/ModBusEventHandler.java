@@ -2,11 +2,7 @@ package com.ldtteam.domumornamentum.client.event.handlers;
 
 import com.ldtteam.domumornamentum.block.IModBlocks;
 import com.ldtteam.domumornamentum.block.decorative.ExtraBlock;
-import com.ldtteam.domumornamentum.block.types.DoorType;
-import com.ldtteam.domumornamentum.block.types.FancyDoorType;
-import com.ldtteam.domumornamentum.block.types.FancyTrapdoorType;
-import com.ldtteam.domumornamentum.block.types.TrapdoorType;
-import com.ldtteam.domumornamentum.block.types.PostType;
+import com.ldtteam.domumornamentum.block.types.*;
 import com.ldtteam.domumornamentum.client.screens.ArchitectsCutterScreen;
 import com.ldtteam.domumornamentum.container.ModContainerTypes;
 import com.ldtteam.domumornamentum.shingles.ShingleHeightType;
@@ -77,6 +73,7 @@ public class ModBusEventHandler
             ItemBlockRenderTypes.setRenderLayer(IModBlocks.getInstance().getDoor(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(IModBlocks.getInstance().getPanel(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(IModBlocks.getInstance().getPost(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(IModBlocks.getInstance().getCornerPanel(), RenderType.translucent());
 
             for (final ShingleHeightType heightType : ShingleHeightType.values())
             {
@@ -169,6 +166,7 @@ public class ModBusEventHandler
 
         return doorType.ordinal();
     }
+
     private static float handlePostTypeOverride(ItemStack itemStack)
     {
         if (!itemStack.getOrCreateTag().contains("type"))

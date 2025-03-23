@@ -1,5 +1,5 @@
 {
-  "parent": "domum_ornamentum:item/flat_shingle_spec",
+  "parent": "domum_ornamentum:item/corner_panel_spec",
   "display": {
     "firstperson_lefthand": {
       "rotation": [

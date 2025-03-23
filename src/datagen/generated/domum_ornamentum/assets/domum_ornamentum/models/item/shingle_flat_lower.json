@@ -1,5 +1,5 @@
 {
-  "parent": "domum_ornamentum:block/shingle/flat_lower_straight",
+  "parent": "domum_ornamentum:item/flat_lower_shingle_spec",
   "display": {
     "firstperson_lefthand": {
       "rotation": [
@@ -102,5 +102,6 @@
         0
       ]
     }
-  }
+  },
+  "loader": "domum_ornamentum:materially_textured"
 }

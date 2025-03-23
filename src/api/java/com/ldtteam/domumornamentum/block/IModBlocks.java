@@ -48,6 +48,8 @@ public interface IModBlocks
 
     Block getPanel();
 
+    Block getCornerPanel();
+
     Block getPost();
 
     Block getDoor();

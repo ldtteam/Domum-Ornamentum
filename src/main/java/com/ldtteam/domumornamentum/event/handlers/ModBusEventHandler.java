@@ -36,6 +36,7 @@ import com.ldtteam.domumornamentum.datagen.global.GlobalLootTableProvider;
 import com.ldtteam.domumornamentum.datagen.global.GlobalRecipeProvider;
 import com.ldtteam.domumornamentum.datagen.global.GlobalTagProvider;
 import com.ldtteam.domumornamentum.datagen.global.MateriallyTexturedBlockRecipeProvider;
+import com.ldtteam.domumornamentum.datagen.panel.CornerPanelBlockStateProvider;
 import com.ldtteam.domumornamentum.datagen.panel.PanelBlockStateProvider;
 import com.ldtteam.domumornamentum.datagen.pillar.PillarBlockStateProvider;
 import com.ldtteam.domumornamentum.datagen.pillar.PillarComponentTagProvider;
@@ -151,7 +152,9 @@ public class ModBusEventHandler
         event.getGenerator().addProvider(true, new TrapdoorsComponentTagProvider(event.getGenerator().getPackOutput(), event.getLookupProvider(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(true, new TrapdoorsCompatibilityTagProvider(event.getGenerator().getPackOutput(), event.getLookupProvider(), event.getExistingFileHelper()));
 
+        //Panel
         event.getGenerator().addProvider(true, new PanelBlockStateProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new CornerPanelBlockStateProvider(event.getGenerator(), event.getExistingFileHelper()));
 
         //Post
         event.getGenerator().addProvider(true, new PostBlockStateProvider(event.getGenerator(), event.getExistingFileHelper()));

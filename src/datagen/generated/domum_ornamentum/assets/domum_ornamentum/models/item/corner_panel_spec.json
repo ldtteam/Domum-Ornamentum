@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/thin_block",
+  "overrides": [
+    {
+      "model": "domum_ornamentum:block/corner_panel/corner_panel_spec",
+      "predicate": {}
+    }
+  ]
+}
