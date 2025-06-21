@@ -11,7 +11,7 @@ public class PaperwallLangEntryProvider implements LanguageProvider.SubProvider 
         acceptor.add(Constants.MOD_ID + ".blockpaperwall.frame.format", "  - Frame:     %s");
         acceptor.add(Constants.MOD_ID + ".blockpaperwall.center.format", "  - Center:    %s");
 
-        acceptor.add(Constants.MOD_ID + ".blocktiledpaperwall.name.format", "%s Framed Tiled Pane");
+        acceptor.add(Constants.MOD_ID + ".blocktiledpaperwall.name.format", "%s Tiled Pane");
         acceptor.add(Constants.MOD_ID + ".blocktiledpaperwall.header", "Materials:");
         acceptor.add(Constants.MOD_ID + ".blocktiledpaperwall.frame.format", "  - Frame:     %s");
         acceptor.add(Constants.MOD_ID + ".blocktiledpaperwall.center.format", "  - Center:    %s");
