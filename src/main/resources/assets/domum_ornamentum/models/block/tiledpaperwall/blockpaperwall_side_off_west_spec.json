@@ -1,0 +1,18 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"1": "block/dark_oak_planks",
+		"particle": "block/oak_planks"
+	},
+	"elements": [
+
+	],
+	"groups": [
+		{
+			"name": "west_off",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [0]
+		}
+	]
+}

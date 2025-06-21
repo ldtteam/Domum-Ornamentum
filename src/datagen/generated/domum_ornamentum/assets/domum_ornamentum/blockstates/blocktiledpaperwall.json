@@ -1,0 +1,82 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/tiledpaperwall/blockpaperwall_post",
+        "uvlock": true
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/tiledpaperwall/blockpaperwall_side_north",
+        "uvlock": true
+      },
+      "when": {
+        "north": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/tiledpaperwall/blockpaperwall_side_off_north",
+        "uvlock": true
+      },
+      "when": {
+        "north": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/tiledpaperwall/blockpaperwall_side_south",
+        "uvlock": true
+      },
+      "when": {
+        "south": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/tiledpaperwall/blockpaperwall_side_off_south",
+        "uvlock": true
+      },
+      "when": {
+        "south": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/tiledpaperwall/blockpaperwall_side_west",
+        "uvlock": true
+      },
+      "when": {
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/tiledpaperwall/blockpaperwall_side_off_west",
+        "uvlock": true
+      },
+      "when": {
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/tiledpaperwall/blockpaperwall_side_east",
+        "uvlock": true
+      },
+      "when": {
+        "east": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "domum_ornamentum:block/tiledpaperwall/blockpaperwall_side_off_east",
+        "uvlock": true
+      },
+      "when": {
+        "east": "false"
+      }
+    }
+  ]
+}
