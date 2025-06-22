@@ -78,6 +78,7 @@ public final class ModBlocks implements IModBlocks {
     private static final RegistryObject<PanelBlock> PANEL;
     private static final RegistryObject<FancyDoorBlock> FANCY_DOOR;
     private static final RegistryObject<FancyTrapdoorBlock> FANCY_TRAPDOOR;
+    private static final RegistryObject<PaperWallBlock> TILED_PAPER_WALL;
 
     static {
         ARCHITECTS_CUTTER = register("architectscutter", ArchitectsCutterBlock::new, b -> new BlockItem(b, new Item.Properties()));
@@ -92,6 +93,7 @@ public final class ModBlocks implements IModBlocks {
 
         SHINGLE_SLAB = register("shingle_slab", ShingleSlabBlock::new, b -> new ShingleSlabBlockItem(b, new Item.Properties()));
         PAPER_WALL = register("blockpaperwall", PaperWallBlock::new, b -> new PaperwallBlockItem(b, new Item.Properties()));
+        TILED_PAPER_WALL = register("blocktiledpaperwall", PaperWallBlock::new, b -> new PaperwallBlockItem(b, new Item.Properties()));
 
         PILLARS.add(register("blockpillar", PillarBlock::new, b -> new PillarBlockItem(b, new Item.Properties())));
         PILLARS.add(register("blockypillar", PillarBlock::new, b -> new PillarBlockItem(b, new Item.Properties())));
@@ -206,6 +208,11 @@ public final class ModBlocks implements IModBlocks {
     @Override
     public PaperWallBlock getPaperWall() {
         return ModBlocks.PAPER_WALL.get();
+    }
+
+    @Override
+    public PaperWallBlock getTiledPaperWall() {
+        return ModBlocks.TILED_PAPER_WALL.get();
     }
 
     @Override
