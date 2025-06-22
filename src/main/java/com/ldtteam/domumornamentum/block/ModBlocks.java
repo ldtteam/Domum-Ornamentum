@@ -79,6 +79,7 @@ public final class ModBlocks implements IModBlocks {
     private static final RegistryObject<FancyDoorBlock> FANCY_DOOR;
     private static final RegistryObject<FancyTrapdoorBlock> FANCY_TRAPDOOR;
     private static final RegistryObject<PaperWallBlock> TILED_PAPER_WALL;
+    private static final RegistryObject<DynamicTimberFrameBlock> DYNAMIC_TIMBER_FRAME;
 
     static {
         ARCHITECTS_CUTTER = register("architectscutter", ArchitectsCutterBlock::new, b -> new BlockItem(b, new Item.Properties()));
@@ -86,6 +87,7 @@ public final class ModBlocks implements IModBlocks {
         for (final TimberFrameType blockType : TimberFrameType.values()) {
             TIMBER_FRAMES.add(register(blockType.getName(), () -> new TimberFrameBlock(blockType), b -> new TimberFrameBlockItem(b, new Item.Properties())));
         }
+        DYNAMIC_TIMBER_FRAME = register("dynamic_timberframe", () -> new DynamicTimberFrameBlock(), b -> new DynamicTimberFrameBlockItem(b, new Item.Properties()));
 
         SHINGLE = register("shingle", ShingleBlock::new, b -> new ShingleBlockItem(b, new Item.Properties()));
         SHINGLE_FLAT = register("shingle_flat", ShingleBlock::new, b -> new ShingleBlockItem(b, new Item.Properties()));
@@ -303,6 +305,11 @@ public final class ModBlocks implements IModBlocks {
     @Override
     public List<AllBrickStairBlock> getAllBrickStairBlocks() {
         return ModBlocks.ALL_BRICK_STAIR.stream().map(RegistryObject::get).toList();
+    }
+
+    @Override
+    public DynamicTimberFrameBlock getDynamicTimberFrame() {
+        return ModBlocks.DYNAMIC_TIMBER_FRAME.get();
     }
 
     /**
