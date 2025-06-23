@@ -51,7 +51,7 @@
       "west-south-center": "block/red_concrete",
       "west-south-up-center": "block/black_concrete",
       "west-north-up-center": "block/glowstone",
-      "west-south-down-center": "block/noteblock",
+      "west-south-down-center": "block/cherry_planks",
       "west-north-down-center": "block/shroomlight",
       "particle": "block/yellow_terracotta"
     },

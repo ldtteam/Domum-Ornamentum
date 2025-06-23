@@ -40,6 +40,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Function;
 
 /**
  * Decorative block
@@ -63,20 +64,79 @@ public class DynamicTimberFrameBlock extends AbstractBlock<DynamicTimberFrameBlo
      */
     private static final float RESISTANCE = 1F;
 
+    /**
+     * Item group cache for recipe.
+     */
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
 
+    /**
+     * Enum defining the different block offsets we care about.
+     */
     public enum Offset
     {
-        UP,
-        DOWN,
-        NORTH,
-        NORTH_EAST,
-        EAST,
-        EAST_SOUTH,
-        SOUTH,
-        SOUTH_WEST,
-        WEST,
-        WEST_NORTH
+        UP(BlockPos::above),
+        DOWN(BlockPos::below),
+        NORTH(BlockPos::north),
+        EAST(BlockPos::east),
+        SOUTH(BlockPos::south),
+        WEST(BlockPos::west),
+        UP_EAST(p -> p.above().east()),
+        UP_WEST(p -> p.above().west()),
+        UP_NORTH(p -> p.above().north()),
+        UP_SOUTH(p -> p.above().south()),
+        DOWN_EAST(p -> p.below().east()),
+        DOWN_WEST(p -> p.below().west()),
+        DOWN_NORTH(p -> p.below().north()),
+        DOWN_SOUTH(p -> p.below().south());
+
+        /**
+         * Translation function this direction means in relation to a blockpos change.
+         */
+        private final Function<BlockPos, BlockPos> posTranslationFunction;
+
+        /**
+         * Create a new offset.
+         * @param changeFunction and its blockpos translation.
+         */
+        Offset(final Function<BlockPos, BlockPos> changeFunction)
+        {
+            this.posTranslationFunction = changeFunction;
+        }
+
+        /**
+         * Inversion of offset.
+         * @return the inverted offset.
+         */
+        public Offset inverted()
+        {
+            return switch (this)
+            {
+                case UP -> DOWN;
+                case DOWN -> UP;
+                case NORTH -> SOUTH;
+                case SOUTH -> NORTH;
+                case EAST -> WEST;
+                case WEST -> EAST;
+                case UP_NORTH -> DOWN_SOUTH;
+                case UP_EAST -> DOWN_WEST;
+                case UP_SOUTH -> DOWN_NORTH;
+                case UP_WEST -> DOWN_EAST;
+                case DOWN_SOUTH -> UP_NORTH;
+                case DOWN_WEST -> UP_EAST;
+                case DOWN_NORTH -> UP_SOUTH;
+                case DOWN_EAST -> UP_WEST;
+            };
+        }
+
+        /**
+         * Apply translation to blockpos.
+         * @param pos input pos.
+         * @return changed output pos.
+         */
+        public BlockPos applyToBlockPos(final BlockPos pos)
+        {
+            return posTranslationFunction.apply(pos);
+        }
     }
 
     /**
@@ -117,28 +177,30 @@ public class DynamicTimberFrameBlock extends AbstractBlock<DynamicTimberFrameBlo
         {
             timberFrameBlockEntity.updateTextureDataWith(MaterialTextureData.deserializeFromNBT(textureData));
             timberFrameBlockEntity.refreshTextureCache();
+
+            for (Offset offset: Offset.values())
+            {
+                updateNeighbor(timberFrameBlockEntity, worldIn.getBlockEntity(offset.applyToBlockPos(pos)), offset, true);
+            }
         }
-
-        updateNeighbor(worldIn.getBlockEntity(pos.above()), Offset.DOWN, true);
-        updateNeighbor(worldIn.getBlockEntity(pos.below()), Offset.UP, true);
-
-        updateNeighbor(worldIn.getBlockEntity(pos.north()), Offset.SOUTH, true);
-        updateNeighbor(worldIn.getBlockEntity(pos.north().east()), Offset.SOUTH_WEST, true);
-        updateNeighbor(worldIn.getBlockEntity(pos.east()), Offset.WEST, true);
-        updateNeighbor(worldIn.getBlockEntity(pos.east().south()), Offset.WEST_NORTH, true);
-        updateNeighbor(worldIn.getBlockEntity(pos.south()), Offset.NORTH, true);
-        updateNeighbor(worldIn.getBlockEntity(pos.south().west()), Offset.NORTH_EAST, true);
-        updateNeighbor(worldIn.getBlockEntity(pos.west()), Offset.EAST, true);
-        updateNeighbor(worldIn.getBlockEntity(pos.west().north()), Offset.EAST_SOUTH, true);
-
-        //todo: Calculate then the neighbors after placement update the neighbors in a 1 radius.
     }
 
-    private void updateNeighbor(final BlockEntity blockEntity, final Offset offset, final boolean added)
+    /**
+     * Utility method to update neighbor with new neighborhood info.
+     * @param thisEntity the blockentity being changed.
+     * @param neighborEntity the blockentity that is being notified.
+     * @param offset the offset at which the neighbor is at.
+     * @param added if this blockentity was being added or removed.
+     */
+    private static void updateNeighbor(final DynamicTimberFrameBlockEntity thisEntity, final BlockEntity neighborEntity, final Offset offset, final boolean added)
     {
-        if (blockEntity != null && blockEntity instanceof DynamicTimberFrameBlockEntity timberFrameBlockEntity)
+        if (neighborEntity != null && neighborEntity instanceof DynamicTimberFrameBlockEntity timberFrameBlockEntity)
         {
-            timberFrameBlockEntity.onNeighborUpdate(offset, added);
+            timberFrameBlockEntity.onNeighborUpdate(thisEntity, offset.inverted(), added);
+            if (thisEntity != null)
+            {
+                thisEntity.onNeighborUpdate(thisEntity, offset, added);
+            }
         }
     }
 
@@ -146,17 +208,11 @@ public class DynamicTimberFrameBlock extends AbstractBlock<DynamicTimberFrameBlo
     public void onRemove(final BlockState state, final Level worldIn, final BlockPos pos, final BlockState otherState, final boolean drop)
     {
         super.onRemove(state, worldIn, pos, otherState, drop);
-        updateNeighbor(worldIn.getBlockEntity(pos.above()), Offset.DOWN, false);
-        updateNeighbor(worldIn.getBlockEntity(pos.below()), Offset.UP, false);
 
-        updateNeighbor(worldIn.getBlockEntity(pos.north()), Offset.SOUTH, false);
-        updateNeighbor(worldIn.getBlockEntity(pos.north().east()), Offset.SOUTH_WEST, false);
-        updateNeighbor(worldIn.getBlockEntity(pos.east()), Offset.WEST, false);
-        updateNeighbor(worldIn.getBlockEntity(pos.east().south()), Offset.WEST_NORTH, false);
-        updateNeighbor(worldIn.getBlockEntity(pos.south()), Offset.NORTH, false);
-        updateNeighbor(worldIn.getBlockEntity(pos.south().west()), Offset.NORTH_EAST, false);
-        updateNeighbor(worldIn.getBlockEntity(pos.west()), Offset.EAST, false);
-        updateNeighbor(worldIn.getBlockEntity(pos.west().north()), Offset.EAST_SOUTH, false);
+        for (Offset offset: Offset.values())
+        {
+            updateNeighbor(null, worldIn.getBlockEntity(offset.applyToBlockPos(pos)), offset, false);
+        }
     }
 
     @Nullable
