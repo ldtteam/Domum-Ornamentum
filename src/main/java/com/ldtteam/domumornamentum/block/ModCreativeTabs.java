@@ -33,6 +33,7 @@ public final class ModCreativeTabs {
 
         output.accept(ModBlocks.getInstance().getShingleSlab());
         output.accept(ModBlocks.getInstance().getPaperWall());
+        output.accept(ModBlocks.getInstance().getTiledPaperWall());
 
         ModBlocks.getInstance().getPillars().forEach(output::accept);
         ModBlocks.getInstance().getFramedLights().forEach(output::accept);

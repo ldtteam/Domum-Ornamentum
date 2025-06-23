@@ -51,12 +51,12 @@ public class PaperWallBlock extends AbstractBlockPane<PaperWallBlock> implements
     /**
      * The hardness this block has.
      */
-    private static final float                      BLOCK_HARDNESS = 3F;
+    private static final float BLOCK_HARDNESS = 3F;
 
     /**
      * The resistance this block has.
      */
-    private static final float                      RESISTANCE     = 1F;
+    private static final float RESISTANCE = 1F;
 
     public PaperWallBlock()
     {
@@ -64,7 +64,8 @@ public class PaperWallBlock extends AbstractBlockPane<PaperWallBlock> implements
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
+    {
         builder.add(NORTH, EAST, WEST, SOUTH, WATERLOGGED);
     }
 
@@ -105,22 +106,26 @@ public class PaperWallBlock extends AbstractBlockPane<PaperWallBlock> implements
     }
 
     @Override
-    public float getDestroyProgress(@NotNull BlockState state, @NotNull Player player, @NotNull BlockGetter level, @NotNull BlockPos pos) {
+    public float getDestroyProgress(@NotNull BlockState state, @NotNull Player player, @NotNull BlockGetter level, @NotNull BlockPos pos)
+    {
         return getDODestroyProgress(super::getDestroyProgress, state, player, level, pos);
     }
 
     @Override
-    public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
+    public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity)
+    {
         return getDOSoundType(super::getSoundType, state, level, pos, entity);
     }
 
     @Override
-    public IMateriallyTexturedBlockComponent getMainComponent() {
+    public IMateriallyTexturedBlockComponent getMainComponent()
+    {
         return COMPONENTS.get(0);
     }
 
     @Override
-    public void fillItemCategory(final @NotNull NonNullList<ItemStack> items) {
+    public void fillItemCategory(final @NotNull NonNullList<ItemStack> items)
+    {
         fillDOItemCategory(this, items, fillItemGroupCache);
     }
 }

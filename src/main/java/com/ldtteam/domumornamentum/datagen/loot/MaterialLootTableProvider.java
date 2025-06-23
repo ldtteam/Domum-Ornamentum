@@ -58,6 +58,7 @@ public class MaterialLootTableProvider extends BlockLootSubProvider
         dropSelfMaterially(ModBlocks.getInstance().getShingleSlab());
         dropSelfMaterially(ModBlocks.getInstance().getStair());
         dropSelfMaterially(ModBlocks.getInstance().getWall());
+        dropSelfMaterially(ModBlocks.getInstance().getTiledPaperWall());
 
         dropSelfMateriallyWithProp(ModBlocks.getInstance().getFancyTrapdoor(), FancyTrapdoorBlock.TYPE);
         dropSelfMateriallyWithProp(ModBlocks.getInstance().getPanel(), PanelBlock.TYPE);

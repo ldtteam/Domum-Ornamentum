@@ -73,6 +73,7 @@ public final class ModBlocks implements IModBlocks {
     private static final DeferredBlock<PanelBlock> PANEL;
     private static final DeferredBlock<FancyDoorBlock> FANCY_DOOR;
     private static final DeferredBlock<FancyTrapdoorBlock> FANCY_TRAPDOOR;
+    private static final DeferredBlock<PaperWallBlock> TILED_PAPER_WALL;
 
     static {
         ARCHITECTS_CUTTER = registerSimpleBlockItem("architectscutter", ArchitectsCutterBlock::new);
@@ -87,6 +88,7 @@ public final class ModBlocks implements IModBlocks {
 
         SHINGLE_SLAB = registerCustomBlockItem("shingle_slab", ShingleSlabBlock::new, b -> new ShingleSlabBlockItem(b, new Item.Properties()));
         PAPER_WALL = registerCustomBlockItem("blockpaperwall", PaperWallBlock::new, b -> new PaperwallBlockItem(b, new Item.Properties()));
+        TILED_PAPER_WALL = registerCustomBlockItem("blocktiledpaperwall", PaperWallBlock::new, b -> new PaperwallBlockItem(b, new Item.Properties()));
 
         PILLARS.add(registerCustomBlockItem("blockpillar", PillarBlock::new, b -> new PillarBlockItem(b, new Item.Properties())));
         PILLARS.add(registerCustomBlockItem("blockypillar", PillarBlock::new, b -> new PillarBlockItem(b, new Item.Properties())));
@@ -212,6 +214,11 @@ public final class ModBlocks implements IModBlocks {
     @Override
     public PaperWallBlock getPaperWall() {
         return ModBlocks.PAPER_WALL.get();
+    }
+
+    @Override
+    public PaperWallBlock getTiledPaperWall() {
+        return ModBlocks.TILED_PAPER_WALL.get();
     }
 
     @Override
