@@ -526,4 +526,22 @@ public class DynamicTimberFrameBlockEntity extends AbstractMateriallyTexturedBlo
         this.offsets.put(offset, added);
         refreshTextureCache();
     }
+
+    /**
+     * Get the frame block.
+     * @return the frame block.
+     */
+    public Block getFrameBlock()
+    {
+        return frameBlock;
+    }
+
+    /**
+     * Get the center block.
+     * @return the center block.
+     */
+    public Block getCenterBlock()
+    {
+        return centerBlock;
+    }
 }

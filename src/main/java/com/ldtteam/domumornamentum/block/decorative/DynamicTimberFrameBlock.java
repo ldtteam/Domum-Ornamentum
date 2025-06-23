@@ -13,10 +13,10 @@ import com.ldtteam.domumornamentum.entity.block.DynamicTimberFrameBlockEntity;
 import com.ldtteam.domumornamentum.recipe.FinishedDORecipe;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.BlockUtils;
+import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -170,12 +170,16 @@ public class DynamicTimberFrameBlock extends AbstractBlock<DynamicTimberFrameBlo
     {
         super.setPlacedBy(worldIn, pos, state, placer, stack);
 
-        final CompoundTag textureData = stack.getOrCreateTagElement("textureData");
         final BlockEntity tileEntity = worldIn.getBlockEntity(pos);
 
         if (tileEntity instanceof DynamicTimberFrameBlockEntity timberFrameBlockEntity)
         {
-            timberFrameBlockEntity.updateTextureDataWith(MaterialTextureData.deserializeFromNBT(textureData));
+            MaterialTextureData textureData = MaterialTextureData.deserializeFromNBT(stack.getOrCreateTagElement("textureData"));
+            if (textureData.isEmpty()) {
+                textureData = MaterialTextureDataUtil.generateRandomTextureDataFrom(this);
+            }
+
+            timberFrameBlockEntity.updateTextureDataWith(textureData);
             timberFrameBlockEntity.refreshTextureCache();
 
             for (Offset offset: Offset.values())
@@ -197,7 +201,7 @@ public class DynamicTimberFrameBlock extends AbstractBlock<DynamicTimberFrameBlo
         if (neighborEntity != null && neighborEntity instanceof DynamicTimberFrameBlockEntity timberFrameBlockEntity)
         {
             timberFrameBlockEntity.onNeighborUpdate(thisEntity, offset.inverted(), added);
-            if (thisEntity != null)
+            if (thisEntity != null && timberFrameBlockEntity.getFrameBlock() == thisEntity.getFrameBlock() && timberFrameBlockEntity.getCenterBlock() == thisEntity.getCenterBlock())
             {
                 thisEntity.onNeighborUpdate(thisEntity, offset, added);
             }
