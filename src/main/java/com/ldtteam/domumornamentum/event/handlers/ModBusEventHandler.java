@@ -24,6 +24,7 @@ import com.ldtteam.domumornamentum.datagen.fencegate.FenceGateComponentTagProvid
 import com.ldtteam.domumornamentum.datagen.floatingcarpet.FloatingCarpetBlockStateProvider;
 import com.ldtteam.domumornamentum.datagen.floatingcarpet.FloatingCarpetBlockTagProvider;
 import com.ldtteam.domumornamentum.datagen.floatingcarpet.FloatingCarpetRecipeProvider;
+import com.ldtteam.domumornamentum.datagen.frames.dynamic.DynamicTimberFramesBlockStateProvider;
 import com.ldtteam.domumornamentum.datagen.frames.light.FramedLightBlockStateProvider;
 import com.ldtteam.domumornamentum.datagen.frames.light.FramedLightComponentTagProvider;
 import com.ldtteam.domumornamentum.datagen.frames.timber.TimberFramesBlockStateProvider;
@@ -107,6 +108,9 @@ public class ModBusEventHandler
         // Timber Frames
         event.getGenerator().addProvider(true, new TimberFramesBlockStateProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(true, new TimberFramesComponentTagProvider(event.getGenerator().getPackOutput(), event.getLookupProvider(), event.getExistingFileHelper()));
+
+        //Dynamic Timber Frames
+        event.getGenerator().addProvider(true, new DynamicTimberFramesBlockStateProvider(event.getGenerator(), event.getExistingFileHelper()));
 
         // Framed Light
         event.getGenerator().addProvider(true, new FramedLightBlockStateProvider(event.getGenerator(), event.getExistingFileHelper()));

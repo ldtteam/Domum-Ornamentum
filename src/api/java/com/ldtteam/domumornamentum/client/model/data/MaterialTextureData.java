@@ -104,11 +104,7 @@ public record MaterialTextureData(Map<ResourceLocation, Block> getTexturedCompon
         final Builder newData = new Builder();
         nbt.getAllKeys().forEach(key -> {
             final ResourceLocation name = ResourceLocation.parse(nbt.getString(key));
-
-            if (BuiltInRegistries.BLOCK.get(name) != Blocks.AIR)
-            {
                 newData.setComponent(ResourceLocation.parse(key), BuiltInRegistries.BLOCK.get(name));
-            }
         });
         return newData.build();
     }

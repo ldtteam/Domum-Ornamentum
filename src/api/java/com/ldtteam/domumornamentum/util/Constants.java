@@ -28,5 +28,6 @@ public class Constants
     {
 
         public static final ResourceLocation MATERIALLY_RETEXTURABLE = resLocDO("materially_retexturable");
+        public static final ResourceLocation DYNAMIC_TIMBERFRAME = resLocDO("dynamic_timberframe");
     }
 }

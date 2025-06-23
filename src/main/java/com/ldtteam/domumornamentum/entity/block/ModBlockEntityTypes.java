@@ -1,6 +1,7 @@
 package com.ldtteam.domumornamentum.entity.block;
 
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
+import com.ldtteam.domumornamentum.block.decorative.DynamicTimberFrameBlock;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.Block;
@@ -22,6 +23,12 @@ public final class ModBlockEntityTypes
       () -> BlockEntityType.Builder.of((BlockEntityType.BlockEntitySupplier<BlockEntity>) MateriallyTexturedBlockEntity::new,
         BuiltInRegistries.BLOCK.stream().filter(IMateriallyTexturedBlock.class::isInstance).toArray(Block[]::new)
       ).build(null)
+    );
+
+    public static DeferredHolder<BlockEntityType<?>, BlockEntityType<BlockEntity>> DYNAMIC_TIMBERFRAME = BLOCK_ENTITIES.register(Constants.BlockEntityTypes.DYNAMIC_TIMBERFRAME.getPath(),
+        () -> BlockEntityType.Builder.of((BlockEntityType.BlockEntitySupplier<BlockEntity>) DynamicTimberFrameBlockEntity::new,
+            BuiltInRegistries.BLOCK.stream().filter(DynamicTimberFrameBlock.class::isInstance).toArray(Block[]::new)
+        ).build(null)
     );
 
     /**

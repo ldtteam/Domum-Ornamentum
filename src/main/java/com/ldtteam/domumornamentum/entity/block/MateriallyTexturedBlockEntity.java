@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 import static com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes.MATERIALLY_TEXTURED;
 import static com.ldtteam.domumornamentum.util.Constants.BLOCK_ENTITY_TEXTURE_DATA;
 
-public class MateriallyTexturedBlockEntity extends BlockEntity implements IMateriallyTexturedBlockEntity
+public class MateriallyTexturedBlockEntity extends AbstractMateriallyTexturedBlockEntity
 {
 
     private MaterialTextureData textureData = MaterialTextureData.EMPTY;

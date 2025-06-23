@@ -70,6 +70,7 @@ public class MaterialLootTableProvider extends BlockLootSubProvider
         ModBlocks.getInstance().getFramedLights().forEach(this::dropSelfMaterially);
         ModBlocks.getInstance().getPillars().forEach(this::dropSelfMaterially);
         ModBlocks.getInstance().getTimberFrames().forEach(this::dropSelfMaterially);
+        dropSelfMaterially(ModBlocks.getInstance().getDynamicTimberFrame());
     }
 
     @Override

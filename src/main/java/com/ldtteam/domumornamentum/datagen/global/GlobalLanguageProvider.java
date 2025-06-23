@@ -10,6 +10,7 @@ import com.ldtteam.domumornamentum.datagen.extra.ExtraLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.fence.FenceLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.fencegate.FenceGateLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.floatingcarpet.FloatingCarpetLangEntryProvider;
+import com.ldtteam.domumornamentum.datagen.frames.dynamic.DynamicFramesLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.frames.light.FramedLightLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.frames.timber.TimberFramesLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.panel.PanelLangEntryProvider;
@@ -54,7 +55,8 @@ public class GlobalLanguageProvider extends LanguageProvider
                 new FancyTrapdoorsLangEntryProvider(),
                 new PaperwallLangEntryProvider(),
                 new WallLangEntryProvider(),
-                new AllBrickLangEntryProvider()
+                new AllBrickLangEntryProvider(),
+                new DynamicFramesLangEntryProvider()
         ));
     }
 
