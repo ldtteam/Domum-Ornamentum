@@ -464,6 +464,12 @@ public class DynamicTimberFrameBlockEntity extends BlockEntity implements IMater
             .build();
     }
 
+    /**
+     * Hook to notify block entity about changed conditions
+     * @param newNeighbor the new neighbor.
+     * @param offset the offset of the neighbor.
+     * @param added if added or removed.
+     */
     public void onNeighborUpdate(final DynamicTimberFrameBlockEntity newNeighbor, final DynamicTimberFrameBlock.Offset offset, final boolean added)
     {
         // Only connect to frames with the same content.
