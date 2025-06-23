@@ -19,5 +19,7 @@ public class Constants
     {
 
         public static final String MATERIALLY_RETEXTURABLE = "materially_retexturable";
+        public static final String DYNAMIC_TIMBERFRAME = "dynamic_timberframe";
+
     }
 }

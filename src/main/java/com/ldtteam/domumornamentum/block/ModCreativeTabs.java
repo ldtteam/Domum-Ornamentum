@@ -28,6 +28,7 @@ public final class ModCreativeTabs {
             .displayItems(new OutputAwareGenerator((config, output) -> {
         output.accept(ModBlocks.getInstance().getArchitectsCutter());
         ModBlocks.getInstance().getTimberFrames().forEach(output::accept);
+
         for (ShingleHeightType heightType : ShingleHeightType.values())
         {
             output.accept(ModBlocks.getInstance().getShingle(heightType));
@@ -52,7 +53,9 @@ public final class ModCreativeTabs {
         output.accept(ModBlocks.getInstance().getPost());
         output.accept(ModBlocks.getInstance().getFancyDoor());
         output.accept(ModBlocks.getInstance().getFancyTrapdoor());
-    })).build());
+        output.accept(ModBlocks.getInstance().getDynamicTimberFrame());
+
+            })).build());
 
     public static final RegistryObject<CreativeModeTab> EXTRA_BLOCKS = TAB_REG.register("extra_blocks", () -> CreativeModeTab.builder()
             .withTabsBefore(GENERAL.getId())

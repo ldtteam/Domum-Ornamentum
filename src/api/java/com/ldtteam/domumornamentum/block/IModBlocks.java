@@ -64,4 +64,5 @@ public interface IModBlocks
 
     List<? extends Block> getAllBrickStairBlocks();
 
+    Block getDynamicTimberFrame();
 }
