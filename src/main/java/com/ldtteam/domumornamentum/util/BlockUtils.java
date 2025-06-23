@@ -2,17 +2,15 @@ package com.ldtteam.domumornamentum.util;
 
 import com.google.common.collect.Lists;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
-import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
+import com.ldtteam.domumornamentum.entity.block.AbstractMateriallyTexturedBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import org.jetbrains.annotations.NotNull;
@@ -49,7 +47,7 @@ public class BlockUtils
         return getMaterializedItemStack(entity, blockEntity, (s, e) -> s);
     }
 
-    public static List<ItemStack> getMaterializedItemStack(final @NotNull LootParams.Builder builder, final BiFunction<ItemStack, MateriallyTexturedBlockEntity, ItemStack> adapter) {
+    public static List<ItemStack> getMaterializedItemStack(final @NotNull LootParams.Builder builder, final BiFunction<ItemStack, AbstractMateriallyTexturedBlockEntity, ItemStack> adapter) {
         final ItemStack stack = getMaterializedItemStack(builder.getOptionalParameter(LootContextParams.THIS_ENTITY), builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY), adapter);
         if (!stack.isEmpty())
             return Lists.newArrayList(stack);
@@ -57,12 +55,12 @@ public class BlockUtils
         return Collections.emptyList();
     }
 
-    public static ItemStack getMaterializedItemStack(final Entity entity, final BlockGetter blockGetter, final BlockPos blockPos, final BiFunction<ItemStack, MateriallyTexturedBlockEntity, ItemStack> adapter) {
+    public static ItemStack getMaterializedItemStack(final Entity entity, final BlockGetter blockGetter, final BlockPos blockPos, final BiFunction<ItemStack, AbstractMateriallyTexturedBlockEntity, ItemStack> adapter) {
         return getMaterializedItemStack(entity, blockGetter.getBlockEntity(blockPos), adapter);
     }
 
-    public static ItemStack getMaterializedItemStack(final Entity entity, final BlockEntity blockEntity, final BiFunction<ItemStack, MateriallyTexturedBlockEntity, ItemStack> adapter) {
-        if (!(blockEntity instanceof final MateriallyTexturedBlockEntity texturedBlockEntity))
+    public static ItemStack getMaterializedItemStack(final Entity entity, final BlockEntity blockEntity, final BiFunction<ItemStack, AbstractMateriallyTexturedBlockEntity, ItemStack> adapter) {
+        if (!(blockEntity instanceof final AbstractMateriallyTexturedBlockEntity texturedBlockEntity))
             return ItemStack.EMPTY;
 
         final MaterialTextureData materialTextureData = texturedBlockEntity.getTextureData();
@@ -72,6 +70,6 @@ public class BlockUtils
         final ItemStack result = new ItemStack(blockEntity.getBlockState().getBlock());
         result.getOrCreateTag().put("textureData", textureNbt);
 
-        return adapter.apply(result, (MateriallyTexturedBlockEntity) blockEntity);
+        return adapter.apply(result, (AbstractMateriallyTexturedBlockEntity) blockEntity);
     }
 }

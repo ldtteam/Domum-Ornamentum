@@ -14,7 +14,6 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.data.ModelData;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -24,7 +23,7 @@ import java.util.*;
 
 import static com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes.DYNAMIC_TIMBERFRAME;
 
-public class DynamicTimberFrameBlockEntity extends BlockEntity implements IMateriallyTexturedBlockEntity
+public class DynamicTimberFrameBlockEntity extends AbstractMateriallyTexturedBlockEntity
 {
     // Frame (wool)
     public static final ResourceLocation NORTH_UP          = new ResourceLocation("block/white_wool");

@@ -20,7 +20,7 @@ import java.util.*;
 
 import static com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes.MATERIALLY_TEXTURED;
 
-public class MateriallyTexturedBlockEntity extends BlockEntity implements IMateriallyTexturedBlockEntity
+public class MateriallyTexturedBlockEntity extends AbstractMateriallyTexturedBlockEntity
 {
 
     private MaterialTextureData textureData = MaterialTextureData.EMPTY;
