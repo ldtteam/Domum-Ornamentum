@@ -203,8 +203,8 @@ public class DynamicTimberFrameBlockEntity extends AbstractMateriallyTexturedBlo
     @Override
     public void updateTextureDataWith(final MaterialTextureData materialTextureData)
     {
-        centerBlock = materialTextureData.getTexturedComponents().get(new ResourceLocation("block/oak_planks"));
-        frameBlock = materialTextureData.getTexturedComponents().get(new ResourceLocation("block/dark_oak_planks"));
+        centerBlock = materialTextureData.getTexturedComponents().get(new ResourceLocation("block/dark_oak_planks"));
+        frameBlock = materialTextureData.getTexturedComponents().get(new ResourceLocation("block/oak_planks"));
         handleTextureMapping();
         originalTextureData = materialTextureData;
     }
