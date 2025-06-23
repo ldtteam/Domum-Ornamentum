@@ -4,6 +4,7 @@ import com.ldtteam.domumornamentum.block.decorative.DynamicTimberFrameBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.client.model.properties.ModProperties;
 import com.ldtteam.domumornamentum.component.ModDataComponents;
+import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
 import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
 import it.unimi.dsi.fastutil.objects.Object2BooleanOpenHashMap;
 import net.minecraft.core.BlockPos;
@@ -209,7 +210,13 @@ public class DynamicTimberFrameBlockEntity extends AbstractMateriallyTexturedBlo
     protected void applyImplicitComponents(final BlockEntity.DataComponentInput componentInput)
     {
         super.applyImplicitComponents(componentInput);
-        updateTextureDataWith(componentInput.getOrDefault(ModDataComponents.TEXTURE_DATA, MaterialTextureData.EMPTY));
+        MaterialTextureData testTextureData = componentInput.getOrDefault(ModDataComponents.TEXTURE_DATA, MaterialTextureData.EMPTY);
+        if (testTextureData.isEmpty())
+        {
+            testTextureData = MaterialTextureDataUtil.generateRandomTextureDataFrom(this.getBlockState().getBlock());
+        }
+
+        updateTextureDataWith(testTextureData);
     }
 
     @Override
@@ -550,5 +557,23 @@ public class DynamicTimberFrameBlockEntity extends AbstractMateriallyTexturedBlo
         }
         this.offsets.put(offset, added);
         refreshTextureCache();
+    }
+
+    /**
+     * Get the frame block.
+     * @return the frame block.
+     */
+    public Block getFrameBlock()
+    {
+        return frameBlock;
+    }
+
+    /**
+     * Get the center block.
+     * @return the center block.
+     */
+    public Block getCenterBlock()
+    {
+        return centerBlock;
     }
 }

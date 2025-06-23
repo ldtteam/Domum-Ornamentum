@@ -190,7 +190,7 @@ public class DynamicTimberFrameBlock extends AbstractBlock<DynamicTimberFrameBlo
         if (neighborEntity != null && neighborEntity instanceof DynamicTimberFrameBlockEntity timberFrameBlockEntity)
         {
             timberFrameBlockEntity.onNeighborUpdate(thisEntity, offset.inverted(), added);
-            if (thisEntity != null)
+            if (thisEntity != null && timberFrameBlockEntity.getFrameBlock() == thisEntity.getFrameBlock() && timberFrameBlockEntity.getCenterBlock() == thisEntity.getCenterBlock())
             {
                 thisEntity.onNeighborUpdate(thisEntity, offset, added);
             }
