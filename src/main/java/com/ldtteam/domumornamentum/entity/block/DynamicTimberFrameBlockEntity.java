@@ -110,6 +110,11 @@ public class DynamicTimberFrameBlockEntity extends AbstractMateriallyTexturedBlo
      */
     private boolean checkedAfterStartup = false;
 
+    /**
+     * Actual texture data to use.
+     */
+    private @NotNull MaterialTextureData originalTextureData = new MaterialTextureData(new HashMap<>());
+
     public DynamicTimberFrameBlockEntity(BlockPos pos, BlockState state)
     {
         super(DYNAMIC_TIMBERFRAME.get(), pos, state);
@@ -145,7 +150,8 @@ public class DynamicTimberFrameBlockEntity extends AbstractMateriallyTexturedBlo
     public void saveAdditional(@NotNull final CompoundTag compound)
     {
         super.saveAdditional(compound);
-        compound.put("textureData", textureDataCache.serializeNBT());
+        compound.put("originalTextureData", originalTextureData.serializeNBT());
+
         compound.putString("primaryBlock", ForgeRegistries.BLOCKS.getKey(centerBlock).toString());
         compound.putString("secondaryBlock", ForgeRegistries.BLOCKS.getKey(frameBlock).toString());
         final ListTag listTag = new ListTag();
@@ -164,10 +170,9 @@ public class DynamicTimberFrameBlockEntity extends AbstractMateriallyTexturedBlo
     {
         super.load(nbt);
 
-        this.textureDataCache = new MaterialTextureData();
-        if (nbt.contains("textureData", Tag.TAG_COMPOUND))
+        if (nbt.contains("originalTextureData"))
         {
-            this.textureDataCache.deserializeNBT(nbt.getCompound("textureData"));
+            this.originalTextureData.deserializeNBT(nbt.getCompound("originalTextureData"));
         }
 
         final ResourceLocation primaryBlockName = new ResourceLocation(nbt.getString("primaryBlock"));
@@ -201,6 +206,7 @@ public class DynamicTimberFrameBlockEntity extends AbstractMateriallyTexturedBlo
         centerBlock = materialTextureData.getTexturedComponents().get(new ResourceLocation("block/oak_planks"));
         frameBlock = materialTextureData.getTexturedComponents().get(new ResourceLocation("block/dark_oak_planks"));
         handleTextureMapping();
+        originalTextureData = materialTextureData;
     }
 
     private void handleTextureMapping()
@@ -259,13 +265,6 @@ public class DynamicTimberFrameBlockEntity extends AbstractMateriallyTexturedBlo
         textureMapping.put(WEST_NORTH_UP_CENTER, Blocks.AIR);
         textureMapping.put(WEST_SOUTH_DOWN_CENTER, Blocks.AIR);
         textureMapping.put(WEST_NORTH_DOWN_CENTER, Blocks.AIR);
-
-    }
-
-    @Override
-    public @NotNull MaterialTextureData getTextureData()
-    {
-        return textureDataCache;
     }
 
     public void refreshTextureCache()
@@ -503,11 +502,19 @@ public class DynamicTimberFrameBlockEntity extends AbstractMateriallyTexturedBlo
             .build();
     }
 
+    @NotNull
+    @Override
+    public MaterialTextureData getTextureData()
+    {
+        return originalTextureData;
+    }
+
     /**
      * Hook to notify block entity about changed conditions
+     *
      * @param newNeighbor the new neighbor.
-     * @param offset the offset of the neighbor.
-     * @param added if added or removed.
+     * @param offset      the offset of the neighbor.
+     * @param added       if added or removed.
      */
     public void onNeighborUpdate(final DynamicTimberFrameBlockEntity newNeighbor, final DynamicTimberFrameBlock.Offset offset, final boolean added)
     {
