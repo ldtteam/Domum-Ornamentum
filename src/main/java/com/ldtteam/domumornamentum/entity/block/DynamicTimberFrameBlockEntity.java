@@ -26,6 +26,65 @@ import static com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes.DYNAM
 
 public class DynamicTimberFrameBlockEntity extends BlockEntity implements IMateriallyTexturedBlockEntity
 {
+    // Frame (wool)
+    public static final ResourceLocation NORTH_UP          = new ResourceLocation("block/white_wool");
+    public static final ResourceLocation NORTH_DOWN        = new ResourceLocation("block/orange_wool");
+    public static final ResourceLocation SOUTH_UP          = new ResourceLocation("block/magenta_wool");
+    public static final ResourceLocation SOUTH_DOWN        = new ResourceLocation("block/light_blue_wool");
+    public static final ResourceLocation EAST_DOWN         = new ResourceLocation("block/yellow_wool");
+    public static final ResourceLocation EAST_UP           = new ResourceLocation("block/lime_wool");
+    public static final ResourceLocation WEST_DOWN         = new ResourceLocation("block/pink_wool");
+    public static final ResourceLocation WEST_UP           = new ResourceLocation("block/gray_wool");
+    public static final ResourceLocation NORTH_EAST_DOWN   = new ResourceLocation("block/light_gray_wool");
+    public static final ResourceLocation NORTH_EAST_UP     = new ResourceLocation("block/cyan_wool");
+    public static final ResourceLocation NORTH_EAST_CORNER = new ResourceLocation("block/purple_wool");
+    public static final ResourceLocation NORTH_WEST_DOWN   = new ResourceLocation("block/blue_wool");
+    public static final ResourceLocation NORTH_WEST_UP     = new ResourceLocation("block/brown_wool");
+    public static final ResourceLocation NORTH_WEST_CORNER = new ResourceLocation("block/green_wool");
+    public static final ResourceLocation SOUTH_EAST_DOWN   = new ResourceLocation("block/red_wool");
+    public static final ResourceLocation SOUTH_EAST_UP     = new ResourceLocation("block/black_wool");
+
+    // Frame (terracotta)
+    public static final ResourceLocation SOUTH_EAST_CORNER = new ResourceLocation("block/white_terracotta");
+    public static final ResourceLocation SOUTH_WEST_DOWN   = new ResourceLocation("block/orange_terracotta");
+    public static final ResourceLocation SOUTH_WEST_UP     = new ResourceLocation("block/magenta_terracotta");
+    public static final ResourceLocation SOUTH_WEST_CORNER = new ResourceLocation("block/light_blue_terracotta");
+
+    // Center (terracotta)
+    public static final ResourceLocation CENTER                 = new ResourceLocation("block/yellow_terracotta");
+    public static final ResourceLocation BOTTOM_CENTER          = new ResourceLocation("block/lime_terracotta");
+    public static final ResourceLocation BOTTOM_SOUTH_CENTER    = new ResourceLocation("block/pink_terracotta");
+    public static final ResourceLocation BOTTOM_NORTH_CENTER    = new ResourceLocation("block/gray_terracotta");
+    public static final ResourceLocation TOP_NORTH_CENTER       = new ResourceLocation("block/light_gray_terracotta");
+    public static final ResourceLocation TOP_SOUTH_CENTER       = new ResourceLocation("block/cyan_terracotta");
+    public static final ResourceLocation TOP_CENTER             = new ResourceLocation("block/purple_terracotta");
+    public static final ResourceLocation NORTH_WEST_CENTER      = new ResourceLocation("block/blue_terracotta");
+    public static final ResourceLocation NORTH_EAST_CENTER      = new ResourceLocation("block/brown_terracotta");
+    public static final ResourceLocation NORTH_WEST_UP_CENTER   = new ResourceLocation("block/green_terracotta");
+    public static final ResourceLocation NORTH_EAST_UP_CENTER   = new ResourceLocation("block/red_terracotta");
+    public static final ResourceLocation NORTH_EAST_DOWN_CENTER = new ResourceLocation("block/black_terracotta");
+
+    // Center (concrete)
+    public static final ResourceLocation NORTH_WEST_DOWN_CENTER = new ResourceLocation("block/white_concrete");
+    public static final ResourceLocation SOUTH_EAST_CENTER      = new ResourceLocation("block/orange_concrete");
+    public static final ResourceLocation SOUTH_WEST_CENTER      = new ResourceLocation("block/magenta_concrete");
+    public static final ResourceLocation SOUTH_WEST_UP_CENTER   = new ResourceLocation("block/light_blue_concrete");
+    public static final ResourceLocation SOUTH_EAST_UP_CENTER   = new ResourceLocation("block/yellow_concrete");
+    public static final ResourceLocation SOUTH_EAST_DOWN_CENTER = new ResourceLocation("block/lime_concrete");
+    public static final ResourceLocation SOUTH_WEST_DOWN_CENTER = new ResourceLocation("block/pink_concrete");
+    public static final ResourceLocation EAST_NORTH_CENTER      = new ResourceLocation("block/gray_concrete");
+    public static final ResourceLocation EAST_SOUTH_CENTER      = new ResourceLocation("block/light_gray_concrete");
+    public static final ResourceLocation EAST_SOUTH_UP_CENTER   = new ResourceLocation("block/cyan_concrete");
+    public static final ResourceLocation EAST_NORTH_UP_CENTER   = new ResourceLocation("block/purple_concrete");
+    public static final ResourceLocation EAST_SOUTH_DOWN_CENTER = new ResourceLocation("block/blue_concrete");
+    public static final ResourceLocation EAST_NORTH_DOWN_CENTER = new ResourceLocation("block/brown_concrete");
+    public static final ResourceLocation WEST_NORTH_CENTER      = new ResourceLocation("block/green_concrete");
+    public static final ResourceLocation WEST_SOUTH_CENTER      = new ResourceLocation("block/red_concrete");
+    public static final ResourceLocation WEST_SOUTH_UP_CENTER   = new ResourceLocation("block/black_concrete");
+    public static final ResourceLocation WEST_NORTH_UP_CENTER   = new ResourceLocation("block/glowstone");
+    public static final ResourceLocation WEST_SOUTH_DOWN_CENTER = new ResourceLocation("block/cherry_planks");
+    public static final ResourceLocation WEST_NORTH_DOWN_CENTER = new ResourceLocation("block/shroomlight");
+
     /**
      * Cached resmap.
      */
@@ -147,62 +206,61 @@ public class DynamicTimberFrameBlockEntity extends BlockEntity implements IMater
 
     private void handleTextureMapping()
     {
-        textureMapping.put(new ResourceLocation("block/white_wool"), frameBlock);
-        textureMapping.put(new ResourceLocation("block/orange_wool"), frameBlock);
-        textureMapping.put(new ResourceLocation("block/magenta_wool"), frameBlock);
-        textureMapping.put(new ResourceLocation("block/light_blue_wool"), frameBlock);
-        textureMapping.put(new ResourceLocation("block/yellow_wool"), frameBlock);
-        textureMapping.put(new ResourceLocation("block/lime_wool"), frameBlock);
-        textureMapping.put(new ResourceLocation("block/pink_wool"), frameBlock);
-        textureMapping.put(new ResourceLocation("block/gray_wool"), frameBlock);
-        textureMapping.put(new ResourceLocation("block/light_gray_wool"), frameBlock);
-        textureMapping.put(new ResourceLocation("block/cyan_wool"), frameBlock);
-        textureMapping.put(new ResourceLocation("block/purple_wool"), frameBlock);
-        textureMapping.put(new ResourceLocation("block/blue_wool"), frameBlock);
-        textureMapping.put(new ResourceLocation("block/brown_wool"), frameBlock);
-        textureMapping.put(new ResourceLocation("block/green_wool"), frameBlock);
-        textureMapping.put(new ResourceLocation("block/red_wool"), frameBlock);
-        textureMapping.put(new ResourceLocation("block/black_wool"), frameBlock);
+        textureMapping.put(NORTH_UP, frameBlock);
+        textureMapping.put(NORTH_DOWN, frameBlock);
+        textureMapping.put(SOUTH_UP, frameBlock);
+        textureMapping.put(SOUTH_DOWN, frameBlock);
+        textureMapping.put(EAST_DOWN, frameBlock);
+        textureMapping.put(EAST_UP, frameBlock);
+        textureMapping.put(WEST_DOWN, frameBlock);
+        textureMapping.put(WEST_UP, frameBlock);
+        textureMapping.put(NORTH_EAST_DOWN, frameBlock);
+        textureMapping.put(NORTH_EAST_UP, frameBlock);
+        textureMapping.put(NORTH_EAST_CORNER, frameBlock);
+        textureMapping.put(NORTH_WEST_DOWN, frameBlock);
+        textureMapping.put(NORTH_WEST_UP, frameBlock);
+        textureMapping.put(NORTH_WEST_CORNER, frameBlock);
+        textureMapping.put(SOUTH_EAST_DOWN, frameBlock);
+        textureMapping.put(SOUTH_EAST_UP, frameBlock);
 
-        textureMapping.put(new ResourceLocation("block/white_terracotta"), frameBlock);
-        textureMapping.put(new ResourceLocation("block/orange_terracotta"), frameBlock);
-        textureMapping.put(new ResourceLocation("block/magenta_terracotta"), frameBlock);
-        textureMapping.put(new ResourceLocation("block/light_blue_terracotta"), frameBlock);
+        textureMapping.put(SOUTH_EAST_CORNER, frameBlock);
+        textureMapping.put(SOUTH_WEST_DOWN, frameBlock);
+        textureMapping.put(SOUTH_WEST_UP, frameBlock);
+        textureMapping.put(SOUTH_WEST_CORNER, frameBlock);
 
+        textureMapping.put(CENTER, centerBlock);
+        textureMapping.put(BOTTOM_CENTER, centerBlock);
+        textureMapping.put(BOTTOM_SOUTH_CENTER, centerBlock);
+        textureMapping.put(BOTTOM_NORTH_CENTER, centerBlock);
+        textureMapping.put(TOP_NORTH_CENTER, centerBlock);
+        textureMapping.put(TOP_SOUTH_CENTER, centerBlock);
+        textureMapping.put(TOP_CENTER, centerBlock);
+        textureMapping.put(NORTH_WEST_CENTER, Blocks.AIR);
+        textureMapping.put(NORTH_EAST_CENTER, Blocks.AIR);
+        textureMapping.put(NORTH_WEST_UP_CENTER, Blocks.AIR);
+        textureMapping.put(NORTH_EAST_UP_CENTER, Blocks.AIR);
+        textureMapping.put(NORTH_EAST_DOWN_CENTER, Blocks.AIR);
 
-        textureMapping.put(new ResourceLocation("block/yellow_terracotta"), centerBlock);
-        textureMapping.put(new ResourceLocation("block/lime_terracotta"), centerBlock);
-        textureMapping.put(new ResourceLocation("block/pink_terracotta"), centerBlock);
-        textureMapping.put(new ResourceLocation("block/gray_terracotta"), centerBlock);
-        textureMapping.put(new ResourceLocation("block/light_gray_terracotta"), centerBlock);
-        textureMapping.put(new ResourceLocation("block/cyan_terracotta"), centerBlock);
-        textureMapping.put(new ResourceLocation("block/purple_terracotta"), centerBlock);
-        textureMapping.put(new ResourceLocation("block/blue_terracotta"), Blocks.AIR);
-        textureMapping.put(new ResourceLocation("block/brown_terracotta"), Blocks.AIR);
-        textureMapping.put(new ResourceLocation("block/green_terracotta"), Blocks.AIR);
-        textureMapping.put(new ResourceLocation("block/red_terracotta"), Blocks.AIR);
-        textureMapping.put(new ResourceLocation("block/black_terracotta"), Blocks.AIR);
+        textureMapping.put(NORTH_WEST_DOWN_CENTER, Blocks.AIR);
+        textureMapping.put(SOUTH_EAST_CENTER, Blocks.AIR);
+        textureMapping.put(SOUTH_WEST_CENTER, Blocks.AIR);
+        textureMapping.put(SOUTH_WEST_UP_CENTER, Blocks.AIR);
+        textureMapping.put(SOUTH_EAST_UP_CENTER, Blocks.AIR);
+        textureMapping.put(SOUTH_EAST_DOWN_CENTER, Blocks.AIR);
+        textureMapping.put(SOUTH_WEST_DOWN_CENTER, Blocks.AIR);
+        textureMapping.put(EAST_NORTH_CENTER, Blocks.AIR);
+        textureMapping.put(EAST_SOUTH_CENTER, Blocks.AIR);
+        textureMapping.put(EAST_SOUTH_UP_CENTER, Blocks.AIR);
+        textureMapping.put(EAST_NORTH_UP_CENTER, Blocks.AIR);
+        textureMapping.put(EAST_SOUTH_DOWN_CENTER, Blocks.AIR);
+        textureMapping.put(EAST_NORTH_DOWN_CENTER, Blocks.AIR);
+        textureMapping.put(WEST_NORTH_CENTER, Blocks.AIR);
+        textureMapping.put(WEST_SOUTH_CENTER, Blocks.AIR);
+        textureMapping.put(WEST_SOUTH_UP_CENTER, Blocks.AIR);
+        textureMapping.put(WEST_NORTH_UP_CENTER, Blocks.AIR);
+        textureMapping.put(WEST_SOUTH_DOWN_CENTER, Blocks.AIR);
+        textureMapping.put(WEST_NORTH_DOWN_CENTER, Blocks.AIR);
 
-        textureMapping.put(new ResourceLocation("block/white_concrete"), Blocks.AIR);
-        textureMapping.put(new ResourceLocation("block/orange_concrete"), Blocks.AIR);
-        textureMapping.put(new ResourceLocation("block/magenta_concrete"), Blocks.AIR);
-        textureMapping.put(new ResourceLocation("block/light_blue_concrete"), Blocks.AIR);
-        textureMapping.put(new ResourceLocation("block/yellow_concrete"), Blocks.AIR);
-        textureMapping.put(new ResourceLocation("block/lime_concrete"), Blocks.AIR);
-        textureMapping.put(new ResourceLocation("block/pink_concrete"), Blocks.AIR);
-        textureMapping.put(new ResourceLocation("block/gray_concrete"), Blocks.AIR);
-        textureMapping.put(new ResourceLocation("block/light_gray_concrete"), Blocks.AIR);
-        textureMapping.put(new ResourceLocation("block/cyan_concrete"), Blocks.AIR);
-        textureMapping.put(new ResourceLocation("block/purple_concrete"), Blocks.AIR);
-        textureMapping.put(new ResourceLocation("block/blue_concrete"), Blocks.AIR);
-        textureMapping.put(new ResourceLocation("block/brown_concrete"), Blocks.AIR);
-        textureMapping.put(new ResourceLocation("block/green_concrete"), Blocks.AIR);
-        textureMapping.put(new ResourceLocation("block/red_concrete"), Blocks.AIR);
-        textureMapping.put(new ResourceLocation("block/black_concrete"), Blocks.AIR);
-
-        textureMapping.put(new ResourceLocation("block/glowstone"), Blocks.AIR);
-        textureMapping.put(new ResourceLocation("block/cherry_planks"), Blocks.AIR);
-        textureMapping.put(new ResourceLocation("block/shroomlight"), Blocks.AIR);
     }
 
     @Override
@@ -227,96 +285,78 @@ public class DynamicTimberFrameBlockEntity extends BlockEntity implements IMater
             {
                 case UP ->
                 {
-                    textureMapping.put(new ResourceLocation("block/white_wool"), Blocks.AIR);
-                    textureMapping.put(new ResourceLocation("block/magenta_wool"), Blocks.AIR);
-                    textureMapping.put(new ResourceLocation("block/lime_wool"), Blocks.AIR);
-                    textureMapping.put(new ResourceLocation("block/gray_wool"), Blocks.AIR);
+                    textureMapping.put(NORTH_UP, Blocks.AIR);
+                    textureMapping.put(EAST_UP, Blocks.AIR);
+                    textureMapping.put(SOUTH_UP, Blocks.AIR);
+                    textureMapping.put(WEST_UP, Blocks.AIR);
                 }
                 case DOWN ->
                 {
-                    textureMapping.put(new ResourceLocation("block/orange_wool"), Blocks.AIR);
-                    textureMapping.put(new ResourceLocation("block/light_blue_wool"), Blocks.AIR);
-                    textureMapping.put(new ResourceLocation("block/yellow_wool"), Blocks.AIR);
-                    textureMapping.put(new ResourceLocation("block/pink_wool"), Blocks.AIR);
+                    textureMapping.put(NORTH_DOWN, Blocks.AIR);
+                    textureMapping.put(EAST_DOWN, Blocks.AIR);
+                    textureMapping.put(SOUTH_DOWN, Blocks.AIR);
+                    textureMapping.put(WEST_DOWN, Blocks.AIR);
                 }
                 case EAST ->
                 {
-                    // North East Corner
-                    textureMapping.put(new ResourceLocation("block/purple_wool"), Blocks.AIR);
-                    // South East Corner
-                    textureMapping.put(new ResourceLocation("block/white_terracotta"), Blocks.AIR);
+                    textureMapping.put(NORTH_EAST_CORNER, Blocks.AIR);
+                    textureMapping.put(SOUTH_EAST_CORNER, Blocks.AIR);
 
                     // Connections
-                    // South East Center
-                    textureMapping.put(new ResourceLocation("block/orange_concrete"), centerBlock);
-
-                    // North East Center
-                    textureMapping.put(new ResourceLocation("block/brown_terracotta"), centerBlock);
+                    textureMapping.put(SOUTH_EAST_CENTER, centerBlock);
+                    textureMapping.put(NORTH_EAST_CENTER, centerBlock);
                 }
                 case WEST ->
                 {
-                    // North West Corner
-                    textureMapping.put(new ResourceLocation("block/green_wool"), Blocks.AIR);
-                    // South West Corner
-                    textureMapping.put(new ResourceLocation("block/light_blue_terracotta"), Blocks.AIR);
+                    textureMapping.put(NORTH_WEST_CORNER, Blocks.AIR);
+                    textureMapping.put(SOUTH_WEST_CORNER, Blocks.AIR);
 
                     // Connections
-                    // South West Center
-                    textureMapping.put(new ResourceLocation("block/magenta_concrete"), centerBlock);
-
-                    // North West Center
-                    textureMapping.put(new ResourceLocation("block/blue_terracotta"), centerBlock);
+                    textureMapping.put(SOUTH_WEST_CENTER, centerBlock);
+                    textureMapping.put(NORTH_WEST_CENTER, centerBlock);
                 }
                 case NORTH ->
                 {
                     // Both North Corners
-                    textureMapping.put(new ResourceLocation("block/purple_wool"), Blocks.AIR);
-                    textureMapping.put(new ResourceLocation("block/green_wool"), Blocks.AIR);
+                    textureMapping.put(NORTH_EAST_CORNER, Blocks.AIR);
+                    textureMapping.put(NORTH_WEST_CORNER, Blocks.AIR);
 
                     // Connections
-                    // East North Center
-                    textureMapping.put(new ResourceLocation("block/gray_concrete"), centerBlock);
-
-                    // West North Center
-                    textureMapping.put(new ResourceLocation("block/green_concrete"), centerBlock);
+                    textureMapping.put(EAST_NORTH_CENTER, centerBlock);
+                    textureMapping.put(WEST_NORTH_CENTER, centerBlock);
                 }
                 case SOUTH ->
                 {
-
-
                     // Both South Corners
-                    textureMapping.put(new ResourceLocation("block/white_terracotta"), Blocks.AIR);
-                    textureMapping.put(new ResourceLocation("block/light_blue_terracotta"), Blocks.AIR);
+                    textureMapping.put(SOUTH_EAST_CORNER, Blocks.AIR);
+                    textureMapping.put(SOUTH_WEST_CORNER, Blocks.AIR);
 
                     // Connections
-                    // East South Center
-                    textureMapping.put(new ResourceLocation("block/light_gray_concrete"), centerBlock);
-
-                    // West South Center
-                    textureMapping.put(new ResourceLocation("block/red_concrete"), centerBlock);
+                    textureMapping.put(EAST_SOUTH_CENTER, centerBlock);
+                    textureMapping.put(WEST_SOUTH_CENTER, centerBlock);
                 }
             }
         }
 
         if (offsets.getBoolean(DynamicTimberFrameBlock.Offset.NORTH))
         {
-            textureMapping.put(new ResourceLocation("block/white_wool"), centerBlock);
-            textureMapping.put(new ResourceLocation("block/orange_wool"), centerBlock);
+            textureMapping.put(NORTH_UP, centerBlock);
+            textureMapping.put(NORTH_DOWN, centerBlock);
         }
         if (offsets.getBoolean(DynamicTimberFrameBlock.Offset.SOUTH))
         {
-            textureMapping.put(new ResourceLocation("block/magenta_wool"), centerBlock);
-            textureMapping.put(new ResourceLocation("block/light_blue_wool"), centerBlock);
+            textureMapping.put(SOUTH_UP, centerBlock);
+            textureMapping.put(SOUTH_DOWN, centerBlock);
         }
         if (offsets.getBoolean(DynamicTimberFrameBlock.Offset.EAST))
         {
-            textureMapping.put(new ResourceLocation("block/lime_wool"), centerBlock);
-            textureMapping.put(new ResourceLocation("block/yellow_wool"), centerBlock);
+            textureMapping.put(EAST_UP, centerBlock);
+            textureMapping.put(EAST_DOWN, centerBlock);
         }
         if (offsets.getBoolean(DynamicTimberFrameBlock.Offset.WEST))
         {
-            textureMapping.put(new ResourceLocation("block/gray_wool"), centerBlock);
-            textureMapping.put(new ResourceLocation("block/pink_wool"), centerBlock);
+            textureMapping.put(WEST_UP, centerBlock);
+            textureMapping.put(WEST_DOWN, centerBlock);
         }
 
         if (offsets.getBoolean(DynamicTimberFrameBlock.Offset.EAST) && offsets.getBoolean(DynamicTimberFrameBlock.Offset.UP))
@@ -324,14 +364,14 @@ public class DynamicTimberFrameBlockEntity extends BlockEntity implements IMater
             if (offsets.getBoolean(DynamicTimberFrameBlock.Offset.UP_EAST))
             {
                 // Disable South & North East Up.
-                textureMapping.put(new ResourceLocation("block/black_wool"), Blocks.AIR);
-                textureMapping.put(new ResourceLocation("block/cyan_wool"), Blocks.AIR);
+                textureMapping.put(SOUTH_EAST_UP, Blocks.AIR);
+                textureMapping.put(NORTH_EAST_UP, Blocks.AIR);
 
                 // Enable South & North East Up Center
-                textureMapping.put(new ResourceLocation("block/yellow_concrete"), centerBlock);
-                textureMapping.put(new ResourceLocation("block/red_terracotta"), centerBlock);
+                textureMapping.put(SOUTH_EAST_UP_CENTER, centerBlock);
+                textureMapping.put(NORTH_EAST_UP_CENTER, centerBlock);
             }
-            textureMapping.put(new ResourceLocation("block/lime_wool"), frameBlock);
+            textureMapping.put(EAST_UP, frameBlock);
         }
 
         if (offsets.getBoolean(DynamicTimberFrameBlock.Offset.NORTH) && offsets.getBoolean(DynamicTimberFrameBlock.Offset.UP))
@@ -339,14 +379,14 @@ public class DynamicTimberFrameBlockEntity extends BlockEntity implements IMater
             if (offsets.getBoolean(DynamicTimberFrameBlock.Offset.UP_NORTH))
             {
                 // Disable North West & North East Up.
-                textureMapping.put(new ResourceLocation("block/brown_wool"), Blocks.AIR);
-                textureMapping.put(new ResourceLocation("block/cyan_wool"), Blocks.AIR);
+                textureMapping.put(NORTH_WEST_UP, Blocks.AIR);
+                textureMapping.put(NORTH_EAST_UP, Blocks.AIR);
 
                 // Enable North West & North East Up Center
-                textureMapping.put(new ResourceLocation("block/glowstone"), centerBlock);
-                textureMapping.put(new ResourceLocation("block/purple_concrete"), centerBlock);
+                textureMapping.put(WEST_NORTH_UP_CENTER, centerBlock);
+                textureMapping.put(EAST_NORTH_UP_CENTER, centerBlock);
             }
-            textureMapping.put(new ResourceLocation("block/white_wool"), frameBlock);
+            textureMapping.put(NORTH_UP, frameBlock);
         }
 
         if (offsets.getBoolean(DynamicTimberFrameBlock.Offset.SOUTH) && offsets.getBoolean(DynamicTimberFrameBlock.Offset.UP))
@@ -354,14 +394,14 @@ public class DynamicTimberFrameBlockEntity extends BlockEntity implements IMater
             if (offsets.getBoolean(DynamicTimberFrameBlock.Offset.UP_SOUTH))
             {
                 // Disable South West & South East Up.
-                textureMapping.put(new ResourceLocation("block/magenta_terracotta"), Blocks.AIR);
-                textureMapping.put(new ResourceLocation("block/black_wool"), Blocks.AIR);
+                textureMapping.put(SOUTH_WEST_UP, Blocks.AIR);
+                textureMapping.put(SOUTH_EAST_UP, Blocks.AIR);
 
                 // Enable South West & South East Up Center
-                textureMapping.put(new ResourceLocation("block/cyan_concrete"), centerBlock);
-                textureMapping.put(new ResourceLocation("block/black_concrete"), centerBlock);
+                textureMapping.put(EAST_SOUTH_UP_CENTER, centerBlock);
+                textureMapping.put(WEST_SOUTH_UP_CENTER, centerBlock);
             }
-            textureMapping.put(new ResourceLocation("block/magenta_wool"), frameBlock);
+            textureMapping.put(SOUTH_UP, frameBlock);
         }
 
         if (offsets.getBoolean(DynamicTimberFrameBlock.Offset.WEST) && offsets.getBoolean(DynamicTimberFrameBlock.Offset.UP))
@@ -369,14 +409,14 @@ public class DynamicTimberFrameBlockEntity extends BlockEntity implements IMater
             if (offsets.getBoolean(DynamicTimberFrameBlock.Offset.UP_WEST))
             {
                 // Disable South & North West Up.
-                textureMapping.put(new ResourceLocation("block/brown_wool"), Blocks.AIR);
-                textureMapping.put(new ResourceLocation("block/magenta_terracotta"), Blocks.AIR);
+                textureMapping.put(NORTH_WEST_UP, Blocks.AIR);
+                textureMapping.put(SOUTH_WEST_UP, Blocks.AIR);
 
                 // Enable South & North West Up Center
-                textureMapping.put(new ResourceLocation("block/green_terracotta"), centerBlock);
-                textureMapping.put(new ResourceLocation("block/light_blue_concrete"), centerBlock);
+                textureMapping.put(NORTH_WEST_UP_CENTER, centerBlock);
+                textureMapping.put(SOUTH_WEST_UP_CENTER, centerBlock);
             }
-            textureMapping.put(new ResourceLocation("block/gray_wool"), frameBlock);
+            textureMapping.put(WEST_UP, frameBlock);
         }
 
         if (offsets.getBoolean(DynamicTimberFrameBlock.Offset.EAST) && offsets.getBoolean(DynamicTimberFrameBlock.Offset.DOWN))
@@ -384,14 +424,14 @@ public class DynamicTimberFrameBlockEntity extends BlockEntity implements IMater
             if (offsets.getBoolean(DynamicTimberFrameBlock.Offset.DOWN_EAST))
             {
                 // Disable South & North East Down.
-                textureMapping.put(new ResourceLocation("block/light_gray_wool"), Blocks.AIR);
-                textureMapping.put(new ResourceLocation("block/red_wool"), Blocks.AIR);
+                textureMapping.put(NORTH_EAST_DOWN, Blocks.AIR);
+                textureMapping.put(SOUTH_EAST_DOWN, Blocks.AIR);
 
                 // Enable South & North East Down Center
-                textureMapping.put(new ResourceLocation("block/black_terracotta"), centerBlock);
-                textureMapping.put(new ResourceLocation("block/lime_concrete"), centerBlock);
+                textureMapping.put(NORTH_EAST_DOWN_CENTER, centerBlock);
+                textureMapping.put(SOUTH_EAST_DOWN_CENTER, centerBlock);
             }
-            textureMapping.put(new ResourceLocation("block/yellow_wool"), frameBlock);
+            textureMapping.put(EAST_DOWN, frameBlock);
         }
 
         if (offsets.getBoolean(DynamicTimberFrameBlock.Offset.NORTH) && offsets.getBoolean(DynamicTimberFrameBlock.Offset.DOWN))
@@ -399,14 +439,14 @@ public class DynamicTimberFrameBlockEntity extends BlockEntity implements IMater
             if (offsets.getBoolean(DynamicTimberFrameBlock.Offset.DOWN_NORTH))
             {
                 // Disable North West & North East Down.
-                textureMapping.put(new ResourceLocation("block/blue_wool"), Blocks.AIR);
-                textureMapping.put(new ResourceLocation("block/light_gray_wool"), Blocks.AIR);
+                textureMapping.put(NORTH_WEST_DOWN, Blocks.AIR);
+                textureMapping.put(NORTH_EAST_DOWN, Blocks.AIR);
 
                 // Enable North West & North East Down Center
-                textureMapping.put(new ResourceLocation("block/shroomlight"), centerBlock);
-                textureMapping.put(new ResourceLocation("block/brown_concrete"), centerBlock);
+                textureMapping.put(WEST_NORTH_DOWN_CENTER, centerBlock);
+                textureMapping.put(EAST_NORTH_DOWN_CENTER, centerBlock);
             }
-            textureMapping.put(new ResourceLocation("block/orange_wool"), frameBlock);
+            textureMapping.put(NORTH_DOWN, frameBlock);
         }
 
         if (offsets.getBoolean(DynamicTimberFrameBlock.Offset.SOUTH) && offsets.getBoolean(DynamicTimberFrameBlock.Offset.DOWN))
@@ -414,14 +454,14 @@ public class DynamicTimberFrameBlockEntity extends BlockEntity implements IMater
             if (offsets.getBoolean(DynamicTimberFrameBlock.Offset.DOWN_SOUTH))
             {
                 // Disable South West & South East Down.
-                textureMapping.put(new ResourceLocation("block/orange_terracotta"), Blocks.AIR);
-                textureMapping.put(new ResourceLocation("block/red_wool"), Blocks.AIR);
+                textureMapping.put(SOUTH_WEST_DOWN, Blocks.AIR);
+                textureMapping.put(SOUTH_EAST_DOWN, Blocks.AIR);
 
                 // Enable South West & South East Down Center
-                textureMapping.put(new ResourceLocation("block/cherry_planks"), centerBlock);
-                textureMapping.put(new ResourceLocation("block/blue_concrete"), centerBlock);
+                textureMapping.put(WEST_SOUTH_DOWN_CENTER, centerBlock);
+                textureMapping.put(EAST_SOUTH_DOWN_CENTER, centerBlock);
             }
-            textureMapping.put(new ResourceLocation("block/light_blue_wool"), frameBlock);
+            textureMapping.put(SOUTH_DOWN, frameBlock);
         }
 
         if (offsets.getBoolean(DynamicTimberFrameBlock.Offset.WEST) && offsets.getBoolean(DynamicTimberFrameBlock.Offset.DOWN))
@@ -429,14 +469,14 @@ public class DynamicTimberFrameBlockEntity extends BlockEntity implements IMater
             if (offsets.getBoolean(DynamicTimberFrameBlock.Offset.DOWN_WEST))
             {
                 // Disable South & North West Down.
-                textureMapping.put(new ResourceLocation("block/orange_terracotta"), Blocks.AIR);
-                textureMapping.put(new ResourceLocation("block/blue_wool"), Blocks.AIR);
+                textureMapping.put(SOUTH_WEST_DOWN, Blocks.AIR);
+                textureMapping.put(NORTH_WEST_DOWN, Blocks.AIR);
 
                 // Enable South & North West Down Center
-                textureMapping.put(new ResourceLocation("block/pink_concrete"), centerBlock);
-                textureMapping.put(new ResourceLocation("block/white_concrete"), centerBlock);
+                textureMapping.put(SOUTH_WEST_DOWN_CENTER, centerBlock);
+                textureMapping.put(NORTH_WEST_DOWN_CENTER, centerBlock);
             }
-            textureMapping.put(new ResourceLocation("block/pink_wool"), frameBlock);
+            textureMapping.put(WEST_DOWN, frameBlock);
         }
 
         this.textureDataCache = new MaterialTextureData(textureMapping);
