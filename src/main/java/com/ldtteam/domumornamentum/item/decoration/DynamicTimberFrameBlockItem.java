@@ -40,7 +40,7 @@ public class DynamicTimberFrameBlockItem extends BlockItem implements IDoItem
         final Block centerBlock = textureData.getTexturedComponents().getOrDefault(centerComponent.getId(), centerComponent.getDefault());
         final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
 
-        return Component.translatable(Constants.MOD_ID + ".timber.frame.name.format", centerBlockName);
+        return Component.translatable(Constants.MOD_ID + ".dynamic.frame.name.format", centerBlockName);
     }
 
     @Override

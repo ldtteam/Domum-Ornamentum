@@ -31,68 +31,19 @@ public class DynamicTimberFrameBlockEntity extends BlockEntity implements IMater
      */
     private MaterialTextureData textureDataCache = new MaterialTextureData(Map.of());
 
+    /**
+     * Texture mapping of position at resource location to block (air, frame or center)
+     */
     private final Map<ResourceLocation, Block> textureMapping = new TreeMap<>();
 
-    // Outline blocks
-    /*north-up
-    north-down
-    south-up
-    south-down
-    east-down
-    east-up
-    west-down
-    west-up
-    north-east-down
-    north-east-up
-    north-east-corner
-    north-west-down
-    north-west-up
-    north-west-corner
-    south-east-down
-    south-east-up
-    south-east-corner
-    south-west-down
-    south-west-up
-    south-west-corner
-
-
-    // Center blocks
-    center
-    bottom-center
-    bottom-south-center
-    bottom-north-center
-    top-north-center
-    top-south-center
-    top-center
-    north-west-center
-    north-east-center
-    north-west-up-center
-    north-east-up-center
-    north-east-down-center
-    north-west-down-center
-    south-east-center
-    south-west-center
-    south-west-up-center
-    south-east-up-center
-    south-east-down-center
-    south-west-down-center
-    east-north-center
-    east-south-center
-    east-south-up-center
-    east-north-up-center
-    east-south-down-center
-    east-north-down-center
-    west-north-center
-    west-south-center
-    west-south-up-center
-    west-north-up-center
-    west-south-down-center
-    west-north-down-center
-
+    /**
+     * All the offsets that there are in a block at the moment.
      */
-
     private Object2BooleanOpenHashMap<DynamicTimberFrameBlock.Offset> offsets = new Object2BooleanOpenHashMap<>();
 
+    /**
+     * The block materials.
+     */
     private Block centerBlock;
     private Block frameBlock;
 
@@ -262,87 +213,110 @@ public class DynamicTimberFrameBlockEntity extends BlockEntity implements IMater
 
     public void refreshTextureCache()
     {
-        if (textureMapping.isEmpty())
-        {
-            handleTextureMapping();
-        }
+        // Reset and recalculate.
+        textureMapping.clear();
+        handleTextureMapping();
 
-        //todo corners:
-        // When there is a block into a corner direction diagional, we don't have to display the corner anymore.
-        // But we can display the middle connector then.
         for (final Object2BooleanMap.Entry<DynamicTimberFrameBlock.Offset> offset : offsets.object2BooleanEntrySet())
         {
+            if (!offset.getBooleanValue())
+            {
+                continue;
+            }
             switch (offset.getKey())
             {
                 case UP ->
                 {
-                    textureMapping.put(new ResourceLocation("block/white_wool"), offset.getBooleanValue() ? Blocks.AIR : frameBlock);
-                    textureMapping.put(new ResourceLocation("block/magenta_wool"), offset.getBooleanValue() ? Blocks.AIR : frameBlock);
-                    textureMapping.put(new ResourceLocation("block/lime_wool"), offset.getBooleanValue() ? Blocks.AIR : frameBlock);
-                    textureMapping.put(new ResourceLocation("block/gray_wool"), offset.getBooleanValue() ? Blocks.AIR : frameBlock);
+                    textureMapping.put(new ResourceLocation("block/white_wool"), Blocks.AIR);
+                    textureMapping.put(new ResourceLocation("block/magenta_wool"), Blocks.AIR);
+                    textureMapping.put(new ResourceLocation("block/lime_wool"), Blocks.AIR);
+                    textureMapping.put(new ResourceLocation("block/gray_wool"), Blocks.AIR);
                 }
                 case DOWN ->
                 {
-                    textureMapping.put(new ResourceLocation("block/orange_wool"), offset.getBooleanValue() ? Blocks.AIR : frameBlock);
-                    textureMapping.put(new ResourceLocation("block/light_blue_wool"), offset.getBooleanValue() ? Blocks.AIR : frameBlock);
-                    textureMapping.put(new ResourceLocation("block/yellow_wool"), offset.getBooleanValue() ? Blocks.AIR : frameBlock);
-                    textureMapping.put(new ResourceLocation("block/pink_wool"), offset.getBooleanValue() ? Blocks.AIR : frameBlock);
+                    textureMapping.put(new ResourceLocation("block/orange_wool"), Blocks.AIR);
+                    textureMapping.put(new ResourceLocation("block/light_blue_wool"), Blocks.AIR);
+                    textureMapping.put(new ResourceLocation("block/yellow_wool"), Blocks.AIR);
+                    textureMapping.put(new ResourceLocation("block/pink_wool"), Blocks.AIR);
                 }
                 case EAST ->
                 {
                     // North East Corner
-                    textureMapping.put(new ResourceLocation("block/purple_wool"), offset.getBooleanValue() ? Blocks.AIR : frameBlock);
+                    textureMapping.put(new ResourceLocation("block/purple_wool"), Blocks.AIR);
                     // South East Corner
-                    textureMapping.put(new ResourceLocation("block/white_terracotta"), offset.getBooleanValue() ? Blocks.AIR : frameBlock);
+                    textureMapping.put(new ResourceLocation("block/white_terracotta"), Blocks.AIR);
 
                     // Connections
                     // South East Center
-                    textureMapping.put(new ResourceLocation("block/orange_concrete"), !offset.getBooleanValue() ? Blocks.AIR : centerBlock);
+                    textureMapping.put(new ResourceLocation("block/orange_concrete"), centerBlock);
 
                     // North East Center
-                    textureMapping.put(new ResourceLocation("block/brown_terracotta"), !offset.getBooleanValue() ? Blocks.AIR : centerBlock);
+                    textureMapping.put(new ResourceLocation("block/brown_terracotta"), centerBlock);
                 }
                 case WEST ->
                 {
                     // North West Corner
-                    textureMapping.put(new ResourceLocation("block/green_wool"), offset.getBooleanValue() ? Blocks.AIR : frameBlock);
+                    textureMapping.put(new ResourceLocation("block/green_wool"), Blocks.AIR);
                     // South West Corner
-                    textureMapping.put(new ResourceLocation("block/light_blue_terracotta"), offset.getBooleanValue() ? Blocks.AIR : frameBlock);
+                    textureMapping.put(new ResourceLocation("block/light_blue_terracotta"), Blocks.AIR);
 
                     // Connections
                     // South West Center
-                    textureMapping.put(new ResourceLocation("block/magenta_concrete"), !offset.getBooleanValue() ? Blocks.AIR : centerBlock);
+                    textureMapping.put(new ResourceLocation("block/magenta_concrete"), centerBlock);
 
                     // North West Center
-                    textureMapping.put(new ResourceLocation("block/blue_terracotta"), !offset.getBooleanValue() ? Blocks.AIR : centerBlock);
+                    textureMapping.put(new ResourceLocation("block/blue_terracotta"), centerBlock);
                 }
                 case NORTH ->
                 {
                     // Both North Corners
-                    textureMapping.put(new ResourceLocation("block/purple_wool"), offset.getBooleanValue() ? Blocks.AIR : frameBlock);
-                    textureMapping.put(new ResourceLocation("block/green_wool"), offset.getBooleanValue() ? Blocks.AIR : frameBlock);
+                    textureMapping.put(new ResourceLocation("block/purple_wool"), Blocks.AIR);
+                    textureMapping.put(new ResourceLocation("block/green_wool"), Blocks.AIR);
 
                     // Connections
                     // East North Center
-                    textureMapping.put(new ResourceLocation("block/gray_concrete"), !offset.getBooleanValue() ? Blocks.AIR : centerBlock);
+                    textureMapping.put(new ResourceLocation("block/gray_concrete"), centerBlock);
 
                     // West North Center
-                    textureMapping.put(new ResourceLocation("block/green_concrete"), !offset.getBooleanValue() ? Blocks.AIR : centerBlock);
+                    textureMapping.put(new ResourceLocation("block/green_concrete"), centerBlock);
                 }
                 case SOUTH ->
                 {
+
+
                     // Both South Corners
-                    textureMapping.put(new ResourceLocation("block/white_terracotta"), offset.getBooleanValue() ? Blocks.AIR : frameBlock);
-                    textureMapping.put(new ResourceLocation("block/light_blue_terracotta"), offset.getBooleanValue() ? Blocks.AIR : frameBlock);
+                    textureMapping.put(new ResourceLocation("block/white_terracotta"), Blocks.AIR);
+                    textureMapping.put(new ResourceLocation("block/light_blue_terracotta"), Blocks.AIR);
 
                     // Connections
                     // East South Center
-                    textureMapping.put(new ResourceLocation("block/light_gray_concrete"), !offset.getBooleanValue() ? Blocks.AIR : centerBlock);
+                    textureMapping.put(new ResourceLocation("block/light_gray_concrete"), centerBlock);
 
                     // West South Center
-                    textureMapping.put(new ResourceLocation("block/red_concrete"), !offset.getBooleanValue() ? Blocks.AIR : centerBlock);
+                    textureMapping.put(new ResourceLocation("block/red_concrete"), centerBlock);
                 }
             }
+        }
+
+        if (offsets.getBoolean(DynamicTimberFrameBlock.Offset.NORTH))
+        {
+            textureMapping.put(new ResourceLocation("block/white_wool"), centerBlock);
+            textureMapping.put(new ResourceLocation("block/orange_wool"), centerBlock);
+        }
+        if (offsets.getBoolean(DynamicTimberFrameBlock.Offset.SOUTH))
+        {
+            textureMapping.put(new ResourceLocation("block/magenta_wool"), centerBlock);
+            textureMapping.put(new ResourceLocation("block/light_blue_wool"), centerBlock);
+        }
+        if (offsets.getBoolean(DynamicTimberFrameBlock.Offset.EAST))
+        {
+            textureMapping.put(new ResourceLocation("block/lime_wool"), centerBlock);
+            textureMapping.put(new ResourceLocation("block/yellow_wool"), centerBlock);
+        }
+        if (offsets.getBoolean(DynamicTimberFrameBlock.Offset.WEST))
+        {
+            textureMapping.put(new ResourceLocation("block/gray_wool"), centerBlock);
+            textureMapping.put(new ResourceLocation("block/pink_wool"), centerBlock);
         }
 
         if (offsets.getBoolean(DynamicTimberFrameBlock.Offset.EAST) && offsets.getBoolean(DynamicTimberFrameBlock.Offset.UP))
@@ -359,16 +333,6 @@ public class DynamicTimberFrameBlockEntity extends BlockEntity implements IMater
             }
             textureMapping.put(new ResourceLocation("block/lime_wool"), frameBlock);
         }
-        else if (false)
-        {
-            // Enable South & North East Up.
-            textureMapping.put(new ResourceLocation("block/black_wool"), frameBlock);
-            textureMapping.put(new ResourceLocation("block/cyan_wool"), frameBlock);
-
-            // Disable South & North East Up Center
-            textureMapping.put(new ResourceLocation("block/yellow_concrete"), Blocks.AIR);
-            textureMapping.put(new ResourceLocation("block/red_terracotta"), Blocks.AIR);
-        }
 
         if (offsets.getBoolean(DynamicTimberFrameBlock.Offset.NORTH) && offsets.getBoolean(DynamicTimberFrameBlock.Offset.UP))
         {
@@ -383,16 +347,6 @@ public class DynamicTimberFrameBlockEntity extends BlockEntity implements IMater
                 textureMapping.put(new ResourceLocation("block/purple_concrete"), centerBlock);
             }
             textureMapping.put(new ResourceLocation("block/white_wool"), frameBlock);
-        }
-        else if (false)
-        {
-            // Enable North West & North East Up.
-            textureMapping.put(new ResourceLocation("block/brown_wool"), frameBlock);
-            textureMapping.put(new ResourceLocation("block/cyan_wool"), frameBlock);
-
-            // Disable North West & North East Up Center
-            textureMapping.put(new ResourceLocation("block/glowstone"), Blocks.AIR);
-            textureMapping.put(new ResourceLocation("block/purple_concrete"), Blocks.AIR);
         }
 
         if (offsets.getBoolean(DynamicTimberFrameBlock.Offset.SOUTH) && offsets.getBoolean(DynamicTimberFrameBlock.Offset.UP))
@@ -409,16 +363,6 @@ public class DynamicTimberFrameBlockEntity extends BlockEntity implements IMater
             }
             textureMapping.put(new ResourceLocation("block/magenta_wool"), frameBlock);
         }
-        else if (false)
-        {
-            // Enable South West & South East Up.
-            textureMapping.put(new ResourceLocation("block/magenta_terracotta"), frameBlock);
-            textureMapping.put(new ResourceLocation("block/black_wool"), frameBlock);
-
-            // Disable South West & South East Up Center
-            textureMapping.put(new ResourceLocation("block/cyan_concrete"), Blocks.AIR);
-            textureMapping.put(new ResourceLocation("block/black_concrete"), Blocks.AIR);
-        }
 
         if (offsets.getBoolean(DynamicTimberFrameBlock.Offset.WEST) && offsets.getBoolean(DynamicTimberFrameBlock.Offset.UP))
         {
@@ -433,16 +377,6 @@ public class DynamicTimberFrameBlockEntity extends BlockEntity implements IMater
                 textureMapping.put(new ResourceLocation("block/light_blue_concrete"), centerBlock);
             }
             textureMapping.put(new ResourceLocation("block/gray_wool"), frameBlock);
-        }
-        else if (false)
-        {
-            // Disable South & North West Up.
-            textureMapping.put(new ResourceLocation("block/brown_wool"), frameBlock);
-            textureMapping.put(new ResourceLocation("block/magenta_terracotta"), frameBlock);
-
-            // Enable South & North West Up Center
-            textureMapping.put(new ResourceLocation("block/green_terracotta"), Blocks.AIR);
-            textureMapping.put(new ResourceLocation("block/light_blue_concrete"), Blocks.AIR);
         }
 
         if (offsets.getBoolean(DynamicTimberFrameBlock.Offset.EAST) && offsets.getBoolean(DynamicTimberFrameBlock.Offset.DOWN))
@@ -459,16 +393,6 @@ public class DynamicTimberFrameBlockEntity extends BlockEntity implements IMater
             }
             textureMapping.put(new ResourceLocation("block/yellow_wool"), frameBlock);
         }
-        else if (false)
-        {
-            // Enable South & North East Down.
-            textureMapping.put(new ResourceLocation("block/light_gray_wool"), frameBlock);
-            textureMapping.put(new ResourceLocation("block/red_wool"), frameBlock);
-
-            // Disable South & North East Down Center
-            textureMapping.put(new ResourceLocation("block/black_terracotta"), Blocks.AIR);
-            textureMapping.put(new ResourceLocation("block/lime_concrete"), Blocks.AIR);
-        }
 
         if (offsets.getBoolean(DynamicTimberFrameBlock.Offset.NORTH) && offsets.getBoolean(DynamicTimberFrameBlock.Offset.DOWN))
         {
@@ -483,16 +407,6 @@ public class DynamicTimberFrameBlockEntity extends BlockEntity implements IMater
                 textureMapping.put(new ResourceLocation("block/brown_concrete"), centerBlock);
             }
             textureMapping.put(new ResourceLocation("block/orange_wool"), frameBlock);
-        }
-        else if (false)
-        {
-            // Enable North West & North East Down.
-            textureMapping.put(new ResourceLocation("block/blue_wool"), frameBlock);
-            textureMapping.put(new ResourceLocation("block/light_gray_wool"), frameBlock);
-
-            // Disable North West & North East Down Center
-            textureMapping.put(new ResourceLocation("block/shroomlight"), Blocks.AIR);
-            textureMapping.put(new ResourceLocation("block/brown_concrete"), Blocks.AIR);
         }
 
         if (offsets.getBoolean(DynamicTimberFrameBlock.Offset.SOUTH) && offsets.getBoolean(DynamicTimberFrameBlock.Offset.DOWN))
@@ -509,16 +423,6 @@ public class DynamicTimberFrameBlockEntity extends BlockEntity implements IMater
             }
             textureMapping.put(new ResourceLocation("block/light_blue_wool"), frameBlock);
         }
-        else if (false)
-        {
-            // Enable South West & South East Down.
-            textureMapping.put(new ResourceLocation("block/orange_terracotta"), frameBlock);
-            textureMapping.put(new ResourceLocation("block/red_wool"), frameBlock);
-
-            // Disable South West & South East Down Center
-            textureMapping.put(new ResourceLocation("block/cherry_planks"), Blocks.AIR);
-            textureMapping.put(new ResourceLocation("block/blue_concrete"), Blocks.AIR);
-        }
 
         if (offsets.getBoolean(DynamicTimberFrameBlock.Offset.WEST) && offsets.getBoolean(DynamicTimberFrameBlock.Offset.DOWN))
         {
@@ -534,17 +438,6 @@ public class DynamicTimberFrameBlockEntity extends BlockEntity implements IMater
             }
             textureMapping.put(new ResourceLocation("block/pink_wool"), frameBlock);
         }
-        else if (false)
-        {
-            // Disable South & North West Down.
-            textureMapping.put(new ResourceLocation("block/orange_terracotta"), frameBlock);
-            textureMapping.put(new ResourceLocation("block/blue_wool"), frameBlock);
-
-            // Enable South & North West Down Center
-            textureMapping.put(new ResourceLocation("block/pink_concrete"), Blocks.AIR);
-            textureMapping.put(new ResourceLocation("block/white_concrete"), Blocks.AIR);
-        }
-
 
         this.textureDataCache = new MaterialTextureData(textureMapping);
         this.requestModelDataUpdate();

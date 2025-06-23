@@ -68,6 +68,7 @@
   "domum_ornamentum.door.type.name.port.manteau": "Port Manteau",
   "domum_ornamentum.door.type.name.vertically.striped": "Vertically Striped",
   "domum_ornamentum.door.type.name.waffle": "Waffle",
+  "domum_ornamentum.dynamic.frame.name.format": "Dynamic Framed %s",
   "domum_ornamentum.extra.name.format": "%s Extra",
   "domum_ornamentum.extra.name.format.black": "Black %s Extra",
   "domum_ornamentum.extra.name.format.blue": "Blue %s Extra",
