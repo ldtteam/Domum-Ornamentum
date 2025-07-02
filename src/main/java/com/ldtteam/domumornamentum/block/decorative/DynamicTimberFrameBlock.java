@@ -15,6 +15,7 @@ import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
@@ -136,6 +137,26 @@ public class DynamicTimberFrameBlock extends AbstractBlock<DynamicTimberFrameBlo
         public BlockPos applyToBlockPos(final BlockPos pos)
         {
             return posTranslationFunction.apply(pos);
+        }
+
+        public Offset rotate()
+        {
+            return switch (this)
+            {
+                case NORTH -> EAST;
+                case SOUTH -> WEST;
+                case EAST -> SOUTH;
+                case WEST -> NORTH;
+                case UP_NORTH -> UP_EAST;
+                case UP_EAST -> UP_SOUTH;
+                case UP_SOUTH -> UP_WEST;
+                case UP_WEST -> UP_NORTH;
+                case DOWN_SOUTH -> DOWN_WEST;
+                case DOWN_WEST -> DOWN_NORTH;
+                case DOWN_NORTH -> DOWN_EAST;
+                case DOWN_EAST -> DOWN_SOUTH;
+                default -> this;
+            };
         }
     }
 
@@ -292,5 +313,20 @@ public class DynamicTimberFrameBlock extends AbstractBlock<DynamicTimberFrameBlo
     @Override
     public void fillItemCategory(final @NotNull NonNullList<ItemStack> items) {
         fillDOItemCategory(this, items, fillItemGroupCache);
+    }
+
+    @Override
+    public BlockState rotate(final BlockState state, final LevelAccessor level, final BlockPos pos, final Rotation direction)
+    {
+        if (level.getBlockEntity(pos) instanceof DynamicTimberFrameBlockEntity dynamicTimberFrameBlockEntity) {
+            dynamicTimberFrameBlockEntity.rotate(direction.ordinal());
+        }
+        return super.rotate(state, level, pos, direction);
+    }
+
+    @Override
+    public BlockState rotate(final BlockState p_60530_, final Rotation p_60531_)
+    {
+        return super.rotate(p_60530_, p_60531_);
     }
 }

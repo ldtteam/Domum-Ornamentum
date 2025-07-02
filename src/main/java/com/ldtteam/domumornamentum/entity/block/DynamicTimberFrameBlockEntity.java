@@ -552,4 +552,21 @@ public class DynamicTimberFrameBlockEntity extends AbstractMateriallyTexturedBlo
     {
         return centerBlock;
     }
+
+    /**
+     * Rotate in direction.
+     * @param rotation the number of rotations.
+     */
+    public void rotate(final int rotation) {
+        final Object2BooleanOpenHashMap<DynamicTimberFrameBlock.Offset> resultMap = new Object2BooleanOpenHashMap<>();
+        for (Map.Entry<DynamicTimberFrameBlock.Offset, Boolean> entry : this.offsets.entrySet()) {
+            DynamicTimberFrameBlock.Offset offset = entry.getKey();
+            for (int i = 0; i < rotation; i++) {
+                offset = offset.rotate();
+            }
+            resultMap.put(offset, entry.getValue());
+        }
+        this.offsets.clear();
+        this.offsets.putAll(resultMap);
+    }
 }
