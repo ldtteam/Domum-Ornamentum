@@ -560,6 +560,14 @@ public class DynamicTimberFrameBlockEntity extends AbstractMateriallyTexturedBlo
     }
 
     /**
+     * Reset all offsets for reload.
+     */
+    public void resetOffsets()
+    {
+        this.offsets.clear();
+    }
+
+    /**
      * Get the frame block.
      * @return the frame block.
      */
