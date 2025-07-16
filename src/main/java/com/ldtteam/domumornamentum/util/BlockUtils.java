@@ -1,6 +1,6 @@
 package com.ldtteam.domumornamentum.util;
 
-import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
+import com.ldtteam.domumornamentum.entity.block.AbstractMateriallyTexturedBlockEntity;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -44,7 +44,7 @@ public class BlockUtils
         final HolderLookup.Provider provider,
         final Property<?>... blockStateProperties)
     {
-        if (!(blockEntity instanceof final MateriallyTexturedBlockEntity texturedBlockEntity))
+        if (!(blockEntity instanceof final AbstractMateriallyTexturedBlockEntity texturedBlockEntity))
         {
             return ItemStack.EMPTY;
         }
