@@ -1,10 +1,12 @@
 package com.ldtteam.domumornamentum.entity.block;
 
+import com.ldtteam.domumornamentum.DomumOrnamentum;
 import com.ldtteam.domumornamentum.block.decorative.DynamicTimberFrameBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.client.model.properties.ModProperties;
 import com.ldtteam.domumornamentum.component.ModDataComponents;
 import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
+import com.mojang.serialization.DynamicOps;
 import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
 import it.unimi.dsi.fastutil.objects.Object2BooleanOpenHashMap;
 import net.minecraft.core.BlockPos;
@@ -13,10 +15,13 @@ import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -153,10 +158,27 @@ public class DynamicTimberFrameBlockEntity extends AbstractMateriallyTexturedBlo
     }
 
     @Override
-    public void saveAdditional(@NotNull final CompoundTag compound, final HolderLookup.Provider registries)
+    public void saveToItem(@NotNull ItemStack stack, HolderLookup.Provider provider)
     {
-        super.saveAdditional(compound, registries);
-        compound.put("originalTextureData", originalTextureData.serializeNBT());
+        CompoundTag compound = new CompoundTag();
+
+        final DynamicOps<Tag> dynamicops = provider.createSerializationContext(NbtOps.INSTANCE);
+        compound.put(BLOCK_ENTITY_TEXTURE_DATA, MaterialTextureData.CODEC.encodeStart(dynamicops, originalTextureData).getOrThrow());
+
+        this.removeComponentsFromTag(compound);
+        BlockItem.setBlockEntityData(stack, this.getType(), compound);
+        stack.applyComponents(this.collectComponents());
+    }
+
+    @Override
+    public void saveAdditional(@NotNull final CompoundTag compound, final HolderLookup.Provider provider)
+    {
+        super.saveAdditional(compound, provider);
+
+        final DynamicOps<Tag> dynamicops = provider.createSerializationContext(NbtOps.INSTANCE);
+
+        // this is still needed even with data components as of 1.21
+        compound.put(BLOCK_ENTITY_TEXTURE_DATA, MaterialTextureData.CODEC.encodeStart(dynamicops, originalTextureData).getOrThrow());
 
         compound.putString("primaryBlock", BuiltInRegistries.BLOCK.getKey(centerBlock).toString());
         compound.putString("secondaryBlock", BuiltInRegistries.BLOCK.getKey(frameBlock).toString());
@@ -172,13 +194,14 @@ public class DynamicTimberFrameBlockEntity extends AbstractMateriallyTexturedBlo
     }
 
     @Override
-    protected void loadAdditional(final CompoundTag nbt, final HolderLookup.Provider registries)
+    protected void loadAdditional(final CompoundTag nbt, final HolderLookup.Provider provider)
     {
-        super.loadAdditional(nbt, registries);
+        super.loadAdditional(nbt, provider);
+        final DynamicOps<Tag> dynamicops = provider.createSerializationContext(NbtOps.INSTANCE);
 
-        if (nbt.contains("originalTextureData"))
+        if (nbt.contains(BLOCK_ENTITY_TEXTURE_DATA))
         {
-            this.originalTextureData.deserializeFromNBT(nbt.getCompound("originalTextureData"));
+            MaterialTextureData.CODEC.parse(dynamicops, nbt.get(BLOCK_ENTITY_TEXTURE_DATA)).resultOrPartial(DomumOrnamentum.LOGGER::error).ifPresent(this::updateTextureDataWith);
         }
 
         final ResourceLocation primaryBlockName = ResourceLocation.parse(nbt.getString("primaryBlock"));
