@@ -1,4 +1,5 @@
 {
+	"format_version": "1.21.6",
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"textures": {
@@ -117,8 +118,8 @@
 		},
 		{
 			"name": "shingle_up_NX",
-			"from": [5.02294, 6.88467, -4],
-			"to": [14.02294, 9.88467, 0],
+			"from": [5.04794, 6.88467, -4],
+			"to": [14.04794, 9.88467, 0],
 			"rotation": {"angle": 22.5, "axis": "z", "origin": [17.97294, 11.93467, -12]},
 			"faces": {
 				"north": {"uv": [0, 0, 9, 3], "texture": "#1"},
@@ -131,9 +132,9 @@
 		},
 		{
 			"name": "shingle_up_SX",
-			"from": [5.02294, 6.98467, 16],
-			"to": [14.02294, 9.88467, 20],
-			"rotation": {"angle": 22.5, "axis": "z", "origin": [17.97294, 11.93467, 8]},
+			"from": [5.02294, 6.93467, 16],
+			"to": [14.02294, 9.83467, 20],
+			"rotation": {"angle": 22.5, "axis": "z", "origin": [17.97294, 11.88467, 8]},
 			"faces": {
 				"east": {"uv": [0, 0, 4, 3], "texture": "#1"},
 				"south": {"uv": [0, 0, 9, 3], "texture": "#1"},
@@ -144,8 +145,8 @@
 		},
 		{
 			"name": "shingle_middle_NX",
-			"from": [-2.31039, 3.88467, -4],
-			"to": [6.68961, 6.88467, 0],
+			"from": [-2.28539, 3.88467, -4],
+			"to": [6.71461, 6.88467, 0],
 			"rotation": {"angle": 22.5, "axis": "z", "origin": [12.63961, 6.60137, -13]},
 			"faces": {
 				"north": {"uv": [0, 0, 9, 3], "texture": "#1"},
@@ -158,9 +159,9 @@
 		},
 		{
 			"name": "shingle_middle_SX",
-			"from": [-2.31039, 3.98467, 16],
-			"to": [6.68961, 6.88467, 20],
-			"rotation": {"angle": 22.5, "axis": "z", "origin": [12.63961, 6.60137, 8]},
+			"from": [-2.31039, 3.93467, 16],
+			"to": [6.68961, 6.83467, 20],
+			"rotation": {"angle": 22.5, "axis": "z", "origin": [12.63961, 6.55137, 8]},
 			"faces": {
 				"east": {"uv": [12, 0, 16, 3], "texture": "#1"},
 				"south": {"uv": [0, 0, 9, 3], "texture": "#1"},
@@ -200,7 +201,7 @@
 			"scale": [0.4, 0.4, 0.4]
 		},
 		"firstperson_lefthand": {
-			"rotation": [0, 225, 0],
+			"rotation": [0, -135, 0],
 			"scale": [0.4, 0.4, 0.4]
 		},
 		"gui": {
