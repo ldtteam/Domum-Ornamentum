@@ -4,13 +4,17 @@
   "group": "floating_carpets",
   "ingredients": [
     {
-      "item": "minecraft:black_carpet"
+      "item": "minecraft:black_wool"
+    },
+    {
+      "item": "minecraft:black_wool"
     },
     {
       "tag": "forge:string"
     }
   ],
   "result": {
+    "count": 3,
     "item": "domum_ornamentum:black_floating_carpet"
   }
 }

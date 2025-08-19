@@ -4,13 +4,17 @@
   "group": "floating_carpets",
   "ingredients": [
     {
-      "item": "minecraft:magenta_carpet"
+      "item": "minecraft:magenta_wool"
+    },
+    {
+      "item": "minecraft:magenta_wool"
     },
     {
       "tag": "forge:string"
     }
   ],
   "result": {
+    "count": 3,
     "item": "domum_ornamentum:magenta_floating_carpet"
   }
 }

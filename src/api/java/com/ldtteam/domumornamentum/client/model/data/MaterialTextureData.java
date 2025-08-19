@@ -71,11 +71,7 @@ public class MaterialTextureData implements INBTSerializable<CompoundTag>
 
         nbt.getAllKeys().forEach(key -> {
             final ResourceLocation name = new ResourceLocation(nbt.getString(key));
-
-            if (ForgeRegistries.BLOCKS.getValue(name) != Blocks.AIR)
-            {
-                this.texturedComponents.put(new ResourceLocation(key), ForgeRegistries.BLOCKS.getValue(name));
-            }
+            this.texturedComponents.put(new ResourceLocation(key), ForgeRegistries.BLOCKS.getValue(name));
         });
     }
 

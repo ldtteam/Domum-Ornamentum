@@ -4,13 +4,17 @@
   "group": "floating_carpets",
   "ingredients": [
     {
-      "item": "minecraft:lime_carpet"
+      "item": "minecraft:lime_wool"
+    },
+    {
+      "item": "minecraft:lime_wool"
     },
     {
       "tag": "forge:string"
     }
   ],
   "result": {
+    "count": 3,
     "item": "domum_ornamentum:lime_floating_carpet"
   }
 }

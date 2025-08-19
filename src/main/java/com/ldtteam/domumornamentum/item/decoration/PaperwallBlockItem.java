@@ -43,7 +43,7 @@ public class PaperwallBlockItem extends BlockItem implements IDoItem
         final Block centerBlock = textureData.getTexturedComponents().getOrDefault(centerComponent.getId(), centerComponent.getDefault());
         final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
 
-        return Component.translatable(Constants.MOD_ID + ".paperwall.name.format", centerBlockName);
+        return Component.translatable(Constants.MOD_ID + "."+ builtInRegistryHolder().key().location().getPath() +".name.format", centerBlockName);
     }
 
     @Override
@@ -57,9 +57,10 @@ public class PaperwallBlockItem extends BlockItem implements IDoItem
             textureData = MaterialTextureDataUtil.generateRandomTextureDataFrom(stack);
         }
 
+        final String id = builtInRegistryHolder().key().location().getPath();
         tooltip.add(Component.translatable(Constants.MOD_ID + ".origin.tooltip"));
         tooltip.add(Component.literal(""));
-        tooltip.add(Component.translatable(Constants.MOD_ID + ".paperwall.header"));
+        tooltip.add(Component.translatable(Constants.MOD_ID + "." + id + ".header"));
 
         final IMateriallyTexturedBlockComponent frameComponent = paperWallBlock.getComponents().get(0);
         final Block frameBlock = textureData.getTexturedComponents().getOrDefault(frameComponent.getId(), frameComponent.getDefault());

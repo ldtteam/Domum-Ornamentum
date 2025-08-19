@@ -4,13 +4,17 @@
   "group": "floating_carpets",
   "ingredients": [
     {
-      "item": "minecraft:yellow_carpet"
+      "item": "minecraft:yellow_wool"
+    },
+    {
+      "item": "minecraft:yellow_wool"
     },
     {
       "tag": "forge:string"
     }
   ],
   "result": {
+    "count": 3,
     "item": "domum_ornamentum:yellow_floating_carpet"
   }
 }

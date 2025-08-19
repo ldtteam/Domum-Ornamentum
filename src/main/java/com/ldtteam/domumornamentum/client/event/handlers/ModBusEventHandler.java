@@ -77,6 +77,8 @@ public class ModBusEventHandler
             ItemBlockRenderTypes.setRenderLayer(IModBlocks.getInstance().getDoor(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(IModBlocks.getInstance().getPanel(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(IModBlocks.getInstance().getPost(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(IModBlocks.getInstance().getTiledPaperWall(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(IModBlocks.getInstance().getDynamicTimberFrame(), RenderType.translucent());
 
             for (final ShingleHeightType heightType : ShingleHeightType.values())
             {

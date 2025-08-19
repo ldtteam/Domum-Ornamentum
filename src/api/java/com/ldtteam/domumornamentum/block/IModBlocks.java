@@ -24,6 +24,8 @@ public interface IModBlocks
 
     Block getPaperWall();
 
+    Block getTiledPaperWall();
+
     List<? extends Block> getExtraTopBlocks();
 
     List<? extends Block> getFloatingCarpets();
@@ -62,4 +64,5 @@ public interface IModBlocks
 
     List<? extends Block> getAllBrickStairBlocks();
 
+    Block getDynamicTimberFrame();
 }

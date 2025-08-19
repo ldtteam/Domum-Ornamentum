@@ -51,21 +51,21 @@ import java.util.Objects;
 public class PaperWallBlock extends AbstractBlockPane<PaperWallBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock
 {
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
-                                                                               .add(new SimpleRetexturableComponent(new ResourceLocation("block/oak_planks"), ModTags.PAPERWALL_FRAME, Blocks.OAK_PLANKS))
-                                                                               .add(new SimpleRetexturableComponent(new ResourceLocation("block/dark_oak_planks"), ModTags.PAPERWALL_CENTER, Blocks.DARK_OAK_PLANKS))
-                                                                               .build();
+        .add(new SimpleRetexturableComponent(new ResourceLocation("block/oak_planks"), ModTags.PAPERWALL_FRAME, Blocks.OAK_PLANKS))
+        .add(new SimpleRetexturableComponent(new ResourceLocation("block/dark_oak_planks"), ModTags.PAPERWALL_CENTER, Blocks.DARK_OAK_PLANKS))
+        .build();
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
 
     /**
      * The hardness this block has.
      */
-    private static final float                      BLOCK_HARDNESS = 3F;
+    private static final float BLOCK_HARDNESS = 3F;
 
     /**
      * The resistance this block has.
      */
-    private static final float                      RESISTANCE     = 1F;
+    private static final float RESISTANCE = 1F;
 
     public PaperWallBlock()
     {
@@ -73,7 +73,8 @@ public class PaperWallBlock extends AbstractBlockPane<PaperWallBlock> implements
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
+    {
         builder.add(NORTH, EAST, WEST, SOUTH, WATERLOGGED);
     }
 
@@ -85,7 +86,7 @@ public class PaperWallBlock extends AbstractBlockPane<PaperWallBlock> implements
 
     @Override
     public void setPlacedBy(
-      final @NotNull Level worldIn, final @NotNull BlockPos pos, final @NotNull BlockState state, @Nullable final LivingEntity placer, final @NotNull ItemStack stack)
+        final @NotNull Level worldIn, final @NotNull BlockPos pos, final @NotNull BlockState state, @Nullable final LivingEntity placer, final @NotNull ItemStack stack)
     {
         super.setPlacedBy(worldIn, pos, state, placer, stack);
 
@@ -93,7 +94,9 @@ public class PaperWallBlock extends AbstractBlockPane<PaperWallBlock> implements
         final BlockEntity tileEntity = worldIn.getBlockEntity(pos);
 
         if (tileEntity instanceof MateriallyTexturedBlockEntity)
+        {
             ((MateriallyTexturedBlockEntity) tileEntity).updateTextureDataWith(MaterialTextureData.deserializeFromNBT(textureData));
+        }
     }
 
     @Nullable
@@ -128,46 +131,53 @@ public class PaperWallBlock extends AbstractBlockPane<PaperWallBlock> implements
     }
 
     @NotNull
-    public Collection<FinishedRecipe> getValidCutterRecipes() {
+    public Collection<FinishedRecipe> getValidCutterRecipes()
+    {
         return Lists.newArrayList(
-          new FinishedDORecipe() {
-              @Override
-              public void serializeRecipeData(final @NotNull JsonObject json)
-              {
-                  json.addProperty("count", COMPONENTS.size() * 3);
-              }
+            new FinishedDORecipe()
+            {
+                @Override
+                public void serializeRecipeData(final @NotNull JsonObject json)
+                {
+                    json.addProperty("count", COMPONENTS.size() * 3);
+                }
 
-              @Override
-              public @NotNull ResourceLocation getId()
-              {
-                  return Objects.requireNonNull(getRegistryName(getBlock()));
-              }
-          }
+                @Override
+                public @NotNull ResourceLocation getId()
+                {
+                    return Objects.requireNonNull(getRegistryName(getBlock()));
+                }
+            }
         );
     }
 
     @Override
-    public float getExplosionResistance(BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {
+    public float getExplosionResistance(BlockState state, BlockGetter level, BlockPos pos, Explosion explosion)
+    {
         return getDOExplosionResistance(super::getExplosionResistance, state, level, pos, explosion);
     }
 
     @Override
-    public float getDestroyProgress(@NotNull BlockState state, @NotNull Player player, @NotNull BlockGetter level, @NotNull BlockPos pos) {
+    public float getDestroyProgress(@NotNull BlockState state, @NotNull Player player, @NotNull BlockGetter level, @NotNull BlockPos pos)
+    {
         return getDODestroyProgress(super::getDestroyProgress, state, player, level, pos);
     }
 
     @Override
-    public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
+    public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity)
+    {
         return getDOSoundType(super::getSoundType, state, level, pos, entity);
     }
 
     @Override
-    public IMateriallyTexturedBlockComponent getMainComponent() {
+    public IMateriallyTexturedBlockComponent getMainComponent()
+    {
         return COMPONENTS.get(0);
     }
 
     @Override
-    public void fillItemCategory(final @NotNull NonNullList<ItemStack> items) {
+    public void fillItemCategory(final @NotNull NonNullList<ItemStack> items)
+    {
         fillDOItemCategory(this, items, fillItemGroupCache);
     }
 }
