@@ -81,101 +81,137 @@ public class GlobalTagProvider extends BlockTagsProvider
           Blocks.OXIDIZED_CUT_COPPER,
           Blocks.WAXED_OXIDIZED_CUT_COPPER);
 
+        this.tag(ModTags.GLOBAL_DEFAULT_EXCLUDE_VANILLA_VARIANTS).add(
+                        // Overworld base
+                        Blocks.BUDDING_AMETHYST,
+                        Blocks.SCULK,
+                        Blocks.SCULK_CATALYST,
+                        Blocks.CRYING_OBSIDIAN,
+                        Blocks.MAGMA_BLOCK,
+                        Blocks.DRIED_KELP_BLOCK,
+                        Blocks.BROWN_MUSHROOM_BLOCK,
+                        Blocks.RED_MUSHROOM_BLOCK,
+                        Blocks.DRIPSTONE_BLOCK,
+                        Blocks.LODESTONE,
+                        Blocks.RESPAWN_ANCHOR,
+                        Blocks.TARGET,
+                        Blocks.HONEY_BLOCK,
+                        Blocks.HONEYCOMB_BLOCK,
+                        Blocks.SLIME_BLOCK,
+                        Blocks.SPONGE,
+                        Blocks.WET_SPONGE,
+                        // Mud
+                        Blocks.PACKED_MUD,
+                        // Stones
+                        Blocks.CALCITE,
+                        Blocks.CRACKED_STONE_BRICKS,
+                        // Deepslate
+                        Blocks.CHISELED_DEEPSLATE,
+                        Blocks.CRACKED_DEEPSLATE_BRICKS,
+                        Blocks.CRACKED_DEEPSLATE_TILES,
+                        // Coral
+                        Blocks.DEAD_BRAIN_CORAL_BLOCK,
+                        Blocks.DEAD_BUBBLE_CORAL_BLOCK,
+                        Blocks.DEAD_FIRE_CORAL_BLOCK,
+                        Blocks.DEAD_TUBE_CORAL_BLOCK,
+                        Blocks.DEAD_HORN_CORAL_BLOCK,
+
+                        // Nether base
+                        Blocks.GILDED_BLACKSTONE,
+                        Blocks.BONE_BLOCK,
+                        Blocks.SOUL_SAND,
+                        Blocks.SOUL_SOIL,
+                        // Nether bricks
+                        Blocks.CRACKED_NETHER_BRICKS,
+                        Blocks.CHISELED_NETHER_BRICKS,
+                        Blocks.RED_NETHER_BRICKS,
+                        // Blackstone
+                        Blocks.CHISELED_POLISHED_BLACKSTONE,
+                        Blocks.CRACKED_POLISHED_BLACKSTONE_BRICKS,
+                        // Basalt
+                        Blocks.POLISHED_BASALT,
+                        Blocks.SMOOTH_BASALT,
+                        // Quartz
+                        Blocks.QUARTZ_PILLAR,
+                        Blocks.QUARTZ_BRICKS,
+                        Blocks.CHISELED_QUARTZ_BLOCK,
+
+                        // Purpur
+                        Blocks.PURPUR_PILLAR
+                )
+                .addTags(
+                        BlockTags.DIRT,
+                        BlockTags.LEAVES,
+                        BlockTags.LOGS,
+                        BlockTags.BAMBOO_BLOCKS,
+                        BlockTags.WOOL,
+                        BlockTags.WART_BLOCKS,
+                        BlockTags.NYLIUM,
+                        BlockTags.TERRACOTTA,
+                        BlockTags.SNOW,
+                        BlockTags.ICE,
+                        BlockTags.CORAL_BLOCKS,
+                        Tags.Blocks.END_STONES,
+                        Tags.Blocks.SAND,
+                        Tags.Blocks.GRAVEL,
+                        Tags.Blocks.OBSIDIAN,
+                        Tags.Blocks.NETHERRACK,
+                        Tags.Blocks.ORES,
+                        Tags.Blocks.STORAGE_BLOCKS,
+                        Tags.Blocks.GLASS,
+                        Tags.Blocks.BOOKSHELVES,
+                        ModTags.EXTRA_BLOCKS,
+                        ModTags.BRICKS,
+                        ModTags.CONCRETE,
+                        ModTags.COPPER,
+                        ModTags.GLACED_TERRACOTTA
+                );
+
         this.tag(ModTags.GLOBAL_DEFAULT).add(
-          Blocks.MOSS_BLOCK,
-          Blocks.CRACKED_POLISHED_BLACKSTONE_BRICKS,
-          Blocks.CHISELED_POLISHED_BLACKSTONE,
-          Blocks.POLISHED_BLACKSTONE,
-          Blocks.BRICKS,
-          Blocks.CALCITE,
-          Blocks.HAY_BLOCK,
-          Blocks.BLACKSTONE,
-          Blocks.GILDED_BLACKSTONE,
-          Blocks.POLISHED_BLACKSTONE_BRICKS,
-          Blocks.NETHERRACK,
-          Blocks.CRIMSON_NYLIUM,
-          Blocks.WARPED_NYLIUM,
-          Blocks.BASALT,
-          Blocks.POLISHED_BASALT,
-          Blocks.SMOOTH_BASALT,
-          Blocks.DEEPSLATE_BRICKS,
-          Blocks.POLISHED_DEEPSLATE,
-          Blocks.PURPUR_BLOCK,
-          Blocks.PURPUR_PILLAR,
-          Blocks.END_STONE,
-          Blocks.OBSIDIAN,
-          Blocks.AMETHYST_BLOCK,
-          Blocks.BUDDING_AMETHYST,
-          Blocks.PACKED_ICE,
-          Blocks.SNOW_BLOCK,
-          Blocks.CRACKED_STONE_BRICKS,
-          Blocks.SMOOTH_STONE,
-          Blocks.CHISELED_STONE_BRICKS,
-          Blocks.SANDSTONE,
-          Blocks.CUT_SANDSTONE,
-          Blocks.CHISELED_SANDSTONE,
-          Blocks.RED_SANDSTONE,
-          Blocks.CHISELED_RED_SANDSTONE,
-          Blocks.CUT_RED_SANDSTONE,
-          Blocks.SMOOTH_SANDSTONE,
-          Blocks.SMOOTH_RED_SANDSTONE,
-          Blocks.QUARTZ_PILLAR,
-          Blocks.QUARTZ_BLOCK,
-          Blocks.QUARTZ_BRICKS,
-          Blocks.SMOOTH_QUARTZ,
-          Blocks.CHISELED_QUARTZ_BLOCK,
-          Blocks.RED_NETHER_BRICKS,
-          Blocks.TUFF,
-          Blocks.NETHER_BRICKS,
-          Blocks.END_STONE_BRICKS,
-          Blocks.PRISMARINE,
-          Blocks.PRISMARINE_BRICKS,
-          Blocks.DARK_PRISMARINE,
-          Blocks.CHISELED_NETHER_BRICKS,
-          Blocks.CHISELED_DEEPSLATE,
-          Blocks.DEEPSLATE_BRICKS,
-          Blocks.POLISHED_DEEPSLATE,
-          Blocks.COBBLED_DEEPSLATE,
-          Blocks.CRACKED_DEEPSLATE_BRICKS,
-          Blocks.DEEPSLATE_TILES,
-          Blocks.CRACKED_DEEPSLATE_TILES,
-          Blocks.CALCITE,
-          Blocks.TUFF,
-          Blocks.BONE_BLOCK,
-          Blocks.AZALEA_LEAVES,
-          Blocks.FLOWERING_AZALEA_LEAVES,
-          Blocks.MUD_BRICKS,
-          Blocks.DRIED_KELP_BLOCK,
-          Blocks.BAMBOO_BLOCK,
-          Blocks.BAMBOO_MOSAIC,
-          Blocks.BAMBOO_PLANKS,
-          Blocks.STRIPPED_BAMBOO_BLOCK,
-          Blocks.SCULK,
-          Blocks.PACKED_MUD,
-          Blocks.BROWN_MUSHROOM_BLOCK,
-          Blocks.RED_MUSHROOM_BLOCK,
-          Blocks.MAGMA_BLOCK,
-          Blocks.CRYING_OBSIDIAN,
-          Blocks.OBSIDIAN
-        )
-          .addTags(
-            ModTags.EXTRA_BLOCKS,
-            Tags.Blocks.END_STONES,
-            ModTags.BRICKS,
-            ModTags.CONCRETE,
-            ModTags.COPPER,
-            BlockTags.TERRACOTTA,
-            BlockTags.WOOL,
-            Tags.Blocks.STORAGE_BLOCKS,
-            Tags.Blocks.GLASS,
-            BlockTags.LOGS,
-            BlockTags.WART_BLOCKS,
-            Tags.Blocks.STONE,
-            Tags.Blocks.COBBLESTONE,
-            Tags.Blocks.OBSIDIAN,
-            BlockTags.STONE_BRICKS,
-            BlockTags.BASE_STONE_NETHER
-          );
+                        // Overworld base
+                        Blocks.BRICKS,
+                        Blocks.MUD_BRICKS,
+                        Blocks.BAMBOO_MOSAIC,
+                        // Stones
+                        Blocks.SMOOTH_STONE,
+                        Blocks.POLISHED_ANDESITE,
+                        Blocks.POLISHED_DIORITE,
+                        Blocks.POLISHED_GRANITE,
+                        // Deepslate
+                        Blocks.POLISHED_DEEPSLATE,
+                        Blocks.DEEPSLATE_BRICKS,
+                        Blocks.DEEPSLATE_TILES,
+                        // Primsarine
+                        Blocks.PRISMARINE,
+                        Blocks.PRISMARINE_BRICKS,
+                        Blocks.DARK_PRISMARINE,
+
+                        // Nether brick
+                        Blocks.NETHER_BRICKS,
+                        // Blackstone
+                        Blocks.POLISHED_BLACKSTONE,
+                        Blocks.POLISHED_BLACKSTONE_BRICKS,
+                        // Quartz
+                        Blocks.QUARTZ_BLOCK,
+                        Blocks.SMOOTH_QUARTZ,
+
+                        // End base
+                        Blocks.END_STONE_BRICKS,
+                        // Purpur
+                        Blocks.PURPUR_BLOCK
+                )
+                .addTags(
+                        ModTags.GLOBAL_DEFAULT_EXCLUDE_VANILLA_VARIANTS,
+                        BlockTags.PLANKS,
+                        BlockTags.BASE_STONE_OVERWORLD,
+                        BlockTags.BASE_STONE_NETHER,
+                        BlockTags.STONE_BRICKS,
+                        Tags.Blocks.COBBLESTONE_NORMAL,
+                        Tags.Blocks.COBBLESTONE_DEEPSLATE,
+                        Tags.Blocks.COBBLESTONE_MOSSY,
+                        Tags.Blocks.STONE,
+                        Tags.Blocks.SANDSTONE
+                );
 
         this.tag(BlockTags.MINEABLE_WITH_AXE)
           .add(ModBlocks.getInstance().getArchitectsCutter(),

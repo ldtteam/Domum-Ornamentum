@@ -20,10 +20,7 @@ public class FancyDoorsComponentTagProvider extends BlockTagsProvider
     @SuppressWarnings("unchecked")
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
-        this.tag(ModTags.FANCY_DOORS_MATERIALS)
-          .addTags(
-            ModTags.DOORS_MATERIALS
-          );
+        this.tag(ModTags.FANCY_DOORS_MATERIALS).addTags(ModTags.DOORS_MATERIALS);
     }
 
     @Override

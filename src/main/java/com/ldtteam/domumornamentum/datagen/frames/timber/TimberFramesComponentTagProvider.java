@@ -4,9 +4,6 @@ import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
@@ -23,43 +20,8 @@ public class TimberFramesComponentTagProvider extends BlockTagsProvider
     @SuppressWarnings("unchecked")
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
-        this.tag(ModTags.TIMBERFRAMES_FRAME)
-          .add(
-            Blocks.BRICKS,
-            Blocks.DEEPSLATE,
-            Blocks.DEEPSLATE_BRICKS,
-            Blocks.COBBLED_DEEPSLATE,
-            Blocks.POLISHED_DEEPSLATE,
-            Blocks.POLISHED_BLACKSTONE
-          )
-          .addTags(
-            ModTags.GLOBAL_DEFAULT,
-            BlockTags.PLANKS,
-            Tags.Blocks.OBSIDIAN,
-            Tags.Blocks.STONE
-          );
-
-        this.tag(ModTags.TIMBERFRAMES_CENTER)
-          .add(
-            Blocks.BRICKS,
-            Blocks.DEEPSLATE,
-            Blocks.DEEPSLATE_BRICKS,
-            Blocks.COBBLED_DEEPSLATE,
-            Blocks.POLISHED_DEEPSLATE,
-            Blocks.POLISHED_BLACKSTONE
-          )
-          .addTags(
-            ModTags.GLOBAL_DEFAULT,
-            BlockTags.PLANKS,
-            Tags.Blocks.COBBLESTONE,
-            Tags.Blocks.STONE,
-            Tags.Blocks.END_STONES,
-            Tags.Blocks.NETHERRACK,
-            Tags.Blocks.OBSIDIAN,
-            Tags.Blocks.SANDSTONE,
-            BlockTags.DIRT
-          );
-
+        this.tag(ModTags.TIMBERFRAMES_FRAME).addTags(ModTags.GLOBAL_DEFAULT);
+        this.tag(ModTags.TIMBERFRAMES_CENTER).addTags(ModTags.GLOBAL_DEFAULT);
     }
 
     @Override

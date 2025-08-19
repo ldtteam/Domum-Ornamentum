@@ -1,7 +1,6 @@
 package com.ldtteam.domumornamentum.tag;
 
 import com.ldtteam.domumornamentum.util.Constants;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -48,6 +47,7 @@ public class ModTags
     public static final TagKey<Block> CONCRETE = tag("concrete");
     public static final TagKey<Block> COPPER = tag("copper");
 
+    public static final TagKey<Block> GLOBAL_DEFAULT_EXCLUDE_VANILLA_VARIANTS = tag("default_exclude_vanilla_variants");
     public static final TagKey<Block> GLOBAL_DEFAULT = tag("default");
     public static final TagKey<Block> PILLAR_MATERIALS = tag("pillar_materials");
     public static final TagKey<Block> ALL_BRICK_MATERIALS = tag("all_brick_materials");

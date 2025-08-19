@@ -20,10 +20,7 @@ public class FenceGateComponentTagProvider extends BlockTagsProvider
     @SuppressWarnings("unchecked")
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
-        this.tag(ModTags.FENCE_GATE_MATERIALS)
-          .addTags(
-            ModTags.FENCE_MATERIALS
-          );
+        this.tag(ModTags.FENCE_GATE_MATERIALS).addTags(ModTags.FENCE_MATERIALS);
     }
 
     @Override
