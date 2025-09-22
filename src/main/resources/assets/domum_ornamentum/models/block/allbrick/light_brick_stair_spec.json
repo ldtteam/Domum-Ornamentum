@@ -3,7 +3,7 @@
   "credit": "Made with Blockbench",
   "textures": {
     "0": "block/oak_planks",
-    "5": "block/white_concrete_powder",
+    "5": "block/light_gray_concrete_powder",
     "particle": "block/oak_planks"
   },
   "elements": [
