@@ -1,0 +1,31 @@
+{
+	"format_version": "1.21.6",
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"1": "oak_planks",
+		"particle": "oak_planks"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [3, 16, 3],
+			"faces": {
+				"north": {"uv": [10.75, 0, 13.25, 16], "texture": "#1"},
+				"east": {"uv": [10.75, 0, 13.25, 16], "texture": "#1"},
+				"south": {"uv": [2.75, 0, 5.25, 16], "texture": "#1"},
+				"west": {"uv": [2.75, 0, 5.25, 16], "texture": "#1"},
+				"up": {"uv": [2.75, 2.75, 5.25, 5.25], "rotation": 270, "texture": "#1"},
+				"down": {"uv": [2.75, 10.75, 5.25, 13.25], "rotation": 90, "texture": "#1"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "VoxelShapes",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [0]
+		}
+	]
+}
