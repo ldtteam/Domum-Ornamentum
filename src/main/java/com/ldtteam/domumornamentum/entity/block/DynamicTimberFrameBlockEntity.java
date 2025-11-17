@@ -203,6 +203,10 @@ public class DynamicTimberFrameBlockEntity extends AbstractMateriallyTexturedBlo
         {
             MaterialTextureData.CODEC.parse(dynamicops, nbt.get(BLOCK_ENTITY_TEXTURE_DATA)).resultOrPartial(DomumOrnamentum.LOGGER::error).ifPresent(this::updateTextureDataWith);
         }
+        else if (nbt.contains("originalTextureData"))
+        {
+            MaterialTextureData.CODEC.parse(dynamicops, nbt.get("originalTextureData")).resultOrPartial(DomumOrnamentum.LOGGER::error).ifPresent(this::updateTextureDataWith);
+        }
 
         final ResourceLocation primaryBlockName = ResourceLocation.parse(nbt.getString("primaryBlock"));
         if (BuiltInRegistries.BLOCK.get(primaryBlockName) != Blocks.AIR)
