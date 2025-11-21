@@ -77,14 +77,8 @@ public class MateriallyTexturedBakedModel implements BakedModel {
             return ChunkRenderTypeSet.none();
         }
 
-        return ChunkRenderTypeSet.union(
-                Stream.concat(
-                        textureData.getTexturedComponents().values().stream()
-                                .map(block -> Minecraft.getInstance().getBlockRenderer().getBlockModel(block.defaultBlockState())
-                                        .getRenderTypes(block.defaultBlockState(), rand, ModelData.EMPTY)),
-                        Stream.of(SOLID_ONLY))
-                .toArray(ChunkRenderTypeSet[]::new)
-        );
+        // Delegate to the shared helper.
+        return computeRenderTypesForMaterials(textureData, rand);
     }
 
     @Override
@@ -158,7 +152,16 @@ public class MateriallyTexturedBakedModel implements BakedModel {
             return Collections.emptyList();
         }
 
-        return Lists.newArrayList(getRenderTypes(blockItem, textureData));
+        // Use the same logic as the block path: union of materials + SOLID.
+        ChunkRenderTypeSet typeSet = computeRenderTypesForMaterials(textureData, RANDOM);
+
+        List<RenderType> types = new ArrayList<>(typeSet.asList());
+        if (!types.contains(RenderType.solid())) 
+        {
+            types.add(RenderType.solid());
+        }
+
+        return types;
     }
 
     private Collection<RenderType> getRenderTypes(BlockItem blockItem, MaterialTextureData textureData) {
@@ -181,20 +184,33 @@ public class MateriallyTexturedBakedModel implements BakedModel {
             textureData = generateRandomTextureDataFrom(itemStack);
         }
 
-        Collection<RenderType> renderTypes = getRenderTypes(blockItem, textureData);
-        if (renderTypes.isEmpty()) {
+        // Update to use helper
+        ChunkRenderTypeSet typeSet = computeRenderTypesForMaterials(textureData, RANDOM);
+        List<RenderType> renderTypes = new ArrayList<>(typeSet.asList());
+
+        if (renderTypes.isEmpty()) 
+        {
             return Collections.emptyList();
         }
 
+        // Always allow a solid pass as a fallback
+        if (!renderTypes.contains(RenderType.solid())) 
+        {
+            renderTypes.add(RenderType.solid());
+        }
+
         MaterialTextureData finalTextureData = textureData;
-        final List<BakedModel> models = new ArrayList<>();
+        List<BakedModel> models = new ArrayList<>();
+
         renderTypes.stream()
-                .map(type -> getRenderType(type, fabulous))
-                .distinct()
-                .map(type -> new SpecificRenderTypeBakedModelWrapper(
-                        type,
-                        getBakedInnerModelFor(itemStack, finalTextureData, blockItem.getBlock().defaultBlockState(), type)
-                )).forEach(models::add);
+            .map(type -> getRenderType(type, fabulous))
+            .distinct()
+            .map(type -> new SpecificRenderTypeBakedModelWrapper(
+                    type,
+                    getBakedInnerModelFor(itemStack, finalTextureData, blockItem.getBlock().defaultBlockState(), type)
+            ))
+            .forEach(models::add);
+
         return models;
     }
 
@@ -281,5 +297,27 @@ public class MateriallyTexturedBakedModel implements BakedModel {
         } else {
             return Sheets.cutoutBlockSheet();
         }
+    }
+    
+    protected ChunkRenderTypeSet computeRenderTypesForMaterials(@Nullable MaterialTextureData textureData, RandomSource rand) 
+    {
+        if (textureData == null || textureData.isEmpty()) 
+        {
+            // worst case, draw as solid only
+            return SOLID_ONLY;
+        }
+
+        // For each material block: ask its baked model which RenderTypes it uses,
+        // then union all of those plus SOLID_ONLY.
+        return ChunkRenderTypeSet.union(
+            Stream.concat(
+                textureData.getTexturedComponents().values().stream()
+                    .map(block -> Minecraft.getInstance()
+                        .getBlockRenderer()
+                        .getBlockModel(block.defaultBlockState())
+                        .getRenderTypes(block.defaultBlockState(), rand, ModelData.EMPTY)),
+                Stream.of(SOLID_ONLY)
+            ).toArray(ChunkRenderTypeSet[]::new)
+        );
     }
 }
