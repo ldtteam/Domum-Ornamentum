@@ -74,11 +74,7 @@ public class RetexturedBakedModelBuilder {
                 return this.withOut(source);
             }
         } else {
-            if (bakedModel.getRenderTypes(new ItemStack(target), Minecraft.useShaderTransparency()).contains(this.renderType)) {
-                return this.with(source, bakedModel, defaultState);
-            } else {
-                return this.withOut(source);
-            }
+            return this.with(source, bakedModel, defaultState);
         }
 
     }
