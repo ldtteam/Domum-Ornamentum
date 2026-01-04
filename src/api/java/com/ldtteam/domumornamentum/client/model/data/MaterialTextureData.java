@@ -15,7 +15,7 @@ public class MaterialTextureData implements INBTSerializable<CompoundTag>
 {
     public static final MaterialTextureData EMPTY = new MaterialTextureData();
 
-    private final Map<ResourceLocation, Block> texturedComponents;
+    private Map<ResourceLocation, Block> texturedComponents;
 
     public MaterialTextureData()
     {
@@ -23,7 +23,7 @@ public class MaterialTextureData implements INBTSerializable<CompoundTag>
     }
 
     public MaterialTextureData(final Map<ResourceLocation, Block> texturedComponents) {
-        this.texturedComponents = texturedComponents;
+        this.texturedComponents = Maps.newHashMap(texturedComponents);
     }
 
     public Map<ResourceLocation, Block> getTexturedComponents()
@@ -68,6 +68,7 @@ public class MaterialTextureData implements INBTSerializable<CompoundTag>
     public void deserializeNBT(final CompoundTag nbt)
     {
         this.texturedComponents.clear();
+        this.texturedComponents = Maps.newHashMap();
 
         nbt.getAllKeys().forEach(key -> {
             final ResourceLocation name = new ResourceLocation(nbt.getString(key));
