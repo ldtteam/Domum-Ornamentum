@@ -172,6 +172,7 @@ public class DynamicTimberFrameBlockEntity extends AbstractMateriallyTexturedBlo
 
         if (nbt.contains("originalTextureData"))
         {
+            this.originalTextureData = new MaterialTextureData();
             this.originalTextureData.deserializeNBT(nbt.getCompound("originalTextureData"));
         }
 
