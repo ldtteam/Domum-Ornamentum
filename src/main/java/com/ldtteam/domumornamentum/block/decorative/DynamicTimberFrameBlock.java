@@ -230,6 +230,28 @@ public class DynamicTimberFrameBlock extends AbstractBlock<DynamicTimberFrameBlo
     }
 
     @Override
+    public BlockState updateShape(
+        final BlockState stateIn,
+        @NotNull final Direction direction,
+        @NotNull final BlockState directionState,
+        @NotNull final LevelAccessor worldIn,
+        @NotNull final BlockPos currentPos,
+        @NotNull final BlockPos directionPos)
+    {
+        final BlockEntity tileEntity = worldIn.getBlockEntity(currentPos);
+
+        if (tileEntity instanceof DynamicTimberFrameBlockEntity timberFrameBlockEntity)
+        {
+            for (Offset offset : Offset.values())
+            {
+                updateNeighbor(timberFrameBlockEntity, worldIn.getBlockEntity(offset.applyToBlockPos(currentPos)), offset, true);
+            }
+        }
+
+        return stateIn;
+    }
+
+    @Override
     public void onRemove(final BlockState state, final Level worldIn, final BlockPos pos, final BlockState otherState, final boolean drop)
     {
         super.onRemove(state, worldIn, pos, otherState, drop);
