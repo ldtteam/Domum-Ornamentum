@@ -55,6 +55,8 @@ public class MaterialLootTableProvider extends BlockLootSubProvider
         dropSelfMaterially(ModBlocks.getInstance().getShingle(ShingleHeightType.DEFAULT));
         dropSelfMaterially(ModBlocks.getInstance().getShingle(ShingleHeightType.FLAT_LOWER));
         dropSelfMaterially(ModBlocks.getInstance().getShingle(ShingleHeightType.FLAT));
+        dropSelfMaterially(ModBlocks.getInstance().getShingle(ShingleHeightType.STEEP_LOWER));
+        dropSelfMaterially(ModBlocks.getInstance().getShingle(ShingleHeightType.STEEP));
         dropSelfMaterially(ModBlocks.getInstance().getShingleSlab());
         dropSelfMaterially(ModBlocks.getInstance().getStair());
         dropSelfMaterially(ModBlocks.getInstance().getWall());
