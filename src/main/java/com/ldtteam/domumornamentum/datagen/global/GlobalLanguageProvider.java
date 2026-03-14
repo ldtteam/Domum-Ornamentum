@@ -90,7 +90,7 @@ public class GlobalLanguageProvider extends LanguageProvider
             acceptor.add("cuttergroup." + Constants.MOD_ID + ".etrapdoor", "Trapdoors");
             acceptor.add("cuttergroup." + Constants.MOD_ID + ".ilight", "Lights");
             acceptor.add("cuttergroup." + Constants.MOD_ID + ".fpanel", "Panels");
-            acceptor.add("cuttergroup." + Constants.MOD_ID + ".hpaperwall", "Paperwalls");
+            acceptor.add("cuttergroup." + Constants.MOD_ID + ".hpaperwall", "Framed Panes");
             acceptor.add("cuttergroup." + Constants.MOD_ID + ".gpillar", "Pillars");
             acceptor.add("cuttergroup." + Constants.MOD_ID + ".kpost", "Posts");
             acceptor.add("cuttergroup." + Constants.MOD_ID + ".cshingle", "Shingles");
