@@ -4,8 +4,9 @@ public enum ShingleHeightType
 {
     DEFAULT(""),
     FLAT("flat_"),
-    FLAT_LOWER("flat_lower_");
-
+    FLAT_LOWER("flat_lower_"),
+    STEEP("steep_"),
+    STEEP_LOWER("steep_lower_");
     private final String id;
 
     ShingleHeightType(final String id)

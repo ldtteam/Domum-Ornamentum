@@ -13,5 +13,9 @@ public class ShinglesLangEntryProvider implements LanguageProvider.SubProvider
 
         acceptor.add(Constants.MOD_ID + ".shingle.name.format.block.domum_ornamentum.shingle", "%s Shingles");
         acceptor.add(Constants.MOD_ID + ".shingle.name.format.block.domum_ornamentum.shingle_flat", "%s Flat Shingles");
+
+
+        acceptor.add(Constants.MOD_ID + ".shingle.name.format.block.domum_ornamentum.shingle_steep_lower", "%s Steep Lower Shingles");
+        acceptor.add(Constants.MOD_ID + ".shingle.name.format.block.domum_ornamentum.shingle_steep", "%s Steep Shingles");
     }
 }
