@@ -63,6 +63,8 @@ public final class ModBlocks implements IModBlocks {
     private static final RegistryObject<ShingleBlock> SHINGLE;
     private static final RegistryObject<ShingleBlock> SHINGLE_FLAT;
     private static final RegistryObject<ShingleBlock> SHINGLE_FLAT_LOWER;
+    private static final RegistryObject<ShingleBlock> SHINGLE_STEEP;
+    private static final RegistryObject<ShingleBlock> SHINGLE_STEEP_LOWER;
     private static final RegistryObject<ShingleSlabBlock> SHINGLE_SLAB;
     private static final RegistryObject<PaperWallBlock> PAPER_WALL;
     private static final RegistryObject<BarrelBlock> STANDING_BARREL;
@@ -92,6 +94,8 @@ public final class ModBlocks implements IModBlocks {
         SHINGLE = register("shingle", ShingleBlock::new, b -> new ShingleBlockItem(b, new Item.Properties()));
         SHINGLE_FLAT = register("shingle_flat", ShingleBlock::new, b -> new ShingleBlockItem(b, new Item.Properties()));
         SHINGLE_FLAT_LOWER = register("shingle_flat_lower", ShingleBlock::new, b -> new ShingleBlockItem(b, new Item.Properties()));
+        SHINGLE_STEEP = register("shingle_steep", ShingleBlock::new, b -> new ShingleBlockItem(b, new Item.Properties()));
+        SHINGLE_STEEP_LOWER = register("shingle_steep_lower", ShingleBlock::new, b -> new ShingleBlockItem(b, new Item.Properties()));
 
         SHINGLE_SLAB = register("shingle_slab", ShingleSlabBlock::new, b -> new ShingleSlabBlockItem(b, new Item.Properties()));
         PAPER_WALL = register("blockpaperwall", PaperWallBlock::new, b -> new PaperwallBlockItem(b, new Item.Properties()));
@@ -182,6 +186,8 @@ public final class ModBlocks implements IModBlocks {
             case DEFAULT -> ModBlocks.SHINGLE.get();
             case FLAT -> ModBlocks.SHINGLE_FLAT.get();
             case FLAT_LOWER -> ModBlocks.SHINGLE_FLAT_LOWER.get();
+            case STEEP -> ModBlocks.SHINGLE_STEEP.get();
+            case STEEP_LOWER -> ModBlocks.SHINGLE_STEEP_LOWER.get();
         };
     }
 

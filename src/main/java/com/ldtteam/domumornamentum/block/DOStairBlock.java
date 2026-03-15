@@ -30,6 +30,10 @@ public class DOStairBlock extends Block implements SimpleWaterloggedBlock
     public static final    BooleanProperty           WATERLOGGED    = BlockStateProperties.WATERLOGGED;
     protected static final VoxelShape                TOP_AABB       = Block.box(0.0D, 8.0D, 0.0D, 16.0D, 16.0D, 16.0D);
     protected static final VoxelShape                BOTTOM_AABB    = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D);
+    protected static final VoxelShape                NORTH_AABB     = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 8.0D);
+    protected static final VoxelShape                EAST_AABB      = Block.box(8.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
+    protected static final VoxelShape                SOUTH_AABB     = Block.box(0.0D, 0.0D, 8.0D, 16.0D, 16.0D, 16.0D);
+    protected static final VoxelShape                WEST_AABB      = Block.box(0.0D, 0.0D, 0.0D, 8.0D, 16.0D, 16.0D);
     protected static final VoxelShape                OCTET_NNN      = Block.box(0.0D, 0.0D, 0.0D, 8.0D, 8.0D, 8.0D);
     protected static final VoxelShape                OCTET_NNP      = Block.box(0.0D, 0.0D, 8.0D, 8.0D, 8.0D, 16.0D);
     protected static final VoxelShape                OCTET_NPN      = Block.box(0.0D, 8.0D, 0.0D, 8.0D, 16.0D, 8.0D);

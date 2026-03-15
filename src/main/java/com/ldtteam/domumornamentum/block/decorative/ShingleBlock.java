@@ -99,6 +99,16 @@ public class ShingleBlock extends AbstractBlockStairs<ShingleBlock> implements I
         if (getRegistryName().equals(new ResourceLocation(Constants.MOD_ID, "shingle_flat_lower")))
         {
             return blockState.getValue(HALF).equals(Half.BOTTOM) ? BOTTOM_AABB : TOP_AABB;
+        } else if (getRegistryName().equals(new ResourceLocation(Constants.MOD_ID, "shingle_steep_lower")))
+        {
+            return switch (blockState.getValue(FACING))
+            {
+                case NORTH -> NORTH_AABB;
+                case EAST -> EAST_AABB;
+                case WEST -> WEST_AABB;
+                case SOUTH -> SOUTH_AABB;
+                default ->  blockState.getValue(HALF).equals(Half.BOTTOM) ? BOTTOM_AABB : TOP_AABB;
+            };
         }
 
         return super.getShape(blockState, blockGetter, blockPos, collisionContext);
