@@ -42,8 +42,8 @@ import java.util.List;
 public class PaperWallBlock extends AbstractBlockPane<PaperWallBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock
 {
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
-                                                                               .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/oak_planks"), ModTags.PAPERWALL_FRAME, Blocks.OAK_PLANKS))
-                                                                               .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/dark_oak_planks"), ModTags.PAPERWALL_CENTER, Blocks.DARK_OAK_PLANKS))
+        .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/oak_planks"), ModTags.PAPERWALL_FRAME, Blocks.STRIPPED_SPRUCE_WOOD))
+        .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/dark_oak_planks"), ModTags.PAPERWALL_CENTER, Blocks.GLASS))
                                                                                .build();
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();

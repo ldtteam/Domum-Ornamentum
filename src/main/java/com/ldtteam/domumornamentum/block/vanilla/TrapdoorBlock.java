@@ -38,13 +38,13 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
+import static net.minecraft.world.level.block.Blocks.STRIPPED_JUNGLE_WOOD;
 
 public class TrapdoorBlock extends AbstractBlockTrapdoor<TrapdoorBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock
 {
     public static final EnumProperty<TrapdoorType>              TYPE       = EnumProperty.create(Constants.TYPE_BLOCK_PROPERTY, TrapdoorType.class);
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
-      .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/oak_planks"), ModTags.TRAPDOORS_MATERIALS, OAK_PLANKS))
+        .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/oak_planks"), ModTags.TRAPDOORS_MATERIALS, STRIPPED_JUNGLE_WOOD))
       .build();
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
