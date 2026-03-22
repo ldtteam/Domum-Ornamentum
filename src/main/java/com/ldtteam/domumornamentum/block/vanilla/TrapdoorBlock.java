@@ -46,14 +46,14 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
-import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
+import static net.minecraft.world.level.block.Blocks.STRIPPED_JUNGLE_WOOD;
 
 @SuppressWarnings("deprecation")
 public class TrapdoorBlock extends AbstractBlockTrapdoor<TrapdoorBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock
 {
     public static final EnumProperty<TrapdoorType>              TYPE       = EnumProperty.create("type", TrapdoorType.class);
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
-      .add(new SimpleRetexturableComponent(new ResourceLocation("minecraft:block/oak_planks"), ModTags.TRAPDOORS_MATERIALS, OAK_PLANKS))
+        .add(new SimpleRetexturableComponent(new ResourceLocation("block/oak_planks"), ModTags.TRAPDOORS_MATERIALS, STRIPPED_JUNGLE_WOOD))
       .build();
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();

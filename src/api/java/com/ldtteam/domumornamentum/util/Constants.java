@@ -1,5 +1,7 @@
 package com.ldtteam.domumornamentum.util;
 
+import net.minecraft.resources.ResourceLocation;
+
 public class Constants
 {
 
@@ -14,6 +16,11 @@ public class Constants
     public static final String DOOR_MODEL_OVERRIDE = MOD_ID + ":door_type";
     public static final String POST_MODEL_OVERRIDE = MOD_ID + ":post_type";
     public static final String DEFAULT_LANG = "en_us";
+
+    public static ResourceLocation resLocDO(final String path)
+    {
+        return new ResourceLocation(MOD_ID, path);
+    }
 
     public static class BlockEntityTypes
     {

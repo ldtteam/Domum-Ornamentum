@@ -54,9 +54,6 @@ public final class ModBlocks implements IModBlocks {
     private static final List<RegistryObject<ExtraBlock>> EXTRA_TOP_BLOCKS = Lists.newArrayList();
     private static final List<RegistryObject<BrickBlock>> BRICK = new ArrayList<>();
     private static final List<RegistryObject<PillarBlock>> PILLARS = new ArrayList<>();
-    private static final List<RegistryObject<AllBrickBlock>> ALL_BRICK = new ArrayList<>();
-    private static final List<RegistryObject<AllBrickStairBlock>> ALL_BRICK_STAIR = new ArrayList<>();
-
     private static final ModBlocks INSTANCE = new ModBlocks();
 
     private static final RegistryObject<ArchitectsCutterBlock> ARCHITECTS_CUTTER;
@@ -82,7 +79,13 @@ public final class ModBlocks implements IModBlocks {
     private static final RegistryObject<FancyTrapdoorBlock> FANCY_TRAPDOOR;
     private static final RegistryObject<PaperWallBlock> TILED_PAPER_WALL;
     private static final RegistryObject<DynamicTimberFrameBlock> DYNAMIC_TIMBER_FRAME;
-
+    private static final RegistryObject<PillarBlock>        ROUND_PILLAR;
+    private static final RegistryObject<PillarBlock>        VOXEL_PILLAR;
+    private static final RegistryObject<PillarBlock>        SQUARE_PILLAR;
+    private static final RegistryObject<AllBrickBlock>      ALL_BRICK;
+    private static final RegistryObject<AllBrickBlock>      ALL_BRICK_DARK;
+    private static final RegistryObject<AllBrickStairBlock> ALL_BRICK_STAIR;
+    private static final RegistryObject<AllBrickStairBlock> ALL_BRICK_DARK_STAIR;
     static {
         ARCHITECTS_CUTTER = register("architectscutter", ArchitectsCutterBlock::new, b -> new BlockItem(b, new Item.Properties()));
 
@@ -101,9 +104,9 @@ public final class ModBlocks implements IModBlocks {
         PAPER_WALL = register("blockpaperwall", PaperWallBlock::new, b -> new PaperwallBlockItem(b, new Item.Properties()));
         TILED_PAPER_WALL = register("blocktiledpaperwall", PaperWallBlock::new, b -> new PaperwallBlockItem(b, new Item.Properties()));
 
-        PILLARS.add(register("blockpillar", PillarBlock::new, b -> new PillarBlockItem(b, new Item.Properties())));
-        PILLARS.add(register("blockypillar", PillarBlock::new, b -> new PillarBlockItem(b, new Item.Properties())));
-        PILLARS.add(register("squarepillar", PillarBlock::new, b -> new PillarBlockItem(b, new Item.Properties())));
+        ROUND_PILLAR = register("blockpillar", PillarBlock::new, b -> new PillarBlockItem(b, new Item.Properties()));
+        VOXEL_PILLAR = register("blockypillar", PillarBlock::new, b -> new PillarBlockItem(b, new Item.Properties()));
+        SQUARE_PILLAR = register("squarepillar", PillarBlock::new, b -> new PillarBlockItem(b, new Item.Properties()));
 
         for (final ExtraBlockType blockType : ExtraBlockType.values()) {
             EXTRA_TOP_BLOCKS.add(register(blockType.getSerializedName(), () -> new ExtraBlock(blockType), b -> new ExtraBlockItem(b, new Item.Properties())));
@@ -133,10 +136,10 @@ public final class ModBlocks implements IModBlocks {
         TRAPDOOR = register("vanilla_trapdoors_compat", TrapdoorBlock::new, b -> new TrapdoorBlockItem(b, new Item.Properties()));
         DOOR = register("vanilla_doors_compat", DoorBlock::new, b -> new DoorBlockItem(b, new Item.Properties()));
         PANEL = register("panel", PanelBlock::new, b -> new PanelBlockItem(b, new Item.Properties()));
-        ALL_BRICK.add(register("light_brick", AllBrickBlock::new, b -> new AllBrickBlockItem(b, new Item.Properties())));
-        ALL_BRICK.add(register("dark_brick", AllBrickBlock::new, b -> new AllBrickBlockItem(b, new Item.Properties())));
-        ALL_BRICK_STAIR.add(register("light_brick_stair", AllBrickStairBlock::new, b -> new AllBrickStairBlockItem(b, new Item.Properties())));
-        ALL_BRICK_STAIR.add(register("dark_brick_stair", AllBrickStairBlock::new, b -> new AllBrickStairBlockItem(b, new Item.Properties())));
+        ALL_BRICK = (register("light_brick", AllBrickBlock::new, b -> new AllBrickBlockItem(b, new Item.Properties())));
+        ALL_BRICK_DARK = (register("dark_brick", AllBrickBlock::new, b -> new AllBrickBlockItem(b, new Item.Properties())));
+        ALL_BRICK_STAIR = (register("light_brick_stair", AllBrickStairBlock::new, b -> new AllBrickStairBlockItem(b, new Item.Properties())));
+        ALL_BRICK_DARK_STAIR = (register("dark_brick_stair", AllBrickStairBlock::new, b -> new AllBrickStairBlockItem(b, new Item.Properties())));
 
         POST = register("post", PostBlock::new, b -> new PostBlockItem(b, new Item.Properties()));
 
@@ -147,7 +150,7 @@ public final class ModBlocks implements IModBlocks {
     /**
      * Specific item groups.
      */
-    public Map<ResourceLocation, List<ItemStack>> itemGroups = new TreeMap<>();
+    public Map<ResourceLocation, List<ItemStack>> itemGroups = new LinkedHashMap<>();
 
     /**
      * Private constructor to hide the implicit public one.
@@ -205,7 +208,49 @@ public final class ModBlocks implements IModBlocks {
     @Override
     public List<PillarBlock> getPillars()
     {
-        return ModBlocks.PILLARS.stream().map(RegistryObject::get).collect(Collectors.toList());
+        return List.of(VOXEL_PILLAR.get(), ROUND_PILLAR.get(), SQUARE_PILLAR.get());
+    }
+
+    @Override
+    public PillarBlock getRoundPillar()
+    {
+        return ROUND_PILLAR.get();
+    }
+
+    @Override
+    public PillarBlock getVoxelPillar()
+    {
+        return VOXEL_PILLAR.get();
+    }
+
+    @Override
+    public PillarBlock getSqaurePillar()
+    {
+        return SQUARE_PILLAR.get();
+    }
+
+    @Override
+    public AllBrickBlock getAllBrickBlock()
+    {
+        return ALL_BRICK.get();
+    }
+
+    @Override
+    public AllBrickBlock getAllBrickDarkBlock()
+    {
+        return ALL_BRICK_DARK.get();
+    }
+
+    @Override
+    public AllBrickStairBlock getAllBrickStairBlock()
+    {
+        return ALL_BRICK_STAIR.get();
+    }
+
+    @Override
+    public AllBrickStairBlock getAllBrickDarkStairBlock()
+    {
+        return ALL_BRICK_DARK_STAIR.get();
     }
 
     @Override
@@ -305,12 +350,12 @@ public final class ModBlocks implements IModBlocks {
 
     @Override
     public List<AllBrickBlock> getAllBrickBlocks() {
-        return ModBlocks.ALL_BRICK.stream().map(RegistryObject::get).toList();
+        return List.of(ALL_BRICK.get(), ALL_BRICK_DARK.get());
     }
 
     @Override
     public List<AllBrickStairBlock> getAllBrickStairBlocks() {
-        return ModBlocks.ALL_BRICK_STAIR.stream().map(RegistryObject::get).toList();
+        return List.of(ALL_BRICK_STAIR.get(), ALL_BRICK_DARK_STAIR.get());
     }
 
     @Override
@@ -346,9 +391,18 @@ public final class ModBlocks implements IModBlocks {
                             itemList.add(process(new ItemStack(item), texturedBlock));
                         }
                     }
-                    itemGroups.put(((IDoItem) item).getGroup(), itemList);
+                    itemGroups.put(((IDoItem) item).getGroup(), SortedBlocks.sortItems(itemList));
                 }
             });
+
+            final Map<ResourceLocation, List<ItemStack>> itemGroupMap = itemGroups;
+            List<ResourceLocation> ids = new ArrayList<>(itemGroupMap.keySet());
+            SortedBlocks.sortGroups(ids);
+            itemGroups = new LinkedHashMap<>();
+            for (final ResourceLocation id : ids)
+            {
+                itemGroups.put(id, itemGroupMap.get(id));
+            }
         }
         return itemGroups;
     }

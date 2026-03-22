@@ -3,16 +3,13 @@ package com.ldtteam.domumornamentum.block.decorative;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.gson.JsonObject;
-import com.ldtteam.domumornamentum.block.AbstractBlock;
-import com.ldtteam.domumornamentum.block.ICachedItemGroupBlock;
-import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
-import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
+import com.ldtteam.domumornamentum.block.*;
 import com.ldtteam.domumornamentum.block.components.SimpleRetexturableComponent;
+import com.ldtteam.domumornamentum.block.types.BrickType;
 import com.ldtteam.domumornamentum.block.types.FramedLightType;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
 import com.ldtteam.domumornamentum.recipe.FinishedDORecipe;
-import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import net.minecraft.core.BlockPos;
@@ -24,7 +21,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -50,10 +46,7 @@ import java.util.Objects;
 public class FramedLightBlock extends AbstractBlock<FramedLightBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock
 {
 
-    public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
-        .add(new SimpleRetexturableComponent(new ResourceLocation("block/oak_planks"), ModTags.TIMBERFRAMES_FRAME, Blocks.OAK_PLANKS))
-        .add(new SimpleRetexturableComponent(new ResourceLocation("block/glowstone"), ModTags.FRAMED_LIGHT_CENTER, Blocks.GLOWSTONE))
-        .build();
+    private static List<IMateriallyTexturedBlockComponent> COMPONENTS = null;
 
     /**
      * The hardness this block has.
@@ -89,6 +82,19 @@ public class FramedLightBlock extends AbstractBlock<FramedLightBlock> implements
     @Override
     public @NotNull List<IMateriallyTexturedBlockComponent> getComponents()
     {
+        if (COMPONENTS == null)
+        {
+            COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
+                .add(new SimpleRetexturableComponent(new ResourceLocation("block/oak_planks"), ModTags.TIMBERFRAMES_FRAME,
+                    ModBlocks.getInstance()
+                        .getBricks()
+                        .stream()
+                        .filter(brickBLock -> (brickBLock.getType() == BrickType.CREAM_STONE))
+                        .findFirst()
+                        .get()))
+                .add(new SimpleRetexturableComponent(new ResourceLocation("block/glowstone"), ModTags.FRAMED_LIGHT_CENTER, Blocks.GLOWSTONE))
+                .build();
+        }
         return COMPONENTS;
     }
 

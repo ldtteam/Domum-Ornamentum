@@ -18,7 +18,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.ldtteam.domumornamentum.util.GuiConstants.*;
@@ -194,6 +197,10 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
         if (id < ModBlocks.getInstance().getOrComputeItemGroups().size())
         {
             this.selectGroup(new ArrayList<>(ModBlocks.getInstance().getOrComputeItemGroups().keySet()).get(id));
+            this.outputInventorySlot.set(ItemStack.EMPTY);
+            this.selectVariant(ModBlocks.getInstance().getOrComputeItemGroups().get(getCurrentGroup()).get(0));
+            updateRecipeResultSlot();
+            broadcastChanges();
             return true;
         }
         else if (this.getCurrentGroup() == null)
@@ -252,7 +259,9 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
     }
 
     private void updateRecipeResultSlot() {
-        if (!this.recipes.isEmpty() && this.currentVariant != null && this.currentVariant.getItem() instanceof BlockItem blockItem) {
+        this.outputInventorySlot.set(ItemStack.EMPTY);
+        if (!this.recipes.isEmpty() && this.currentVariant != null && this.currentVariant.getItem() instanceof BlockItem blockItem)
+        {
             for (final ArchitectsCutterRecipe recipe : recipes)
             {
                 final ItemStack resultItem = recipe.getResultItem(this.world.registryAccess());
@@ -277,9 +286,6 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
                     break;
                 }
             }
-
-        } else {
-            this.outputInventorySlot.set(ItemStack.EMPTY);
         }
 
         this.broadcastChanges();
