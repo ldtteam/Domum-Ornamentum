@@ -38,7 +38,7 @@ public class AllBrickStairBlock extends AbstractBlockStairs<AllBrickStairBlock> 
 {
 
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
-        .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/oak_planks"), ModTags.ALL_BRICK_MATERIALS, Blocks.OAK_PLANKS))
+        .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/oak_planks"), ModTags.ALL_BRICK_MATERIALS, Blocks.POLISHED_ANDESITE))
         .build();
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();

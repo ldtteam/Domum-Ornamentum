@@ -41,15 +41,15 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Objects;
 
-import static net.minecraft.world.level.block.Blocks.ACACIA_PLANKS;
-import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
+import static net.minecraft.world.level.block.Blocks.COPPER_BLOCK;
+import static net.minecraft.world.level.block.Blocks.SPRUCE_PLANKS;
 
 public class FancyDoorBlock extends AbstractBlockDoor<FancyDoorBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock
 {
     public static final EnumProperty<FancyDoorType>             TYPE       = EnumProperty.create(Constants.TYPE_BLOCK_PROPERTY, FancyDoorType.class);
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
-                                                                               .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/oak_planks"), ModTags.FANCY_DOORS_MATERIALS, OAK_PLANKS))
-                                                                               .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/acacia_planks"), ModTags.FANCY_DOORS_MATERIALS, ACACIA_PLANKS, true))
+        .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/oak_planks"), ModTags.FANCY_DOORS_MATERIALS, SPRUCE_PLANKS))
+        .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/acacia_planks"), ModTags.FANCY_DOORS_MATERIALS, COPPER_BLOCK, true))
                                                                                .build();
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();

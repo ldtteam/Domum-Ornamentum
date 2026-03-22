@@ -2,11 +2,9 @@ package com.ldtteam.domumornamentum.block.decorative;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import com.ldtteam.domumornamentum.block.AbstractBlockDirectional;
-import com.ldtteam.domumornamentum.block.ICachedItemGroupBlock;
-import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
-import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
+import com.ldtteam.domumornamentum.block.*;
 import com.ldtteam.domumornamentum.block.components.SimpleRetexturableComponent;
+import com.ldtteam.domumornamentum.block.types.ExtraBlockType;
 import com.ldtteam.domumornamentum.block.types.ShingleSlabShapeType;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
 import com.ldtteam.domumornamentum.recipe.architectscutter.ArchitectsCutterRecipeBuilder;
@@ -28,11 +26,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -49,19 +43,10 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-
 import java.util.List;
 
-import static com.ldtteam.domumornamentum.block.types.ShingleSlabShapeType.CURVED;
-import static com.ldtteam.domumornamentum.block.types.ShingleSlabShapeType.FOUR_WAY;
-import static com.ldtteam.domumornamentum.block.types.ShingleSlabShapeType.ONE_WAY;
-import static com.ldtteam.domumornamentum.block.types.ShingleSlabShapeType.THREE_WAY;
-import static com.ldtteam.domumornamentum.block.types.ShingleSlabShapeType.TOP;
-import static com.ldtteam.domumornamentum.block.types.ShingleSlabShapeType.TWO_WAY;
-import static net.minecraft.core.Direction.EAST;
-import static net.minecraft.core.Direction.NORTH;
-import static net.minecraft.core.Direction.SOUTH;
-import static net.minecraft.core.Direction.WEST;
+import static com.ldtteam.domumornamentum.block.types.ShingleSlabShapeType.*;
+import static net.minecraft.core.Direction.*;
 
 /**
  * Decorative block
@@ -69,10 +54,7 @@ import static net.minecraft.core.Direction.WEST;
 public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock> implements SimpleWaterloggedBlock, IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock
 {
     public static final MapCodec<ShingleSlabBlock> CODEC = simpleCodec(ShingleSlabBlock::new);
-    public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
-                                                                               .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/oak_planks"), ModTags.SHINGLES_ROOF, Blocks.OAK_PLANKS))
-                                                                               .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/dark_oak_planks"), ModTags.SHINGLES_SUPPORT, Blocks.DARK_OAK_PLANKS))
-                                                                               .build();
+    private static List<IMateriallyTexturedBlockComponent> COMPONENTS = null;
 
     /**
      * The SHAPEs of the shingle slab.
@@ -298,6 +280,18 @@ public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock>
     @Override
     public @NotNull List<IMateriallyTexturedBlockComponent> getComponents()
     {
+        if (COMPONENTS == null)
+        {
+            COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
+                .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/oak_planks"), ModTags.SHINGLES_ROOF, ModBlocks.getInstance()
+                    .getExtraTopBlocks()
+                    .stream()
+                    .filter(b -> (b instanceof ExtraBlock extraBlock && extraBlock.getType() == ExtraBlockType.BASE_BRICK))
+                    .findFirst()
+                    .get()))
+                .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/dark_oak_planks"), ModTags.SHINGLES_SUPPORT, Blocks.OAK_PLANKS))
+                .build();
+        }
         return COMPONENTS;
     }
 
@@ -323,7 +317,7 @@ public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock>
     @Override
     public void buildRecipes(final RecipeOutput recipeOutput)
     {
-        new ArchitectsCutterRecipeBuilder(this, RecipeCategory.BUILDING_BLOCKS).count(COMPONENTS.size() * 2).save(recipeOutput);
+        new ArchitectsCutterRecipeBuilder(this, RecipeCategory.BUILDING_BLOCKS).count(getComponents().size() * 2).save(recipeOutput);
     }
 
     @Override
@@ -343,7 +337,7 @@ public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock>
 
     @Override
     public IMateriallyTexturedBlockComponent getMainComponent() {
-        return COMPONENTS.get(0);
+        return getComponents().get(0);
     }
 
     @Override

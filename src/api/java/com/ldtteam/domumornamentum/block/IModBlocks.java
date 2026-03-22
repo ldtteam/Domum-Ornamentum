@@ -20,6 +20,20 @@ public interface IModBlocks
 
     List<? extends Block> getFramedLights();
 
+    Block getRoundPillar();
+
+    Block getVoxelPillar();
+
+    Block getSqaurePillar();
+
+    Block getAllBrickBlock();
+
+    Block getAllBrickDarkBlock();
+
+    Block getAllBrickStairBlock();
+
+    Block getAllBrickDarkStairBlock();
+
     Block getShingleSlab();
 
     Block getPaperWall();
