@@ -50,16 +50,7 @@ public class FancyTrapdoorBlockItem extends BlockItem implements IDoItem
     {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
 
-        FancyTrapdoorType trapdoorType;
-        try {
-            if (stack.getOrCreateTag().contains("type"))
-                trapdoorType = FancyTrapdoorType.valueOf(stack.getOrCreateTag().getString("type").toUpperCase());
-            else
-                trapdoorType = FancyTrapdoorType.FULL;
-        } catch (Exception ex) {
-            trapdoorType = FancyTrapdoorType.FULL;
-        }
-
+        FancyTrapdoorType trapdoorType = FancyTrapdoorType.fromString(stack.getOrCreateTag().getString("type"), FancyTrapdoorType.FULL);
         tooltip.add(Component.translatable(Constants.MOD_ID + ".origin.tooltip"));
         tooltip.add(Component.literal(""));
         tooltip.add(Component.translatable(

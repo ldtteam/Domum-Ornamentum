@@ -119,7 +119,8 @@ public class PanelBlock extends AbstractPanelBlockTrapdoor<PanelBlock> implement
     @Override
     public BlockState getStateForPlacement(final @NotNull BlockPlaceContext context)
     {
-        final BlockState state = super.getStateForPlacement(context).setValue(TYPE, TrapdoorType.valueOf(context.getItemInHand().getOrCreateTag().getString("type")));
+        final BlockState state =
+            super.getStateForPlacement(context).setValue(TYPE, TrapdoorType.fromString(context.getItemInHand().getOrCreateTag().getString("type"), TrapdoorType.FULL));
         final Vec3 offsetPos = context.getClickLocation().subtract(Vec3.atLowerCornerOf(context.getClickedPos()));
         if (context.getClickedFace().getAxis().isHorizontal())
         {

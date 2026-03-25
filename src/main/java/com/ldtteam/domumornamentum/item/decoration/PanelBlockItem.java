@@ -49,23 +49,7 @@ public class PanelBlockItem extends BlockItem implements IDoItem
     {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
 
-        TrapdoorType trapdoorType;
-        try
-        {
-            if (stack.getOrCreateTag().contains("type"))
-            {
-                trapdoorType = TrapdoorType.valueOf(stack.getOrCreateTag().getString("type").toUpperCase());
-            }
-            else
-            {
-                trapdoorType = TrapdoorType.FULL;
-            }
-        }
-        catch (Exception ex)
-        {
-            trapdoorType = TrapdoorType.FULL;
-        }
-
+        final TrapdoorType trapdoorType = TrapdoorType.fromString(stack.getOrCreateTag().getString("type"), TrapdoorType.FULL);
         tooltip.add(Component.translatable(Constants.MOD_ID + ".origin.tooltip"));
         tooltip.add(Component.literal(""));
         tooltip.add(Component.translatable(

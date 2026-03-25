@@ -123,7 +123,7 @@ public class PostBlock extends AbstractPostBlock<PostBlock> implements IMaterial
 
         worldIn.setBlock(
           pos,
-          state.setValue(TYPE, PostType.valueOf(type.toUpperCase())),
+            state.setValue(TYPE, PostType.fromString(type, PostType.PLAIN)),
           Block.UPDATE_ALL
         );
 

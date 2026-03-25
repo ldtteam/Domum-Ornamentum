@@ -49,23 +49,7 @@ public class PostBlockItem extends BlockItem implements IDoItem
     {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
 
-        PostType postType;
-        try
-        {
-            if (stack.getOrCreateTag().contains("type"))
-            {
-                postType = PostType.valueOf(stack.getOrCreateTag().getString("type").toUpperCase());
-            }
-            else
-            {
-                postType = PostType.PLAIN;
-            }
-        }
-        catch (Exception ex)
-        {
-            postType = PostType.PLAIN;
-        }
-
+        PostType postType = PostType.fromString(stack.getOrCreateTag().getString("type"), PostType.PLAIN);
         tooltip.add(Component.translatable(Constants.MOD_ID + ".origin.tooltip"));
         tooltip.add(Component.literal(""));
         tooltip.add(Component.translatable(

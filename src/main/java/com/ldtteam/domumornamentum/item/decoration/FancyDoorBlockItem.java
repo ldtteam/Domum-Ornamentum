@@ -52,23 +52,7 @@ public class FancyDoorBlockItem extends DoubleHighBlockItem implements IDoItem
     {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
 
-        FancyDoorType doorType;
-        try
-        {
-            if (stack.getOrCreateTag().contains("type"))
-            {
-                doorType = FancyDoorType.valueOf(stack.getOrCreateTag().getString("type").toUpperCase());
-            }
-            else
-            {
-                doorType = FancyDoorType.FULL;
-            }
-        }
-        catch (Exception ex)
-        {
-            doorType = FancyDoorType.FULL;
-        }
-
+        FancyDoorType doorType = FancyDoorType.fromString(stack.getOrCreateTag().getString("type"), FancyDoorType.FULL);
         tooltip.add(Component.translatable(Constants.MOD_ID + ".origin.tooltip"));
         tooltip.add(Component.literal(""));
         tooltip.add(Component.translatable(
