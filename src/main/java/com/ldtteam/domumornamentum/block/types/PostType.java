@@ -1,8 +1,11 @@
 package com.ldtteam.domumornamentum.block.types;
 
+import com.ldtteam.domumornamentum.util.EnumHelper;
 import net.minecraft.util.StringRepresentable;
 import org.apache.commons.lang3.StringUtils;
+
 import java.util.Arrays;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -38,5 +41,12 @@ public enum PostType implements StringRepresentable
         return Arrays.stream(parts)
           .map(StringUtils::capitalize)
           .collect(Collectors.joining(" "));
+    }
+
+    private static final Map<String, PostType> ID_MAP = EnumHelper.createMap(PostType.class);
+
+    public static PostType fromString(final String s, final PostType defaultType)
+    {
+        return EnumHelper.fromString(ID_MAP, s, defaultType);
     }
 }

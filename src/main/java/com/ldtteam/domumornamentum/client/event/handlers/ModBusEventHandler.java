@@ -2,11 +2,7 @@ package com.ldtteam.domumornamentum.client.event.handlers;
 
 import com.ldtteam.domumornamentum.block.IModBlocks;
 import com.ldtteam.domumornamentum.block.decorative.ExtraBlock;
-import com.ldtteam.domumornamentum.block.types.DoorType;
-import com.ldtteam.domumornamentum.block.types.FancyDoorType;
-import com.ldtteam.domumornamentum.block.types.FancyTrapdoorType;
-import com.ldtteam.domumornamentum.block.types.TrapdoorType;
-import com.ldtteam.domumornamentum.block.types.PostType;
+import com.ldtteam.domumornamentum.block.types.*;
 import com.ldtteam.domumornamentum.client.screens.ArchitectsCutterScreen;
 import com.ldtteam.domumornamentum.container.ModContainerTypes;
 import com.ldtteam.domumornamentum.shingles.ShingleHeightType;
@@ -36,17 +32,17 @@ public class ModBusEventHandler
     public static void onFMLClientSetup(final FMLClientSetupEvent event)
     {
         event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getTrapdoor().asItem(), Constants.TRAPDOOR_MODEL_OVERRIDE,
-          (itemStack, clientLevel, livingEntity, i) -> getTypeOrdinal(itemStack, TrapdoorType.class, TrapdoorType.FULL)));
+            (itemStack, clientLevel, livingEntity, i) -> TrapdoorType.fromString(GetTypeString(itemStack), TrapdoorType.WAFFLE).ordinal()));
         event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getDoor().asItem(), Constants.DOOR_MODEL_OVERRIDE,
-          (itemStack, clientLevel, livingEntity, i) -> getTypeOrdinal(itemStack, DoorType.class, DoorType.FULL)));
+            (itemStack, clientLevel, livingEntity, i) -> DoorType.fromString(GetTypeString(itemStack), DoorType.WAFFLE).ordinal()));
         event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getFancyDoor().asItem(), Constants.DOOR_MODEL_OVERRIDE,
-          (itemStack, clientLevel, livingEntity, i) -> getTypeOrdinal(itemStack, FancyDoorType.class, FancyDoorType.FULL)));
+            (itemStack, clientLevel, livingEntity, i) -> FancyDoorType.fromString(GetTypeString(itemStack), FancyDoorType.FULL).ordinal()));
         event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getFancyTrapdoor().asItem(), Constants.TRAPDOOR_MODEL_OVERRIDE,
-          (itemStack, clientLevel, livingEntity, i) -> getTypeOrdinal(itemStack, FancyTrapdoorType.class, FancyTrapdoorType.FULL)));
+            (itemStack, clientLevel, livingEntity, i) -> FancyTrapdoorType.fromString(GetTypeString(itemStack), FancyTrapdoorType.FULL).ordinal()));
         event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getPanel().asItem(), Constants.TRAPDOOR_MODEL_OVERRIDE,
-          (itemStack, clientLevel, livingEntity, i) -> getTypeOrdinal(itemStack, TrapdoorType.class, TrapdoorType.FULL)));
+            (itemStack, clientLevel, livingEntity, i) -> TrapdoorType.fromString(GetTypeString(itemStack), TrapdoorType.WAFFLE).ordinal()));
         event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getPost().asItem(), Constants.POST_MODEL_OVERRIDE,
-          (itemStack, clientLevel, livingEntity, i) -> getTypeOrdinal(itemStack, PostType.class, PostType.PLAIN)));
+            (itemStack, clientLevel, livingEntity, i) -> PostType.fromString(GetTypeString(itemStack), PostType.PLAIN).ordinal()));
 
         event.enqueueWork(() -> {
             ItemBlockRenderTypes.setRenderLayer(IModBlocks.getInstance().getArchitectsCutter(), RenderType.cutout());
@@ -81,21 +77,8 @@ public class ModBusEventHandler
         });
     }
 
-    private static <T extends Enum<T>> float getTypeOrdinal(final ItemStack itemStack, final Class<T> enumClass, final T defaultValue)
+    private static String GetTypeString(final ItemStack itemStack)
     {
-        final String type = itemStack.getOrDefault(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY).properties().get(Constants.TYPE_BLOCK_PROPERTY);
-        if (type == null)
-        {
-            return defaultValue.ordinal();
-        }
-
-        try
-        {
-            return Enum.valueOf(enumClass, type.toUpperCase()).ordinal();
-        }
-        catch (Exception e)
-        {
-            return defaultValue.ordinal();
-        }
+        return itemStack.getOrDefault(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY).properties().get(Constants.TYPE_BLOCK_PROPERTY);
     }
 }
