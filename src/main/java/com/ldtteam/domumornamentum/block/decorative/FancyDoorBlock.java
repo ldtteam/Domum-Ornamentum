@@ -9,6 +9,7 @@ import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.components.SimpleRetexturableComponent;
 import com.ldtteam.domumornamentum.block.types.FancyDoorType;
+import com.ldtteam.domumornamentum.block.types.FancyTrapdoorType;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
 import com.ldtteam.domumornamentum.recipe.FinishedDORecipe;
@@ -114,12 +115,12 @@ public class FancyDoorBlock extends AbstractBlockDoor<FancyDoorBlock> implements
         final String type = stack.getOrCreateTag().getString("type");
         worldIn.setBlock(
           pos,
-          worldIn.getBlockState(pos).setValue(TYPE, FancyDoorType.valueOf(type.toUpperCase())),
+            worldIn.getBlockState(pos).setValue(TYPE, FancyDoorType.fromString(type, FancyDoorType.FULL)),
           Block.UPDATE_ALL
         );
         worldIn.setBlock(
           pos.above(),
-          worldIn.getBlockState(pos.above()).setValue(TYPE, FancyDoorType.valueOf(type.toUpperCase())),
+            worldIn.getBlockState(pos.above()).setValue(TYPE, FancyDoorType.fromString(type, FancyDoorType.FULL)),
           Block.UPDATE_ALL
         );
 

@@ -51,23 +51,7 @@ public class DoorBlockItem extends DoubleHighBlockItem implements IDoItem
     {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
 
-        DoorType doorType;
-        try
-        {
-            if (stack.getOrCreateTag().contains("type"))
-            {
-                doorType = DoorType.valueOf(stack.getOrCreateTag().getString("type").toUpperCase());
-            }
-            else
-            {
-                doorType = DoorType.FULL;
-            }
-        }
-        catch (Exception ex)
-        {
-            doorType = DoorType.FULL;
-        }
-
+        DoorType doorType = DoorType.fromString(stack.getOrCreateTag().getString("type"), DoorType.WAFFLE);
         tooltip.add(Component.translatable(Constants.MOD_ID + ".origin.tooltip"));
         tooltip.add(Component.literal(""));
         tooltip.add(Component.translatable(

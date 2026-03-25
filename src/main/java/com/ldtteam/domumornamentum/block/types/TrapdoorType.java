@@ -1,10 +1,11 @@
 package com.ldtteam.domumornamentum.block.types;
 
+import com.ldtteam.domumornamentum.util.EnumHelper;
 import net.minecraft.util.StringRepresentable;
-import net.minecraft.util.StringUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public enum TrapdoorType implements StringRepresentable
@@ -35,14 +36,23 @@ public enum TrapdoorType implements StringRepresentable
         return serializationName;
     }
 
-    public String getTranslationKeySuffix() {
+    public String getTranslationKeySuffix()
+    {
         return getSerializedName().replace("_", ".");
     }
 
-    public String getDefaultEnglishTranslation() {
+    public String getDefaultEnglishTranslation()
+    {
         final String[] parts = getSerializedName().split("_");
         return Arrays.stream(parts)
-          .map(StringUtils::capitalize)
-          .collect(Collectors.joining(" "));
+            .map(StringUtils::capitalize)
+            .collect(Collectors.joining(" "));
+    }
+
+    private static final Map<String, TrapdoorType> ID_MAP = EnumHelper.createMap(TrapdoorType.class);
+
+    public static TrapdoorType fromString(final String s, final TrapdoorType defaultType)
+    {
+        return EnumHelper.fromString(ID_MAP, s, defaultType);
     }
 }

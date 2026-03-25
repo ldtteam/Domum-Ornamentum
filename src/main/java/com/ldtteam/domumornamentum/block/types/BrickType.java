@@ -1,9 +1,12 @@
 package com.ldtteam.domumornamentum.block.types;
 
+import com.ldtteam.domumornamentum.util.EnumHelper;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Map;
 
 /**
  * Creates special blocks for shingles and timberframes.
@@ -49,5 +52,12 @@ public enum BrickType implements StringRepresentable
     public Item getIngredient2()
     {
         return this.ingredient2;
+    }
+
+    private static final Map<String, BrickType> ID_MAP = EnumHelper.createMap(BrickType.class);
+
+    public static BrickType fromString(final String s, final BrickType defaultType)
+    {
+        return EnumHelper.fromString(ID_MAP, s, defaultType);
     }
 }

@@ -107,12 +107,12 @@ public class DoorBlock extends AbstractBlockDoor<DoorBlock> implements IMaterial
         final String type = stack.getOrCreateTag().getString("type");
         worldIn.setBlock(
           pos,
-          worldIn.getBlockState(pos).setValue(TYPE, DoorType.valueOf(type.toUpperCase())),
+            worldIn.getBlockState(pos).setValue(TYPE, DoorType.fromString(type, DoorType.WAFFLE)),
           Block.UPDATE_ALL
         );
         worldIn.setBlock(
           pos.above(),
-          worldIn.getBlockState(pos.above()).setValue(TYPE, DoorType.valueOf(type.toUpperCase())),
+            worldIn.getBlockState(pos.above()).setValue(TYPE, DoorType.fromString(type, DoorType.WAFFLE)),
           Block.UPDATE_ALL
         );
 

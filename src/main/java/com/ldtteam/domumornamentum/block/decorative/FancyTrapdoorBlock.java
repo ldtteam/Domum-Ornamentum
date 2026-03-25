@@ -111,7 +111,7 @@ public class FancyTrapdoorBlock extends AbstractBlockTrapdoor<FancyTrapdoorBlock
         final String type = stack.getOrCreateTag().getString("type");
         worldIn.setBlock(
           pos,
-          state.setValue(TYPE, FancyTrapdoorType.valueOf(type.toUpperCase())),
+            state.setValue(TYPE, FancyTrapdoorType.fromString(type, FancyTrapdoorType.FULL)),
           Block.UPDATE_ALL
         );
 

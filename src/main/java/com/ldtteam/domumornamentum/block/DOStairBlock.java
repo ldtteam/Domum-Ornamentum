@@ -56,7 +56,7 @@ public class DOStairBlock extends Block implements SimpleWaterloggedBlock
                                     .setValue(FACING, Direction.NORTH)
                                     .setValue(HALF, Half.BOTTOM)
                                     .setValue(SHAPE, StairsShape.STRAIGHT)
-                                    .setValue(WATERLOGGED, Boolean.valueOf(false)));
+            .setValue(WATERLOGGED, false));
         this.stateSupplier = state;
     }
 
@@ -128,7 +128,7 @@ public class DOStairBlock extends Block implements SimpleWaterloggedBlock
                                     direction != Direction.DOWN && (direction == Direction.UP || !(p_56872_.getClickLocation().y - (double) blockpos.getY() > 0.5D))
                                       ? Half.BOTTOM
                                       : Half.TOP)
-                                  .setValue(WATERLOGGED, Boolean.valueOf(fluidstate.getType() == Fluids.WATER));
+            .setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER);
         return blockstate.setValue(SHAPE, getStairsShape(blockstate, p_56872_.getLevel(), blockpos));
     }
 

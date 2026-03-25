@@ -125,7 +125,7 @@ public class TrapdoorBlock extends AbstractBlockTrapdoor<TrapdoorBlock> implemen
     @Override
     public BlockState getStateForPlacement(final @NotNull BlockPlaceContext context)
     {
-        return super.getStateForPlacement(context).setValue(TYPE, TrapdoorType.valueOf(context.getItemInHand().getOrCreateTag().getString("type")));
+        return super.getStateForPlacement(context).setValue(TYPE, TrapdoorType.fromString(context.getItemInHand().getOrCreateTag().getString("type"), TrapdoorType.WAFFLE));
     }
 
     @Override

@@ -1,7 +1,10 @@
 package com.ldtteam.domumornamentum.block.types;
 
+import com.ldtteam.domumornamentum.util.EnumHelper;
 import net.minecraft.util.StringRepresentable;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Map;
 
 /**
  * Wood types used by Shingles
@@ -80,5 +83,12 @@ public enum ShingleWoodType implements StringRepresentable
     public String getRecipeIngredient()
     {
         return this.recipeIngredient;
+    }
+
+    private static final Map<String, ShingleWoodType> ID_MAP = EnumHelper.createMap(ShingleWoodType.class);
+
+    public static ShingleWoodType fromString(final String s, final ShingleWoodType defaultType)
+    {
+        return EnumHelper.fromString(ID_MAP, s, defaultType);
     }
 }

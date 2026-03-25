@@ -1,5 +1,6 @@
 package com.ldtteam.domumornamentum.block.types;
 
+import com.ldtteam.domumornamentum.util.EnumHelper;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
@@ -9,6 +10,8 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Map;
 
 /**
  * Creates special blocks for shingles and timberframes.
@@ -118,5 +121,12 @@ public enum ExtraBlockType implements StringRepresentable
             properties.noCollission();
         }
         return properties;
+    }
+
+    private static final Map<String, ExtraBlockType> ID_MAP = EnumHelper.createMap(ExtraBlockType.class);
+
+    public static ExtraBlockType fromString(final String s, final ExtraBlockType defaultType)
+    {
+        return EnumHelper.fromString(ID_MAP, s, defaultType);
     }
 }

@@ -33,15 +33,7 @@ public class ModBusEventHandler
           (itemStack, clientLevel, livingEntity, i) -> {
             if (!itemStack.getOrCreateTag().contains("type"))
                 return 0f;
-
-              TrapdoorType trapdoorType;
-              try {
-                  trapdoorType = TrapdoorType.valueOf(itemStack.getOrCreateTag().getString("type").toUpperCase());
-              } catch (Exception ex) {
-                  trapdoorType = TrapdoorType.FULL;
-              }
-
-              return trapdoorType.ordinal();
+              return TrapdoorType.fromString(itemStack.getOrCreateTag().getString("type"), TrapdoorType.WAFFLE).ordinal();
           }));
         event.enqueueWork(() -> ItemProperties.register(IModBlocks.getInstance().getDoor().asItem(), new ResourceLocation(Constants.DOOR_MODEL_OVERRIDE),
           (itemStack, clientLevel, livingEntity, i) -> handleDoorTypeOverride(itemStack)));
@@ -98,18 +90,7 @@ public class ModBusEventHandler
         {
             return 0f;
         }
-
-        DoorType doorType;
-        try
-        {
-            doorType = DoorType.valueOf(itemStack.getOrCreateTag().getString("type").toUpperCase());
-        }
-        catch (Exception ex)
-        {
-            doorType = DoorType.FULL;
-        }
-
-        return doorType.ordinal();
+        return DoorType.fromString(itemStack.getOrCreateTag().getString("type"), DoorType.WAFFLE).ordinal();
     }
 
     private static float handleFancyDoorTypeOverride(ItemStack itemStack)
@@ -119,17 +100,7 @@ public class ModBusEventHandler
             return 0f;
         }
 
-        FancyDoorType doorType;
-        try
-        {
-            doorType = FancyDoorType.valueOf(itemStack.getOrCreateTag().getString("type").toUpperCase());
-        }
-        catch (Exception ex)
-        {
-            doorType = FancyDoorType.FULL;
-        }
-
-        return doorType.ordinal();
+        return FancyDoorType.fromString(itemStack.getOrCreateTag().getString("type"), FancyDoorType.FULL).ordinal();
     }
 
     private static float handleFancyTrapdoorTypeOverride(ItemStack itemStack)
@@ -139,17 +110,7 @@ public class ModBusEventHandler
             return 0f;
         }
 
-        FancyTrapdoorType doorType;
-        try
-        {
-            doorType = FancyTrapdoorType.valueOf(itemStack.getOrCreateTag().getString("type").toUpperCase());
-        }
-        catch (Exception ex)
-        {
-            doorType = FancyTrapdoorType.FULL;
-        }
-
-        return doorType.ordinal();
+        return FancyTrapdoorType.fromString(itemStack.getOrCreateTag().getString("type"), FancyTrapdoorType.FULL).ordinal();
     }
 
     private static float handleStaticTrapdoorTypeOverride(ItemStack itemStack)
@@ -159,17 +120,7 @@ public class ModBusEventHandler
             return 0f;
         }
 
-        TrapdoorType doorType;
-        try
-        {
-            doorType = TrapdoorType.valueOf(itemStack.getOrCreateTag().getString("type").toUpperCase());
-        }
-        catch (Exception ex)
-        {
-            doorType = TrapdoorType.FULL;
-        }
-
-        return doorType.ordinal();
+        return TrapdoorType.fromString(itemStack.getOrCreateTag().getString("type"), TrapdoorType.WAFFLE).ordinal();
     }
     private static float handlePostTypeOverride(ItemStack itemStack)
     {
@@ -178,16 +129,6 @@ public class ModBusEventHandler
             return 0f;
         }
 
-        PostType postType;
-        try
-        {
-            postType = PostType.valueOf(itemStack.getOrCreateTag().getString("type").toUpperCase());
-        }
-        catch (Exception ex)
-        {
-            postType = PostType.PLAIN;
-        }
-
-        return postType.ordinal();
+        return PostType.fromString(itemStack.getOrCreateTag().getString("type"), PostType.PLAIN).ordinal();
     }
 }
