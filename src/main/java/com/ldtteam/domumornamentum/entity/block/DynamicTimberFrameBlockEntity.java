@@ -536,7 +536,7 @@ public class DynamicTimberFrameBlockEntity extends AbstractMateriallyTexturedBlo
             textureMapping.put(WEST_DOWN, frameBlock);
         }
 
-        this.textureDataCache = new MaterialTextureData(textureMapping);
+        this.textureDataCache = new MaterialTextureData(new HashMap<>(textureMapping));
         this.requestModelDataUpdate();
         if (level != null)
         {
