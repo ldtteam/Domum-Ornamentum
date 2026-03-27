@@ -2,11 +2,9 @@ package com.ldtteam.domumornamentum.block.decorative;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import com.ldtteam.domumornamentum.block.AbstractBlockStairs;
-import com.ldtteam.domumornamentum.block.ICachedItemGroupBlock;
-import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
-import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
+import com.ldtteam.domumornamentum.block.*;
 import com.ldtteam.domumornamentum.block.components.SimpleRetexturableComponent;
+import com.ldtteam.domumornamentum.block.types.ExtraBlockType;
 import com.ldtteam.domumornamentum.block.types.ShingleShapeType;
 import com.ldtteam.domumornamentum.entity.block.MateriallyTexturedBlockEntity;
 import com.ldtteam.domumornamentum.recipe.architectscutter.ArchitectsCutterRecipeBuilder;
@@ -45,10 +43,7 @@ import java.util.List;
  */
 public class ShingleBlock extends AbstractBlockStairs<ShingleBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock
 {
-    public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
-                                                                               .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/clay"), ModTags.SHINGLES_ROOF, Blocks.CLAY))
-                                                                               .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/oak_planks"), ModTags.SHINGLES_SUPPORT, Blocks.OAK_PLANKS))
-                                                                               .build();
+    private static List<IMateriallyTexturedBlockComponent> COMPONENTS = null;
 
     /**
      * The hardness this block has.
@@ -107,6 +102,20 @@ public class ShingleBlock extends AbstractBlockStairs<ShingleBlock> implements I
     @Override
     public @NotNull List<IMateriallyTexturedBlockComponent> getComponents()
     {
+        if (COMPONENTS == null)
+        {
+            COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
+                .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/clay"), ModTags.SHINGLES_ROOF,
+                    ModBlocks.getInstance()
+                        .getExtraTopBlocks()
+                        .stream()
+                        .filter(b -> (b instanceof ExtraBlock extraBlock && extraBlock.getType() == ExtraBlockType.BASE_BRICK))
+                        .findFirst()
+                        .get()))
+                .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/oak_planks"), ModTags.SHINGLES_SUPPORT, Blocks.OAK_PLANKS))
+                .build();
+        }
+
         return COMPONENTS;
     }
 
@@ -138,7 +147,7 @@ public class ShingleBlock extends AbstractBlockStairs<ShingleBlock> implements I
     @Override
     public void buildRecipes(final RecipeOutput recipeOutput)
     {
-        new ArchitectsCutterRecipeBuilder(this, RecipeCategory.BUILDING_BLOCKS).count(COMPONENTS.size() * 2).save(recipeOutput);        
+        new ArchitectsCutterRecipeBuilder(this, RecipeCategory.BUILDING_BLOCKS).count(getComponents().size() * 2).save(recipeOutput);
     }
 
     @Override
@@ -158,7 +167,7 @@ public class ShingleBlock extends AbstractBlockStairs<ShingleBlock> implements I
 
     @Override
     public IMateriallyTexturedBlockComponent getMainComponent() {
-        return COMPONENTS.get(0);
+        return getComponents().get(0);
     }
 
     @Override

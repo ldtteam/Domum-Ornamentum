@@ -38,15 +38,15 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-import static net.minecraft.world.level.block.Blocks.ACACIA_PLANKS;
-import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
+import static net.minecraft.world.level.block.Blocks.QUARTZ_BLOCK;
+import static net.minecraft.world.level.block.Blocks.STRIPPED_OAK_WOOD;
 
 public class FancyTrapdoorBlock extends AbstractBlockTrapdoor<FancyTrapdoorBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock
 {
     public static final EnumProperty<FancyTrapdoorType> TYPE = EnumProperty.create(Constants.TYPE_BLOCK_PROPERTY, FancyTrapdoorType.class);
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
-                                                                               .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/oak_planks"), ModTags.FANCY_TRAPDOORS_MATERIALS, OAK_PLANKS))
-                                                                               .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/acacia_planks"), ModTags.FANCY_TRAPDOORS_MATERIALS, ACACIA_PLANKS))
+        .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/oak_planks"), ModTags.FANCY_TRAPDOORS_MATERIALS, STRIPPED_OAK_WOOD))
+        .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/acacia_planks"), ModTags.FANCY_TRAPDOORS_MATERIALS, QUARTZ_BLOCK))
                                                                                .build();
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();

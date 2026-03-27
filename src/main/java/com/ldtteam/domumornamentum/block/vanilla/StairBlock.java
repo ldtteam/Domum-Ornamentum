@@ -34,10 +34,12 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
+import static net.minecraft.world.level.block.Blocks.STRIPPED_OAK_WOOD;
 
 public class StairBlock extends net.minecraft.world.level.block.StairBlock implements IMateriallyTexturedBlock, EntityBlock, ICachedItemGroupBlock, IDOBlock<StairBlock>
 {
-    private static IMateriallyTexturedBlockComponent MATERIAL_COMPONENT = new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/oak_planks"), ModTags.STAIRS_MATERIALS, OAK_PLANKS);
+    private static IMateriallyTexturedBlockComponent MATERIAL_COMPONENT =
+        new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/oak_planks"), ModTags.STAIRS_MATERIALS, STRIPPED_OAK_WOOD);
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
                                                                                .add(MATERIAL_COMPONENT)
                                                                                .build();

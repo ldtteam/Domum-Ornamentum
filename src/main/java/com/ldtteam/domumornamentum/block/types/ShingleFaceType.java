@@ -1,7 +1,10 @@
 package com.ldtteam.domumornamentum.block.types;
 
+import com.ldtteam.domumornamentum.util.EnumHelper;
 import net.minecraft.util.StringRepresentable;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Map;
 
 /**
  * Face types used by both Shingles and Shingle Slabs.
@@ -138,5 +141,12 @@ public enum ShingleFaceType implements StringRepresentable
     public boolean isDyed()
     {
         return this.isDyed;
+    }
+
+    private static final Map<String, ShingleFaceType> ID_MAP = EnumHelper.createMap(ShingleFaceType.class);
+
+    public static ShingleFaceType fromString(final String s, final ShingleFaceType defaultType)
+    {
+        return EnumHelper.fromString(ID_MAP, s, defaultType);
     }
 }
