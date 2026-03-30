@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.ldtteam.domumornamentum.client.model.geometry.MateriallyTexturedGeometry;
 import com.ldtteam.domumornamentum.util.Constants;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -25,7 +25,7 @@ public class MateriallyTexturedModelLoader implements IGeometryLoader<Materially
     @Override
     public MateriallyTexturedGeometry read(JsonObject jsonObject, JsonDeserializationContext deserializationContext) throws JsonParseException {
         final String parent = jsonObject.get("parent").getAsString();
-        final ResourceLocation parentLocation = ResourceLocation.parse(parent);
+        final Identifier parentLocation = Identifier.parse(parent);
 
         return new MateriallyTexturedGeometry(parentLocation);
     }

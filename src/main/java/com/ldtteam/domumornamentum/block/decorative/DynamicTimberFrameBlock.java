@@ -11,12 +11,14 @@ import com.ldtteam.domumornamentum.entity.block.DynamicTimberFrameBlockEntity;
 import com.ldtteam.domumornamentum.recipe.architectscutter.ArchitectsCutterRecipeBuilder;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.BlockUtils;
+import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -36,6 +38,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.function.Function;
 
 /**
@@ -44,8 +47,8 @@ import java.util.function.Function;
 public class DynamicTimberFrameBlock extends AbstractBlock<DynamicTimberFrameBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock
 {
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
-        .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/oak_planks"), ModTags.TIMBERFRAMES_FRAME, Blocks.OAK_PLANKS))
-        .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/dark_oak_planks"), ModTags.TIMBERFRAMES_CENTER, Blocks.DARK_OAK_PLANKS))
+        .add(new SimpleRetexturableComponent(Identifier.withDefaultNamespace("block/oak_planks"), ModTags.TIMBERFRAMES_FRAME, Blocks.OAK_PLANKS))
+        .add(new SimpleRetexturableComponent(Identifier.withDefaultNamespace("block/dark_oak_planks"), ModTags.TIMBERFRAMES_CENTER, Blocks.DARK_OAK_PLANKS))
         .build();
 
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
@@ -68,7 +71,7 @@ public class DynamicTimberFrameBlock extends AbstractBlock<DynamicTimberFrameBlo
     /**
      * Enum defining the different block offsets we care about.
      */
-    public enum Offset
+    public enum Offset implements StringRepresentable
     {
         UP(BlockPos::above),
         DOWN(BlockPos::below),
@@ -84,6 +87,11 @@ public class DynamicTimberFrameBlock extends AbstractBlock<DynamicTimberFrameBlo
         DOWN_WEST(p -> p.below().west()),
         DOWN_NORTH(p -> p.below().north()),
         DOWN_SOUTH(p -> p.below().south());
+
+        public static final Codec<Offset> CODEC = new StringRepresentable.EnumCodec<>(
+            values(),
+            s -> valueOf(s.toUpperCase(Locale.ROOT).replace("-", "_"))
+        );
 
         /**
          * Translation function this direction means in relation to a blockpos change.
@@ -152,6 +160,12 @@ public class DynamicTimberFrameBlock extends AbstractBlock<DynamicTimberFrameBlo
                 case DOWN_EAST -> DOWN_SOUTH;
                 default -> this;
             };
+        }
+
+        @Override
+        public String getSerializedName()
+        {
+            return name().toLowerCase(Locale.ROOT).replace("_", "-");
         }
     }
 

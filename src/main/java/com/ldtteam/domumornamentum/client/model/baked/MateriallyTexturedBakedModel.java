@@ -14,7 +14,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
@@ -122,7 +122,7 @@ public class MateriallyTexturedBakedModel implements BakedModel {
         if (textureData == null)
             return getParticleIcon();
 
-        final ResourceLocation particleTextureName = getParticleIcon().contents().name();
+        final Identifier particleTextureName = getParticleIcon().contents().name();
         if (!textureData.getTexturedComponents().containsKey(particleTextureName))
             return getParticleIcon();
 

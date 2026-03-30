@@ -11,10 +11,9 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 import java.util.HashMap;
@@ -23,25 +22,25 @@ import java.util.Objects;
 import java.util.function.IntFunction;
 import java.util.function.UnaryOperator;
 
-public record MaterialTextureData(Map<ResourceLocation, Block> getTexturedComponents)
+public record MaterialTextureData(Map<Identifier, Block> getTexturedComponents)
 {
     public static final MaterialTextureData EMPTY = new MaterialTextureData(Map.of());
 
     public static final Codec<MaterialTextureData> CODEC =
-        Codec.unboundedMap(ResourceLocation.CODEC, BuiltInRegistries.BLOCK.byNameCodec())
+        Codec.unboundedMap(Identifier.CODEC, BuiltInRegistries.BLOCK.byNameCodec())
             .xmap(MaterialTextureData::fromCodec, MaterialTextureData::getTexturedComponents);
 
     public static final StreamCodec<RegistryFriendlyByteBuf, MaterialTextureData> STREAM_CODEC =
         ByteBufCodecs
-            .map((IntFunction<Map<ResourceLocation, Block>>) HashMap::new,
-                ResourceLocation.STREAM_CODEC,
+            .map((IntFunction<Map<Identifier, Block>>) HashMap::new,
+                Identifier.STREAM_CODEC,
                 ByteBufCodecs.registry(Registries.BLOCK))
             .map(MaterialTextureData::fromCodec, MaterialTextureData::getTexturedComponents);
 
     /**
      * Ensures emptiness and mutability
      */
-    private static MaterialTextureData fromCodec(final Map<ResourceLocation, Block> texturedComponents)
+    private static MaterialTextureData fromCodec(final Map<Identifier, Block> texturedComponents)
     {
         return texturedComponents.isEmpty() ? EMPTY : new MaterialTextureData(texturedComponents);
     }
@@ -103,8 +102,8 @@ public record MaterialTextureData(Map<ResourceLocation, Block> getTexturedCompon
 
         final Builder newData = new Builder();
         nbt.getAllKeys().forEach(key -> {
-            final ResourceLocation name = ResourceLocation.parse(nbt.getString(key));
-                newData.setComponent(ResourceLocation.parse(key), BuiltInRegistries.BLOCK.get(name));
+            final Identifier name = Identifier.parse(nbt.getString(key));
+                newData.setComponent(Identifier.parse(key), BuiltInRegistries.BLOCK.get(name));
         });
         return newData.build();
     }
@@ -145,9 +144,9 @@ public record MaterialTextureData(Map<ResourceLocation, Block> getTexturedCompon
      */
     public static class Builder
     {
-        private final ImmutableMap.Builder<ResourceLocation, Block> texturedComponents = ImmutableMap.builder();
+        private final ImmutableMap.Builder<Identifier, Block> texturedComponents = ImmutableMap.builder();
 
-        public Builder setComponent(final ResourceLocation key, final Block value)
+        public Builder setComponent(final Identifier key, final Block value)
         {
             texturedComponents.put(key, value);
             return this;

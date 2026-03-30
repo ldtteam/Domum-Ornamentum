@@ -9,7 +9,7 @@ import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.block.Block;
@@ -66,7 +66,7 @@ public class PostBlockItem extends BlockItemWithClientBePlacement implements IDo
     }
 
     @Override
-    public ResourceLocation getGroup()
+    public Identifier getGroup()
     {
         return Constants.resLocDO("kpost");
     }

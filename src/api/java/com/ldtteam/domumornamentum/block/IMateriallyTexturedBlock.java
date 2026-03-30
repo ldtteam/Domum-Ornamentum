@@ -2,11 +2,12 @@ package com.ldtteam.domumornamentum.block;
 
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.entity.block.IMateriallyTexturedBlockEntity;
+import com.ldtteam.domumornamentum.util.QuadFunction;
+import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.data.models.blockstates.PropertyDispatch;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -78,7 +79,7 @@ public interface IMateriallyTexturedBlock
         return stack.isCorrectToolForDrops(state);
     }
 
-    default float getDOExplosionResistance(final PropertyDispatch.QuadFunction<BlockState, BlockGetter, BlockPos, Explosion, Float> inputFunction, BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {
+    default float getDOExplosionResistance(final QuadFunction<BlockState, BlockGetter, BlockPos, Explosion, Float> inputFunction, BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof IMateriallyTexturedBlockEntity mtbe) {
             if (getMainComponent() == null)
@@ -94,7 +95,7 @@ public interface IMateriallyTexturedBlock
         return inputFunction.apply(state, level, pos, explosion);
     }
 
-    default float getDODestroyProgress(final PropertyDispatch.QuadFunction<BlockState, Player, BlockGetter, BlockPos, Float> inputFunction, BlockState state, Player player, BlockGetter level, BlockPos pos) {
+    default float getDODestroyProgress(final QuadFunction<BlockState, Player, BlockGetter, BlockPos, Float> inputFunction, BlockState state, Player player, BlockGetter level, BlockPos pos) {
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof IMateriallyTexturedBlockEntity mtbe) {
             if (getMainComponent() == null)
@@ -110,7 +111,7 @@ public interface IMateriallyTexturedBlock
         return inputFunction.apply(state, player, level, pos);
     }
 
-    default SoundType getDOSoundType(final PropertyDispatch.QuadFunction<BlockState, LevelReader, BlockPos, Entity, SoundType> inputFunction, BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
+    default SoundType getDOSoundType(final QuadFunction<BlockState, LevelReader, BlockPos, Entity, SoundType> inputFunction, BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof IMateriallyTexturedBlockEntity mtbe) {
             if (getMainComponent() == null)

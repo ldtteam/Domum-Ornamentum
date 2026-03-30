@@ -10,7 +10,7 @@ import com.ldtteam.domumornamentum.item.interfaces.IDoItem;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.ItemStack;
@@ -68,13 +68,13 @@ public class TimberFrameBlockItem extends BlockItemWithClientBePlacement impleme
     }
 
     @Override
-    public List<ResourceLocation> getInputIds()
+    public List<Identifier> getInputIds()
     {
         return ImmutableList.of(Constants.resLocDO("frame"), Constants.resLocDO("center"));
     }
 
     @Override
-    public ResourceLocation getGroup()
+    public Identifier getGroup()
     {
         return Constants.resLocDO("btimberframe");
     }

@@ -15,7 +15,7 @@ import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.packs.VanillaRecipeProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.component.BlockItemStateProperties;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.Property;
@@ -75,7 +75,7 @@ public class ArchitectsCutterRecipeBuilder
         return this;
     }
 
-    public void save(final RecipeOutput output, final ResourceLocation recipeId)
+    public void save(final RecipeOutput output, final Identifier recipeId)
     {
         final ArchitectsCutterRecipe recipe = new ArchitectsCutterRecipe(BuiltInRegistries.BLOCK.getKey(result),
             count,

@@ -13,87 +13,92 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.client.model.data.ModelData;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
 import static com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes.DYNAMIC_TIMBERFRAME;
 import static com.ldtteam.domumornamentum.util.Constants.BLOCK_ENTITY_TEXTURE_DATA;
+import static com.ldtteam.domumornamentum.util.Constants.OFFSETS;
+import static com.ldtteam.domumornamentum.util.Constants.PRIMARY_BLOCK;
+import static com.ldtteam.domumornamentum.util.Constants.SECONDARY_BLOCK;
 
 public class DynamicTimberFrameBlockEntity extends AbstractMateriallyTexturedBlockEntity
 {
     // Frame (wool)
-    public static final ResourceLocation NORTH_UP          = ResourceLocation.withDefaultNamespace("block/white_wool");
-    public static final ResourceLocation NORTH_DOWN        = ResourceLocation.withDefaultNamespace("block/orange_wool");
-    public static final ResourceLocation SOUTH_UP          = ResourceLocation.withDefaultNamespace("block/magenta_wool");
-    public static final ResourceLocation SOUTH_DOWN        = ResourceLocation.withDefaultNamespace("block/light_blue_wool");
-    public static final ResourceLocation EAST_DOWN         = ResourceLocation.withDefaultNamespace("block/yellow_wool");
-    public static final ResourceLocation EAST_UP           = ResourceLocation.withDefaultNamespace("block/lime_wool");
-    public static final ResourceLocation WEST_DOWN         = ResourceLocation.withDefaultNamespace("block/pink_wool");
-    public static final ResourceLocation WEST_UP           = ResourceLocation.withDefaultNamespace("block/gray_wool");
-    public static final ResourceLocation NORTH_EAST_DOWN   = ResourceLocation.withDefaultNamespace("block/light_gray_wool");
-    public static final ResourceLocation NORTH_EAST_UP     = ResourceLocation.withDefaultNamespace("block/cyan_wool");
-    public static final ResourceLocation NORTH_EAST_CORNER = ResourceLocation.withDefaultNamespace("block/purple_wool");
-    public static final ResourceLocation NORTH_WEST_DOWN   = ResourceLocation.withDefaultNamespace("block/blue_wool");
-    public static final ResourceLocation NORTH_WEST_UP     = ResourceLocation.withDefaultNamespace("block/brown_wool");
-    public static final ResourceLocation NORTH_WEST_CORNER = ResourceLocation.withDefaultNamespace("block/green_wool");
-    public static final ResourceLocation SOUTH_EAST_DOWN   = ResourceLocation.withDefaultNamespace("block/red_wool");
-    public static final ResourceLocation SOUTH_EAST_UP     = ResourceLocation.withDefaultNamespace("block/black_wool");
+    public static final Identifier NORTH_UP          = Identifier.withDefaultNamespace("block/white_wool");
+    public static final Identifier NORTH_DOWN        = Identifier.withDefaultNamespace("block/orange_wool");
+    public static final Identifier SOUTH_UP          = Identifier.withDefaultNamespace("block/magenta_wool");
+    public static final Identifier SOUTH_DOWN        = Identifier.withDefaultNamespace("block/light_blue_wool");
+    public static final Identifier EAST_DOWN         = Identifier.withDefaultNamespace("block/yellow_wool");
+    public static final Identifier EAST_UP           = Identifier.withDefaultNamespace("block/lime_wool");
+    public static final Identifier WEST_DOWN         = Identifier.withDefaultNamespace("block/pink_wool");
+    public static final Identifier WEST_UP           = Identifier.withDefaultNamespace("block/gray_wool");
+    public static final Identifier NORTH_EAST_DOWN   = Identifier.withDefaultNamespace("block/light_gray_wool");
+    public static final Identifier NORTH_EAST_UP     = Identifier.withDefaultNamespace("block/cyan_wool");
+    public static final Identifier NORTH_EAST_CORNER = Identifier.withDefaultNamespace("block/purple_wool");
+    public static final Identifier NORTH_WEST_DOWN   = Identifier.withDefaultNamespace("block/blue_wool");
+    public static final Identifier NORTH_WEST_UP     = Identifier.withDefaultNamespace("block/brown_wool");
+    public static final Identifier NORTH_WEST_CORNER = Identifier.withDefaultNamespace("block/green_wool");
+    public static final Identifier SOUTH_EAST_DOWN   = Identifier.withDefaultNamespace("block/red_wool");
+    public static final Identifier SOUTH_EAST_UP     = Identifier.withDefaultNamespace("block/black_wool");
 
     // Frame (terracotta)
-    public static final ResourceLocation SOUTH_EAST_CORNER = ResourceLocation.withDefaultNamespace("block/white_terracotta");
-    public static final ResourceLocation SOUTH_WEST_DOWN   = ResourceLocation.withDefaultNamespace("block/orange_terracotta");
-    public static final ResourceLocation SOUTH_WEST_UP     = ResourceLocation.withDefaultNamespace("block/magenta_terracotta");
-    public static final ResourceLocation SOUTH_WEST_CORNER = ResourceLocation.withDefaultNamespace("block/light_blue_terracotta");
+    public static final Identifier SOUTH_EAST_CORNER = Identifier.withDefaultNamespace("block/white_terracotta");
+    public static final Identifier SOUTH_WEST_DOWN   = Identifier.withDefaultNamespace("block/orange_terracotta");
+    public static final Identifier SOUTH_WEST_UP     = Identifier.withDefaultNamespace("block/magenta_terracotta");
+    public static final Identifier SOUTH_WEST_CORNER = Identifier.withDefaultNamespace("block/light_blue_terracotta");
 
     // Center (terracotta)
-    public static final ResourceLocation CENTER                 = ResourceLocation.withDefaultNamespace("block/yellow_terracotta");
-    public static final ResourceLocation BOTTOM_CENTER          = ResourceLocation.withDefaultNamespace("block/lime_terracotta");
-    public static final ResourceLocation BOTTOM_SOUTH_CENTER    = ResourceLocation.withDefaultNamespace("block/pink_terracotta");
-    public static final ResourceLocation BOTTOM_NORTH_CENTER    = ResourceLocation.withDefaultNamespace("block/gray_terracotta");
-    public static final ResourceLocation TOP_NORTH_CENTER       = ResourceLocation.withDefaultNamespace("block/light_gray_terracotta");
-    public static final ResourceLocation TOP_SOUTH_CENTER       = ResourceLocation.withDefaultNamespace("block/cyan_terracotta");
-    public static final ResourceLocation TOP_CENTER             = ResourceLocation.withDefaultNamespace("block/purple_terracotta");
-    public static final ResourceLocation NORTH_WEST_CENTER      = ResourceLocation.withDefaultNamespace("block/blue_terracotta");
-    public static final ResourceLocation NORTH_EAST_CENTER      = ResourceLocation.withDefaultNamespace("block/brown_terracotta");
-    public static final ResourceLocation NORTH_WEST_UP_CENTER   = ResourceLocation.withDefaultNamespace("block/green_terracotta");
-    public static final ResourceLocation NORTH_EAST_UP_CENTER   = ResourceLocation.withDefaultNamespace("block/red_terracotta");
-    public static final ResourceLocation NORTH_EAST_DOWN_CENTER = ResourceLocation.withDefaultNamespace("block/black_terracotta");
+    public static final Identifier CENTER                 = Identifier.withDefaultNamespace("block/yellow_terracotta");
+    public static final Identifier BOTTOM_CENTER          = Identifier.withDefaultNamespace("block/lime_terracotta");
+    public static final Identifier BOTTOM_SOUTH_CENTER    = Identifier.withDefaultNamespace("block/pink_terracotta");
+    public static final Identifier BOTTOM_NORTH_CENTER    = Identifier.withDefaultNamespace("block/gray_terracotta");
+    public static final Identifier TOP_NORTH_CENTER       = Identifier.withDefaultNamespace("block/light_gray_terracotta");
+    public static final Identifier TOP_SOUTH_CENTER       = Identifier.withDefaultNamespace("block/cyan_terracotta");
+    public static final Identifier TOP_CENTER             = Identifier.withDefaultNamespace("block/purple_terracotta");
+    public static final Identifier NORTH_WEST_CENTER      = Identifier.withDefaultNamespace("block/blue_terracotta");
+    public static final Identifier NORTH_EAST_CENTER      = Identifier.withDefaultNamespace("block/brown_terracotta");
+    public static final Identifier NORTH_WEST_UP_CENTER   = Identifier.withDefaultNamespace("block/green_terracotta");
+    public static final Identifier NORTH_EAST_UP_CENTER   = Identifier.withDefaultNamespace("block/red_terracotta");
+    public static final Identifier NORTH_EAST_DOWN_CENTER = Identifier.withDefaultNamespace("block/black_terracotta");
 
     // Center (concrete)
-    public static final ResourceLocation NORTH_WEST_DOWN_CENTER = ResourceLocation.withDefaultNamespace("block/white_concrete");
-    public static final ResourceLocation SOUTH_EAST_CENTER      = ResourceLocation.withDefaultNamespace("block/orange_concrete");
-    public static final ResourceLocation SOUTH_WEST_CENTER      = ResourceLocation.withDefaultNamespace("block/magenta_concrete");
-    public static final ResourceLocation SOUTH_WEST_UP_CENTER   = ResourceLocation.withDefaultNamespace("block/light_blue_concrete");
-    public static final ResourceLocation SOUTH_EAST_UP_CENTER   = ResourceLocation.withDefaultNamespace("block/yellow_concrete");
-    public static final ResourceLocation SOUTH_EAST_DOWN_CENTER = ResourceLocation.withDefaultNamespace("block/lime_concrete");
-    public static final ResourceLocation SOUTH_WEST_DOWN_CENTER = ResourceLocation.withDefaultNamespace("block/pink_concrete");
-    public static final ResourceLocation EAST_NORTH_CENTER      = ResourceLocation.withDefaultNamespace("block/gray_concrete");
-    public static final ResourceLocation EAST_SOUTH_CENTER      = ResourceLocation.withDefaultNamespace("block/light_gray_concrete");
-    public static final ResourceLocation EAST_SOUTH_UP_CENTER   = ResourceLocation.withDefaultNamespace("block/cyan_concrete");
-    public static final ResourceLocation EAST_NORTH_UP_CENTER   = ResourceLocation.withDefaultNamespace("block/purple_concrete");
-    public static final ResourceLocation EAST_SOUTH_DOWN_CENTER = ResourceLocation.withDefaultNamespace("block/blue_concrete");
-    public static final ResourceLocation EAST_NORTH_DOWN_CENTER = ResourceLocation.withDefaultNamespace("block/brown_concrete");
-    public static final ResourceLocation WEST_NORTH_CENTER      = ResourceLocation.withDefaultNamespace("block/green_concrete");
-    public static final ResourceLocation WEST_SOUTH_CENTER      = ResourceLocation.withDefaultNamespace("block/red_concrete");
-    public static final ResourceLocation WEST_SOUTH_UP_CENTER   = ResourceLocation.withDefaultNamespace("block/black_concrete");
-    public static final ResourceLocation WEST_NORTH_UP_CENTER   = ResourceLocation.withDefaultNamespace("block/glowstone");
-    public static final ResourceLocation WEST_SOUTH_DOWN_CENTER = ResourceLocation.withDefaultNamespace("block/cherry_planks");
-    public static final ResourceLocation WEST_NORTH_DOWN_CENTER = ResourceLocation.withDefaultNamespace("block/shroomlight");
+    public static final Identifier NORTH_WEST_DOWN_CENTER = Identifier.withDefaultNamespace("block/white_concrete");
+    public static final Identifier SOUTH_EAST_CENTER      = Identifier.withDefaultNamespace("block/orange_concrete");
+    public static final Identifier SOUTH_WEST_CENTER      = Identifier.withDefaultNamespace("block/magenta_concrete");
+    public static final Identifier SOUTH_WEST_UP_CENTER   = Identifier.withDefaultNamespace("block/light_blue_concrete");
+    public static final Identifier SOUTH_EAST_UP_CENTER   = Identifier.withDefaultNamespace("block/yellow_concrete");
+    public static final Identifier SOUTH_EAST_DOWN_CENTER = Identifier.withDefaultNamespace("block/lime_concrete");
+    public static final Identifier SOUTH_WEST_DOWN_CENTER = Identifier.withDefaultNamespace("block/pink_concrete");
+    public static final Identifier EAST_NORTH_CENTER      = Identifier.withDefaultNamespace("block/gray_concrete");
+    public static final Identifier EAST_SOUTH_CENTER      = Identifier.withDefaultNamespace("block/light_gray_concrete");
+    public static final Identifier EAST_SOUTH_UP_CENTER   = Identifier.withDefaultNamespace("block/cyan_concrete");
+    public static final Identifier EAST_NORTH_UP_CENTER   = Identifier.withDefaultNamespace("block/purple_concrete");
+    public static final Identifier EAST_SOUTH_DOWN_CENTER = Identifier.withDefaultNamespace("block/blue_concrete");
+    public static final Identifier EAST_NORTH_DOWN_CENTER = Identifier.withDefaultNamespace("block/brown_concrete");
+    public static final Identifier WEST_NORTH_CENTER      = Identifier.withDefaultNamespace("block/green_concrete");
+    public static final Identifier WEST_SOUTH_CENTER      = Identifier.withDefaultNamespace("block/red_concrete");
+    public static final Identifier WEST_SOUTH_UP_CENTER   = Identifier.withDefaultNamespace("block/black_concrete");
+    public static final Identifier WEST_NORTH_UP_CENTER   = Identifier.withDefaultNamespace("block/glowstone");
+    public static final Identifier WEST_SOUTH_DOWN_CENTER = Identifier.withDefaultNamespace("block/cherry_planks");
+    public static final Identifier WEST_NORTH_DOWN_CENTER = Identifier.withDefaultNamespace("block/shroomlight");
 
     /**
      * Cached resmap.
@@ -103,7 +108,7 @@ public class DynamicTimberFrameBlockEntity extends AbstractMateriallyTexturedBlo
     /**
      * Texture mapping of position at resource location to block (air, frame or center)
      */
-    private final Map<ResourceLocation, Block> textureMapping = new TreeMap<>();
+    private final Map<Identifier, Block> textureMapping = new TreeMap<>();
 
     /**
      * All the offsets that there are in a block at the moment.
@@ -140,15 +145,15 @@ public class DynamicTimberFrameBlockEntity extends AbstractMateriallyTexturedBlo
     }
 
     @Override
-    public void onDataPacket(final Connection net, final ClientboundBlockEntityDataPacket packet, final HolderLookup.Provider lookupProvider)
+    public void onDataPacket(final Connection net, final ValueInput valueInput)
     {
-        this.loadAdditional(Objects.requireNonNull(packet.getTag()), lookupProvider);
+        this.loadAdditional(valueInput);
     }
 
     @Override
-    public void handleUpdateTag(final CompoundTag tag, final HolderLookup.Provider lookupProvider)
+    public void handleUpdateTag(final ValueInput input)
     {
-        this.loadAdditional(tag, lookupProvider);
+        this.loadAdditional(input);
     }
 
     @Override
@@ -156,6 +161,8 @@ public class DynamicTimberFrameBlockEntity extends AbstractMateriallyTexturedBlo
     {
         return ClientboundBlockEntityDataPacket.create(this);
     }
+
+
 
     @Override
     public void saveToItem(@NotNull ItemStack stack, HolderLookup.Provider provider)
@@ -168,6 +175,32 @@ public class DynamicTimberFrameBlockEntity extends AbstractMateriallyTexturedBlo
         this.removeComponentsFromTag(compound);
         BlockItem.setBlockEntityData(stack, this.getType(), compound);
         stack.applyComponents(this.collectComponents());
+    }
+
+    @Override
+    protected void saveAdditional(final ValueOutput output)
+    {
+        super.saveAdditional(output);
+
+        var blockRegistryCodec = getLevel().registryAccess().lookupOrThrow(Registries.BLOCK)
+                .byNameCodec();
+
+        output.store(BLOCK_ENTITY_TEXTURE_DATA, MaterialTextureData.CODEC, originalTextureData);
+        output.store(PRIMARY_BLOCK, blockRegistryCodec, centerBlock);
+        output.store(SECONDARY_BLOCK, blockRegistryCodec, frameBlock);
+
+        var offsetList = output.list(OFFSETS, DynamicTimberFrameBlock.Offset.CODEC);
+
+
+        final ListTag listTag = new ListTag();
+        for (final Object2BooleanMap.Entry<DynamicTimberFrameBlock.Offset> mapEntry : offsets.object2BooleanEntrySet())
+        {
+            final CompoundTag localCompound = new CompoundTag();
+            localCompound.putInt("offset", mapEntry.getKey().ordinal());
+            localCompound.putBoolean("bool", mapEntry.getBooleanValue());
+            listTag.add(localCompound);
+        }
+        output.put("offsets", listTag);
     }
 
     @Override
@@ -208,13 +241,13 @@ public class DynamicTimberFrameBlockEntity extends AbstractMateriallyTexturedBlo
             MaterialTextureData.CODEC.parse(dynamicops, nbt.get("originalTextureData")).resultOrPartial(DomumOrnamentum.LOGGER::error).ifPresent(this::updateTextureDataWith);
         }
 
-        final ResourceLocation primaryBlockName = ResourceLocation.parse(nbt.getString("primaryBlock"));
+        final Identifier primaryBlockName = Identifier.parse(nbt.getString("primaryBlock"));
         if (BuiltInRegistries.BLOCK.get(primaryBlockName) != Blocks.AIR)
         {
             this.centerBlock = BuiltInRegistries.BLOCK.get(primaryBlockName);
         }
 
-        final ResourceLocation secondaryBlockName = ResourceLocation.parse(nbt.getString("secondaryBlock"));
+        final Identifier secondaryBlockName = Identifier.parse(nbt.getString("secondaryBlock"));
         if (BuiltInRegistries.BLOCK.get(secondaryBlockName) != Blocks.AIR)
         {
             this.frameBlock = BuiltInRegistries.BLOCK.get(secondaryBlockName);
@@ -262,8 +295,8 @@ public class DynamicTimberFrameBlockEntity extends AbstractMateriallyTexturedBlo
     @Override
     public void updateTextureDataWith(final MaterialTextureData materialTextureData)
     {
-        centerBlock = materialTextureData.getTexturedComponents().get(ResourceLocation.withDefaultNamespace("block/dark_oak_planks"));
-        frameBlock = materialTextureData.getTexturedComponents().get(ResourceLocation.withDefaultNamespace("block/oak_planks"));
+        centerBlock = materialTextureData.getTexturedComponents().get(Identifier.withDefaultNamespace("block/dark_oak_planks"));
+        frameBlock = materialTextureData.getTexturedComponents().get(Identifier.withDefaultNamespace("block/oak_planks"));
         handleTextureMapping();
         originalTextureData = materialTextureData;
     }

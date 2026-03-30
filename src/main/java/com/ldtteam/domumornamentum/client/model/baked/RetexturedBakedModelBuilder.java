@@ -10,9 +10,8 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.SimpleBakedModel;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.model.IQuadTransformer;
@@ -40,8 +39,8 @@ public class RetexturedBakedModelBuilder {
     private final BakedModel target;
     private final RenderType renderType;
     private final BlockState sourceState;
-    private final boolean itemStackMode;
-    private final Map<ResourceLocation, ReplacementModelData> retexturingMaps = Maps.newHashMap();
+    private final boolean                               itemStackMode;
+    private final Map<Identifier, ReplacementModelData> retexturingMaps = Maps.newHashMap();
 
     private RetexturedBakedModelBuilder(final BakedModel sourceModel, BlockState sourceState, RenderType renderType, boolean itemStackMode, final BakedModel target) {
         this.sourceModel = sourceModel;
@@ -52,7 +51,7 @@ public class RetexturedBakedModelBuilder {
     }
 
     public RetexturedBakedModelBuilder with(
-            final ResourceLocation source,
+            final Identifier source,
             final BakedModel target,
             final BlockState state
             ) {
@@ -61,7 +60,7 @@ public class RetexturedBakedModelBuilder {
     }
 
     public RetexturedBakedModelBuilder with(
-            final ResourceLocation source,
+            final Identifier source,
             final Block target
     ) {
         final BlockState defaultState = target.defaultBlockState();
@@ -80,7 +79,7 @@ public class RetexturedBakedModelBuilder {
     }
 
     public RetexturedBakedModelBuilder withOut(
-            final ResourceLocation source
+            final Identifier source
     ) {
         this.retexturingMaps.putIfAbsent(source, null);
         return this;
@@ -123,11 +122,11 @@ public class RetexturedBakedModelBuilder {
         return builder.build();
     }
 
-    private boolean needsRetexturing(Map<ResourceLocation, ?> retexturingMaps, TextureAtlasSprite quad) {
+    private boolean needsRetexturing(Map<Identifier, ?> retexturingMaps, TextureAtlasSprite quad) {
         return retexturingMaps.containsKey(quad.contents().name()) && retexturingMaps.get(quad.contents().name()) != null;
     }
 
-    private boolean needsErasure(Map<ResourceLocation, ?> retexturingMaps, TextureAtlasSprite quad) {
+    private boolean needsErasure(Map<Identifier, ?> retexturingMaps, TextureAtlasSprite quad) {
         return retexturingMaps.containsKey(quad.contents().name()) && retexturingMaps.get(quad.contents().name()) == null;
     }
 

@@ -33,7 +33,7 @@ import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
@@ -75,7 +75,7 @@ public class ArchitectsCutterCategory implements IRecipeCategory<RecipeHolder<Ar
     public ArchitectsCutterCategory(@NotNull final IGuiHelper guiHelper, @NotNull final JEIPlugin plugin)
     {
         this.plugin = plugin;
-        final ResourceLocation texture = Constants.resLocDO("textures/gui/container/architectscutter2.png");
+        final Identifier texture = Constants.resLocDO("textures/gui/container/architectscutter2.png");
         this.background = guiHelper.createDrawable(texture, JEI_OFFSET_X, JEI_OFFSET_Y, CUTTER_BG_W - JEI_OFFSET_X - 9, 88);
         this.thumb = guiHelper.createDrawable(texture, CUTTER_SLIDER_U_DISABLED, CUTTER_SLIDER_V, CUTTER_SLIDER_W, CUTTER_SLIDER_H);
         this.slot = guiHelper.createDrawable(texture, CUTTER_SLOT_U, CUTTER_SLOT_V, CUTTER_SLOT_W, CUTTER_SLOT_H);
@@ -311,8 +311,8 @@ public class ArchitectsCutterCategory implements IRecipeCategory<RecipeHolder<Ar
     {
         private final ArchitectsCutterRecipe recipe;
 
-        private ResourceLocation groupId = ResourceLocation.withDefaultNamespace("");
-        private ItemStack group = ItemStack.EMPTY;
+        private Identifier groupId = Identifier.withDefaultNamespace("");
+        private ItemStack  group   = ItemStack.EMPTY;
         private ItemStack output = ItemStack.EMPTY;
 
         private final Container ingredientContainer =
@@ -330,7 +330,7 @@ public class ArchitectsCutterCategory implements IRecipeCategory<RecipeHolder<Ar
         }
 
         @NotNull
-        public ResourceLocation getGroupId()
+        public Identifier getGroupId()
         {
             return this.groupId;
         }
@@ -358,7 +358,7 @@ public class ArchitectsCutterCategory implements IRecipeCategory<RecipeHolder<Ar
             }
             else
             {
-                this.groupId = ResourceLocation.withDefaultNamespace("");
+                this.groupId = Identifier.withDefaultNamespace("");
                 this.group = ItemStack.EMPTY;
             }
 

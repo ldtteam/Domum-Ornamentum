@@ -2,7 +2,7 @@ package com.ldtteam.domumornamentum.block;
 
 import com.ldtteam.domumornamentum.container.ArchitectsCutterContainer;
 import com.ldtteam.domumornamentum.util.Constants;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -45,7 +45,7 @@ public final class ArchitectsCutterBlock extends AbstractBlock<ArchitectsCutterB
     }
 
     @Override
-    public ResourceLocation getRegistryName()
+    public Identifier getRegistryName()
     {
         return getRegistryName(this);
     }

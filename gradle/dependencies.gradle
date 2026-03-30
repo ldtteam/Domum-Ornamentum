@@ -3,6 +3,7 @@ repositories {
 }
 
 dependencies {
+    /*
     implementation "mezz.jei:jei-${project.jei_mcversion}-common-api:${project.jei_version}"
     implementation "mezz.jei:jei-${project.jei_mcversion}-neoforge-api:${project.jei_version}"
     runtimeOnly "mezz.jei:jei-${project.jei_mcversion}-neoforge:${project.jei_version}"
@@ -10,5 +11,6 @@ dependencies {
     implementation ("com.ldtteam:datagenerators:${project.dataGeneratorsVersion}:universal") {
         transitive = false
     }
+    */
 }
 

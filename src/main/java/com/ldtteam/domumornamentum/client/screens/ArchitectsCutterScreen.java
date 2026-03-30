@@ -13,7 +13,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
@@ -29,8 +29,8 @@ import static com.ldtteam.domumornamentum.util.GuiConstants.*;
 
 public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCutterContainer>
 {
-    private static final ResourceLocation BACKGROUND_TEXTURE1 = Constants.resLocDO("textures/gui/container/architectscutter.png");
-    private static final ResourceLocation BACKGROUND_TEXTURE2 = Constants.resLocDO("textures/gui/container/architectscutter2.png");
+    private static final Identifier BACKGROUND_TEXTURE1 = Constants.resLocDO("textures/gui/container/architectscutter.png");
+    private static final Identifier BACKGROUND_TEXTURE2 = Constants.resLocDO("textures/gui/container/architectscutter2.png");
 
     private float recipeSliderProgress;
 
@@ -124,7 +124,7 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
         this.drawRecipesItems(graphics, recipeAreaLeft, recipeAreaTop);
     }
 
-    private ResourceLocation getBackGroundTexture()
+    private Identifier getBackGroundTexture()
     {
         return this.menu.getCurrentGroup() == null ? BACKGROUND_TEXTURE1 : BACKGROUND_TEXTURE2;
     }
@@ -136,7 +136,7 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
             int i = this.leftPos + CUTTER_RECIPE_X;
             int j = this.topPos + CUTTER_RECIPE_Y;
             int k = this.typeIndexOffset + 10;
-            final List<ResourceLocation> list = new ArrayList<>(ModBlocks.getInstance().getOrComputeItemGroups().keySet());
+            final List<Identifier> list = new ArrayList<>(ModBlocks.getInstance().getOrComputeItemGroups().keySet());
             for (int l = this.typeIndexOffset; l < k && l < list.size(); ++l)
             {
                 int i1 = l - this.typeIndexOffset;
@@ -188,7 +188,7 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
 
     private void drawRecipeButtonBackgrounds(GuiGraphics graphics, int x, int y, int recipeAreaLeft, int recipeAreaTop) {
 
-        final List<ResourceLocation> groups = new ArrayList<>(ModBlocks.getInstance().getOrComputeItemGroups().keySet());
+        final List<Identifier> groups = new ArrayList<>(ModBlocks.getInstance().getOrComputeItemGroups().keySet());
         for(int i = this.typeIndexOffset; i < this.typeIndexOffset + 10 && i < groups.size(); ++i) {
             int drawIndex = i - this.typeIndexOffset;
             int drawLeft = recipeAreaLeft + drawIndex % 10 * CUTTER_RECIPE_W;
@@ -230,7 +230,7 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
         if (this.menu.getCurrentVariant() != null && this.menu.getCurrentVariant().getItem() instanceof BlockItem item && item.getBlock() instanceof IMateriallyTexturedBlock block)
         {
             final int numComponents = block.getComponents().size();
-            final List<ResourceLocation> input = new ArrayList<>();
+            final List<Identifier> input = new ArrayList<>();
             if (item instanceof IDoItem doItem)
             {
                 input.addAll(doItem.getInputIds());
@@ -251,14 +251,14 @@ public class ArchitectsCutterScreen extends AbstractContainerScreen<ArchitectsCu
 
     private void drawRecipesItems(final @NotNull GuiGraphics graphics, int left, int top) {
 
-        final List<ResourceLocation> typeList = new ArrayList<>(ModBlocks.getInstance().getOrComputeItemGroups().keySet());
+        final List<Identifier> typeList = new ArrayList<>(ModBlocks.getInstance().getOrComputeItemGroups().keySet());
         for(int i = this.typeIndexOffset; i < this.typeIndexOffset + 10 && i < typeList.size(); ++i) {
             int j = i - this.typeIndexOffset;
             int k = left + j % 10 * CUTTER_RECIPE_W;
             int l = j / 10;
             int i1 = top + l * CUTTER_RECIPE_H + 2;
 
-            final ResourceLocation type = typeList.get(i);
+            final Identifier type = typeList.get(i);
             if (ModBlocks.getInstance().getOrComputeItemGroups().get(type).isEmpty())
             {
                 DomumOrnamentum.LOGGER.error("Empty Item Category: " + type);

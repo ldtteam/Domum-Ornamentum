@@ -14,7 +14,7 @@ import com.ldtteam.domumornamentum.shingles.ShingleHeightType;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
@@ -138,7 +138,7 @@ public final class ModBlocks implements IModBlocks {
     /**
      * Specific item groups.
      */
-    public Map<ResourceLocation, List<ItemStack>> itemGroups = new TreeMap<>();
+    public Map<Identifier, List<ItemStack>> itemGroups = new TreeMap<>();
 
     /**
      * Private constructor to hide the implicit public one.
@@ -322,7 +322,7 @@ public final class ModBlocks implements IModBlocks {
      * Get or compute the item group specifics.
      * @return the item group.
      */
-    public Map<ResourceLocation, List<ItemStack>> getOrComputeItemGroups()
+    public Map<Identifier, List<ItemStack>> getOrComputeItemGroups()
     {
         if (itemGroups.isEmpty())
         {

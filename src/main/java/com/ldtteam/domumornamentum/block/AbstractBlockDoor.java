@@ -1,7 +1,7 @@
 package com.ldtteam.domumornamentum.block;
 
 import com.ldtteam.domumornamentum.block.interfaces.IDOBlock;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 
@@ -21,7 +21,7 @@ public abstract class AbstractBlockDoor<B extends AbstractBlockDoor<B>> extends 
     }
 
     @Override
-    public ResourceLocation getRegistryName()
+    public Identifier getRegistryName()
     {
         return getRegistryName(this);
     }

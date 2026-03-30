@@ -7,7 +7,7 @@ import com.ldtteam.domumornamentum.recipe.architectscutter.ArchitectsCutterRecip
 import com.ldtteam.domumornamentum.recipe.architectscutter.ArchitectsCutterRecipeInput;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
@@ -90,7 +90,7 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
     /**
      * The currently selected group.
      */
-    private ResourceLocation currentGroup;
+    private Identifier currentGroup;
 
     /**
      * The current selected variant.
@@ -252,7 +252,7 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
         this.outputInventorySlot.set(ItemStack.EMPTY);
         if (!stacks.stream().allMatch(ItemStack::isEmpty)) {
             this.recipes = this.world.getRecipeManager().getRecipesFor(ModRecipeTypes.ARCHITECTS_CUTTER.get(), new ArchitectsCutterRecipeInput(inventoryIn), this.world);
-            this.recipes.sort(Comparator.<RecipeHolder<ArchitectsCutterRecipe>, ResourceLocation>comparing(h -> h.value().getBlockName()).thenComparing(RecipeHolder::id));
+            this.recipes.sort(Comparator.<RecipeHolder<ArchitectsCutterRecipe>, Identifier>comparing(h -> h.value().getBlockName()).thenComparing(RecipeHolder::id));
         }
         updateRecipeResultSlot();
     }
@@ -363,7 +363,7 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
      * Get the current selected group.
      * @return the group.
      */
-    public ResourceLocation getCurrentGroup()
+    public Identifier getCurrentGroup()
     {
         return currentGroup;
     }
@@ -390,7 +390,7 @@ public class ArchitectsCutterContainer extends AbstractContainerMenu
      * Group setter.
      * @param location the group to select.
      */
-    public void selectGroup(final ResourceLocation location)
+    public void selectGroup(final Identifier location)
     {
         this.currentGroup = location;
     }

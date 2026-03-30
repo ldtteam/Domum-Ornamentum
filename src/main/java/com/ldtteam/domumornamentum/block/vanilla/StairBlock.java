@@ -15,7 +15,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -37,7 +37,7 @@ import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
 
 public class StairBlock extends net.minecraft.world.level.block.StairBlock implements IMateriallyTexturedBlock, EntityBlock, ICachedItemGroupBlock, IDOBlock<StairBlock>
 {
-    private static IMateriallyTexturedBlockComponent MATERIAL_COMPONENT = new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/oak_planks"), ModTags.STAIRS_MATERIALS, OAK_PLANKS);
+    private static IMateriallyTexturedBlockComponent MATERIAL_COMPONENT = new SimpleRetexturableComponent(Identifier.withDefaultNamespace("block/oak_planks"), ModTags.STAIRS_MATERIALS, OAK_PLANKS);
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
                                                                                .add(MATERIAL_COMPONENT)
                                                                                .build();
@@ -50,7 +50,7 @@ public class StairBlock extends net.minecraft.world.level.block.StairBlock imple
     }
 
     @Override
-    public ResourceLocation getRegistryName()
+    public Identifier getRegistryName()
     {
         return getRegistryName(this);
     }

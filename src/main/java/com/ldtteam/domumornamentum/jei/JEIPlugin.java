@@ -11,7 +11,7 @@ import mezz.jei.api.registration.*;
 import mezz.jei.api.runtime.IIngredientManager;
 import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 import org.jetbrains.annotations.NotNull;
@@ -30,7 +30,7 @@ public class JEIPlugin implements IModPlugin
 
     @NotNull
     @Override
-    public ResourceLocation getPluginUid()
+    public Identifier getPluginUid()
     {
         return Constants.resLocDO(Constants.MOD_ID);
     }

@@ -17,7 +17,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -45,8 +45,8 @@ public class FancyTrapdoorBlock extends AbstractBlockTrapdoor<FancyTrapdoorBlock
 {
     public static final EnumProperty<FancyTrapdoorType> TYPE = EnumProperty.create(Constants.TYPE_BLOCK_PROPERTY, FancyTrapdoorType.class);
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
-                                                                               .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/oak_planks"), ModTags.FANCY_TRAPDOORS_MATERIALS, OAK_PLANKS))
-                                                                               .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/acacia_planks"), ModTags.FANCY_TRAPDOORS_MATERIALS, ACACIA_PLANKS))
+                                                                               .add(new SimpleRetexturableComponent(Identifier.withDefaultNamespace("block/oak_planks"), ModTags.FANCY_TRAPDOORS_MATERIALS, OAK_PLANKS))
+                                                                               .add(new SimpleRetexturableComponent(Identifier.withDefaultNamespace("block/acacia_planks"), ModTags.FANCY_TRAPDOORS_MATERIALS, ACACIA_PLANKS))
                                                                                .build();
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();

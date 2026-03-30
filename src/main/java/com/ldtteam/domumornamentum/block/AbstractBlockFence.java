@@ -2,7 +2,7 @@ package com.ldtteam.domumornamentum.block;
 
 import com.ldtteam.domumornamentum.block.interfaces.IDOBlock;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.FenceBlock;
 
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -18,7 +18,7 @@ public abstract class AbstractBlockFence<B extends AbstractBlockFence<B>> extend
     }
 
     @Override
-    public ResourceLocation getRegistryName()
+    public Identifier getRegistryName()
     {
         return getRegistryName(this);
     }

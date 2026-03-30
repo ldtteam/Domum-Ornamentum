@@ -17,7 +17,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -42,7 +42,7 @@ import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
 public class WallBlock extends AbstractBlockWall<WallBlock> implements IMateriallyTexturedBlock, EntityBlock, ICachedItemGroupBlock
 {
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
-                                                                               .add(new SimpleRetexturableComponent(ResourceLocation.withDefaultNamespace("block/oak_planks"), ModTags.WALL_MATERIALS, OAK_PLANKS))
+                                                                               .add(new SimpleRetexturableComponent(Identifier.withDefaultNamespace("block/oak_planks"), ModTags.WALL_MATERIALS, OAK_PLANKS))
                                                                                .build();
 
     public static ImmutableMap<Direction, EnumProperty<WallSide>> PROPERTIES = ImmutableMap.of(

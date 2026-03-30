@@ -3,7 +3,7 @@ package com.ldtteam.domumornamentum.block;
 import com.ldtteam.domumornamentum.block.interfaces.IDOBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
@@ -42,7 +42,7 @@ public abstract class AbstractPanelBlockTrapdoor<B extends AbstractPanelBlockTra
     }
 
     @Override
-    public ResourceLocation getRegistryName()
+    public Identifier getRegistryName()
     {
         return getRegistryName(this);
     }

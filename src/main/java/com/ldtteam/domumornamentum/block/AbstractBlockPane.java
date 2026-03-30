@@ -3,7 +3,7 @@ package com.ldtteam.domumornamentum.block;
 import com.google.common.collect.ImmutableMap;
 import com.ldtteam.domumornamentum.block.interfaces.IDOBlock;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.CrossCollisionBlock;
 import net.minecraft.world.level.block.IronBarsBlock;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
@@ -23,7 +23,7 @@ public abstract class AbstractBlockPane<B extends AbstractBlockPane<B>> extends 
     }
 
     @Override
-    public ResourceLocation getRegistryName()
+    public Identifier getRegistryName()
     {
         return getRegistryName(this);
     }

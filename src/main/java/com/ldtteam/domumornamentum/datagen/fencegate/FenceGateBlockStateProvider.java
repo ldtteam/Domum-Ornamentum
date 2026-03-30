@@ -7,7 +7,7 @@ import com.ldtteam.domumornamentum.datagen.utils.ModelBuilderUtils;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
@@ -69,7 +69,7 @@ public class FenceGateBlockStateProvider extends BlockStateProvider {
                 + (wallState ? "wall_" : "")
                 + (open ? "open" : "");
 
-        final ResourceLocation specLocation = Constants.resLocDO("block/fence_gate/fence_gate_"
+        final Identifier specLocation = Constants.resLocDO("block/fence_gate/fence_gate_"
                 + (wallState ? "wall_" : "")
                 + (open ? "open_" : "") + "spec");
 

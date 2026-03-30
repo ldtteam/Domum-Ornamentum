@@ -3,7 +3,6 @@ package com.ldtteam.domumornamentum.recipe.architectscutter;
 import com.google.common.collect.Lists;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
-import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockManager;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.recipe.ModRecipeSerializers;
 import com.ldtteam.domumornamentum.recipe.ModRecipeTypes;
@@ -16,17 +15,20 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.PlacementInfo;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeBookCategory;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 
@@ -37,7 +39,7 @@ public class ArchitectsCutterRecipe implements Recipe<ArchitectsCutterRecipeInpu
             ExtraCodecs.POSITIVE_INT.optionalFieldOf("count", 1).forGetter(ArchitectsCutterRecipe::getCount),
             DataComponentPatch.CODEC.optionalFieldOf("components", DataComponentPatch.EMPTY).forGetter(ArchitectsCutterRecipe::getComponentPatch))
         .apply(builder, ArchitectsCutterRecipe::new));
-    public static final StreamCodec<RegistryFriendlyByteBuf, ArchitectsCutterRecipe> STREAM_CODEC = StreamCodec.composite(ResourceLocation.STREAM_CODEC,
+    public static final StreamCodec<RegistryFriendlyByteBuf, ArchitectsCutterRecipe> STREAM_CODEC = StreamCodec.composite(Identifier.STREAM_CODEC,
             ArchitectsCutterRecipe::getBlockName,
             ByteBufCodecs.VAR_INT,
             ArchitectsCutterRecipe::getCount,
@@ -45,11 +47,11 @@ public class ArchitectsCutterRecipe implements Recipe<ArchitectsCutterRecipeInpu
             ArchitectsCutterRecipe::getComponentPatch,
             ArchitectsCutterRecipe::new);
 
-    private final ResourceLocation blockName;
-    private final int count;
+    private final Identifier blockName;
+    private final int        count;
     private final DataComponentPatch componentMap;
 
-    public ArchitectsCutterRecipe(final ResourceLocation blockName, final int count, final DataComponentPatch componentMap)
+    public ArchitectsCutterRecipe(final Identifier blockName, final int count, final DataComponentPatch componentMap)
     {
         this.blockName = blockName;
         this.count = count;
@@ -58,17 +60,17 @@ public class ArchitectsCutterRecipe implements Recipe<ArchitectsCutterRecipeInpu
 
     public ArchitectsCutterRecipe(final Holder<Block> block, final int count, final DataComponentPatch componentMap)
     {
-        this(block.unwrapKey().orElseThrow().location(), count, componentMap);
+        this(block.unwrapKey().orElseThrow().identifier(), count, componentMap);
     }
 
-    public ResourceLocation getBlockName()
+    public Identifier getBlockName()
     {
         return blockName;
     }
 
     public Block getBlock()
     {
-        return BuiltInRegistries.BLOCK.get(blockName);
+        return BuiltInRegistries.BLOCK.getValue(blockName);
     }
 
     @Override
@@ -99,7 +101,7 @@ public class ArchitectsCutterRecipe implements Recipe<ArchitectsCutterRecipeInpu
     }
 
     @Override
-    public @NotNull ItemStack assemble(final @NotNull ArchitectsCutterRecipeInput inv, final HolderLookup.Provider provider)
+    public @NonNull ItemStack assemble(final ArchitectsCutterRecipeInput inv)
     {
         final Block generatedBlock = getBlock();
 
@@ -140,9 +142,15 @@ public class ArchitectsCutterRecipe implements Recipe<ArchitectsCutterRecipeInpu
     }
 
     @Override
-    public boolean canCraftInDimensions(final int width, final int height)
+    public boolean showNotification()
     {
-        return width * height <= IMateriallyTexturedBlockManager.getInstance().getMaxTexturableComponentCount();
+        return false;
+    }
+
+    @Override
+    public String group()
+    {
+        return "";
     }
 
     @Override
@@ -160,15 +168,27 @@ public class ArchitectsCutterRecipe implements Recipe<ArchitectsCutterRecipeInpu
     }
 
     @Override
-    public @NotNull RecipeSerializer<?> getSerializer()
+    public @NonNull RecipeSerializer<? extends Recipe<ArchitectsCutterRecipeInput>> getSerializer()
     {
         return ModRecipeSerializers.ARCHITECTS_CUTTER.get();
     }
 
     @Override
-    public @NotNull RecipeType<?> getType()
+    public @NonNull RecipeType<? extends Recipe<ArchitectsCutterRecipeInput>> getType()
     {
         return ModRecipeTypes.ARCHITECTS_CUTTER.get();
+    }
+
+    @Override
+    public PlacementInfo placementInfo()
+    {
+        return null;
+    }
+
+    @Override
+    public RecipeBookCategory recipeBookCategory()
+    {
+        return null;
     }
 
     public @NotNull DataComponentPatch getComponentPatch()
