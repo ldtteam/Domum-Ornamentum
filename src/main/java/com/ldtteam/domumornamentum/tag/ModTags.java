@@ -26,6 +26,7 @@ public class ModTags
     public static final TagKey<Block> PAPERWALL_CENTER = tag("paper_wall_center");
 
     public static final TagKey<Block> EXTRA_BLOCKS    = tag("extra_block");
+    public static final TagKey<Block> DYNAMIC_BLOCKS    = tag("dynamic_blocks");
 
     public static final TagKey<Block> FLOATING_CARPETS = tag("floating_carpet");
 

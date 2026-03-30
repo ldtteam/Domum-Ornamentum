@@ -127,7 +127,7 @@ public class FramedLightBlock extends AbstractBlock<FramedLightBlock> implements
     @Override
     public void buildRecipes(final RecipeOutput recipeOutput)
     {
-        new ArchitectsCutterRecipeBuilder(this, RecipeCategory.BUILDING_BLOCKS).count(COMPONENTS.size()).save(recipeOutput);
+        new ArchitectsCutterRecipeBuilder(this, RecipeCategory.BUILDING_BLOCKS).count(getComponents().size()).save(recipeOutput);
     }
 
     @Override
@@ -147,7 +147,7 @@ public class FramedLightBlock extends AbstractBlock<FramedLightBlock> implements
 
     @Override
     public IMateriallyTexturedBlockComponent getMainComponent() {
-        return COMPONENTS.get(0);
+        return getComponents().get(0);
     }
 
     @Override
