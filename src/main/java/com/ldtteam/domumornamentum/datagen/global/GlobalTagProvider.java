@@ -220,6 +220,28 @@ public class GlobalTagProvider extends BlockTagsProvider
         this.tag(BlockTags.STAIRS)
           .add(ModBlocks.getInstance().getStair())
           .add(ModBlocks.getInstance().getAllBrickStairBlocks().toArray(new Block[0]));
+
+        this.tag(ModTags.DYNAMIC_BLOCKS)
+                .add(ModBlocks.getInstance().getTimberFrames().toArray(new Block[0]))
+                .add(ModBlocks.getInstance().getFramedLights().toArray(new Block[0]))
+                .add(ModBlocks.getInstance().getPillars().toArray(new Block[0]))
+                .add(ModBlocks.getInstance().getAllBrickBlocks().toArray(new Block[0]))
+                .add(ModBlocks.getInstance().getAllBrickStairBlocks().toArray(new Block[0]))
+                .add(ModBlocks.getInstance().getShingleSlab())
+                .add(ModBlocks.getInstance().getPaperWall())
+                .add(ModBlocks.getInstance().getTiledPaperWall())
+                .add(ModBlocks.getInstance().getFence())
+                .add(ModBlocks.getInstance().getFenceGate())
+                .add(ModBlocks.getInstance().getSlab())
+                .add(ModBlocks.getInstance().getWall())
+                .add(ModBlocks.getInstance().getStair())
+                .add(ModBlocks.getInstance().getTrapdoor())
+                .add(ModBlocks.getInstance().getPanel())
+                .add(ModBlocks.getInstance().getPost())
+                .add(ModBlocks.getInstance().getDoor())
+                .add(ModBlocks.getInstance().getFancyDoor())
+                .add(ModBlocks.getInstance().getFancyTrapdoor())
+                .add(ModBlocks.getInstance().getDynamicTimberFrame());
     }
 
     @Override

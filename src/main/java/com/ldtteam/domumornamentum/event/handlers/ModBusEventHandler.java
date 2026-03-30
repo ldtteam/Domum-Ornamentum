@@ -7,6 +7,7 @@ import com.ldtteam.domumornamentum.datagen.bricks.BrickBlockStateProvider;
 import com.ldtteam.domumornamentum.datagen.bricks.BrickBlockTagProvider;
 import com.ldtteam.domumornamentum.datagen.bricks.BrickItemTagProvider;
 import com.ldtteam.domumornamentum.datagen.bricks.BrickRecipeProvider;
+import com.ldtteam.domumornamentum.datagen.compat.create.CreateCompatTagProvider;
 import com.ldtteam.domumornamentum.datagen.door.DoorsBlockStateProvider;
 import com.ldtteam.domumornamentum.datagen.door.DoorsComponentTagProvider;
 import com.ldtteam.domumornamentum.datagen.door.fancy.FancyDoorsBlockStateProvider;
@@ -201,5 +202,8 @@ public class ModBusEventHandler
         event.getGenerator().addProvider(true, new GlobalLanguageProvider(event.getGenerator()));
         event.getGenerator().addProvider(true, new GlobalLootTableProvider(event.getGenerator().getPackOutput(), event.getLookupProvider()));
         event.getGenerator().addProvider(true, new MateriallyTexturedBlockRecipeProvider(event.getGenerator().getPackOutput(), event.getLookupProvider()));
+
+        //compat
+        event.getGenerator().addProvider(true, new CreateCompatTagProvider(event.getGenerator().getPackOutput(), event.getLookupProvider(), event.getExistingFileHelper()));
     }
 }
