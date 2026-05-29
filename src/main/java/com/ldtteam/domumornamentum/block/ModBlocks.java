@@ -69,6 +69,7 @@ public final class ModBlocks implements IModBlocks {
     private static final RegistryObject<FenceBlock> FENCE;
     private static final RegistryObject<FenceGateBlock> FENCE_GATE;
     private static final RegistryObject<SlabBlock> SLAB;
+    private static final RegistryObject<StackedSlabBlock> STACKED_SLAB;
     private static final RegistryObject<WallBlock> WALL;
     private static final RegistryObject<StairBlock> STAIR;
     private static final RegistryObject<TrapdoorBlock> TRAPDOOR;
@@ -131,6 +132,7 @@ public final class ModBlocks implements IModBlocks {
         FENCE = register("vanilla_fence_compat", FenceBlock::new, b -> new FenceBlockItem(b, new Item.Properties()));
         FENCE_GATE = register("vanilla_fence_gate_compat", FenceGateBlock::new, b -> new FenceGateBlockItem(b, new Item.Properties()));
         SLAB = register("vanilla_slab_compat", SlabBlock::new, b -> new SlabBlockItem(b, new Item.Properties()));
+        STACKED_SLAB = register("stacked_slab", StackedSlabBlock::new, b -> new StackedSlabBlockItem(b, new Item.Properties()));
         WALL = register("vanilla_wall_compat", WallBlock::new, b -> new WallBlockItem(b, new Item.Properties()));
         STAIR = register("vanilla_stairs_compat", StairBlock::new, b -> new StairsBlockItem(b, new Item.Properties()));
         TRAPDOOR = register("vanilla_trapdoors_compat", TrapdoorBlock::new, b -> new TrapdoorBlockItem(b, new Item.Properties()));
@@ -301,6 +303,11 @@ public final class ModBlocks implements IModBlocks {
     @Override
     public SlabBlock getSlab() {
         return ModBlocks.SLAB.get();
+    }
+
+    @Override
+    public StackedSlabBlock getStackedSlab() {
+        return ModBlocks.STACKED_SLAB.get();
     }
 
     @Override

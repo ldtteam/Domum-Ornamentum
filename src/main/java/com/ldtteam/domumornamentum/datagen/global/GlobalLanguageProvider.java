@@ -105,6 +105,8 @@ public class GlobalLanguageProvider extends LanguageProvider
             acceptor.add(Constants.MOD_ID + ".desc.support", "Support %s");
             acceptor.add(Constants.MOD_ID + ".desc.center", "Center %s");
             acceptor.add(Constants.MOD_ID + ".desc.frame", "Frame %s");
+            acceptor.add(Constants.MOD_ID + ".desc.bottom", "Bottom %s");
+            acceptor.add(Constants.MOD_ID + ".desc.top", "Top %s");
             acceptor.add(Constants.MOD_ID + ".desc.shingle", "Shingle %s");
             acceptor.add(Constants.MOD_ID + ".desc.onlyone", "%s");
 

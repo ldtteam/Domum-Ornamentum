@@ -2,6 +2,7 @@ package com.ldtteam.domumornamentum.datagen.slab;
 
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.vanilla.SlabBlock;
+import com.ldtteam.domumornamentum.block.vanilla.StackedSlabBlock;
 import com.ldtteam.domumornamentum.datagen.MateriallyTexturedModelBuilder;
 import com.ldtteam.domumornamentum.datagen.utils.ModelBuilderUtils;
 import com.ldtteam.domumornamentum.util.Constants;
@@ -9,6 +10,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
@@ -25,6 +27,7 @@ public class SlabBlockStateProvider extends BlockStateProvider
     @Override
     protected void registerStatesAndModels() {
         createBlockstateFile(ModBlocks.getInstance().getSlab());
+        createStackedSlabBlockstateFile(ModBlocks.getInstance().getStackedSlab());
     }
 
     private void createBlockstateFile(final SlabBlock slabBlock)
@@ -44,6 +47,16 @@ public class SlabBlockStateProvider extends BlockStateProvider
                                                     .customLoader(MateriallyTexturedModelBuilder::new)
                                                     .end();
         ModelBuilderUtils.applyDefaultItemTransforms(itemModelBuilder);
+    }
+
+    private void createStackedSlabBlockstateFile(final StackedSlabBlock stackedSlabBlock)
+    {
+        final ModelFile blockModel = models().withExistingParent("block/slab/stacked_slab", modLoc("block/slab/stacked_slab_spec"))
+                                      .customLoader(MateriallyTexturedModelBuilder::new)
+                                      .end();
+
+        simpleBlock(stackedSlabBlock, blockModel);
+        ModelBuilderUtils.applyDefaultItemTransforms(itemModels().getBuilder(stackedSlabBlock.getRegistryName().getPath()).parent(blockModel));
     }
 
     @NotNull

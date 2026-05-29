@@ -45,6 +45,7 @@ public final class ModCreativeTabs {
         output.accept(ModBlocks.getInstance().getFence());
         output.accept(ModBlocks.getInstance().getFenceGate());
         output.accept(ModBlocks.getInstance().getSlab());
+        output.accept(ModBlocks.getInstance().getStackedSlab());
         output.accept(ModBlocks.getInstance().getWall());
         output.accept(ModBlocks.getInstance().getStair());
         output.accept(ModBlocks.getInstance().getTrapdoor());
