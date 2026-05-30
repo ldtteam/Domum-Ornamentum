@@ -25,8 +25,8 @@ import java.util.List;
  * Item representation for the stacked slab block.
  * <p>
  * The item exposes two slab material inputs to the architect's cutter, formats
- * its name from both selected materials, and keeps the recipe grouped with the
- * vanilla block cutter recipes instead of the timber frame recipes.
+ * its name from both selected materials, and groups the recipe with the
+ * vanilla block cutter recipes.
  */
 public class StackedSlabBlockItem extends BlockItem implements IDoItem
 {

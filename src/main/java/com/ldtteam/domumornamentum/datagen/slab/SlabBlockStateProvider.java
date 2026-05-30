@@ -49,6 +49,10 @@ public class SlabBlockStateProvider extends BlockStateProvider
         ModelBuilderUtils.applyDefaultItemTransforms(itemModelBuilder);
     }
 
+    /**
+     * Generates the client model/blockstate outputs for the stacked slab.
+     * @param stackedSlabBlock
+     */
     private void createStackedSlabBlockstateFile(final StackedSlabBlock stackedSlabBlock)
     {
         final ModelFile blockModel = models().withExistingParent("block/slab/stacked_slab", modLoc("block/slab/stacked_slab_spec"))

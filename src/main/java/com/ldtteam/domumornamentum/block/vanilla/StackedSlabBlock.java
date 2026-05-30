@@ -43,13 +43,14 @@ import java.util.List;
 import java.util.Objects;
 
 import static net.minecraft.world.level.block.Blocks.STRIPPED_OAK_WOOD;
+import static net.minecraft.world.level.block.Blocks.STRIPPED_DARK_OAK_WOOD;
 
 /**
- * Full-block slab pair produced by the architect's cutter from two slab materials.
+ * Full-block slab pair produced by the architect's cutter from two textured materials.
  * <p>
- * This block intentionally uses the Domum materially textured block pipeline while
+ * This block uses the Domum materially textured block pipeline while
  * presenting itself with the vanilla block recipes, allowing top and bottom slab
- * textures to be chosen independently without adding a placement-time merge path.
+ * textures to be chosen independently.
  */
 public class StackedSlabBlock extends AbstractBlock<StackedSlabBlock> implements IMateriallyTexturedBlock, EntityBlock, ICachedItemGroupBlock
 {
@@ -59,7 +60,7 @@ public class StackedSlabBlock extends AbstractBlock<StackedSlabBlock> implements
      */
     public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
       .add(new SimpleRetexturableComponent(new ResourceLocation("block/oak_planks"), ModTags.SLAB_MATERIALS, STRIPPED_OAK_WOOD))
-      .add(new SimpleRetexturableComponent(new ResourceLocation("block/dark_oak_planks"), ModTags.SLAB_MATERIALS, STRIPPED_OAK_WOOD))
+      .add(new SimpleRetexturableComponent(new ResourceLocation("block/dark_oak_planks"), ModTags.SLAB_MATERIALS, STRIPPED_DARK_OAK_WOOD))
       .build();
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
