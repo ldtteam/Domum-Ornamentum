@@ -306,7 +306,8 @@ public final class ModBlocks implements IModBlocks {
     }
 
     @Override
-    public StackedSlabBlock getStackedSlab() {
+    public StackedSlabBlock getStackedSlab() 
+    {
         return ModBlocks.STACKED_SLAB.get();
     }
 
