@@ -40,11 +40,10 @@ public class AllBrickStairBlockStateProvider extends BlockStateProvider
                 for (Half halfValue : net.minecraft.world.level.block.StairBlock.HALF.getPossibleValues())
                 {
                     builder.part()
-                      .modelFile(models().withExistingParent("block/allbrick/" + allBrickStairBlock.getRegistryName().getPath() + getTypeFromShape(shapeValue), modLoc("block/allbrick/" + allBrickStairBlock.getRegistryName().getPath() + getTypeFromShape(shapeValue) + "_spec"))
-                                   .customLoader(MateriallyTexturedModelBuilder::new)
-                                   .end())
+                      .modelFile(models().withExistingParent("block/allbrick/" + allBrickStairBlock.getRegistryName().getPath() + getTypeFromShape(shapeValue) + "_def", modLoc("block/allbrick/" + allBrickStairBlock.getRegistryName().getPath() + getTypeFromShape(shapeValue))))
                       .rotationX(halfValue == Half.TOP ? 180 : 0)
                       .rotationY(getYFromFacing(facingValue) + getYFromShape(shapeValue) + getYFromHalf(halfValue, shapeValue))
+                      .uvLock(true)
                       .addModel()
                       .condition(FACING, facingValue)
                       .condition(SHAPE, shapeValue)
@@ -54,7 +53,7 @@ public class AllBrickStairBlockStateProvider extends BlockStateProvider
             }
         }
 
-        final ItemModelBuilder itemModelBuilder = itemModels().withExistingParent(allBrickStairBlock.getRegistryName().getPath(), modLoc("block/allbrick/" + allBrickStairBlock.getRegistryName().getPath()))
+        final ItemModelBuilder itemModelBuilder = itemModels().withExistingParent(allBrickStairBlock.getRegistryName().getPath(), modLoc("block/allbrick/" + allBrickStairBlock.getRegistryName().getPath() + "_spec"))
                                                     .customLoader(MateriallyTexturedModelBuilder::new)
                                                     .end();
         ModelBuilderUtils.applyDefaultItemTransforms(itemModelBuilder);

@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "domum_ornamentum:block/allbrick/light_brick"
+      "model": "domum_ornamentum:block/allbrick/light_brick_def"
     }
   }
 }

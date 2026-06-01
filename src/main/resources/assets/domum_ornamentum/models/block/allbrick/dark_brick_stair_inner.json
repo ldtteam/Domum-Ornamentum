@@ -1,0 +1,81 @@
+{
+  "loader": "forge:composite",
+  "textures": {
+    "particle": "domum_ornamentum:block/allbrick/allbrick_brick_overlay_dark"
+  },
+  "children": {
+    "block": {
+      "parent": "domum_ornamentum:block/stair/stairs_inner",
+      "loader": "domum_ornamentum:materially_textured"
+    },
+    "overlay": {
+      "parent": "block/block",
+      "render_type": "translucent",
+      "textures": {
+        "5": "domum_ornamentum:block/allbrick/allbrick_brick_overlay_dark"
+      },
+      "elements": [
+        {
+          "name": "overlaylower",
+          "from": [-0.02, -0.02, -0.02],
+          "to": [16.02, 8.02, 16.02],
+          "shade": true,
+          "faces": {
+            "north": {"uv": [0, 8, 16, 16], "texture": "#5"},
+            "east": {"uv": [0, 8, 16, 16], "texture": "#5"},
+            "south": {"uv": [0, 8, 16, 16], "texture": "#5"},
+            "west": {"uv": [0, 8, 16, 16], "texture": "#5"},
+            "up": {"uv": [0, 0, 16, 16], "texture": "#5"},
+            "down": {"uv": [16, 16, 0, 0], "texture": "#5"}
+          }
+        },
+        {
+          "name": "overlayupper",
+          "from": [-0.02, 7.98, 7.98],
+          "to": [16.02, 16.02, 16.02],
+          "shade": true,
+          "faces": {
+            "north": {"uv": [0, 0, 16, 8], "texture": "#5"},
+            "east": {"uv": [0, 0, 8, 8], "texture": "#5"},
+            "south": {"uv": [0, 0, 16, 8], "texture": "#5"},
+            "west": {"uv": [8, 0, 16, 8], "texture": "#5"},
+            "up": {"uv": [0, 8, 16, 16], "texture": "#5"},
+            "down": {"uv": [0, 0, 0, 0], "texture": "#5"}
+          }
+        },
+        {
+          "name": "overlayupper",
+          "from": [7.98, 7.98, -0.02],
+          "to": [16.02, 16.02, 8.02],
+          "shade": true,
+          "faces": {
+            "north": {"uv": [0, 0, 8, 8], "texture": "#5"},
+            "east": {"uv": [8, 0, 16, 8], "texture": "#5"},
+            "south": {"uv": [0, 0, 16, 8], "texture": "#5"},
+            "west": {"uv": [0, 0, 8, 8], "texture": "#5"},
+            "up": {"uv": [8, 0, 16, 8], "texture": "#5"},
+            "down": {"uv": [0, 0, 0, 0], "texture": "#5"}
+          }
+        }
+      ],
+      "display": {
+        "thirdperson_lefthand": {
+          "rotation": [75, -135, 0],
+          "translation": [0, 2.5, 0],
+          "scale": [0.375, 0.375, 0.375]
+        },
+        "gui": {
+          "rotation": [30, 135, 0],
+          "scale": [0.625, 0.625, 0.625]
+        },
+        "head": {
+          "rotation": [0, -90, 0]
+        }
+      }
+    }
+  }
+}
+
+
+
+

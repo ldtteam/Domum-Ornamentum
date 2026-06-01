@@ -162,7 +162,7 @@ public class FramedLightBlock extends AbstractBlock<FramedLightBlock> implements
               @Override
               public void serializeRecipeData(final @NotNull JsonObject json)
               {
-                  json.addProperty("count", COMPONENTS.size());
+                  json.addProperty("count", getComponents().size());
               }
 
               @Override

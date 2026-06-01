@@ -81,12 +81,13 @@ public class MateriallyTexturedBakedModel implements BakedModel {
             return ChunkRenderTypeSet.none();
         }
 
+        final ChunkRenderTypeSet innerModelSet = innerModel.getRenderTypes(state, rand, data);
         return ChunkRenderTypeSet.union(
                 Stream.concat(
                         textureData.getTexturedComponents().values().stream()
                                 .map(block -> Minecraft.getInstance().getBlockRenderer().getBlockModel(block.defaultBlockState())
                                         .getRenderTypes(block.defaultBlockState(), rand, ModelData.EMPTY)),
-                        Stream.of(SOLID_ONLY))
+                        Stream.of(SOLID_ONLY, innerModelSet))
                 .toArray(ChunkRenderTypeSet[]::new)
         );
     }

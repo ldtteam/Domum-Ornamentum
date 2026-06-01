@@ -1,0 +1,34 @@
+{
+  "loader": "forge:composite",
+  "textures": {
+    "particle": "domum_ornamentum:block/allbrick/allbrick_brick_overlay_light"
+  },
+  "children": {
+    "block": {
+      "parent": "domum_ornamentum:block/allbrick/block_spec",
+      "loader": "domum_ornamentum:materially_textured"
+    },
+    "overlay": {
+      "parent": "block/block",
+      "render_type": "translucent",
+      "textures": {
+        "5": "domum_ornamentum:block/allbrick/allbrick_brick_overlay_light"
+      },
+      "elements": [
+        {
+          "from": [ -0.002, -0.002, -0.002 ],
+          "to":   [ 16.002, 16.002, 16.002 ],
+          "shade": true,
+          "faces": {
+            "north": { "texture": "#5", "cullface": "north" },
+            "east":  { "texture": "#5", "cullface": "east" },
+            "south": { "texture": "#5", "cullface": "south" },
+            "west":  { "texture": "#5", "cullface": "west" },
+            "up":    { "texture": "#5", "cullface": "up" },
+            "down":  { "texture": "#5", "cullface": "down" }
+          }
+        }
+      ]
+    }
+  }
+}

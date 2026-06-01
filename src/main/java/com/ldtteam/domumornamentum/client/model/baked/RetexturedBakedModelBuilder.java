@@ -101,7 +101,7 @@ public class RetexturedBakedModelBuilder {
                 sourceModel.getOverrides()
         );
 
-        this.target.getQuads(null, null, RANDOM, ModelData.EMPTY, this.renderType).forEach(quad -> {
+        this.target.getQuads(this.sourceState, null, RANDOM, ModelData.EMPTY, this.renderType).forEach(quad -> {
             if (needsRetexturing(this.retexturingMaps, quad.getSprite())) {
                 retexture(quad, null).ifPresent(builder::addUnculledFace);
             } else if (!needsErasure(this.retexturingMaps, quad.getSprite())) {
@@ -110,7 +110,7 @@ public class RetexturedBakedModelBuilder {
         });
 
         for (final Direction value : Direction.values()) {
-            this.target.getQuads(null, value, RANDOM, ModelData.EMPTY, this.renderType).forEach(quad -> {
+            this.target.getQuads(this.sourceState, value, RANDOM, ModelData.EMPTY, this.renderType).forEach(quad -> {
                 if (needsRetexturing(this.retexturingMaps, quad.getSprite())) {
                     retexture(quad, value).ifPresent(newQuad -> builder.addCulledFace(value, newQuad));
                 } else if (!needsErasure(this.retexturingMaps, quad.getSprite())) {
