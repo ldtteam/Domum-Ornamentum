@@ -184,7 +184,7 @@ public class ShingleBlock extends AbstractBlockStairs<ShingleBlock> implements I
               @Override
               public void serializeRecipeData(final @NotNull JsonObject json)
               {
-                  json.addProperty("count", COMPONENTS.size() * 2);
+                  json.addProperty("count", getComponents().size() * 2);
               }
 
               @Override
