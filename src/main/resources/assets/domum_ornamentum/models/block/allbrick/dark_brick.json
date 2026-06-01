@@ -1,5 +1,8 @@
 {
   "loader": "forge:composite",
+  "textures": {
+    "particle": "domum_ornamentum:block/allbrick/allbrick_brick_overlay_dark"
+  },
   "children": {
     "block": {
       "parent": "domum_ornamentum:block/allbrick/block_spec",
