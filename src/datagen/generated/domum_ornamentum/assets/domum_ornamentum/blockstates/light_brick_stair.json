@@ -2,7 +2,8 @@
   "multipart": [
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_def",
+        "uvlock": true,
         "x": 180,
         "y": 270
       },
@@ -14,7 +15,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_def",
+        "uvlock": true,
         "y": 270
       },
       "when": {
@@ -25,7 +27,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner_def",
+        "uvlock": true,
         "x": 180,
         "y": 270
       },
@@ -37,7 +40,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner_def",
+        "uvlock": true,
         "y": 180
       },
       "when": {
@@ -48,7 +52,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner_def",
+        "uvlock": true,
         "x": 180,
         "y": 360
       },
@@ -60,7 +65,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner_def",
+        "uvlock": true,
         "y": 270
       },
       "when": {
@@ -71,7 +77,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer_def",
+        "uvlock": true,
         "x": 180,
         "y": 270
       },
@@ -83,7 +90,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer_def",
+        "uvlock": true,
         "y": 180
       },
       "when": {
@@ -94,7 +102,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer_def",
+        "uvlock": true,
         "x": 180,
         "y": 360
       },
@@ -106,7 +115,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer_def",
+        "uvlock": true,
         "y": 270
       },
       "when": {
@@ -117,7 +127,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_def",
+        "uvlock": true,
         "x": 180,
         "y": 90
       },
@@ -129,7 +140,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_def",
+        "uvlock": true,
         "y": 90
       },
       "when": {
@@ -140,7 +152,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner_def",
+        "uvlock": true,
         "x": 180,
         "y": 90
       },
@@ -152,7 +165,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner"
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner_def",
+        "uvlock": true
       },
       "when": {
         "facing": "south",
@@ -162,7 +176,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner_def",
+        "uvlock": true,
         "x": 180,
         "y": 180
       },
@@ -174,7 +189,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner_def",
+        "uvlock": true,
         "y": 90
       },
       "when": {
@@ -185,7 +201,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer_def",
+        "uvlock": true,
         "x": 180,
         "y": 90
       },
@@ -197,7 +214,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer"
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer_def",
+        "uvlock": true
       },
       "when": {
         "facing": "south",
@@ -207,7 +225,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer_def",
+        "uvlock": true,
         "x": 180,
         "y": 180
       },
@@ -219,7 +238,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer_def",
+        "uvlock": true,
         "y": 90
       },
       "when": {
@@ -230,7 +250,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_def",
+        "uvlock": true,
         "x": 180,
         "y": 180
       },
@@ -242,7 +263,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_def",
+        "uvlock": true,
         "y": 180
       },
       "when": {
@@ -253,7 +275,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner_def",
+        "uvlock": true,
         "x": 180,
         "y": 180
       },
@@ -265,7 +288,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner_def",
+        "uvlock": true,
         "y": 90
       },
       "when": {
@@ -276,7 +300,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner_def",
+        "uvlock": true,
         "x": 180,
         "y": 270
       },
@@ -288,7 +313,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner_def",
+        "uvlock": true,
         "y": 180
       },
       "when": {
@@ -299,7 +325,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer_def",
+        "uvlock": true,
         "x": 180,
         "y": 180
       },
@@ -311,7 +338,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer_def",
+        "uvlock": true,
         "y": 90
       },
       "when": {
@@ -322,7 +350,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer_def",
+        "uvlock": true,
         "x": 180,
         "y": 270
       },
@@ -334,7 +363,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer_def",
+        "uvlock": true,
         "y": 180
       },
       "when": {
@@ -345,7 +375,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_def",
+        "uvlock": true,
         "x": 180
       },
       "when": {
@@ -356,7 +387,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair"
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_def",
+        "uvlock": true
       },
       "when": {
         "facing": "east",
@@ -366,7 +398,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner_def",
+        "uvlock": true,
         "x": 180
       },
       "when": {
@@ -377,7 +410,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner_def",
+        "uvlock": true,
         "y": -90
       },
       "when": {
@@ -388,7 +422,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner_def",
+        "uvlock": true,
         "x": 180,
         "y": 90
       },
@@ -400,7 +435,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner"
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner_def",
+        "uvlock": true
       },
       "when": {
         "facing": "east",
@@ -410,7 +446,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer_def",
+        "uvlock": true,
         "x": 180
       },
       "when": {
@@ -421,7 +458,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer_def",
+        "uvlock": true,
         "y": -90
       },
       "when": {
@@ -432,7 +470,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer",
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer_def",
+        "uvlock": true,
         "x": 180,
         "y": 90
       },
@@ -444,7 +483,8 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer"
+        "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer_def",
+        "uvlock": true
       },
       "when": {
         "facing": "east",
