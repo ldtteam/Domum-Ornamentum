@@ -33,6 +33,8 @@ public class ShinglesBlockStateProvider extends BlockStateProvider
         createBlockstateFile(ModBlocks.getInstance().getShingle(ShingleHeightType.DEFAULT), ShingleHeightType.DEFAULT);
         createBlockstateFile(ModBlocks.getInstance().getShingle(ShingleHeightType.FLAT), ShingleHeightType.FLAT);
         createBlockstateFile(ModBlocks.getInstance().getShingle(ShingleHeightType.FLAT_LOWER), ShingleHeightType.FLAT_LOWER);
+        createBlockstateFile(ModBlocks.getInstance().getShingle(ShingleHeightType.STEEP), ShingleHeightType.STEEP);
+        createBlockstateFile(ModBlocks.getInstance().getShingle(ShingleHeightType.STEEP_LOWER), ShingleHeightType.STEEP_LOWER);
     }
 
     private void createBlockstateFile(final ShingleBlock shingle, final ShingleHeightType heightType)
