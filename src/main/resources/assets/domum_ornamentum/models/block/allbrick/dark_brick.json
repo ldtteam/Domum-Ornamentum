@@ -16,8 +16,8 @@
       },
       "elements": [
         {
-          "from": [ -0.002, -0.002, -0.002 ],
-          "to":   [ 16.002, 16.002, 16.002 ],
+          "from": [ 0, 0, 0],
+          "to":   [ 16, 16, 16],
           "shade": true,
           "faces": {
             "north": { "texture": "#5", "cullface": "north" },
