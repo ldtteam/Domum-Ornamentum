@@ -163,7 +163,7 @@ public class RetexturedBakedModelBuilder {
 
         final ReplacementModelData modelData = this.retexturingMaps.get(source.getSprite().contents().name());
         List<BakedQuad> targetQuads = modelData.model().getQuads(
-                null,
+                modelData.state(),
                 direction,
                 RANDOM,
                 ModelData.EMPTY,
@@ -174,7 +174,7 @@ public class RetexturedBakedModelBuilder {
         //Lets try with the targeting direction (the normal) of the quad itself.
         if (targetQuads.isEmpty())
             targetQuads = modelData.model().getQuads(
-                    null,
+                    modelData.state(),
                     source.getDirection(),
                     RANDOM,
                     ModelData.EMPTY,
