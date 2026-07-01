@@ -1,0 +1,22 @@
+{
+  "parent": "block/block",
+  "render_type": "solid",
+  "textures": {
+    "0": "block/oak_planks",
+    "particle": "block/oak_planks"
+  },
+  "elements": [
+    {
+      "from": [0.002, 0.002, 0.002],
+      "to": [15.998, 15.998, 15.998],
+      "faces": {
+        "north":{"texture": "#0", "cullface":"north"},
+        "east": {"texture": "#0", "cullface":"east" },
+        "south":{"texture": "#0", "cullface":"south"},
+        "west": {"texture": "#0", "cullface":"west" },
+        "up":   {"texture": "#0", "cullface":"up"   },
+        "down": {"texture": "#0", "cullface":"down" }
+      }
+    }
+  ]
+}

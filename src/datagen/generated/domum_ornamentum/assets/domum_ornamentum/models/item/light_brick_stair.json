@@ -1,5 +1,5 @@
 {
-  "parent": "domum_ornamentum:block/allbrick/light_brick_stair",
+  "parent": "domum_ornamentum:block/allbrick/light_brick_stair_spec",
   "display": {
     "firstperson_lefthand": {
       "rotation": [
