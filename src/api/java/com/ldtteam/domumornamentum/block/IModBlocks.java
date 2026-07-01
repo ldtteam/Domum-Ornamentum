@@ -54,6 +54,8 @@ public interface IModBlocks
 
     Block getSlab();
 
+    Block getStackedSlab();
+
     List<? extends Block> getBricks();
 
     Block getWall();
