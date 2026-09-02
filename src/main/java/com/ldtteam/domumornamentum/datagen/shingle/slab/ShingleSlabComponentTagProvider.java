@@ -20,8 +20,7 @@ public class ShingleSlabComponentTagProvider extends BlockTagsProvider
     @SuppressWarnings("unchecked")
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
-        this.tag(ModTags.SHINGLES_COVER)
-          .addTags(ModTags.SHINGLES_ROOF);
+        this.tag(ModTags.SHINGLES_COVER).addTags(ModTags.SHINGLES_ROOF);
     }
 
     @Override

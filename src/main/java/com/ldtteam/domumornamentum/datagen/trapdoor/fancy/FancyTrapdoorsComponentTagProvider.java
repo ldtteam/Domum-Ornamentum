@@ -20,10 +20,7 @@ public class FancyTrapdoorsComponentTagProvider extends BlockTagsProvider
     @SuppressWarnings("unchecked")
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
-        this.tag(ModTags.FANCY_TRAPDOORS_MATERIALS)
-          .addTags(
-            ModTags.TRAPDOORS_MATERIALS
-          );
+        this.tag(ModTags.FANCY_TRAPDOORS_MATERIALS).addTags(ModTags.TRAPDOORS_MATERIALS);
     }
 
     @Override
