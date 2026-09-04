@@ -7,17 +7,17 @@ import com.ldtteam.domumornamentum.datagen.utils.ModelBuilderUtils;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
-import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
-import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
-import net.neoforged.neoforge.client.model.generators.ModelFile;
-import net.neoforged.neoforge.client.model.generators.MultiPartBlockStateBuilder;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import com.ldtteam.domumornamentum.datagen.model.BlockStateProvider;
+import com.ldtteam.domumornamentum.datagen.model.ConfiguredModel;
+import com.ldtteam.domumornamentum.datagen.model.ModelFile;
+import com.ldtteam.domumornamentum.datagen.model.MultiPartBlockStateBuilder;
+import com.ldtteam.domumornamentum.datagen.DatagenContext;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
 public class TimberFramesBlockStateProvider extends BlockStateProvider {
-    public TimberFramesBlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
+    public TimberFramesBlockStateProvider(DataGenerator gen, DatagenContext exFileHelper) {
         super(gen.getPackOutput(), Constants.MOD_ID, exFileHelper);
     }
 
@@ -42,7 +42,7 @@ public class TimberFramesBlockStateProvider extends BlockStateProvider {
                 partBuilder.rotationX(getXFromDirection(direction));
                 partBuilder.rotationY(getYFromDirection(direction));
             }
-            partBuilder.addModel().condition(TimberFrameBlock.FACING, direction);
+            partBuilder.addModel().condition(TimberFrameBlock.FACING, direction).end();
         });
 
         ModelBuilderUtils.applyDefaultItemTransforms(itemModels().getBuilder(timberFrameBlock.getRegistryName().getPath()).parent(blockModel));

@@ -2,18 +2,10 @@
   "type": "minecraft:crafting_shapeless",
   "category": "equipment",
   "ingredients": [
-    {
-      "item": "minecraft:gravel"
-    },
-    {
-      "item": "minecraft:gravel"
-    },
-    {
-      "item": "minecraft:brick"
-    },
-    {
-      "item": "minecraft:brick"
-    }
+    "minecraft:gravel",
+    "minecraft:gravel",
+    "minecraft:brick",
+    "minecraft:brick"
   ],
   "result": {
     "count": 4,

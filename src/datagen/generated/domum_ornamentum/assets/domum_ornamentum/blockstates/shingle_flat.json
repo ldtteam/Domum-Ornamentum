@@ -49,8 +49,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_inner_right",
-        "x": 180,
-        "y": 360
+        "x": 180
       },
       "when": {
         "facing": "north",
@@ -95,8 +94,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_outer_right",
-        "x": 180,
-        "y": 360
+        "x": 180
       },
       "when": {
         "facing": "north",
@@ -119,7 +117,7 @@
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_straight",
         "x": 180,
-        "y": 450
+        "y": 90
       },
       "when": {
         "facing": "south",
@@ -130,7 +128,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_straight",
-        "y": 450
+        "y": 90
       },
       "when": {
         "facing": "south",
@@ -142,7 +140,7 @@
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_inner_left",
         "x": 180,
-        "y": 450
+        "y": 90
       },
       "when": {
         "facing": "south",
@@ -152,8 +150,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/shingle/flat_inner_left",
-        "y": 360
+        "model": "domum_ornamentum:block/shingle/flat_inner_left"
       },
       "when": {
         "facing": "south",
@@ -165,7 +162,7 @@
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_inner_right",
         "x": 180,
-        "y": 540
+        "y": 180
       },
       "when": {
         "facing": "south",
@@ -176,7 +173,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_inner_right",
-        "y": 450
+        "y": 90
       },
       "when": {
         "facing": "south",
@@ -188,7 +185,7 @@
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_outer_left",
         "x": 180,
-        "y": 450
+        "y": 90
       },
       "when": {
         "facing": "south",
@@ -198,8 +195,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/shingle/flat_outer_left",
-        "y": 360
+        "model": "domum_ornamentum:block/shingle/flat_outer_left"
       },
       "when": {
         "facing": "south",
@@ -211,7 +207,7 @@
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_outer_right",
         "x": 180,
-        "y": 540
+        "y": 180
       },
       "when": {
         "facing": "south",
@@ -222,7 +218,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_outer_right",
-        "y": 450
+        "y": 90
       },
       "when": {
         "facing": "south",
@@ -348,8 +344,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_straight",
-        "x": 180,
-        "y": 360
+        "x": 180
       },
       "when": {
         "facing": "east",
@@ -359,8 +354,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/shingle/flat_straight",
-        "y": 360
+        "model": "domum_ornamentum:block/shingle/flat_straight"
       },
       "when": {
         "facing": "east",
@@ -371,8 +365,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_inner_left",
-        "x": 180,
-        "y": 360
+        "x": 180
       },
       "when": {
         "facing": "east",
@@ -395,7 +388,7 @@
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_inner_right",
         "x": 180,
-        "y": 450
+        "y": 90
       },
       "when": {
         "facing": "east",
@@ -405,8 +398,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/shingle/flat_inner_right",
-        "y": 360
+        "model": "domum_ornamentum:block/shingle/flat_inner_right"
       },
       "when": {
         "facing": "east",
@@ -417,8 +409,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_outer_left",
-        "x": 180,
-        "y": 360
+        "x": 180
       },
       "when": {
         "facing": "east",
@@ -441,7 +432,7 @@
       "apply": {
         "model": "domum_ornamentum:block/shingle/flat_outer_right",
         "x": 180,
-        "y": 450
+        "y": 90
       },
       "when": {
         "facing": "east",
@@ -451,8 +442,7 @@
     },
     {
       "apply": {
-        "model": "domum_ornamentum:block/shingle/flat_outer_right",
-        "y": 360
+        "model": "domum_ornamentum:block/shingle/flat_outer_right"
       },
       "when": {
         "facing": "east",

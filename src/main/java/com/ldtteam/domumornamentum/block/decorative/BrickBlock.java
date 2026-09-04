@@ -3,6 +3,7 @@ package com.ldtteam.domumornamentum.block.decorative;
 import com.ldtteam.domumornamentum.block.AbstractBlock;
 import com.ldtteam.domumornamentum.block.types.BrickType;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 
 /**
@@ -28,9 +29,9 @@ public class BrickBlock extends AbstractBlock<BrickBlock>
     /**
      * Constructor of the FullBlock.
      */
-    public BrickBlock(final BrickType type)
+    public BrickBlock(final BrickType type, final BlockBehaviour.Properties props)
     {
-        super(Properties.of().mapColor(MapColor.WOOD).sound(SoundType.STONE).strength(BLOCK_HARDNESS, RESISTANCE));
+        super(props.mapColor(MapColor.WOOD).sound(SoundType.STONE).strength(BLOCK_HARDNESS, RESISTANCE));
         this.type = type;
     }
 

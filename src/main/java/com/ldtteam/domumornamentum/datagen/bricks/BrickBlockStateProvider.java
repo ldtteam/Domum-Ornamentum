@@ -4,14 +4,14 @@ import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.decorative.BrickBlock;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.data.DataGenerator;
-import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
-import net.neoforged.neoforge.client.model.generators.ModelFile;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import com.ldtteam.domumornamentum.datagen.model.BlockStateProvider;
+import com.ldtteam.domumornamentum.datagen.model.ModelFile;
+import com.ldtteam.domumornamentum.datagen.DatagenContext;
 import org.jetbrains.annotations.NotNull;
 
 public class BrickBlockStateProvider extends BlockStateProvider
 {
-    public BrickBlockStateProvider(DataGenerator generator, ExistingFileHelper existingFileHelper)
+    public BrickBlockStateProvider(DataGenerator generator, DatagenContext existingFileHelper)
     {
         super(generator.getPackOutput(), Constants.MOD_ID, existingFileHelper);
     }

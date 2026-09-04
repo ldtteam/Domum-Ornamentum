@@ -6,12 +6,16 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -35,9 +39,9 @@ public class BarrelBlock extends AbstractBlock<BarrelBlock> implements SimpleWat
 
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-    public BarrelBlock()
+    public BarrelBlock(final BlockBehaviour.Properties props)
     {
-        super(AbstractBlock.Properties.ofLegacyCopy(Blocks.OAK_PLANKS).strength(3f, 1f));
+        super(props.strength(3f, 1f));
         this.registerDefaultState(this.getStateDefinition().any().setValue(WATERLOGGED, false));
     }
 
@@ -79,11 +83,19 @@ public class BarrelBlock extends AbstractBlock<BarrelBlock> implements SimpleWat
     }
 
     @Override
-    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos)
+    public BlockState updateShape(
+        BlockState stateIn,
+        LevelReader worldIn,
+        ScheduledTickAccess ticks,
+        BlockPos currentPos,
+        Direction facing,
+        BlockPos facingPos,
+        BlockState facingState,
+        RandomSource random)
     {
         if (stateIn.getValue(WATERLOGGED))
         {
-            worldIn.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
+            ticks.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
         }
 
         return stateIn;

@@ -5,12 +5,15 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -25,7 +28,7 @@ import java.util.stream.IntStream;
  */
 public class DOStairBlock extends Block implements SimpleWaterloggedBlock
 {
-    public static final    DirectionProperty         FACING         = HorizontalDirectionalBlock.FACING;
+    public static final    EnumProperty<Direction> FACING         = HorizontalDirectionalBlock.FACING;
     public static final    EnumProperty<Half>        HALF           = BlockStateProperties.HALF;
     public static final    EnumProperty<StairsShape> SHAPE          = BlockStateProperties.STAIRS_SHAPE;
     public static final    BooleanProperty           WATERLOGGED    = BlockStateProperties.WATERLOGGED;
@@ -212,16 +215,24 @@ public class DOStairBlock extends Block implements SimpleWaterloggedBlock
     }
 
     @Override
-    public BlockState updateShape(BlockState p_56925_, Direction p_56926_, BlockState p_56927_, LevelAccessor p_56928_, BlockPos p_56929_, BlockPos p_56930_)
+    public BlockState updateShape(
+        BlockState state,
+        LevelReader level,
+        ScheduledTickAccess ticks,
+        BlockPos pos,
+        Direction direction,
+        BlockPos neighbourPos,
+        BlockState neighbourState,
+        RandomSource random)
     {
-        if (p_56925_.getValue(WATERLOGGED))
+        if (state.getValue(WATERLOGGED))
         {
-            p_56928_.scheduleTick(p_56929_, Fluids.WATER, Fluids.WATER.getTickDelay(p_56928_));
+            ticks.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
-        return p_56926_.getAxis().isHorizontal()
-                 ? p_56925_.setValue(SHAPE, getStairsShape(p_56925_, p_56928_, p_56929_))
-                 : super.updateShape(p_56925_, p_56926_, p_56927_, p_56928_, p_56929_, p_56930_);
+        return direction.getAxis().isHorizontal()
+                 ? state.setValue(SHAPE, getStairsShape(state, level, pos))
+                 : super.updateShape(state, level, ticks, pos, direction, neighbourPos, neighbourState, random);
     }
 
     @Override

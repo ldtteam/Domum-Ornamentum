@@ -5,14 +5,14 @@ import com.ldtteam.domumornamentum.block.decorative.FloatingCarpetBlock;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.Identifier;
-import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
-import net.neoforged.neoforge.client.model.generators.ModelFile;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import com.ldtteam.domumornamentum.datagen.model.BlockStateProvider;
+import com.ldtteam.domumornamentum.datagen.model.ModelFile;
+import com.ldtteam.domumornamentum.datagen.DatagenContext;
 import org.jetbrains.annotations.NotNull;
 
 public class FloatingCarpetBlockStateProvider extends BlockStateProvider
 {
-    public FloatingCarpetBlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
+    public FloatingCarpetBlockStateProvider(DataGenerator gen, DatagenContext exFileHelper) {
         super(gen.getPackOutput(), Constants.MOD_ID, exFileHelper);
     }
 

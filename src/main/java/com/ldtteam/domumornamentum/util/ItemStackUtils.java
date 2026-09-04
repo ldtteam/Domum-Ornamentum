@@ -2,12 +2,9 @@ package com.ldtteam.domumornamentum.util;
 
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import com.ldtteam.domumornamentum.item.interfaces.IDoItem;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
@@ -23,17 +20,11 @@ public class ItemStackUtils {
             return ItemStack.EMPTY;
         }
 
-        final Registry<Block> blockRegistry = BuiltInRegistries.BLOCK;
-        final Registry<Item> itemRegistry = BuiltInRegistries.ITEM;
-
-        final Identifier mainHandItemLocation = itemRegistry.getKey(mainHandStack.getItem());
-        final Identifier offHandItemLocation = itemRegistry.getKey(offHandStack.getItem());
-
-        if (blockRegistry.containsKey(mainHandItemLocation) && blockRegistry.get(mainHandItemLocation) instanceof IMateriallyTexturedBlock) {
+        if (mainHandStack.getItem() instanceof BlockItem blockItem && blockItem.getBlock() instanceof IMateriallyTexturedBlock) {
             return mainHandStack;
         }
 
-        if (blockRegistry.containsKey(offHandItemLocation) && blockRegistry.get(offHandItemLocation) instanceof IMateriallyTexturedBlock) {
+        if (offHandStack.getItem() instanceof BlockItem blockItem && blockItem.getBlock() instanceof IMateriallyTexturedBlock) {
             return offHandStack;
         }
 

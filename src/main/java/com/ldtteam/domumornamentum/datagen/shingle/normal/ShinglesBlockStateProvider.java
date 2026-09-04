@@ -12,11 +12,11 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.block.state.properties.StairsShape;
-import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
-import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
-import net.neoforged.neoforge.client.model.generators.ModelFile;
-import net.neoforged.neoforge.client.model.generators.MultiPartBlockStateBuilder;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import com.ldtteam.domumornamentum.datagen.model.BlockStateProvider;
+import com.ldtteam.domumornamentum.datagen.model.ItemModelBuilder;
+import com.ldtteam.domumornamentum.datagen.model.ModelFile;
+import com.ldtteam.domumornamentum.datagen.model.MultiPartBlockStateBuilder;
+import com.ldtteam.domumornamentum.datagen.DatagenContext;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumMap;
@@ -24,7 +24,7 @@ import java.util.Map;
 
 public class ShinglesBlockStateProvider extends BlockStateProvider
 {
-    public ShinglesBlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
+    public ShinglesBlockStateProvider(DataGenerator gen, DatagenContext exFileHelper) {
         super(gen.getPackOutput(), Constants.MOD_ID, exFileHelper);
     }
 

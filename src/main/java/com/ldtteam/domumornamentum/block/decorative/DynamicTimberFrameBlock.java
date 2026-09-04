@@ -23,14 +23,17 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.HitResult;
@@ -51,7 +54,7 @@ public class DynamicTimberFrameBlock extends AbstractBlock<DynamicTimberFrameBlo
         .add(new SimpleRetexturableComponent(Identifier.withDefaultNamespace("block/dark_oak_planks"), ModTags.TIMBERFRAMES_CENTER, Blocks.DARK_OAK_PLANKS))
         .build();
 
-    public static final DirectionProperty FACING = BlockStateProperties.FACING;
+    public static final EnumProperty<Direction> FACING = BlockStateProperties.FACING;
 
     /**
      * The hardness this block has.
@@ -172,13 +175,13 @@ public class DynamicTimberFrameBlock extends AbstractBlock<DynamicTimberFrameBlo
     /**
      * Constructor for the TimberFrame
      */
-    public DynamicTimberFrameBlock()
+    public DynamicTimberFrameBlock(final BlockBehaviour.Properties props)
     {
-        super(Properties.of().mapColor(MapColor.WOOD).pushReaction(PushReaction.PUSH_ONLY).strength(BLOCK_HARDNESS, RESISTANCE).noOcclusion());
+        super(props.mapColor(MapColor.WOOD).pushReaction(PushReaction.PUSH_ONLY).strength(BLOCK_HARDNESS, RESISTANCE).noOcclusion());
     }
 
     @Override
-    public boolean shouldDisplayFluidOverlay(final BlockState state, final BlockAndTintGetter level, final BlockPos pos, final FluidState fluidState)
+    public boolean shouldDisplayFluidOverlay(final BlockState state, final BlockAndLightGetter level, final BlockPos pos, final FluidState fluidState)
     {
         return true;
     }
@@ -235,11 +238,13 @@ public class DynamicTimberFrameBlock extends AbstractBlock<DynamicTimberFrameBlo
     @Override
     public BlockState updateShape(
         final BlockState stateIn,
-        @NotNull final Direction direction,
-        @NotNull final BlockState directionState,
-        @NotNull final LevelAccessor worldIn,
+        @NotNull final LevelReader worldIn,
+        @NotNull final ScheduledTickAccess ticks,
         @NotNull final BlockPos currentPos,
-        @NotNull final BlockPos directionPos)
+        @NotNull final Direction direction,
+        @NotNull final BlockPos directionPos,
+        @NotNull final BlockState directionState,
+        @NotNull final RandomSource random)
     {
         final BlockEntity tileEntity = worldIn.getBlockEntity(currentPos);
 
@@ -255,10 +260,8 @@ public class DynamicTimberFrameBlock extends AbstractBlock<DynamicTimberFrameBlo
     }
 
     @Override
-    public void onRemove(final BlockState state, final Level worldIn, final BlockPos pos, final BlockState otherState, final boolean drop)
+    public void affectNeighborsAfterRemoval(final BlockState state, final ServerLevel worldIn, final BlockPos pos, final boolean drop)
     {
-        super.onRemove(state, worldIn, pos, otherState, drop);
-
         for (Offset offset: Offset.values())
         {
             updateNeighbor(null, worldIn.getBlockEntity(offset.applyToBlockPos(pos)), offset, false);
@@ -279,7 +282,7 @@ public class DynamicTimberFrameBlock extends AbstractBlock<DynamicTimberFrameBlo
     }
 
     @Override
-    public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final LevelReader world, final BlockPos pos, final Player player)
+    public ItemStack getCloneItemStack(final LevelReader world, final BlockPos pos, final BlockState state, final boolean includeData, final Player player)
     {
         return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos), world.registryAccess());
     }

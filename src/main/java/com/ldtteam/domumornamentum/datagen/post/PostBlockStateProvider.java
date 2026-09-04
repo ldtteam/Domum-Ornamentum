@@ -8,10 +8,10 @@ import com.ldtteam.domumornamentum.datagen.utils.ModelBuilderUtils;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
-import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
-import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
-import net.neoforged.neoforge.client.model.generators.MultiPartBlockStateBuilder;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import com.ldtteam.domumornamentum.datagen.model.BlockStateProvider;
+import com.ldtteam.domumornamentum.datagen.model.ItemModelBuilder;
+import com.ldtteam.domumornamentum.datagen.model.MultiPartBlockStateBuilder;
+import com.ldtteam.domumornamentum.datagen.DatagenContext;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -20,7 +20,7 @@ import static com.ldtteam.domumornamentum.block.AbstractPostBlock.FACING;
 
 public class PostBlockStateProvider extends BlockStateProvider {
 
-    public PostBlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
+    public PostBlockStateProvider(DataGenerator gen, DatagenContext exFileHelper) {
         super(gen.getPackOutput(), Constants.MOD_ID, exFileHelper);
     }
 

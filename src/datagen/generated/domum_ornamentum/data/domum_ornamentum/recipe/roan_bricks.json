@@ -2,18 +2,10 @@
   "type": "minecraft:crafting_shapeless",
   "category": "equipment",
   "ingredients": [
-    {
-      "item": "minecraft:white_concrete_powder"
-    },
-    {
-      "item": "minecraft:white_concrete_powder"
-    },
-    {
-      "item": "minecraft:brick"
-    },
-    {
-      "item": "minecraft:brick"
-    }
+    "minecraft:white_concrete_powder",
+    "minecraft:white_concrete_powder",
+    "minecraft:brick",
+    "minecraft:brick"
   ],
   "result": {
     "count": 4,

@@ -13,10 +13,12 @@ import net.minecraft.network.chat.Component;
 
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.block.Block;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class PanelBlockItem extends BlockItemWithClientBePlacement implements IDoItem
 {
@@ -41,15 +43,15 @@ public class PanelBlockItem extends BlockItemWithClientBePlacement implements ID
     }
 
     @Override
-    public void appendHoverText(final ItemStack stack, final TooltipContext tooltipContext, final List<Component> tooltip, final TooltipFlag flagIn)
+    public void appendHoverText(final ItemStack stack, final TooltipContext tooltipContext, final TooltipDisplay display, final Consumer<Component> tooltip, final TooltipFlag flagIn)
     {
-        super.appendHoverText(stack, tooltipContext, tooltip, flagIn);
+        super.appendHoverText(stack, tooltipContext, display, tooltip, flagIn);
 
         final TrapdoorType trapdoorType = BlockUtils.getPropertyFromBlockStateTag(stack, PanelBlock.TYPE, TrapdoorType.FULL);
 
-        tooltip.add(Component.translatable(Constants.MOD_ID + ".origin.tooltip"));
-        tooltip.add(Component.literal(""));
-        tooltip.add(Component.translatable(
+        tooltip.accept(Component.translatable(Constants.MOD_ID + ".origin.tooltip"));
+        tooltip.accept(Component.literal(""));
+        tooltip.accept(Component.translatable(
           Constants.MOD_ID + ".trapdoor.type.format",
           Component.translatable(Constants.MOD_ID + ".trapdoor.type.name." + trapdoorType.getTranslationKeySuffix())
         ));
@@ -62,7 +64,7 @@ public class PanelBlockItem extends BlockItemWithClientBePlacement implements ID
         final IMateriallyTexturedBlockComponent trapDoorComponent = panelBlock.getComponents().get(0);
         final Block trapDoorBlock = textureData.getTexturedComponents().getOrDefault(trapDoorComponent.getId(), trapDoorComponent.getDefault());
         final Component trapDoorBlockName = BlockUtils.getHoverName(trapDoorBlock);
-        tooltip.add(Component.translatable(Constants.MOD_ID + ".desc.onlyone", Component.translatable(Constants.MOD_ID + ".desc.material", trapDoorBlockName)));
+        tooltip.accept(Component.translatable(Constants.MOD_ID + ".desc.onlyone", Component.translatable(Constants.MOD_ID + ".desc.material", trapDoorBlockName)));
     }
 
     @Override

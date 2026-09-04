@@ -27,6 +27,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.MapColor;
@@ -58,9 +59,9 @@ public class PaperWallBlock extends AbstractBlockPane<PaperWallBlock> implements
      */
     private static final float RESISTANCE = 1F;
 
-    public PaperWallBlock()
+    public PaperWallBlock(final BlockBehaviour.Properties props)
     {
-        super(Properties.of().mapColor(MapColor.NONE).isRedstoneConductor((state, getter, pos) -> false).strength(BLOCK_HARDNESS, RESISTANCE));
+        super(props.mapColor(MapColor.NONE).isRedstoneConductor((state, getter, pos) -> false).strength(BLOCK_HARDNESS, RESISTANCE));
     }
 
     @Override
@@ -89,7 +90,7 @@ public class PaperWallBlock extends AbstractBlockPane<PaperWallBlock> implements
     }
 
     @Override
-    public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final LevelReader world, final BlockPos pos, final Player player)
+    public ItemStack getCloneItemStack(final LevelReader world, final BlockPos pos, final BlockState state, final boolean includeData, final Player player)
     {
         return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos), world.registryAccess());
     }

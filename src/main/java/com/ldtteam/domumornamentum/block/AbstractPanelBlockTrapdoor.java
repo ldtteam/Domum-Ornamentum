@@ -7,6 +7,8 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
@@ -17,6 +19,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -109,17 +112,19 @@ public abstract class AbstractPanelBlockTrapdoor<B extends AbstractPanelBlockTra
     @Override
     public BlockState updateShape(
       BlockState state,
-      @NotNull Direction direction,
-      @NotNull BlockState stateOut,
-      @NotNull LevelAccessor level,
+      @NotNull LevelReader level,
+      @NotNull ScheduledTickAccess ticks,
       @NotNull BlockPos pos,
-      @NotNull BlockPos pos2)
+      @NotNull Direction direction,
+      @NotNull BlockPos pos2,
+      @NotNull BlockState stateOut,
+      @NotNull RandomSource random)
     {
         if (state.getValue(WATERLOGGED))
         {
-            level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+            ticks.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
-        return super.updateShape(state, direction, stateOut, level, pos, pos2);
+        return super.updateShape(state, level, ticks, pos, direction, pos2, stateOut, random);
     }
 }

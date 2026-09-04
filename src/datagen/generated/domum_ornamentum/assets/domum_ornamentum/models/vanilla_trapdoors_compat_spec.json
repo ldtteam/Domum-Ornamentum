@@ -1,0 +1,233 @@
+{
+  "parent": "minecraft:block/thin_block",
+  "display": {
+    "firstperson_lefthand": {
+      "rotation": [
+        0.0,
+        225.0,
+        0.0
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ],
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0.0,
+        225.0,
+        0.0
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ],
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "fixed": {
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "ground": {
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.25,
+        0.25,
+        0.25
+      ],
+      "translation": [
+        0.0,
+        3.0,
+        0.0
+      ]
+    },
+    "gui": {
+      "rotation": [
+        30.0,
+        225.0,
+        0.0
+      ],
+      "scale": [
+        0.625,
+        0.625,
+        0.625
+      ],
+      "translation": [
+        0.0,
+        0.5,
+        0.0
+      ]
+    },
+    "head": {
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.03,
+        1.03,
+        1.03
+      ],
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        75.0,
+        45.0,
+        0.0
+      ],
+      "scale": [
+        0.375,
+        0.375,
+        0.375
+      ],
+      "translation": [
+        0.0,
+        2.5,
+        0.0
+      ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [
+        75.0,
+        45.0,
+        0.0
+      ],
+      "scale": [
+        0.375,
+        0.375,
+        0.375
+      ],
+      "translation": [
+        0.0,
+        2.5,
+        0.0
+      ]
+    }
+  },
+  "overrides": [
+    {
+      "model": "domum_ornamentum:block/trapdoor/trapdoor_boss_spec",
+      "predicate": {
+        "domum_ornamentum:trapdoor_type": 0.0
+      }
+    },
+    {
+      "model": "domum_ornamentum:block/trapdoor/trapdoor_coffer_spec",
+      "predicate": {
+        "domum_ornamentum:trapdoor_type": 1.0
+      }
+    },
+    {
+      "model": "domum_ornamentum:block/trapdoor/trapdoor_full_spec",
+      "predicate": {
+        "domum_ornamentum:trapdoor_type": 2.0
+      }
+    },
+    {
+      "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontal_bars_spec",
+      "predicate": {
+        "domum_ornamentum:trapdoor_type": 3.0
+      }
+    },
+    {
+      "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontally_squiggly_striped_spec",
+      "predicate": {
+        "domum_ornamentum:trapdoor_type": 4.0
+      }
+    },
+    {
+      "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontally_striped_spec",
+      "predicate": {
+        "domum_ornamentum:trapdoor_type": 5.0
+      }
+    },
+    {
+      "model": "domum_ornamentum:block/trapdoor/trapdoor_moulding_spec",
+      "predicate": {
+        "domum_ornamentum:trapdoor_type": 6.0
+      }
+    },
+    {
+      "model": "domum_ornamentum:block/trapdoor/trapdoor_port_manteau_spec",
+      "predicate": {
+        "domum_ornamentum:trapdoor_type": 7.0
+      }
+    },
+    {
+      "model": "domum_ornamentum:block/trapdoor/trapdoor_porthole_spec",
+      "predicate": {
+        "domum_ornamentum:trapdoor_type": 8.0
+      }
+    },
+    {
+      "model": "domum_ornamentum:block/trapdoor/trapdoor_roundel_spec",
+      "predicate": {
+        "domum_ornamentum:trapdoor_type": 9.0
+      }
+    },
+    {
+      "model": "domum_ornamentum:block/trapdoor/trapdoor_slot_spec",
+      "predicate": {
+        "domum_ornamentum:trapdoor_type": 10.0
+      }
+    },
+    {
+      "model": "domum_ornamentum:block/trapdoor/trapdoor_vertical_bars_spec",
+      "predicate": {
+        "domum_ornamentum:trapdoor_type": 11.0
+      }
+    },
+    {
+      "model": "domum_ornamentum:block/trapdoor/trapdoor_vertically_squiggly_striped_spec",
+      "predicate": {
+        "domum_ornamentum:trapdoor_type": 12.0
+      }
+    },
+    {
+      "model": "domum_ornamentum:block/trapdoor/trapdoor_vertically_striped_spec",
+      "predicate": {
+        "domum_ornamentum:trapdoor_type": 13.0
+      }
+    },
+    {
+      "model": "domum_ornamentum:block/trapdoor/trapdoor_waffle_spec",
+      "predicate": {
+        "domum_ornamentum:trapdoor_type": 14.0
+      }
+    }
+  ]
+}

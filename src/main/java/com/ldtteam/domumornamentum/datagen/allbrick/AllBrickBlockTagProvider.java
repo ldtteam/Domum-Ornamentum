@@ -1,14 +1,19 @@
 package com.ldtteam.domumornamentum.datagen.allbrick;
 
+import static com.ldtteam.domumornamentum.datagen.TagAppenderHelper.addBlocks;
+
 import com.ldtteam.domumornamentum.tag.ModTags;
+import net.minecraft.data.tags.TagAppender;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.data.BlockTagsProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import com.ldtteam.domumornamentum.datagen.tags.BlockTagsProvider;
+import com.ldtteam.domumornamentum.datagen.DatagenContext;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,14 +21,20 @@ import java.util.concurrent.CompletableFuture;
 
 public class AllBrickBlockTagProvider extends BlockTagsProvider
 {
-    public AllBrickBlockTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, lookupProvider, Constants.MOD_ID, existingFileHelper);
+    public AllBrickBlockTagProvider(
+        PackOutput output,
+        CompletableFuture<HolderLookup.Provider> lookupProvider,
+        CompletableFuture<TagsProvider.TagLookup<Block>> parentProvider,
+        @Nullable DatagenContext existingFileHelper
+    ) {
+        super(output, lookupProvider, parentProvider, Constants.MOD_ID, existingFileHelper);
     }
 
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
 
-        this.tag(ModTags.ALL_BRICK_MATERIALS).add(
+        final var tagVar0 = this.tag(ModTags.ALL_BRICK_MATERIALS);
+        addBlocks(tagVar0,
             Blocks.MOSS_BLOCK,
             Blocks.CRACKED_POLISHED_BLACKSTONE_BRICKS,
             Blocks.CHISELED_POLISHED_BLACKSTONE,
@@ -89,8 +100,8 @@ public class AllBrickBlockTagProvider extends BlockTagsProvider
             Blocks.POLISHED_ANDESITE,
             Blocks.POLISHED_DIORITE,
             Blocks.POLISHED_GRANITE
-          )
-          .addTags(
+          );
+        tagVar0.addTags(
             ModTags.EXTRA_BLOCKS,
             Tags.Blocks.END_STONES,
             ModTags.BRICKS,

@@ -12,7 +12,7 @@ import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.pathfinder.PathComputationType;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.BlockHitResult;
@@ -35,12 +35,12 @@ import net.minecraft.world.inventory.ContainerLevelAccess;
 public final class ArchitectsCutterBlock extends AbstractBlock<ArchitectsCutterBlock>
 {
     private static final   Component    CONTAINER_NAME = Component.translatable(Constants.MOD_ID + ".architectscutter");
-    public static final    DirectionProperty FACING         = HorizontalDirectionalBlock.FACING;
+    public static final    EnumProperty<Direction> FACING         = HorizontalDirectionalBlock.FACING;
     protected static final VoxelShape SHAPE = Block.box(0.01D, 0.01D, 0.01D, 15.99D, 9.9D, 15.99D);
 
-    public ArchitectsCutterBlock()
+    public ArchitectsCutterBlock(final BlockBehaviour.Properties props)
     {
-        super(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).sound(SoundType.STONE).requiresCorrectToolForDrops().strength(3.5F));
+        super(props.mapColor(MapColor.STONE).sound(SoundType.STONE).requiresCorrectToolForDrops().strength(3.5F));
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
 
@@ -58,7 +58,7 @@ public final class ArchitectsCutterBlock extends AbstractBlock<ArchitectsCutterB
     @NotNull
     @Override
     public InteractionResult useWithoutItem(@NotNull BlockState state, Level worldIn, @NotNull BlockPos pos, @NotNull Player player, @NotNull BlockHitResult hit) {
-        if (worldIn.isClientSide) {
+        if (worldIn.isClientSide()) {
             return InteractionResult.SUCCESS;
         } else {
             player.openMenu(state.getMenuProvider(worldIn, pos));

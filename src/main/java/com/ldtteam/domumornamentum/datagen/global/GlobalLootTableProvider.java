@@ -7,6 +7,7 @@ import com.ldtteam.domumornamentum.block.decorative.ExtraBlock;
 import com.ldtteam.domumornamentum.block.decorative.FloatingCarpetBlock;
 import com.ldtteam.domumornamentum.datagen.loot.MaterialLootTableProvider;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.LootTableProvider;
@@ -43,22 +44,34 @@ public class GlobalLootTableProvider extends LootTableProvider
         protected void generate() {
             for (final BrickBlock block : ModBlocks.getInstance().getBricks())
             {
+                validateBlockItem(block);
                 dropSelf(block);
             }
 
             for (final ExtraBlock block : ModBlocks.getInstance().getExtraTopBlocks())
             {
+                validateBlockItem(block);
                 dropSelf(block);
             }
 
             for (final FloatingCarpetBlock block : ModBlocks.getInstance().getFloatingCarpets())
             {
+                validateBlockItem(block);
                 dropSelf(block);
             }
 
+            validateBlockItem(ModBlocks.getInstance().getStandingBarrel());
             dropSelf(ModBlocks.getInstance().getStandingBarrel());
+            validateBlockItem(ModBlocks.getInstance().getLayingBarrel());
             dropSelf(ModBlocks.getInstance().getLayingBarrel());
+            validateBlockItem(ModBlocks.getInstance().getArchitectsCutter());
             dropSelf(ModBlocks.getInstance().getArchitectsCutter());
+        }
+
+        private static void validateBlockItem(final Block block) {
+            if (block.asItem() == net.minecraft.world.item.Items.AIR) {
+                throw new IllegalStateException("Block has no BlockItem: " + BuiltInRegistries.BLOCK.getKey(block));
+            }
         }
 
         @Override

@@ -1,17 +1,10 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "group": "floating_carpets",
   "ingredients": [
-    {
-      "item": "minecraft:orange_wool"
-    },
-    {
-      "item": "minecraft:orange_wool"
-    },
-    {
-      "tag": "c:strings"
-    }
+    "minecraft:orange_wool",
+    "minecraft:orange_wool",
+    "#c:strings"
   ],
   "result": {
     "count": 3,

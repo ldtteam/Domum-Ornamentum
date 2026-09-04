@@ -46,11 +46,6 @@ public class PostBlock extends AbstractPostBlock<PostBlock> implements IMaterial
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
 
-    public PostBlock()
-    {
-        this(Properties.of().mapColor(MapColor.WOOD).strength(3.0F));
-    }
-
     public PostBlock(final Properties props)
     {
         super(props);
@@ -101,7 +96,7 @@ public class PostBlock extends AbstractPostBlock<PostBlock> implements IMaterial
     }
 
     @Override
-    public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final LevelReader world, final BlockPos pos, final Player player)
+    public ItemStack getCloneItemStack(final LevelReader world, final BlockPos pos, final BlockState state, final boolean includeData, final Player player)
     {
         return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos), world.registryAccess(), TYPE);
     }

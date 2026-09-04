@@ -9,10 +9,10 @@ import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
-import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
-import net.neoforged.neoforge.client.model.generators.MultiPartBlockStateBuilder;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import com.ldtteam.domumornamentum.datagen.model.BlockStateProvider;
+import com.ldtteam.domumornamentum.datagen.model.ItemModelBuilder;
+import com.ldtteam.domumornamentum.datagen.model.MultiPartBlockStateBuilder;
+import com.ldtteam.domumornamentum.datagen.DatagenContext;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Locale;
@@ -21,7 +21,7 @@ import java.util.Objects;
 public class PaperwallBlockStateProvider extends BlockStateProvider {
 
 
-    public PaperwallBlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
+    public PaperwallBlockStateProvider(DataGenerator gen, DatagenContext exFileHelper) {
         super(gen.getPackOutput(), Constants.MOD_ID, exFileHelper);
     }
 

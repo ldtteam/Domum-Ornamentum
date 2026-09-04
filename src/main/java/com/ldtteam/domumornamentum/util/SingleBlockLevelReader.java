@@ -21,6 +21,7 @@ import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.lighting.LevelLightEngine;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.attribute.EnvironmentAttributeReader;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
@@ -155,16 +156,7 @@ public class SingleBlockLevelReader extends SingleBlockBlockReader implements Le
     }
 
     @Override
-    public float getShade(@NotNull final Direction p_230487_1_, final boolean p_230487_2_)
-    {
-        if (this.reader == null)
-            return 0;
-
-        return this.reader.getShade(p_230487_1_, p_230487_2_);
-    }
-
     @NotNull
-    @Override
     public LevelLightEngine getLightEngine()
     {
         if (this.reader == null)
@@ -228,5 +220,14 @@ public class SingleBlockLevelReader extends SingleBlockBlockReader implements Le
     public FluidState getFluidState(@NotNull final BlockPos pos)
     {
         return this.getBlockState(pos).getFluidState();
+    }
+
+    @Override
+    public EnvironmentAttributeReader environmentAttributes() {
+        if (this.reader == null) {
+            return EnvironmentAttributeReader.EMPTY;
+        }
+
+        return this.reader.environmentAttributes();
     }
 }

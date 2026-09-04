@@ -72,7 +72,7 @@ public interface IClientboundDistributor extends CustomPacketPayload
 
         final String crash =
             "Got client chunk for server network message: " + this.getClass().getName() + " - " + chunk.getClass().getName();
-        if (FMLEnvironment.production)
+        if (FMLEnvironment.isProduction())
         {
             new IllegalArgumentException(crash).printStackTrace();
         }

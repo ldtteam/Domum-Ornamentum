@@ -28,6 +28,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
@@ -40,6 +41,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.pathfinder.PathComputationType;
@@ -107,11 +109,6 @@ public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock>
     /**
      * Constructor for the TimberFrame
      */
-    public ShingleSlabBlock()
-    {
-        this(Properties.of().mapColor(MapColor.WOOD).strength(BLOCK_HARDNESS, RESISTANCE));
-    }
-
     public ShingleSlabBlock(final Properties props)
     {
         super(props);
@@ -127,11 +124,19 @@ public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock>
     // Deprecated here just means that you should not use this method when referencing a block, and instead it's blockstate <- Forge's Discord
     @NotNull
     @Override
-    public BlockState updateShape(final BlockState stateIn, @NotNull final Direction HORIZONTAL_FACING, @NotNull final BlockState HORIZONTAL_FACINGState, @NotNull final LevelAccessor worldIn, @NotNull final BlockPos currentPos, @NotNull final BlockPos HORIZONTAL_FACINGPos)
+    public BlockState updateShape(
+        final BlockState stateIn,
+        @NotNull final LevelReader worldIn,
+        @NotNull final ScheduledTickAccess ticks,
+        @NotNull final BlockPos currentPos,
+        @NotNull final Direction HORIZONTAL_FACING,
+        @NotNull final BlockPos HORIZONTAL_FACINGPos,
+        @NotNull final BlockState HORIZONTAL_FACINGState,
+        @NotNull final RandomSource random)
     {
         if (stateIn.getValue(WATERLOGGED))
         {
-            worldIn.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
+            ticks.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
         }
 
         return getSlabShape(stateIn, worldIn, currentPos);
@@ -187,7 +192,7 @@ public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock>
      * @param position the position.Re
      * @return the blockState to use.
      */
-    private static BlockState getSlabShape(@NotNull final BlockState state, @NotNull final LevelAccessor world, @NotNull final BlockPos position)
+    private static BlockState getSlabShape(@NotNull final BlockState state, @NotNull final BlockGetter world, @NotNull final BlockPos position)
     {
         final boolean north = world.getBlockState(position.north()).getBlock() instanceof ShingleSlabBlock;
         final boolean south = world.getBlockState(position.south()).getBlock() instanceof ShingleSlabBlock;
@@ -315,7 +320,7 @@ public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock>
     }
 
     @Override
-    public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final LevelReader world, final BlockPos pos, final Player player)
+    public ItemStack getCloneItemStack(final LevelReader world, final BlockPos pos, final BlockState state, final boolean includeData, final Player player)
     {
         return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos), world.registryAccess());
     }

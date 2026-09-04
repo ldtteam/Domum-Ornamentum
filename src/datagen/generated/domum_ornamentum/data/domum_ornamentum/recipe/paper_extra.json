@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "X": {
-      "item": "minecraft:paper"
-    },
-    "Z": {
-      "item": "minecraft:paper"
-    }
+    "X": "minecraft:paper",
+    "Z": "minecraft:paper"
   },
   "pattern": [
     "X X",

@@ -46,9 +46,9 @@ public class SlabBlock extends AbstractBlockSlab<SlabBlock> implements IMaterial
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
 
-    public SlabBlock()
+    public SlabBlock(final BlockBehaviour.Properties props)
     {
-        super(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).noOcclusion().strength(2.0F, 3.0F));
+        super(props.mapColor(MapColor.WOOD).noOcclusion().strength(2.0F, 3.0F));
     }
 
     @Override
@@ -90,7 +90,7 @@ public class SlabBlock extends AbstractBlockSlab<SlabBlock> implements IMaterial
     }
 
     @Override
-    public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final LevelReader world, final BlockPos pos, final Player player)
+    public ItemStack getCloneItemStack(final LevelReader world, final BlockPos pos, final BlockState state, final boolean includeData, final Player player)
     {
         return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos), world.registryAccess());
     }

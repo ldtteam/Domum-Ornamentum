@@ -44,9 +44,9 @@ public class FenceBlock extends AbstractBlockFence<FenceBlock> implements IMater
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
 
-    public FenceBlock()
+    public FenceBlock(final BlockBehaviour.Properties props)
     {
-        super(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).strength(2.0F, 3.0F));
+        super(props.mapColor(MapColor.WOOD).strength(2.0F, 3.0F));
     }
 
     @Override
@@ -69,7 +69,7 @@ public class FenceBlock extends AbstractBlockFence<FenceBlock> implements IMater
     }
 
     @Override
-    public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final LevelReader world, final BlockPos pos, final Player player)
+    public ItemStack getCloneItemStack(final LevelReader world, final BlockPos pos, final BlockState state, final boolean includeData, final Player player)
     {
         return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos), world.registryAccess());
     }

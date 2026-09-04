@@ -28,3 +28,47 @@ tableau {
         })
     }
 }
+// NeoGradle 7.1.x does not strip @OnlyIn annotations that Vineflower adds back
+// during decompilation for MC 26.x. The NeoForm and UserDev patches expect them
+// removed before nested type declarations. We also restore blank-line separators.
+tasks.matching { it.name == 'neoFormPatch' }.configureEach {
+    doFirst {
+        def decompileJar = project.file("build/neoForm/neoFormJoined26.2-2/steps/decompile/outputs.jar")
+        if (!decompileJar.exists()) return
+
+        def workDir = new File(project.buildDir, "onlyin-fix")
+        workDir.deleteDir()
+        workDir.mkdirs()
+
+        def zipTree = project.zipTree(decompileJar)
+        def javaFiles = []
+        zipTree.visit { details ->
+            def dest = new File(workDir, details.path)
+            if (details.directory) {
+                return
+            }
+            if (!dest.name.endsWith('.java')) {
+                return
+            }
+
+            dest.parentFile.mkdirs()
+            details.copyTo(dest)
+            javaFiles << dest
+        }
+
+        javaFiles.each { f ->
+            def text = f.text
+            def fixed = text.replaceAll(
+                /(?m)^( +)@OnlyIn\s*\([^)]*\)\n(\1(?:public |private |protected )?(?:static |final |abstract )?(?:class |interface |record |enum |@interface ))/,
+                '$2')
+            fixed = fixed.replaceAll(
+                /(?m)^(\}+)\n( +(?:public|private|protected)\s+(?:static\s+)?(?:class |record |interface |enum ))/,
+                '$1\n\n$2')
+            if (fixed != text) f.text = fixed
+        }
+
+        def ant = new groovy.ant.AntBuilder()
+        ant.jar(destfile: decompileJar.absolutePath, basedir: workDir, update: true)
+        workDir.deleteDir()
+    }
+}

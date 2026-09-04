@@ -1,102 +1,125 @@
 package com.ldtteam.domumornamentum.datagen.global;
 
+import static com.ldtteam.domumornamentum.datagen.TagAppenderHelper.addBlocks;
+import static com.ldtteam.domumornamentum.datagen.TagAppenderHelper.addKeys;
+
 import com.ldtteam.domumornamentum.block.ModBlocks;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.tags.TagAppender;
 import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.WeatheringCopper;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.data.BlockTagsProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import com.ldtteam.domumornamentum.datagen.tags.BlockTagsProvider;
+import com.ldtteam.domumornamentum.datagen.DatagenContext;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
 public class GlobalTagProvider extends BlockTagsProvider
 {
-    public GlobalTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, lookupProvider, Constants.MOD_ID, existingFileHelper);
+    public GlobalTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable DatagenContext existingFileHelper) {
+        this(output, lookupProvider, CompletableFuture.completedFuture(TagsProvider.TagLookup.empty()), existingFileHelper);
+    }
+
+    public GlobalTagProvider(
+        PackOutput output,
+        CompletableFuture<HolderLookup.Provider> lookupProvider,
+        CompletableFuture<TagsProvider.TagLookup<Block>> parentProvider,
+        @Nullable DatagenContext existingFileHelper
+    ) {
+        super(output, lookupProvider, parentProvider, Constants.MOD_ID, existingFileHelper);
     }
 
     @SuppressWarnings("unchecked")
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
-        this.tag(ModTags.CONCRETE)
-          .add(
-            Blocks.BLACK_CONCRETE,
-            Blocks.CYAN_CONCRETE,
-            Blocks.BLUE_CONCRETE,
-            Blocks.BROWN_CONCRETE,
-            Blocks.GRAY_CONCRETE,
-            Blocks.GREEN_CONCRETE,
-            Blocks.LIGHT_BLUE_CONCRETE,
-            Blocks.LIGHT_GRAY_CONCRETE,
-            Blocks.LIME_CONCRETE,
-            Blocks.MAGENTA_CONCRETE,
-            Blocks.ORANGE_CONCRETE,
-            Blocks.PINK_CONCRETE,
-            Blocks.PURPLE_CONCRETE,
-            Blocks.RED_CONCRETE,
-            Blocks.WHITE_CONCRETE,
-            Blocks.YELLOW_CONCRETE);
+        addBlocks(this.tag(ModTags.CONCRETE),
+            Blocks.CONCRETE.pick(DyeColor.BLACK),
+            Blocks.CONCRETE.pick(DyeColor.CYAN),
+            Blocks.CONCRETE.pick(DyeColor.BLUE),
+            Blocks.CONCRETE.pick(DyeColor.BROWN),
+            Blocks.CONCRETE.pick(DyeColor.GRAY),
+            Blocks.CONCRETE.pick(DyeColor.GREEN),
+            Blocks.CONCRETE.pick(DyeColor.LIGHT_BLUE),
+            Blocks.CONCRETE.pick(DyeColor.LIGHT_GRAY),
+            Blocks.CONCRETE.pick(DyeColor.LIME),
+            Blocks.CONCRETE.pick(DyeColor.MAGENTA),
+            Blocks.CONCRETE.pick(DyeColor.ORANGE),
+            Blocks.CONCRETE.pick(DyeColor.PINK),
+            Blocks.CONCRETE.pick(DyeColor.PURPLE),
+            Blocks.CONCRETE.pick(DyeColor.RED),
+            Blocks.CONCRETE.pick(DyeColor.WHITE),
+            Blocks.CONCRETE.pick(DyeColor.YELLOW));
 
-        this.tag(ModTags.GLACED_TERRACOTTA).add(
-            Blocks.WHITE_GLAZED_TERRACOTTA,
-            Blocks.ORANGE_GLAZED_TERRACOTTA,
-            Blocks.MAGENTA_GLAZED_TERRACOTTA,
-            Blocks.LIGHT_BLUE_GLAZED_TERRACOTTA,
-            Blocks.YELLOW_GLAZED_TERRACOTTA,
-            Blocks.LIME_GLAZED_TERRACOTTA,
-            Blocks.PINK_GLAZED_TERRACOTTA,
-            Blocks.GRAY_GLAZED_TERRACOTTA,
-            Blocks.LIGHT_GRAY_GLAZED_TERRACOTTA,
-            Blocks.CYAN_GLAZED_TERRACOTTA,
-            Blocks.PURPLE_GLAZED_TERRACOTTA,
-            Blocks.BLUE_GLAZED_TERRACOTTA,
-            Blocks.BROWN_GLAZED_TERRACOTTA,
-            Blocks.GREEN_GLAZED_TERRACOTTA,
-            Blocks.RED_GLAZED_TERRACOTTA,
-            Blocks.BLACK_GLAZED_TERRACOTTA);
+        final var tagVar0 = this.tag(ModTags.GLACED_TERRACOTTA);
+        addBlocks(tagVar0,
+            Blocks.GLAZED_TERRACOTTA.pick(DyeColor.WHITE),
+            Blocks.GLAZED_TERRACOTTA.pick(DyeColor.ORANGE),
+            Blocks.GLAZED_TERRACOTTA.pick(DyeColor.MAGENTA),
+            Blocks.GLAZED_TERRACOTTA.pick(DyeColor.LIGHT_BLUE),
+            Blocks.GLAZED_TERRACOTTA.pick(DyeColor.YELLOW),
+            Blocks.GLAZED_TERRACOTTA.pick(DyeColor.LIME),
+            Blocks.GLAZED_TERRACOTTA.pick(DyeColor.PINK),
+            Blocks.GLAZED_TERRACOTTA.pick(DyeColor.GRAY),
+            Blocks.GLAZED_TERRACOTTA.pick(DyeColor.LIGHT_GRAY),
+            Blocks.GLAZED_TERRACOTTA.pick(DyeColor.CYAN),
+            Blocks.GLAZED_TERRACOTTA.pick(DyeColor.PURPLE),
+            Blocks.GLAZED_TERRACOTTA.pick(DyeColor.BLUE),
+            Blocks.GLAZED_TERRACOTTA.pick(DyeColor.BROWN),
+            Blocks.GLAZED_TERRACOTTA.pick(DyeColor.GREEN),
+            Blocks.GLAZED_TERRACOTTA.pick(DyeColor.RED),
+            Blocks.GLAZED_TERRACOTTA.pick(DyeColor.BLACK));
 
-        this.tag(ModTags.COPPER).add(
-            Blocks.COPPER_BLOCK,
-            Blocks.WAXED_COPPER_BLOCK,
-            Blocks.EXPOSED_COPPER,
-            Blocks.WAXED_EXPOSED_COPPER,
-            Blocks.WEATHERED_COPPER,
-            Blocks.WAXED_WEATHERED_COPPER,
-            Blocks.OXIDIZED_COPPER,
-            Blocks.WAXED_OXIDIZED_COPPER,
-            Blocks.CUT_COPPER,
-            Blocks.WAXED_CUT_COPPER,
-            Blocks.EXPOSED_CUT_COPPER,
-            Blocks.WAXED_EXPOSED_CUT_COPPER,
-            Blocks.WEATHERED_CUT_COPPER,
-            Blocks.WAXED_WEATHERED_CUT_COPPER,
-            Blocks.OXIDIZED_CUT_COPPER,
-            Blocks.WAXED_OXIDIZED_CUT_COPPER,
-            Blocks.CHISELED_COPPER,
-            Blocks.WAXED_CHISELED_COPPER,
-            Blocks.EXPOSED_CHISELED_COPPER,
-            Blocks.WAXED_EXPOSED_CHISELED_COPPER,
-            Blocks.WEATHERED_CHISELED_COPPER,
-            Blocks.WAXED_WEATHERED_CHISELED_COPPER,
-            Blocks.OXIDIZED_CHISELED_COPPER,
-            Blocks.WAXED_OXIDIZED_CHISELED_COPPER,
-            Blocks.COPPER_GRATE,
-            Blocks.WAXED_COPPER_GRATE,
-            Blocks.EXPOSED_COPPER_GRATE,
-            Blocks.WAXED_EXPOSED_COPPER_GRATE,
-            Blocks.WEATHERED_COPPER_GRATE,
-            Blocks.WAXED_WEATHERED_COPPER_GRATE,
-            Blocks.OXIDIZED_COPPER_GRATE,
-            Blocks.WAXED_OXIDIZED_COPPER_GRATE);
+        final var tagVar1 = this.tag(ModTags.COPPER);
+        addBlocks(tagVar1,
+            Blocks.COPPER_BLOCK.weathering().pick(WeatheringCopper.WeatherState.UNAFFECTED),
+            Blocks.COPPER_BLOCK.waxed().pick(WeatheringCopper.WeatherState.UNAFFECTED),
+            Blocks.COPPER_BLOCK.weathering().pick(WeatheringCopper.WeatherState.EXPOSED),
+            Blocks.COPPER_BLOCK.waxed().pick(WeatheringCopper.WeatherState.EXPOSED),
+            Blocks.COPPER_BLOCK.weathering().pick(WeatheringCopper.WeatherState.WEATHERED),
+            Blocks.COPPER_BLOCK.waxed().pick(WeatheringCopper.WeatherState.WEATHERED),
+            Blocks.COPPER_BLOCK.weathering().pick(WeatheringCopper.WeatherState.OXIDIZED),
+            Blocks.COPPER_BLOCK.waxed().pick(WeatheringCopper.WeatherState.OXIDIZED),
+            Blocks.CUT_COPPER.weathering().pick(WeatheringCopper.WeatherState.UNAFFECTED),
+            Blocks.CUT_COPPER.waxed().pick(WeatheringCopper.WeatherState.UNAFFECTED),
+            Blocks.CUT_COPPER.weathering().pick(WeatheringCopper.WeatherState.EXPOSED),
+            Blocks.CUT_COPPER.waxed().pick(WeatheringCopper.WeatherState.EXPOSED),
+            Blocks.CUT_COPPER.weathering().pick(WeatheringCopper.WeatherState.WEATHERED),
+            Blocks.CUT_COPPER.waxed().pick(WeatheringCopper.WeatherState.WEATHERED),
+            Blocks.CUT_COPPER.weathering().pick(WeatheringCopper.WeatherState.OXIDIZED),
+            Blocks.CUT_COPPER.waxed().pick(WeatheringCopper.WeatherState.OXIDIZED),
+            Blocks.CHISELED_COPPER.weathering().pick(WeatheringCopper.WeatherState.UNAFFECTED),
+            Blocks.CHISELED_COPPER.waxed().pick(WeatheringCopper.WeatherState.UNAFFECTED),
+            Blocks.CHISELED_COPPER.weathering().pick(WeatheringCopper.WeatherState.EXPOSED),
+            Blocks.CHISELED_COPPER.waxed().pick(WeatheringCopper.WeatherState.EXPOSED),
+            Blocks.CHISELED_COPPER.weathering().pick(WeatheringCopper.WeatherState.WEATHERED),
+            Blocks.CHISELED_COPPER.waxed().pick(WeatheringCopper.WeatherState.WEATHERED),
+            Blocks.CHISELED_COPPER.weathering().pick(WeatheringCopper.WeatherState.OXIDIZED),
+            Blocks.CHISELED_COPPER.waxed().pick(WeatheringCopper.WeatherState.OXIDIZED),
+            Blocks.COPPER_GRATE.weathering().pick(WeatheringCopper.WeatherState.UNAFFECTED),
+            Blocks.COPPER_GRATE.waxed().pick(WeatheringCopper.WeatherState.UNAFFECTED),
+            Blocks.COPPER_GRATE.weathering().pick(WeatheringCopper.WeatherState.EXPOSED),
+            Blocks.COPPER_GRATE.waxed().pick(WeatheringCopper.WeatherState.EXPOSED),
+            Blocks.COPPER_GRATE.weathering().pick(WeatheringCopper.WeatherState.WEATHERED),
+            Blocks.COPPER_GRATE.waxed().pick(WeatheringCopper.WeatherState.WEATHERED),
+            Blocks.COPPER_GRATE.weathering().pick(WeatheringCopper.WeatherState.OXIDIZED),
+            Blocks.COPPER_GRATE.waxed().pick(WeatheringCopper.WeatherState.OXIDIZED));
 
-        this.tag(ModTags.GLOBAL_DEFAULT).add(
+        final var tagVar2 = this.tag(ModTags.GLOBAL_DEFAULT);
+        addBlocks(tagVar2,
             Blocks.MOSS_BLOCK,
             Blocks.CRACKED_POLISHED_BLACKSTONE_BRICKS,
             Blocks.CHISELED_POLISHED_BLACKSTONE,
@@ -199,27 +222,29 @@ public class GlobalTagProvider extends BlockTagsProvider
             BlockTags.BASE_STONE_NETHER
           );
 
-        this.tag(BlockTags.MINEABLE_WITH_AXE)
-          .add(ModBlocks.getInstance().getArchitectsCutter(),
-            ModBlocks.getInstance().getLayingBarrel(),
-            ModBlocks.getInstance().getStandingBarrel());
+        addKeys(this.tag(BlockTags.MINEABLE_WITH_AXE), List.of(
+            keyFor(ModBlocks.getInstance().getArchitectsCutter()),
+            keyFor(ModBlocks.getInstance().getLayingBarrel()),
+            keyFor(ModBlocks.getInstance().getStandingBarrel())
+        ));
 
-        this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
-          .add(ModBlocks.getInstance().getBricks().toArray(new Block[0]));
+        addKeys(this.tag(BlockTags.MINEABLE_WITH_PICKAXE),
+            ModBlocks.getInstance().getBricks().stream()
+                .map(GlobalTagProvider::keyFor).collect(Collectors.toList()));
 
-        ModBlocks.getInstance().getExtraTopBlocks().forEach(extraBlock -> this.tag(extraBlock.getType().getCategory().getMineableTag()).add(extraBlock));
+        addKeys(this.tag(BlockTags.DOORS), List.of(keyFor(ModBlocks.getInstance().getDoor())));
+        addKeys(this.tag(BlockTags.DOORS), List.of(keyFor(ModBlocks.getInstance().getFancyDoor())));
 
-        this.tag(BlockTags.DOORS)
-          .add(ModBlocks.getInstance().getDoor())
-          .add(ModBlocks.getInstance().getFancyDoor());
+        addKeys(this.tag(BlockTags.WOODEN_DOORS), List.of(keyFor(ModBlocks.getInstance().getDoor())));
+        addKeys(this.tag(BlockTags.WOODEN_DOORS), List.of(keyFor(ModBlocks.getInstance().getFancyDoor())));
 
-        this.tag(BlockTags.WOODEN_DOORS)
-          .add(ModBlocks.getInstance().getDoor())
-          .add(ModBlocks.getInstance().getFancyDoor());
+        addKeys(this.tag(BlockTags.STAIRS), List.of(keyFor(ModBlocks.getInstance().getStair())));
+        addKeys(this.tag(BlockTags.STAIRS), ModBlocks.getInstance().getAllBrickStairBlocks().stream()
+            .map(GlobalTagProvider::keyFor).collect(Collectors.toList()));
+    }
 
-        this.tag(BlockTags.STAIRS)
-          .add(ModBlocks.getInstance().getStair())
-          .add(ModBlocks.getInstance().getAllBrickStairBlocks().toArray(new Block[0]));
+    private static ResourceKey<Block> keyFor(final Block block) {
+        return ResourceKey.create(Registries.BLOCK, BuiltInRegistries.BLOCK.getKey(block));
     }
 
     @Override

@@ -55,11 +55,6 @@ public class PanelBlock extends AbstractPanelBlockTrapdoor<PanelBlock> implement
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
 
-    public PanelBlock()
-    {
-        this(Properties.of().mapColor(MapColor.WOOD).strength(3.0F).noOcclusion().isValidSpawn((state, blockGetter, pos, type) -> false));
-    }
-
     public PanelBlock(final Properties props)
     {
         super(props);
@@ -180,7 +175,7 @@ public class PanelBlock extends AbstractPanelBlockTrapdoor<PanelBlock> implement
     }
 
     @Override
-    public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final LevelReader world, final BlockPos pos, final Player player)
+    public ItemStack getCloneItemStack(final LevelReader world, final BlockPos pos, final BlockState state, final boolean includeData, final Player player)
     {
         return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos), world.registryAccess(), TYPE);
     }

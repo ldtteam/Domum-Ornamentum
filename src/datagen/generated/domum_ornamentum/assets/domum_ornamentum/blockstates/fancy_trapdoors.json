@@ -4,7 +4,7 @@
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full",
         "uvlock": true,
-        "x": -90,
+        "x": 270,
         "y": 180
       },
       "when": {
@@ -57,7 +57,7 @@
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper",
         "uvlock": true,
-        "x": -90,
+        "x": 270,
         "y": 180
       },
       "when": {
@@ -110,8 +110,7 @@
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full",
         "uvlock": true,
-        "x": -90,
-        "y": 360
+        "x": 270
       },
       "when": {
         "type": "full",
@@ -151,8 +150,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full",
-        "uvlock": true,
-        "y": 360
+        "uvlock": true
       },
       "when": {
         "type": "full",
@@ -165,8 +163,7 @@
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper",
         "uvlock": true,
-        "x": -90,
-        "y": 360
+        "x": 270
       },
       "when": {
         "type": "creeper",
@@ -206,8 +203,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper",
-        "uvlock": true,
-        "y": 360
+        "uvlock": true
       },
       "when": {
         "type": "creeper",
@@ -220,8 +216,8 @@
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full",
         "uvlock": true,
-        "x": -90,
-        "y": 450
+        "x": 270,
+        "y": 90
       },
       "when": {
         "type": "full",
@@ -262,7 +258,7 @@
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full",
         "uvlock": true,
-        "y": 450
+        "y": 90
       },
       "when": {
         "type": "full",
@@ -275,8 +271,8 @@
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper",
         "uvlock": true,
-        "x": -90,
-        "y": 450
+        "x": 270,
+        "y": 90
       },
       "when": {
         "type": "creeper",
@@ -317,7 +313,7 @@
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper",
         "uvlock": true,
-        "y": 450
+        "y": 90
       },
       "when": {
         "type": "creeper",
@@ -330,7 +326,7 @@
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full",
         "uvlock": true,
-        "x": -90,
+        "x": 270,
         "y": 270
       },
       "when": {
@@ -385,7 +381,7 @@
       "apply": {
         "model": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper",
         "uvlock": true,
-        "x": -90,
+        "x": 270,
         "y": 270
       },
       "when": {

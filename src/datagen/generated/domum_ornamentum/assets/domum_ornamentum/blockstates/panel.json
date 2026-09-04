@@ -4,7 +4,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_boss",
         "uvlock": true,
-        "x": -90,
+        "x": 270,
         "y": 180
       },
       "when": {
@@ -57,7 +57,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_coffer",
         "uvlock": true,
-        "x": -90,
+        "x": 270,
         "y": 180
       },
       "when": {
@@ -110,7 +110,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_full",
         "uvlock": true,
-        "x": -90,
+        "x": 270,
         "y": 180
       },
       "when": {
@@ -163,7 +163,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_horizontal_bars",
         "uvlock": true,
-        "x": -90,
+        "x": 270,
         "y": 180
       },
       "when": {
@@ -216,7 +216,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_horizontally_squiggly_striped",
         "uvlock": true,
-        "x": -90,
+        "x": 270,
         "y": 180
       },
       "when": {
@@ -269,7 +269,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_horizontally_striped",
         "uvlock": true,
-        "x": -90,
+        "x": 270,
         "y": 180
       },
       "when": {
@@ -322,7 +322,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_moulding",
         "uvlock": true,
-        "x": -90,
+        "x": 270,
         "y": 180
       },
       "when": {
@@ -375,7 +375,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_port_manteau",
         "uvlock": true,
-        "x": -90,
+        "x": 270,
         "y": 180
       },
       "when": {
@@ -428,7 +428,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_porthole",
         "uvlock": true,
-        "x": -90,
+        "x": 270,
         "y": 180
       },
       "when": {
@@ -481,7 +481,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_roundel",
         "uvlock": true,
-        "x": -90,
+        "x": 270,
         "y": 180
       },
       "when": {
@@ -534,7 +534,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_slot",
         "uvlock": true,
-        "x": -90,
+        "x": 270,
         "y": 180
       },
       "when": {
@@ -587,7 +587,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_vertical_bars",
         "uvlock": true,
-        "x": -90,
+        "x": 270,
         "y": 180
       },
       "when": {
@@ -640,7 +640,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_vertically_squiggly_striped",
         "uvlock": true,
-        "x": -90,
+        "x": 270,
         "y": 180
       },
       "when": {
@@ -693,7 +693,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_vertically_striped",
         "uvlock": true,
-        "x": -90,
+        "x": 270,
         "y": 180
       },
       "when": {
@@ -746,7 +746,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_waffle",
         "uvlock": true,
-        "x": -90,
+        "x": 270,
         "y": 180
       },
       "when": {
@@ -799,8 +799,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_boss",
         "uvlock": true,
-        "x": -90,
-        "y": 360
+        "x": 270
       },
       "when": {
         "type": "boss",
@@ -840,8 +839,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_boss",
-        "uvlock": true,
-        "y": 360
+        "uvlock": true
       },
       "when": {
         "type": "boss",
@@ -854,8 +852,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_coffer",
         "uvlock": true,
-        "x": -90,
-        "y": 360
+        "x": 270
       },
       "when": {
         "type": "coffer",
@@ -895,8 +892,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_coffer",
-        "uvlock": true,
-        "y": 360
+        "uvlock": true
       },
       "when": {
         "type": "coffer",
@@ -909,8 +905,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_full",
         "uvlock": true,
-        "x": -90,
-        "y": 360
+        "x": 270
       },
       "when": {
         "type": "full",
@@ -950,8 +945,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_full",
-        "uvlock": true,
-        "y": 360
+        "uvlock": true
       },
       "when": {
         "type": "full",
@@ -964,8 +958,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_horizontal_bars",
         "uvlock": true,
-        "x": -90,
-        "y": 360
+        "x": 270
       },
       "when": {
         "type": "horizontal_bars",
@@ -1005,8 +998,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_horizontal_bars",
-        "uvlock": true,
-        "y": 360
+        "uvlock": true
       },
       "when": {
         "type": "horizontal_bars",
@@ -1019,8 +1011,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_horizontally_squiggly_striped",
         "uvlock": true,
-        "x": -90,
-        "y": 360
+        "x": 270
       },
       "when": {
         "type": "horizontally_squiggly_striped",
@@ -1060,8 +1051,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_horizontally_squiggly_striped",
-        "uvlock": true,
-        "y": 360
+        "uvlock": true
       },
       "when": {
         "type": "horizontally_squiggly_striped",
@@ -1074,8 +1064,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_horizontally_striped",
         "uvlock": true,
-        "x": -90,
-        "y": 360
+        "x": 270
       },
       "when": {
         "type": "horizontally_striped",
@@ -1115,8 +1104,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_horizontally_striped",
-        "uvlock": true,
-        "y": 360
+        "uvlock": true
       },
       "when": {
         "type": "horizontally_striped",
@@ -1129,8 +1117,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_moulding",
         "uvlock": true,
-        "x": -90,
-        "y": 360
+        "x": 270
       },
       "when": {
         "type": "moulding",
@@ -1170,8 +1157,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_moulding",
-        "uvlock": true,
-        "y": 360
+        "uvlock": true
       },
       "when": {
         "type": "moulding",
@@ -1184,8 +1170,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_port_manteau",
         "uvlock": true,
-        "x": -90,
-        "y": 360
+        "x": 270
       },
       "when": {
         "type": "port_manteau",
@@ -1225,8 +1210,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_port_manteau",
-        "uvlock": true,
-        "y": 360
+        "uvlock": true
       },
       "when": {
         "type": "port_manteau",
@@ -1239,8 +1223,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_porthole",
         "uvlock": true,
-        "x": -90,
-        "y": 360
+        "x": 270
       },
       "when": {
         "type": "porthole",
@@ -1280,8 +1263,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_porthole",
-        "uvlock": true,
-        "y": 360
+        "uvlock": true
       },
       "when": {
         "type": "porthole",
@@ -1294,8 +1276,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_roundel",
         "uvlock": true,
-        "x": -90,
-        "y": 360
+        "x": 270
       },
       "when": {
         "type": "roundel",
@@ -1335,8 +1316,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_roundel",
-        "uvlock": true,
-        "y": 360
+        "uvlock": true
       },
       "when": {
         "type": "roundel",
@@ -1349,8 +1329,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_slot",
         "uvlock": true,
-        "x": -90,
-        "y": 360
+        "x": 270
       },
       "when": {
         "type": "slot",
@@ -1390,8 +1369,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_slot",
-        "uvlock": true,
-        "y": 360
+        "uvlock": true
       },
       "when": {
         "type": "slot",
@@ -1404,8 +1382,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_vertical_bars",
         "uvlock": true,
-        "x": -90,
-        "y": 360
+        "x": 270
       },
       "when": {
         "type": "vertical_bars",
@@ -1445,8 +1422,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_vertical_bars",
-        "uvlock": true,
-        "y": 360
+        "uvlock": true
       },
       "when": {
         "type": "vertical_bars",
@@ -1459,8 +1435,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_vertically_squiggly_striped",
         "uvlock": true,
-        "x": -90,
-        "y": 360
+        "x": 270
       },
       "when": {
         "type": "vertically_squiggly_striped",
@@ -1500,8 +1475,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_vertically_squiggly_striped",
-        "uvlock": true,
-        "y": 360
+        "uvlock": true
       },
       "when": {
         "type": "vertically_squiggly_striped",
@@ -1514,8 +1488,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_vertically_striped",
         "uvlock": true,
-        "x": -90,
-        "y": 360
+        "x": 270
       },
       "when": {
         "type": "vertically_striped",
@@ -1555,8 +1528,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_vertically_striped",
-        "uvlock": true,
-        "y": 360
+        "uvlock": true
       },
       "when": {
         "type": "vertically_striped",
@@ -1569,8 +1541,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_waffle",
         "uvlock": true,
-        "x": -90,
-        "y": 360
+        "x": 270
       },
       "when": {
         "type": "waffle",
@@ -1610,8 +1581,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_waffle",
-        "uvlock": true,
-        "y": 360
+        "uvlock": true
       },
       "when": {
         "type": "waffle",
@@ -1624,8 +1594,8 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_boss",
         "uvlock": true,
-        "x": -90,
-        "y": 450
+        "x": 270,
+        "y": 90
       },
       "when": {
         "type": "boss",
@@ -1666,7 +1636,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_boss",
         "uvlock": true,
-        "y": 450
+        "y": 90
       },
       "when": {
         "type": "boss",
@@ -1679,8 +1649,8 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_coffer",
         "uvlock": true,
-        "x": -90,
-        "y": 450
+        "x": 270,
+        "y": 90
       },
       "when": {
         "type": "coffer",
@@ -1721,7 +1691,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_coffer",
         "uvlock": true,
-        "y": 450
+        "y": 90
       },
       "when": {
         "type": "coffer",
@@ -1734,8 +1704,8 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_full",
         "uvlock": true,
-        "x": -90,
-        "y": 450
+        "x": 270,
+        "y": 90
       },
       "when": {
         "type": "full",
@@ -1776,7 +1746,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_full",
         "uvlock": true,
-        "y": 450
+        "y": 90
       },
       "when": {
         "type": "full",
@@ -1789,8 +1759,8 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_horizontal_bars",
         "uvlock": true,
-        "x": -90,
-        "y": 450
+        "x": 270,
+        "y": 90
       },
       "when": {
         "type": "horizontal_bars",
@@ -1831,7 +1801,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_horizontal_bars",
         "uvlock": true,
-        "y": 450
+        "y": 90
       },
       "when": {
         "type": "horizontal_bars",
@@ -1844,8 +1814,8 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_horizontally_squiggly_striped",
         "uvlock": true,
-        "x": -90,
-        "y": 450
+        "x": 270,
+        "y": 90
       },
       "when": {
         "type": "horizontally_squiggly_striped",
@@ -1886,7 +1856,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_horizontally_squiggly_striped",
         "uvlock": true,
-        "y": 450
+        "y": 90
       },
       "when": {
         "type": "horizontally_squiggly_striped",
@@ -1899,8 +1869,8 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_horizontally_striped",
         "uvlock": true,
-        "x": -90,
-        "y": 450
+        "x": 270,
+        "y": 90
       },
       "when": {
         "type": "horizontally_striped",
@@ -1941,7 +1911,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_horizontally_striped",
         "uvlock": true,
-        "y": 450
+        "y": 90
       },
       "when": {
         "type": "horizontally_striped",
@@ -1954,8 +1924,8 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_moulding",
         "uvlock": true,
-        "x": -90,
-        "y": 450
+        "x": 270,
+        "y": 90
       },
       "when": {
         "type": "moulding",
@@ -1996,7 +1966,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_moulding",
         "uvlock": true,
-        "y": 450
+        "y": 90
       },
       "when": {
         "type": "moulding",
@@ -2009,8 +1979,8 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_port_manteau",
         "uvlock": true,
-        "x": -90,
-        "y": 450
+        "x": 270,
+        "y": 90
       },
       "when": {
         "type": "port_manteau",
@@ -2051,7 +2021,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_port_manteau",
         "uvlock": true,
-        "y": 450
+        "y": 90
       },
       "when": {
         "type": "port_manteau",
@@ -2064,8 +2034,8 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_porthole",
         "uvlock": true,
-        "x": -90,
-        "y": 450
+        "x": 270,
+        "y": 90
       },
       "when": {
         "type": "porthole",
@@ -2106,7 +2076,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_porthole",
         "uvlock": true,
-        "y": 450
+        "y": 90
       },
       "when": {
         "type": "porthole",
@@ -2119,8 +2089,8 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_roundel",
         "uvlock": true,
-        "x": -90,
-        "y": 450
+        "x": 270,
+        "y": 90
       },
       "when": {
         "type": "roundel",
@@ -2161,7 +2131,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_roundel",
         "uvlock": true,
-        "y": 450
+        "y": 90
       },
       "when": {
         "type": "roundel",
@@ -2174,8 +2144,8 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_slot",
         "uvlock": true,
-        "x": -90,
-        "y": 450
+        "x": 270,
+        "y": 90
       },
       "when": {
         "type": "slot",
@@ -2216,7 +2186,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_slot",
         "uvlock": true,
-        "y": 450
+        "y": 90
       },
       "when": {
         "type": "slot",
@@ -2229,8 +2199,8 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_vertical_bars",
         "uvlock": true,
-        "x": -90,
-        "y": 450
+        "x": 270,
+        "y": 90
       },
       "when": {
         "type": "vertical_bars",
@@ -2271,7 +2241,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_vertical_bars",
         "uvlock": true,
-        "y": 450
+        "y": 90
       },
       "when": {
         "type": "vertical_bars",
@@ -2284,8 +2254,8 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_vertically_squiggly_striped",
         "uvlock": true,
-        "x": -90,
-        "y": 450
+        "x": 270,
+        "y": 90
       },
       "when": {
         "type": "vertically_squiggly_striped",
@@ -2326,7 +2296,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_vertically_squiggly_striped",
         "uvlock": true,
-        "y": 450
+        "y": 90
       },
       "when": {
         "type": "vertically_squiggly_striped",
@@ -2339,8 +2309,8 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_vertically_striped",
         "uvlock": true,
-        "x": -90,
-        "y": 450
+        "x": 270,
+        "y": 90
       },
       "when": {
         "type": "vertically_striped",
@@ -2381,7 +2351,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_vertically_striped",
         "uvlock": true,
-        "y": 450
+        "y": 90
       },
       "when": {
         "type": "vertically_striped",
@@ -2394,8 +2364,8 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_waffle",
         "uvlock": true,
-        "x": -90,
-        "y": 450
+        "x": 270,
+        "y": 90
       },
       "when": {
         "type": "waffle",
@@ -2436,7 +2406,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_waffle",
         "uvlock": true,
-        "y": 450
+        "y": 90
       },
       "when": {
         "type": "waffle",
@@ -2449,7 +2419,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_boss",
         "uvlock": true,
-        "x": -90,
+        "x": 270,
         "y": 270
       },
       "when": {
@@ -2504,7 +2474,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_coffer",
         "uvlock": true,
-        "x": -90,
+        "x": 270,
         "y": 270
       },
       "when": {
@@ -2559,7 +2529,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_full",
         "uvlock": true,
-        "x": -90,
+        "x": 270,
         "y": 270
       },
       "when": {
@@ -2614,7 +2584,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_horizontal_bars",
         "uvlock": true,
-        "x": -90,
+        "x": 270,
         "y": 270
       },
       "when": {
@@ -2669,7 +2639,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_horizontally_squiggly_striped",
         "uvlock": true,
-        "x": -90,
+        "x": 270,
         "y": 270
       },
       "when": {
@@ -2724,7 +2694,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_horizontally_striped",
         "uvlock": true,
-        "x": -90,
+        "x": 270,
         "y": 270
       },
       "when": {
@@ -2779,7 +2749,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_moulding",
         "uvlock": true,
-        "x": -90,
+        "x": 270,
         "y": 270
       },
       "when": {
@@ -2834,7 +2804,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_port_manteau",
         "uvlock": true,
-        "x": -90,
+        "x": 270,
         "y": 270
       },
       "when": {
@@ -2889,7 +2859,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_porthole",
         "uvlock": true,
-        "x": -90,
+        "x": 270,
         "y": 270
       },
       "when": {
@@ -2944,7 +2914,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_roundel",
         "uvlock": true,
-        "x": -90,
+        "x": 270,
         "y": 270
       },
       "when": {
@@ -2999,7 +2969,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_slot",
         "uvlock": true,
-        "x": -90,
+        "x": 270,
         "y": 270
       },
       "when": {
@@ -3054,7 +3024,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_vertical_bars",
         "uvlock": true,
-        "x": -90,
+        "x": 270,
         "y": 270
       },
       "when": {
@@ -3109,7 +3079,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_vertically_squiggly_striped",
         "uvlock": true,
-        "x": -90,
+        "x": 270,
         "y": 270
       },
       "when": {
@@ -3164,7 +3134,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_vertically_striped",
         "uvlock": true,
-        "x": -90,
+        "x": 270,
         "y": 270
       },
       "when": {
@@ -3219,7 +3189,7 @@
       "apply": {
         "model": "domum_ornamentum:block/panel/panel_waffle",
         "uvlock": true,
-        "x": -90,
+        "x": 270,
         "y": 270
       },
       "when": {

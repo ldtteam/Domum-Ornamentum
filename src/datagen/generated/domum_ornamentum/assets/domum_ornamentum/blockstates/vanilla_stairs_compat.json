@@ -54,8 +54,7 @@
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs_inner",
         "uvlock": true,
-        "x": 180,
-        "y": 360
+        "x": 180
       },
       "when": {
         "facing": "north",
@@ -104,8 +103,7 @@
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs_outer",
         "uvlock": true,
-        "x": 180,
-        "y": 360
+        "x": 180
       },
       "when": {
         "facing": "north",
@@ -412,7 +410,7 @@
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs_inner",
         "uvlock": true,
-        "y": -90
+        "y": 270
       },
       "when": {
         "facing": "east",
@@ -460,7 +458,7 @@
       "apply": {
         "model": "domum_ornamentum:block/stair/stairs_outer",
         "uvlock": true,
-        "y": -90
+        "y": 270
       },
       "when": {
         "facing": "east",

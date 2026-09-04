@@ -20,7 +20,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.BlockAndTintGetter;
+import net.minecraft.world.level.BlockAndLightGetter;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.LevelReader;
@@ -28,6 +28,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.MapColor;
@@ -69,9 +70,9 @@ public class FramedLightBlock extends AbstractBlock<FramedLightBlock> implements
     /**
      * Constructor for the Framed Light
      */
-    public FramedLightBlock(final FramedLightType framedLightType)
+    public FramedLightBlock(final FramedLightType framedLightType, final BlockBehaviour.Properties props)
     {
-        super(Properties.of().mapColor(MapColor.WOOD).pushReaction(PushReaction.PUSH_ONLY).strength(BLOCK_HARDNESS, RESISTANCE).noOcclusion().lightLevel(state -> 15));
+        super(props.mapColor(MapColor.WOOD).pushReaction(PushReaction.PUSH_ONLY).strength(BLOCK_HARDNESS, RESISTANCE).noOcclusion().lightLevel(state -> 15));
         this.framedLightType = framedLightType;
     }
 
@@ -87,7 +88,7 @@ public class FramedLightBlock extends AbstractBlock<FramedLightBlock> implements
     }
 
     @Override
-    public boolean shouldDisplayFluidOverlay(final BlockState state, final BlockAndTintGetter level, final BlockPos pos, final FluidState fluidState)
+    public boolean shouldDisplayFluidOverlay(final BlockState state, final BlockAndLightGetter level, final BlockPos pos, final FluidState fluidState)
     {
         return true;
     }
@@ -111,7 +112,7 @@ public class FramedLightBlock extends AbstractBlock<FramedLightBlock> implements
     }
 
     @Override
-    public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final LevelReader world, final BlockPos pos, final Player player)
+    public ItemStack getCloneItemStack(final LevelReader world, final BlockPos pos, final BlockState state, final boolean includeData, final Player player)
     {
         return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos), world.registryAccess());
     }

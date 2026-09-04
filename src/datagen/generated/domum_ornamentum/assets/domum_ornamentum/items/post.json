@@ -1,0 +1,55 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "block_state_property": "type",
+    "cases": [
+      {
+        "model": {
+          "type": "domum_ornamentum:materially_textured_item",
+          "model": "domum_ornamentum:block/post/post_plain_spec"
+        },
+        "when": "plain"
+      },
+      {
+        "model": {
+          "type": "domum_ornamentum:materially_textured_item",
+          "model": "domum_ornamentum:block/post/post_heavy_spec"
+        },
+        "when": "heavy"
+      },
+      {
+        "model": {
+          "type": "domum_ornamentum:materially_textured_item",
+          "model": "domum_ornamentum:block/post/post_turned_spec"
+        },
+        "when": "turned"
+      },
+      {
+        "model": {
+          "type": "domum_ornamentum:materially_textured_item",
+          "model": "domum_ornamentum:block/post/post_pinched_spec"
+        },
+        "when": "pinched"
+      },
+      {
+        "model": {
+          "type": "domum_ornamentum:materially_textured_item",
+          "model": "domum_ornamentum:block/post/post_double_spec"
+        },
+        "when": "double"
+      },
+      {
+        "model": {
+          "type": "domum_ornamentum:materially_textured_item",
+          "model": "domum_ornamentum:block/post/post_quad_spec"
+        },
+        "when": "quad"
+      }
+    ],
+    "fallback": {
+      "type": "domum_ornamentum:materially_textured_item",
+      "model": "domum_ornamentum:block/post/post_plain_spec"
+    },
+    "property": "minecraft:block_state"
+  }
+}

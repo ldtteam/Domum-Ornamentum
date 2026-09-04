@@ -30,6 +30,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
@@ -52,9 +53,9 @@ public class DoorBlock extends AbstractBlockDoor<DoorBlock> implements IMaterial
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
 
-    public DoorBlock()
+    public DoorBlock(final BlockBehaviour.Properties props)
     {
-        super(Properties.of().mapColor(MapColor.WOOD).strength(3.0F).noOcclusion().isValidSpawn((state, blockGetter, pos, type) -> false));
+        super(props.mapColor(MapColor.WOOD).strength(3.0F).noOcclusion().isValidSpawn((state, blockGetter, pos, type) -> false));
         this.registerDefaultState(this.defaultBlockState().setValue(TYPE, DoorType.FULL));
     }
 
@@ -112,7 +113,7 @@ public class DoorBlock extends AbstractBlockDoor<DoorBlock> implements IMaterial
     }
 
     @Override
-    public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final LevelReader world, final BlockPos pos, final Player player)
+    public ItemStack getCloneItemStack(final LevelReader world, final BlockPos pos, final BlockState state, final boolean includeData, final Player player)
     {
         return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos), world.registryAccess(), TYPE);
     }

@@ -11,9 +11,11 @@ import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.block.Block;
 import java.util.List;
+import java.util.function.Consumer;
 
 /** Post block item
  * copied other types, renamed vars
@@ -41,15 +43,15 @@ public class PostBlockItem extends BlockItemWithClientBePlacement implements IDo
     }
 
     @Override
-    public void appendHoverText(final ItemStack stack, final TooltipContext tooltipContext, final List<Component> tooltip, final TooltipFlag flagIn)
+    public void appendHoverText(final ItemStack stack, final TooltipContext tooltipContext, final TooltipDisplay display, final Consumer<Component> tooltip, final TooltipFlag flagIn)
     {
-        super.appendHoverText(stack, tooltipContext, tooltip, flagIn);
+        super.appendHoverText(stack, tooltipContext, display, tooltip, flagIn);
 
         final PostType postType = BlockUtils.getPropertyFromBlockStateTag(stack, PostBlock.TYPE, PostType.PLAIN);
 
-        tooltip.add(Component.translatable(Constants.MOD_ID + ".origin.tooltip"));
-        tooltip.add(Component.literal(""));
-        tooltip.add(Component.translatable(
+        tooltip.accept(Component.translatable(Constants.MOD_ID + ".origin.tooltip"));
+        tooltip.accept(Component.literal(""));
+        tooltip.accept(Component.translatable(
           Constants.MOD_ID + ".post.type.format",
           Component.translatable(Constants.MOD_ID + ".post.type.name." + postType.getTranslationKeySuffix())
         ));
@@ -62,7 +64,7 @@ public class PostBlockItem extends BlockItemWithClientBePlacement implements IDo
         final IMateriallyTexturedBlockComponent postComponent = postBlock.getComponents().get(0);
         final Block postBlock = textureData.getTexturedComponents().getOrDefault(postComponent.getId(), postComponent.getDefault());
         final Component postBlockName = BlockUtils.getHoverName(postBlock);
-        tooltip.add(Component.translatable(Constants.MOD_ID + ".desc.onlyone", Component.translatable(Constants.MOD_ID + ".desc.material", postBlockName)));
+        tooltip.accept(Component.translatable(Constants.MOD_ID + ".desc.onlyone", Component.translatable(Constants.MOD_ID + ".desc.material", postBlockName)));
     }
 
     @Override
