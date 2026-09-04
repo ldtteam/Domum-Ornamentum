@@ -1,17 +1,10 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "group": "floating_carpets",
   "ingredients": [
-    {
-      "item": "minecraft:black_wool"
-    },
-    {
-      "item": "minecraft:black_wool"
-    },
-    {
-      "tag": "c:strings"
-    }
+    "minecraft:black_wool",
+    "minecraft:black_wool",
+    "#c:strings"
   ],
   "result": {
     "count": 3,

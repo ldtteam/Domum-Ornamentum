@@ -14,10 +14,8 @@ public class SelfUpgradingDoubleHighBlockItem extends DoubleHighBlockItem
         super(block, properties);
     }
 
-    @Override
-    public void verifyComponentsAfterLoad(final ItemStack itemStack)
+public void verifyComponentsAfterLoad(final ItemStack itemStack)
     {
-        super.verifyComponentsAfterLoad(itemStack);
         SelfUpgradingBlockItem.upgrade(itemStack);
     }
 }

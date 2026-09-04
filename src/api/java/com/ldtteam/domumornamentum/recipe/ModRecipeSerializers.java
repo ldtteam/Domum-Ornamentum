@@ -1,7 +1,6 @@
 package com.ldtteam.domumornamentum.recipe;
 
 import com.ldtteam.domumornamentum.recipe.architectscutter.ArchitectsCutterRecipe;
-import com.ldtteam.domumornamentum.recipe.architectscutter.ArchitectsCutterRecipeSerializer;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.crafting.RecipeSerializer;

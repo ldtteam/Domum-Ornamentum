@@ -4,8 +4,10 @@ import com.ldtteam.domumornamentum.tag.ModTags;
 import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.neoforged.neoforge.common.data.BlockTagsProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.minecraft.data.tags.TagsProvider;
+import net.minecraft.world.level.block.Block;
+import com.ldtteam.domumornamentum.datagen.tags.BlockTagsProvider;
+import com.ldtteam.domumornamentum.datagen.DatagenContext;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -13,8 +15,13 @@ import java.util.concurrent.CompletableFuture;
 
 public class FenceComponentTagProvider extends BlockTagsProvider
 {
-    public FenceComponentTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, lookupProvider, Constants.MOD_ID, existingFileHelper);
+    public FenceComponentTagProvider(
+        PackOutput output,
+        CompletableFuture<HolderLookup.Provider> lookupProvider,
+        CompletableFuture<TagsProvider.TagLookup<Block>> parentProvider,
+        @Nullable DatagenContext existingFileHelper
+    ) {
+        super(output, lookupProvider, parentProvider, Constants.MOD_ID, existingFileHelper);
     }
 
     @SuppressWarnings("unchecked")

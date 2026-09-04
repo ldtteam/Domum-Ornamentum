@@ -5,6 +5,7 @@ import com.ldtteam.domumornamentum.IDomumOrnamentumApi;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlock;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.mojang.serialization.Codec;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
@@ -14,6 +15,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 import java.util.HashMap;
@@ -101,9 +103,11 @@ public record MaterialTextureData(Map<Identifier, Block> getTexturedComponents)
             return EMPTY;
 
         final Builder newData = new Builder();
-        nbt.getAllKeys().forEach(key -> {
-            final Identifier name = Identifier.parse(nbt.getString(key));
-                newData.setComponent(Identifier.parse(key), BuiltInRegistries.BLOCK.get(name));
+        nbt.keySet().forEach(key -> {
+            final Identifier name = Identifier.parse(nbt.getString(key).orElseThrow());
+                newData.setComponent(
+                    Identifier.parse(key),
+                    BuiltInRegistries.BLOCK.get(name).map(Holder::value).orElse(Blocks.AIR));
         });
         return newData.build();
     }
@@ -111,7 +115,7 @@ public record MaterialTextureData(Map<Identifier, Block> getTexturedComponents)
     /**
      * Writes this textureData into given itemStack.
      * 
-     * @see BlockEntity#saveToItem(ItemStack, net.minecraft.core.HolderLookup.Provider)
+     * @see BlockEntity#saveWithFullMetadata(net.minecraft.core.HolderLookup.Provider)
      */
     public void writeToItemStack(final ItemStack itemStack)
     {

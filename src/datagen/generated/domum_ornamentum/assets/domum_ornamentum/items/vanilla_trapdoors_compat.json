@@ -1,0 +1,118 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "block_state_property": "type",
+    "cases": [
+      {
+        "model": {
+          "type": "domum_ornamentum:materially_textured_item",
+          "model": "domum_ornamentum:block/trapdoor/trapdoor_boss_spec"
+        },
+        "when": "boss"
+      },
+      {
+        "model": {
+          "type": "domum_ornamentum:materially_textured_item",
+          "model": "domum_ornamentum:block/trapdoor/trapdoor_coffer_spec"
+        },
+        "when": "coffer"
+      },
+      {
+        "model": {
+          "type": "domum_ornamentum:materially_textured_item",
+          "model": "domum_ornamentum:block/trapdoor/trapdoor_full_spec"
+        },
+        "when": "full"
+      },
+      {
+        "model": {
+          "type": "domum_ornamentum:materially_textured_item",
+          "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontal_bars_spec"
+        },
+        "when": "horizontal_bars"
+      },
+      {
+        "model": {
+          "type": "domum_ornamentum:materially_textured_item",
+          "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontally_squiggly_striped_spec"
+        },
+        "when": "horizontally_squiggly_striped"
+      },
+      {
+        "model": {
+          "type": "domum_ornamentum:materially_textured_item",
+          "model": "domum_ornamentum:block/trapdoor/trapdoor_horizontally_striped_spec"
+        },
+        "when": "horizontally_striped"
+      },
+      {
+        "model": {
+          "type": "domum_ornamentum:materially_textured_item",
+          "model": "domum_ornamentum:block/trapdoor/trapdoor_moulding_spec"
+        },
+        "when": "moulding"
+      },
+      {
+        "model": {
+          "type": "domum_ornamentum:materially_textured_item",
+          "model": "domum_ornamentum:block/trapdoor/trapdoor_port_manteau_spec"
+        },
+        "when": "port_manteau"
+      },
+      {
+        "model": {
+          "type": "domum_ornamentum:materially_textured_item",
+          "model": "domum_ornamentum:block/trapdoor/trapdoor_porthole_spec"
+        },
+        "when": "porthole"
+      },
+      {
+        "model": {
+          "type": "domum_ornamentum:materially_textured_item",
+          "model": "domum_ornamentum:block/trapdoor/trapdoor_roundel_spec"
+        },
+        "when": "roundel"
+      },
+      {
+        "model": {
+          "type": "domum_ornamentum:materially_textured_item",
+          "model": "domum_ornamentum:block/trapdoor/trapdoor_slot_spec"
+        },
+        "when": "slot"
+      },
+      {
+        "model": {
+          "type": "domum_ornamentum:materially_textured_item",
+          "model": "domum_ornamentum:block/trapdoor/trapdoor_vertical_bars_spec"
+        },
+        "when": "vertical_bars"
+      },
+      {
+        "model": {
+          "type": "domum_ornamentum:materially_textured_item",
+          "model": "domum_ornamentum:block/trapdoor/trapdoor_vertically_squiggly_striped_spec"
+        },
+        "when": "vertically_squiggly_striped"
+      },
+      {
+        "model": {
+          "type": "domum_ornamentum:materially_textured_item",
+          "model": "domum_ornamentum:block/trapdoor/trapdoor_vertically_striped_spec"
+        },
+        "when": "vertically_striped"
+      },
+      {
+        "model": {
+          "type": "domum_ornamentum:materially_textured_item",
+          "model": "domum_ornamentum:block/trapdoor/trapdoor_waffle_spec"
+        },
+        "when": "waffle"
+      }
+    ],
+    "fallback": {
+      "type": "domum_ornamentum:materially_textured_item",
+      "model": "domum_ornamentum:block/trapdoor/trapdoor_boss_spec"
+    },
+    "property": "minecraft:block_state"
+  }
+}

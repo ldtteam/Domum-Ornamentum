@@ -22,6 +22,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.PlacementInfo;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeBookCategories;
 import net.minecraft.world.item.crafting.RecipeBookCategory;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -153,7 +154,6 @@ public class ArchitectsCutterRecipe implements Recipe<ArchitectsCutterRecipeInpu
         return "";
     }
 
-    @Override
     public @NotNull ItemStack getResultItem(final HolderLookup.Provider provider)
     {
         final Block generatedBlock = getBlock();
@@ -182,13 +182,13 @@ public class ArchitectsCutterRecipe implements Recipe<ArchitectsCutterRecipeInpu
     @Override
     public PlacementInfo placementInfo()
     {
-        return null;
+        return PlacementInfo.NOT_PLACEABLE;
     }
 
     @Override
     public RecipeBookCategory recipeBookCategory()
     {
-        return null;
+        return RecipeBookCategories.CRAFTING_MISC;
     }
 
     public @NotNull DataComponentPatch getComponentPatch()

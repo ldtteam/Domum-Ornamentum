@@ -1,6 +1,6 @@
 {
 	"credit": "Made with Blockbench by Shindria",
-	"parent": "block/cube_all",
+	"parent": "minecraft:block/block",
 	"textures": {
 		"column": "block/oak_planks",
 		"particle": "block/oak_planks"

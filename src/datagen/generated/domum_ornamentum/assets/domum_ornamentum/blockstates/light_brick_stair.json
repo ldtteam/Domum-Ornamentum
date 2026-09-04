@@ -49,8 +49,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner",
-        "x": 180,
-        "y": 360
+        "x": 180
       },
       "when": {
         "facing": "north",
@@ -95,8 +94,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer",
-        "x": 180,
-        "y": 360
+        "x": 180
       },
       "when": {
         "facing": "north",
@@ -378,7 +376,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/allbrick/light_brick_stair_inner",
-        "y": -90
+        "y": 270
       },
       "when": {
         "facing": "east",
@@ -422,7 +420,7 @@
     {
       "apply": {
         "model": "domum_ornamentum:block/allbrick/light_brick_stair_outer",
-        "y": -90
+        "y": 270
       },
       "when": {
         "facing": "east",

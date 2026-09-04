@@ -16,15 +16,13 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 
-@EventBusSubscriber(modid = Constants.MOD_ID, bus = EventBusSubscriber.Bus.GAME, value = Dist.CLIENT)
+@EventBusSubscriber(modid = Constants.MOD_ID, value = Dist.CLIENT)
 public class MateriallyTexturedBlockPreviewRenderHandler {
 
     @SubscribeEvent
-    public static void onRenderLevelStage(RenderLevelStageEvent event) {
-        if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_LEVEL) {
-            final PoseStack poseStack = event.getPoseStack();
-            renderMateriallyTexturedBlockPreview(poseStack);
-        }
+    public static void onRenderLevelStage(RenderLevelStageEvent.AfterLevel event) {
+        final PoseStack poseStack = event.getPoseStack();
+        renderMateriallyTexturedBlockPreview(poseStack);
     }
 
     public static void renderMateriallyTexturedBlockPreview(final PoseStack poseStack) {
@@ -40,7 +38,7 @@ public class MateriallyTexturedBlockPreviewRenderHandler {
         if (heldStack.isEmpty())
             return;
 
-        Vec3 targetedRenderPos = Vec3.atLowerCornerOf(blockRayTraceResult.getBlockPos().offset(blockRayTraceResult.getDirection().getNormal()));
+        Vec3 targetedRenderPos = Vec3.atLowerCornerOf(blockRayTraceResult.getBlockPos().offset(blockRayTraceResult.getDirection().getUnitVec3i()));
         renderGhost(poseStack, heldStack, targetedRenderPos, blockRayTraceResult, Minecraft.getInstance().level);
     }
 

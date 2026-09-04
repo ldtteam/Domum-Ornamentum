@@ -6,6 +6,7 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -24,9 +25,9 @@ public class FloatingCarpetBlock extends AbstractBlock<FloatingCarpetBlock>
      */
     private final DyeColor color;
 
-    public FloatingCarpetBlock(final DyeColor color)
+    public FloatingCarpetBlock(final DyeColor color, final BlockBehaviour.Properties props)
     {
-        super(Properties.of().mapColor(MapColor.WOOL).sound(SoundType.WOOL).isRedstoneConductor((state, getter, pos) -> false).forceSolidOff().strength(0.1F));
+        super(props.mapColor(MapColor.WOOL).sound(SoundType.WOOL).isRedstoneConductor((state, getter, pos) -> false).forceSolidOff().strength(0.1F));
         this.color = color;
     }
 

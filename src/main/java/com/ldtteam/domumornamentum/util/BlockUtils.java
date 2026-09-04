@@ -3,10 +3,12 @@ package com.ldtteam.domumornamentum.util;
 import com.ldtteam.domumornamentum.entity.block.AbstractMateriallyTexturedBlockEntity;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.component.TypedEntityData;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.BlockItemStateProperties;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -50,7 +52,8 @@ public class BlockUtils
         }
 
         final ItemStack result = new ItemStack(blockEntity.getBlockState().getBlock());
-        texturedBlockEntity.saveToItem(result, provider);
+        CompoundTag blockEntityTag = texturedBlockEntity.saveWithoutMetadata(provider);
+        result.set(DataComponents.BLOCK_ENTITY_DATA, TypedEntityData.of(texturedBlockEntity.getType(), blockEntityTag));
 
         if (blockStateProperties.length > 0)
         {
@@ -71,7 +74,7 @@ public class BlockUtils
         final Property<T> property,
         final T value)
     {
-        if (!FMLEnvironment.production && !(itemStack.getItem() instanceof BlockItem))
+        if (!FMLEnvironment.isProduction() && !(itemStack.getItem() instanceof BlockItem))
         {
             throw new IllegalArgumentException("item not BlockItem: " + itemStack.getItem());
         }

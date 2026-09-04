@@ -27,6 +27,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.WallSide;
@@ -36,6 +37,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Map;
 
 import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
 
@@ -45,18 +47,14 @@ public class WallBlock extends AbstractBlockWall<WallBlock> implements IMaterial
                                                                                .add(new SimpleRetexturableComponent(Identifier.withDefaultNamespace("block/oak_planks"), ModTags.WALL_MATERIALS, OAK_PLANKS))
                                                                                .build();
 
-    public static ImmutableMap<Direction, EnumProperty<WallSide>> PROPERTIES = ImmutableMap.of(
-            Direction.NORTH, WallBlock.NORTH_WALL,
-            Direction.EAST, WallBlock.EAST_WALL,
-            Direction.SOUTH, WallBlock.SOUTH_WALL,
-            Direction.WEST, WallBlock.WEST_WALL
-    );
+    public static final Map<Direction, EnumProperty<WallSide>> PROPERTIES =
+            net.minecraft.world.level.block.WallBlock.PROPERTY_BY_DIRECTION;
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
 
-    public WallBlock()
+    public WallBlock(final BlockBehaviour.Properties props)
     {
-        super(Properties.of().mapColor(MapColor.WOOD).strength(2.0F, 3.0F));
+        super(props.mapColor(MapColor.WOOD).strength(2.0F, 3.0F));
     }
     @Override
     public @NotNull List<IMateriallyTexturedBlockComponent> getComponents()
@@ -77,7 +75,7 @@ public class WallBlock extends AbstractBlockWall<WallBlock> implements IMaterial
     }
 
     @Override
-    public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final LevelReader world, final BlockPos pos, final Player player)
+    public ItemStack getCloneItemStack(final LevelReader world, final BlockPos pos, final BlockState state, final boolean includeData, final Player player)
     {
         return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos), world.registryAccess());
     }

@@ -18,18 +18,23 @@ public final class ModBlockEntityTypes
 {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, Constants.MOD_ID);
 
-    @SuppressWarnings({"SuspiciousToArrayCall", "ConstantConditions"}) //Not really true.
-    public static DeferredHolder<BlockEntityType<?>, BlockEntityType<BlockEntity>> MATERIALLY_TEXTURED = BLOCK_ENTITIES.register(Constants.BlockEntityTypes.MATERIALLY_RETEXTURABLE.getPath(),
-      () -> BlockEntityType.Builder.of((BlockEntityType.BlockEntitySupplier<BlockEntity>) MateriallyTexturedBlockEntity::new,
-        BuiltInRegistries.BLOCK.stream().filter(IMateriallyTexturedBlock.class::isInstance).toArray(Block[]::new)
-      ).build(null)
-    );
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends BlockEntity>> MATERIALLY_TEXTURED =
+        BLOCK_ENTITIES.register(
+            Constants.BlockEntityTypes.MATERIALLY_RETEXTURABLE.getPath(),
+            () -> new BlockEntityType<>(
+                MateriallyTexturedBlockEntity::new,
+                BuiltInRegistries.BLOCK.stream().filter(IMateriallyTexturedBlock.class::isInstance).toArray(Block[]::new)
+            )
+        );
 
-    public static DeferredHolder<BlockEntityType<?>, BlockEntityType<BlockEntity>> DYNAMIC_TIMBERFRAME = BLOCK_ENTITIES.register(Constants.BlockEntityTypes.DYNAMIC_TIMBERFRAME.getPath(),
-        () -> BlockEntityType.Builder.of((BlockEntityType.BlockEntitySupplier<BlockEntity>) DynamicTimberFrameBlockEntity::new,
-            BuiltInRegistries.BLOCK.stream().filter(DynamicTimberFrameBlock.class::isInstance).toArray(Block[]::new)
-        ).build(null)
-    );
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends BlockEntity>> DYNAMIC_TIMBERFRAME =
+        BLOCK_ENTITIES.register(
+            Constants.BlockEntityTypes.DYNAMIC_TIMBERFRAME.getPath(),
+            () -> new BlockEntityType<>(
+                DynamicTimberFrameBlockEntity::new,
+                BuiltInRegistries.BLOCK.stream().filter(DynamicTimberFrameBlock.class::isInstance).toArray(Block[]::new)
+            )
+        );
 
     /**
      * Private constructor to hide the implicit public one.

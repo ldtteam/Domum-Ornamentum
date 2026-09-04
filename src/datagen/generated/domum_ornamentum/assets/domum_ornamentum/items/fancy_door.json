@@ -1,0 +1,27 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "block_state_property": "type",
+    "cases": [
+      {
+        "model": {
+          "type": "domum_ornamentum:materially_textured_item",
+          "model": "domum_ornamentum:item/door/fancy/door_full_spec"
+        },
+        "when": "full"
+      },
+      {
+        "model": {
+          "type": "domum_ornamentum:materially_textured_item",
+          "model": "domum_ornamentum:item/door/fancy/door_creeper_spec"
+        },
+        "when": "creeper"
+      }
+    ],
+    "fallback": {
+      "type": "domum_ornamentum:materially_textured_item",
+      "model": "domum_ornamentum:item/door/fancy/door_full_spec"
+    },
+    "property": "minecraft:block_state"
+  }
+}

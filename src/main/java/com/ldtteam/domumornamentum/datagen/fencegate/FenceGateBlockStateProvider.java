@@ -9,18 +9,18 @@ import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
-import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
-import net.neoforged.neoforge.client.model.generators.ModelFile;
-import net.neoforged.neoforge.client.model.generators.MultiPartBlockStateBuilder;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import com.ldtteam.domumornamentum.datagen.model.BlockStateProvider;
+import com.ldtteam.domumornamentum.datagen.model.ItemModelBuilder;
+import com.ldtteam.domumornamentum.datagen.model.ModelFile;
+import com.ldtteam.domumornamentum.datagen.model.MultiPartBlockStateBuilder;
+import com.ldtteam.domumornamentum.datagen.DatagenContext;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class FenceGateBlockStateProvider extends BlockStateProvider {
-    public FenceGateBlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
+    public FenceGateBlockStateProvider(DataGenerator gen, DatagenContext exFileHelper) {
         super(gen.getPackOutput(), Constants.MOD_ID, exFileHelper);
     }
 
@@ -51,7 +51,8 @@ public class FenceGateBlockStateProvider extends BlockStateProvider {
                             .addModel()
                             .condition(HorizontalDirectionalBlock.FACING, direction)
                             .condition(FenceGateBlock.IN_WALL, wallState)
-                            .condition(FenceGateBlock.OPEN, open);
+                            .condition(FenceGateBlock.OPEN, open)
+                            .end();
                 }
             }
         }

@@ -25,6 +25,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.HitResult;
@@ -44,9 +45,9 @@ public class StairBlock extends net.minecraft.world.level.block.StairBlock imple
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
 
-    public StairBlock()
+    public StairBlock(final BlockBehaviour.Properties props)
     {
-        super(OAK_PLANKS.defaultBlockState(), Properties.of().mapColor(MapColor.WOOD).noOcclusion().strength(2.0F, 3.0F));
+        super(OAK_PLANKS.defaultBlockState(), props.mapColor(MapColor.WOOD).noOcclusion().strength(2.0F, 3.0F));
     }
 
     @Override
@@ -75,7 +76,7 @@ public class StairBlock extends net.minecraft.world.level.block.StairBlock imple
     }
 
     @Override
-    public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final LevelReader world, final BlockPos pos, final Player player)
+    public ItemStack getCloneItemStack(final LevelReader world, final BlockPos pos, final BlockState state, final boolean includeData, final Player player)
     {
         return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos), world.registryAccess());
     }

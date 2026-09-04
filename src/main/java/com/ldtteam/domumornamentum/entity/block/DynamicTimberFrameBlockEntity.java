@@ -26,9 +26,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import net.neoforged.neoforge.model.data.ModelData;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -141,7 +143,7 @@ public class DynamicTimberFrameBlockEntity extends AbstractMateriallyTexturedBlo
     @Override
     public CompoundTag getUpdateTag(final HolderLookup.Provider registries)
     {
-        return this.saveWithId(registries);
+        return this.saveWithFullMetadata(registries);
     }
 
     @Override
@@ -165,19 +167,6 @@ public class DynamicTimberFrameBlockEntity extends AbstractMateriallyTexturedBlo
 
 
     @Override
-    public void saveToItem(@NotNull ItemStack stack, HolderLookup.Provider provider)
-    {
-        CompoundTag compound = new CompoundTag();
-
-        final DynamicOps<Tag> dynamicops = provider.createSerializationContext(NbtOps.INSTANCE);
-        compound.put(BLOCK_ENTITY_TEXTURE_DATA, MaterialTextureData.CODEC.encodeStart(dynamicops, originalTextureData).getOrThrow());
-
-        this.removeComponentsFromTag(compound);
-        BlockItem.setBlockEntityData(stack, this.getType(), compound);
-        stack.applyComponents(this.collectComponents());
-    }
-
-    @Override
     protected void saveAdditional(final ValueOutput output)
     {
         super.saveAdditional(output);
@@ -189,85 +178,57 @@ public class DynamicTimberFrameBlockEntity extends AbstractMateriallyTexturedBlo
         output.store(PRIMARY_BLOCK, blockRegistryCodec, centerBlock);
         output.store(SECONDARY_BLOCK, blockRegistryCodec, frameBlock);
 
-        var offsetList = output.list(OFFSETS, DynamicTimberFrameBlock.Offset.CODEC);
-
-
-        final ListTag listTag = new ListTag();
+        var rawOffsets = output.childrenList(OFFSETS);
         for (final Object2BooleanMap.Entry<DynamicTimberFrameBlock.Offset> mapEntry : offsets.object2BooleanEntrySet())
         {
-            final CompoundTag localCompound = new CompoundTag();
-            localCompound.putInt("offset", mapEntry.getKey().ordinal());
-            localCompound.putBoolean("bool", mapEntry.getBooleanValue());
-            listTag.add(localCompound);
+            ValueOutput child = rawOffsets.addChild();
+            child.putInt("offset", mapEntry.getKey().ordinal());
+            child.putBoolean("bool", mapEntry.getBooleanValue());
         }
-        output.put("offsets", listTag);
+
+        if (rawOffsets.isEmpty())
+        {
+            output.discard(OFFSETS);
+        }
     }
 
     @Override
-    public void saveAdditional(@NotNull final CompoundTag compound, final HolderLookup.Provider provider)
+    protected void loadAdditional(final ValueInput input)
     {
-        super.saveAdditional(compound, provider);
+        super.loadAdditional(input);
 
-        final DynamicOps<Tag> dynamicops = provider.createSerializationContext(NbtOps.INSTANCE);
+        input.read(BLOCK_ENTITY_TEXTURE_DATA, MaterialTextureData.CODEC)
+            .or(() -> input.read("originalTextureData", MaterialTextureData.CODEC))
+            .ifPresent(this::updateTextureDataWith);
 
-        // this is still needed even with data components as of 1.21
-        compound.put(BLOCK_ENTITY_TEXTURE_DATA, MaterialTextureData.CODEC.encodeStart(dynamicops, originalTextureData).getOrThrow());
+        final String primaryBlockName = input.getStringOr("primaryBlock", "");
+        BuiltInRegistries.BLOCK.getOptional(Identifier.parse(primaryBlockName))
+            .filter(block -> block != Blocks.AIR)
+            .ifPresent(block -> this.centerBlock = block);
 
-        compound.putString("primaryBlock", BuiltInRegistries.BLOCK.getKey(centerBlock).toString());
-        compound.putString("secondaryBlock", BuiltInRegistries.BLOCK.getKey(frameBlock).toString());
-        final ListTag listTag = new ListTag();
-        for (final Object2BooleanMap.Entry<DynamicTimberFrameBlock.Offset> mapEntry : offsets.object2BooleanEntrySet())
-        {
-            final CompoundTag localCompound = new CompoundTag();
-            localCompound.putInt("offset", mapEntry.getKey().ordinal());
-            localCompound.putBoolean("bool", mapEntry.getBooleanValue());
-            listTag.add(localCompound);
-        }
-        compound.put("offsets", listTag);
-    }
-
-    @Override
-    protected void loadAdditional(final CompoundTag nbt, final HolderLookup.Provider provider)
-    {
-        super.loadAdditional(nbt, provider);
-        final DynamicOps<Tag> dynamicops = provider.createSerializationContext(NbtOps.INSTANCE);
-
-        if (nbt.contains(BLOCK_ENTITY_TEXTURE_DATA))
-        {
-            MaterialTextureData.CODEC.parse(dynamicops, nbt.get(BLOCK_ENTITY_TEXTURE_DATA)).resultOrPartial(DomumOrnamentum.LOGGER::error).ifPresent(this::updateTextureDataWith);
-        }
-        else if (nbt.contains("originalTextureData"))
-        {
-            MaterialTextureData.CODEC.parse(dynamicops, nbt.get("originalTextureData")).resultOrPartial(DomumOrnamentum.LOGGER::error).ifPresent(this::updateTextureDataWith);
-        }
-
-        final Identifier primaryBlockName = Identifier.parse(nbt.getString("primaryBlock"));
-        if (BuiltInRegistries.BLOCK.get(primaryBlockName) != Blocks.AIR)
-        {
-            this.centerBlock = BuiltInRegistries.BLOCK.get(primaryBlockName);
-        }
-
-        final Identifier secondaryBlockName = Identifier.parse(nbt.getString("secondaryBlock"));
-        if (BuiltInRegistries.BLOCK.get(secondaryBlockName) != Blocks.AIR)
-        {
-            this.frameBlock = BuiltInRegistries.BLOCK.get(secondaryBlockName);
-        }
+        final String secondaryBlockName = input.getStringOr("secondaryBlock", "");
+        BuiltInRegistries.BLOCK.getOptional(Identifier.parse(secondaryBlockName))
+            .filter(block -> block != Blocks.AIR)
+            .ifPresent(block -> this.frameBlock = block);
 
         offsets.clear();
-        for (final Tag tag : nbt.getList("offsets", Tag.TAG_COMPOUND))
+        input.childrenListOrEmpty(OFFSETS).forEach(child -> {
+            int ordinal = child.getIntOr("offset", 0);
+            DynamicTimberFrameBlock.Offset[] values = DynamicTimberFrameBlock.Offset.values();
+            if (ordinal >= 0 && ordinal < values.length)
         {
-            final CompoundTag compoundTag = (CompoundTag) tag;
-            offsets.put(DynamicTimberFrameBlock.Offset.values()[compoundTag.getInt("offset")], compoundTag.getBoolean("bool"));
+                offsets.put(values[ordinal], child.getBooleanOr("bool", false));
         }
+        });
 
-        if (level != null && level.isClientSide)
+        if (level != null && level.isClientSide())
         {
             refreshTextureCache();
         }
     }
 
     @Override
-    protected void applyImplicitComponents(final BlockEntity.DataComponentInput componentInput)
+    protected void applyImplicitComponents(final DataComponentGetter componentInput)
     {
         super.applyImplicitComponents(componentInput);
         MaterialTextureData testTextureData = componentInput.getOrDefault(ModDataComponents.TEXTURE_DATA, MaterialTextureData.EMPTY);
@@ -287,9 +248,9 @@ public class DynamicTimberFrameBlockEntity extends AbstractMateriallyTexturedBlo
     }
 
     @Override
-    public void removeComponentsFromTag(final CompoundTag itemStackTag)
+    public void removeComponentsFromTag(final ValueOutput itemStackTag)
     {
-        itemStackTag.remove(BLOCK_ENTITY_TEXTURE_DATA);
+        itemStackTag.discard(BLOCK_ENTITY_TEXTURE_DATA);
     }
 
     @Override
@@ -574,7 +535,7 @@ public class DynamicTimberFrameBlockEntity extends AbstractMateriallyTexturedBlo
         if (level != null)
         {
             setChanged();
-            level.getChunk(worldPosition.getX() >> 4, worldPosition.getZ() >> 4).setUnsaved(true);
+            level.getChunk(worldPosition.getX() >> 4, worldPosition.getZ() >> 4).markUnsaved();
             level.sendBlockUpdated(getBlockPos(), Blocks.AIR.defaultBlockState(), getBlockState(), Block.UPDATE_ALL);
         }
     }

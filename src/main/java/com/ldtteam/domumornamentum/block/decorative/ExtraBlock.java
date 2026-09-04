@@ -4,6 +4,7 @@ import com.ldtteam.domumornamentum.block.AbstractBlock;
 import com.ldtteam.domumornamentum.block.types.ExtraBlockType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -30,9 +31,9 @@ public class ExtraBlock extends AbstractBlock<ExtraBlock>
     /**
      * Constructor of the FullBlock.
      */
-    public ExtraBlock(final ExtraBlockType type)
+    public ExtraBlock(final ExtraBlockType type, final BlockBehaviour.Properties props)
     {
-        super(type.adjustProperties(Properties.of().mapColor(MapColor.WOOD).sound(type.getSoundType()).strength(BLOCK_HARDNESS, RESISTANCE)));
+        super(type.adjustProperties(props.mapColor(MapColor.WOOD).sound(type.getSoundType()).strength(BLOCK_HARDNESS, RESISTANCE)));
         this.type = type;
     }
 

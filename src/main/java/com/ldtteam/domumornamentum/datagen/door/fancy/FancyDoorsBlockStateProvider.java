@@ -9,18 +9,18 @@ import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.level.block.state.properties.DoorHingeSide;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
-import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
-import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
-import net.neoforged.neoforge.client.model.generators.ModelFile;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import com.ldtteam.domumornamentum.datagen.model.BlockStateProvider;
+import com.ldtteam.domumornamentum.datagen.model.ConfiguredModel;
+import com.ldtteam.domumornamentum.datagen.model.ItemModelBuilder;
+import com.ldtteam.domumornamentum.datagen.model.ModelFile;
+import com.ldtteam.domumornamentum.datagen.DatagenContext;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Function;
 
 public class FancyDoorsBlockStateProvider extends BlockStateProvider
 {
-    public FancyDoorsBlockStateProvider(final DataGenerator gen, final ExistingFileHelper exFileHelper)
+    public FancyDoorsBlockStateProvider(final DataGenerator gen, final DatagenContext exFileHelper)
     {
         super(gen.getPackOutput(), Constants.MOD_ID, exFileHelper);
     }

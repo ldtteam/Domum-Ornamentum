@@ -1,17 +1,10 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "group": "floating_carpets",
   "ingredients": [
-    {
-      "item": "minecraft:cyan_wool"
-    },
-    {
-      "item": "minecraft:cyan_wool"
-    },
-    {
-      "tag": "c:strings"
-    }
+    "minecraft:cyan_wool",
+    "minecraft:cyan_wool",
+    "#c:strings"
   ],
   "result": {
     "count": 3,

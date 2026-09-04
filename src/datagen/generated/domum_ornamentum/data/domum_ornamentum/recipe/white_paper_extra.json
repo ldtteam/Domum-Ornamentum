@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "X": {
-      "item": "minecraft:paper"
-    },
-    "Z": {
-      "item": "minecraft:white_dye"
-    }
+    "X": "minecraft:paper",
+    "Z": "minecraft:white_dye"
   },
   "pattern": [
     "X X",

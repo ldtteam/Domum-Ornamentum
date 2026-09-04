@@ -1,17 +1,10 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "group": "floating_carpets",
   "ingredients": [
-    {
-      "item": "minecraft:pink_wool"
-    },
-    {
-      "item": "minecraft:pink_wool"
-    },
-    {
-      "tag": "c:strings"
-    }
+    "minecraft:pink_wool",
+    "minecraft:pink_wool",
+    "#c:strings"
   ],
   "result": {
     "count": 3,

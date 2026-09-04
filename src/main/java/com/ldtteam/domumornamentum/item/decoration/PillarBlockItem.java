@@ -12,11 +12,13 @@ import net.minecraft.network.chat.Component;
 
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class PillarBlockItem extends BlockItemWithClientBePlacement implements IDoItem
 {
@@ -41,23 +43,23 @@ public class PillarBlockItem extends BlockItemWithClientBePlacement implements I
     }
 
     @Override
-    public void appendHoverText(@NotNull final ItemStack stack, final TooltipContext tooltipContext, @NotNull final List<Component> tooltip, @NotNull final TooltipFlag flagIn)
+    public void appendHoverText(final ItemStack stack, final TooltipContext tooltipContext, final TooltipDisplay display, final Consumer<Component> tooltip, final TooltipFlag flagIn)
     {
-        super.appendHoverText(stack, tooltipContext, tooltip, flagIn);
+        super.appendHoverText(stack, tooltipContext, display, tooltip, flagIn);
 
         MaterialTextureData textureData = MaterialTextureData.readFromItemStack(stack);
         if (textureData.isEmpty()) {
             textureData = MaterialTextureDataUtil.generateRandomTextureDataFrom(stack);
         }
 
-        tooltip.add(Component.translatable(Constants.MOD_ID + ".origin.tooltip"));
-        tooltip.add(Component.literal(""));
-        tooltip.add(Component.translatable(Constants.MOD_ID + ".pillar.header"));
+        tooltip.accept(Component.translatable(Constants.MOD_ID + ".origin.tooltip"));
+        tooltip.accept(Component.literal(""));
+        tooltip.accept(Component.translatable(Constants.MOD_ID + ".pillar.header"));
 
         final IMateriallyTexturedBlockComponent frameComponent = pillarBlock.getComponents().get(0);
         final Block frameBlock = textureData.getTexturedComponents().getOrDefault(frameComponent.getId(), frameComponent.getDefault());
         final Component frameBlockName = BlockUtils.getHoverName(frameBlock);
-        tooltip.add(Component.translatable(Constants.MOD_ID + ".desc.onlyone", Component.translatable(Constants.MOD_ID + ".desc.material", frameBlockName)));
+        tooltip.accept(Component.translatable(Constants.MOD_ID + ".desc.onlyone", Component.translatable(Constants.MOD_ID + ".desc.material", frameBlockName)));
     }
 
     @Override

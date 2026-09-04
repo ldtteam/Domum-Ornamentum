@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "L": {
-      "tag": "minecraft:logs"
-    },
-    "S": {
-      "item": "minecraft:stone_slab"
-    },
-    "X": {
-      "item": "minecraft:iron_ingot"
-    }
+    "L": "#minecraft:logs",
+    "S": "minecraft:stone_slab",
+    "X": "minecraft:iron_ingot"
   },
   "pattern": [
     " X ",
@@ -18,7 +12,6 @@
     "LLL"
   ],
   "result": {
-    "count": 1,
     "id": "domum_ornamentum:architectscutter"
   }
 }

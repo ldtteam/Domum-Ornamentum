@@ -10,7 +10,7 @@ import com.ldtteam.domumornamentum.block.vanilla.DoorBlock;
 import com.ldtteam.domumornamentum.block.vanilla.TrapdoorBlock;
 import com.ldtteam.domumornamentum.component.ModDataComponents;
 import com.ldtteam.domumornamentum.shingles.ShingleHeightType;
-import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.advancements.predicates.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -22,6 +22,7 @@ import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
 import net.minecraft.world.level.storage.loot.functions.CopyBlockState;
@@ -89,7 +90,7 @@ public class MaterialLootTableProvider extends BlockLootSubProvider
                 .withPool(LootPool.lootPool()
                     .setRolls(ConstantValue.exactly(1))
                     .add(itemPoolBuilder.apply(LootItem.lootTableItem(block)
-                        .apply(CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY)
+                        .apply(CopyComponentsFunction.copyComponentsFromBlockEntity(LootContextParams.BLOCK_ENTITY)
                             .include(ModDataComponents.TEXTURE_DATA.get()))))));
     }
 
@@ -98,6 +99,9 @@ public class MaterialLootTableProvider extends BlockLootSubProvider
      */
     protected void dropSelfMaterially(final Block block)
     {
+        if (block.asItem() == net.minecraft.world.item.Items.AIR) {
+            throw new IllegalStateException("Block has no BlockItem: " + BuiltInRegistries.BLOCK.getKey(block));
+        }
         dropSelfMaterially(block, UnaryOperator.identity());
     }
 

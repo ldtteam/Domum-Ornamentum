@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "X": {
-      "item": "minecraft:brick"
-    },
-    "Z": {
-      "item": "minecraft:pink_dye"
-    }
+    "X": "minecraft:brick",
+    "Z": "minecraft:pink_dye"
   },
   "pattern": [
     "X X",

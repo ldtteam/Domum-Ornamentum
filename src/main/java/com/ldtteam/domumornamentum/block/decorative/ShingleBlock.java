@@ -28,6 +28,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.block.state.properties.StairsShape;
@@ -62,9 +63,9 @@ public class ShingleBlock extends AbstractBlockStairs<ShingleBlock> implements I
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
 
-    public ShingleBlock()
+    public ShingleBlock(final BlockBehaviour.Properties props)
     {
-        super(Blocks.OAK_PLANKS::defaultBlockState, Properties.of().mapColor(MapColor.WOOD).strength(BLOCK_HARDNESS, RESISTANCE).noOcclusion());
+        super(Blocks.OAK_PLANKS::defaultBlockState, props.mapColor(MapColor.WOOD).strength(BLOCK_HARDNESS, RESISTANCE).noOcclusion());
     }
 
     /**
@@ -120,7 +121,7 @@ public class ShingleBlock extends AbstractBlockStairs<ShingleBlock> implements I
     }
 
     @Override
-    public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final LevelReader world, final BlockPos pos, final Player player)
+    public ItemStack getCloneItemStack(final LevelReader world, final BlockPos pos, final BlockState state, final boolean includeData, final Player player)
     {
         return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos), world.registryAccess());
     }
