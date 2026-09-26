@@ -1,0 +1,37 @@
+{
+  "credit": "Adapted from MC Trade Post",
+  "parent": "block/block",
+  "textures": {
+    "frame": "block/oak_planks",
+    "particle": "block/dark_oak_planks",
+    "centre": "block/dark_oak_planks"
+  },
+  "elements": [
+    {
+      "name": "top",
+      "from": [0, 8, 0],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": { "uv": [0, 0, 16, 8], "texture": "#frame", "cullface": "north" },
+        "east": { "uv": [0, 0, 16, 8], "texture": "#frame", "cullface": "east" },
+        "south": { "uv": [0, 0, 16, 8], "texture": "#frame", "cullface": "south" },
+        "west": { "uv": [0, 0, 16, 8], "texture": "#frame", "cullface": "west" },
+        "up": { "uv": [0, 0, 16, 16], "texture": "#frame", "cullface": "up" },
+        "down": { "uv": [0.5, 0.5, 15.5, 15.5], "texture": "#frame" }
+      }
+    },
+    {
+      "name": "bottom",
+      "from": [0, 0, 0],
+      "to": [16, 8, 16],
+      "faces": {
+        "north": { "uv": [0, 8, 16, 16], "texture": "#centre", "cullface": "north" },
+        "east": { "uv": [0, 8, 16, 16], "texture": "#centre", "cullface": "east" },
+        "south": { "uv": [0, 8, 16, 16], "texture": "#centre", "cullface": "south" },
+        "west": { "uv": [0, 8, 16, 16], "texture": "#centre", "cullface": "west" },
+        "up": { "uv": [0.5, 0.5, 15.5, 15.5], "texture": "#centre" },
+        "down": { "uv": [0, 0, 16, 16], "texture": "#centre", "cullface": "down" }
+      }
+    }
+  ]
+}

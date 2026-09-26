@@ -24,12 +24,14 @@ public class SlabCompatibilityTagProvider extends BlockTagsProvider
 
         this.tag(BlockTags.SLABS)
           .add(
-            ModBlocks.getInstance().getSlab()
+            ModBlocks.getInstance().getSlab(),
+            ModBlocks.getInstance().getStackedSlab()
           );
 
         this.tag(BlockTags.WOODEN_SLABS)
           .add(
-            ModBlocks.getInstance().getSlab()
+            ModBlocks.getInstance().getSlab(),
+            ModBlocks.getInstance().getStackedSlab()
           );
     }
 

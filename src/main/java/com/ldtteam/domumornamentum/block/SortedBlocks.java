@@ -66,6 +66,7 @@ public class SortedBlocks
         groupSortingIndex.put(Constants.resLocDO("avanilla"), 1);
         simpleBlockIndex(modBlocks.getStair(), 11);
         simpleBlockIndex(modBlocks.getSlab(), 12);
+        simpleBlockIndex(modBlocks.getStackedSlab(), 12.1);
         simpleBlockIndex(modBlocks.getFence(), 13);
         simpleBlockIndex(modBlocks.getFenceGate(), 14);
         simpleBlockIndex(modBlocks.getWall(), 15);
