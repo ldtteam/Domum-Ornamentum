@@ -1,11 +1,11 @@
 package com.ldtteam.domumornamentum.datagen.wall.paper;
 
-import com.ldtteam.data.LanguageProvider;
+import com.ldtteam.domumornamentum.datagen.LanguageProviderWrapper;
 import com.ldtteam.domumornamentum.util.Constants;
 
-public class PaperwallLangEntryProvider implements LanguageProvider.SubProvider {
+public class PaperwallLangEntryProvider implements LanguageProviderWrapper.SubProvider {
     @Override
-    public void addTranslations(LanguageProvider.LanguageAcceptor acceptor) {
+    public void addTranslations(LanguageProviderWrapper.LanguageAcceptor acceptor) {
         acceptor.add(Constants.MOD_ID + ".blockpaperwall.name.format", "%s Framed Pane");
         acceptor.add(Constants.MOD_ID + ".blockpaperwall.header", "Materials:");
         acceptor.add(Constants.MOD_ID + ".blockpaperwall.frame.format", "  - Frame:     %s");

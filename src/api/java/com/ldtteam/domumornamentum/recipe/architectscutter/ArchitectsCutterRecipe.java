@@ -9,7 +9,6 @@ import com.ldtteam.domumornamentum.recipe.ModRecipeTypes;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -22,6 +21,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.PlacementInfo;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeBookCategories;
 import net.minecraft.world.item.crafting.RecipeBookCategory;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -34,12 +34,13 @@ import java.util.List;
 
 public class ArchitectsCutterRecipe implements Recipe<ArchitectsCutterRecipeInput>
 {
-    public static final MapCodec<ArchitectsCutterRecipe> CODEC = RecordCodecBuilder.mapCodec(builder -> builder
+	@SuppressWarnings("deprecation")
+	public static final MapCodec<ArchitectsCutterRecipe>                             CODEC        = RecordCodecBuilder.mapCodec(builder -> builder
         .group(BuiltInRegistries.BLOCK.holderByNameCodec().fieldOf("block").forGetter(rec -> rec.getBlock().builtInRegistryHolder()),
             ExtraCodecs.POSITIVE_INT.optionalFieldOf("count", 1).forGetter(ArchitectsCutterRecipe::getCount),
             DataComponentPatch.CODEC.optionalFieldOf("components", DataComponentPatch.EMPTY).forGetter(ArchitectsCutterRecipe::getComponentPatch))
         .apply(builder, ArchitectsCutterRecipe::new));
-    public static final StreamCodec<RegistryFriendlyByteBuf, ArchitectsCutterRecipe> STREAM_CODEC = StreamCodec.composite(Identifier.STREAM_CODEC,
+	public static final StreamCodec<RegistryFriendlyByteBuf, ArchitectsCutterRecipe> STREAM_CODEC = StreamCodec.composite(Identifier.STREAM_CODEC,
             ArchitectsCutterRecipe::getBlockName,
             ByteBufCodecs.VAR_INT,
             ArchitectsCutterRecipe::getCount,
@@ -101,7 +102,7 @@ public class ArchitectsCutterRecipe implements Recipe<ArchitectsCutterRecipeInpu
     }
 
     @Override
-    public @NonNull ItemStack assemble(final ArchitectsCutterRecipeInput inv)
+    public @NonNull ItemStack assemble(final @NonNull ArchitectsCutterRecipeInput inv)
     {
         final Block generatedBlock = getBlock();
 
@@ -148,23 +149,9 @@ public class ArchitectsCutterRecipe implements Recipe<ArchitectsCutterRecipeInpu
     }
 
     @Override
-    public String group()
+    public @NonNull String group()
     {
         return "";
-    }
-
-    @Override
-    public @NotNull ItemStack getResultItem(final HolderLookup.Provider provider)
-    {
-        final Block generatedBlock = getBlock();
-
-        if (!(generatedBlock instanceof IMateriallyTexturedBlock))
-            return ItemStack.EMPTY;
-
-        final ItemStack result = new ItemStack(generatedBlock);
-        result.applyComponents(componentMap);
-
-        return result;
     }
 
     @Override
@@ -180,15 +167,15 @@ public class ArchitectsCutterRecipe implements Recipe<ArchitectsCutterRecipeInpu
     }
 
     @Override
-    public PlacementInfo placementInfo()
+    public @NonNull PlacementInfo placementInfo()
     {
-        return null;
+        return PlacementInfo.NOT_PLACEABLE;
     }
 
     @Override
-    public RecipeBookCategory recipeBookCategory()
+    public @NonNull RecipeBookCategory recipeBookCategory()
     {
-        return null;
+        return RecipeBookCategories.STONECUTTER;
     }
 
     public @NotNull DataComponentPatch getComponentPatch()

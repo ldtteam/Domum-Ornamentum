@@ -1,19 +1,25 @@
 package com.ldtteam.domumornamentum.util;
 
 import com.ldtteam.domumornamentum.entity.block.AbstractMateriallyTexturedBlockEntity;
+import com.ldtteam.domumornamentum.entity.block.ModBlockEntityTypes;
+import com.mojang.serialization.DynamicOps;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.component.TypedDataComponent;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.BlockItemStateProperties;
+import net.minecraft.world.item.component.TypedEntityData;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
-import net.neoforged.fml.loading.FMLEnvironment;
 
 import java.util.Collections;
 import java.util.List;
@@ -49,8 +55,13 @@ public class BlockUtils
             return ItemStack.EMPTY;
         }
 
+        //TODO: Figure out how to store this data!
+
         final ItemStack result = new ItemStack(blockEntity.getBlockState().getBlock());
-        texturedBlockEntity.saveToItem(result, provider);
+        final CompoundTag nbt = texturedBlockEntity.saveCustomOnly(provider);
+
+        final TypedEntityData<BlockEntityType<?>> typedEntityData = TypedEntityData.of(ModBlockEntityTypes.MATERIALLY_TEXTURED.get(), nbt);
+        result.set(DataComponents.BLOCK_ENTITY_DATA, typedEntityData);
 
         if (blockStateProperties.length > 0)
         {
@@ -71,7 +82,7 @@ public class BlockUtils
         final Property<T> property,
         final T value)
     {
-        if (!FMLEnvironment.production && !(itemStack.getItem() instanceof BlockItem))
+        if (!(itemStack.getItem() instanceof BlockItem))
         {
             throw new IllegalArgumentException("item not BlockItem: " + itemStack.getItem());
         }

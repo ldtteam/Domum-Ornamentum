@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    "minecraft:brick",
+    "minecraft:brick",
+    "minecraft:stone_bricks",
+    "minecraft:stone_bricks"
+  ],
+  "result": {
+    "count": 4,
+    "id": "domum_ornamentum:roan_stone_bricks"
+  }
+}

@@ -3,7 +3,6 @@ package com.ldtteam.domumornamentum.block;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
 import com.ldtteam.domumornamentum.entity.block.IMateriallyTexturedBlockEntity;
 import com.ldtteam.domumornamentum.util.QuadFunction;
-import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.NonNullList;
@@ -70,7 +69,7 @@ public interface IMateriallyTexturedBlock
             {
                 return stack.isCorrectToolForDrops(state);
             }
-            Block block = mtbe.getTextureData().getTexturedComponents().get(getMainComponent().getId());
+            Block block = mtbe.getTextureData().components().get(getMainComponent().getId());
             if (block != null)
             {
                 return stack.isCorrectToolForDrops(block.defaultBlockState());
@@ -86,7 +85,7 @@ public interface IMateriallyTexturedBlock
             {
                 return inputFunction.apply(state, level, pos, explosion);
             }
-            Block block = mtbe.getTextureData().getTexturedComponents().get(getMainComponent().getId());
+            Block block = mtbe.getTextureData().components().get(getMainComponent().getId());
             if (block != null)
             {
                 return block.getExplosionResistance(state, level, pos, explosion);
@@ -102,7 +101,7 @@ public interface IMateriallyTexturedBlock
             {
                 return inputFunction.apply(state, player, level, pos);
             }
-            Block block = mtbe.getTextureData().getTexturedComponents().get(getMainComponent().getId());
+            Block block = mtbe.getTextureData().components().get(getMainComponent().getId());
             if (block != null)
             {
                 return block.defaultBlockState().getDestroyProgress(player, level, pos);
@@ -118,7 +117,7 @@ public interface IMateriallyTexturedBlock
             {
                 return inputFunction.apply(state, level, pos, entity);
             }
-            Block block = mtbe.getTextureData().getTexturedComponents().get(getMainComponent().getId());
+            Block block = mtbe.getTextureData().components().get(getMainComponent().getId());
             if (block != null)
             {
                 return block.getSoundType(state, level, pos, entity);

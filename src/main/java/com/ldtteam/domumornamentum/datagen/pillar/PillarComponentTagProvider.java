@@ -1,28 +1,20 @@
 package com.ldtteam.domumornamentum.datagen.pillar;
 
 import com.ldtteam.domumornamentum.tag.ModTags;
-import com.ldtteam.domumornamentum.util.Constants;
+import com.ldtteam.domumornamentum.datagen.global.BlockTagSection;
+import com.ldtteam.domumornamentum.datagen.global.ModBlockTagsProvider;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
-import net.neoforged.neoforge.common.data.BlockTagsProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.concurrent.CompletableFuture;
-
-public class PillarComponentTagProvider extends BlockTagsProvider
+public class PillarComponentTagProvider implements BlockTagSection
 {
-    public PillarComponentTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, lookupProvider, Constants.MOD_ID, existingFileHelper);
-    }
 
     @SuppressWarnings("unchecked")
     @Override
-    protected void addTags(HolderLookup.@NotNull Provider provider) {
-        this.tag(ModTags.PILLAR_MATERIALS)
+    public void addTags(ModBlockTagsProvider host, HolderLookup.@NotNull Provider provider) {
+        host.tag(ModTags.PILLAR_MATERIALS)
           .add(
             Blocks.BRICKS,
             Blocks.DEEPSLATE,
@@ -35,10 +27,4 @@ public class PillarComponentTagProvider extends BlockTagsProvider
           );
     }
 
-    @Override
-    @NotNull
-    public String getName()
-    {
-        return "Pillar Tag Provider";
-    }
 }

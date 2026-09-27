@@ -2,6 +2,7 @@ package com.ldtteam.domumornamentum.block.types;
 
 import net.minecraft.util.StringRepresentable;
 import org.apache.commons.lang3.StringUtils;
+import org.jspecify.annotations.NonNull;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -18,7 +19,7 @@ public enum DoorType implements StringRepresentable
     DoorType(final String serializationName) {this.serializationName = serializationName;}
 
     @Override
-    public String getSerializedName()
+    public @NonNull String getSerializedName()
     {
         return serializationName;
     }

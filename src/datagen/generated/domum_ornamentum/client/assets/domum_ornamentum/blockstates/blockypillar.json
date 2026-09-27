@@ -1,0 +1,40 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/pillar/blockypillar_pillar_base_spec"
+      },
+      "when": {
+        "column": "pillar_base"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/pillar/blockypillar_pillar_capital_spec"
+      },
+      "when": {
+        "column": "pillar_capital"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/pillar/blockypillar_pillar_column_spec"
+      },
+      "when": {
+        "column": "pillar_column"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/pillar/blockypillar_full_pillar_spec"
+      },
+      "when": {
+        "column": "full_pillar"
+      }
+    }
+  ]
+}

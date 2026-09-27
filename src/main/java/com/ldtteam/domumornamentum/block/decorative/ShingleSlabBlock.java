@@ -28,6 +28,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
@@ -43,10 +44,11 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.pathfinder.PathComputationType;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nullable;
 
@@ -107,11 +109,6 @@ public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock>
     /**
      * Constructor for the TimberFrame
      */
-    public ShingleSlabBlock()
-    {
-        this(Properties.of().mapColor(MapColor.WOOD).strength(BLOCK_HARDNESS, RESISTANCE));
-    }
-
     public ShingleSlabBlock(final Properties props)
     {
         super(props);
@@ -119,7 +116,7 @@ public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock>
     }
 
     @Override
-    protected MapCodec<ShingleSlabBlock> codec()
+    protected @NonNull MapCodec<ShingleSlabBlock> codec()
     {
         return CODEC;
     }
@@ -127,14 +124,22 @@ public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock>
     // Deprecated here just means that you should not use this method when referencing a block, and instead it's blockstate <- Forge's Discord
     @NotNull
     @Override
-    public BlockState updateShape(final BlockState stateIn, @NotNull final Direction HORIZONTAL_FACING, @NotNull final BlockState HORIZONTAL_FACINGState, @NotNull final LevelAccessor worldIn, @NotNull final BlockPos currentPos, @NotNull final BlockPos HORIZONTAL_FACINGPos)
+    protected BlockState updateShape(
+      final BlockState state,
+      final @NonNull LevelReader levelReader,
+      final @NonNull ScheduledTickAccess scheduledTickAccess,
+      final @NonNull BlockPos pos,
+      final @NonNull Direction direction,
+      final @NonNull BlockPos fromPos,
+      final @NonNull BlockState neighborState,
+      final @NonNull RandomSource randomSource)
     {
-        if (stateIn.getValue(WATERLOGGED))
+        if (state.getValue(WATERLOGGED))
         {
-            worldIn.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
+            scheduledTickAccess.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(levelReader));
         }
 
-        return getSlabShape(stateIn, worldIn, currentPos);
+        return getSlabShape(state, (LevelAccessor) levelReader, pos);
     }
 
     @Nullable
@@ -308,26 +313,27 @@ public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock>
         return new MateriallyTexturedBlockEntity(blockPos, blockState);
     }
 
-    @Override
-    public void resetCache()
+        public void resetCache()
     {
         fillItemGroupCache.clear();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final LevelReader world, final BlockPos pos, final Player player)
+    public @NonNull ItemStack getCloneItemStack(final LevelReader level, final @NonNull BlockPos pos, final @NonNull BlockState state, final boolean includeData)
     {
-        return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos), world.registryAccess());
+        return BlockUtils.getMaterializedItemStack(level.getBlockEntity(pos), level.registryAccess());
     }
 
-    @Override
-    public void buildRecipes(final RecipeOutput recipeOutput)
+        @Override
+
+        public void buildRecipes(final RecipeOutput recipeOutput)
     {
         new ArchitectsCutterRecipeBuilder(this, RecipeCategory.BUILDING_BLOCKS).count(COMPONENTS.size() * 2).save(recipeOutput);
     }
 
     @Override
-    public float getExplosionResistance(BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {
+    public float getExplosionResistance(@NonNull BlockState state, @NonNull BlockGetter level, @NonNull BlockPos pos, @NonNull Explosion explosion) {
         return getDOExplosionResistance(super::getExplosionResistance, state, level, pos, explosion);
     }
 
@@ -337,7 +343,7 @@ public class ShingleSlabBlock extends AbstractBlockDirectional<ShingleSlabBlock>
     }
 
     @Override
-    public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @org.jetbrains.annotations.Nullable Entity entity) {
+    public @NonNull SoundType getSoundType(@NonNull BlockState state, @NonNull LevelReader level, @NonNull BlockPos pos, @org.jetbrains.annotations.Nullable Entity entity) {
         return getDOSoundType(super::getSoundType, state, level, pos, entity);
     }
 

@@ -1,7 +1,7 @@
 package com.ldtteam.domumornamentum.datagen.global;
 
-import com.ldtteam.data.LanguageProvider;
 import com.ldtteam.domumornamentum.block.ModBlocks;
+import com.ldtteam.domumornamentum.datagen.LanguageProviderWrapper;
 import com.ldtteam.domumornamentum.datagen.allbrick.AllBrickLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.bricks.BrickLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.door.DoorsLangEntryProvider;
@@ -14,8 +14,8 @@ import com.ldtteam.domumornamentum.datagen.frames.dynamic.DynamicFramesLangEntry
 import com.ldtteam.domumornamentum.datagen.frames.light.FramedLightLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.frames.timber.TimberFramesLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.panel.PanelLangEntryProvider;
-import com.ldtteam.domumornamentum.datagen.post.PostLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.pillar.PillarLangEntryProvider;
+import com.ldtteam.domumornamentum.datagen.post.PostLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.shingle.normal.ShinglesLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.shingle.slab.ShingleSlabLangEntryProvider;
 import com.ldtteam.domumornamentum.datagen.slab.SlabLangEntryProvider;
@@ -30,10 +30,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class GlobalLanguageProvider extends LanguageProvider
+public class GlobalLanguageProvider extends LanguageProviderWrapper
 {
     public GlobalLanguageProvider(DataGenerator gen) {
-        super(gen, Constants.MOD_ID, Constants.DEFAULT_LANG, List.of(
+        super(gen.getPackOutput(), Constants.MOD_ID, Constants.DEFAULT_LANG, List.of(
                 new BrickLangEntryProvider(),
                 new DoorsLangEntryProvider(),
                 new FancyDoorsLangEntryProvider(),

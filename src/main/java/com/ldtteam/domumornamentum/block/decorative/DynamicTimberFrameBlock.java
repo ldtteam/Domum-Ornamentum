@@ -18,6 +18,8 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -29,13 +31,13 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
-import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 import java.util.Locale;
@@ -51,7 +53,7 @@ public class DynamicTimberFrameBlock extends AbstractBlock<DynamicTimberFrameBlo
         .add(new SimpleRetexturableComponent(Identifier.withDefaultNamespace("block/dark_oak_planks"), ModTags.TIMBERFRAMES_CENTER, Blocks.DARK_OAK_PLANKS))
         .build();
 
-    public static final DirectionProperty FACING = BlockStateProperties.FACING;
+    public static final EnumProperty<Direction> FACING = BlockStateProperties.FACING;
 
     /**
      * The hardness this block has.
@@ -163,7 +165,7 @@ public class DynamicTimberFrameBlock extends AbstractBlock<DynamicTimberFrameBlo
         }
 
         @Override
-        public String getSerializedName()
+        public @NonNull String getSerializedName()
         {
             return name().toLowerCase(Locale.ROOT).replace("_", "-");
         }
@@ -172,13 +174,13 @@ public class DynamicTimberFrameBlock extends AbstractBlock<DynamicTimberFrameBlo
     /**
      * Constructor for the TimberFrame
      */
-    public DynamicTimberFrameBlock()
+    public DynamicTimberFrameBlock(Properties properties)
     {
-        super(Properties.of().mapColor(MapColor.WOOD).pushReaction(PushReaction.PUSH_ONLY).strength(BLOCK_HARDNESS, RESISTANCE).noOcclusion());
+        super(properties.mapColor(MapColor.WOOD).pushReaction(PushReaction.PUSH_ONLY).strength(BLOCK_HARDNESS, RESISTANCE).noOcclusion());
     }
 
     @Override
-    public boolean shouldDisplayFluidOverlay(final BlockState state, final BlockAndTintGetter level, final BlockPos pos, final FluidState fluidState)
+    public boolean shouldDisplayFluidOverlay(final @NonNull BlockState state, final @NonNull BlockAndLightGetter level, final @NonNull BlockPos pos, final @NonNull FluidState fluidState)
     {
         return true;
     }
@@ -196,7 +198,7 @@ public class DynamicTimberFrameBlock extends AbstractBlock<DynamicTimberFrameBlo
     }
 
     @Override
-    public void setPlacedBy(final Level worldIn, final BlockPos pos, final BlockState state, @Nullable final LivingEntity placer, final ItemStack stack)
+    public void setPlacedBy(final @NonNull Level worldIn, final @NonNull BlockPos pos, final @NonNull BlockState state, @Nullable final LivingEntity placer, final @NonNull ItemStack stack)
     {
         super.setPlacedBy(worldIn, pos, state, placer, stack);
 
@@ -233,35 +235,38 @@ public class DynamicTimberFrameBlock extends AbstractBlock<DynamicTimberFrameBlo
     }
 
     @Override
-    public BlockState updateShape(
-        final BlockState stateIn,
-        @NotNull final Direction direction,
-        @NotNull final BlockState directionState,
-        @NotNull final LevelAccessor worldIn,
-        @NotNull final BlockPos currentPos,
-        @NotNull final BlockPos directionPos)
+    protected @NonNull BlockState updateShape(
+        final @NonNull BlockState state,
+        final LevelReader level,
+        final @NonNull ScheduledTickAccess ticks,
+        final @NonNull BlockPos pos,
+        final @NonNull Direction directionToNeighbour,
+        final @NonNull BlockPos neighbourPos,
+        final @NonNull BlockState neighbourState,
+        final @NonNull RandomSource random)
     {
-        final BlockEntity tileEntity = worldIn.getBlockEntity(currentPos);
+
+        final BlockEntity tileEntity = level.getBlockEntity(pos);
 
         if (tileEntity instanceof DynamicTimberFrameBlockEntity timberFrameBlockEntity)
         {
             for (Offset offset : Offset.values())
             {
-                updateNeighbor(timberFrameBlockEntity, worldIn.getBlockEntity(offset.applyToBlockPos(currentPos)), offset, true);
+                updateNeighbor(timberFrameBlockEntity, level.getBlockEntity(offset.applyToBlockPos(pos)), offset, true);
             }
         }
 
-        return stateIn;
+        return state;
     }
 
     @Override
-    public void onRemove(final BlockState state, final Level worldIn, final BlockPos pos, final BlockState otherState, final boolean drop)
+    protected void affectNeighborsAfterRemoval(final @NonNull BlockState state, final @NonNull ServerLevel level, final @NonNull BlockPos pos, final boolean movedByPiston)
     {
-        super.onRemove(state, worldIn, pos, otherState, drop);
+        super.affectNeighborsAfterRemoval(state, level, pos, movedByPiston);
 
         for (Offset offset: Offset.values())
         {
-            updateNeighbor(null, worldIn.getBlockEntity(offset.applyToBlockPos(pos)), offset, false);
+            updateNeighbor(null, level.getBlockEntity(offset.applyToBlockPos(pos)), offset, false);
         }
     }
 
@@ -272,26 +277,27 @@ public class DynamicTimberFrameBlock extends AbstractBlock<DynamicTimberFrameBlo
         return new DynamicTimberFrameBlockEntity(blockPos, blockState);
     }
 
-    @Override
-    public void resetCache()
+        public void resetCache()
     {
         fillItemGroupCache.clear();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final LevelReader world, final BlockPos pos, final Player player)
+    public @NonNull ItemStack getCloneItemStack(final LevelReader level, final @NonNull BlockPos pos, final @NonNull BlockState state, final boolean includeData)
     {
-        return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos), world.registryAccess());
+        return BlockUtils.getMaterializedItemStack(level.getBlockEntity(pos), level.registryAccess());
     }
 
-    @Override
-    public void buildRecipes(final RecipeOutput recipeOutput)
+        @Override
+
+        public void buildRecipes(final RecipeOutput recipeOutput)
     {
         new ArchitectsCutterRecipeBuilder(this, RecipeCategory.BUILDING_BLOCKS).count(COMPONENTS.size()).save(recipeOutput);
     }
 
     @Override
-    public float getExplosionResistance(BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {
+    public float getExplosionResistance(@NonNull BlockState state, @NonNull BlockGetter level, @NonNull BlockPos pos, @NonNull Explosion explosion) {
         return getDOExplosionResistance(super::getExplosionResistance, state, level, pos, explosion);
     }
 
@@ -301,7 +307,7 @@ public class DynamicTimberFrameBlock extends AbstractBlock<DynamicTimberFrameBlo
     }
 
     @Override
-    public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
+    public @NonNull SoundType getSoundType(@NonNull BlockState state, @NonNull LevelReader level, @NonNull BlockPos pos, @Nullable Entity entity) {
         return getDOSoundType(super::getSoundType, state, level, pos, entity);
     }
 
@@ -316,7 +322,7 @@ public class DynamicTimberFrameBlock extends AbstractBlock<DynamicTimberFrameBlo
     }
 
     @Override
-    public BlockState rotate(final BlockState state, final LevelAccessor level, final BlockPos pos, final Rotation direction)
+    public @NonNull BlockState rotate(final @NonNull BlockState state, final LevelAccessor level, final @NonNull BlockPos pos, final @NonNull Rotation direction)
     {
         if (level.getBlockEntity(pos) instanceof DynamicTimberFrameBlockEntity dynamicTimberFrameBlockEntity) {
             dynamicTimberFrameBlockEntity.rotate(direction.ordinal());
@@ -325,7 +331,7 @@ public class DynamicTimberFrameBlock extends AbstractBlock<DynamicTimberFrameBlo
     }
 
     @Override
-    public BlockState rotate(final BlockState p_60530_, final Rotation p_60531_)
+    public @NonNull BlockState rotate(final @NonNull BlockState p_60530_, final @NonNull Rotation p_60531_)
     {
         return super.rotate(p_60530_, p_60531_);
     }

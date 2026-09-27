@@ -1,12 +1,12 @@
 package com.ldtteam.domumornamentum.datagen.pillar;
 
-import com.ldtteam.data.LanguageProvider;
+import com.ldtteam.domumornamentum.datagen.LanguageProviderWrapper;
 import com.ldtteam.domumornamentum.util.Constants;
 
-public class PillarLangEntryProvider implements LanguageProvider.SubProvider
+public class PillarLangEntryProvider implements LanguageProviderWrapper.SubProvider
 {
     @Override
-    public void addTranslations(LanguageProvider.LanguageAcceptor acceptor) {
+    public void addTranslations(LanguageProviderWrapper.LanguageAcceptor acceptor) {
         acceptor.add(Constants.MOD_ID + ".blockpillar.name.format", "Round %s Pillar");
         acceptor.add(Constants.MOD_ID + ".blockypillar.name.format", "Voxel %s Pillar");
         acceptor.add(Constants.MOD_ID + ".squarepillar.name.format", "Square %s Pillar");

@@ -2,6 +2,7 @@ package com.ldtteam.domumornamentum.block.types;
 
 import net.minecraft.util.StringRepresentable;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 /**
  * Shape types used by the Shingle Slabs.
@@ -27,7 +28,7 @@ public enum ShingleSlabShapeType implements StringRepresentable
     }
 
     @Override
-    public String getSerializedName()
+    public @NonNull String getSerializedName()
     {
         return this.name;
     }

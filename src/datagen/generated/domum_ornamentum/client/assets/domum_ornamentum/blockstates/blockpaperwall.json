@@ -1,0 +1,82 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/paperwall/blockpaperwall_post_spec"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/paperwall/blockpaperwall_side_north_spec"
+      },
+      "when": {
+        "north": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/paperwall/blockpaperwall_side_off_north_spec"
+      },
+      "when": {
+        "north": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/paperwall/blockpaperwall_side_east_spec"
+      },
+      "when": {
+        "east": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/paperwall/blockpaperwall_side_off_east_spec"
+      },
+      "when": {
+        "east": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/paperwall/blockpaperwall_side_south_spec"
+      },
+      "when": {
+        "south": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/paperwall/blockpaperwall_side_off_south_spec"
+      },
+      "when": {
+        "south": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/paperwall/blockpaperwall_side_west_spec"
+      },
+      "when": {
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/paperwall/blockpaperwall_side_off_west_spec"
+      },
+      "when": {
+        "west": "false"
+      }
+    }
+  ]
+}

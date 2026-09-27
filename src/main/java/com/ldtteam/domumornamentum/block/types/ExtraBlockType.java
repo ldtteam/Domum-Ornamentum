@@ -115,7 +115,7 @@ public enum ExtraBlockType implements StringRepresentable
     {
         if (this.isTranslucent)
         {
-            properties.noCollission();
+            properties.noCollision();
         }
         return properties;
     }

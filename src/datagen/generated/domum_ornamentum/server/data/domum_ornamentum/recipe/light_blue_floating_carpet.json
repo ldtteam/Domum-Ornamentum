@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "floating_carpets",
+  "ingredients": [
+    "minecraft:light_blue_wool",
+    "minecraft:light_blue_wool",
+    "#c:strings"
+  ],
+  "result": {
+    "count": 3,
+    "id": "domum_ornamentum:light_blue_floating_carpet"
+  }
+}

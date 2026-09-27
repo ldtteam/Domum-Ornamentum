@@ -1,12 +1,12 @@
 package com.ldtteam.domumornamentum.datagen.allbrick;
 
-import com.ldtteam.data.LanguageProvider;
+import com.ldtteam.domumornamentum.datagen.LanguageProviderWrapper;
 import com.ldtteam.domumornamentum.util.Constants;
 
-public class AllBrickLangEntryProvider implements LanguageProvider.SubProvider
+public class AllBrickLangEntryProvider implements LanguageProviderWrapper.SubProvider
 {
     @Override
-    public void addTranslations(LanguageProvider.LanguageAcceptor acceptor) {
+    public void addTranslations(LanguageProviderWrapper.LanguageAcceptor acceptor) {
         acceptor.add(Constants.MOD_ID + ".dark_brick.name.format", "Dark %s Brick");
         acceptor.add(Constants.MOD_ID + ".light_brick.name.format", "Light %s Brick");
 

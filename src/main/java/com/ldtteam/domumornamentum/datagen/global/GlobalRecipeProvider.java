@@ -1,69 +1,80 @@
 package com.ldtteam.domumornamentum.datagen.global;
 
 import com.ldtteam.domumornamentum.block.ModBlocks;
+import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.HolderLookup.Provider;
-import net.minecraft.data.PackOutput;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
-import org.jetbrains.annotations.NotNull;
 
-import java.util.concurrent.CompletableFuture;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
+import org.jspecify.annotations.NonNull;
 
 public class GlobalRecipeProvider extends RecipeProvider {
 
-    public GlobalRecipeProvider(PackOutput packOutput, CompletableFuture<Provider> lookupProvider) {
-        super(packOutput, lookupProvider);
+    public GlobalRecipeProvider(Provider lookupProvider, RecipeOutput recipeOutput) {
+        super(lookupProvider, recipeOutput);
     }
 
-    private static void buildCutterRecipe(RecipeOutput writer) {
-        final ShapedRecipeBuilder cutterRecipeBuilder = new ShapedRecipeBuilder(RecipeCategory.TOOLS, ModBlocks.getInstance().getArchitectsCutter().asItem(), 1);
+    private void buildCutterRecipe() {
+        final ShapedRecipeBuilder cutterRecipeBuilder = this.shaped(RecipeCategory.TOOLS, ModBlocks.getInstance().getArchitectsCutter().asItem(), 1);
         cutterRecipeBuilder.define('X', Items.IRON_INGOT);
         cutterRecipeBuilder.define('S', Items.STONE_SLAB);
         cutterRecipeBuilder.define('L', ItemTags.LOGS);
         cutterRecipeBuilder.pattern(" X ");
         cutterRecipeBuilder.pattern("SSS");
         cutterRecipeBuilder.pattern("LLL");
-        cutterRecipeBuilder.unlockedBy("has_iron_ingot", has(Items.IRON_INGOT));
-        cutterRecipeBuilder.unlockedBy("has_stone_slab", has(Items.STONE_SLAB));
-        cutterRecipeBuilder.unlockedBy("has_log", has(ItemTags.LOGS));
-        cutterRecipeBuilder.save(writer);
+        cutterRecipeBuilder.unlockedBy("has_iron_ingot", this.has(Items.IRON_INGOT));
+        cutterRecipeBuilder.unlockedBy("has_stone_slab", this.has(Items.STONE_SLAB));
+        cutterRecipeBuilder.unlockedBy("has_log", this.has(ItemTags.LOGS));
+        cutterRecipeBuilder.save(this.output, ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath(Constants.MOD_ID, "architects_cutter")));
     }
 
     @Override
-    protected void buildRecipes(@NotNull RecipeOutput recipeOutput) {
-        buildCutterRecipe(recipeOutput);
-        buildBarrelRecipe(recipeOutput);
+    protected void buildRecipes() {
+        buildCutterRecipe();
+        buildBarrelRecipe();
     }
 
-    private void buildBarrelRecipe(RecipeOutput writer) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.getInstance().getStandingBarrel())
+    private void buildBarrelRecipe() {
+        this.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.getInstance().getStandingBarrel())
                 .define('S', Items.STICK)
                 .define('W', ItemTags.PLANKS)
                 .pattern("SWS")
                 .pattern("SWS")
                 .pattern("SWS")
-                .unlockedBy("has_stick", has(Items.STICK))
-                .unlockedBy("has_planks", has(ItemTags.PLANKS))
-                .save(writer);
+                .unlockedBy("has_stick", this.has(Items.STICK))
+                .unlockedBy("has_planks", this.has(ItemTags.PLANKS))
+                .save(this.output, ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath(Constants.MOD_ID, BuiltInRegistries.BLOCK.getKey(ModBlocks.getInstance().getStandingBarrel()).getPath())));
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.getInstance().getLayingBarrel())
+        this.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.getInstance().getLayingBarrel())
                 .define('S', Items.STICK)
                 .define('W', ItemTags.PLANKS)
                 .pattern("SSS")
                 .pattern("WWW")
                 .pattern("SSS")
-                .unlockedBy("has_stick", has(Items.STICK))
-                .unlockedBy("has_planks", has(ItemTags.PLANKS))
-                .save(writer);
+                .unlockedBy("has_stick", this.has(Items.STICK))
+                .unlockedBy("has_planks", this.has(ItemTags.PLANKS))
+                .save(this.output, ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath(Constants.MOD_ID, BuiltInRegistries.BLOCK.getKey(ModBlocks.getInstance().getLayingBarrel()).getPath())));
     }
 
-    @NotNull
-    @Override
-    public String getName() {
-        return "Global Blocks Recipe Provider";
+    public static void register(GatherDataEvent.Server event)
+    {
+        event.addProvider(new RecipeProvider.Runner(event.getGenerator().getPackOutput(), event.getLookupProvider()) {
+            @Override
+            protected @NonNull RecipeProvider createRecipeProvider(net.minecraft.core.HolderLookup.@NonNull Provider registries, @NonNull RecipeOutput output) {
+                return new GlobalRecipeProvider(registries, output);
+            }
+            @Override
+            public @NonNull String getName() { return "GlobalRecipeProvider"; }
+        });
     }
+
 }

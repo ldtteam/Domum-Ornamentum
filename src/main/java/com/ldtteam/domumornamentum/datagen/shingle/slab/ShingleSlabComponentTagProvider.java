@@ -1,33 +1,19 @@
 package com.ldtteam.domumornamentum.datagen.shingle.slab;
 
 import com.ldtteam.domumornamentum.tag.ModTags;
-import com.ldtteam.domumornamentum.util.Constants;
+import com.ldtteam.domumornamentum.datagen.global.BlockTagSection;
+import com.ldtteam.domumornamentum.datagen.global.ModBlockTagsProvider;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.PackOutput;
-import net.neoforged.neoforge.common.data.BlockTagsProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.concurrent.CompletableFuture;
-
-public class ShingleSlabComponentTagProvider extends BlockTagsProvider
+public class ShingleSlabComponentTagProvider implements BlockTagSection
 {
-    public ShingleSlabComponentTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, lookupProvider, Constants.MOD_ID, existingFileHelper);
-    }
 
     @SuppressWarnings("unchecked")
     @Override
-    protected void addTags(HolderLookup.@NotNull Provider provider) {
-        this.tag(ModTags.SHINGLES_COVER)
+    public void addTags(ModBlockTagsProvider host, HolderLookup.@NotNull Provider provider) {
+        host.tag(ModTags.SHINGLES_COVER)
           .addTags(ModTags.SHINGLES_ROOF);
     }
 
-    @Override
-    @NotNull
-    public String getName()
-    {
-        return "Shingle Slabs Tag Provider";
-    }
 }

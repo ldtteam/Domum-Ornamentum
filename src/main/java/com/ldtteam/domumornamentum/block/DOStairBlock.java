@@ -2,9 +2,11 @@ package com.ldtteam.domumornamentum.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -16,6 +18,7 @@ import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jspecify.annotations.NonNull;
 
 import java.util.stream.IntStream;
 
@@ -25,7 +28,7 @@ import java.util.stream.IntStream;
  */
 public class DOStairBlock extends Block implements SimpleWaterloggedBlock
 {
-    public static final    DirectionProperty         FACING         = HorizontalDirectionalBlock.FACING;
+    public static final    EnumProperty<Direction>         FACING         = HorizontalDirectionalBlock.FACING;
     public static final    EnumProperty<Half>        HALF           = BlockStateProperties.HALF;
     public static final    EnumProperty<StairsShape> SHAPE          = BlockStateProperties.STAIRS_SHAPE;
     public static final    BooleanProperty           WATERLOGGED    = BlockStateProperties.WATERLOGGED;
@@ -206,44 +209,53 @@ public class DOStairBlock extends Block implements SimpleWaterloggedBlock
     }
 
     @Override
-    public boolean isPathfindable(BlockState p_56891_, PathComputationType p_56894_)
+    public boolean isPathfindable(@NonNull BlockState p_56891_, @NonNull PathComputationType p_56894_)
     {
         return false;
     }
 
     @Override
-    public BlockState updateShape(BlockState p_56925_, Direction p_56926_, BlockState p_56927_, LevelAccessor p_56928_, BlockPos p_56929_, BlockPos p_56930_)
+    protected @NonNull BlockState updateShape(
+        final BlockState state,
+        final @NonNull LevelReader level,
+        final @NonNull ScheduledTickAccess ticks,
+        final @NonNull BlockPos pos,
+        final @NonNull Direction directionToNeighbour,
+        final @NonNull BlockPos neighbourPos,
+        final @NonNull BlockState neighbourState,
+        final @NonNull RandomSource random)
     {
-        if (p_56925_.getValue(WATERLOGGED))
+        if (state.getValue(WATERLOGGED))
         {
-            p_56928_.scheduleTick(p_56929_, Fluids.WATER, Fluids.WATER.getTickDelay(p_56928_));
+            ticks.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
-        return p_56926_.getAxis().isHorizontal()
-                 ? p_56925_.setValue(SHAPE, getStairsShape(p_56925_, p_56928_, p_56929_))
-                 : super.updateShape(p_56925_, p_56926_, p_56927_, p_56928_, p_56929_, p_56930_);
+        return directionToNeighbour.getAxis().isHorizontal()
+                 ? state.setValue(SHAPE, getStairsShape(state, level, pos))
+                 : super.updateShape(state, level, ticks, pos, directionToNeighbour, neighbourPos, neighbourState, random);
     }
 
     @Override
-    public boolean useShapeForLightOcclusion(BlockState p_56967_)
+    public boolean useShapeForLightOcclusion(@NonNull BlockState p_56967_)
     {
         return true;
     }
 
     @Override
-    public FluidState getFluidState(BlockState p_56969_)
+    public @NonNull FluidState getFluidState(BlockState p_56969_)
     {
         return p_56969_.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(p_56969_);
     }
 
     @Override
-    public BlockState rotate(BlockState p_56922_, Rotation p_56923_)
+    public @NonNull BlockState rotate(BlockState p_56922_, Rotation p_56923_)
     {
         return p_56922_.setValue(FACING, p_56923_.rotate(p_56922_.getValue(FACING)));
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    public BlockState mirror(BlockState p_56919_, Mirror p_56920_)
+    public @NonNull BlockState mirror(BlockState p_56919_, Mirror p_56920_)
     {
         Direction direction = p_56919_.getValue(FACING);
         StairsShape stairsshape = p_56919_.getValue(SHAPE);
@@ -290,7 +302,7 @@ public class DOStairBlock extends Block implements SimpleWaterloggedBlock
     }
 
     @Override
-    public VoxelShape getShape(BlockState p_56956_, BlockGetter p_56957_, BlockPos p_56958_, CollisionContext p_56959_)
+    public @NonNull VoxelShape getShape(@NonNull BlockState p_56956_, @NonNull BlockGetter p_56957_, @NonNull BlockPos p_56958_, @NonNull CollisionContext p_56959_)
     {
         return (p_56956_.getValue(HALF) == Half.TOP ? TOP_SHAPES : BOTTOM_SHAPES)[SHAPE_BY_STATE[this.getShapeIndex(p_56956_)]];
     }

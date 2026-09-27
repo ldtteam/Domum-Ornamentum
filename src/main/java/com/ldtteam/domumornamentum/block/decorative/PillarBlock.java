@@ -37,12 +37,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 
@@ -77,10 +77,11 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
 
     /**
      * base constructor
+     * @param properties the block properties.
      */
-    public PillarBlock()
+    public PillarBlock(final Properties properties)
     {
-        super(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(BLOCK_HARDNESS, RESISTANCE));
+        super(properties.mapColor(MapColor.STONE).strength(BLOCK_HARDNESS, RESISTANCE));
         this.registerDefaultState(this.stateDefinition.any().setValue(COLUMN,PillarShapeType.FULL_PILLAR));
     }
 
@@ -280,20 +281,21 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
         return new MateriallyTexturedBlockEntity(blockPos, blockState);
     }
 
-    @Override
-    public void resetCache()
+        public void resetCache()
     {
         fillItemGroupCache.clear();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    public @NotNull ItemStack getCloneItemStack(final @NotNull BlockState state, final @NotNull HitResult target, final LevelReader world, final @NotNull BlockPos pos, final @NotNull Player player)
+    public @NonNull ItemStack getCloneItemStack(final LevelReader level, final @NonNull BlockPos pos, final @NonNull BlockState state, final boolean includeData)
     {
-        return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos), world.registryAccess());
+        return BlockUtils.getMaterializedItemStack(level.getBlockEntity(pos), level.registryAccess());
     }
 
-    @Override
-    public void buildRecipes(final RecipeOutput recipeOutput)
+        @Override
+
+        public void buildRecipes(final RecipeOutput recipeOutput)
     {
         new ArchitectsCutterRecipeBuilder(this, RecipeCategory.DECORATIONS).count(COMPONENTS.size()).save(recipeOutput);
     }
@@ -318,7 +320,7 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
     }
 
     @Override
-    public float getExplosionResistance(BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {
+    public float getExplosionResistance(@NonNull BlockState state, @NonNull BlockGetter level, @NonNull BlockPos pos, @NonNull Explosion explosion) {
         return getDOExplosionResistance(super::getExplosionResistance, state, level, pos, explosion);
     }
 
@@ -328,7 +330,7 @@ public class PillarBlock extends AbstractBlock<PillarBlock> implements IMaterial
     }
 
     @Override
-    public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
+    public @NonNull SoundType getSoundType(@NonNull BlockState state, @NonNull LevelReader level, @NonNull BlockPos pos, @Nullable Entity entity) {
         return getDOSoundType(super::getSoundType, state, level, pos, entity);
     }
 

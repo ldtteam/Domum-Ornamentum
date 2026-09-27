@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "": {
+      "type": "domum_ornamentum:materially_textured",
+      "parent": "domum_ornamentum:block/framed_light/fancy_light_spec"
+    }
+  }
+}

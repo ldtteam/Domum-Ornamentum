@@ -3,9 +3,10 @@ package com.ldtteam.domumornamentum.client.event.handlers;
 import com.ldtteam.domumornamentum.client.render.ModelGhostRenderer;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.ItemStackUtils;
+import com.mojang.blaze3d.vertex.ByteBufferBuilder;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.BlockHitResult;
@@ -16,18 +17,19 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 
-@EventBusSubscriber(modid = Constants.MOD_ID, bus = EventBusSubscriber.Bus.GAME, value = Dist.CLIENT)
-public class MateriallyTexturedBlockPreviewRenderHandler {
+@EventBusSubscriber(modid = Constants.MOD_ID, value = Dist.CLIENT)
+public class MateriallyTexturedBlockPreviewRenderHandler
+{
 
     @SubscribeEvent
-    public static void onRenderLevelStage(RenderLevelStageEvent event) {
-        if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_LEVEL) {
-            final PoseStack poseStack = event.getPoseStack();
-            renderMateriallyTexturedBlockPreview(poseStack);
-        }
+    public static void onRenderLevelStage(RenderLevelStageEvent.AfterLevel event)
+    {
+        final PoseStack poseStack = event.getPoseStack();
+        renderMateriallyTexturedBlockPreview(poseStack);
     }
 
-    public static void renderMateriallyTexturedBlockPreview(final PoseStack poseStack) {
+    public static void renderMateriallyTexturedBlockPreview(final PoseStack poseStack)
+    {
         final HitResult rayTraceResult = Minecraft.getInstance().hitResult;
         if (!(rayTraceResult instanceof final BlockHitResult blockRayTraceResult) || blockRayTraceResult.getType() == HitResult.Type.MISS)
             return;
@@ -40,20 +42,28 @@ public class MateriallyTexturedBlockPreviewRenderHandler {
         if (heldStack.isEmpty())
             return;
 
-        Vec3 targetedRenderPos = Vec3.atLowerCornerOf(blockRayTraceResult.getBlockPos().offset(blockRayTraceResult.getDirection().getNormal()));
-        renderGhost(poseStack, heldStack, targetedRenderPos, blockRayTraceResult, Minecraft.getInstance().level);
+        Vec3 targetedRenderPos = Vec3.atLowerCornerOf(blockRayTraceResult.getBlockPos().offset(blockRayTraceResult.getDirection().getUnitVec3i()));
+
+        // Create a BufferSource for rendering the ghost
+        final MultiBufferSource.BufferSource bufferSource = MultiBufferSource.immediate(new ByteBufferBuilder(65536));
+        renderGhost(poseStack, bufferSource, heldStack, targetedRenderPos, blockRayTraceResult);
+        bufferSource.endBatch();
     }
 
     private static void renderGhost(
             final PoseStack poseStack,
+            final MultiBufferSource.BufferSource bufferSource,
             final ItemStack heldStack,
-            final Vec3 targetedRenderPos, BlockHitResult blockRayTraceResult, ClientLevel level) {
+            final Vec3 targetedRenderPos,
+            final BlockHitResult blockRayTraceResult)
+    {
         ModelGhostRenderer.getInstance().renderGhost(
                 poseStack,
+                bufferSource,
                 heldStack,
                 targetedRenderPos,
                 blockRayTraceResult,
-                level,
+                Minecraft.getInstance().level,
                 false
         );
     }

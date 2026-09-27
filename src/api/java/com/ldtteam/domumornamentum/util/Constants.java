@@ -21,6 +21,8 @@ public class Constants
     public static final String PRIMARY_BLOCK = "primaryBlock";
     public static final String SECONDARY_BLOCK = "secondaryBlock";
     public static final String OFFSETS = "offsets";
+    public static final String OFFSET = "offset";
+    public static final String BOOL = "bool";
 
     public static Identifier resLocDO(final String path)
     {

@@ -8,15 +8,18 @@ import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.Criterion;
-import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
+import net.minecraft.advancements.criterion.RecipeUnlockedTrigger;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.packs.VanillaRecipeProvider;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.component.BlockItemStateProperties;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.Property;
 
@@ -81,19 +84,21 @@ public class ArchitectsCutterRecipeBuilder
             count,
             components.build());
 
+        final ResourceKey<Recipe<?>> recipeKey = ResourceKey.create(Registries.RECIPE, recipeId);
+
         if (criteria.isEmpty())
         {
-            output.accept(recipeId, recipe, null);
+            output.accept(recipeKey, recipe, null);
             return;
         }
 
         final Advancement.Builder advancement = output.advancement()
-            .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeId))
-            .rewards(AdvancementRewards.Builder.recipe(recipeId))
+            .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeKey))
+            .rewards(AdvancementRewards.Builder.recipe(recipeKey))
             .requirements(AdvancementRequirements.Strategy.OR);
         this.criteria.forEach(advancement::addCriterion);
 
-        output.accept(recipeId, recipe, advancement.build(recipeId.withPrefix("recipes/" + category.getFolderName() + "/")));
+        output.accept(recipeKey, recipe, advancement.build(recipeId.withPrefix("recipes/" + category.getFolderName() + "/")));
     }
 
     public void saveSuffix(final RecipeOutput output, final String suffix)

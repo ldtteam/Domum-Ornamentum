@@ -14,10 +14,6 @@ public class SelfUpgradingDoubleHighBlockItem extends DoubleHighBlockItem
         super(block, properties);
     }
 
-    @Override
-    public void verifyComponentsAfterLoad(final ItemStack itemStack)
-    {
-        super.verifyComponentsAfterLoad(itemStack);
-        SelfUpgradingBlockItem.upgrade(itemStack);
-    }
+    // TODO(26.1): Item#verifyComponentsAfterLoad was removed in NeoForge 26.1.
+    // Wire SelfUpgradingBlockItem.upgrade() to a new item-load hook once decided.
 }

@@ -7,10 +7,12 @@ pluginManagement {
             name = 'Tableau'
         }
     }
+
+    includeBuild('../Tableau')
 }
 
 plugins {
-    id 'com.ldtteam.tableau' version '0.0.87'
+    id 'com.ldtteam.tableau.all' version '0.0.107'
     id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
 }
 
@@ -20,3 +22,5 @@ features {
     usesGit = true
     usesCurse = true
 }
+
+

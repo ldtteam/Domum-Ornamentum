@@ -1,0 +1,31 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/slab/slab_top_spec"
+      },
+      "when": {
+        "type": "top"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/slab/slab_bottom_spec"
+      },
+      "when": {
+        "type": "bottom"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/slab/slab_double_spec"
+      },
+      "when": {
+        "type": "double"
+      }
+    }
+  ]
+}

@@ -1,29 +1,21 @@
 package com.ldtteam.domumornamentum.datagen.stair;
 
 import com.ldtteam.domumornamentum.tag.ModTags;
-import com.ldtteam.domumornamentum.util.Constants;
+import com.ldtteam.domumornamentum.datagen.global.BlockTagSection;
+import com.ldtteam.domumornamentum.datagen.global.ModBlockTagsProvider;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.data.BlockTagsProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.concurrent.CompletableFuture;
-
-public class StairsComponentTagProvider extends BlockTagsProvider
+public class StairsComponentTagProvider implements BlockTagSection
 {
-    public StairsComponentTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, lookupProvider, Constants.MOD_ID, existingFileHelper);
-    }
 
     @SuppressWarnings("unchecked")
     @Override
-    protected void addTags(HolderLookup.@NotNull Provider provider) {
-        this.tag(ModTags.STAIRS_MATERIALS)
+    public void addTags(ModBlockTagsProvider host, HolderLookup.@NotNull Provider provider) {
+        host.tag(ModTags.STAIRS_MATERIALS)
           .add(
             Blocks.BLACKSTONE,
             Blocks.GILDED_BLACKSTONE,
@@ -77,10 +69,4 @@ public class StairsComponentTagProvider extends BlockTagsProvider
           );
     }
 
-    @Override
-    @NotNull
-    public String getName()
-    {
-        return "Stairs Tag Provider";
-    }
 }

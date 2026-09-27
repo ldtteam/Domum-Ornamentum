@@ -1,12 +1,12 @@
 package com.ldtteam.domumornamentum.datagen.extra;
 
-import com.ldtteam.data.LanguageProvider;
+import com.ldtteam.domumornamentum.datagen.LanguageProviderWrapper;
 import com.ldtteam.domumornamentum.util.Constants;
 
-public class ExtraLangEntryProvider implements LanguageProvider.SubProvider
+public class ExtraLangEntryProvider implements LanguageProviderWrapper.SubProvider
 {
     @Override
-    public void addTranslations(LanguageProvider.LanguageAcceptor acceptor) {
+    public void addTranslations(LanguageProviderWrapper.LanguageAcceptor acceptor) {
         acceptor.add(Constants.MOD_ID + ".extra.name.format", "%s Extra");
         acceptor.add(Constants.MOD_ID + ".extra.name.format.black", "Black %s Extra");
         acceptor.add(Constants.MOD_ID + ".extra.name.format.blue", "Blue %s Extra");

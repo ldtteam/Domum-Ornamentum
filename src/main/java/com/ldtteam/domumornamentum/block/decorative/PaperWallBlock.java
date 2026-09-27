@@ -30,9 +30,9 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 
@@ -58,9 +58,9 @@ public class PaperWallBlock extends AbstractBlockPane<PaperWallBlock> implements
      */
     private static final float RESISTANCE = 1F;
 
-    public PaperWallBlock()
+    public PaperWallBlock(final Properties properties)
     {
-        super(Properties.of().mapColor(MapColor.NONE).isRedstoneConductor((state, getter, pos) -> false).strength(BLOCK_HARDNESS, RESISTANCE));
+        super(properties.mapColor(MapColor.NONE).isRedstoneConductor((state, getter, pos) -> false).strength(BLOCK_HARDNESS, RESISTANCE));
     }
 
     @Override
@@ -82,26 +82,27 @@ public class PaperWallBlock extends AbstractBlockPane<PaperWallBlock> implements
         return new MateriallyTexturedBlockEntity(blockPos, blockState);
     }
 
-    @Override
-    public void resetCache()
+        public void resetCache()
     {
         fillItemGroupCache.clear();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final LevelReader world, final BlockPos pos, final Player player)
+    public @NonNull ItemStack getCloneItemStack(final LevelReader level, final @NonNull BlockPos pos, final @NonNull BlockState state, final boolean includeData)
     {
-        return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos), world.registryAccess());
+        return BlockUtils.getMaterializedItemStack(level.getBlockEntity(pos), level.registryAccess());
     }
 
-    @Override
-    public void buildRecipes(final RecipeOutput recipeOutput)
+        @Override
+
+        public void buildRecipes(final RecipeOutput recipeOutput)
     {
         new ArchitectsCutterRecipeBuilder(this, RecipeCategory.DECORATIONS).count(COMPONENTS.size() * 3).save(recipeOutput);        
     }
 
     @Override
-    public float getExplosionResistance(BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {
+    public float getExplosionResistance(@NonNull BlockState state, @NonNull BlockGetter level, @NonNull BlockPos pos, @NonNull Explosion explosion) {
         return getDOExplosionResistance(super::getExplosionResistance, state, level, pos, explosion);
     }
 
@@ -112,7 +113,7 @@ public class PaperWallBlock extends AbstractBlockPane<PaperWallBlock> implements
     }
 
     @Override
-    public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity)
+    public @NonNull SoundType getSoundType(@NonNull BlockState state, @NonNull LevelReader level, @NonNull BlockPos pos, @Nullable Entity entity)
     {
         return getDOSoundType(super::getSoundType, state, level, pos, entity);
     }

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "floating_carpets",
+  "ingredients": [
+    "minecraft:cyan_wool",
+    "minecraft:cyan_wool",
+    "#c:strings"
+  ],
+  "result": {
+    "count": 3,
+    "id": "domum_ornamentum:cyan_floating_carpet"
+  }
+}

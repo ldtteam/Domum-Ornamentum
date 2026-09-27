@@ -59,17 +59,19 @@ public class JEIPlugin implements IModPlugin
     @Override
     public void registerRecipes(@NotNull final IRecipeRegistration registration)
     {
+        /**
         final RecipeManager recipeManager = Minecraft.getInstance().level.getRecipeManager();
 
         registration.addRecipes(ArchitectsCutterCategory.TYPE, recipeManager.getAllRecipesFor(ModRecipeTypes.ARCHITECTS_CUTTER.get()));
+         **/
     }
 
     @Override
     public void registerRecipeCatalysts(@NotNull final IRecipeCatalystRegistration registration)
     {
-        registration.addRecipeCatalyst(VanillaTypes.ITEM_STACK,
-                new ItemStack(IDomumOrnamentumApi.getInstance().getBlocks().getArchitectsCutter()),
-                ArchitectsCutterCategory.TYPE);
+        registration.addCraftingStation(
+                ArchitectsCutterCategory.TYPE,
+                new ItemStack(IDomumOrnamentumApi.getInstance().getBlocks().getArchitectsCutter()));
     }
 
     @Override

@@ -2,30 +2,35 @@ package com.ldtteam.domumornamentum.datagen.floatingcarpet;
 
 import com.ldtteam.domumornamentum.block.ModBlocks;
 import com.ldtteam.domumornamentum.block.decorative.FloatingCarpetBlock;
+import com.ldtteam.domumornamentum.util.Constants;
 import net.minecraft.core.HolderLookup.Provider;
-import net.minecraft.data.PackOutput;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
+
+import net.neoforged.neoforge.data.event.GatherDataEvent;
+import org.jspecify.annotations.NonNull;
 
 public class FloatingCarpetRecipeProvider extends RecipeProvider {
 
-    public FloatingCarpetRecipeProvider(PackOutput packOutput, CompletableFuture<Provider> lookupProvider) {
-        super(packOutput, lookupProvider);
+    public FloatingCarpetRecipeProvider(Provider lookupProvider, RecipeOutput recipeOutput) {
+        super(lookupProvider, recipeOutput);
     }
 
     @Override
-    protected void buildRecipes(final RecipeOutput builder) {
+    protected void buildRecipes() {
         final Map<DyeColor, Block> wools = new HashMap<>();
         wools.put(DyeColor.WHITE, Blocks.WHITE_WOOL);
         wools.put(DyeColor.LIGHT_GRAY, Blocks.LIGHT_GRAY_WOOL);
@@ -46,19 +51,26 @@ public class FloatingCarpetRecipeProvider extends RecipeProvider {
 
         for (final FloatingCarpetBlock block : ModBlocks.getInstance().getFloatingCarpets()) {
             final DyeColor color = block.getColor();
-            ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, block, 3)
-                    .requires(wools.get(color), 2)
-                    .requires(Tags.Items.STRINGS)
-                    .group("floating_carpets")
-                    .unlockedBy("has_string", has(Tags.Items.STRINGS))
-                    .unlockedBy("has_wool", has(wools.get(color)))
-                    .save(builder);
+            final ShapelessRecipeBuilder builder = this.shapeless(RecipeCategory.DECORATIONS, block, 3);
+            builder.requires(wools.get(color), 2);
+            builder.requires(Tags.Items.STRINGS);
+            builder.group("floating_carpets");
+            builder.unlockedBy("has_string", this.has(Tags.Items.STRINGS));
+            builder.unlockedBy("has_wool", this.has(wools.get(color)));
+            builder.save(this.output, ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath(Constants.MOD_ID, BuiltInRegistries.BLOCK.getKey(block).getPath())));
         }
     }
 
-    @NotNull
-    @Override
-    public String getName() {
-        return "Floating Carpet Recipe Provider";
+    public static void register(GatherDataEvent.Server event)
+    {
+        event.addProvider(new RecipeProvider.Runner(event.getGenerator().getPackOutput(), event.getLookupProvider()) {
+            @Override
+            protected @NonNull RecipeProvider createRecipeProvider(net.minecraft.core.HolderLookup.@NonNull Provider registries, @NonNull RecipeOutput output) {
+                return new FloatingCarpetRecipeProvider(registries, output);
+            }
+            @Override
+            public @NonNull String getName() { return "FloatingCarpetRecipeProvider"; }
+        });
     }
+
 }

@@ -50,7 +50,7 @@ public class MateriallyTexturedBlockEntity extends AbstractMateriallyTexturedBlo
     }
 
     @Override
-    public @NotNull CompoundTag getUpdateTag(final HolderLookup.Provider provider)
+    public @NotNull CompoundTag getUpdateTag(final HolderLookup.@NonNull Provider provider)
     {
         return this.saveWithoutMetadata(provider);
     }
@@ -62,14 +62,14 @@ public class MateriallyTexturedBlockEntity extends AbstractMateriallyTexturedBlo
     }
 
     @Override
-    protected void saveAdditional(final ValueOutput output)
+    protected void saveAdditional(final @NonNull ValueOutput output)
     {
         super.saveAdditional(output);
         output.store(BLOCK_ENTITY_TEXTURE_DATA, MaterialTextureData.CODEC, textureData);
     }
 
     @Override
-    protected void loadAdditional(final ValueInput input)
+    protected void loadAdditional(final @NonNull ValueInput input)
     {
         super.loadAdditional(input);
         textureData = input.read(BLOCK_ENTITY_TEXTURE_DATA, MaterialTextureData.CODEC).orElse(MaterialTextureData.EMPTY);
@@ -117,12 +117,13 @@ public class MateriallyTexturedBlockEntity extends AbstractMateriallyTexturedBlo
     }
 
     @Override
-    protected void collectImplicitComponents(final DataComponentMap.Builder componentBuilder)
+    protected void collectImplicitComponents(final DataComponentMap.@NonNull Builder componentBuilder)
     {
         super.collectImplicitComponents(componentBuilder);
         componentBuilder.set(ModDataComponents.TEXTURE_DATA, textureData);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void removeComponentsFromTag(final ValueOutput output)
     {

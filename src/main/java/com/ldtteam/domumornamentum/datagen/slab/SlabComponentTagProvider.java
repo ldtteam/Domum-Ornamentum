@@ -1,29 +1,21 @@
 package com.ldtteam.domumornamentum.datagen.slab;
 
 import com.ldtteam.domumornamentum.tag.ModTags;
-import com.ldtteam.domumornamentum.util.Constants;
+import com.ldtteam.domumornamentum.datagen.global.BlockTagSection;
+import com.ldtteam.domumornamentum.datagen.global.ModBlockTagsProvider;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.data.BlockTagsProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.concurrent.CompletableFuture;
-
-public class SlabComponentTagProvider extends BlockTagsProvider {
-    public SlabComponentTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, lookupProvider, Constants.MOD_ID, existingFileHelper);
-    }
+public class SlabComponentTagProvider implements BlockTagSection {
 
     @SuppressWarnings("unchecked")
     @Override
-    protected void addTags(HolderLookup.@NotNull Provider provider) {
+    public void addTags(ModBlockTagsProvider host, HolderLookup.@NotNull Provider provider) {
 
-        this.tag(ModTags.SLAB_MATERIALS)
+        host.tag(ModTags.SLAB_MATERIALS)
                 .add(
                         Blocks.BLACKSTONE,
                         Blocks.GILDED_BLACKSTONE,
@@ -77,9 +69,4 @@ public class SlabComponentTagProvider extends BlockTagsProvider {
                 );
     }
 
-    @Override
-    @NotNull
-    public String getName() {
-        return "Slab Tag Provider";
-    }
 }

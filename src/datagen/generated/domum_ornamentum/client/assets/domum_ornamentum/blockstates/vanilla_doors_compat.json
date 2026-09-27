@@ -1,0 +1,1764 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_full_top_left_open_spec"
+      },
+      "when": {
+        "type": "full",
+        "facing": "north",
+        "half": "upper",
+        "hinge": "left",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_full_top_left_spec",
+        "y": 270
+      },
+      "when": {
+        "type": "full",
+        "facing": "north",
+        "half": "upper",
+        "hinge": "left",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_full_top_right_open_spec",
+        "y": 180
+      },
+      "when": {
+        "type": "full",
+        "facing": "north",
+        "half": "upper",
+        "hinge": "right",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_full_top_right_spec",
+        "y": 270
+      },
+      "when": {
+        "type": "full",
+        "facing": "north",
+        "half": "upper",
+        "hinge": "right",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_full_bottom_left_open_spec"
+      },
+      "when": {
+        "type": "full",
+        "facing": "north",
+        "half": "lower",
+        "hinge": "left",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_full_bottom_left_spec",
+        "y": 270
+      },
+      "when": {
+        "type": "full",
+        "facing": "north",
+        "half": "lower",
+        "hinge": "left",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_full_bottom_right_open_spec",
+        "y": 180
+      },
+      "when": {
+        "type": "full",
+        "facing": "north",
+        "half": "lower",
+        "hinge": "right",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_full_bottom_right_spec",
+        "y": 270
+      },
+      "when": {
+        "type": "full",
+        "facing": "north",
+        "half": "lower",
+        "hinge": "right",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_port_manteau_top_left_open_spec"
+      },
+      "when": {
+        "type": "port_manteau",
+        "facing": "north",
+        "half": "upper",
+        "hinge": "left",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_port_manteau_top_left_spec",
+        "y": 270
+      },
+      "when": {
+        "type": "port_manteau",
+        "facing": "north",
+        "half": "upper",
+        "hinge": "left",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_port_manteau_top_right_open_spec",
+        "y": 180
+      },
+      "when": {
+        "type": "port_manteau",
+        "facing": "north",
+        "half": "upper",
+        "hinge": "right",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_port_manteau_top_right_spec",
+        "y": 270
+      },
+      "when": {
+        "type": "port_manteau",
+        "facing": "north",
+        "half": "upper",
+        "hinge": "right",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_port_manteau_bottom_left_open_spec"
+      },
+      "when": {
+        "type": "port_manteau",
+        "facing": "north",
+        "half": "lower",
+        "hinge": "left",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_port_manteau_bottom_left_spec",
+        "y": 270
+      },
+      "when": {
+        "type": "port_manteau",
+        "facing": "north",
+        "half": "lower",
+        "hinge": "left",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_port_manteau_bottom_right_open_spec",
+        "y": 180
+      },
+      "when": {
+        "type": "port_manteau",
+        "facing": "north",
+        "half": "lower",
+        "hinge": "right",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_port_manteau_bottom_right_spec",
+        "y": 270
+      },
+      "when": {
+        "type": "port_manteau",
+        "facing": "north",
+        "half": "lower",
+        "hinge": "right",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_vertically_striped_top_left_open_spec"
+      },
+      "when": {
+        "type": "vertically_striped",
+        "facing": "north",
+        "half": "upper",
+        "hinge": "left",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_vertically_striped_top_left_spec",
+        "y": 270
+      },
+      "when": {
+        "type": "vertically_striped",
+        "facing": "north",
+        "half": "upper",
+        "hinge": "left",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_vertically_striped_top_right_open_spec",
+        "y": 180
+      },
+      "when": {
+        "type": "vertically_striped",
+        "facing": "north",
+        "half": "upper",
+        "hinge": "right",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_vertically_striped_top_right_spec",
+        "y": 270
+      },
+      "when": {
+        "type": "vertically_striped",
+        "facing": "north",
+        "half": "upper",
+        "hinge": "right",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_vertically_striped_bottom_left_open_spec"
+      },
+      "when": {
+        "type": "vertically_striped",
+        "facing": "north",
+        "half": "lower",
+        "hinge": "left",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_vertically_striped_bottom_left_spec",
+        "y": 270
+      },
+      "when": {
+        "type": "vertically_striped",
+        "facing": "north",
+        "half": "lower",
+        "hinge": "left",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_vertically_striped_bottom_right_open_spec",
+        "y": 180
+      },
+      "when": {
+        "type": "vertically_striped",
+        "facing": "north",
+        "half": "lower",
+        "hinge": "right",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_vertically_striped_bottom_right_spec",
+        "y": 270
+      },
+      "when": {
+        "type": "vertically_striped",
+        "facing": "north",
+        "half": "lower",
+        "hinge": "right",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_waffle_top_left_open_spec"
+      },
+      "when": {
+        "type": "waffle",
+        "facing": "north",
+        "half": "upper",
+        "hinge": "left",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_waffle_top_left_spec",
+        "y": 270
+      },
+      "when": {
+        "type": "waffle",
+        "facing": "north",
+        "half": "upper",
+        "hinge": "left",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_waffle_top_right_open_spec",
+        "y": 180
+      },
+      "when": {
+        "type": "waffle",
+        "facing": "north",
+        "half": "upper",
+        "hinge": "right",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_waffle_top_right_spec",
+        "y": 270
+      },
+      "when": {
+        "type": "waffle",
+        "facing": "north",
+        "half": "upper",
+        "hinge": "right",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_waffle_bottom_left_open_spec"
+      },
+      "when": {
+        "type": "waffle",
+        "facing": "north",
+        "half": "lower",
+        "hinge": "left",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_waffle_bottom_left_spec",
+        "y": 270
+      },
+      "when": {
+        "type": "waffle",
+        "facing": "north",
+        "half": "lower",
+        "hinge": "left",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_waffle_bottom_right_open_spec",
+        "y": 180
+      },
+      "when": {
+        "type": "waffle",
+        "facing": "north",
+        "half": "lower",
+        "hinge": "right",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_waffle_bottom_right_spec",
+        "y": 270
+      },
+      "when": {
+        "type": "waffle",
+        "facing": "north",
+        "half": "lower",
+        "hinge": "right",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_full_top_left_open_spec",
+        "y": 180
+      },
+      "when": {
+        "type": "full",
+        "facing": "south",
+        "half": "upper",
+        "hinge": "left",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_full_top_left_spec",
+        "y": 90
+      },
+      "when": {
+        "type": "full",
+        "facing": "south",
+        "half": "upper",
+        "hinge": "left",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_full_top_right_open_spec"
+      },
+      "when": {
+        "type": "full",
+        "facing": "south",
+        "half": "upper",
+        "hinge": "right",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_full_top_right_spec",
+        "y": 90
+      },
+      "when": {
+        "type": "full",
+        "facing": "south",
+        "half": "upper",
+        "hinge": "right",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_full_bottom_left_open_spec",
+        "y": 180
+      },
+      "when": {
+        "type": "full",
+        "facing": "south",
+        "half": "lower",
+        "hinge": "left",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_full_bottom_left_spec",
+        "y": 90
+      },
+      "when": {
+        "type": "full",
+        "facing": "south",
+        "half": "lower",
+        "hinge": "left",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_full_bottom_right_open_spec"
+      },
+      "when": {
+        "type": "full",
+        "facing": "south",
+        "half": "lower",
+        "hinge": "right",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_full_bottom_right_spec",
+        "y": 90
+      },
+      "when": {
+        "type": "full",
+        "facing": "south",
+        "half": "lower",
+        "hinge": "right",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_port_manteau_top_left_open_spec",
+        "y": 180
+      },
+      "when": {
+        "type": "port_manteau",
+        "facing": "south",
+        "half": "upper",
+        "hinge": "left",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_port_manteau_top_left_spec",
+        "y": 90
+      },
+      "when": {
+        "type": "port_manteau",
+        "facing": "south",
+        "half": "upper",
+        "hinge": "left",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_port_manteau_top_right_open_spec"
+      },
+      "when": {
+        "type": "port_manteau",
+        "facing": "south",
+        "half": "upper",
+        "hinge": "right",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_port_manteau_top_right_spec",
+        "y": 90
+      },
+      "when": {
+        "type": "port_manteau",
+        "facing": "south",
+        "half": "upper",
+        "hinge": "right",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_port_manteau_bottom_left_open_spec",
+        "y": 180
+      },
+      "when": {
+        "type": "port_manteau",
+        "facing": "south",
+        "half": "lower",
+        "hinge": "left",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_port_manteau_bottom_left_spec",
+        "y": 90
+      },
+      "when": {
+        "type": "port_manteau",
+        "facing": "south",
+        "half": "lower",
+        "hinge": "left",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_port_manteau_bottom_right_open_spec"
+      },
+      "when": {
+        "type": "port_manteau",
+        "facing": "south",
+        "half": "lower",
+        "hinge": "right",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_port_manteau_bottom_right_spec",
+        "y": 90
+      },
+      "when": {
+        "type": "port_manteau",
+        "facing": "south",
+        "half": "lower",
+        "hinge": "right",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_vertically_striped_top_left_open_spec",
+        "y": 180
+      },
+      "when": {
+        "type": "vertically_striped",
+        "facing": "south",
+        "half": "upper",
+        "hinge": "left",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_vertically_striped_top_left_spec",
+        "y": 90
+      },
+      "when": {
+        "type": "vertically_striped",
+        "facing": "south",
+        "half": "upper",
+        "hinge": "left",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_vertically_striped_top_right_open_spec"
+      },
+      "when": {
+        "type": "vertically_striped",
+        "facing": "south",
+        "half": "upper",
+        "hinge": "right",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_vertically_striped_top_right_spec",
+        "y": 90
+      },
+      "when": {
+        "type": "vertically_striped",
+        "facing": "south",
+        "half": "upper",
+        "hinge": "right",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_vertically_striped_bottom_left_open_spec",
+        "y": 180
+      },
+      "when": {
+        "type": "vertically_striped",
+        "facing": "south",
+        "half": "lower",
+        "hinge": "left",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_vertically_striped_bottom_left_spec",
+        "y": 90
+      },
+      "when": {
+        "type": "vertically_striped",
+        "facing": "south",
+        "half": "lower",
+        "hinge": "left",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_vertically_striped_bottom_right_open_spec"
+      },
+      "when": {
+        "type": "vertically_striped",
+        "facing": "south",
+        "half": "lower",
+        "hinge": "right",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_vertically_striped_bottom_right_spec",
+        "y": 90
+      },
+      "when": {
+        "type": "vertically_striped",
+        "facing": "south",
+        "half": "lower",
+        "hinge": "right",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_waffle_top_left_open_spec",
+        "y": 180
+      },
+      "when": {
+        "type": "waffle",
+        "facing": "south",
+        "half": "upper",
+        "hinge": "left",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_waffle_top_left_spec",
+        "y": 90
+      },
+      "when": {
+        "type": "waffle",
+        "facing": "south",
+        "half": "upper",
+        "hinge": "left",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_waffle_top_right_open_spec"
+      },
+      "when": {
+        "type": "waffle",
+        "facing": "south",
+        "half": "upper",
+        "hinge": "right",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_waffle_top_right_spec",
+        "y": 90
+      },
+      "when": {
+        "type": "waffle",
+        "facing": "south",
+        "half": "upper",
+        "hinge": "right",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_waffle_bottom_left_open_spec",
+        "y": 180
+      },
+      "when": {
+        "type": "waffle",
+        "facing": "south",
+        "half": "lower",
+        "hinge": "left",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_waffle_bottom_left_spec",
+        "y": 90
+      },
+      "when": {
+        "type": "waffle",
+        "facing": "south",
+        "half": "lower",
+        "hinge": "left",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_waffle_bottom_right_open_spec"
+      },
+      "when": {
+        "type": "waffle",
+        "facing": "south",
+        "half": "lower",
+        "hinge": "right",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_waffle_bottom_right_spec",
+        "y": 90
+      },
+      "when": {
+        "type": "waffle",
+        "facing": "south",
+        "half": "lower",
+        "hinge": "right",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_full_top_left_open_spec",
+        "y": 270
+      },
+      "when": {
+        "type": "full",
+        "facing": "west",
+        "half": "upper",
+        "hinge": "left",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_full_top_left_spec",
+        "y": 180
+      },
+      "when": {
+        "type": "full",
+        "facing": "west",
+        "half": "upper",
+        "hinge": "left",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_full_top_right_open_spec",
+        "y": 90
+      },
+      "when": {
+        "type": "full",
+        "facing": "west",
+        "half": "upper",
+        "hinge": "right",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_full_top_right_spec",
+        "y": 180
+      },
+      "when": {
+        "type": "full",
+        "facing": "west",
+        "half": "upper",
+        "hinge": "right",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_full_bottom_left_open_spec",
+        "y": 270
+      },
+      "when": {
+        "type": "full",
+        "facing": "west",
+        "half": "lower",
+        "hinge": "left",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_full_bottom_left_spec",
+        "y": 180
+      },
+      "when": {
+        "type": "full",
+        "facing": "west",
+        "half": "lower",
+        "hinge": "left",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_full_bottom_right_open_spec",
+        "y": 90
+      },
+      "when": {
+        "type": "full",
+        "facing": "west",
+        "half": "lower",
+        "hinge": "right",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_full_bottom_right_spec",
+        "y": 180
+      },
+      "when": {
+        "type": "full",
+        "facing": "west",
+        "half": "lower",
+        "hinge": "right",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_port_manteau_top_left_open_spec",
+        "y": 270
+      },
+      "when": {
+        "type": "port_manteau",
+        "facing": "west",
+        "half": "upper",
+        "hinge": "left",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_port_manteau_top_left_spec",
+        "y": 180
+      },
+      "when": {
+        "type": "port_manteau",
+        "facing": "west",
+        "half": "upper",
+        "hinge": "left",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_port_manteau_top_right_open_spec",
+        "y": 90
+      },
+      "when": {
+        "type": "port_manteau",
+        "facing": "west",
+        "half": "upper",
+        "hinge": "right",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_port_manteau_top_right_spec",
+        "y": 180
+      },
+      "when": {
+        "type": "port_manteau",
+        "facing": "west",
+        "half": "upper",
+        "hinge": "right",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_port_manteau_bottom_left_open_spec",
+        "y": 270
+      },
+      "when": {
+        "type": "port_manteau",
+        "facing": "west",
+        "half": "lower",
+        "hinge": "left",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_port_manteau_bottom_left_spec",
+        "y": 180
+      },
+      "when": {
+        "type": "port_manteau",
+        "facing": "west",
+        "half": "lower",
+        "hinge": "left",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_port_manteau_bottom_right_open_spec",
+        "y": 90
+      },
+      "when": {
+        "type": "port_manteau",
+        "facing": "west",
+        "half": "lower",
+        "hinge": "right",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_port_manteau_bottom_right_spec",
+        "y": 180
+      },
+      "when": {
+        "type": "port_manteau",
+        "facing": "west",
+        "half": "lower",
+        "hinge": "right",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_vertically_striped_top_left_open_spec",
+        "y": 270
+      },
+      "when": {
+        "type": "vertically_striped",
+        "facing": "west",
+        "half": "upper",
+        "hinge": "left",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_vertically_striped_top_left_spec",
+        "y": 180
+      },
+      "when": {
+        "type": "vertically_striped",
+        "facing": "west",
+        "half": "upper",
+        "hinge": "left",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_vertically_striped_top_right_open_spec",
+        "y": 90
+      },
+      "when": {
+        "type": "vertically_striped",
+        "facing": "west",
+        "half": "upper",
+        "hinge": "right",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_vertically_striped_top_right_spec",
+        "y": 180
+      },
+      "when": {
+        "type": "vertically_striped",
+        "facing": "west",
+        "half": "upper",
+        "hinge": "right",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_vertically_striped_bottom_left_open_spec",
+        "y": 270
+      },
+      "when": {
+        "type": "vertically_striped",
+        "facing": "west",
+        "half": "lower",
+        "hinge": "left",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_vertically_striped_bottom_left_spec",
+        "y": 180
+      },
+      "when": {
+        "type": "vertically_striped",
+        "facing": "west",
+        "half": "lower",
+        "hinge": "left",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_vertically_striped_bottom_right_open_spec",
+        "y": 90
+      },
+      "when": {
+        "type": "vertically_striped",
+        "facing": "west",
+        "half": "lower",
+        "hinge": "right",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_vertically_striped_bottom_right_spec",
+        "y": 180
+      },
+      "when": {
+        "type": "vertically_striped",
+        "facing": "west",
+        "half": "lower",
+        "hinge": "right",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_waffle_top_left_open_spec",
+        "y": 270
+      },
+      "when": {
+        "type": "waffle",
+        "facing": "west",
+        "half": "upper",
+        "hinge": "left",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_waffle_top_left_spec",
+        "y": 180
+      },
+      "when": {
+        "type": "waffle",
+        "facing": "west",
+        "half": "upper",
+        "hinge": "left",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_waffle_top_right_open_spec",
+        "y": 90
+      },
+      "when": {
+        "type": "waffle",
+        "facing": "west",
+        "half": "upper",
+        "hinge": "right",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_waffle_top_right_spec",
+        "y": 180
+      },
+      "when": {
+        "type": "waffle",
+        "facing": "west",
+        "half": "upper",
+        "hinge": "right",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_waffle_bottom_left_open_spec",
+        "y": 270
+      },
+      "when": {
+        "type": "waffle",
+        "facing": "west",
+        "half": "lower",
+        "hinge": "left",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_waffle_bottom_left_spec",
+        "y": 180
+      },
+      "when": {
+        "type": "waffle",
+        "facing": "west",
+        "half": "lower",
+        "hinge": "left",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_waffle_bottom_right_open_spec",
+        "y": 90
+      },
+      "when": {
+        "type": "waffle",
+        "facing": "west",
+        "half": "lower",
+        "hinge": "right",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_waffle_bottom_right_spec",
+        "y": 180
+      },
+      "when": {
+        "type": "waffle",
+        "facing": "west",
+        "half": "lower",
+        "hinge": "right",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_full_top_left_open_spec",
+        "y": 90
+      },
+      "when": {
+        "type": "full",
+        "facing": "east",
+        "half": "upper",
+        "hinge": "left",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_full_top_left_spec"
+      },
+      "when": {
+        "type": "full",
+        "facing": "east",
+        "half": "upper",
+        "hinge": "left",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_full_top_right_open_spec",
+        "y": 270
+      },
+      "when": {
+        "type": "full",
+        "facing": "east",
+        "half": "upper",
+        "hinge": "right",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_full_top_right_spec"
+      },
+      "when": {
+        "type": "full",
+        "facing": "east",
+        "half": "upper",
+        "hinge": "right",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_full_bottom_left_open_spec",
+        "y": 90
+      },
+      "when": {
+        "type": "full",
+        "facing": "east",
+        "half": "lower",
+        "hinge": "left",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_full_bottom_left_spec"
+      },
+      "when": {
+        "type": "full",
+        "facing": "east",
+        "half": "lower",
+        "hinge": "left",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_full_bottom_right_open_spec",
+        "y": 270
+      },
+      "when": {
+        "type": "full",
+        "facing": "east",
+        "half": "lower",
+        "hinge": "right",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_full_bottom_right_spec"
+      },
+      "when": {
+        "type": "full",
+        "facing": "east",
+        "half": "lower",
+        "hinge": "right",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_port_manteau_top_left_open_spec",
+        "y": 90
+      },
+      "when": {
+        "type": "port_manteau",
+        "facing": "east",
+        "half": "upper",
+        "hinge": "left",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_port_manteau_top_left_spec"
+      },
+      "when": {
+        "type": "port_manteau",
+        "facing": "east",
+        "half": "upper",
+        "hinge": "left",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_port_manteau_top_right_open_spec",
+        "y": 270
+      },
+      "when": {
+        "type": "port_manteau",
+        "facing": "east",
+        "half": "upper",
+        "hinge": "right",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_port_manteau_top_right_spec"
+      },
+      "when": {
+        "type": "port_manteau",
+        "facing": "east",
+        "half": "upper",
+        "hinge": "right",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_port_manteau_bottom_left_open_spec",
+        "y": 90
+      },
+      "when": {
+        "type": "port_manteau",
+        "facing": "east",
+        "half": "lower",
+        "hinge": "left",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_port_manteau_bottom_left_spec"
+      },
+      "when": {
+        "type": "port_manteau",
+        "facing": "east",
+        "half": "lower",
+        "hinge": "left",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_port_manteau_bottom_right_open_spec",
+        "y": 270
+      },
+      "when": {
+        "type": "port_manteau",
+        "facing": "east",
+        "half": "lower",
+        "hinge": "right",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_port_manteau_bottom_right_spec"
+      },
+      "when": {
+        "type": "port_manteau",
+        "facing": "east",
+        "half": "lower",
+        "hinge": "right",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_vertically_striped_top_left_open_spec",
+        "y": 90
+      },
+      "when": {
+        "type": "vertically_striped",
+        "facing": "east",
+        "half": "upper",
+        "hinge": "left",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_vertically_striped_top_left_spec"
+      },
+      "when": {
+        "type": "vertically_striped",
+        "facing": "east",
+        "half": "upper",
+        "hinge": "left",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_vertically_striped_top_right_open_spec",
+        "y": 270
+      },
+      "when": {
+        "type": "vertically_striped",
+        "facing": "east",
+        "half": "upper",
+        "hinge": "right",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_vertically_striped_top_right_spec"
+      },
+      "when": {
+        "type": "vertically_striped",
+        "facing": "east",
+        "half": "upper",
+        "hinge": "right",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_vertically_striped_bottom_left_open_spec",
+        "y": 90
+      },
+      "when": {
+        "type": "vertically_striped",
+        "facing": "east",
+        "half": "lower",
+        "hinge": "left",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_vertically_striped_bottom_left_spec"
+      },
+      "when": {
+        "type": "vertically_striped",
+        "facing": "east",
+        "half": "lower",
+        "hinge": "left",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_vertically_striped_bottom_right_open_spec",
+        "y": 270
+      },
+      "when": {
+        "type": "vertically_striped",
+        "facing": "east",
+        "half": "lower",
+        "hinge": "right",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_vertically_striped_bottom_right_spec"
+      },
+      "when": {
+        "type": "vertically_striped",
+        "facing": "east",
+        "half": "lower",
+        "hinge": "right",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_waffle_top_left_open_spec",
+        "y": 90
+      },
+      "when": {
+        "type": "waffle",
+        "facing": "east",
+        "half": "upper",
+        "hinge": "left",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_waffle_top_left_spec"
+      },
+      "when": {
+        "type": "waffle",
+        "facing": "east",
+        "half": "upper",
+        "hinge": "left",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_waffle_top_right_open_spec",
+        "y": 270
+      },
+      "when": {
+        "type": "waffle",
+        "facing": "east",
+        "half": "upper",
+        "hinge": "right",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_waffle_top_right_spec"
+      },
+      "when": {
+        "type": "waffle",
+        "facing": "east",
+        "half": "upper",
+        "hinge": "right",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_waffle_bottom_left_open_spec",
+        "y": 90
+      },
+      "when": {
+        "type": "waffle",
+        "facing": "east",
+        "half": "lower",
+        "hinge": "left",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_waffle_bottom_left_spec"
+      },
+      "when": {
+        "type": "waffle",
+        "facing": "east",
+        "half": "lower",
+        "hinge": "left",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_waffle_bottom_right_open_spec",
+        "y": 270
+      },
+      "when": {
+        "type": "waffle",
+        "facing": "east",
+        "half": "lower",
+        "hinge": "right",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/door/door_waffle_bottom_right_spec"
+      },
+      "when": {
+        "type": "waffle",
+        "facing": "east",
+        "half": "lower",
+        "hinge": "right",
+        "open": "false"
+      }
+    }
+  ]
+}

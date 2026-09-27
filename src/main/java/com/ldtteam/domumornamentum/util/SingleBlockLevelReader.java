@@ -4,11 +4,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.world.attribute.EnvironmentAttributeReader;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeManager;
+import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
@@ -154,15 +156,6 @@ public class SingleBlockLevelReader extends SingleBlockBlockReader implements Le
         return this.reader.enabledFeatures();
     }
 
-    @Override
-    public float getShade(@NotNull final Direction p_230487_1_, final boolean p_230487_2_)
-    {
-        if (this.reader == null)
-            return 0;
-
-        return this.reader.getShade(p_230487_1_, p_230487_2_);
-    }
-
     @NotNull
     @Override
     public LevelLightEngine getLightEngine()
@@ -228,5 +221,15 @@ public class SingleBlockLevelReader extends SingleBlockBlockReader implements Le
     public FluidState getFluidState(@NotNull final BlockPos pos)
     {
         return this.getBlockState(pos).getFluidState();
+    }
+
+    @NotNull
+    @Override
+    public EnvironmentAttributeReader environmentAttributes()
+    {
+        if (this.reader == null)
+            return EnvironmentAttributeReader.EMPTY;
+
+        return this.reader.environmentAttributes();
     }
 }

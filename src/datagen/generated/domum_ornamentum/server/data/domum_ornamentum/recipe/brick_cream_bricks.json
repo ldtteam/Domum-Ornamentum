@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    "minecraft:sandstone",
+    "minecraft:sandstone",
+    "minecraft:brick",
+    "minecraft:brick"
+  ],
+  "result": {
+    "count": 4,
+    "id": "domum_ornamentum:cream_bricks"
+  }
+}

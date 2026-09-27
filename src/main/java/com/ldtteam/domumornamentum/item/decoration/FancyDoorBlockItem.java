@@ -5,84 +5,86 @@ import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.decorative.FancyDoorBlock;
 import com.ldtteam.domumornamentum.block.types.FancyDoorType;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
-import com.ldtteam.domumornamentum.item.DoubleHighBlockItemWithClientBePlacement;
+import com.ldtteam.domumornamentum.item.SelfUpgradingDoubleHighBlockItem;
 import com.ldtteam.domumornamentum.item.interfaces.IDoItem;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.Constants;
 import com.ldtteam.domumornamentum.util.MaterialTextureDataUtil;
 import net.minecraft.network.chat.Component;
-
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.List;
+import java.util.function.Consumer;
 
-public class FancyDoorBlockItem extends DoubleHighBlockItemWithClientBePlacement implements IDoItem
-{
-    private final FancyDoorBlock doorBlock;
+public class FancyDoorBlockItem extends SelfUpgradingDoubleHighBlockItem implements IDoItem {
+	private final FancyDoorBlock doorBlock;
 
-    public FancyDoorBlockItem(final FancyDoorBlock blockIn, final Properties builder)
-    {
-        super(blockIn, builder);
-        this.doorBlock = blockIn;
-    }
+	public FancyDoorBlockItem(final FancyDoorBlock blockIn, final Properties builder) {
+		super(blockIn, builder);
+		this.doorBlock = blockIn;
+	}
 
-    @Override
-    public @NotNull Component getName(final ItemStack stack)
-    {
-        final MaterialTextureData textureData = MaterialTextureData.readFromItemStack(stack);
+	@Override
+	public @NotNull Component getName(final @NonNull ItemStack stack) {
+		final MaterialTextureData textureData = MaterialTextureData.readFromItemStack(stack);
 
-        final IMateriallyTexturedBlockComponent coverComponent = doorBlock.getComponents().get(0);
-        final Block centerBlock = textureData.getTexturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
-        final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
+		final IMateriallyTexturedBlockComponent coverComponent = doorBlock.getComponents().get(0);
+		final Block centerBlock = textureData.components().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
+		final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
 
-        return Component.translatable(Constants.MOD_ID + ".fancydoor.name.format", centerBlockName);
-    }
+		return Component.translatable(Constants.MOD_ID + ".fancydoor.name.format", centerBlockName);
+	}
 
-    @Override
-    public void appendHoverText(@NotNull final ItemStack stack, final TooltipContext tooltipContext, @NotNull final List<Component> tooltip, @NotNull final TooltipFlag flagIn)
-    {
-        super.appendHoverText(stack, tooltipContext, tooltip, flagIn);
+	@SuppressWarnings("deprecation")
+	@Override
+	public void appendHoverText(
+			@NotNull final ItemStack stack,
+			final Item.@NonNull TooltipContext tooltipContext,
+			final @NonNull TooltipDisplay display,
+			final @NonNull Consumer<Component> tooltip,
+			@NotNull final TooltipFlag flagIn) {
+		super.appendHoverText(stack, tooltipContext, display, tooltip, flagIn);
 
-        final FancyDoorType doorType = BlockUtils.getPropertyFromBlockStateTag(stack, FancyDoorBlock.TYPE, FancyDoorType.FULL);
+		final FancyDoorType doorType = BlockUtils.getPropertyFromBlockStateTag(stack, FancyDoorBlock.TYPE, FancyDoorType.FULL);
+		tooltip.accept(Component.translatable(Constants.MOD_ID + ".origin.tooltip"));
+		tooltip.accept(Component.literal(""));
+		tooltip.accept(Component.translatable(
+				Constants.MOD_ID + ".fancydoor.type.format",
+				Component.translatable(
+						Constants.MOD_ID + ".fancydoor.type.name." + doorType.getTranslationKeySuffix()
+				)
+		));
 
-        tooltip.add(Component.translatable(Constants.MOD_ID + ".origin.tooltip"));
-        tooltip.add(Component.literal(""));
-        tooltip.add(Component.translatable(
-          Constants.MOD_ID + ".fancydoor.type.format",
-          Component.translatable(
-            Constants.MOD_ID + ".fancydoor.type.name." + doorType.getTranslationKeySuffix()
-          )
-        ));
+		MaterialTextureData textureData = MaterialTextureData.readFromItemStack(stack);
+		if (textureData.isEmpty()) {
+			textureData = MaterialTextureDataUtil.generateRandomTextureDataFrom(stack);
+		}
 
-        MaterialTextureData textureData = MaterialTextureData.readFromItemStack(stack);
-        if (textureData.isEmpty()) {
-            textureData = MaterialTextureDataUtil.generateRandomTextureDataFrom(stack);
-        }
+		final IMateriallyTexturedBlockComponent trapDoorComponent = doorBlock.getComponents().get(0);
+		final Block trapDoorBlock = textureData.components().getOrDefault(trapDoorComponent.getId(), trapDoorComponent.getDefault());
+		final Component trapDoorBlockName = BlockUtils.getHoverName(trapDoorBlock);
+		tooltip.accept(Component.translatable(Constants.MOD_ID + ".desc.frame", Component.translatable(Constants.MOD_ID + ".desc.material", trapDoorBlockName)));
 
-        final IMateriallyTexturedBlockComponent trapDoorComponent = doorBlock.getComponents().get(0);
-        final Block trapDoorBlock = textureData.getTexturedComponents().getOrDefault(trapDoorComponent.getId(), trapDoorComponent.getDefault());
-        final Component trapDoorBlockName = BlockUtils.getHoverName(trapDoorBlock);
-        tooltip.add(Component.translatable(Constants.MOD_ID + ".desc.frame", Component.translatable(Constants.MOD_ID + ".desc.material", trapDoorBlockName)));
+		final IMateriallyTexturedBlockComponent trapDoorFrameComponent = doorBlock.getComponents().get(1);
+		final Block trapDoorFrameBlock = textureData.components().getOrDefault(trapDoorFrameComponent.getId(), trapDoorFrameComponent.getDefault());
+		final Component trapDoorFrameBlockName = BlockUtils.getHoverName(trapDoorFrameBlock);
+		tooltip.accept(Component.translatable(Constants.MOD_ID + ".desc.center", Component.translatable(Constants.MOD_ID + ".desc.material", trapDoorFrameBlockName)));
+	}
 
-        final IMateriallyTexturedBlockComponent trapDoorFrameComponent = doorBlock.getComponents().get(1);
-        final Block trapDoorFrameBlock = textureData.getTexturedComponents().getOrDefault(trapDoorFrameComponent.getId(), trapDoorFrameComponent.getDefault());
-        final Component trapDoorFrameBlockName = BlockUtils.getHoverName(trapDoorFrameBlock);
-        tooltip.add(Component.translatable(Constants.MOD_ID + ".desc.center", Component.translatable(Constants.MOD_ID + ".desc.material", trapDoorFrameBlockName)));
-    }
+	@Override
+	public List<Identifier> getInputIds() {
+		return ImmutableList.of(Constants.resLocDO("frame"), Constants.resLocDO("center"));
+	}
 
-    @Override
-    public List<Identifier> getInputIds()
-    {
-        return ImmutableList.of(Constants.resLocDO("frame"), Constants.resLocDO("center"));
-    }
-
-    @Override
-    public Identifier getGroup()
-    {
-        return Constants.resLocDO("ddoor");
-    }
+	@Override
+	public Identifier getGroup() {
+		return Constants.resLocDO("ddoor");
+	}
 }

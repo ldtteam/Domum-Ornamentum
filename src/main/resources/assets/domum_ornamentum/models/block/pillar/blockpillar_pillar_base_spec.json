@@ -1,6 +1,5 @@
 {
 	"credit": "Made with Blockbench",
-	"parent": "minecraft:block/cube_all",
 	"textures": {
 		"column": "block/oak_planks",
 		"base": "block/oak_planks",

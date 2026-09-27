@@ -1,12 +1,12 @@
 package com.ldtteam.domumornamentum.datagen.floatingcarpet;
 
-import com.ldtteam.data.LanguageProvider;
+import com.ldtteam.domumornamentum.datagen.LanguageProviderWrapper;
 import com.ldtteam.domumornamentum.util.Constants;
 
-public class FloatingCarpetLangEntryProvider implements LanguageProvider.SubProvider {
+public class FloatingCarpetLangEntryProvider implements LanguageProviderWrapper.SubProvider {
 
     @Override
-    public void addTranslations(LanguageProvider.LanguageAcceptor acceptor) {
+    public void addTranslations(LanguageProviderWrapper.LanguageAcceptor acceptor) {
         acceptor.add("block." + Constants.MOD_ID + ".black_floating_carpet", "Black Floating Carpet");
         acceptor.add("block." + Constants.MOD_ID + ".blue_floating_carpet", "Blue Floating Carpet");
         acceptor.add("block." + Constants.MOD_ID + ".brown_floating_carpet", "Brown Floating Carpet");

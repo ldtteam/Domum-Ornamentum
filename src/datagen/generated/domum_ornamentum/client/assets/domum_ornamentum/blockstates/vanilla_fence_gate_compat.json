@@ -1,0 +1,192 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/fence_gate/fence_gate_spec"
+      },
+      "when": {
+        "facing": "north",
+        "in_wall": "false",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/fence_gate/fence_gate_open_spec"
+      },
+      "when": {
+        "facing": "north",
+        "in_wall": "false",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/fence_gate/fence_gate_wall_spec"
+      },
+      "when": {
+        "facing": "north",
+        "in_wall": "true",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/fence_gate/fence_gate_wall_open_spec"
+      },
+      "when": {
+        "facing": "north",
+        "in_wall": "true",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/fence_gate/fence_gate_spec",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "in_wall": "false",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/fence_gate/fence_gate_open_spec",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "in_wall": "false",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/fence_gate/fence_gate_wall_spec",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "in_wall": "true",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/fence_gate/fence_gate_wall_open_spec",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "in_wall": "true",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/fence_gate/fence_gate_spec",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "in_wall": "false",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/fence_gate/fence_gate_open_spec",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "in_wall": "false",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/fence_gate/fence_gate_wall_spec",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "in_wall": "true",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/fence_gate/fence_gate_wall_open_spec",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "in_wall": "true",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/fence_gate/fence_gate_spec",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "in_wall": "false",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/fence_gate/fence_gate_open_spec",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "in_wall": "false",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/fence_gate/fence_gate_wall_spec",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "in_wall": "true",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/fence_gate/fence_gate_wall_open_spec",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "in_wall": "true",
+        "open": "true"
+      }
+    }
+  ]
+}

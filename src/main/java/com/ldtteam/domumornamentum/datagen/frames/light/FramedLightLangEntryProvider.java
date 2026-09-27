@@ -1,13 +1,13 @@
 package com.ldtteam.domumornamentum.datagen.frames.light;
 
-import com.ldtteam.data.LanguageProvider;
 import com.ldtteam.domumornamentum.block.types.FramedLightType;
+import com.ldtteam.domumornamentum.datagen.LanguageProviderWrapper;
 import com.ldtteam.domumornamentum.util.Constants;
 
-public class FramedLightLangEntryProvider implements LanguageProvider.SubProvider
+public class FramedLightLangEntryProvider implements LanguageProviderWrapper.SubProvider
 {
     @Override
-    public void addTranslations(LanguageProvider.LanguageAcceptor acceptor) {
+    public void addTranslations(LanguageProviderWrapper.LanguageAcceptor acceptor) {
         for (final FramedLightType type : FramedLightType.values())
         {
             final String reference = Constants.MOD_ID + ".light.frame.type." + type.getName();

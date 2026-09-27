@@ -1,6 +1,5 @@
 {
 	"credit": "Made with Blockbench by Shindria",
-	"parent": "block/cube_all",
 	"textures": {
 		"capital": "block/oak_planks",
 		"column": "block/oak_planks",

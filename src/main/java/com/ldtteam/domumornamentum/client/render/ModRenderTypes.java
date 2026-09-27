@@ -1,275 +1,178 @@
 package com.ldtteam.domumornamentum.client.render;
 
-import com.ldtteam.domumornamentum.util.Constants;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.VertexFormat;
-import net.minecraft.client.renderer.RenderStateShard;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.Sheets;
-import net.minecraft.world.inventory.InventoryMenu;
-import org.jetbrains.annotations.NotNull;
-import org.lwjgl.opengl.GL11;
-
-import java.util.OptionalDouble;
 import java.util.function.Supplier;
 
+import com.google.common.base.Suppliers;
+
+import com.ldtteam.domumornamentum.util.Constants;
+
+import net.minecraft.client.renderer.rendertype.LayeringTransform;
+import net.minecraft.client.renderer.rendertype.OutputTarget;
+import net.minecraft.client.renderer.rendertype.RenderSetup;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.texture.TextureAtlas;
+import net.minecraft.resources.Identifier;
+
+/**
+ * Custom render types for Domum Ornamentum.
+ * Uses the 26.x pipeline/RenderSetup architecture.
+ */
 public enum ModRenderTypes
 {
-    MEASUREMENT_LINES(() -> InternalType.MEASUREMENT_LINES),
-    CHISEL_PREVIEW_INSIDE_BLOCKS(() -> InternalType.CHISEL_PREVIEW_INSIDE_BLOCKS),
-    CHISEL_PREVIEW_OUTSIDE_BLOCKS(() -> InternalType.CHISEL_PREVIEW_OUTSIDE_BLOCKS),
-    WIREFRAME_LINES(() -> InternalType.WIREFRAME_LINES),
-    WIREFRAME_LINES_ALWAYS(() -> InternalType.WIREFRAME_LINES_ALWAYS),
-    WIREFRAME_BODY(() -> InternalType.WIREFRAME_BODY),
-    GHOST_BLOCK_PREVIEW(() -> InternalType.GHOST_BLOCK_PREVIEW),
-    GHOST_BLOCK_PREVIEW_GREATER(() -> InternalType.GHOST_BLOCK_PREVIEW_GREATER),
-    GHOST_BLOCK_COLORED_PREVIEW(() -> InternalType.GHOST_BLOCK_COLORED_PREVIEW),
-    GHOST_BLOCK_COLORED_PREVIEW_ALWAYS(() -> InternalType.GHOST_BLOCK_COLORED_PREVIEW_ALWAYS);
+	MEASUREMENT_LINES(InternalType.MEASUREMENT_LINES),
+	CHISEL_PREVIEW_INSIDE_BLOCKS(InternalType.CHISEL_PREVIEW_INSIDE_BLOCKS),
+	CHISEL_PREVIEW_OUTSIDE_BLOCKS(InternalType.CHISEL_PREVIEW_OUTSIDE_BLOCKS),
+	WIREFRAME_LINES(InternalType.WIREFRAME_LINES),
+	WIREFRAME_LINES_ALWAYS(InternalType.WIREFRAME_LINES_ALWAYS),
+	WIREFRAME_BODY(InternalType.WIREFRAME_BODY),
+	GHOST_BLOCK_PREVIEW(InternalType.GHOST_BLOCK_PREVIEW),
+	GHOST_BLOCK_PREVIEW_GREATER(InternalType.GHOST_BLOCK_PREVIEW_GREATER),
+	GHOST_BLOCK_COLORED_PREVIEW(InternalType.GHOST_BLOCK_COLORED_PREVIEW),
+	GHOST_BLOCK_COLORED_PREVIEW_ALWAYS(InternalType.GHOST_BLOCK_COLORED_PREVIEW_ALWAYS);
 
-    private final Supplier<RenderType> typeSupplier;
+	private final Supplier<RenderType> typeSupplier;
 
-    ModRenderTypes(final Supplier<RenderType> typeSupplier) {this.typeSupplier = typeSupplier;}
+	ModRenderTypes(final Supplier<RenderType> typeSupplier) {
+		this.typeSupplier = typeSupplier;
+	}
 
-    public RenderType get() {
-        return typeSupplier.get();
-    }
+	public RenderType get() {
+		return typeSupplier.get();
+	}
 
-    private static class InternalState extends RenderStateShard
-    {
-        private static final DepthTestStateShard DISABLED_DEPTH_TEST = new DepthTestDisabled();
-        private static final DepthTestLessOrEqual LESS_OR_EQUAL_DEPTH_TEST = new DepthTestLessOrEqual();
-        private static final DepthTestGreaterOrEqual GREATER_OR_EQUAL_DEPTH_TEST = new DepthTestGreaterOrEqual();
+	private static class InternalType
+	{
+		// === Line-based types (measurement, chisel preview, wireframe) ===
 
-        private static class DepthTestDisabled extends DepthTestStateShard
-        {
-            public DepthTestDisabled()
-            {
-                super("depth_test_disabled", 0);
-            }
+		public static Supplier<RenderType> MEASUREMENT_LINES = Suppliers.memoize(InternalType::measurementLines);
 
-            @Override
-            public void setupRenderState()
-            {
-                RenderSystem.disableDepthTest();
-            }
+		private static RenderType measurementLines()
+		{
+			var state = RenderSetup.builder(ModRenderPipelines.MEASUREMENT_LINES.pipeline())
+					.setLayeringTransform(LayeringTransform.VIEW_OFFSET_Z_LAYERING)
+					.setOutputTarget(OutputTarget.ITEM_ENTITY_TARGET)
+					.createRenderSetup();
+			return RenderType.create(Constants.MOD_ID + ":measurement_lines", state);
+		}
 
-            @Override
-            public void clearRenderState()
-            {
-                RenderSystem.enableDepthTest();
-            }
+		public static Supplier<RenderType> CHISEL_PREVIEW_INSIDE_BLOCKS = Suppliers.memoize(InternalType::chiselPreviewInsideBlocks);
 
-            @Override
-            public @NotNull String toString()
-            {
-                return name + "[" + Constants.MOD_ID + ":depth_test_disabled]";
-            }
-        }
+		private static RenderType chiselPreviewInsideBlocks()
+		{
+			var state = RenderSetup.builder(ModRenderPipelines.CHISEL_PREVIEW_INSIDE_BLOCKS.pipeline())
+					.setLayeringTransform(LayeringTransform.VIEW_OFFSET_Z_LAYERING)
+					.setOutputTarget(OutputTarget.ITEM_ENTITY_TARGET)
+					.createRenderSetup();
+			return RenderType.create(Constants.MOD_ID + ":chisel_preview_inside_blocks", state);
+		}
 
-        private static class DepthTestLessOrEqual extends DepthTestStateShard
-        {
-            public DepthTestLessOrEqual()
-            {
-                super("depth_test_less_or_equal", 0);
-            }
+		public static Supplier<RenderType> CHISEL_PREVIEW_OUTSIDE_BLOCKS = Suppliers.memoize(InternalType::chiselPreviewOutsideBlocks);
 
-            @Override
-            public void setupRenderState()
-            {
-                RenderSystem.enableDepthTest();
-                RenderSystem.depthFunc(GL11.GL_LEQUAL);
-            }
+		private static RenderType chiselPreviewOutsideBlocks()
+		{
+			var state = RenderSetup.builder(ModRenderPipelines.CHISEL_PREVIEW_OUTSIDE_BLOCKS.pipeline())
+					.setLayeringTransform(LayeringTransform.VIEW_OFFSET_Z_LAYERING)
+					.setOutputTarget(OutputTarget.ITEM_ENTITY_TARGET)
+					.createRenderSetup();
+			return RenderType.create(Constants.MOD_ID + ":chisel_preview_outside_blocks", state);
+		}
 
-            @Override
-            public void clearRenderState()
-            {
-                RenderSystem.enableDepthTest();
-                RenderSystem.depthFunc(GL11.GL_LEQUAL);
-            }
+		public static Supplier<RenderType> WIREFRAME_LINES = Suppliers.memoize(InternalType::wireframeLines);
 
-            @Override
-            public @NotNull String toString()
-            {
-                return name + "[" + Constants.MOD_ID + ":depth_test_less_or_equal]";
-            }
-        }
+		private static RenderType wireframeLines()
+		{
+			var state = RenderSetup.builder(ModRenderPipelines.WIREFRAME_LINES.pipeline())
+					.setLayeringTransform(LayeringTransform.VIEW_OFFSET_Z_LAYERING)
+					.setOutputTarget(OutputTarget.ITEM_ENTITY_TARGET)
+					.sortOnUpload()
+					.createRenderSetup();
+			return RenderType.create(Constants.MOD_ID + ":wireframe_lines", state);
+		}
 
-        private static class DepthTestGreaterOrEqual extends DepthTestStateShard
-        {
-            public DepthTestGreaterOrEqual()
-            {
-                super("depth_test_greater_or_equal", 0);
-            }
+		public static Supplier<RenderType> WIREFRAME_LINES_ALWAYS = Suppliers.memoize(InternalType::wireframeLinesAlways);
 
-            @Override
-            public void setupRenderState()
-            {
-                RenderSystem.enableDepthTest();
-                RenderSystem.depthFunc(GL11.GL_GEQUAL);
-            }
+		private static RenderType wireframeLinesAlways()
+		{
+			var state = RenderSetup.builder(ModRenderPipelines.WIREFRAME_LINES_ALWAYS.pipeline())
+					.setLayeringTransform(LayeringTransform.VIEW_OFFSET_Z_LAYERING)
+					.setOutputTarget(OutputTarget.ITEM_ENTITY_TARGET)
+					.sortOnUpload()
+					.createRenderSetup();
+			return RenderType.create(Constants.MOD_ID + ":wireframe_lines_always", state);
+		}
 
-            @Override
-            public void clearRenderState()
-            {
-                RenderSystem.enableDepthTest();
-                RenderSystem.depthFunc(GL11.GL_LEQUAL);
-            }
+		// === Wireframe body (opaque solid for wireframe overlay) ===
 
-            @Override
-            public @NotNull String toString()
-            {
-                return name + "[" + Constants.MOD_ID + ":depth_test_greater_or_equal]";
-            }
-        }
+		public static Supplier<RenderType> WIREFRAME_BODY = Suppliers.memoize(InternalType::wireframeBody);
 
-        public InternalState(String name, Runnable setupState, Runnable clearState) {
-            super(name, setupState, clearState);
-            throw new IllegalStateException("This class must not be instantiated");
-        }
-    }
+		private static RenderType wireframeBody()
+		{
+			var state = RenderSetup.builder(ModRenderPipelines.WIREFRAME_BODY.pipeline())
+					.setLayeringTransform(LayeringTransform.VIEW_OFFSET_Z_LAYERING)
+					.setOutputTarget(OutputTarget.ITEM_ENTITY_TARGET)
+					.sortOnUpload()
+					.createRenderSetup();
+			return RenderType.create(Constants.MOD_ID + ":wireframe_body", state);
+		}
 
-    private static class InternalType extends RenderType
-    {
-        private static final RenderType MEASUREMENT_LINES = RenderType.create(Constants.MOD_ID + ":measurement_lines",
-          DefaultVertexFormat.POSITION_COLOR_NORMAL,
-          VertexFormat.Mode.LINES,
-          256,
-          false,
-          false,
-          CompositeState.builder()
-            .setShaderState(RENDERTYPE_LINES_SHADER)
-            .setLineState(new LineStateShard(OptionalDouble.of(2.5d)))
-            .setLayeringState(VIEW_OFFSET_Z_LAYERING)
-            .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
-            .setOutputState(TRANSLUCENT_TARGET)
-            .setWriteMaskState(COLOR_WRITE)
-            .setCullState(NO_CULL)
-            .setDepthTestState(InternalState.DISABLED_DEPTH_TEST)
-            .createCompositeState(false));
+		// === Ghost block types (textured block preview) ===
 
-        private static final RenderType CHISEL_PREVIEW_INSIDE_BLOCKS = RenderType.create(Constants.MOD_ID + ":chisel_preview_inside_blocks",
-                DefaultVertexFormat.POSITION_COLOR_NORMAL,
-                VertexFormat.Mode.LINES,
-                256,
-                false,
-                false,
-                CompositeState.builder()
-                        .setShaderState(RENDERTYPE_LINES_SHADER)
-                        .setLineState(new LineStateShard(OptionalDouble.of(2.5d)))
-                        .setLayeringState(VIEW_OFFSET_Z_LAYERING)
-                        .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
-                        .setOutputState(TRANSLUCENT_TARGET)
-                        .setWriteMaskState(COLOR_WRITE)
-                        .setCullState(NO_CULL)
-                        .setDepthTestState(InternalState.GREATER_OR_EQUAL_DEPTH_TEST)
-                        .createCompositeState(false));
+		public static Supplier<RenderType> GHOST_BLOCK_PREVIEW = Suppliers.memoize(InternalType::ghostBlockPreview);
 
-        private static final RenderType CHISEL_PREVIEW_OUTSIDE_BLOCKS = RenderType.create(Constants.MOD_ID + ":chisel_preview_outside_blocks",
-                DefaultVertexFormat.POSITION_COLOR_NORMAL,
-                VertexFormat.Mode.LINES,
-                256,
-                false,
-                false,
-                CompositeState.builder()
-                        .setShaderState(RENDERTYPE_LINES_SHADER)
-                        .setLineState(new LineStateShard(OptionalDouble.of(2.5d)))
-                        .setLayeringState(VIEW_OFFSET_Z_LAYERING)
-                        .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
-                        .setOutputState(TRANSLUCENT_TARGET)
-                        .setWriteMaskState(COLOR_WRITE)
-                        .setCullState(NO_CULL)
-                        .setDepthTestState(InternalState.LESS_OR_EQUAL_DEPTH_TEST)
-                        .createCompositeState(false));
+		@SuppressWarnings("deprecation")
+		private static RenderType ghostBlockPreview()
+		{
+			var state = RenderSetup.builder(ModRenderPipelines.GHOST_BLOCK.pipeline())
+					.withTexture("Sampler0", TextureAtlas.LOCATION_BLOCKS)
+					.useLightmap()
+					.useOverlay()
+					.setOutputTarget(OutputTarget.ITEM_ENTITY_TARGET)
+					.affectsCrumbling()
+					.sortOnUpload()
+					.createRenderSetup();
+			return RenderType.create(Constants.MOD_ID + ":ghost_block_preview", state);
+		}
 
-        private static final RenderType WIREFRAME_LINES = buildWireframeType(false);
-        private static final RenderType WIREFRAME_LINES_ALWAYS = buildWireframeType(true);
+		public static Supplier<RenderType> GHOST_BLOCK_PREVIEW_GREATER = Suppliers.memoize(InternalType::ghostBlockPreviewGreater);
 
-        private static RenderType buildWireframeType(final boolean always)
-        {
-          return RenderType.create(Constants.MOD_ID + ":wireframe_lines" + (always ? "_always" : ""),
-          DefaultVertexFormat.POSITION_COLOR,
-          VertexFormat.Mode.LINES,
-          256,
-          false,
-          true,
-          CompositeState.builder()
-            .setShaderState(RENDERTYPE_LINES_SHADER)
-            .setLineState(new LineStateShard(OptionalDouble.of(3d)))
-            .setLayeringState(VIEW_OFFSET_Z_LAYERING)
-            .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
-            .setOutputState(TRANSLUCENT_TARGET)
-            .setWriteMaskState(COLOR_WRITE)
-            .setCullState(NO_CULL)
-            .setDepthTestState(always ? InternalState.DISABLED_DEPTH_TEST : LEQUAL_DEPTH_TEST)
-            .createCompositeState(false));
-        }
+		@SuppressWarnings("deprecation")
+		private static RenderType ghostBlockPreviewGreater()
+		{
+			var state = RenderSetup.builder(ModRenderPipelines.GHOST_BLOCK_GREATER.pipeline())
+					.withTexture("Sampler0", TextureAtlas.LOCATION_BLOCKS)
+					.useLightmap()
+					.useOverlay()
+					.setOutputTarget(OutputTarget.ITEM_ENTITY_TARGET)
+					.affectsCrumbling()
+					.sortOnUpload()
+					.createRenderSetup();
+			return RenderType.create(Constants.MOD_ID + ":ghost_block_preview_greater", state);
+		}
 
-        private static final RenderType WIREFRAME_BODY = RenderType.create(Constants.MOD_ID + ":wireframe_body",
-          DefaultVertexFormat.BLOCK,
-          VertexFormat.Mode.QUADS,
-          2097152,
-          false,
-          true,
-          CompositeState.builder()
-            .setShaderState(RenderType.RENDERTYPE_SOLID_SHADER)
-            .setLayeringState(VIEW_OFFSET_Z_LAYERING)
-            .setTransparencyState(NO_TRANSPARENCY)
-            .setOutputState(TRANSLUCENT_TARGET)
-            .setWriteMaskState(COLOR_WRITE)
-            .setCullState(NO_CULL)
-            .setDepthTestState(NO_DEPTH_TEST)
-            .createCompositeState(false));
+		// === Colored ghost types (solid color fill) ===
 
-        private static final TextureStateShard BLOCK_TEXTURE = new TextureStateShard(InventoryMenu.BLOCK_ATLAS, false, false);
-        private static final DepthTestStateShard GREATER_DEPTH_TEST = new DepthTestStateShard(">", GL11.GL_GREATER);
+		public static Supplier<RenderType> GHOST_BLOCK_COLORED_PREVIEW = Suppliers.memoize(InternalType::ghostBlockColoredPreview);
 
-        private static final RenderType GHOST_BLOCK_PREVIEW = buildGhostType(false);
-        private static final RenderType GHOST_BLOCK_PREVIEW_GREATER = buildGhostType(true);
+		private static RenderType ghostBlockColoredPreview()
+		{
+			var state = RenderSetup.builder(ModRenderPipelines.GHOST_BLOCK_COLORED.pipeline())
+					.setOutputTarget(OutputTarget.ITEM_ENTITY_TARGET)
+					.affectsCrumbling()
+					.sortOnUpload()
+					.createRenderSetup();
+			return RenderType.create(Constants.MOD_ID + ":ghost_block_colored_preview", state);
+		}
 
-        private static RenderType buildGhostType(final boolean greater)
-        {
-            if (!greater)
-                return Sheets.translucentCullBlockSheet();
+		public static Supplier<RenderType> GHOST_BLOCK_COLORED_PREVIEW_ALWAYS = Suppliers.memoize(InternalType::ghostBlockColoredPreviewAlways);
 
-            return RenderType.create(Constants.MOD_ID + ":ghost_block_preview_greater",
-              DefaultVertexFormat.BLOCK,
-              VertexFormat.Mode.QUADS,
-              256,
-              true,
-              true,
-              CompositeState.builder()
-                .setShaderState(RenderType.RENDERTYPE_ENTITY_TRANSLUCENT_CULL_SHADER)
-                .setTextureState(BLOCK_TEXTURE)
-                .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
-                .setLightmapState(LIGHTMAP)
-                .setOverlayState(OVERLAY)
-                .setDepthTestState(GREATER_DEPTH_TEST) // Only difference from RenderType#ENTITY_TRANSLUCENT_CULL
-                .createCompositeState(false));
-        }
-
-        private static final RenderType GHOST_BLOCK_COLORED_PREVIEW = buildColoredGhostType(false);
-        private static final RenderType GHOST_BLOCK_COLORED_PREVIEW_ALWAYS = buildColoredGhostType(true);
-
-        private static RenderType buildColoredGhostType(final boolean always)
-        {
-          return RenderType.create(Constants.MOD_ID + ":ghost_block_colored_preview" + (always ? "_always" : ""),
-            DefaultVertexFormat.POSITION_COLOR_NORMAL,
-            VertexFormat.Mode.QUADS,
-            256,
-            false,
-            false,
-            CompositeState.builder()
-              .setShaderState(POSITION_COLOR_SHADER)
-              .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
-              .setDepthTestState(always ? InternalState.DISABLED_DEPTH_TEST : LEQUAL_DEPTH_TEST)
-              .createCompositeState(false));
-        }
-
-        private InternalType(String name, VertexFormat fmt, VertexFormat.Mode glMode, int size, boolean doCrumbling, boolean depthSorting, Runnable onEnable, Runnable onDisable)
-        {
-            super(name, fmt, glMode, size, doCrumbling, depthSorting, onEnable, onDisable);
-            throw new IllegalStateException("This class must not be instantiated");
-        }
-    }
+		private static RenderType ghostBlockColoredPreviewAlways()
+		{
+			var state = RenderSetup.builder(ModRenderPipelines.GHOST_BLOCK_COLORED_ALWAYS.pipeline())
+					.setOutputTarget(OutputTarget.ITEM_ENTITY_TARGET)
+					.affectsCrumbling()
+					.sortOnUpload()
+					.createRenderSetup();
+			return RenderType.create(Constants.MOD_ID + ":ghost_block_colored_preview_always", state);
+		}
+	}
 }

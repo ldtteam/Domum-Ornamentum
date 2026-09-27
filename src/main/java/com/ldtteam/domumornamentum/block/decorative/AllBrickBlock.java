@@ -28,92 +28,86 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 
-public class AllBrickBlock extends AbstractBlock<AllBrickBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock
-{
+public class AllBrickBlock extends AbstractBlock<AllBrickBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock {
 
-    public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
-        .add(new SimpleRetexturableComponent(Identifier.withDefaultNamespace("block/oak_planks"), ModTags.ALL_BRICK_MATERIALS, Blocks.OAK_PLANKS))
-        .build();
+	public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
+			.add(new SimpleRetexturableComponent(Identifier.withDefaultNamespace("block/oak_planks"), ModTags.ALL_BRICK_MATERIALS, Blocks.OAK_PLANKS))
+			.build();
 
-    private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
+	private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
 
-    /**
-     * The hardness this block has.
-     */
-    private static final float                      BLOCK_HARDNESS = 3F;
+	/**
+	 * The hardness this block has.
+	 */
+	private static final float BLOCK_HARDNESS = 3F;
 
-    /**
-     * The resistance this block has.
-     */
-    private static final float                      RESISTANCE     = 1F;
+	/**
+	 * The resistance this block has.
+	 */
+	private static final float RESISTANCE = 1F;
 
-    /**
-     * base constructor
-     */
-    public AllBrickBlock()
-    {
-        super(Properties.of().mapColor(MapColor.STONE).strength(BLOCK_HARDNESS, RESISTANCE));
-    }
+	/**
+	 * base constructor
+	 * @param properties the block properties.
+	 */
+	public AllBrickBlock(final Properties properties) {
+		super(properties.mapColor(MapColor.STONE).strength(BLOCK_HARDNESS, RESISTANCE));
+	}
 
-    @Override
-    public @NotNull List<IMateriallyTexturedBlockComponent> getComponents()
-    {
-        return COMPONENTS;
-    }
+	@Override
+	public @NotNull List<IMateriallyTexturedBlockComponent> getComponents() {
+		return COMPONENTS;
+	}
 
-    @Nullable
-    @Override
-    public BlockEntity newBlockEntity(final @NotNull BlockPos blockPos, final @NotNull BlockState blockState)
-    {
-        return new MateriallyTexturedBlockEntity(blockPos, blockState);
-    }
+	@Nullable
+	@Override
+	public BlockEntity newBlockEntity(final @NotNull BlockPos blockPos, final @NotNull BlockState blockState) {
+		return new MateriallyTexturedBlockEntity(blockPos, blockState);
+	}
 
-    @Override
-    public void resetCache()
-    {
-        fillItemGroupCache.clear();
-    }
+	public void resetCache() {
+		fillItemGroupCache.clear();
+	}
 
-    @Override
-    public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final LevelReader world, final BlockPos pos, final Player player)
-    {
-        return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos), world.registryAccess());
-    }
+	@SuppressWarnings("deprecation")
+	@Override
+	public @NonNull ItemStack getCloneItemStack(final LevelReader level, final @NonNull BlockPos pos, final @NonNull BlockState state, final boolean includeData) {
+		return BlockUtils.getMaterializedItemStack(level.getBlockEntity(pos), level.registryAccess());
+	}
 
-    @Override
-    public void buildRecipes(final RecipeOutput recipeOutput)
-    {
-        new ArchitectsCutterRecipeBuilder(this, RecipeCategory.BUILDING_BLOCKS).count(COMPONENTS.size()).save(recipeOutput);
-    }
+	@Override
+	public void buildRecipes(final RecipeOutput recipeOutput) {
+		new ArchitectsCutterRecipeBuilder(this, RecipeCategory.BUILDING_BLOCKS).count(COMPONENTS.size()).save(recipeOutput);
+	}
 
-    @Override
-    public float getExplosionResistance(BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {
-        return getDOExplosionResistance(super::getExplosionResistance, state, level, pos, explosion);
-    }
+	@Override
+	public float getExplosionResistance(@NonNull BlockState state, @NonNull BlockGetter level, @NonNull BlockPos pos, @NonNull Explosion explosion) {
+		return getDOExplosionResistance(super::getExplosionResistance, state, level, pos, explosion);
+	}
 
-    @Override
-    public float getDestroyProgress(@NotNull BlockState state, @NotNull Player player, @NotNull BlockGetter level, @NotNull BlockPos pos) {
-        return getDODestroyProgress(super::getDestroyProgress, state, player, level, pos);
-    }
+	@Override
+	public float getDestroyProgress(@NotNull BlockState state, @NotNull Player player, @NotNull BlockGetter level, @NotNull BlockPos pos) {
+		return getDODestroyProgress(super::getDestroyProgress, state, player, level, pos);
+	}
 
-    @Override
-    public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
-        return getDOSoundType(super::getSoundType, state, level, pos, entity);
-    }
+	@Override
+	public @NonNull SoundType getSoundType(@NonNull BlockState state, @NonNull LevelReader level, @NonNull BlockPos pos, @Nullable Entity entity) {
+		return getDOSoundType(super::getSoundType, state, level, pos, entity);
+	}
 
-    @Override
-    public IMateriallyTexturedBlockComponent getMainComponent() {
-        return COMPONENTS.get(0);
-    }
+	@Override
+	public IMateriallyTexturedBlockComponent getMainComponent() {
+		return COMPONENTS.get(0);
+	}
 
-    @Override
-    public void fillItemCategory(final @NotNull NonNullList<ItemStack> items) {
-        fillDOItemCategory(this, items, fillItemGroupCache);
-    }
+	@Override
+	public void fillItemCategory(final @NotNull NonNullList<ItemStack> items) {
+		fillDOItemCategory(this, items, fillItemGroupCache);
+	}
 }

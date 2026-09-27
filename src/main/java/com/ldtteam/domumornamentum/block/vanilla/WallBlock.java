@@ -1,7 +1,6 @@
 package com.ldtteam.domumornamentum.block.vanilla;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.ldtteam.domumornamentum.block.AbstractBlockWall;
 import com.ldtteam.domumornamentum.block.ICachedItemGroupBlock;
@@ -31,9 +30,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.WallSide;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 
@@ -45,18 +44,14 @@ public class WallBlock extends AbstractBlockWall<WallBlock> implements IMaterial
                                                                                .add(new SimpleRetexturableComponent(Identifier.withDefaultNamespace("block/oak_planks"), ModTags.WALL_MATERIALS, OAK_PLANKS))
                                                                                .build();
 
-    public static ImmutableMap<Direction, EnumProperty<WallSide>> PROPERTIES = ImmutableMap.of(
-            Direction.NORTH, WallBlock.NORTH_WALL,
-            Direction.EAST, WallBlock.EAST_WALL,
-            Direction.SOUTH, WallBlock.SOUTH_WALL,
-            Direction.WEST, WallBlock.WEST_WALL
-    );
+    // 26.1: vanilla WallBlock renamed NORTH_WALL/EAST_WALL/... to NORTH/EAST/... and provides PROPERTY_BY_DIRECTION
+    public static final java.util.Map<Direction, EnumProperty<WallSide>> PROPERTIES = PROPERTY_BY_DIRECTION;
 
     private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
 
-    public WallBlock()
+    public WallBlock(final Properties properties)
     {
-        super(Properties.of().mapColor(MapColor.WOOD).strength(2.0F, 3.0F));
+        super(properties.mapColor(MapColor.WOOD).strength(2.0F, 3.0F));
     }
     @Override
     public @NotNull List<IMateriallyTexturedBlockComponent> getComponents()
@@ -70,26 +65,25 @@ public class WallBlock extends AbstractBlockWall<WallBlock> implements IMaterial
         return new MateriallyTexturedBlockEntity(blockPos, blockState);
     }
 
-    @Override
-    public void resetCache()
+        public void resetCache()
     {
         fillItemGroupCache.clear();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final LevelReader world, final BlockPos pos, final Player player)
+    public @NonNull ItemStack getCloneItemStack(final LevelReader level, final @NonNull BlockPos pos, final @NonNull BlockState state, final boolean includeData)
     {
-        return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos), world.registryAccess());
+        return BlockUtils.getMaterializedItemStack(level.getBlockEntity(pos), level.registryAccess());
     }
 
-    @Override
-    public void buildRecipes(final RecipeOutput recipeOutput)
+        public void buildRecipes(final RecipeOutput recipeOutput)
     {
         new ArchitectsCutterRecipeBuilder(this, RecipeCategory.DECORATIONS).save(recipeOutput);
     }
 
     @Override
-    public float getExplosionResistance(BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {
+    public float getExplosionResistance(@NonNull BlockState state, @NonNull BlockGetter level, @NonNull BlockPos pos, @NonNull Explosion explosion) {
         return getDOExplosionResistance(super::getExplosionResistance, state, level, pos, explosion);
     }
 
@@ -99,7 +93,7 @@ public class WallBlock extends AbstractBlockWall<WallBlock> implements IMaterial
     }
 
     @Override
-    public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
+    public @NonNull SoundType getSoundType(@NonNull BlockState state, @NonNull LevelReader level, @NonNull BlockPos pos, @Nullable Entity entity) {
         return getDOSoundType(super::getSoundType, state, level, pos, entity);
     }
 

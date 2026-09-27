@@ -1,13 +1,13 @@
 package com.ldtteam.domumornamentum.datagen.frames.timber;
 
-import com.ldtteam.data.LanguageProvider;
 import com.ldtteam.domumornamentum.block.types.TimberFrameType;
+import com.ldtteam.domumornamentum.datagen.LanguageProviderWrapper;
 import com.ldtteam.domumornamentum.util.Constants;
 
-public class TimberFramesLangEntryProvider implements LanguageProvider.SubProvider {
+public class TimberFramesLangEntryProvider implements LanguageProviderWrapper.SubProvider {
 
     @Override
-    public void addTranslations(LanguageProvider.LanguageAcceptor acceptor) {
+    public void addTranslations(LanguageProviderWrapper.LanguageAcceptor acceptor) {
         for (final TimberFrameType type : TimberFrameType.values())
         {
             final String reference = Constants.MOD_ID + ".timber.frame.type." + type.getName();

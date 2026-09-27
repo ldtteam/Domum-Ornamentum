@@ -1,13 +1,13 @@
 package com.ldtteam.domumornamentum.datagen.panel;
 
-import com.ldtteam.data.LanguageProvider;
 import com.ldtteam.domumornamentum.block.types.TrapdoorType;
+import com.ldtteam.domumornamentum.datagen.LanguageProviderWrapper;
 import com.ldtteam.domumornamentum.util.Constants;
 
-public class PanelLangEntryProvider implements LanguageProvider.SubProvider
+public class PanelLangEntryProvider implements LanguageProviderWrapper.SubProvider
 {
     @Override
-    public void addTranslations(LanguageProvider.LanguageAcceptor acceptor) {
+    public void addTranslations(LanguageProviderWrapper.LanguageAcceptor acceptor) {
         acceptor.add(Constants.MOD_ID + ".panel.name.format", "%s Panel");
         acceptor.add(Constants.MOD_ID + ".panel.type.format", "Variant: %s");
         acceptor.add(Constants.MOD_ID + ".panel.block.format", "Material: %s");

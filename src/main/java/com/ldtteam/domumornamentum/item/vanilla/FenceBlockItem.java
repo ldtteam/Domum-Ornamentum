@@ -1,9 +1,12 @@
 package com.ldtteam.domumornamentum.item.vanilla;
 
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
+import java.util.function.Consumer;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.component.TooltipDisplay;
 import com.ldtteam.domumornamentum.block.vanilla.FenceBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
-import com.ldtteam.domumornamentum.item.BlockItemWithClientBePlacement;
+import com.ldtteam.domumornamentum.item.SelfUpgradingBlockItem;
 import com.ldtteam.domumornamentum.item.interfaces.IDoItem;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.Constants;
@@ -15,10 +18,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
-import java.util.List;
-
-public class FenceBlockItem extends BlockItemWithClientBePlacement implements IDoItem
+public class FenceBlockItem extends SelfUpgradingBlockItem implements IDoItem
 {
     private final FenceBlock fenceBlock;
 
@@ -29,22 +31,23 @@ public class FenceBlockItem extends BlockItemWithClientBePlacement implements ID
     }
 
     @Override
-    public Component getName(final ItemStack stack)
+    public @NonNull Component getName(final @NonNull ItemStack stack)
     {
         final MaterialTextureData textureData = MaterialTextureData.readFromItemStack(stack);
 
         final IMateriallyTexturedBlockComponent coverComponent = fenceBlock.getComponents().get(0);
-        final Block centerBlock = textureData.getTexturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
+        final Block centerBlock = textureData.components().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
         final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
 
         return Component.translatable(Constants.MOD_ID + ".fence.name.format", centerBlockName);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    public void appendHoverText(@NotNull final ItemStack stack, final TooltipContext tooltipContext, @NotNull final List<Component> tooltip, @NotNull final TooltipFlag flagIn)
+    public void appendHoverText(@NotNull final ItemStack stack, final Item.@NonNull TooltipContext tooltipContext, final @NonNull TooltipDisplay display, final @NonNull Consumer<Component> tooltip, @NotNull final TooltipFlag flagIn)
     {
-        super.appendHoverText(stack, tooltipContext, tooltip, flagIn);
-        tooltip.add(Component.translatable(Constants.MOD_ID + ".origin.tooltip"));
+        super.appendHoverText(stack, tooltipContext, display, tooltip, flagIn);
+    tooltip.accept(Component.translatable(Constants.MOD_ID + ".origin.tooltip"));
 
         MaterialTextureData textureData = MaterialTextureData.readFromItemStack(stack);
         if (textureData.isEmpty()) {
@@ -52,8 +55,8 @@ public class FenceBlockItem extends BlockItemWithClientBePlacement implements ID
         }
 
         final IMateriallyTexturedBlockComponent component = fenceBlock.getComponents().get(0);
-        final Block block = textureData.getTexturedComponents().getOrDefault(component.getId(), component.getDefault());
-        tooltip.add(Component.translatable(Constants.MOD_ID + ".desc.onlyone", Component.translatable(Constants.MOD_ID + ".desc.material", BlockUtils.getHoverName(block))));
+        final Block block = textureData.components().getOrDefault(component.getId(), component.getDefault());
+    tooltip.accept(Component.translatable(Constants.MOD_ID + ".desc.onlyone", Component.translatable(Constants.MOD_ID + ".desc.material", BlockUtils.getHoverName(block))));
     }
 
     @Override

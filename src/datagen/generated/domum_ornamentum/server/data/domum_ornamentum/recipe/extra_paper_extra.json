@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "X": "minecraft:paper",
+    "Z": "minecraft:paper"
+  },
+  "pattern": [
+    "X X",
+    " Z ",
+    "X X"
+  ],
+  "result": {
+    "count": 4,
+    "id": "domum_ornamentum:paper_extra"
+  }
+}

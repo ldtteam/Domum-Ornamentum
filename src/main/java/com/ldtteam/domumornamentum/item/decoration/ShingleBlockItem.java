@@ -1,10 +1,13 @@
 package com.ldtteam.domumornamentum.item.decoration;
 
 import com.google.common.collect.ImmutableList;
+import java.util.function.Consumer;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.component.TooltipDisplay;
 import com.ldtteam.domumornamentum.block.IMateriallyTexturedBlockComponent;
 import com.ldtteam.domumornamentum.block.decorative.ShingleBlock;
 import com.ldtteam.domumornamentum.client.model.data.MaterialTextureData;
-import com.ldtteam.domumornamentum.item.BlockItemWithClientBePlacement;
+import com.ldtteam.domumornamentum.item.SelfUpgradingBlockItem;
 import com.ldtteam.domumornamentum.item.interfaces.IDoItem;
 import com.ldtteam.domumornamentum.util.BlockUtils;
 import com.ldtteam.domumornamentum.util.Constants;
@@ -16,10 +19,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.network.chat.Component;
 
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 
-public class ShingleBlockItem extends BlockItemWithClientBePlacement implements IDoItem
+public class ShingleBlockItem extends SelfUpgradingBlockItem implements IDoItem
 {
     private final ShingleBlock shingleBlock;
 
@@ -30,22 +34,23 @@ public class ShingleBlockItem extends BlockItemWithClientBePlacement implements 
     }
 
     @Override
-    public @NotNull Component getName(final ItemStack stack)
+    public @NotNull Component getName(final @NonNull ItemStack stack)
     {
         final MaterialTextureData textureData = MaterialTextureData.readFromItemStack(stack);
 
         final IMateriallyTexturedBlockComponent coverComponent = shingleBlock.getComponents().get(0);
-        final Block centerBlock = textureData.getTexturedComponents().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
+        final Block centerBlock = textureData.components().getOrDefault(coverComponent.getId(), coverComponent.getDefault());
         final Component centerBlockName = BlockUtils.getHoverName(centerBlock);
 
         return Component.translatable(Constants.MOD_ID + ".shingle.name.format." + stack.getItem().getDescriptionId(), centerBlockName);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    public void appendHoverText(final ItemStack stack, final TooltipContext tooltipContext, final List<Component> tooltip, final TooltipFlag flagIn)
+    public void appendHoverText(final @NonNull ItemStack stack, final Item.@NonNull TooltipContext tooltipContext, final @NonNull TooltipDisplay display, final @NonNull Consumer<Component> tooltip, final @NonNull TooltipFlag flagIn)
     {
-        super.appendHoverText(stack, tooltipContext, tooltip, flagIn);
-        tooltip.add(Component.translatable(Constants.MOD_ID + ".origin.tooltip"));
+        super.appendHoverText(stack, tooltipContext, display, tooltip, flagIn);
+    tooltip.accept(Component.translatable(Constants.MOD_ID + ".origin.tooltip"));
 
         MaterialTextureData textureData = MaterialTextureData.readFromItemStack(stack);
         if (textureData.isEmpty()) {
@@ -53,14 +58,14 @@ public class ShingleBlockItem extends BlockItemWithClientBePlacement implements 
         }
 
         final IMateriallyTexturedBlockComponent mainComponent = shingleBlock.getComponents().get(0);
-        final Block mainBlock = textureData.getTexturedComponents().getOrDefault(mainComponent.getId(), mainComponent.getDefault());
+        final Block mainBlock = textureData.components().getOrDefault(mainComponent.getId(), mainComponent.getDefault());
         final Component mainBlockName = BlockUtils.getHoverName(mainBlock);
-        tooltip.add(Component.translatable(Constants.MOD_ID + ".desc.shingle", Component.translatable(Constants.MOD_ID + ".desc.material", mainBlockName)));
+    tooltip.accept(Component.translatable(Constants.MOD_ID + ".desc.shingle", Component.translatable(Constants.MOD_ID + ".desc.material", mainBlockName)));
 
         final IMateriallyTexturedBlockComponent supportComponent = shingleBlock.getComponents().get(1);
-        final Block supportBlock = textureData.getTexturedComponents().getOrDefault(supportComponent.getId(), supportComponent.getDefault());
+        final Block supportBlock = textureData.components().getOrDefault(supportComponent.getId(), supportComponent.getDefault());
         final Component supportBlockName = BlockUtils.getHoverName(supportBlock);
-        tooltip.add(Component.translatable(Constants.MOD_ID + ".desc.support", Component.translatable(Constants.MOD_ID + ".desc.material", supportBlockName)));
+    tooltip.accept(Component.translatable(Constants.MOD_ID + ".desc.support", Component.translatable(Constants.MOD_ID + ".desc.material", supportBlockName)));
     }
 
     @Override

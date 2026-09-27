@@ -13,7 +13,6 @@ import com.ldtteam.domumornamentum.recipe.ModRecipeTypes;
 import com.ldtteam.domumornamentum.recipe.architectscutter.ArchitectsCutterRecipe;
 import com.ldtteam.domumornamentum.recipe.architectscutter.ArchitectsCutterRecipeInput;
 import com.ldtteam.domumornamentum.util.Constants;
-import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.builder.ITooltipBuilder;
@@ -24,11 +23,11 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredientRenderer;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
-import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import mezz.jei.api.recipe.types.IRecipeType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -43,17 +42,38 @@ import net.minecraft.world.level.block.Block;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.*;
-import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import static com.ldtteam.domumornamentum.util.Constants.MOD_ID;
-import static com.ldtteam.domumornamentum.util.GuiConstants.*;
+import static com.ldtteam.domumornamentum.util.GuiConstants.CUTTER_BG_W;
+import static com.ldtteam.domumornamentum.util.GuiConstants.CUTTER_INPUT_SPACING;
+import static com.ldtteam.domumornamentum.util.GuiConstants.CUTTER_INPUT_X;
+import static com.ldtteam.domumornamentum.util.GuiConstants.CUTTER_INPUT_Y;
+import static com.ldtteam.domumornamentum.util.GuiConstants.CUTTER_OUTPUT_X;
+import static com.ldtteam.domumornamentum.util.GuiConstants.CUTTER_OUTPUT_Y;
+import static com.ldtteam.domumornamentum.util.GuiConstants.CUTTER_RECIPE_H;
+import static com.ldtteam.domumornamentum.util.GuiConstants.CUTTER_RECIPE_SPACING;
+import static com.ldtteam.domumornamentum.util.GuiConstants.CUTTER_RECIPE_U_NORMAL;
+import static com.ldtteam.domumornamentum.util.GuiConstants.CUTTER_RECIPE_V;
+import static com.ldtteam.domumornamentum.util.GuiConstants.CUTTER_RECIPE_W;
+import static com.ldtteam.domumornamentum.util.GuiConstants.CUTTER_RECIPE_X;
+import static com.ldtteam.domumornamentum.util.GuiConstants.CUTTER_RECIPE_Y;
+import static com.ldtteam.domumornamentum.util.GuiConstants.CUTTER_SLIDER_H;
+import static com.ldtteam.domumornamentum.util.GuiConstants.CUTTER_SLIDER_U_DISABLED;
+import static com.ldtteam.domumornamentum.util.GuiConstants.CUTTER_SLIDER_V;
+import static com.ldtteam.domumornamentum.util.GuiConstants.CUTTER_SLIDER_W;
+import static com.ldtteam.domumornamentum.util.GuiConstants.CUTTER_SLIDER_X;
+import static com.ldtteam.domumornamentum.util.GuiConstants.CUTTER_SLOT_H;
+import static com.ldtteam.domumornamentum.util.GuiConstants.CUTTER_SLOT_U;
+import static com.ldtteam.domumornamentum.util.GuiConstants.CUTTER_SLOT_V;
+import static com.ldtteam.domumornamentum.util.GuiConstants.CUTTER_SLOT_W;
 
-@OnlyIn(Dist.CLIENT)
 public class ArchitectsCutterCategory implements IRecipeCategory<RecipeHolder<ArchitectsCutterRecipe>>
 {
-    public static final RecipeType<RecipeHolder<ArchitectsCutterRecipe>> TYPE = RecipeType.createFromVanilla(ModRecipeTypes.ARCHITECTS_CUTTER.get());
+    public static final IRecipeType<RecipeHolder<ArchitectsCutterRecipe>> TYPE = IRecipeType.create(ModRecipeTypes.ARCHITECTS_CUTTER.get());
 
     /**
      * Horizontal offset between the real cutter display and the JEI display, since we only show a portion.
@@ -63,6 +83,14 @@ public class ArchitectsCutterCategory implements IRecipeCategory<RecipeHolder<Ar
      * Vertical offset between the real cutter display and the JEI display, since we only show a portion.
      */
     private static final int JEI_OFFSET_Y = 14;
+    /**
+     * Height of the JEI recipe display.
+     */
+    private static final int JEI_HEIGHT = 110;
+    /**
+     * Width of the JEI recipe display.
+     */
+    private static final int JEI_WIDTH = CUTTER_BG_W - JEI_OFFSET_X - 9;
 
     private final JEIPlugin plugin;
     private final IDrawable background;
@@ -76,7 +104,7 @@ public class ArchitectsCutterCategory implements IRecipeCategory<RecipeHolder<Ar
     {
         this.plugin = plugin;
         final Identifier texture = Constants.resLocDO("textures/gui/container/architectscutter2.png");
-        this.background = guiHelper.createDrawable(texture, JEI_OFFSET_X, JEI_OFFSET_Y, CUTTER_BG_W - JEI_OFFSET_X - 9, 88);
+        this.background = guiHelper.createDrawable(texture, JEI_OFFSET_X, JEI_OFFSET_Y, CUTTER_BG_W - JEI_OFFSET_X - 9, JEI_HEIGHT);
         this.thumb = guiHelper.createDrawable(texture, CUTTER_SLIDER_U_DISABLED, CUTTER_SLIDER_V, CUTTER_SLIDER_W, CUTTER_SLIDER_H);
         this.slot = guiHelper.createDrawable(texture, CUTTER_SLOT_U, CUTTER_SLOT_V, CUTTER_SLOT_W, CUTTER_SLOT_H);
         this.button = guiHelper.createDrawable(texture, CUTTER_RECIPE_U_NORMAL, CUTTER_RECIPE_V, CUTTER_RECIPE_W, CUTTER_RECIPE_H);
@@ -96,7 +124,7 @@ public class ArchitectsCutterCategory implements IRecipeCategory<RecipeHolder<Ar
 
     @NotNull
     @Override
-    public RecipeType<RecipeHolder<ArchitectsCutterRecipe>> getRecipeType()
+    public IRecipeType<RecipeHolder<ArchitectsCutterRecipe>> getRecipeType()
     {
         return TYPE;
     }
@@ -110,16 +138,21 @@ public class ArchitectsCutterCategory implements IRecipeCategory<RecipeHolder<Ar
 
     @NotNull
     @Override
-    public IDrawable getBackground()
-    {
-        return this.background;
-    }
-
-    @NotNull
-    @Override
     public IDrawable getIcon()
     {
         return this.icon;
+    }
+
+    @Override
+    public int getWidth()
+    {
+        return JEI_WIDTH;
+    }
+
+    @Override
+    public int getHeight()
+    {
+        return JEI_HEIGHT;
     }
 
     @Override
@@ -135,21 +168,20 @@ public class ArchitectsCutterCategory implements IRecipeCategory<RecipeHolder<Ar
 
         final Collection<IMateriallyTexturedBlockComponent> components = materiallyTexturedBlock.getComponents();
         final List<List<ItemStack>> inputs = components.stream()
-                .map(component -> BuiltInRegistries.BLOCK.getTag(component.getValidSkins()).orElseThrow().stream()
-                        .map(Holder::value)
-                        .map(ItemStack::new)
-                        .collect(Collectors.collectingAndThen(
-                                Collectors.toCollection(ArrayList::new),
-                                list ->
-                                {
-                                    Collections.shuffle(list);
-                                    return list;
-                                })))
-                .collect(Collectors.toList());
+                .map(component -> {
+                    final List<ItemStack> candidateStacks = new ArrayList<>(
+                        StreamSupport.stream(BuiltInRegistries.BLOCK.getTagOrEmpty(component.getValidSkins()).spliterator(), false)
+                            .map(Holder::value)
+                            .map(ItemStack::new)
+                            .toList());
+                    Collections.shuffle(candidateStacks);
+                    return candidateStacks;
+                })
+                .toList();
 
         final List<ItemStack> defaultInputs = components.stream()
                 .map(component -> new ItemStack(component.getDefault()))
-                .collect(Collectors.toList());
+                .toList();
 
         final DisplayData displayData = cachedDisplayData.getUnchecked(recipe);
         final Container container = displayData.getIngredientContainer();
@@ -159,21 +191,12 @@ public class ArchitectsCutterCategory implements IRecipeCategory<RecipeHolder<Ar
             container.setItem(i, defaultInputs.get(i));
         }
 
-        ItemStack output = recipe.assemble(new ArchitectsCutterRecipeInput(container), null);
-        if (output.isEmpty())   // wat?
-        {
-            output = recipe.getResultItem(null);
-            if (output.isEmpty())   // WAT?
-            {
-                output = new ItemStack(generatedBlock);
-            }
-            output.setCount(Math.max(components.size(), recipe.getCount()));
-        }
-        displayData.setOutput(output);
+        final ItemStack output = recipe.assemble(new ArchitectsCutterRecipeInput(container));
+        displayData.setOutput(output.isEmpty() ? new ItemStack(generatedBlock) : output);
 
         builder.addSlot(RecipeIngredientRole.OUTPUT, CUTTER_OUTPUT_X - JEI_OFFSET_X, CUTTER_OUTPUT_Y - JEI_OFFSET_Y)
                 .setCustomRenderer(VanillaTypes.ITEM_STACK, new OutputRenderer(plugin, displayData))
-                .addItemStack(output);
+                .add(output);
 
         for (int slot = 0; slot < IMateriallyTexturedBlockManager.getInstance().getMaxTexturableComponentCount(); ++slot)
         {
@@ -185,20 +208,19 @@ public class ArchitectsCutterCategory implements IRecipeCategory<RecipeHolder<Ar
         }
     }
 
-    @NotNull
     @Override
-    public List<Component> getTooltipStrings(@NotNull final RecipeHolder<ArchitectsCutterRecipe> holder,
-                                             @NotNull final IRecipeSlotsView recipeSlotsView,
-                                             final double mouseX, final double mouseY)
+    public void getTooltip(@NotNull final ITooltipBuilder tooltip,
+                           @NotNull final RecipeHolder<ArchitectsCutterRecipe> holder,
+                           @NotNull final IRecipeSlotsView recipeSlotsView,
+                           final double mouseX, final double mouseY)
     {
         final ArchitectsCutterRecipe recipe = holder.value();
-        final List<Component> tooltips = new ArrayList<>();
 
         final Rect2i groupButton = new Rect2i(CUTTER_RECIPE_X - JEI_OFFSET_X, CUTTER_RECIPE_Y + 1 - JEI_OFFSET_Y, this.button.getWidth(), this.button.getHeight());
         if (groupButton.contains((int) mouseX, (int) mouseY))
         {
             final DisplayData displayData = cachedDisplayData.getUnchecked(recipe);
-            tooltips.add(Component.translatable("cuttergroup." +
+            tooltip.add(Component.translatable("cuttergroup." +
                     displayData.getGroupId().getNamespace() + "." + displayData.getGroupId().getPath()));
         }
 
@@ -206,39 +228,35 @@ public class ArchitectsCutterCategory implements IRecipeCategory<RecipeHolder<Ar
         if (recipeButton.contains((int) mouseX, (int) mouseY))
         {
             final DisplayData displayData = cachedDisplayData.getUnchecked(recipe);
-            tooltips.add(displayData.getOutput().getHoverName());
+            tooltip.add(displayData.getOutput().getHoverName());
         }
-
-        return tooltips;
     }
 
     @Override
     public void draw(@NotNull final RecipeHolder<ArchitectsCutterRecipe> holder,
                      @NotNull final IRecipeSlotsView recipeSlotsView,
-                     @NotNull final GuiGraphics stack,
+                     @NotNull final GuiGraphicsExtractor guiGraphics,
                      final double mouseX, final double mouseY)
     {
         final ArchitectsCutterRecipe recipe = holder.value();
         final DisplayData displayData = cachedDisplayData.getUnchecked(recipe);
         displayData.reassembleIfNeeded(recipeSlotsView.getSlotViews(RecipeIngredientRole.INPUT));
 
-        this.thumb.draw(stack, CUTTER_SLIDER_X - JEI_OFFSET_X, CUTTER_RECIPE_Y + 1 - JEI_OFFSET_Y);
-        this.thumb.draw(stack, CUTTER_SLIDER_X - JEI_OFFSET_X, CUTTER_RECIPE_Y + 1 + CUTTER_RECIPE_SPACING - JEI_OFFSET_Y);
+        this.background.draw(guiGraphics);
+        this.thumb.draw(guiGraphics, CUTTER_SLIDER_X - JEI_OFFSET_X, CUTTER_RECIPE_Y + 1 - JEI_OFFSET_Y);
+        this.thumb.draw(guiGraphics, CUTTER_SLIDER_X - JEI_OFFSET_X, CUTTER_RECIPE_Y + 1 + CUTTER_RECIPE_SPACING - JEI_OFFSET_Y);
 
-        drawButton(stack, CUTTER_RECIPE_X - JEI_OFFSET_X, CUTTER_RECIPE_Y + 1 - JEI_OFFSET_Y, displayData.getGroup());
-        drawButton(stack, CUTTER_RECIPE_X - JEI_OFFSET_X, CUTTER_RECIPE_Y + 1 - JEI_OFFSET_Y + CUTTER_RECIPE_SPACING, displayData.getOutput());
+        drawButton(guiGraphics, CUTTER_RECIPE_X - JEI_OFFSET_X, CUTTER_RECIPE_Y + 1 - JEI_OFFSET_Y, displayData.getGroup());
+        drawButton(guiGraphics, CUTTER_RECIPE_X - JEI_OFFSET_X, CUTTER_RECIPE_Y + 1 - JEI_OFFSET_Y + CUTTER_RECIPE_SPACING, displayData.getOutput());
     }
 
-    private void drawButton(@NotNull final GuiGraphics stack, final int x, final int y, @NotNull final ItemStack item)
+    private void drawButton(@NotNull final GuiGraphicsExtractor guiGraphics, final int x, final int y, @NotNull final ItemStack item)
     {
-        this.button.draw(stack, x, y);
-        final PoseStack pose = stack.pose();
-        pose.pushPose();
-        pose.translate(x, y + 1, 0);
+        this.button.draw(guiGraphics, x, y);
         final ItemStack buttonStack = item.copy();
         buttonStack.setCount(1);
-        this.plugin.getIngredientManager().getIngredientRenderer(VanillaTypes.ITEM_STACK).render(stack, buttonStack);
-        pose.popPose();
+        this.plugin.getIngredientManager().getIngredientRenderer(VanillaTypes.ITEM_STACK)
+                .render(guiGraphics, buttonStack, x, y + 1);
     }
 
     private static class OutputRenderer implements IIngredientRenderer<ItemStack>
@@ -265,15 +283,14 @@ public class ArchitectsCutterCategory implements IRecipeCategory<RecipeHolder<Ar
         }
 
         @Override
-        public void render(@NotNull final GuiGraphics stack,
+        public void render(@NotNull final GuiGraphicsExtractor guiGraphics,
                            @NotNull final ItemStack ingredient)
         {
-            getRenderer().render(stack, displayData.getOutput());
+            getRenderer().render(guiGraphics, displayData.getOutput());
         }
 
         @NotNull
         @Override
-        @SuppressWarnings("removal")
         public List<Component> getTooltip(@NotNull final ItemStack ingredient,
                                           @NotNull final TooltipFlag tooltipFlag)
         {
@@ -281,9 +298,9 @@ public class ArchitectsCutterCategory implements IRecipeCategory<RecipeHolder<Ar
         }
 
         @Override
-        public void getTooltip(final ITooltipBuilder tooltip, final ItemStack ingredient, final TooltipFlag tooltipFlag)
+        public void getTooltip(final @NonNull ITooltipBuilder tooltip, final @NonNull ItemStack ingredient, final @NonNull TooltipFlag tooltipFlag)
         {
-            getRenderer().getTooltip(tooltip, ingredient, tooltipFlag);
+            getRenderer().getTooltip(tooltip, displayData.getOutput(), tooltipFlag);
         }
 
         @NotNull
@@ -385,7 +402,7 @@ public class ArchitectsCutterCategory implements IRecipeCategory<RecipeHolder<Ar
 
             if (!same)
             {
-                this.output = recipe.assemble(new ArchitectsCutterRecipeInput(this.ingredientContainer), null);
+                this.output = recipe.assemble(new ArchitectsCutterRecipeInput(this.ingredientContainer));
             }
         }
     }

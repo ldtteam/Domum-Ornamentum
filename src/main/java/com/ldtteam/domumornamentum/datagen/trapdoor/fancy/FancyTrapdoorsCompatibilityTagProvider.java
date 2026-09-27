@@ -1,40 +1,26 @@
 package com.ldtteam.domumornamentum.datagen.trapdoor.fancy;
 
 import com.ldtteam.domumornamentum.block.ModBlocks;
-import com.ldtteam.domumornamentum.util.Constants;
+import com.ldtteam.domumornamentum.datagen.global.BlockTagSection;
+import com.ldtteam.domumornamentum.datagen.global.ModBlockTagsProvider;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
-import net.neoforged.neoforge.common.data.BlockTagsProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.concurrent.CompletableFuture;
-
-public class FancyTrapdoorsCompatibilityTagProvider extends BlockTagsProvider
+public class FancyTrapdoorsCompatibilityTagProvider implements BlockTagSection
 {
-    public FancyTrapdoorsCompatibilityTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, lookupProvider, Constants.MOD_ID, existingFileHelper);
-    }
 
     @Override
-    protected void addTags(HolderLookup.@NotNull Provider provider) {
-        this.tag(BlockTags.TRAPDOORS)
+    public void addTags(ModBlockTagsProvider host, HolderLookup.@NotNull Provider provider) {
+        host.tag(BlockTags.TRAPDOORS)
           .add(
             ModBlocks.getInstance().getFancyTrapdoor()
           );
 
-        this.tag(BlockTags.WOODEN_TRAPDOORS)
+        host.tag(BlockTags.WOODEN_TRAPDOORS)
           .add(
             ModBlocks.getInstance().getFancyTrapdoor()
           );
     }
 
-    @Override
-    @NotNull
-    public String getName()
-    {
-        return "FancyTrapdoor Compatibility Tag Provider";
-    }
 }

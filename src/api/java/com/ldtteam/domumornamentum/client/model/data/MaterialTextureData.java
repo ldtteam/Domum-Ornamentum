@@ -14,7 +14,6 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,20 +21,25 @@ import java.util.Objects;
 import java.util.function.IntFunction;
 import java.util.function.UnaryOperator;
 
-public record MaterialTextureData(Map<Identifier, Block> getTexturedComponents)
+public record MaterialTextureData(Map<Identifier, Block> components)
 {
     public static final MaterialTextureData EMPTY = new MaterialTextureData(Map.of());
 
     public static final Codec<MaterialTextureData> CODEC =
         Codec.unboundedMap(Identifier.CODEC, BuiltInRegistries.BLOCK.byNameCodec())
-            .xmap(MaterialTextureData::fromCodec, MaterialTextureData::getTexturedComponents);
+            .xmap(MaterialTextureData::fromCodec, MaterialTextureData::components);
 
     public static final StreamCodec<RegistryFriendlyByteBuf, MaterialTextureData> STREAM_CODEC =
         ByteBufCodecs
             .map((IntFunction<Map<Identifier, Block>>) HashMap::new,
                 Identifier.STREAM_CODEC,
                 ByteBufCodecs.registry(Registries.BLOCK))
-            .map(MaterialTextureData::fromCodec, MaterialTextureData::getTexturedComponents);
+            .map(MaterialTextureData::fromCodec, MaterialTextureData::components);
+
+    public MaterialTextureData(final Map<Identifier, Block> components)
+    {
+        this.components = ImmutableMap.copyOf(components);
+    }
 
     /**
      * Ensures emptiness and mutability
@@ -59,19 +63,19 @@ public record MaterialTextureData(Map<Identifier, Block> getTexturedComponents)
         int localComponentsPresent = 0;
         for (final IMateriallyTexturedBlockComponent component : block.getComponents())
         {
-            if (getTexturedComponents().containsKey(component.getId()))
+            if (components().containsKey(component.getId()))
             {
                 localComponentsPresent++;
             }
         }
 
-        if (localComponentsPresent == getTexturedComponents().size())
+        if (localComponentsPresent == components().size())
         {
             return this;
         }
 
         final Builder newData = new Builder();
-        block.getComponents().forEach(comp -> newData.setComponent(comp.getId(), getTexturedComponents().get(comp.getId())));
+        block.getComponents().forEach(comp -> newData.setComponent(comp.getId(), components().get(comp.getId())));
         return newData.build();
     }
 
@@ -86,7 +90,7 @@ public record MaterialTextureData(Map<Identifier, Block> getTexturedComponents)
         if (isEmpty())
             return nbt;
 
-        this.getTexturedComponents().forEach((key, value) -> nbt.putString(key.toString(), Objects.requireNonNull(BuiltInRegistries.BLOCK.getKey(value)).toString()));
+        this.components().forEach((key, value) -> nbt.putString(key.toString(), Objects.requireNonNull(BuiltInRegistries.BLOCK.getKey(value)).toString()));
 
         return nbt;
     }
@@ -101,17 +105,19 @@ public record MaterialTextureData(Map<Identifier, Block> getTexturedComponents)
             return EMPTY;
 
         final Builder newData = new Builder();
-        nbt.getAllKeys().forEach(key -> {
-            final Identifier name = Identifier.parse(nbt.getString(key));
-                newData.setComponent(Identifier.parse(key), BuiltInRegistries.BLOCK.get(name));
+        nbt.forEach((key, tag) -> {
+            final Identifier name = Identifier.parse(tag.asString().orElseThrow());
+            newData.setComponent(
+                Identifier.parse(key),
+                BuiltInRegistries.BLOCK.getValue(name)
+            );
         });
+
         return newData.build();
     }
 
     /**
      * Writes this textureData into given itemStack.
-     * 
-     * @see BlockEntity#saveToItem(ItemStack, net.minecraft.core.HolderLookup.Provider)
      */
     public void writeToItemStack(final ItemStack itemStack)
     {
@@ -146,10 +152,9 @@ public record MaterialTextureData(Map<Identifier, Block> getTexturedComponents)
     {
         private final ImmutableMap.Builder<Identifier, Block> texturedComponents = ImmutableMap.builder();
 
-        public Builder setComponent(final Identifier key, final Block value)
+        public void setComponent(final Identifier key, final Block value)
         {
             texturedComponents.put(key, value);
-            return this;
         }
 
         public MaterialTextureData build()

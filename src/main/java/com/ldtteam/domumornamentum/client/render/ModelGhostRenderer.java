@@ -1,25 +1,29 @@
 package com.ldtteam.domumornamentum.client.render;
 
 import com.ldtteam.domumornamentum.util.ItemStackUtils;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.ByteBufferBuilder;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.MeshData;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.QuadInstance;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.blaze3d.vertex.VertexFormat;
-import com.mojang.blaze3d.vertex.VertexFormat.Mode;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.geom.builders.UVPair;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.block.BlockAndTintGetter;
+import net.minecraft.client.renderer.block.BlockQuadOutput;
+import net.minecraft.client.renderer.block.ModelBlockRenderer;
+import net.minecraft.client.renderer.block.MovingBlockRenderState;
+import net.minecraft.client.renderer.block.BlockStateModelSet;
+import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
+import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.ModelManager;
+import net.minecraft.client.resources.model.geometry.BakedQuad;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.util.Mth;
+import net.minecraft.util.ARGB;
+import net.minecraft.util.LightCoordsUtil;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
@@ -30,46 +34,40 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.client.ChunkRenderTypeSet;
-import net.neoforged.neoforge.client.model.data.ModelData;
-import org.jetbrains.annotations.NotNull;
+import net.neoforged.neoforge.model.data.ModelData;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
-import org.lwjgl.system.MemoryStack;
 
-import java.nio.Buffer;
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
-public class ModelGhostRenderer {
-
+public class ModelGhostRenderer
+{
     private static final ModelGhostRenderer INSTANCE = new ModelGhostRenderer();
 
-    private static final ByteBufferBuilder BUFFER_BUILDER = new ByteBufferBuilder(2097152);
-    private static BufferBuilderTransparent BUFFER = null;
-
-    public static ModelGhostRenderer getInstance() {
+    public static ModelGhostRenderer getInstance()
+    {
         return INSTANCE;
     }
 
-    private ModelGhostRenderer() {
+    private ModelGhostRenderer()
+    {
     }
 
     public void renderGhost(
             final PoseStack poseStack,
+            final MultiBufferSource.BufferSource bufferSource,
             final ItemStack renderStack,
             final Vec3 targetedRenderPos,
             final BlockHitResult blockHitResult,
             final ClientLevel level,
-            final boolean ignoreDepth) {
+            final boolean ignoreDepth)
+    {
         poseStack.pushPose();
 
         // Offset/scale by an unnoticeable amount to prevent z-fighting
-        final Vec3 camera = Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
+        final Vec3 camera = Minecraft.getInstance().gameRenderer.getMainCamera().position();
         poseStack.translate(
                 targetedRenderPos.x - camera.x - 0.000125,
                 targetedRenderPos.y - camera.y + 0.000125,
@@ -79,85 +77,63 @@ public class ModelGhostRenderer {
 
         final Vector4f color = new Vector4f(0, 0, 1, 0.5f);
 
-        final List<ModelToRender> models;
-        ModelData modelData = null;
-        BlockState placementState;
-        final boolean renderItemMode;
-        if (renderStack.getItem() instanceof BlockItem blockItem) {
+        if (renderStack.getItem() instanceof BlockItem blockItem)
+        {
             final BlockPlaceContext context = new BlockPlaceContext(
                     Objects.requireNonNull(Minecraft.getInstance().player),
                     Objects.requireNonNull(ItemStackUtils.getHandWithMateriallyTexturedItemStackFromPlayer(Minecraft.getInstance().player)),
                     renderStack,
                     blockHitResult
             );
-            placementState = blockItem.getBlock().getStateForPlacement(context);
 
-            if (placementState == null) {
+            BlockState placementState = blockItem.getBlock().getStateForPlacement(context);
+            if (placementState == null)
+            {
                 poseStack.popPose();
                 return;
             }
 
             placementState = renderStack.getOrDefault(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY).apply(placementState);
 
-            final BakedModel model = Minecraft.getInstance().getBlockRenderer().getBlockModelShaper().getBlockModel(placementState);
-
-            if (blockItem.getBlock() instanceof EntityBlock entityBlock) {
+            ModelData modelData = ModelData.EMPTY;
+            if (blockItem.getBlock() instanceof EntityBlock entityBlock)
+            {
                 final BlockEntity blockEntity = entityBlock.newBlockEntity(context.getClickedPos(), placementState);
-                if (blockEntity != null) {
+                if (blockEntity != null)
+                {
                     blockEntity.applyComponentsFromItemStack(renderStack);
-
                     modelData = blockEntity.getModelData();
-                    modelData = model.getModelData(Objects.requireNonNull(Minecraft.getInstance().level), context.getClickedPos(), placementState, modelData);
                 }
             }
 
-            if (modelData == null) {
-                modelData = ModelData.EMPTY;
-            }
-
-            final RandomSource randomSource = RandomSource.create();
-            randomSource.setSeed(42L);
-            final ChunkRenderTypeSet renderTypeSet = model.getRenderTypes(placementState, randomSource, modelData);
-            models = renderTypeSet.asList().stream()
-                    .map(renderType -> new ModelToRender(model, renderType))
-                    .toList();
-            renderItemMode = false;
-        } else {
-            placementState = null;
-            final BakedModel model = Minecraft.getInstance().getItemRenderer().getModel(renderStack, null, null, 0);
-            final List<BakedModel> renderPasses = model.getRenderPasses(renderStack, true);
-            //TODO; Figure this out.
-            modelData = ModelData.EMPTY;
-            models = renderPasses.stream()
-                    .flatMap(pass -> pass.getRenderTypes(renderStack, true).stream().map(type -> new ModelToRender(pass, type)))
-                    .toList();
-            renderItemMode = true;
+            renderGhostForBlock(
+                    placementState,
+                    context.getClickedPos(),
+                    poseStack,
+                    bufferSource,
+                    modelData,
+                    color,
+                    false,
+                    ignoreDepth,
+                    level
+            );
         }
-
-        renderGhost(
-                placementState,
-                blockHitResult.getBlockPos(),
-                poseStack,
-                models,
-                modelData,
-                color,
-                false,
-                renderItemMode
-        );
+        // Non-BlockItem rendering skipped for now - requires significant API changes in 26.1
 
         poseStack.popPose();
     }
 
-    @SuppressWarnings("SameParameterValue")
-    private void renderGhost(
+    private void renderGhostForBlock(
             final BlockState state,
             final BlockPos pos,
             final PoseStack poseStack,
-            final List<ModelToRender> models,
+            final MultiBufferSource.BufferSource bufferSource,
             final ModelData modelData,
             final Vector4f color,
             final boolean renderColoredGhost,
-            final boolean renderItemMode) {
+            final boolean ignoreDepth,
+            final ClientLevel level)
+    {
         final RenderType renderType;
         if (renderColoredGhost)
         {
@@ -165,45 +141,76 @@ public class ModelGhostRenderer {
         }
         else
         {
-            renderType = ModRenderTypes.GHOST_BLOCK_PREVIEW.get();
+            renderType = ignoreDepth
+                    ? ModRenderTypes.GHOST_BLOCK_PREVIEW_GREATER.get()
+                    : ModRenderTypes.GHOST_BLOCK_PREVIEW.get();
         }
-        BUFFER = new BufferBuilderTransparent(BUFFER_BUILDER, renderType.mode(), renderType.format());
-        BUFFER.setAlphaPercentage(color.w());
+
         if (renderColoredGhost)
         {
-            for (ModelToRender model : models) {
-                renderColoredModelLists(
-                        state,
-                        model,
-                        modelData,
-                        poseStack,
-                        color
-                );
-            }
+            renderColoredGhost(poseStack, bufferSource, state, pos, modelData, color, renderType);
         }
         else
         {
-            for (ModelToRender model : models) {
-                renderFullModelLists(
-                        model,
-                        modelData,
-                        state,
-                        pos,
-                        poseStack,
-                        renderItemMode
-                );
-            }
+            renderTexturedGhost(poseStack, bufferSource, state, pos, modelData, level, renderType);
         }
-        final MeshData meshData = BUFFER.buildOrThrow();
-        // TODO: meshData.sortQuads(null, RenderSystem.getVertexSorting()); move to event bufferSource?
-        renderType.draw(meshData);
-        BUFFER = null;
+
+        bufferSource.endBatch(renderType);
     }
 
-    private static final float[] DIRECTIONAL_BRIGHTNESS = { 0.5f, 1f, 0.7f, 0.7f, 0.6f, 0.6f };
+    private void renderTexturedGhost(
+            final PoseStack poseStack,
+            final MultiBufferSource.BufferSource bufferSource,
+            final BlockState state,
+            final BlockPos pos,
+            final ModelData modelData,
+            final ClientLevel level,
+            final RenderType renderType)
+    {
+        // Create a BlockAndTintGetter that returns our placement state
+        final MovingBlockRenderState blockAndTintGetter = new MovingBlockRenderState();
+        blockAndTintGetter.blockPos = pos;
+        blockAndTintGetter.blockState = state;
+        blockAndTintGetter.biome = level.getBiome(pos);
+        blockAndTintGetter.cardinalLighting = level.cardinalLighting();
+        blockAndTintGetter.lightEngine = level.getLightEngine();
+        blockAndTintGetter.modelData = modelData;
 
-    private static Vector3f[] getShadedColors(final Vector4f color) {
-        // Directionally shade the color by the amount MC normally does
+        // Get the BlockStateModel for this block state
+        final ModelManager modelManager = Minecraft.getInstance().getModelManager();
+        final BlockStateModelSet blockStateModelSet = modelManager.getBlockStateModelSet();
+        final BlockStateModel model = blockStateModelSet.get(state);
+
+        // Create the output that submits to our custom render type
+        final VertexConsumer buffer = bufferSource.getBuffer(renderType);
+        final QuadInstance quadInstance = new QuadInstance();
+        quadInstance.setColor(ARGB.color(255, 255, 255, 255));
+        quadInstance.setLightCoords(LightCoordsUtil.FULL_BRIGHT);
+        quadInstance.setOverlayCoords(OverlayTexture.NO_OVERLAY);
+
+        final BlockQuadOutput output = (x, y, z, quad, instance) ->
+                buffer.putBlockBakedQuad(x, y, z, quad, instance);
+
+        // Create the block renderer and tesselate
+        final ModelBlockRenderer blockRenderer = new ModelBlockRenderer(
+                Minecraft.getInstance().options.ambientOcclusion().get(),
+                false,
+                Minecraft.getInstance().getBlockColors());
+
+        blockRenderer.tesselateBlock(
+                output,
+                0, 0, 0,
+                blockAndTintGetter,
+                pos,
+                state,
+                model,
+                42L);
+    }
+
+    private static final float[] DIRECTIONAL_BRIGHTNESS = {0.5f, 1f, 0.7f, 0.7f, 0.6f, 0.6f};
+
+    private static Vector3f[] getShadedColors(final Vector4f color)
+    {
         return Arrays.stream(Direction.values())
                 .map(direction ->
                 {
@@ -215,173 +222,127 @@ public class ModelGhostRenderer {
                 }).toArray(Vector3f[]::new);
     }
 
-    private static Vector3f[] getNormals(final PoseStack.Pose pose) {
-        // Transform the normal vector of each direction by the pose's normal matrix
+    private static Vector3f[] getNormals(final PoseStack.Pose pose)
+    {
         return Arrays.stream(Direction.values())
                 .map(direction ->
                 {
-                    final Vec3i faceNormal = direction.getNormal();
+                    final Vec3i faceNormal = direction.getUnitVec3i();
                     final Vector3f normal = new Vector3f(faceNormal.getX(), faceNormal.getY(), faceNormal.getZ());
                     normal.mul(pose.normal());
                     return normal;
                 }).toArray(Vector3f[]::new);
     }
 
-    private static void renderFullModelLists(
-            ModelToRender pModel,
-            ModelData modelData,
-            BlockState state,
-            BlockPos pos,
-            PoseStack pPoseStack,
-            boolean renderItemMode) {
-        RandomSource randomsource = RandomSource.create();
-
-        for(Direction direction : Direction.values()) {
-            randomsource.setSeed(42L);
-            if (renderItemMode)
-                Minecraft.getInstance().getItemRenderer().renderQuadList(pPoseStack, ModelGhostRenderer.BUFFER, pModel.model().getQuads(state, direction, randomsource, modelData, pModel.renderType()), new ItemStack(state.getBlock()), 15728880, OverlayTexture.NO_OVERLAY);
-            else
-                renderBlockTintedQuadList(pPoseStack, pModel.model().getQuads(state, direction, randomsource, modelData, pModel.renderType()), state, pos);
-        }
-
-        randomsource.setSeed(42L);
-        if (renderItemMode)
-            Minecraft.getInstance().getItemRenderer().renderQuadList(pPoseStack, ModelGhostRenderer.BUFFER, pModel.model().getQuads(state, null, randomsource, modelData, pModel.renderType()), new ItemStack(state.getBlock()), 15728880, OverlayTexture.NO_OVERLAY);
-        else
-            renderBlockTintedQuadList(pPoseStack, pModel.model().getQuads(state, null, randomsource, modelData, pModel.renderType()), state, pos);
-    }
-
-    private static void renderBlockTintedQuadList(PoseStack pPoseStack, List<BakedQuad> pQuads, BlockState placementState, BlockPos pos) {
-        PoseStack.Pose posestack$pose = pPoseStack.last();
-
-        for(BakedQuad bakedquad : pQuads) {
-            int i = -1;
-            if (bakedquad.isTinted()) {
-                i = Minecraft.getInstance().getBlockColors().getColor(placementState, Minecraft.getInstance().level, pos, bakedquad.getTintIndex());
-            }
-
-            float f = (float)(i >> 16 & 0xFF) / 255.0F;
-            float f1 = (float)(i >> 8 & 0xFF) / 255.0F;
-            float f2 = (float)(i & 0xFF) / 255.0F;
-            ModelGhostRenderer.BUFFER.putBulkData(posestack$pose, bakedquad, f, f1, f2, 1.0F, 15728880, OverlayTexture.NO_OVERLAY, true);
-        }
-    }
-
-    /**
-     * Optimized version of ItemRenderer#renderModelLists that ignores textures, and renders a model's quads with a single RGBA color shaded by the quads' direction to match MCs similar shading
-     */
-    private static void renderColoredModelLists(
-            final BlockState state,
-            final ModelToRender model,
-            final ModelData modelData,
+    private void renderColoredGhost(
             final PoseStack poseStack,
-            final Vector4f color) {
-        final RandomSource random = RandomSource.create(42);
+            final MultiBufferSource.BufferSource bufferSource,
+            final BlockState state,
+            final BlockPos pos,
+            final ModelData modelData,
+            final Vector4f color,
+            final RenderType renderType)
+    {
+        final ModelManager modelManager = Minecraft.getInstance().getModelManager();
+        final BlockStateModelSet blockStateModelSet = modelManager.getBlockStateModelSet();
+        final BlockStateModel model = blockStateModelSet.get(state);
 
-        // Setup normals and shaded colors for each direction
+        final RandomSource random = RandomSource.create(42);
         final Vector3f[] normals = getNormals(poseStack.last());
         final Vector3f[] shadedColors = getShadedColors(color);
+        final Vector4f posVec = new Vector4f();
+        final VertexConsumer buffer = bufferSource.getBuffer(renderType);
 
-        // Initialize reusable position vector to avoid needless creation of new ones
-        final Vector4f pos = new Vector4f();
-
-        for (final Direction direction : Direction.values()) {
-            // Render outer directional quads
+        for (final Direction direction : Direction.values())
+        {
             random.setSeed(42L);
-            renderColoredQuadList(poseStack.last().pose(), model.model().getQuads(state, direction, random, modelData, model.renderType()), normals, shadedColors, pos);
+            renderQuadListForDirection(buffer, poseStack.last().pose(), model, state, pos, random, modelData, direction, normals, shadedColors, posVec);
         }
 
-        // Render quads of unspecified direction
         random.setSeed(42L);
-        renderColoredQuadList(poseStack.last().pose(), model.model().getQuads(state, null, random, modelData, model.renderType()), normals, shadedColors, pos);
+        renderQuadListForDirection(buffer, poseStack.last().pose(), model, state, pos, random, modelData, null, normals, shadedColors, posVec);
     }
 
-    /**
-     * Optimized version of ItemRenderer#renderQuadList
-     */
-    private static void renderColoredQuadList(
+    private void renderQuadListForDirection(
+            final VertexConsumer buffer,
             final Matrix4f pose,
-            final List<BakedQuad> quads,
+            final BlockStateModel model,
+            final BlockState state,
+            final BlockPos pos,
+            final RandomSource random,
+            final ModelData modelData,
+            final Direction direction,
             final Vector3f[] normals,
             final Vector3f[] shadedColors,
-            final Vector4f pos) {
-        for (final BakedQuad quad : quads) {
-            putColoredBulkData(
-                    pose,
-                    quad,
-                    shadedColors[quad.getDirection().ordinal()],
-                    normals[quad.getDirection().ordinal()],
-                    pos);
+            final Vector4f posVec)
+    {
+        // Get quads for this direction by using a dummy BlockQuadOutput that collects them
+        final java.util.List<BakedQuad> quads = new java.util.ArrayList<>();
+        final QuadInstance instance = new QuadInstance();
+        instance.setColor(ARGB.color(255, 255, 255, 255));
+        instance.setLightCoords(LightCoordsUtil.FULL_BRIGHT);
+        instance.setOverlayCoords(OverlayTexture.NO_OVERLAY);
+
+        final BlockAndTintGetter dummyGetter = BlockAndTintGetter.EMPTY;
+        final MovingBlockRenderState blockAndTintGetter = new MovingBlockRenderState();
+        blockAndTintGetter.blockPos = pos;
+        blockAndTintGetter.blockState = state;
+        blockAndTintGetter.modelData = modelData;
+
+        final ModelBlockRenderer blockRenderer = new ModelBlockRenderer(
+                Minecraft.getInstance().options.ambientOcclusion().get(),
+                false,
+                Minecraft.getInstance().getBlockColors());
+
+        // Collect quads by using a BlockQuadOutput that stores them
+        final BlockQuadOutput collector = (x, y, z, quad, inst) ->
+        {
+            if (direction == null || quad.direction() == direction)
+            {
+                quads.add(quad);
+            }
+        };
+
+        blockRenderer.tesselateBlock(
+                collector,
+                0, 0, 0,
+                blockAndTintGetter,
+                pos,
+                state,
+                model,
+                42L);
+
+        // Render collected quads with custom color
+        for (final BakedQuad quad : quads)
+        {
+            putColoredBulkData(buffer, pose, quad, shadedColors[quad.direction().ordinal()], normals[quad.direction().ordinal()], posVec);
         }
     }
 
     private static void putColoredBulkData(
+            final VertexConsumer buffer,
             final Matrix4f pose,
             final BakedQuad bakedQuad,
             final Vector3f color,
             final Vector3f normal,
-            final Vector4f pos) {
-        // Get vertex data
-        final int[] vertices = bakedQuad.getVertices();
-        final int vertexCount = vertices.length / (DefaultVertexFormat.BLOCK.getVertexSize() / 4);
+            final Vector4f posVec)
+    {
+        for (int v = 0; v < 4; ++v)
+        {
+            final var vertexPos = bakedQuad.position(v);
+            posVec.set(vertexPos.x(), vertexPos.y(), vertexPos.z(), 1f);
+            posVec.mul(pose);
 
-        try (final MemoryStack memorystack = MemoryStack.stackPush()) {
-            // Setup buffers
-            final ByteBuffer bytebuffer = memorystack.malloc(DefaultVertexFormat.BLOCK.getVertexSize());
-            final IntBuffer intbuffer = bytebuffer.asIntBuffer();
+            final long packedUv = bakedQuad.packedUV(v);
+            final float u = UVPair.unpackU(packedUv);
+            final float uvV = UVPair.unpackV(packedUv);
 
-            for (int v = 0; v < vertexCount; ++v) {
-                // Add vertex data to the buffer
-                ((Buffer) intbuffer).clear();
-                intbuffer.put(vertices, v * 8, 8);
-
-                // Extract relative position, then transform it to the position in the world
-                pos.set(bytebuffer.getFloat(0),
-                        bytebuffer.getFloat(4),
-                        bytebuffer.getFloat(8),
-                        1f);
-                pos.mul(pose);
-
-                ModelGhostRenderer.BUFFER.addVertex(pos.x(), pos.y(), pos.z())
-                        .setColor(color.x(), color.y(), color.z(), 1f)
-                        .setNormal(normal.x(), normal.y(), normal.z());
-            }
+            buffer.addVertex(posVec.x(), posVec.y(), posVec.z())
+                    .setColor(color.x(), color.y(), color.z(), 1f)
+                    .setUv(u, uvV)
+                    .setUv1(Short.MAX_VALUE, Short.MAX_VALUE)
+                    .setUv2(LightCoordsUtil.block(LightCoordsUtil.FULL_BRIGHT), LightCoordsUtil.sky(LightCoordsUtil.FULL_SKY))
+                    .setNormal(normal.x(), normal.y(), normal.z());
         }
     }
-
-    private static class BufferBuilderTransparent extends BufferBuilder {
-
-        private float alphaPercentage;
-
-        public BufferBuilderTransparent(ByteBufferBuilder memory, Mode mode, VertexFormat format)
-        {
-            super(memory, mode, format);
-        }
-
-        public void setAlphaPercentage(final float alphaPercentage) {
-            this.alphaPercentage = Mth.clamp(alphaPercentage, 0, 1);
-        }
-
-        @Override
-        public @NotNull VertexConsumer setColor(int red, int green, int blue, int alpha) {
-            return super.setColor(red, green, blue, (int) (alpha * alphaPercentage));
-        }
-
-        @Override
-        public VertexConsumer setColor(int argb)
-        {
-            final int newAlpha = (int) ((argb >> 24) * alphaPercentage);
-            return super.setColor((newAlpha << 24) | (argb & 0x00ffffff));
-        }
-
-        @Override
-        public void addVertex(float x, float y, float z, int argb, float texU,
-                float texV, int overlayUV, int lightmapUV, float normalX, float normalY, float normalZ) {
-            final int newAlpha = (int) ((argb >> 24) * alphaPercentage);
-            super.addVertex(x, y, z, (newAlpha << 24) | (argb & 0x00ffffff), texU, texV, overlayUV, lightmapUV, normalX, normalY, normalZ);
-        }
-
-    }
-
-    private record ModelToRender(BakedModel model, RenderType renderType) {}
 }

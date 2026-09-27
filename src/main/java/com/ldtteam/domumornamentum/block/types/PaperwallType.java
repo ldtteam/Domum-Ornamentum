@@ -3,6 +3,7 @@ package com.ldtteam.domumornamentum.block.types;
 import com.ldtteam.domumornamentum.block.decorative.PaperWallBlock;
 import net.minecraft.util.StringRepresentable;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 /**
  * Types that the {@link PaperWallBlock} supports
@@ -27,7 +28,7 @@ public enum PaperwallType implements StringRepresentable
     }
 
     @Override
-    public String getSerializedName()
+    public @NonNull String getSerializedName()
     {
         return this.name;
     }

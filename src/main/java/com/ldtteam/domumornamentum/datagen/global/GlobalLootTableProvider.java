@@ -22,14 +22,15 @@ import java.util.concurrent.CompletableFuture;
 /**
  * This class generates the default loot_table for blocks (if a block is destroyed, it drops its item).
  */
+import net.neoforged.neoforge.data.event.GatherDataEvent;
+
 public class GlobalLootTableProvider extends LootTableProvider
 {
 
     public GlobalLootTableProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> provider) {
         super(packOutput,
             Set.of(),
-            List.of(new SubProviderEntry(GlobalLootTableEntries::new, LootContextParamSets.BLOCK),
-                new SubProviderEntry(MaterialLootTableProvider::new, LootContextParamSets.BLOCK)),
+            List.of(new SubProviderEntry(GlobalLootTableEntries::new, LootContextParamSets.BLOCK)),
             provider);
     }
 
@@ -78,5 +79,10 @@ public class GlobalLootTableProvider extends LootTableProvider
     public String getName()
     {
         return "Default Block Loot Tables Provider";
+    }
+
+    public static void register(GatherDataEvent.Server event)
+    {
+        event.addProvider(new GlobalLootTableProvider(event.getGenerator().getPackOutput(), event.getLookupProvider()));
     }
 }

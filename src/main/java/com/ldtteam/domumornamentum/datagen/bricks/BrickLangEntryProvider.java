@@ -1,14 +1,13 @@
 package com.ldtteam.domumornamentum.datagen.bricks;
 
-import com.ldtteam.data.LanguageProvider;
 import com.ldtteam.domumornamentum.block.types.BrickType;
+import com.ldtteam.domumornamentum.datagen.LanguageProviderWrapper;
 import com.ldtteam.domumornamentum.util.Constants;
 
-public class BrickLangEntryProvider implements LanguageProvider.SubProvider
+public class BrickLangEntryProvider implements LanguageProviderWrapper.SubProvider
 {
-
     @Override
-    public void addTranslations(LanguageProvider.LanguageAcceptor acceptor) {
+    public void addTranslations(final LanguageProviderWrapper.LanguageAcceptor acceptor) {
         acceptor.add("block." + Constants.MOD_ID + "." + BrickType.BEIGE.getSerializedName(), "Beige Bricks");
         acceptor.add("block." + Constants.MOD_ID + "." + BrickType.BROWN.getSerializedName(), "Brown Bricks");
         acceptor.add("block." + Constants.MOD_ID + "." + BrickType.CREAM.getSerializedName(), "Cream Bricks");

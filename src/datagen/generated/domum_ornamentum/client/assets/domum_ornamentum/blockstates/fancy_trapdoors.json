@@ -1,0 +1,436 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full_spec",
+        "x": 270,
+        "y": 180
+      },
+      "when": {
+        "type": "full",
+        "facing": "north",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full_spec",
+        "x": 180
+      },
+      "when": {
+        "type": "full",
+        "facing": "north",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full_spec",
+        "x": 90
+      },
+      "when": {
+        "type": "full",
+        "facing": "north",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full_spec"
+      },
+      "when": {
+        "type": "full",
+        "facing": "north",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper_spec",
+        "x": 270,
+        "y": 180
+      },
+      "when": {
+        "type": "creeper",
+        "facing": "north",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper_spec",
+        "x": 180
+      },
+      "when": {
+        "type": "creeper",
+        "facing": "north",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper_spec",
+        "x": 90
+      },
+      "when": {
+        "type": "creeper",
+        "facing": "north",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper_spec"
+      },
+      "when": {
+        "type": "creeper",
+        "facing": "north",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full_spec",
+        "x": 270
+      },
+      "when": {
+        "type": "full",
+        "facing": "south",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full_spec",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "type": "full",
+        "facing": "south",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full_spec",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "type": "full",
+        "facing": "south",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full_spec",
+        "y": 180
+      },
+      "when": {
+        "type": "full",
+        "facing": "south",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper_spec",
+        "x": 270
+      },
+      "when": {
+        "type": "creeper",
+        "facing": "south",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper_spec",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "type": "creeper",
+        "facing": "south",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper_spec",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "type": "creeper",
+        "facing": "south",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper_spec",
+        "y": 180
+      },
+      "when": {
+        "type": "creeper",
+        "facing": "south",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full_spec",
+        "x": 270,
+        "y": 90
+      },
+      "when": {
+        "type": "full",
+        "facing": "west",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full_spec",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "type": "full",
+        "facing": "west",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full_spec",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "type": "full",
+        "facing": "west",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full_spec",
+        "y": 270
+      },
+      "when": {
+        "type": "full",
+        "facing": "west",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper_spec",
+        "x": 270,
+        "y": 90
+      },
+      "when": {
+        "type": "creeper",
+        "facing": "west",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper_spec",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "type": "creeper",
+        "facing": "west",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper_spec",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "type": "creeper",
+        "facing": "west",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper_spec",
+        "y": 270
+      },
+      "when": {
+        "type": "creeper",
+        "facing": "west",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full_spec",
+        "x": 270,
+        "y": 270
+      },
+      "when": {
+        "type": "full",
+        "facing": "east",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full_spec",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "type": "full",
+        "facing": "east",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full_spec",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "type": "full",
+        "facing": "east",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/trapdoor/fancy/trapdoor_full_spec",
+        "y": 90
+      },
+      "when": {
+        "type": "full",
+        "facing": "east",
+        "half": "bottom",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper_spec",
+        "x": 270,
+        "y": 270
+      },
+      "when": {
+        "type": "creeper",
+        "facing": "east",
+        "half": "top",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper_spec",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "type": "creeper",
+        "facing": "east",
+        "half": "top",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper_spec",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "type": "creeper",
+        "facing": "east",
+        "half": "bottom",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "type": "domum_ornamentum:materially_textured",
+        "parent": "domum_ornamentum:block/trapdoor/fancy/trapdoor_creeper_spec",
+        "y": 90
+      },
+      "when": {
+        "type": "creeper",
+        "facing": "east",
+        "half": "bottom",
+        "open": "false"
+      }
+    }
+  ]
+}

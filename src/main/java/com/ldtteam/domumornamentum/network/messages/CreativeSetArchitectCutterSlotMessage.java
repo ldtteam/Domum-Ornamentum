@@ -12,6 +12,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 /**
  * Sets the item in the {@link ArchitectsCutterScreen} for creative mode.
@@ -26,7 +27,7 @@ public record CreativeSetArchitectCutterSlotMessage(int slot, ItemStack stack) i
         CreativeSetArchitectCutterSlotMessage::new);
 
     @Override
-    public Type<CreativeSetArchitectCutterSlotMessage> type()
+    public @NonNull Type<CreativeSetArchitectCutterSlotMessage> type()
     {
         return ID;
     }

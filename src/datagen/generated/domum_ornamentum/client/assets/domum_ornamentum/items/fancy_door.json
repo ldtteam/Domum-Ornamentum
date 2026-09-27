@@ -1,0 +1,22 @@
+{
+  "model": {
+    "type": "minecraft:range_dispatch",
+    "entries": [
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "domum_ornamentum:item/door/fancy/door_full_spec"
+        },
+        "threshold": 0.0
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "domum_ornamentum:item/door/fancy/door_creeper_spec"
+        },
+        "threshold": 1.0
+      }
+    ],
+    "property": "domum_ornamentum:fancy_door_type"
+  }
+}

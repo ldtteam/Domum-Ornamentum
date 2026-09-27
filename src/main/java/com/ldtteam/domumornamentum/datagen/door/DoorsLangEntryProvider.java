@@ -1,13 +1,13 @@
 package com.ldtteam.domumornamentum.datagen.door;
 
-import com.ldtteam.data.LanguageProvider;
 import com.ldtteam.domumornamentum.block.types.DoorType;
+import com.ldtteam.domumornamentum.datagen.LanguageProviderWrapper;
 import com.ldtteam.domumornamentum.util.Constants;
 
-public class DoorsLangEntryProvider implements LanguageProvider.SubProvider
+public class DoorsLangEntryProvider implements LanguageProviderWrapper.SubProvider
 {
     @Override
-    public void addTranslations(LanguageProvider.LanguageAcceptor acceptor) {
+    public void addTranslations(LanguageProviderWrapper.LanguageAcceptor acceptor) {
         acceptor.add(Constants.MOD_ID + ".door.name.format", "%s Door");
         acceptor.add(Constants.MOD_ID + ".door.type.format", "Variant: %s");
         acceptor.add(Constants.MOD_ID + ".door.block.format", "Material: %s");

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    "minecraft:sand",
+    "minecraft:sand",
+    "minecraft:sandstone",
+    "minecraft:sandstone"
+  ],
+  "result": {
+    "count": 4,
+    "id": "domum_ornamentum:sand_bricks"
+  }
+}

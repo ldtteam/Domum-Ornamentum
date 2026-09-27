@@ -34,9 +34,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 import java.util.Objects;
@@ -44,115 +44,105 @@ import java.util.Objects;
 import static net.minecraft.world.level.block.Blocks.ACACIA_PLANKS;
 import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
 
-public class FancyDoorBlock extends AbstractBlockDoor<FancyDoorBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock
-{
-    public static final EnumProperty<FancyDoorType>             TYPE       = EnumProperty.create(Constants.TYPE_BLOCK_PROPERTY, FancyDoorType.class);
-    public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
-                                                                               .add(new SimpleRetexturableComponent(Identifier.withDefaultNamespace("block/oak_planks"), ModTags.FANCY_DOORS_MATERIALS, OAK_PLANKS))
-                                                                               .add(new SimpleRetexturableComponent(Identifier.withDefaultNamespace("block/acacia_planks"), ModTags.FANCY_DOORS_MATERIALS, ACACIA_PLANKS, true))
-                                                                               .build();
+public class FancyDoorBlock extends AbstractBlockDoor<FancyDoorBlock> implements IMateriallyTexturedBlock, ICachedItemGroupBlock, EntityBlock {
+	public static final EnumProperty<FancyDoorType>             TYPE       = EnumProperty.create(Constants.TYPE_BLOCK_PROPERTY, FancyDoorType.class);
+	public static final List<IMateriallyTexturedBlockComponent> COMPONENTS = ImmutableList.<IMateriallyTexturedBlockComponent>builder()
+			.add(new SimpleRetexturableComponent(Identifier.withDefaultNamespace("block/oak_planks"), ModTags.FANCY_DOORS_MATERIALS, OAK_PLANKS))
+			.add(new SimpleRetexturableComponent(Identifier.withDefaultNamespace("block/acacia_planks"), ModTags.FANCY_DOORS_MATERIALS, ACACIA_PLANKS, true))
+			.build();
 
-    private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
+	private final List<ItemStack> fillItemGroupCache = Lists.newArrayList();
 
-    public FancyDoorBlock()
-    {
-        super(Properties.of().mapColor(MapColor.WOOD).strength(3.0F).noOcclusion().isValidSpawn((state, blockGetter, pos, type) -> false));
-        this.registerDefaultState(this.defaultBlockState().setValue(TYPE, FancyDoorType.FULL));
-    }
+	public FancyDoorBlock(final Properties properties) {
+		super(properties.mapColor(MapColor.WOOD).strength(3.0F).noOcclusion().isValidSpawn((state, blockGetter, pos, type) -> false));
+		this.registerDefaultState(this.defaultBlockState().setValue(TYPE, FancyDoorType.FULL));
+	}
 
-    @Override
-    protected void createBlockStateDefinition(final StateDefinition.@NotNull Builder<Block, BlockState> builder)
-    {
-        super.createBlockStateDefinition(builder);
-        builder.add(TYPE);
-    }
+	@Override
+	protected void createBlockStateDefinition(final StateDefinition.@NotNull Builder<Block, BlockState> builder) {
+		super.createBlockStateDefinition(builder);
+		builder.add(TYPE);
+	}
 
-    @Override
-    public @NotNull List<IMateriallyTexturedBlockComponent> getComponents()
-    {
-        return COMPONENTS;
-    }
+	@Override
+	public @NotNull List<IMateriallyTexturedBlockComponent> getComponents() {
+		return COMPONENTS;
+	}
 
-    @Override
-    public void fillItemCategory(final @NotNull NonNullList<ItemStack> items)
-    {
-        if (!fillItemGroupCache.isEmpty()) {
-            items.addAll(fillItemGroupCache);
-            return;
-        }
+	@Override
+	public void fillItemCategory(final @NotNull NonNullList<ItemStack> items) {
+		if (!fillItemGroupCache.isEmpty()) {
+			items.addAll(fillItemGroupCache);
+			return;
+		}
 
-        try {
-            for (final FancyDoorType fancyDoorType : FancyDoorType.values())
-            {
-                final ItemStack result = new ItemStack(this);
-                BlockUtils.putPropertyIntoBlockStateTag(result, TYPE, fancyDoorType);
+		try {
+			for (final FancyDoorType fancyDoorType : FancyDoorType.values()) {
+				final ItemStack result = new ItemStack(this);
+				BlockUtils.putPropertyIntoBlockStateTag(result, TYPE, fancyDoorType);
 
-                fillItemGroupCache.add(result);
-            }
-        } catch (IllegalStateException exception)
-        {
-            //Ignored. Thrown during start up.
-        }
+				fillItemGroupCache.add(result);
+			}
+		}
+		catch (IllegalStateException exception) {
+			//Ignored. Thrown during start up.
+		}
 
-        items.addAll(fillItemGroupCache);
-    }
+		items.addAll(fillItemGroupCache);
+	}
 
-    @Override
-    public void setPlacedBy(
-      final @NotNull Level worldIn, final @NotNull BlockPos pos, final @NotNull BlockState state, @Nullable final LivingEntity placer, final @NotNull ItemStack stack)
-    {
-        super.setPlacedBy(worldIn, pos, state, Objects.requireNonNull(placer), stack);
+	@Override
+	public void setPlacedBy(
+			final @NotNull Level worldIn,
+			final @NotNull BlockPos pos,
+			final @NotNull BlockState state,
+			@Nullable final LivingEntity placer,
+			final @NotNull ItemStack stack) {
+		super.setPlacedBy(worldIn, pos, state, Objects.requireNonNull(placer), stack);
 
-        worldIn.getBlockEntity(pos.above()).applyComponentsFromItemStack(stack);
-    }
+		Objects.requireNonNull(worldIn.getBlockEntity(pos.above())).applyComponentsFromItemStack(stack);
+	}
 
-    @Nullable
-    @Override
-    public BlockEntity newBlockEntity(final @NotNull BlockPos blockPos, final @NotNull BlockState blockState)
-    {
-        return new MateriallyTexturedBlockEntity(blockPos, blockState);
-    }
+	@Nullable
+	@Override
+	public BlockEntity newBlockEntity(final @NotNull BlockPos blockPos, final @NotNull BlockState blockState) {
+		return new MateriallyTexturedBlockEntity(blockPos, blockState);
+	}
 
-    @Override
-    public ItemStack getCloneItemStack(final BlockState state, final HitResult target, final LevelReader world, final BlockPos pos, final Player player)
-    {
-        return BlockUtils.getMaterializedItemStack(world.getBlockEntity(pos), world.registryAccess(), TYPE);
-    }
+	@SuppressWarnings("deprecation")
+	@Override
+	public @NonNull ItemStack getCloneItemStack(final LevelReader level, final @NonNull BlockPos pos, final @NonNull BlockState state, final boolean includeData) {
+		return BlockUtils.getMaterializedItemStack(level.getBlockEntity(pos), level.registryAccess(), TYPE);
+	}
 
-    @Override
-    public void resetCache()
-    {
-        fillItemGroupCache.clear();
-    }
+	public void resetCache() {
+		fillItemGroupCache.clear();
+	}
 
+	@Override
+	public void buildRecipes(final RecipeOutput recipeOutput) {
+		for (final FancyDoorType value : FancyDoorType.values()) {
+			new ArchitectsCutterRecipeBuilder(this, RecipeCategory.REDSTONE).resultProperty(TYPE, value).saveSuffix(recipeOutput, value.getSerializedName());
+		}
+	}
 
-    @Override
-    public void buildRecipes(final RecipeOutput recipeOutput)
-    {
-        for (final FancyDoorType value : FancyDoorType.values())
-        {
-            new ArchitectsCutterRecipeBuilder(this, RecipeCategory.REDSTONE).resultProperty(TYPE, value)
-                .saveSuffix(recipeOutput, value.getSerializedName());
-        }
-    }
+	@Override
+	public float getExplosionResistance(@NonNull BlockState state, @NonNull BlockGetter level, @NonNull BlockPos pos, @NonNull Explosion explosion) {
+		return getDOExplosionResistance(super::getExplosionResistance, state, level, pos, explosion);
+	}
 
-    @Override
-    public float getExplosionResistance(BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {
-        return getDOExplosionResistance(super::getExplosionResistance, state, level, pos, explosion);
-    }
+	@Override
+	public float getDestroyProgress(@NotNull BlockState state, @NotNull Player player, @NotNull BlockGetter level, @NotNull BlockPos pos) {
+		return getDODestroyProgress(super::getDestroyProgress, state, player, level, pos);
+	}
 
-    @Override
-    public float getDestroyProgress(@NotNull BlockState state, @NotNull Player player, @NotNull BlockGetter level, @NotNull BlockPos pos) {
-        return getDODestroyProgress(super::getDestroyProgress, state, player, level, pos);
-    }
+	@Override
+	public @NonNull SoundType getSoundType(@NonNull BlockState state, @NonNull LevelReader level, @NonNull BlockPos pos, @Nullable Entity entity) {
+		return getDOSoundType(super::getSoundType, state, level, pos, entity);
+	}
 
-    @Override
-    public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
-        return getDOSoundType(super::getSoundType, state, level, pos, entity);
-    }
-
-    @Override
-    public IMateriallyTexturedBlockComponent getMainComponent() {
-        return COMPONENTS.get(0);
-    }
+	@Override
+	public IMateriallyTexturedBlockComponent getMainComponent() {
+		return COMPONENTS.getFirst();
+	}
 }
