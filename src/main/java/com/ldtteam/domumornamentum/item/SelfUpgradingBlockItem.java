@@ -52,7 +52,7 @@ public class SelfUpgradingBlockItem extends BlockItem
             // move Type from root to BlockStateTag
             if (oldData.contains(TYPE_BLOCK_PROPERTY, Tag.TAG_STRING))
             {
-                itemStack.update(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY, props -> with(props, TYPE_BLOCK_PROPERTY, oldData.getString(TYPE_BLOCK_PROPERTY)));
+                itemStack.update(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY, props -> with(props, TYPE_BLOCK_PROPERTY, oldData.getString(TYPE_BLOCK_PROPERTY).toLowerCase()));
                 oldData.remove(TYPE_BLOCK_PROPERTY);
             }
 
